@@ -3289,6 +3289,6 @@ class AttachedFlxText extends FlxText
 			alpha = sprTracker.alpha;
 		}
 		
-		testTxt.test = _song.notes[curSec].sectionNotes.length - 1;
+		testTxt.text = _song.notes[curSec].sectionNotes.length - 1;
 	}
 }
