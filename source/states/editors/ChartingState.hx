@@ -2636,8 +2636,9 @@ class ChartingState extends MusicBeatState
 		}
 		Conductor.songPosition = FlxG.sound.music.time;
 		if(!waveformChanged) updateWaveform();
-		
-		testTxt.text = _song.notes[curSec].sectionNotes.length - 1;
+		//var zoomThinga:Flont = _song.notes[curSec].sectionNotes.length - 1;
+		var test:String = _song.notes[curSec].sectionNotes.length - 1;
+		testTxt.text = test;
 	}
 
 	function updateSectionUI():Void
