@@ -2636,6 +2636,8 @@ class ChartingState extends MusicBeatState
 		}
 		Conductor.songPosition = FlxG.sound.music.time;
 		if(!waveformChanged) updateWaveform();
+		
+		testTxt.text = _song.notes[curSec].sectionNotes.length - 1;
 	}
 
 	function updateSectionUI():Void
@@ -3289,6 +3291,6 @@ class AttachedFlxText extends FlxText
 			alpha = sprTracker.alpha;
 		}
 		
-		testTxt.text = _song.notes[curSec].sectionNotes.length - 1;
+		
 	}
 }
