@@ -2636,9 +2636,7 @@ class ChartingState extends MusicBeatState
 		}
 		Conductor.songPosition = FlxG.sound.music.time;
 		if(!waveformChanged) updateWaveform();
-		var zoomThinga:Float = _song.notes[curSec].sectionNotes.length - 1;
-		var test:String = 'what' + zoomThinga;
-		testTxt.text = test;
+		
 	}
 
 	function updateSectionUI():Void
@@ -2651,6 +2649,10 @@ class ChartingState extends MusicBeatState
 		check_altAnim.checked = sec.altAnim;
 		check_changeBPM.checked = sec.changeBPM;
 		stepperSectionBPM.value = sec.bpm;
+		
+		var zoomThinga:Float = _song.notes[curSec].sectionNotes.length - 1;
+		var test:String = 'what' + zoomThinga;
+		testTxt.text = test;
 
 		updateHeads();
 	}
