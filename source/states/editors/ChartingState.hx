@@ -152,6 +152,7 @@ class ChartingState extends MusicBeatState
 	var currentSongName:String;
 	
 	var zoomTxt:FlxText;
+	var testTxt:FlxText;
 
 	var zoomList:Array<Float> = [
 		0.25,
@@ -394,6 +395,9 @@ class ChartingState extends MusicBeatState
 		zoomTxt.scrollFactor.set();
 		add(zoomTxt);
 		
+		testTxt = new FlxText(10, 100-32, 0, "Zoom: 1 / 1", 16);
+		testTxt.scrollFactor.set();
+		add(testTxt);
 		updateGrid();
 
 		#if android
@@ -3284,5 +3288,7 @@ class AttachedFlxText extends FlxText
 			angle = sprTracker.angle;
 			alpha = sprTracker.alpha;
 		}
+		
+		testTxt.test = _song.notes[curSec].sectionNotes.length - 1;
 	}
 }
