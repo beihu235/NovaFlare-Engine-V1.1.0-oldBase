@@ -691,7 +691,7 @@ class ChartingState extends MusicBeatState
 		stepperSectionBPM.name = 'section_bpm';
 		blockPressWhileTypingOnStepper.push(stepperSectionBPM);
 		
-		var zoomThinga:Float = _song.notes[curSec].sectionNotes.length;
+		var zoomThinga:Int = _song.notes[curSec].sectionNotes.length;
 		var test:String = 'what' + zoomThinga;
 		testTxt.text = test;
 
