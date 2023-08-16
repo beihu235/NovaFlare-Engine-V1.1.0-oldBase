@@ -33,24 +33,24 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		
 		loadLeft = new FlxSprite(isTransIn ? 0 : -1280, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingL'));
 		loadLeft.scrollFactor.set();
-		loadLeft.antialiasing = ClientPrefs.globalAntialiasing;
+		loadLeft.antialiasing = ClientPrefs.data.antialiasing;
 		add(loadLeft);
 		
 		loadRight = new FlxSprite(isTransIn ? 0 : 1280, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingR'));
 		loadRight.scrollFactor.set();
-		loadRight.antialiasing = ClientPrefs.globalAntialiasing;
+		loadRight.antialiasing = ClientPrefs.data.antialiasing;
 		add(loadRight);
 		
-		WaterMark = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 100 * 2, 0, 'NF ENGINE V1.0.1', 110);
+		WaterMark = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 100 * 2, 0, 'NF ENGINE V1.1.0', 110);
 		WaterMark.scrollFactor.set();
 		WaterMark.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 113, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		WaterMark.antialiasing = ClientPrefs.globalAntialiasing;
+		WaterMark.antialiasing = ClientPrefs.data.antialiasing;
 		add(WaterMark);
         
         EventText= new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 110, 0, 'LOADING . . . . . . ', 110);
 		EventText.scrollFactor.set();
 		EventText.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 113, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		EventText.antialiasing = ClientPrefs.globalAntialiasing;
+		EventText.antialiasing = ClientPrefs.data.antialiasing;
 		add(EventText);
 		
 		if(!isTransIn) {
