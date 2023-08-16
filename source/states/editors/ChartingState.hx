@@ -2650,10 +2650,11 @@ class ChartingState extends MusicBeatState
 		check_changeBPM.checked = sec.changeBPM;
 		stepperSectionBPM.value = sec.bpm;
 		
-		var zoomThinga:Float = _song.notes[curSec].sectionNotes[_song.notes[curSec].sectionNotes.length - 1];
+		if (_song.notes[curSec].sectionNotes.length != null){
+		var zoomThinga:Float = _song.notes[curSec].sectionNotes.length;
 		var test:String = 'what' + zoomThinga;
 		testTxt.text = test;
-
+        }
 		updateHeads();
 	}
 
