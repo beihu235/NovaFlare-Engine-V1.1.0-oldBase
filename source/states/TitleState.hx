@@ -82,6 +82,8 @@ class TitleState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		
+		FlxTransitionableState.skipNextTransOut = true;
+		
 		
 		//https://github.com/beihu235/AndroidDialogs
 		var lang:String = '';
