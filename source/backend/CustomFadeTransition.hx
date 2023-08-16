@@ -1,6 +1,12 @@
 package backend;
 
 import flixel.util.FlxGradient;
+import flixel.text.FlxText;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
+import flixel.FlxSubState;
+import flixel.FlxSprite;
+import openfl.utils.Assets;
 
 class CustomFadeTransition extends MusicBeatSubstate {
 	public static var finishCallback:Void->Void;
@@ -9,18 +15,28 @@ class CustomFadeTransition extends MusicBeatSubstate {
 	var isTransIn:Bool = false;
 	var transBlack:FlxSprite;
 	var transGradient:FlxSprite;
+	
+	var loadLeft:FlxSprite;
+	var loadRight:FlxSprite;
+	var WaterMark:FlxText;
+	var EventText:FlxText;
+	
+	var loadLeftTween:FlxTween;
+	var loadRightTween:FlxTween;
+	var EventTextTween:FlxTween;
+	var loadTextTween:FlxTween;
 
 	public function new(duration:Float, isTransIn:Bool) {
 		super();
 
 		this.isTransIn = isTransIn;
 		
-		loadLeft = new FlxSprite(isTransIn ? 0 : -1280, 0).loadGraphic(Paths.image('loadingL'));
+		loadLeft = new FlxSprite(isTransIn ? 0 : -1280, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingL'));
 		loadLeft.scrollFactor.set();
 		loadLeft.antialiasing = ClientPrefs.globalAntialiasing;
 		add(loadLeft);
 		
-		loadRight = new FlxSprite(isTransIn ? 0 : 1280, 0).loadGraphic(Paths.image('loadingR'));
+		loadRight = new FlxSprite(isTransIn ? 0 : 1280, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingR'));
 		loadRight.scrollFactor.set();
 		loadRight.antialiasing = ClientPrefs.globalAntialiasing;
 		add(loadRight);
