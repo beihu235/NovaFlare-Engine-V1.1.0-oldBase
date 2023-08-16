@@ -694,9 +694,7 @@ class ChartingState extends MusicBeatState
 		stepperSectionBPM.name = 'section_bpm';
 		blockPressWhileTypingOnStepper.push(stepperSectionBPM);
 		
-		var zoomThinga:Int = _song.notes[curSec].sectionNotes.length;
-		var test:String = 'what' + zoomThinga;
-		testTxt.text = test;
+		
 
 		var check_eventsSec:FlxUICheckBox = null;
 		var check_notesSec:FlxUICheckBox = null;
@@ -1637,6 +1635,10 @@ class ChartingState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		curStep = recalculateSteps();
+		
+		var zoomThinga:Int = _song.notes[curSec].sectionNotes.length;
+		var test:String = 'what' + zoomThinga;
+		testTxt.text = test;
 
 		if(FlxG.sound.music.time < 0) {
 			FlxG.sound.music.pause();
