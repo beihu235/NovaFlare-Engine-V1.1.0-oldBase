@@ -71,7 +71,7 @@ class TitleState extends MusicBeatState
 
 	var mustUpdate:Bool = false;
     
-    public static var checkToast:Bool = false;
+    public static var checkOpenFirst:Bool = false;
     
 	var titleJSON:TitleData;
 
@@ -82,7 +82,7 @@ class TitleState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		
-		FlxTransitionableState.skipNextTransOut = true;
+		
 		
 		
 		//https://github.com/beihu235/AndroidDialogs
@@ -91,9 +91,11 @@ class TitleState extends MusicBeatState
 		lang = 'psych0.71h 安卓端口测试\nb站-北狐丶逐梦移植\n禁止上传到任何资源网站';
 		else
 		lang = 'psych0.71h android port test\nport by NF|beihu';
-		if(!checkToast){
-				
-		checkToast = true;
+		if(!checkOpenFirst){
+		
+		FlxTransitionableState.skipNextTransOut = true;
+										
+		checkOpenFirst = true;
 		AndroidDialogsExtend.OpenToast(lang,2);
 		
 		}
