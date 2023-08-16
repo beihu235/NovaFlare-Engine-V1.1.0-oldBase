@@ -370,6 +370,11 @@ class ChartingState extends MusicBeatState
 			tipText.scrollFactor.set();
 			add(tipText);
 		}
+		
+		testTxt = new FlxText(10, 100-32, 0, "Zoom: 1 / 1", 16);
+		testTxt.scrollFactor.set();
+		add(testTxt);
+		
 		add(UI_box);
 
 		addSongUI();
@@ -395,9 +400,7 @@ class ChartingState extends MusicBeatState
 		zoomTxt.scrollFactor.set();
 		add(zoomTxt);
 		
-		testTxt = new FlxText(10, 100-32, 0, "Zoom: 1 / 1", 16);
-		testTxt.scrollFactor.set();
-		add(testTxt);
+		
 		updateGrid();
 
 		#if android
