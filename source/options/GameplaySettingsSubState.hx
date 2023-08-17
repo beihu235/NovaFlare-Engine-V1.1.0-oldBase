@@ -19,6 +19,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'middleScroll',
 			'bool');
 		addOption(option);
+		
+		var option:Option = new Option('Filp Chart',
+			'If checked, filp chart for playing',
+			'filpChart',
+			'bool');
+		addOption(option);
 
 		var option:Option = new Option('Opponent Notes',
 			'If unchecked, opponent notes get hidden.',
