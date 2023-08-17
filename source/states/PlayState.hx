@@ -492,6 +492,14 @@ class PlayState extends MusicBeatState
 		timeBar.visible = showTime;
 		add(timeBar);
 		add(timeTxt);
+		
+		if (ClientPrefs.data.gradientTimeBar) {
+	        var wawa = [];
+            for (i in dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
+            var wawa2 = [];
+            for (i in boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
+            timeBar.createGradientBar([0x0], [Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]);
+        }
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
@@ -1434,6 +1442,13 @@ class PlayState extends MusicBeatState
 
 				var newCharacter:String = event.value2;
 				addCharacterToList(newCharacter, charType);
+				if (ClientPrefs.data.gradientTimeBar) {
+				var wawa = [];
+                for (i in dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
+                var wawa2 = [];
+                for (i in boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
+                timeBar.createGradientBar([0x0], [Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]);
+                }
 			
 			case 'Play Sound':
 				precacheList.set(event.value1, 'sound');
@@ -2151,6 +2166,13 @@ class PlayState extends MusicBeatState
 						}
 				}
 				reloadHealthBarColors();
+				if (ClientPrefs.data.gradientTimeBar) {
+			    var wawa = [];
+                for (i in dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
+                var wawa2 = [];
+                for (i in boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
+                timeBar.createGradientBar([0x0], [Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]);	
+                }
 
 			case 'Change Scroll Speed':
 				if (songSpeedType != "constant")
