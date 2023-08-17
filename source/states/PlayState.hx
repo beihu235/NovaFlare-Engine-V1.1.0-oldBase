@@ -495,12 +495,10 @@ class PlayState extends MusicBeatState
 		add(timeTxt);
 		
 		if (ClientPrefs.data.gradientTimeBar) {
-	        var wawa = [];
-            for (i in dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
-            var wawa2 = [];
-            for (i in boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
-            timeBar.setColors(CoolUtil.colorFromString([0x0]), CoolUtil.colorFromString([Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]));
-            //timeBar.setColors(CoolUtil.colorFromString([0x0]), CoolUtil.colorFromString([Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]));
+	        
+           timeBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
+		   FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+          
         }
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
@@ -1445,11 +1443,8 @@ class PlayState extends MusicBeatState
 				var newCharacter:String = event.value2;
 				addCharacterToList(newCharacter, charType);
 				if (ClientPrefs.data.gradientTimeBar) {
-				var wawa = [];
-                for (i in dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
-                var wawa2 = [];
-                for (i in boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
-                timeBar.setColors(CoolUtil.colorFromString([0x0]), CoolUtil.colorFromString([Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]));
+				timeBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
+		        FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
                 }
 			
 			case 'Play Sound':
@@ -2169,11 +2164,8 @@ class PlayState extends MusicBeatState
 				}
 				reloadHealthBarColors();
 				if (ClientPrefs.data.gradientTimeBar) {
-			    var wawa = [];
-                for (i in dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
-                var wawa2 = [];
-                for (i in boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
-                timeBar.setColors(CoolUtil.colorFromString([0x0]), CoolUtil.colorFromString([Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]));	
+			    timeBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
+		        FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
                 }
 
 			case 'Change Scroll Speed':
