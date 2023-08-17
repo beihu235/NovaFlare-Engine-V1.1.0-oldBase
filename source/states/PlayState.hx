@@ -499,8 +499,8 @@ class PlayState extends MusicBeatState
             for (i in dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
             var wawa2 = [];
             for (i in boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
-            timeBar.setColors([0x0],[Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]);
-            //timeBar.setColors([0x0],[Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]);
+            timeBar.setColors(CoolUtil.colorFromString([0x0]), CoolUtil.colorFromString([Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]));
+            //timeBar.setColors(CoolUtil.colorFromString([0x0]), CoolUtil.colorFromString([Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]));
         }
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
@@ -1449,7 +1449,7 @@ class PlayState extends MusicBeatState
                 for (i in dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
                 var wawa2 = [];
                 for (i in boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
-                timeBar.setColors([0x0],[Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]);
+                timeBar.setColors(CoolUtil.colorFromString([0x0]), CoolUtil.colorFromString([Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]));
                 }
 			
 			case 'Play Sound':
@@ -2173,7 +2173,7 @@ class PlayState extends MusicBeatState
                 for (i in dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
                 var wawa2 = [];
                 for (i in boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
-                timeBar.setColors([0x0],[Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]);	
+                timeBar.setColors(CoolUtil.colorFromString([0x0]), CoolUtil.colorFromString([Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]));	
                 }
 
 			case 'Change Scroll Speed':
