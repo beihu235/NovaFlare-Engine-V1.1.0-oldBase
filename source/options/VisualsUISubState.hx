@@ -95,8 +95,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		var option:Option = new Option('GradientColor TimeBar ',
 			"If chacked timebar will have gradient color\nbut maybe will have bug when you change timebar color again",
 			'gradientTimeBar',
-			'bool',
-			true);
+			'bool');
 		addOption(option);
 
 		var option:Option = new Option('Flashing Lights',
@@ -139,8 +138,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		var option:Option = new Option('FPS Rainbow',
 			'If unchecked, FPS not change color',
 			'rainbowFPS',
-			'bool',
-			true);
+			'bool');
 		addOption(option);
 		
 		var option:Option = new Option('Pause Screen Song:',
