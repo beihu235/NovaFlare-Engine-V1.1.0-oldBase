@@ -10,6 +10,7 @@ import states.TitleState;
 class SaveVariables {
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
+	public var filpChart:Bool = false;
 	public var opponentStrums:Bool = true;
 	public var showFPS:Bool = true;
 	public var flashing:Bool = true;
@@ -20,14 +21,11 @@ class SaveVariables {
 	public var splashAlpha:Float = 0.6;
 	public var lowQuality:Bool = false;
 	public var shaders:Bool = true;
-	public var cacheOnGPU:Bool = false; //From Stilic
+	public var cacheOnGPU:Bool = #if !switch false #else true #end; //From Stilic
 	public var framerate:Int = 60;
-	public var cursing:Bool = true;
-	public var violence:Bool = true;
 	public var camZooms:Bool = true;
 	public var hideHud:Bool = false;
 	public var noteOffset:Int = 0;
-	public var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
 	public var arrowRGB:Array<Array<FlxColor>> = [
 		[0xFFC24B99, 0xFFFFFFFF, 0xFF3C1F56],
 		[0xFF00FFFF, 0xFFFFFFFF, 0xFF1542B7],
@@ -48,13 +46,6 @@ class SaveVariables {
 	public var pauseMusic:String = 'Tea Time';
 	public var checkForUpdates:Bool = true;
 	public var comboStacking:Bool = true;
-	
-	public var hitboxmode:String = 'New';
-	public var hitboxExtend = true;
-	public var hitboxLocation:String = 'Bottom';
-	public var hitboxalpha:Float = 0.2; //someone request this lol
-	public var VirtualPadAlpha:Float = 0.75;
-	
 	public var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -204,7 +195,7 @@ class ClientPrefs {
 			Main.fpsVar.visible = data.showFPS;
 		}
 
-		#if !html5
+		#if (!html5 && !switch)
 		FlxG.autoPause = ClientPrefs.data.autoPause;
 		#end
 
