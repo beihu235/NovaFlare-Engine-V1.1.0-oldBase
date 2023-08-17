@@ -13,6 +13,7 @@ class SaveVariables {
 	public var filpChart:Bool = false;
 	public var opponentStrums:Bool = true;
 	public var showFPS:Bool = true;
+	public var rainbowFPS:Bool = false;
 	public var flashing:Bool = true;
 	public var autoPause:Bool = true;
 	public var antialiasing:Bool = true;
@@ -75,6 +76,13 @@ class SaveVariables {
 	public var badWindow:Int = 135;
 	public var safeFrames:Float = 10;
 	public var discordRPC:Bool = true;
+	
+	
+	public var hitboxmode:String = 'New';  //it be delete   
+	public var hitboxExtend = true;
+	public var hitboxLocation:String = 'Bottom';
+	public var hitboxalpha:Float = 0.2;
+	public var VirtualPadAlpha:Float = 0.75;
 
 	public function new()
 	{
