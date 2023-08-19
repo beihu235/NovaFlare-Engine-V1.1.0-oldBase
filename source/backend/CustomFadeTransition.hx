@@ -36,11 +36,13 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		loadLeft.scrollFactor.set();
 		loadLeft.antialiasing = ClientPrefs.data.antialiasing;
 		add(loadLeft);
+		loadLeft.scale.set(loadLeft.frameWidth / 1280, loadLeft.frameHeight / 720);
 		
 		loadRight = new FlxSprite(isTransIn ? 0 : 1280, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingR'));
 		loadRight.scrollFactor.set();
 		loadRight.antialiasing = ClientPrefs.data.antialiasing;
 		add(loadRight);
+		loadRight.scale.set(loadRight.frameWidth / 1280, loadRight.frameHeight / 720);
 		
 		WaterMark = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 100 * 2, 0, 'NF ENGINE V1.1.0', 110);
 		WaterMark.scrollFactor.set();
