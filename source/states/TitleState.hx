@@ -82,15 +82,16 @@ class TitleState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		
-		
+		ClientPrefs.data.AndriodUpdateFirstCheck = true;
+		ClientPrefs.saveSettings();
 		
 		
 		//https://github.com/beihu235/AndroidDialogs
 		var lang:String = '';
 		if (DeviceLanguage.getLang() == 'zh') 
-		lang = 'psych0.71h 安卓端口测试\nb站-北狐丶逐梦移植\n禁止上传到任何资源网站';
+		lang = 'NF1.1.0测试\nb站-北狐丶逐梦移植\n禁止上传到任何资源网站';
 		else
-		lang = 'psych0.71h android port test\nport by NF|beihu';
+		lang = 'NF1.1.0 android port test\nport by NF|beihu';
 		if(!checkOpenFirst){
 		
 		FlxTransitionableState.skipNextTransOut = true;
