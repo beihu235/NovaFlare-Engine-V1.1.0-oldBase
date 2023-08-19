@@ -85,7 +85,9 @@ class SaveVariables {
 	public var hitboxLocation:String = 'Bottom';
 	public var hitboxalpha:Float = 0.2;
 	public var VirtualPadAlpha:Float = 0.75;
-
+    public var AndriodUpdateFirstCheck = false; //check for update new assets
+    
+    
 	public function new()
 	{
 		//Why does haxe needs this again?
