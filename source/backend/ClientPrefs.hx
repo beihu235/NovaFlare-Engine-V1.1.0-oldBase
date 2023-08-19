@@ -10,10 +10,8 @@ import states.TitleState;
 class SaveVariables {
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
-	public var filpChart:Bool = false;
 	public var opponentStrums:Bool = true;
 	public var showFPS:Bool = true;
-	public var rainbowFPS:Bool = false;
 	public var flashing:Bool = true;
 	public var autoPause:Bool = true;
 	public var antialiasing:Bool = true;
@@ -40,7 +38,6 @@ class SaveVariables {
 
 	public var ghostTapping:Bool = true;
 	public var timeBarType:String = 'Time Left';
-	public var gradientTimeBar:Bool = false;
 	public var scoreZoom:Bool = true;
 	public var noReset:Bool = false;
 	public var healthBarAlpha:Float = 1;
@@ -79,12 +76,16 @@ class SaveVariables {
 	public var discordRPC:Bool = true;
 	
 	
-	public var hitboxmode:String = 'New';  //it be delete   
+	
+	public var hitboxmode:String = 'New';  //it be deleted
 	public var hitboxExtend = true;
 	public var hitboxLocation:String = 'Bottom';
 	public var hitboxalpha:Float = 0.2;
 	public var VirtualPadAlpha:Float = 0.75;
-
+    public var AndriodUpdateFirstCheck = false; //check for update new assets
+    
+    
+    
 	public function new()
 	{
 		//Why does haxe needs this again?
