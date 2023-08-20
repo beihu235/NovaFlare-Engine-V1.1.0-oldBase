@@ -4,6 +4,9 @@ import objects.Note;
 import objects.StrumNote;
 import objects.Alphabet;
 
+import sys.FileSystem;
+import sys.io.File;
+
 class VisualsUISubState extends BaseOptionsMenu
 {
 	var noteOptionID:Int = -1;
@@ -25,6 +28,17 @@ class VisualsUISubState extends BaseOptionsMenu
 			note.playAnim('static');
 			notes.add(note);
 		}
+		
+		if (!FileSystem.exists(SUtil.getPath() + 'assets/shared/images/noteSkins') && !FileSystem.exists(SUtil.getPath() + 'assets/shared/images/noteSplashes') && Mods.mergeAllTextsNamed('images/noteSplashes/list.txt', 'shared').length == 0 && Mods.mergeAllTextsNamed('images/noteSkins/list.txt', 'shared').length == 0)//make sure people use 0.71h assets not old shits
+				{
+				
+				    var lang:String = '';
+		            if (DeviceLanguage.getLang() == 'zh') 
+		            lang = '未检测到noteskin和noteSplashes文件夹\n设置里将不显示这两个选项';
+		            else
+		            lang = 'noteskin and noteSplashes folders not detected, these options will not appear in Settings.';
+		            AndroidDialogsExtend.OpenToast(lang,2);
+				}
 
 		// options
 
