@@ -241,7 +241,7 @@ class MainMenuState extends MusicBeatState
         */
         
 		#if android
-		addVirtualPad(NONE, B_E);
+		addVirtualPad(NONE, A_B_E);
 		//_virtualpad.cameras = [camHUD];
 		#end
 		
