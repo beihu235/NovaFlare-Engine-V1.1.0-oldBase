@@ -16,6 +16,7 @@ class SaveVariables {
 	public var showFPS:Bool = true;
 	public var rainbowFPS:Bool = false;
 	public var flashing:Bool = true;
+	public var ResultsScreen:Bool = true;
 	public var autoPause:Bool = true;
 	public var antialiasing:Bool = true;
 	public var noteSkin:String = 'Default';
