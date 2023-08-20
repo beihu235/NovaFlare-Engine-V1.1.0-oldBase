@@ -44,6 +44,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 		
+		var option:Option = new Option('Results Screen',
+			"If checked, Open Results Screen at end song",
+			'ResultsScreen',
+			'bool');
+		addOption(option);
+		
 		var option:Option = new Option('Auto Pause',
 			"If checked, the game automatically pauses if the screen isn't on focus.",
 			'autoPause',
