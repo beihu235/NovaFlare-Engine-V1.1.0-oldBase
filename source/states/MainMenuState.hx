@@ -115,7 +115,7 @@ class MainMenuState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 		
-	    bgMove = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), 1, 1, true, true, 0, 0);
+	    bgMove = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), XY, true, true, 0, 0);
 		//bgMove.scrollFactor.set();
 		bgMove.alpha = 0.1;
 		bgMove.color = ColorArray[currentColor];
