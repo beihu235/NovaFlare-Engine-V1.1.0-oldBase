@@ -39,7 +39,6 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
-	var debugKeys:Array<FlxKey>;
 	/*
 	
 	var test1:FlxText;
@@ -78,15 +77,15 @@ class MainMenuState extends MusicBeatState
         bpm = TitleState.bpm;
         
 		#if MODS_ALLOWED
-		Paths.pushGlobalMods();
+		Mods.pushGlobalMods();
 		#end
-		WeekData.loadTheFirstEnabledMod();
+		Mods.loadTopMod();
 
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end
-		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
+		
 
 		camGame = new FlxCamera();
 		//camHUD = new FlxCamera();
@@ -211,7 +210,7 @@ class MainMenuState extends MusicBeatState
 		// NG.core.calls.event.logEvent('swag').send();
 
 		//changeItem();
-
+        /*
 		#if ACHIEVEMENTS_ALLOWED
 		Achievements.loadAchievements();
 		var leDate = Date.now();
@@ -223,7 +222,7 @@ class MainMenuState extends MusicBeatState
 				ClientPrefs.saveSettings();
 			}
 		}
-		#end
+		#end*/
 		/*
 		 test1 = new FlxText(12, FlxG.height - 84, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		test1.scrollFactor.set();
@@ -372,7 +371,7 @@ class MainMenuState extends MusicBeatState
 	
 			
 			#if (desktop || android)
-			else if (FlxG.keys.anyJustPressed(debugKeys) #if android || MusicBeatState._virtualpad.buttonE.justPressed #end)
+			else if (controls.justPressed('debug_1') #if android || MusicBeatState._virtualpad.buttonE.justPressed #end)
 			{
 				selectedSomethin = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
