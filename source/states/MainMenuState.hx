@@ -7,6 +7,8 @@ import flixel.FlxObject;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.effects.FlxFlicker;
 
+import flixel.addons.display.FlxBackdrop;
+
 import flixel.input.keyboard.FlxKey;
 import lime.app.Application;
 
