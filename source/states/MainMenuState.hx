@@ -95,7 +95,6 @@ class MainMenuState extends MusicBeatState
 		//camHUD.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
-		//FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camAchievement, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		
@@ -114,7 +113,7 @@ class MainMenuState extends MusicBeatState
 		bg.setGraphicSize(Std.int(bg.width));
 		bg.updateHitbox();
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 		
 	    bgMove = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), 1, 1, true, true, 0, 0);
@@ -123,7 +122,7 @@ class MainMenuState extends MusicBeatState
 		bgMove.color = ColorArray[currentColor];
 		bgMove.screenCenter();
 		bgMove.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
-		//bgMove.antialiasing = ClientPrefs.globalAntialiasing;
+		//bgMove.antialiasing = ClientPrefs.data.antialiasing;
 		add(bgMove);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -137,7 +136,7 @@ class MainMenuState extends MusicBeatState
 		magenta.updateHitbox();
 		magenta.screenCenter();
 		magenta.visible = false;
-		magenta.antialiasing = ClientPrefs.globalAntialiasing;
+		magenta.antialiasing = ClientPrefs.data.antialiasing;
 		magenta.color = 0xFFfd719b;
 		add(magenta);
 		
@@ -171,7 +170,7 @@ class MainMenuState extends MusicBeatState
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
-			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
+			menuItem.antialiasing = ClientPrefs.data.antialiasing;
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
 			//menuItem.offset.x = menuItem.offset.x * 0.8;
@@ -195,19 +194,19 @@ class MainMenuState extends MusicBeatState
 				});                                   
 		}
 
-		FlxG.camera.follow(camFollowPos, null, 1);
+		FlxG.camera.follow(camFollow, null, 0);
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "NF Engine v" + '1.0.1' + ' (PSYCH v0.6.3)', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		versionShit.antialiasing = ClientPrefs.globalAntialiasing;
+		versionShit.antialiasing = ClientPrefs.data.antialiasing;
 		add(versionShit);
 		//versionShit.cameras = [camHUD];
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + '0.2.8', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-		versionShit.antialiasing = ClientPrefs.globalAntialiasing;
+		versionShit.antialiasing = ClientPrefs.data.antialiasing;
         //versionShit.cameras = [camHUD];
 		// NG.core.calls.event.logEvent('swag').send();
 
@@ -252,6 +251,7 @@ class MainMenuState extends MusicBeatState
 		super.create();
 	}
 
+    /*
 	#if ACHIEVEMENTS_ALLOWED
 	// Unlocks "Freaky on a Friday Night" achievement
 	function giveAchievement() {
@@ -260,7 +260,8 @@ class MainMenuState extends MusicBeatState
 		trace('Giving achievement "friday_night_play"');
 	}
 	#end
-
+    */
+    
 	var selectedSomethin:Bool = false;
 	
 	var canClick:Bool = true;
@@ -275,8 +276,7 @@ class MainMenuState extends MusicBeatState
 			if(FreeplayState.vocals != null) FreeplayState.vocals.volume += 0.5 * elapsed;
 		}
 
-		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
-		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
+		FlxG.camera.followLerp = FlxMath.bound(elapsed * 9 / (FlxG.updateFramerate / 60), 0, 1);
 
 		if (FlxG.mouse.justPressed) usingMouse = true;
 		
@@ -372,7 +372,7 @@ class MainMenuState extends MusicBeatState
 	
 			
 			#if (desktop || android)
-			else if (FlxG.keys.anyJustPressed(debugKeys) #if android || _virtualpad.buttonE.justPressed #end)
+			else if (FlxG.keys.anyJustPressed(debugKeys) #if android || MusicBeatState._virtualpad.buttonE.justPressed #end)
 			{
 				selectedSomethin = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
