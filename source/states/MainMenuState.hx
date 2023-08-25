@@ -23,7 +23,7 @@ class MainMenuState extends MusicBeatState
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
-	//private var camHUD:FlxCamera;
+	private var camHUD:FlxCamera;
 	private var camAchievement:FlxCamera;
 	
 	var optionShit:Array<String> = [
@@ -88,13 +88,14 @@ class MainMenuState extends MusicBeatState
 		
 
 		camGame = new FlxCamera();
-		//camHUD = new FlxCamera();
+		camHUD = new FlxCamera();
 		camAchievement = new FlxCamera();
 		camAchievement.bgColor.alpha = 0;
-		//camHUD.bgColor.alpha = 0;
+		camHUD.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camAchievement, false);
+		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		
         //CustomFadeTransition.nextCamera = camAchievement;
@@ -200,13 +201,13 @@ class MainMenuState extends MusicBeatState
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		versionShit.antialiasing = ClientPrefs.data.antialiasing;
 		add(versionShit);
-		//versionShit.cameras = [camHUD];
+		versionShit.cameras = [camHUD];
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + '0.2.8', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 		versionShit.antialiasing = ClientPrefs.data.antialiasing;
-        //versionShit.cameras = [camHUD];
+        versionShit.cameras = [camHUD];
 		// NG.core.calls.event.logEvent('swag').send();
 
 		//changeItem();
@@ -242,10 +243,10 @@ class MainMenuState extends MusicBeatState
         
 		#if android
 		addVirtualPad(NONE, A_B_E);
-		//_virtualpad.cameras = [camHUD];
+		_virtualpad.cameras = [camHUD];
 		#end
 		
-		
+		CustomFadeTransition.nextCamera = camHUD;
 
 		super.create();
 	}
@@ -393,16 +394,16 @@ class MainMenuState extends MusicBeatState
             
             FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});
            
-			//camGame.zoom = 1 + 0.03;
-			//camGame.scale.y = 1 + 0.015;
-			//FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
+			camGame.zoom = 1 + 0.03;
+			
+			FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
 			
 			menuItems.forEach(function(spr:FlxSprite)	{
-			/*	spr.scale.x = 0.83;
+				spr.scale.x = 0.83;
 				spr.scale.y = 0.83;
 				    FlxTween.tween(spr.scale, {x: 0.8}, 0.6, {ease: FlxEase.cubeOut});
 				    FlxTween.tween(spr.scale, {y: 0.8}, 0.6, {ease: FlxEase.cubeOut});
-			*/
+			
 				
             });
             
@@ -424,7 +425,7 @@ class MainMenuState extends MusicBeatState
 		    spr.centerOrigin();
 		});
 		
-		//CustomFadeTransition.nextCamera = camHUD;
+		
 		
 		super.update(elapsed);
 	}
@@ -468,7 +469,7 @@ class MainMenuState extends MusicBeatState
 		});
 		
 		
-		//FlxTween.tween(camGame, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
+		FlxTween.tween(camGame, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
 		//camGame.fade(FlxColor.BLACK, 1.2, false);
 		//camHUD.fade(FlxColor.BLACK, 1.2, false);
 		FlxTween.tween(camGame, {angle: 0}, 0.8, {
