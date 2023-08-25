@@ -487,7 +487,8 @@ class MainMenuState extends MusicBeatState
 			}
 			else
 			{				
-				//
+				
+				spr.animation.play('selected');
 			
 			    FlxTween.tween(spr, {y: 360 - spr.height / 2}, 0.6, {
 					ease: FlxEase.backInOut
