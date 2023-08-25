@@ -97,11 +97,11 @@ class MainMenuState extends MusicBeatState
 		FlxG.cameras.add(camAchievement, false);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
-		
+		CustomFadeTransition.nextCamera = camHUD;
         //CustomFadeTransition.nextCamera = camAchievement;
         
-		transIn = FlxTransitionableState.defaultTransIn;
-		transOut = FlxTransitionableState.defaultTransOut;
+		//transIn = FlxTransitionableState.defaultTransIn;
+		//transOut = FlxTransitionableState.defaultTransOut;
 
 		persistentUpdate = persistentDraw = true;
 		
@@ -246,7 +246,7 @@ class MainMenuState extends MusicBeatState
 		MusicBeatState._virtualpad.cameras = [camHUD];
 		#end
 		
-		CustomFadeTransition.nextCamera = camHUD;
+		
 
 		super.create();
 	}
