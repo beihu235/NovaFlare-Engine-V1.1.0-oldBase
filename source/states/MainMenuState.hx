@@ -243,7 +243,7 @@ class MainMenuState extends MusicBeatState
         
 		#if android
 		addVirtualPad(NONE, A_B_E);
-		_virtualpad.cameras = [camHUD];
+		MusicBeatState._virtualpad.cameras = [camHUD];
 		#end
 		
 		CustomFadeTransition.nextCamera = camHUD;
