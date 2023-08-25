@@ -199,7 +199,7 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var option:FlxSprite = menuItems.members[i];
-				optionTween[i] = FlxTween.tween(option, {x: 100}, 0.5 + 0.06 * i , {
+				optionTween[i] = FlxTween.tween(option, {x: 100}, 0.8 + 0.1 * i , {
 					ease: FlxEase.backInOut
 			    });
 		}
@@ -257,8 +257,9 @@ class MainMenuState extends MusicBeatState
 		#end
 		
 		
-
+        
 		super.create();
+		CustomFadeTransition.nextCamera = camHUD;
 	}
 
     /*
