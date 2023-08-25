@@ -34,7 +34,6 @@ class FPS extends TextField
 	public var currentFPS(default, null):Float;
     public var logicFPStime(default, null):Float;
     public var DisplayFPS(default, null):Float;
-    public var skippedFPS(default, null):Float;
 
 	@:noCompletion private var cacheCount:Int;
 	@:noCompletion private var currentTime:Float;
@@ -71,7 +70,6 @@ class FPS extends TextField
 	
 	public static var currentColor = 0;    
 	 var skippedFrames = 0;
-	 //var skippedFPS:Bool = true;
 	 
      var logicFPSnum = 0;
 	
@@ -135,21 +133,17 @@ class FPS extends TextField
 		
 		if (currentFPS > ClientPrefs.data.framerate) currentFPS = ClientPrefs.data.framerate;
 		
-		skippedFPS += deltaTime;
 		
-		if (skippedFPS >= deltaTime * 2 )
-		{
-            if ( DisplayFPS > currentFPS )
-            {
-            DisplayFPS = DisplayFPS - 1;
-            }
-            else if ( DisplayFPS < currentFPS )
-            {
-            DisplayFPS = DisplayFPS + 1;
-            }
+        if ( DisplayFPS > currentFPS ){
+            if (Math.abs(DisplayFPS - currentFPS) > 10) DisplayFPS = DisplayFPS - 2;
+            else DisplayFPS = DisplayFPS - 1;
+        }
+        else if ( DisplayFPS < currentFPS ){
+            if (Math.abs(DisplayFPS - currentFPS) > 10) DisplayFPS = DisplayFPS + 2;
+            else DisplayFPS = DisplayFPS + 1;
+        }
             
-            skippedFPS = 0;
-        }      
+        
         
 	
 		
