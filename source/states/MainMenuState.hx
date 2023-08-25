@@ -274,11 +274,12 @@ class MainMenuState extends MusicBeatState
 	#end
     */
     
-	var selectedSomethin:Bool = false;
 	
 	var canClick:Bool = true;
 	var canBeat:Bool = true;
 	var usingMouse:Bool = true;
+	
+	var endCheck:Bool = false;
 
 	override function update(elapsed:Float)
 	{
@@ -291,6 +292,9 @@ class MainMenuState extends MusicBeatState
 		FlxG.camera.followLerp = FlxMath.bound(elapsed * 9 / (FlxG.updateFramerate / 60), 0, 1);
 
 		if (FlxG.mouse.justPressed) usingMouse = true;
+		
+        if(!endCheck){
+		
 		
 		if (controls.UI_UP_P)
 			{
@@ -311,8 +315,11 @@ class MainMenuState extends MusicBeatState
 		    if (curSelected < 0)
 			    curSelected = menuItems.length - 1;
 			    
-			if (controls.ACCEPT) selectSomething();
-		
+			if (controls.ACCEPT) {
+			selectSomething();
+		    endCheck = true;
+		    }
+		    
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			if (usingMouse)
@@ -373,11 +380,9 @@ class MainMenuState extends MusicBeatState
 			}
 		});
 		
-		if (!selectedSomethin)
-		{
 			if (controls.BACK)
 			{
-				selectedSomethin = true;
+				endCheck = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new TitleState());
 			}		
@@ -386,12 +391,13 @@ class MainMenuState extends MusicBeatState
 			#if (desktop || android)
 			else if (controls.justPressed('debug_1') #if android || MusicBeatState._virtualpad.buttonE.justPressed #end)
 			{
-				selectedSomethin = true;
+				endCheck = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
 			}
 			#end 
-		}
-       
+		
+        }
+      
         SoundTime = FlxG.sound.music.time / 1000;
         BeatTime = 60 / bpm;
         
@@ -447,7 +453,7 @@ class MainMenuState extends MusicBeatState
     
     function selectSomething()
 	{
-		selectedSomethin = true;
+		endCheck = true;
 		FlxG.sound.play(Paths.sound('confirmMenu'));
 		canClick = false;
 		
