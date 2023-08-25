@@ -65,6 +65,9 @@ class OptionsState extends MusicBeatState
 		bg.screenCenter();
 		add(bg);
 		
+		changeSelection();
+		ClientPrefs.saveSettings();
+		
 		#if android
 		tipText = new FlxText(150, FlxG.height - 24, 0, 'Press X to Go In Android Controls Menu', 16);
 			tipText.setFormat("VCR OSD Mono", 17, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
