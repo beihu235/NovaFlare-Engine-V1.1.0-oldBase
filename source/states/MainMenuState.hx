@@ -25,6 +25,7 @@ class MainMenuState extends MusicBeatState
 	private var camGame:FlxCamera;
 	private var camHUD:FlxCamera;
 	private var camAchievement:FlxCamera;
+	var optionTween:Array<FlxTween> = [];
 	
 	var optionShit:Array<String> = [
 		'story_mode',
@@ -183,7 +184,7 @@ class MainMenuState extends MusicBeatState
 			//menuItem.offset.x = menuItem.offset.x * 0.8;
 			//menuItem.offset.y = menuItem.offset.y * 0.8 + menuItem.width / 2;
 			}
-			
+			/*
 			FlxTween.tween(menuItem, {x: 100}, (0.5 + 0.06 * i), {
 			    ease: FlxEase.quadOut,
 			    type: ONESHOT,
@@ -191,7 +192,16 @@ class MainMenuState extends MusicBeatState
 				    {
 
 				    }
-				});                                   
+				});                             
+				*/      
+		}
+		
+		for (i in 0...optionShit.length)
+		{
+			var option:FlxSprite = optionShit.members[i];
+				optionTween[i] = FlxTween.tween(option, {x: 100}, 0.5 + 0.06 * i , {
+					ease: FlxEase.backInOut
+			    });
 		}
 
 		FlxG.camera.follow(camFollow, null, 0);
@@ -437,6 +447,20 @@ class MainMenuState extends MusicBeatState
 		selectedSomethin = true;
 		FlxG.sound.play(Paths.sound('confirmMenu'));
 		canClick = false;
+		
+		for (i in 0...optionShit.length)
+		{
+			var option:FlxSprite = optionShit.members[i];
+			if(optionTween[i] != null) optionTween[i].cancel();
+			if( i != curSelected)
+				optionTween[i] = FlxTween.tween(option, {x: -800}, 0.6 + 0.1 * Math.abs(curSelected - i ), {
+					ease: FlxEase.backInOut,
+					onComplete: function(twn:FlxTween)
+					{
+						spr.kill();
+					}
+			    });
+		}
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
@@ -455,11 +479,7 @@ class MainMenuState extends MusicBeatState
 				//
 			
 			    FlxTween.tween(spr, {y: 360 - spr.height / 2}, 0.6, {
-					ease: FlxEase.backInOut,
-					onComplete: function(twn:FlxTween)
-					{
-						//spr.kill();
-					}
+					ease: FlxEase.backInOut
 			    });
 			
 			    FlxTween.tween(spr, {x: 640 - spr.width / 2}, 0.6, {
