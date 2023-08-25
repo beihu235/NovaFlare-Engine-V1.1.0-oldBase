@@ -200,7 +200,7 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var option:FlxSprite = menuItems.members[i];
-				optionTween[i] = FlxTween.tween(option, {x: 100}, 0.8 + 0.1 * i , {
+				optionTween[i] = FlxTween.tween(option, {x: 100}, 0.7 + 0.08 * i , {
 					ease: FlxEase.backInOut
 			    });
 		}
@@ -465,19 +465,19 @@ class MainMenuState extends MusicBeatState
 			    });
 		}
 		
-		if (cameraTween[0] != null) cameraTween[0] = FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
+		if (cameraTween[0] != null) cameraTween[0].cancel();
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			if (curSelected != spr.ID)
 			{
-				FlxTween.tween(spr, {x: -800}, 0.6 + 0.1 * Math.abs(curSelected - spr.ID), {
+				/*FlxTween.tween(spr, {x: -800}, 0.6 + 0.1 * Math.abs(curSelected - spr.ID), {
 					ease: FlxEase.backInOut,
 					onComplete: function(twn:FlxTween)
 					{
 						spr.kill();
 					}
-			    });
+			    });*/
 			}
 			else
 			{				
