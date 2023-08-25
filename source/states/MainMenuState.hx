@@ -26,6 +26,7 @@ class MainMenuState extends MusicBeatState
 	public var camHUD:FlxCamera;
 	public var camAchievement:FlxCamera;
 	var optionTween:Array<FlxTween> = [];
+	var cameraTween:Array<FlxTween> = [];
 	
 	var optionShit:Array<String> = [
 		'story_mode',
@@ -407,8 +408,9 @@ class MainMenuState extends MusicBeatState
            
 			camGame.zoom = 1 + 0.03;
 			
-			FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
-			
+			//FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
+			cameraTween[0] = FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
+		    
 			menuItems.forEach(function(spr:FlxSprite)	{
 				spr.scale.x = 0.83;
 				spr.scale.y = 0.83;
@@ -462,6 +464,8 @@ class MainMenuState extends MusicBeatState
 					}
 			    });
 		}
+		
+		if (cameraTween[0] != null) cameraTween[0] = FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
