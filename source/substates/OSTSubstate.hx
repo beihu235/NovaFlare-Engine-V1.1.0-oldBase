@@ -48,7 +48,7 @@ class OSTSubstate extends MusicBeatSubstate
 {
     public static var vocals:FlxSound = null;
 
-	public function new(/*poop:String,songName:String,*/needVoices:Bool)
+	public function new(needVoices:Bool,bpm:Float)
 	{
 		super();
 		
