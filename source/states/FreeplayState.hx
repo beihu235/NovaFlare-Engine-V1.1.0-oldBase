@@ -343,8 +343,11 @@ class FreeplayState extends MusicBeatState
 				vocals.volume = 0.7;
 				instPlaying = curSelected;
 				*/
+				var needsVoices:Bool = false;
+				if (PlayState.SONG.needsVoices)needsVoices = true;				
+					
 				persistentUpdate = false;
-				openSubState(new OSTSubstate(PlayState.SONG));
+				openSubState(new OSTSubstate(PlayState.SONG,needsVoices));
 			}
 			
 			
