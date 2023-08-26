@@ -60,7 +60,7 @@ class OSTSubstate extends MusicBeatSubstate
 		var buffer:Float = 0;
 		var bytes:Float = 0;
 		
-		var length:Float = 0;
+		var byteLength:Float = 0;
 		var khz:Float = 0;
 		var channels:Float = 0;
 		var stereo:Float = 0;
@@ -105,7 +105,7 @@ class OSTSubstate extends MusicBeatSubstate
 		buffer = snd._sound.__buffer;
 		bytes = buffer.data.buffer;
 		
-		length = bytes.length - 1;
+		byteLength = bytes.byteLength - 1;
 		khz = (buffer.sampleRate / 1000);
 		channels = buffer.channels;
 		stereo = channels > 1;
@@ -165,7 +165,7 @@ class OSTSubstate extends MusicBeatSubstate
 		
 		
 		
-		while (index < length) {
+		while (index < byteLength) {
 			if (index >= 0) {
 				var byte = bytes.getUInt16(index * channels * 2);
 
