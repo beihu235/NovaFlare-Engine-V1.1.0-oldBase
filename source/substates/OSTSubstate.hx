@@ -49,7 +49,7 @@ class OSTSubstate extends MusicBeatSubstate
 {
     public static var vocals:FlxSound = null;
     var left:FlxSprite;
-    var flashGFX:FlxSpriteUtil;
+    var flashGFX:FlxSprite;
     var _rect:Rectangle;
     var _temprect:Rectangle;
     
@@ -116,29 +116,29 @@ class OSTSubstate extends MusicBeatSubstate
 		
 		var snd = FlxG.sound.music;
 
-		var currentTime = snd.time;
+		var currentTime:Float = snd.time;
 		
-		var buffer = snd._sound.__buffer;
-		var bytes = buffer.data.buffer;
+		var buffer:Float = snd._sound.__buffer;
+		var bytes:Float = buffer.data.buffer;
 		
-		var length = bytes.length - 1;
-		var khz = (buffer.sampleRate / 1000);
-		var channels = buffer.channels;
-		var stereo = channels > 1;
+		var length:Float = bytes.length - 1;
+		var khz:Float = (buffer.sampleRate / 1000);
+		var channels:Float = buffer.channels;
+		var stereo:Float = channels > 1;
 		
-		var index = Math.floor(currentTime * khz);
-		var samples = 720;//Math.floor((currentTime + (((60 / Conductor.bpm) * 1000 / 4) * 16)) * khz - index);
-		var samplesPerRow = samples / 720;
+		var index:Float = Math.floor(currentTime * khz);
+		var samples:Float = 720;//Math.floor((currentTime + (((60 / Conductor.bpm) * 1000 / 4) * 16)) * khz - index);
+		var samplesPerRow:Float = samples / 720;
 
-		var lmin = 0;
-		var lmax = 0;
+		var lmin:Float = 0;
+		var lmax:Float = 0;
 
-		var rmin = 0;
-		var rmax = 0;
+		var rmin:Float = 0;
+		var rmax:Float = 0;
 
-		var rows = 0;
-		var render = 0;
-		var prevRows = 0;
+		var rows:Float = 0;
+		var render:Int = 0;
+		var prevRows:Float = 0;
 		
 		while (index < length) {
 			if (index >= 0) {
@@ -155,11 +155,11 @@ class OSTSubstate extends MusicBeatSubstate
 				}
 
 				if (stereo) {
-					var byte = bytes.getUInt16((index * channels * 2) + 2);
+					var byte:Float = bytes.getUInt16((index * channels * 2) + 2);
 
 					if (byte > 65535 / 2) byte -= 65535;
 
-					var sample = (byte / 65535);
+					var sample:Float = (byte / 65535);
 
 					if (sample > 0) {
 						if (sample > rmax) rmax = sample;
