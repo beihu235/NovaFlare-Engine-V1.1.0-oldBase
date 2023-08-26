@@ -319,7 +319,7 @@ class MainMenuState extends MusicBeatState
 			
 			    menuItems.forEach(function(spr:FlxSprite){
 			        if (curSelected == spr.ID){
-				        if spr.animation.curAnim.name('selected'){
+				        if spr.animation.curAnim.name == ('selected'){
 				        selectSomething();
 				        }
 				        else
