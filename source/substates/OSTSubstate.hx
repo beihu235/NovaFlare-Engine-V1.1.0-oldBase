@@ -17,7 +17,7 @@ import openfl.media.Sound;
 import openfl.net.FileReference;
 import openfl.utils.Assets as OpenFlAssets;
 
-import flixel.addons.transition.FlxTransitionableState
+import flixel.addons.transition.FlxTransitionableState;
 
 import backend.Song;
 import backend.Section;
