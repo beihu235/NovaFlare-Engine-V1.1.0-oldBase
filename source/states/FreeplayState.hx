@@ -322,9 +322,7 @@ class FreeplayState extends MusicBeatState
 			openSubState(new GameplayChangersSubstate());
 		}
 		else if(FlxG.keys.justPressed.SPACE #if android || MusicBeatState._virtualpad.buttonX.justPressed #end)
-		{
-		    
-			
+		{		    			
 		    
 			if(instPlaying != curSelected)
 			{
@@ -335,10 +333,7 @@ class FreeplayState extends MusicBeatState
 				var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
 				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
 				
-				if (PlayState.SONG.needsVoices)
-					vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
-				else
-					vocals = new FlxSound();
+				
                 /*
 				FlxG.sound.list.add(vocals);
 				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
@@ -349,7 +344,7 @@ class FreeplayState extends MusicBeatState
 				instPlaying = curSelected;
 				*/
 				persistentUpdate = false;
-				openSubState(new OSTSubstate(PlayState.SONG.song,vocals));
+				openSubState(new OSTSubstate(PlayState.SONG));
 			}
 			
 			
