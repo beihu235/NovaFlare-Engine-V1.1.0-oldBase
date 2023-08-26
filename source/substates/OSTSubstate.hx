@@ -53,6 +53,33 @@ class OSTSubstate extends MusicBeatSubstate
     var _rect:Rectangle;
     var _temprect:Rectangle;
     
+    var snd = FlxG.sound.music;
+
+		var currentTime:Float = 0;
+		
+		var buffer:Float = 0;
+		var bytes:Float = 0;
+		
+		var length:Float = 0;
+		var khz:Float = 0;
+		var channels:Float = 0;
+		var stereo:Float = 0;
+		
+		var index:Float = 0;
+		var samples:Float = 0;//Math.floor((currentTime + (((60 / Conductor.bpm) * 1000 / 4) * 16)) * khz - index);
+		var samplesPerRow:Float = 0;
+
+		var lmin:Float = 0;
+		var lmax:Float = 0;
+
+		var rmin:Float = 0;
+		var rmax:Float = 0;
+
+		var rows:Float = 0;
+		var render:Int = 0;
+		var prevRows:Float = 0;
+        var midx:Float = 0;
+    
 	public function new(needVoices:Bool,bpm:Float)
 	{
 		super();				
@@ -73,7 +100,29 @@ class OSTSubstate extends MusicBeatSubstate
 		left.alpha = 0.5;
 		add(left);
 		
+		currentTime = snd.time;
 		
+		buffer = snd._sound.__buffer;
+		bytes = buffer.data.buffer;
+		
+		length = bytes.length - 1;
+		khz = (buffer.sampleRate / 1000);
+		channels = buffer.channels;
+		stereo = channels > 1;
+		
+		index = Math.floor(currentTime * khz);
+		samples = 720;//Math.floor((currentTime + (((60 / Conductor.bpm) * 1000 / 4) * 16)) * khz - index);
+		samplesPerRow = samples / 720;
+
+		lmin = 0;
+		lmax = 0;
+
+		rmin = 0;
+		rmax = 0;
+
+		rows = 0;
+		render = 0;
+		prevRows = 0;
 		
 		//game.add(right);
 		
@@ -114,31 +163,7 @@ class OSTSubstate extends MusicBeatSubstate
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 		//flashGFX2.clear(); flashGFX2.beginFill(0xFFFFFF, 1);
 		
-		var snd = FlxG.sound.music;
-
-		var currentTime:Float = snd.time;
 		
-		var buffer:Float = snd._sound.__buffer;
-		var bytes:Float = buffer.data.buffer;
-		
-		var length:Float = bytes.length - 1;
-		var khz:Float = (buffer.sampleRate / 1000);
-		var channels:Float = buffer.channels;
-		var stereo:Float = channels > 1;
-		
-		var index:Float = Math.floor(currentTime * khz);
-		var samples:Float = 720;//Math.floor((currentTime + (((60 / Conductor.bpm) * 1000 / 4) * 16)) * khz - index);
-		var samplesPerRow:Float = samples / 720;
-
-		var lmin:Float = 0;
-		var lmax:Float = 0;
-
-		var rmin:Float = 0;
-		var rmax:Float = 0;
-
-		var rows:Float = 0;
-		var render:Int = 0;
-		var prevRows:Float = 0;
 		
 		while (index < length) {
 			if (index >= 0) {
