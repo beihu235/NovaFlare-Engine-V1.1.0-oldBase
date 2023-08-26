@@ -347,7 +347,7 @@ class FreeplayState extends MusicBeatState
 				if (PlayState.SONG.needsVoices)needsVoices = true;				
 					
 				persistentUpdate = false;
-				openSubState(new OSTSubstate(/*poop,songs[curSelected].songName.toLowerCase(),*/needsVoices));
+				openSubState(new OSTSubstate(needsVoices,PlayState.SONG.bpm));
 			}
 			
 			
