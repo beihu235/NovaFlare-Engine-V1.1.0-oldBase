@@ -64,8 +64,7 @@ class OSTSubstate extends MusicBeatSubstate
 		vocals.play();
 		vocals.persist = true;
 		vocals.looped = true;
-		vocals.volume = 0.7;
-		
+		vocals.volume = 0.7;		
 		
 	}
 
@@ -74,6 +73,12 @@ class OSTSubstate extends MusicBeatSubstate
 	{
 		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
 		{
+		    FlxG.sound.music.volume = 0;
+		    destroyVocals();
+		
+		    FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+			FlxG.sound.music.fadeIn(4, 0, 0.7);		
+		    
 			#if android
 			FlxTransitionableState.skipNextTransOut = true;
 			FlxG.resetState();
@@ -86,5 +91,11 @@ class OSTSubstate extends MusicBeatSubstate
 		super.update(elapsed);
 	}
 
-	
+	public static function destroyVocals() {
+		if(vocals != null) {
+			vocals.stop();
+			vocals.destroy();
+		}
+		vocals = null;
+	}
 }
