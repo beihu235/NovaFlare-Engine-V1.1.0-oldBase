@@ -9,6 +9,7 @@ import flixel.FlxObject;
 import flixel.group.FlxGroup;
 import flixel.math.FlxPoint;
 import flixel.util.FlxSort;
+import flixel.util.FlxSpriteUtil;
 import lime.media.AudioBuffer;
 import lime.utils.Assets;
 import openfl.events.Event;
@@ -48,7 +49,7 @@ class OSTSubstate extends MusicBeatSubstate
 {
     public static var vocals:FlxSound = null;
     var left:FlxSprite;
-    var flashGFX:FlxSpriteUtil;
+    var flashGFX:FlxSprite;
     var _rect:Rectangle;
     var _temprect:Rectangle;
     
@@ -129,15 +130,15 @@ class OSTSubstate extends MusicBeatSubstate
 		var samples = 720;//Math.floor((currentTime + (((60 / Conductor.bpm) * 1000 / 4) * 16)) * khz - index);
 		var samplesPerRow = samples / 720;
 
-		var lmin = 0;
-		var lmax = 0;
+		var lmin:Float = 0;
+		var lmax:Float = 0;
 
-		var rmin = 0;
-		var rmax = 0;
+		var rmin:Float = 0;
+		var rmax:Float = 0;
 
-		var rows = 0;
-		var render = 0;
-		var prevRows = 0;
+		var rows:Float = 0;
+		var render:Int = 0;
+		var prevRows:Float = 0;
 		
 		while (index < length) {
 			if (index >= 0) {
