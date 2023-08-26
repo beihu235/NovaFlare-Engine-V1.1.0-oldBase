@@ -47,7 +47,11 @@ import flixel.ui.FlxButton;
 class OSTSubstate extends MusicBeatSubstate
 {
     public static var vocals:FlxSound = null;
-
+    var left:FlxSprite;
+    var flashGFX:FlxSpriteUtil.flashGfx;
+    var _rect:Rectangle;
+    var _temprect:Rectangle;
+    
 	public function new(needVoices:Bool,bpm:Float)
 	{
 		super();				
@@ -107,7 +111,7 @@ class OSTSubstate extends MusicBeatSubstate
 		//right.pixels.fillRect(_rect, 0xFF000000);
 
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
-		flashGFX2.clear(); flashGFX2.beginFill(0xFFFFFF, 1);
+		//flashGFX2.clear(); flashGFX2.beginFill(0xFFFFFF, 1);
 		
 		var snd = FlxG.sound.music;
 
