@@ -315,9 +315,8 @@ class MainMenuState extends MusicBeatState
 		    if (curSelected < 0)
 			    curSelected = menuItems.length - 1;
 			    
-			if (controls.ACCEPT_P) {
+			if (controls.ACCEPT) {
 			selectSomething();
-		    endCheck = true;
 		    }
 		    
 		menuItems.forEach(function(spr:FlxSprite)
