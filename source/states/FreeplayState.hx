@@ -12,7 +12,7 @@ import states.editors.ChartingState;
 
 import substates.GameplayChangersSubstate;
 import substates.ResetScoreSubState;
-import substates.OSTSubState;
+import substates.OSTSubstate;
 
 #if MODS_ALLOWED
 import sys.FileSystem;
