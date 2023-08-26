@@ -315,7 +315,7 @@ class MainMenuState extends MusicBeatState
 		    if (curSelected < 0)
 			    curSelected = menuItems.length - 1;
 			    
-			if (controls.ACCEPT) {
+			if (controls.ACCEPT_P) {
 			selectSomething();
 		    endCheck = true;
 		    }
@@ -371,7 +371,7 @@ class MainMenuState extends MusicBeatState
 			        spr.animation.play('idle');
 			        //spr.updateHitbox();
 
-			        if (spr.ID == curSelected)
+			        if (spr.ID == curSelected )
 			        {
 			        	spr.animation.play('selected');
 			        	//spr.centerOffsets();
@@ -430,11 +430,7 @@ class MainMenuState extends MusicBeatState
         if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true;        
         
         bgMove.alpha = 0.1;
-        /*
-        test1.text = "time: " + SoundTime;
-        test2.text = "beatTime: " + BeatTime;
-        test3.text = "startbeat: " + ((SoundTime / BeatTime) % 4);
-        */
+   
 		
 
 		menuItems.forEach(function(spr:FlxSprite)
