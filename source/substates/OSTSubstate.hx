@@ -46,11 +46,16 @@ import flixel.ui.FlxButton;
 
 class OSTSubstate extends MusicBeatSubstate
 {
+    public static var vocals:FlxSound = null;
 
-
-	public function new(Song:String,vocals:String)
+	public function new(Song:String)
 	{
 		super();
+		
+		if (Song.needsVoices)
+			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
+		else
+			vocals = new FlxSound();
 		
 		FlxG.sound.list.add(vocals);
 		FlxG.sound.playMusic(Paths.inst(Song), 0.7);
