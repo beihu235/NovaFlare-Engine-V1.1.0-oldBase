@@ -12,6 +12,7 @@ import states.editors.ChartingState;
 
 import substates.GameplayChangersSubstate;
 import substates.ResetScoreSubState;
+import substates.OSTSubState;
 
 #if MODS_ALLOWED
 import sys.FileSystem;
@@ -322,19 +323,23 @@ class FreeplayState extends MusicBeatState
 		}
 		else if(FlxG.keys.justPressed.SPACE #if android || MusicBeatState._virtualpad.buttonX.justPressed #end)
 		{
+		    
+			
+		    
 			if(instPlaying != curSelected)
 			{
-				#if PRELOAD_ALL
+				
 				destroyFreeplayVocals();
 				FlxG.sound.music.volume = 0;
 				Mods.currentModDirectory = songs[curSelected].folder;
 				var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
 				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
+				
 				if (PlayState.SONG.needsVoices)
 					vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
 				else
 					vocals = new FlxSound();
-
+                /*
 				FlxG.sound.list.add(vocals);
 				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
 				vocals.play();
@@ -342,8 +347,12 @@ class FreeplayState extends MusicBeatState
 				vocals.looped = true;
 				vocals.volume = 0.7;
 				instPlaying = curSelected;
-				#end
+				*/
+				persistentUpdate = false;
+				openSubState(new OSTSubstate(PlayState.SONG.song,vocals));
 			}
+			
+			
 		}
 
 		else if (controls.ACCEPT)
