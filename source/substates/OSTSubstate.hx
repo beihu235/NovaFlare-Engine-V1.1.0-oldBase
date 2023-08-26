@@ -9,6 +9,7 @@ import flixel.FlxObject;
 import flixel.group.FlxGroup;
 import flixel.math.FlxPoint;
 import flixel.util.FlxSort;
+import flixel.util.FlxSpriteUtil;
 import lime.media.AudioBuffer;
 import lime.utils.Assets;
 import openfl.events.Event;
@@ -48,7 +49,7 @@ class OSTSubstate extends MusicBeatSubstate
 {
     public static var vocals:FlxSound = null;
     var left:FlxSprite;
-    var flashGFX:FlxSpriteUtil.flashGfx;
+    var flashGFX:FlxSpriteUtil;
     var _rect:Rectangle;
     var _temprect:Rectangle;
     
