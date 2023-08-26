@@ -103,8 +103,8 @@ class OSTSubstate extends MusicBeatSubstate
 		left.pixels.lock();
 		left.pixels.fillRect(_rect, 0xFF000000);
 		
-		right.pixels.lock();
-		right.pixels.fillRect(_rect, 0xFF000000);
+		//right.pixels.lock();
+		//right.pixels.fillRect(_rect, 0xFF000000);
 
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 		flashGFX2.clear(); flashGFX2.beginFill(0xFFFFFF, 1);
