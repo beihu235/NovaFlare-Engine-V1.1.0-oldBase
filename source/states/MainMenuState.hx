@@ -317,16 +317,16 @@ class MainMenuState extends MusicBeatState
 			    
 			if (controls.ACCEPT) {
 			
-			/*
+			
 			    menuItems.forEach(function(spr:FlxSprite){
 			        if (curSelected == spr.ID){
-				        if spr.animation.curAnim.name == ('selected'){
+				        if (spr.animation.curAnim.name == 'selected'){
 				        selectSomething();
 				        }
 				        else
 				        spr.animation.play('selected');
 			        }
-		        });			*/
+		        });			
 		    }
 		    
 		menuItems.forEach(function(spr:FlxSprite)
