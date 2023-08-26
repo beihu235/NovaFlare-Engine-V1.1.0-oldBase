@@ -70,7 +70,7 @@ class OSTSubstate extends MusicBeatSubstate
 		
 		
 		
-		game.add(right);
+		//game.add(right);
 		
 		flashGFX = FlxSpriteUtil.flashGfx;
 		
