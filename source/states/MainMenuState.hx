@@ -317,6 +317,7 @@ class MainMenuState extends MusicBeatState
 			    
 			if (controls.ACCEPT) {
 			
+			/*
 			    menuItems.forEach(function(spr:FlxSprite){
 			        if (curSelected == spr.ID){
 				        if spr.animation.curAnim.name == ('selected'){
@@ -325,7 +326,7 @@ class MainMenuState extends MusicBeatState
 				        else
 				        spr.animation.play('selected');
 			        }
-		        });			
+		        });			*/
 		    }
 		    
 		menuItems.forEach(function(spr:FlxSprite)
