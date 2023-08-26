@@ -48,11 +48,11 @@ class OSTSubstate extends MusicBeatSubstate
 {
     public static var vocals:FlxSound = null;
 
-	public function new(Song:String)
+	public function new(Song,needVoices:Bool)
 	{
 		super();
 		
-		if (Song.needsVoices)
+		if (needsVoices)
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
 		else
 			vocals = new FlxSound();
