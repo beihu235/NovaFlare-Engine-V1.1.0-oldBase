@@ -239,7 +239,7 @@ class OSTSubstate extends MusicBeatSubstate
 		}
 		
 		flashGFX.endFill(); 
-		waveformVoiceSprite.pixels.draw(FlxSpriteUtil.flashGfxSprite);
+		waveformVoiceSprite.pixels.draw(FlxSpriteUtil.flashGFxSprite);
 		waveformVoiceSprite.pixels.unlock(); 
 		
 		return;
@@ -332,7 +332,7 @@ class OSTSubstate extends MusicBeatSubstate
 		}
 		
 		flashGFX.endFill(); 
-		waveFormMainSprite.pixels.draw(FlxSpriteUtil.flashGFXSprite);
+		waveFormMainSprite.pixels.draw(FlxSpriteUtil.flashGFxSprite);
 		waveFormMainSprite.pixels.unlock(); 
 		
 		return;
