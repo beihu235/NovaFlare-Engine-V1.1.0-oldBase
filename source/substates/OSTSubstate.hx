@@ -81,15 +81,7 @@ class OSTSubstate extends MusicBeatSubstate
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 		
-		waveformVoiceSprite = new FlxSprite(1280 - 400 - 50, 50).makeGraphic(400, 100, 0xFF000000);
-		waveformVoiceSprite.alpha = 0.5;
-		add(waveformVoiceSprite);
-				
-		waveformInstSprite = new FlxSprite(1280 - 400 - 50, 50 + 300).makeGraphic(400, 100, 0xFF000000);
-		waveformInstSprite.alpha = 0.5;
-		add(waveformInstSprite);
-	
-	    logoBl = new FlxSprite(0, 0);
+		logoBl = new FlxSprite(0, 0);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		logoBl.antialiasing = ClientPrefs.data.antialiasing;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
@@ -100,6 +92,16 @@ class OSTSubstate extends MusicBeatSubstate
 		add(logoBl);
 		logoBl.x = 320 - logoBl.width / 2;
 		logoBl.y = 360 - logoBl.height / 2;
+		
+		waveformVoiceSprite = new FlxSprite(1280 - 400 - 50, 50).makeGraphic(400, 100, 0xFF000000);
+		waveformVoiceSprite.alpha = 0.5;
+		add(waveformVoiceSprite);
+				
+		waveformInstSprite = new FlxSprite(1280 - 400 - 50, 50 + 300).makeGraphic(400, 100, 0xFF000000);
+		waveformInstSprite.alpha = 0.5;
+		add(waveformInstSprite);
+	
+	    
 	}
     
     var SoundTime:Float = 0;
