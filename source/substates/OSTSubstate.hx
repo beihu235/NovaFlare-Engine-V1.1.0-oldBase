@@ -109,9 +109,11 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.scale.y = 0.75;
 		logoBl.updateHitbox();
 		add(logoBl);
-		logoBl.cameras = [camLogo];
-		logoBl.screenCenter(XY);
-		FlxSpriteUtil.cameraBound(logoBl, camGame, ANY);
+		logoBl.x = 320 - logoBl.width / 2;
+		logoBl.x = 360 - logoBl.height / 2;
+		//logoBl.cameras = [camLogo];
+		//logoBl.screenCenter(XY);
+		
 		
 		waveformVoiceSprite = new FlxSprite(1280 - 640, 50).makeGraphic(640 - 50, 100, 0xFF000000);
 		waveformVoiceSprite.alpha = 0.5;
@@ -131,6 +133,8 @@ class OSTSubstate extends MusicBeatSubstate
 		
 		SoundTime = FlxG.sound.music.time / 1000;
         BeatTime = 60 / bpm;
+        
+        FlxSpriteUtil.cameraBound(logoBl, camGame, ANY);
         
         if ( Math.floor(SoundTime/BeatTime) % 4  == 0 && canBeat){       
             canBeat = false;            
