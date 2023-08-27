@@ -111,7 +111,7 @@ class OSTSubstate extends MusicBeatSubstate
 		add(logoBl);
 		logoBl.cameras = [camLogo];
 		logoBl.screenCenter(XY);
-		ccameraBound(logoBl, camGame, Left)
+		FlxSpriteUtil.cameraBound(logoBl, camGame, Left)
 		
 		waveformVoiceSprite = new FlxSprite(1280 - 640, 50).makeGraphic(640 - 50, 100, 0xFF000000);
 		waveformVoiceSprite.alpha = 0.5;
