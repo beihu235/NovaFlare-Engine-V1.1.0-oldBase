@@ -74,18 +74,22 @@ class OSTSubstate extends MusicBeatSubstate
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 		
-		waveformSprite = new FlxSprite(1280 - 100 - 50, 50).makeGraphic(300, 100, 0xFF000000);
+		waveformSprite = new FlxSprite(1280 - 300 - 50, 50).makeGraphic(300, 100, 0xFF000000);
 		waveformSprite.alpha = 0.5;
 		add(waveformSprite);
 	
 	
-	    logoBl = new FlxSprite(200, 200);
+	    logoBl = new FlxSprite(0, 0);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		logoBl.antialiasing = ClientPrefs.data.antialiasing;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
+		logoBl.scale.x = 0.5;
+		logoBl.scale.y = 0.5;
 		logoBl.updateHitbox();
 		add(logoBl);
+		logoBl.x = 320 - logoBl.width / 2;
+		logoBl.x = 360 - logoBl.height / 2;
 	}
 
 	
