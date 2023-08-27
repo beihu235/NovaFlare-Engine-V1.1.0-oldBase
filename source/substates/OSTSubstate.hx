@@ -47,7 +47,8 @@ import flixel.ui.FlxButton;
 
 class OSTSubstate extends MusicBeatSubstate
 {
-    var waveformSprite:FlxSprite;
+    var waveformVoiceSprite:FlxSprite;
+    var waveformInstSprite:FlxSprite;
     var logoBl:FlxSprite;
     var bpm:Float = 0;
     public static var vocals:FlxSound;
@@ -77,10 +78,16 @@ class OSTSubstate extends MusicBeatSubstate
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 		
-		waveformSprite = new FlxSprite(1280 - 300 - 50, 50).makeGraphic(300, 100, 0xFF000000);
-		waveformSprite.alpha = 0.5;
-		add(waveformSprite);
-	
+		waveformVoiceSprite = new FlxSprite(1280 - 400 - 50, 50).makeGraphic(400, 100, 0xFF000000);
+		waveformVoiceSprite.alpha = 0.5;
+		add(waveformVoiceSprite);
+		
+		
+		if (needVoices){
+		waveformInstSprite = new FlxSprite(1280 - 400 - 50, 50 + 300).makeGraphic(400, 100, 0xFF000000);
+		waveformInstSprite.alpha = 0.5;
+		add(waveformInstSprite);
+	    }
 	
 	    logoBl = new FlxSprite(0, 0);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
@@ -92,7 +99,7 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.updateHitbox();
 		add(logoBl);
 		logoBl.x = 320 - logoBl.width / 2;
-		logoBl.x = 360 - logoBl.height / 2;
+		logoBl.y = 360 - logoBl.height / 2;
 	}
     
     var SoundTime:Float = 0;
@@ -118,7 +125,8 @@ class OSTSubstate extends MusicBeatSubstate
 			#end
 		}
 		
-		updateWaveform();
+		updateVoiceWaveform();		
+		if (needVoices) updateInstWaveform();
 		
 		SoundTime = FlxG.sound.music.time / 1000;
         BeatTime = 60 / bpm;
@@ -138,16 +146,109 @@ class OSTSubstate extends MusicBeatSubstate
 	
 
 
-	function updateWaveform() {
+	function updateVoiceWaveform() {
 	
 	    var flashGFX = FlxSpriteUtil.flashGfx;
 		
-		var _rect = new Rectangle(0, 0, 300, 100);
+		var _rect = new Rectangle(0, 0, 400, 100);
 		//var _temprect = new Rectangle(0, 0, 0, 0);
 		var midx = 100 / 2;
 	
-	    waveformSprite.pixels.lock();
-		waveformSprite.pixels.fillRect(_rect, 0xFF000000);
+	    waveformVoiceSprite.pixels.lock();
+		waveformVoiceSprite.pixels.fillRect(_rect, 0xFF000000);
+
+		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
+		
+		
+		var snd = vocals;
+
+		var currentTime = snd.time;
+		
+		var buffer = snd._sound.__buffer;
+		var bytes = buffer.data.buffer;
+		
+		var length = bytes.length - 1;
+		var khz = (buffer.sampleRate / 1000);
+		var channels = buffer.channels;
+		var stereo = channels > 1;
+		
+		var index = Math.floor(currentTime * khz);
+		var samples = 720;//Math.floor((currentTime + (((60 / Conductor.bpm) * 1000 / 4) * 16)) * khz - index);
+		var samplesPerRow = samples / 720;
+
+		var lmin:Float = 0;
+		var lmax:Float = 0;
+		
+		var rmin:Float = 0;
+		var rmax:Float = 0;
+
+		var rows = 0;
+		var render = 0;
+		var prevRows = 0;
+		
+		while (index < length) {
+			if (index >= 0) {
+				var byte = bytes.getUInt16(index * channels * 2);
+
+				if (byte > 65535 / 2) byte -= 65535;
+
+				var sample = (byte / 65535);
+
+				if (sample > 0) {
+					if (sample > lmax) lmax = sample;
+				} else if (sample < 0) {
+					if (sample < lmin) lmin = sample;
+				}
+
+				if (stereo) {
+					var byte = bytes.getUInt16((index * channels * 2) + 2);
+
+					if (byte > 65535 / 2) byte -= 65535;
+
+					var sample = (byte / 65535);
+
+					if (sample > 0) {
+						if (sample > rmax) rmax = sample;
+					} else if (sample < 0) {
+						if (sample < rmin) rmin = sample;
+					}
+				}
+			}
+			
+			if (rows - prevRows >= samplesPerRow) {
+				prevRows = rows + ((rows - prevRows) - 1);
+				
+				flashGFX.drawRect(render, midx + (rmin * midx * 2), 1, (rmax - rmin) * midx * 2);
+				//flashGFX2.drawRect(midx + (rmin * midx * 2), render, (rmax - rmin) * midx * 2, 1);
+				
+				
+				
+				lmin = lmax = rmin = rmax = 0;
+				render++;
+			}
+			
+			index++;
+			rows++;
+			if (render > 300 - 1) break;
+		}
+		
+		flashGFX.endFill(); 
+		waveformVoiceSprite.pixels.draw(FlxSpriteUtil.flashGfxSprite);
+		waveformVoiceSprite.pixels.unlock(); 
+		
+		return;
+	}	
+	
+	function updateInstWaveform() {
+	
+	    var flashGFX = FlxSpriteUtil.flashGfx;
+		
+		var _rect = new Rectangle(0, 0, 400, 100);
+		//var _temprect = new Rectangle(0, 0, 0, 0);
+		var midx = 100 / 2;
+	
+	    waveformInstSprite.pixels.lock();
+		waveformInstSprite.pixels.fillRect(_rect, 0xFF000000);
 
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 		
@@ -225,8 +326,8 @@ class OSTSubstate extends MusicBeatSubstate
 		}
 		
 		flashGFX.endFill(); 
-		waveformSprite.pixels.draw(FlxSpriteUtil.flashGfxSprite);
-		waveformSprite.pixels.unlock(); 
+		waveformInstSprite.pixels.draw(FlxSpriteUtil.flashGfxSprite);
+		waveformInstSprite.pixels.unlock(); 
 		
 		return;
 	}	
