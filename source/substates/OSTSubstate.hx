@@ -47,7 +47,7 @@ import flixel.ui.FlxButton;
 
 class OSTSubstate extends MusicBeatSubstate
 {
-    var waveformSprite:FlxSprite;
+    var left:FlxSprite;
     public static var vocals:FlxSound;
 	public function new(needVoices:Bool,bpm:Float)
 	{
@@ -76,6 +76,21 @@ class OSTSubstate extends MusicBeatSubstate
 		waveformSprite = new FlxSprite().makeGraphic(1280, 720, 0xFF000000);
 		waveformSprite.alpha = 0.5;
 		add(waveformSprite);
+		
+		left = new FlxSprite().loadGraphic(Paths.image('what'));
+		left.alpha = 0.5;
+		add(left);
+		
+		
+		
+		
+		flashGFX = FlxSpriteUtil.flashGfx;
+		flashSpr2 = new Sprite();
+		flashGFX2 = flashSpr2.graphics;
+		
+		_rect = new Rectangle(0, 0, 1280, 720);
+		_temprect = new Rectangle(0, 0, 0, 0);
+		midx = 720 / 2;
 		
 		
 	}
@@ -107,171 +122,66 @@ class OSTSubstate extends MusicBeatSubstate
 		super.update(elapsed);
 	}
 	
-	var waveformPrinted:Bool = true;
-	var wavData:Array<Array<Array<Float>>> = [[[0], [0]], [[0], [0]]];
 
-	var lastWaveformHeight:Int = 0;
-	var waveformPrinted:Bool = true;
-	var wavData:Array<Array<Array<Float>>> = [[[0], [0]], [[0], [0]]];
 
-	var lastWaveformHeight:Int = 0;
 	function updateWaveform() {
-		if(waveformPrinted) {
-			var width:Int = Std.int(GRID_SIZE * 8);
-			var height:Int = Std.int(gridBG.height);
-			if(lastWaveformHeight != height && waveformSprite.pixels != null)
-			{
-				waveformSprite.pixels.dispose();
-				waveformSprite.pixels.disposeImage();
-				waveformSprite.makeGraphic(width, height, 0x00FFFFFF);
-				lastWaveformHeight = height;
-			}
-			waveformSprite.pixels.fillRect(new Rectangle(0, 0, width, height), 0x00FFFFFF);
-		}
-		waveformPrinted = false;
+	
+	    left.pixels.lock();
+		left.pixels.fillRect(_rect, 0xFF000000);
+		
+		right.pixels.lock();
+		right.pixels.fillRect(_rect, 0xFF000000);
 
-		if(!FlxG.save.data.chart_waveformInst && !FlxG.save.data.chart_waveformVoices) {
-			//trace('Epic fail on the waveform lol');
-			return;
-		}
+		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
+		flashGFX2.clear(); flashGFX2.beginFill(0xFFFFFF, 1);
 		
-		wavData[0][0] = [];
-		wavData[0][1] = [];
-		wavData[1][0] = [];
-		wavData[1][1] = [];
-		
-		SoundTime = FlxG.sound.music.time / 1000;
-        BeatTime = 60 / bpm;
-        
-		var steps:Int = Math.floor(SoundTime/BeatTime) ;
-		var st:Float = FlxG.sound.music.time;
-		var et:Float = st + (Conductor.stepCrochet * steps);
-		
-		if (FlxG.save.data.chart_waveformInst) {
-			var sound:FlxSound = FlxG.sound.music;
-			if (sound._sound != null && sound._sound.__buffer != null) {
-				var bytes:Bytes = sound._sound.__buffer.data.toBytes();
-				
-				wavData = waveformData(
-					sound._sound.__buffer,
-					bytes,
-					st,
-					et,
-					1,
-					wavData,
-					Std.int(gridBG.height)
-				);
-			}
-		}
-		
-		if (FlxG.save.data.chart_waveformVoices) {
-			var sound:FlxSound = vocals;
-			if (sound._sound != null && sound._sound.__buffer != null) {
-				var bytes:Bytes = sound._sound.__buffer.data.toBytes();
-				
-				wavData = waveformData(
-					sound._sound.__buffer,
-					bytes,
-					st,
-					et,
-					1,
-					wavData,
-					Std.int(gridBG.height)
-				);
-			}
-		}
-		
-		// Draws
-		var gSize:Int = Std.int(GRID_SIZE * 8);
-		var hSize:Int = Std.int(gSize / 2);
-		
-		var lmin:Float = 0;
-		var lmax:Float = 0;
-		
-		var rmin:Float = 0;
-		var rmax:Float = 0;
-		
-		var size:Float = 1;
-		
-		var leftLength:Int = (
-			wavData[0][0].length > wavData[0][1].length ? wavData[0][0].length : wavData[0][1].length
-		);
-		
-		var rightLength:Int = (
-			wavData[1][0].length > wavData[1][1].length ? wavData[1][0].length : wavData[1][1].length
-		);
-		
-		var length:Int = leftLength > rightLength ? leftLength : rightLength;
-		
-		var index:Int;
-		for (i in 0...length) {
-			index = i;
-			
-			lmin = FlxMath.bound(((index < wavData[0][0].length && index >= 0) ? wavData[0][0][index] : 0) * (gSize / 1.12), -hSize, hSize) / 2;
-			lmax = FlxMath.bound(((index < wavData[0][1].length && index >= 0) ? wavData[0][1][index] : 0) * (gSize / 1.12), -hSize, hSize) / 2;
-			
-			rmin = FlxMath.bound(((index < wavData[1][0].length && index >= 0) ? wavData[1][0][index] : 0) * (gSize / 1.12), -hSize, hSize) / 2;
-			rmax = FlxMath.bound(((index < wavData[1][1].length && index >= 0) ? wavData[1][1][index] : 0) * (gSize / 1.12), -hSize, hSize) / 2;
-			
-			waveformSprite.pixels.fillRect(new Rectangle(hSize - (lmin + rmin), i * size, (lmin + rmin) + (lmax + rmax), size), FlxColor.BLUE);
-		}
-		
-		waveformPrinted = true;
-	}
+		var snd = FlxG.sound.music;
 
-	function waveformData(buffer:AudioBuffer, bytes:Bytes, time:Float, endTime:Float, multiply:Float = 1, ?array:Array<Array<Array<Float>>>, ?steps:Float):Array<Array<Array<Float>>>
-	{
-		#if (lime_cffi && !macro)
-		if (buffer == null || buffer.data == null) return [[[0], [0]], [[0], [0]]];
+		var currentTime = snd.time;
 		
-		var khz:Float = (buffer.sampleRate / 1000);
-		var channels:Int = buffer.channels;
+		var buffer = snd._sound.__buffer;
+		var bytes = buffer.data.buffer;
 		
-		var index:Int = Std.int(time * khz);
+		var length = bytes.length - 1;
+		var khz = (buffer.sampleRate / 1000);
+		var channels = buffer.channels;
+		var stereo = channels > 1;
 		
-		var samples:Float = ((endTime - time) * khz);
+		var index = Math.floor(currentTime * khz);
+		var samples = 720;//Math.floor((currentTime + (((60 / Conductor.bpm) * 1000 / 4) * 16)) * khz - index);
+		var samplesPerRow = samples / 720;
+
+		var lmin = 0;
+		var lmax = 0;
+
+		var rmin = 0;
+		var rmax = 0;
+
+		var rows = 0;
+		var render = 0;
+		var prevRows = 0;
 		
-		if (steps == null) steps = 1280;
-		
-		var samplesPerRow:Float = samples / steps;
-		var samplesPerRowI:Int = Std.int(samplesPerRow);
-		
-		var gotIndex:Int = 0;
-		
-		var lmin:Float = 0;
-		var lmax:Float = 0;
-		
-		var rmin:Float = 0;
-		var rmax:Float = 0;
-		
-		var rows:Float = 0;
-		
-		var simpleSample:Bool = true;//samples > 17200;
-		var v1:Bool = false;
-		
-		if (array == null) array = [[[0], [0]], [[0], [0]]];
-		
-		while (index < (bytes.length - 1)) {
+		while (index < length) {
 			if (index >= 0) {
-				var byte:Int = bytes.getUInt16(index * channels * 2);
-				
+				var byte = bytes.getUInt16(index * channels * 2);
+
 				if (byte > 65535 / 2) byte -= 65535;
-				
-				var sample:Float = (byte / 65535);
-				
+
+				var sample = (byte / 65535);
+
 				if (sample > 0) {
 					if (sample > lmax) lmax = sample;
 				} else if (sample < 0) {
 					if (sample < lmin) lmin = sample;
 				}
-				
-				if (channels >= 2) {
-					byte = bytes.getUInt16((index * channels * 2) + 2);
-					
+
+				if (stereo) {
+					var byte = bytes.getUInt16((index * channels * 2) + 2);
+
 					if (byte > 65535 / 2) byte -= 65535;
-					
-					sample = (byte / 65535);
-					
+
+					var sample = (byte / 65535);
+
 					if (sample > 0) {
 						if (sample > rmax) rmax = sample;
 					} else if (sample < 0) {
@@ -280,57 +190,30 @@ class OSTSubstate extends MusicBeatSubstate
 				}
 			}
 			
-			v1 = samplesPerRowI > 0 ? (index % samplesPerRowI == 0) : false;
-			while (simpleSample ? v1 : rows >= samplesPerRow) {
-				v1 = false;
-				rows -= samplesPerRow;
+			if (rows - prevRows >= samplesPerRow) {
+				prevRows = rows + ((rows - prevRows) - 1);
 				
-				gotIndex++;
+				flashGFX.drawRect(render, midx + (rmin * midx * 2), 1, (rmax - rmin) * midx * 2);
+				//flashGFX2.drawRect(midx + (rmin * midx * 2), render, (rmax - rmin) * midx * 2, 1);
 				
-				var lRMin:Float = Math.abs(lmin) * multiply;
-				var lRMax:Float = lmax * multiply;
 				
-				var rRMin:Float = Math.abs(rmin) * multiply;
-				var rRMax:Float = rmax * multiply;
 				
-				if (gotIndex > array[0][0].length) array[0][0].push(lRMin);
-					else array[0][0][gotIndex - 1] = array[0][0][gotIndex - 1] + lRMin;
-				
-				if (gotIndex > array[0][1].length) array[0][1].push(lRMax);
-					else array[0][1][gotIndex - 1] = array[0][1][gotIndex - 1] + lRMax;
-				
-				if (channels >= 2) {
-					if (gotIndex > array[1][0].length) array[1][0].push(rRMin);
-						else array[1][0][gotIndex - 1] = array[1][0][gotIndex - 1] + rRMin;
-					
-					if (gotIndex > array[1][1].length) array[1][1].push(rRMax);
-						else array[1][1][gotIndex - 1] = array[1][1][gotIndex - 1] + rRMax;
-				}
-				else {
-					if (gotIndex > array[1][0].length) array[1][0].push(lRMin);
-						else array[1][0][gotIndex - 1] = array[1][0][gotIndex - 1] + lRMin;
-					
-					if (gotIndex > array[1][1].length) array[1][1].push(lRMax);
-						else array[1][1][gotIndex - 1] = array[1][1][gotIndex - 1] + lRMax;
-				}
-				
-				lmin = 0;
-				lmax = 0;
-				
-				rmin = 0;
-				rmax = 0;
+				lmin = lmax = rmin = rmax = 0;
+				render++;
 			}
 			
 			index++;
 			rows++;
-			if(gotIndex > steps) break;
+			if (render > 1280) break;
 		}
 		
-		return array;
-		#else
-		return [[[0], [0]], [[0], [0]]];
-		#end
-	}
+		flashGFX.endFill(); flashGFX2.endFill();
+		left.pixels.draw(FlxSpriteUtil.flashGfxSprite);
+		left.pixels.unlock(); 
+		//left.dirty = true;
+		
+		return;
+	}	
 
 	public static function destroyVocals() {
 		if(vocals != null) {
