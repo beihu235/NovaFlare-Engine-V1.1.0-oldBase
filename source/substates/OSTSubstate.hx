@@ -209,6 +209,8 @@ class OSTSubstate extends MusicBeatSubstate
 			waveformSprite.pixels.fillRect(new Rectangle(hSize - (lmin + rmin), i * size, (lmin + rmin) + (lmax + rmax), size), FlxColor.BLUE);
 		}
 		
+		
+		}
 		waveformPrinted = true;
 	}
 
