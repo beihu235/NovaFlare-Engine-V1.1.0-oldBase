@@ -74,7 +74,7 @@ class OSTSubstate extends MusicBeatSubstate
 		add(bg);
 		
 		waveformSprite = new FlxSprite().makeGraphic(1280, 720, 0xFF000000);
-		waveformSprite.alpha = 0.5;.
+		waveformSprite.alpha = 0.5;
 		add(waveformSprite);
 		
 		
