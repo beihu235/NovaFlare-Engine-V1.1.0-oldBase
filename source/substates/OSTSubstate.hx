@@ -48,12 +48,12 @@ import flixel.ui.FlxButton;
 class OSTSubstate extends MusicBeatSubstate
 {
     var waveformVoiceSprite:FlxSprite;
-    var waveformInstSprite:FlxSprite;
+    public  var waveformInstSprite:FlxSprite;
     var logoBl:FlxSprite;
     var bpm:Float = 0;
-    var vocals:FlxSound;
+    public  var vocals:FlxSound;
     var songVoice:Bool = false;
-	function new(needVoices:Bool,songBpm:Float)
+	public function new(needVoices:Bool,songBpm:Float)
 	{
 		super();		
 		
@@ -108,22 +108,7 @@ class OSTSubstate extends MusicBeatSubstate
 	var canBeat:Bool = true;
 	override function update(elapsed:Float)
 	{
-		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
-		{
-		    FlxG.sound.music.volume = 0;
-		    destroyVocals();
 		
-		    FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
-			FlxG.sound.music.fadeIn(4, 0, 0.7);		
-		    
-			#if android
-			FlxTransitionableState.skipNextTransOut = true;
-			FlxG.resetState();
-			#else
-			FlxG.sound.play(Paths.sound('cancelMenu'));
-			close();
-			#end
-		}
 		
 		updateVoiceWaveform();		
 		if (songVoice) updateInstWaveform();
@@ -140,6 +125,22 @@ class OSTSubstate extends MusicBeatSubstate
 		
 		if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true;   
 		
+		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
+		{
+		    FlxG.sound.music.volume = 0;
+		    destroyVocals();
+		
+		    FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+			FlxG.sound.music.fadeIn(4, 0, 0.7);		
+		    
+			#if android
+			FlxTransitionableState.skipNextTransOut = true;
+			FlxG.resetState();
+			#else
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+			close();
+			#end
+		}
 		
 		super.update(elapsed);
 	}
@@ -239,7 +240,7 @@ class OSTSubstate extends MusicBeatSubstate
 		return;
 	}	
 	
-	function updateInstWaveform() {
+	public  function updateInstWaveform() {
 	
 	    var flashGFX = FlxSpriteUtil.flashGfx;
 		
