@@ -48,10 +48,10 @@ import flixel.ui.FlxButton;
 class OSTSubstate extends MusicBeatSubstate
 {
     var waveformVoiceSprite:FlxSprite;
-    public  var waveformInstSprite:FlxSprite;
+    public static var waveformInstSprite:FlxSprite;
     var logoBl:FlxSprite;
     var bpm:Float = 0;
-    public  var vocals:FlxSound;
+    public static var vocals:FlxSound;
     var songVoice:Bool = false;
 	public function new(needVoices:Bool,songBpm:Float)
 	{
@@ -240,7 +240,7 @@ class OSTSubstate extends MusicBeatSubstate
 		return;
 	}	
 	
-	public  function updateInstWaveform() {
+	public static function updateInstWaveform() {
 	
 	    var flashGFX = FlxSpriteUtil.flashGfx;
 		
