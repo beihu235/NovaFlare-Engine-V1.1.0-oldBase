@@ -48,12 +48,12 @@ import flixel.ui.FlxButton;
 class OSTSubstate extends MusicBeatSubstate
 {
     var waveformVoiceSprite:FlxSprite;
-    public static var waveformInstSprite:FlxSprite;
+    var waveformInstSprite:FlxSprite;
     var logoBl:FlxSprite;
     var bpm:Float = 0;
-    public static var vocals:FlxSound;
+    var vocals:FlxSound;
     var songVoice:Bool = false;
-	public function new(needVoices:Bool,songBpm:Float)
+	function new(needVoices:Bool,songBpm:Float)
 	{
 		super();		
 		
@@ -84,13 +84,10 @@ class OSTSubstate extends MusicBeatSubstate
 		waveformVoiceSprite = new FlxSprite(1280 - 400 - 50, 50).makeGraphic(400, 100, 0xFF000000);
 		waveformVoiceSprite.alpha = 0.5;
 		add(waveformVoiceSprite);
-		
-		
-		if (needVoices){
+				
 		waveformInstSprite = new FlxSprite(1280 - 400 - 50, 50 + 300).makeGraphic(400, 100, 0xFF000000);
 		waveformInstSprite.alpha = 0.5;
 		add(waveformInstSprite);
-	    }
 	
 	    logoBl = new FlxSprite(0, 0);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
@@ -232,7 +229,7 @@ class OSTSubstate extends MusicBeatSubstate
 			
 			index++;
 			rows++;
-			if (render > 300 - 1) break;
+			if (render > 400 - 1) break;
 		}
 		
 		flashGFX.endFill(); 
@@ -242,7 +239,7 @@ class OSTSubstate extends MusicBeatSubstate
 		return;
 	}	
 	
-	public static function updateInstWaveform() {
+	function updateInstWaveform() {
 	
 	    var flashGFX = FlxSpriteUtil.flashGfx;
 		
@@ -325,7 +322,7 @@ class OSTSubstate extends MusicBeatSubstate
 			
 			index++;
 			rows++;
-			if (render > 300 - 1) break;
+			if (render > 400 - 1) break;
 		}
 		
 		flashGFX.endFill(); 
