@@ -72,7 +72,7 @@ class OSTSubstate extends MusicBeatSubstate
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		
-		camLogo.offset.x = -320;
+		camLogo.x = -320;
 		
 		bpm = songBpm;		
 		
