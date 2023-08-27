@@ -49,7 +49,7 @@ class OSTSubstate extends MusicBeatSubstate
 {
     public static var vocals:FlxSound = null;
     var left:FlxSprite;
-    var flashGFX:FlxSprite;
+    var flashSpr:FlxSprite;
     var _rect:Rectangle;
     var _temprect:Rectangle;
     
@@ -57,8 +57,8 @@ class OSTSubstate extends MusicBeatSubstate
 
 		var currentTime:Float = 0;
 		
-		var buffer:Float = 0;
-		var bytes:Float = 0;
+		var buffer:AudioBuffer;
+		var bytes:Bytes = sound._sound.__buffer.data.toBytes();
 		
 		var byteLength:Float = 0;
 		var khz:Float = 0;
@@ -100,6 +100,9 @@ class OSTSubstate extends MusicBeatSubstate
 		left.alpha = 0.5;
 		add(left);
 		
+		flashSpr = new FlxSprite();
+		flashGFX = flashSpr.graphics;
+		
 		currentTime = snd.time;
 		
 		buffer = snd._sound.__buffer;
@@ -126,7 +129,7 @@ class OSTSubstate extends MusicBeatSubstate
 		
 		//game.add(right);
 		
-		flashGFX = FlxSpriteUtil.flashGfx;
+		//flashGFX = FlxSpriteUtil.flashGfx;
 		
 		_rect = new Rectangle(0, 0, 1280, 720);
 		_temprect = new Rectangle(0, 0, 0, 0);
@@ -161,7 +164,7 @@ class OSTSubstate extends MusicBeatSubstate
 		//right.pixels.fillRect(_rect, 0xFF000000);
 
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
-		//flashGFX2.clear(); flashGFX2.beginFill(0xFFFFFF, 1);
+		flashGFX.clear(); flashGFX.beginFill(0xFFFFFF, 1);
 		
 		
 		
@@ -211,10 +214,9 @@ class OSTSubstate extends MusicBeatSubstate
 			if (render > 720-1) break;
 		}
 		
-		flashGFX.endFill(); //flashGFX2.endFill();
-		left.pixels.draw(FlxSpriteUtil.flashGfxSprite); //right.pixels.draw(flashSpr2);
-		left.pixels.unlock(); //right.pixels.unlock();
-		//left.dirty = true;
+		flashGFX.endFill();
+		left.pixels.draw(flashSpr);
+		left.pixels.unlock();
 		
 		return;
 		
