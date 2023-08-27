@@ -49,10 +49,13 @@ class OSTSubstate extends MusicBeatSubstate
 {
     var waveformSprite:FlxSprite;
     var logoBl:FlxSprite;
+    var bpm:Float = 0;
     public static var vocals:FlxSound;
-	public function new(needVoices:Bool,bpm:Float)
+	public function new(needVoices:Bool,songBpm:Float)
 	{
-		super();				
+		super();		
+		
+		bpm = songBpm;		
 		
 		if (needVoices)
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
