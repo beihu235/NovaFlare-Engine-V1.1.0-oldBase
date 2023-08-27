@@ -51,7 +51,7 @@ class OSTSubstate extends MusicBeatSubstate
     public static var waveFormMainSprite:FlxSprite;
     var logoBl:FlxSprite;
     var flashSpr2:FlxSprite;
-    public static var flashGFX2:graphics;
+    public static var flashGFX2:Graphics;
     var bpm:Float = 0;
     public static var vocals:FlxSound;
     var songVoice:Bool = false;
