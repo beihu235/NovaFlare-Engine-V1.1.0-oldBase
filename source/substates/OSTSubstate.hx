@@ -91,8 +91,8 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.scale.y = 0.5;
 		logoBl.updateHitbox();
 		add(logoBl);
-		logoBl.x = 320 - logoBl.width / 2 - logoBl.offset.x /2;
-		logoBl.y = 360 - logoBl.height / 2 - logoBl.offset.y / 2;
+		logoBl.x = 320 - logoBl.width / 2;
+		logoBl.y = 360 - logoBl.height / 2;
 		
 		waveformVoiceSprite = new FlxSprite(1280 - 400 - 50, 50).makeGraphic(400, 100, 0xFF000000);
 		waveformVoiceSprite.alpha = 0.5;
