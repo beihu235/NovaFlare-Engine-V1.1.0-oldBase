@@ -73,25 +73,13 @@ class OSTSubstate extends MusicBeatSubstate
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 		
-		waveformSprite = new FlxSprite().makeGraphic(1280, 720, 0xFF000000);
-		waveformSprite.alpha = 0.5;
-		add(waveformSprite);
+		left = new FlxSprite().makeGraphic(1280, 720, 0xFF000000);
+		left.alpha = 0.5;
+		add(left);
 		
 		left = new FlxSprite().loadGraphic(Paths.image('what'));
 		left.alpha = 0.5;
 		add(left);
-		
-		
-		
-		
-		flashGFX = FlxSpriteUtil.flashGfx;
-		flashSpr2 = new Sprite();
-		flashGFX2 = flashSpr2.graphics;
-		
-		_rect = new Rectangle(0, 0, 1280, 720);
-		_temprect = new Rectangle(0, 0, 0, 0);
-		midx = 720 / 2;
-		
 		
 	}
 
@@ -126,14 +114,17 @@ class OSTSubstate extends MusicBeatSubstate
 
 	function updateWaveform() {
 	
+	    var flashGFX = FlxSpriteUtil.flashGfx;
+		
+		var _rect = new Rectangle(0, 0, 1280, 720);
+		var _temprect = new Rectangle(0, 0, 0, 0);
+		var midx = 720 / 2;
+	
 	    left.pixels.lock();
 		left.pixels.fillRect(_rect, 0xFF000000);
-		
-		right.pixels.lock();
-		right.pixels.fillRect(_rect, 0xFF000000);
 
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
-		flashGFX2.clear(); flashGFX2.beginFill(0xFFFFFF, 1);
+		
 		
 		var snd = FlxG.sound.music;
 
@@ -207,10 +198,9 @@ class OSTSubstate extends MusicBeatSubstate
 			if (render > 1280) break;
 		}
 		
-		flashGFX.endFill(); flashGFX2.endFill();
+		flashGFX.endFill(); 
 		left.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		left.pixels.unlock(); 
-		//left.dirty = true;
 		
 		return;
 	}	
