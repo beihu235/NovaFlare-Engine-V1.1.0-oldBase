@@ -242,7 +242,7 @@ class OSTSubstate extends MusicBeatSubstate
 		return;
 	}	
 	
-	public function updateInstWaveform() {
+	public static function updateInstWaveform() {
 	
 	    var flashGFX = FlxSpriteUtil.flashGfx;
 		
