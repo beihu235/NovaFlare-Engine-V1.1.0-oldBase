@@ -47,7 +47,7 @@ import flixel.ui.FlxButton;
 
 class OSTSubstate extends MusicBeatSubstate
 {
-    var left:FlxSprite;
+    var waveformSprite:FlxSprite;
     public static var vocals:FlxSound;
 	public function new(needVoices:Bool,bpm:Float)
 	{
@@ -73,13 +73,10 @@ class OSTSubstate extends MusicBeatSubstate
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 		
-		left = new FlxSprite().makeGraphic(1280, 720, 0xFF000000);
-		left.alpha = 0.5;
-		add(left);
-		
-		left = new FlxSprite().loadGraphic(Paths.image('what'));
-		left.alpha = 0.5;
-		add(left);
+		waveformSprite = new FlxSprite().makeGraphic(1280, 720, 0xFF000000);
+		waveformSprite.alpha = 0.5;
+		add(waveformSprite);
+	
 		
 	}
 
@@ -120,8 +117,8 @@ class OSTSubstate extends MusicBeatSubstate
 		var _temprect = new Rectangle(0, 0, 0, 0);
 		var midx = 720 / 2;
 	
-	    left.pixels.lock();
-		left.pixels.fillRect(_rect, 0xFF000000);
+	    waveformSprite.pixels.lock();
+		waveformSprite.pixels.fillRect(_rect, 0xFF000000);
 
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 		
@@ -199,8 +196,8 @@ class OSTSubstate extends MusicBeatSubstate
 		}
 		
 		flashGFX.endFill(); 
-		left.pixels.draw(FlxSpriteUtil.flashGfxSprite);
-		left.pixels.unlock(); 
+		waveformSprite.pixels.draw(FlxSpriteUtil.flashGfxSprite);
+		waveformSprite.pixels.unlock(); 
 		
 		return;
 	}	
