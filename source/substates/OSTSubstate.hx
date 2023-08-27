@@ -103,9 +103,10 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.antialiasing = ClientPrefs.data.antialiasing;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
+		logoBl.offset.x = 0;
+		logoBl.offset.y = 0;
 		logoBl.scale.x = 0.75;
 		logoBl.scale.y = 0.75;
-		logoBl.centerOffsets();
 		logoBl.updateHitbox();
 		add(logoBl);
 		logoBl.cameras = [camLogo];
@@ -131,9 +132,8 @@ class OSTSubstate extends MusicBeatSubstate
         BeatTime = 60 / bpm;
         
         if ( Math.floor(SoundTime/BeatTime) % 4  == 0 && canBeat){       
-
-            canBeat = false;
-            
+            canBeat = false;            
+            camBeat();
             logoBl.animation.play('bump');
         }
 		
@@ -253,6 +253,12 @@ class OSTSubstate extends MusicBeatSubstate
 		
 		return;
 	}	
+	
+	function camBeat() {
+	    camGame.zoom = 1 + 0.03;
+	    FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
+	
+	}
 
 	public static function destroyVocals() {
 		if(vocals != null) {
