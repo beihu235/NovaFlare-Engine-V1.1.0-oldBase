@@ -86,12 +86,13 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.antialiasing = ClientPrefs.data.antialiasing;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
+		logoBl.centerOrigin();
 		logoBl.scale.x = 0.5;
 		logoBl.scale.y = 0.5;
 		logoBl.updateHitbox();
 		add(logoBl);
-		logoBl.x = 320 - logoBl.frameWidth / 2;
-		logoBl.y = 360 - logoBl.frameHeight / 2;
+		logoBl.x = 320;
+		logoBl.y = 360;
 		
 		waveformVoiceSprite = new FlxSprite(1280 - 400 - 50, 50).makeGraphic(400, 100, 0xFF000000);
 		waveformVoiceSprite.alpha = 0.5;
@@ -314,7 +315,7 @@ class OSTSubstate extends MusicBeatSubstate
 			if (rows - prevRows >= samplesPerRow) {
 				prevRows = rows + ((rows - prevRows) - 1);
 				
-				flashGFX.drawRect(render, midx + (rmin * midx * 2), 1, (rmax - rmin) * midx * 2);
+				flashGFX.drawRect(render, 100, 1, -(rmax - rmin) * midx * 2);
 				//flashGFX2.drawRect(midx + (rmin * midx * 2), render, (rmax - rmin) * midx * 2, 1);
 				
 				
