@@ -127,8 +127,8 @@ class OSTSubstate extends MusicBeatSubstate
 		wavData[1][0] = [];
 		wavData[1][1] = [];
 		
-		var steps:Int = Math.round(getSectionBeats() * 4);
-		var st:Float = sectionStartTime();
+		var steps:Int = 0;
+		var st:Float = FlxG.sound.music.time;
 		var et:Float = st + (Conductor.stepCrochet * steps);
 		
 		if (FlxG.save.data.chart_waveformInst) {
