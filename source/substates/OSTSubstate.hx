@@ -163,7 +163,7 @@ class OSTSubstate extends MusicBeatSubstate
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 		
 		
-		var snd = vocals;
+		var snd = FlxG.sound.music;
 
 		var currentTime = snd.time;
 		
@@ -242,7 +242,7 @@ class OSTSubstate extends MusicBeatSubstate
 		return;
 	}	
 	
-	function updateInstWaveform() {
+	public function updateInstWaveform() {
 	
 	    var flashGFX = FlxSpriteUtil.flashGfx;
 		
@@ -256,7 +256,7 @@ class OSTSubstate extends MusicBeatSubstate
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 		
 		
-		var snd = FlxG.sound.music;
+		var snd = vocals;
 
 		var currentTime = snd.time;
 		
