@@ -48,6 +48,7 @@ import flixel.ui.FlxButton;
 class OSTSubstate extends MusicBeatSubstate
 {
     var waveformSprite:FlxSprite;
+    var vocals:FlxSound();
 	public function new(needVoices:Bool,bpm:Float)
 	{
 		super();				
