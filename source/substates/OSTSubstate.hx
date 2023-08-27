@@ -48,6 +48,7 @@ import flixel.ui.FlxButton;
 class OSTSubstate extends MusicBeatSubstate
 {
     var waveformSprite:FlxSprite;
+    var logoBl:FlxSprite;
     public static var vocals:FlxSound;
 	public function new(needVoices:Bool,bpm:Float)
 	{
@@ -73,10 +74,17 @@ class OSTSubstate extends MusicBeatSubstate
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 		
-		waveformSprite = new FlxSprite().makeGraphic(1280, 720, 0xFF000000);
+		waveformSprite = new FlxSprite(600,100).makeGraphic(300, 150, 0xFF000000);
 		waveformSprite.alpha = 0.5;
 		add(waveformSprite);
 	
+	
+	    logoBl = new FlxSprite(200, 200);
+		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+		logoBl.antialiasing = ClientPrefs.data.antialiasing;
+		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
+		logoBl.animation.play('bump');
+		logoBl.updateHitbox();
 		
 	}
 
@@ -113,9 +121,9 @@ class OSTSubstate extends MusicBeatSubstate
 	
 	    var flashGFX = FlxSpriteUtil.flashGfx;
 		
-		var _rect = new Rectangle(0, 0, 1280, 720);
-		var _temprect = new Rectangle(0, 0, 0, 0);
-		var midx = 720 / 2;
+		var _rect = new Rectangle(0, 0, 300, 150);
+		//var _temprect = new Rectangle(0, 0, 0, 0);
+		var midx = 150 / 2;
 	
 	    waveformSprite.pixels.lock();
 		waveformSprite.pixels.fillRect(_rect, 0xFF000000);
@@ -192,7 +200,7 @@ class OSTSubstate extends MusicBeatSubstate
 			
 			index++;
 			rows++;
-			if (render > 1280) break;
+			if (render > 300 - 1) break;
 		}
 		
 		flashGFX.endFill(); 
