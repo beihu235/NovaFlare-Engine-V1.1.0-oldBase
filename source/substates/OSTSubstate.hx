@@ -92,7 +92,7 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.x = 360 - logoBl.height / 2;
 	}
 
-	
+	var canBeat:Bool = true;
 	override function update(elapsed:Float)
 	{
 		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
@@ -114,6 +114,17 @@ class OSTSubstate extends MusicBeatSubstate
 		
 		updateWaveform();
 		
+		SoundTime = FlxG.sound.music.time / 1000;
+        BeatTime = 60 / bpm;
+        
+        if ( Math.floor(SoundTime/BeatTime) % 4  == 0 && canBeat){       
+
+            canBeat = false;
+            
+            logoBl.animation.play('bump');
+        }
+		
+		if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true;   
 		
 		
 		super.update(elapsed);
