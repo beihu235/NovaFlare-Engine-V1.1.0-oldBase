@@ -105,8 +105,8 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.animation.play('bump');
 		logoBl.offset.x = 0;
 		logoBl.offset.y = 0;
-		if(logoBl.width / 2 >= 320){
-		logoBl.scale.x = (320 / logoBl.width / 2) - 0.25;
+		if(logoBl.frameWidth / 2 >= 320){
+		logoBl.scale.x = (320 / logoBl.frameWidth / 2) - 0.25;
 		logoBl.scale.y = logoBl.scale.x;
 		}
 		else{
