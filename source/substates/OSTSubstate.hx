@@ -103,7 +103,6 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.antialiasing = ClientPrefs.data.antialiasing;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
-		logoBl.centerOrigin();
 		logoBl.scale.x = 0.75;
 		logoBl.scale.y = 0.75;
 		logoBl.centerOffsets();
