@@ -97,7 +97,7 @@ class OSTSubstate extends MusicBeatSubstate
 		waveformVoiceSprite.alpha = 0.5;
 		add(waveformVoiceSprite);
 				
-		waveFormMainSprite = new FlxSprite(1280 - 400 - 50, 50 + 300).makeGraphic(400, 100, 0xFF000000);
+		waveFormMainSprite = new FlxSprite(1280 - 400 - 50, 50 + 200).makeGraphic(400, 100, 0xFF000000);
 		waveFormMainSprite.alpha = 0.5;
 		add(waveFormMainSprite);
 	
