@@ -100,7 +100,7 @@ class OSTSubstate extends MusicBeatSubstate
 			#end
 		}
 		
-		waveformData();
+		updateWaveform();
 		
 		
 		
@@ -114,7 +114,7 @@ class OSTSubstate extends MusicBeatSubstate
 	function updateWaveform() {
 		if(waveformPrinted) {
 			var width:Int = 1280;
-			var height:Int = 720;
+			var height:Int = 720;/*
 			if(lastWaveformHeight != height && waveformSprite.pixels != null)
 			{
 				waveformSprite.pixels.dispose();
@@ -123,7 +123,7 @@ class OSTSubstate extends MusicBeatSubstate
 				lastWaveformHeight = height;
 			}
 			waveformSprite.pixels.fillRect(new Rectangle(0, 0, width, height), 0x00FFFFFF);
-		}
+		}*/
 		waveformPrinted = false;
 
 		if(!FlxG.save.data.chart_waveformInst && !FlxG.save.data.chart_waveformVoices) {
@@ -212,12 +212,13 @@ class OSTSubstate extends MusicBeatSubstate
 		waveformPrinted = true;
 	}
 
-	function waveformData(buffer:AudioBuffer, bytes:Bytes, time:Float, endTime:Float, multiply:Float = 1, ?array:Array<Array<Array<Float>>>, ?steps:Float):Array<Array<Array<Float>>>
+	function waveformData(buffer:AudioBuffer, bytes:Bytes, time:Float, endTime:Float, multiply:Float = 1, ?array:Array<Array<Array<Float>>>, ?steps:Float)
 	{
 		if (buffer == null || buffer.data == null) return [[[0], [0]], [[0], [0]]];
 		
 		var khz:Float = (buffer.sampleRate / 1000);
 		var channels:Int = buffer.channels;
+		var stereo:Float = channels > 1;
 		
 		var index:Int = Std.int(time * khz);
 		
@@ -237,6 +238,7 @@ class OSTSubstate extends MusicBeatSubstate
 		var rmax:Float = 0;
 		
 		var rows:Float = 0;
+		var prevRows:Float = 0;
 		
 		var midx = 720 / 2;
 		
@@ -289,7 +291,7 @@ class OSTSubstate extends MusicBeatSubstate
 			if (render > 1280) break;
 		}
 		
-		waveformSprite.endFill();
+		//waveformSprite.endFill();
 		//waveformSprite.pixels.draw(flashSpr2);
 		waveformSprite.pixels.unlock();
 		//left.dirty = true;
