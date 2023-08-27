@@ -110,7 +110,7 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.updateHitbox();
 		add(logoBl);
 		logoBl.x = 320 - logoBl.width / 2;
-		logoBl.x = 360 - logoBl.height / 2;
+		logoBl.y = 360 - logoBl.height / 2;
 		//logoBl.cameras = [camLogo];
 		//logoBl.screenCenter(XY);
 		
@@ -127,14 +127,13 @@ class OSTSubstate extends MusicBeatSubstate
 	var canBeat:Bool = true;
 	override function update(elapsed:Float)
 	{
-		
+
+		FlxSpriteUtil.cameraBound(logoBl, camGame, ANY);
 		
 		updateVoiceWaveform();		
 		
 		SoundTime = FlxG.sound.music.time / 1000;
         BeatTime = 60 / bpm;
-        
-        FlxSpriteUtil.cameraBound(logoBl, camGame, ANY);
         
         if ( Math.floor(SoundTime/BeatTime) % 4  == 0 && canBeat){       
             canBeat = false;            
