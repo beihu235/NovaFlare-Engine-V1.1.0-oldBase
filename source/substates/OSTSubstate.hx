@@ -52,11 +52,14 @@ class OSTSubstate extends MusicBeatSubstate
     var logoBl:FlxSprite;
     var bpm:Float = 0;
     public static var vocals:FlxSound;
+    var songVoice:Bool = false;
 	public function new(needVoices:Bool,songBpm:Float)
 	{
 		super();		
 		
 		bpm = songBpm;		
+		
+		songVoice = needVoices;
 		
 		if (needVoices)
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
@@ -126,7 +129,7 @@ class OSTSubstate extends MusicBeatSubstate
 		}
 		
 		updateVoiceWaveform();		
-		if (needVoices) updateInstWaveform();
+		if (songVoice) updateInstWaveform();
 		
 		SoundTime = FlxG.sound.music.time / 1000;
         BeatTime = 60 / bpm;
