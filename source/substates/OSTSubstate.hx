@@ -142,11 +142,11 @@ class OSTSubstate extends MusicBeatSubstate
 		var samples = 720;//Math.floor((currentTime + (((60 / Conductor.bpm) * 1000 / 4) * 16)) * khz - index);
 		var samplesPerRow = samples / 720;
 
-		var lmin = 0;
-		var lmax = 0;
-
-		var rmin = 0;
-		var rmax = 0;
+		var lmin:Float = 0;
+		var lmax:Float = 0;
+		
+		var rmin:Float = 0;
+		var rmax:Float = 0;
 
 		var rows = 0;
 		var render = 0;
