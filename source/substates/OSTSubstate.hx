@@ -48,7 +48,7 @@ import flixel.ui.FlxButton;
 class OSTSubstate extends MusicBeatSubstate
 {
     var waveformSprite:FlxSprite;
-    var vocals:FlxSound;
+    public static var vocals:FlxSound;
 	public function new(needVoices:Bool,bpm:Float)
 	{
 		super();				
@@ -143,7 +143,7 @@ class OSTSubstate extends MusicBeatSubstate
 					et,
 					1,
 					wavData,
-					Std.int(gridBG.height)
+					1280
 				);
 			}
 		}
@@ -160,14 +160,14 @@ class OSTSubstate extends MusicBeatSubstate
 					et,
 					1,
 					wavData,
-					Std.int(gridBG.height)
+					720
 				);
 			}
 		}
 		
 		// Draws
-		var gSize:Int = Std.int(GRID_SIZE * 8);
-		var hSize:Int = Std.int(gSize / 2);
+		var gSize:Int = 1280;
+		var hSize:Int = 720;
 		
 		var lmin:Float = 0;
 		var lmax:Float = 0;
@@ -215,7 +215,7 @@ class OSTSubstate extends MusicBeatSubstate
 		
 		var samples:Float = ((endTime - time) * khz);
 		
-		if (steps == null) steps = 1280;
+		if (steps == null) steps = 0;
 		
 		var samplesPerRow:Float = samples / steps;
 		var samplesPerRowI:Int = Std.int(samplesPerRow);
@@ -307,7 +307,7 @@ class OSTSubstate extends MusicBeatSubstate
 			
 			index++;
 			rows++;
-			if(gotIndex > steps) break;
+			if(gotIndex > 1280) break;
 		}
 		
 		return array;
