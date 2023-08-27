@@ -89,6 +89,7 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.centerOrigin();
 		logoBl.scale.x = 0.5;
 		logoBl.scale.y = 0.5;
+		logoBl.centerOffsets();
 		logoBl.updateHitbox();
 		add(logoBl);
 		logoBl.x = 320 - logoBl.width / 2;
