@@ -74,7 +74,7 @@ class OSTSubstate extends MusicBeatSubstate
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 		
-		waveformSprite = new FlxSprite(600,100).makeGraphic(300, 150, 0xFF000000);
+		waveformSprite = new FlxSprite(1280 - 100 - 50, 50).makeGraphic(300, 100, 0xFF000000);
 		waveformSprite.alpha = 0.5;
 		add(waveformSprite);
 	
@@ -85,7 +85,7 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
-		
+		add(logoBl)
 	}
 
 	
@@ -121,9 +121,9 @@ class OSTSubstate extends MusicBeatSubstate
 	
 	    var flashGFX = FlxSpriteUtil.flashGfx;
 		
-		var _rect = new Rectangle(0, 0, 300, 150);
+		var _rect = new Rectangle(0, 0, 300, 100);
 		//var _temprect = new Rectangle(0, 0, 0, 0);
-		var midx = 150 / 2;
+		var midx = 100 / 2;
 	
 	    waveformSprite.pixels.lock();
 		waveformSprite.pixels.fillRect(_rect, 0xFF000000);
