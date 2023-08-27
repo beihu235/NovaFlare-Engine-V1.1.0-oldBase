@@ -50,6 +50,7 @@ class OSTSubstate extends MusicBeatSubstate
     var waveformVoiceSprite:FlxSprite;
     public static var waveFormMainSprite:FlxSprite;
     var logoBl:FlxSprite;
+    var flashSpr2:FlxSprite;
     var bpm:Float = 0;
     public static var vocals:FlxSound;
     var songVoice:Bool = false;
@@ -91,7 +92,7 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.scale.y = 0.5;
 		logoBl.updateHitbox();
 		add(logoBl);
-		logoBl.x = 320 - logoBl.width / 2 - logoBl.offset.x / 2;
+		logoBl.x = 320 - logoBl.width / 2 - logoBl.offset.x /2;
 		logoBl.y = 360 - logoBl.height / 2 - logoBl.offset.y / 2;
 		
 		waveformVoiceSprite = new FlxSprite(1280 - 400 - 50, 50).makeGraphic(400, 100, 0xFF000000);
@@ -101,6 +102,9 @@ class OSTSubstate extends MusicBeatSubstate
 		waveFormMainSprite = new FlxSprite(1280 - 400 - 50, 50 + 200).makeGraphic(400, 100, 0xFF000000);
 		waveFormMainSprite.alpha = 0.5;
 		add(waveFormMainSprite);
+		
+		flashGFX2 = flashSpr2.graphics;
+		
 	
 	    
 	}
@@ -112,6 +116,8 @@ class OSTSubstate extends MusicBeatSubstate
 	override function update(elapsed:Float)
 	{
 		
+		
+		flashGFX2.clear(); flashGFX2.beginFill(0xFFFFFF, 1);
 		
 		updateVoiceWaveform();		
 		updateMainWaveform();
@@ -223,7 +229,7 @@ class OSTSubstate extends MusicBeatSubstate
 				prevRows = rows + ((rows - prevRows) - 1);
 				
 				flashGFX.drawRect(render, midx + (rmin * midx * 2), 1, (rmax - rmin) * midx * 2);
-				//flashGFX2.drawRect(midx + (rmin * midx * 2), render, (rmax - rmin) * midx * 2, 1);
+				//flashGFX.drawRect(midx + (rmin * midx * 2), render, (rmax - rmin) * midx * 2, 1);
 				
 				
 				
@@ -245,7 +251,7 @@ class OSTSubstate extends MusicBeatSubstate
 	
 	public static function updateMainWaveform() {
 	
-	    var flashGFX2 = FlxSpriteUtil.flashGfx;
+	    var flashGFX = FlxSpriteUtil.flashGfx;
 		
 		var _rect = new Rectangle(0, 0, 400, 100);
 		//var _temprect = new Rectangle(0, 0, 0, 0);
@@ -316,7 +322,7 @@ class OSTSubstate extends MusicBeatSubstate
 				prevRows = rows + ((rows - prevRows) - 1);
 				
 				flashGFX2.drawRect(render, 100, 1, -(rmax - rmin) * midx * 2);
-				//flashGFX2.drawRect(midx + (rmin * midx * 2), render, (rmax - rmin) * midx * 2, 1);
+				//flashGFX.drawRect(midx + (rmin * midx * 2), render, (rmax - rmin) * midx * 2, 1);
 				
 				
 				
@@ -330,7 +336,7 @@ class OSTSubstate extends MusicBeatSubstate
 		}
 		
 		flashGFX2.endFill(); 
-		waveFormMainSprite.pixels.draw(FlxSpriteUtil.flashGFX2Sprite);
+		waveFormMainSprite.pixels.draw(flashSpr2);
 		waveFormMainSprite.pixels.unlock(); 
 		
 		return;
