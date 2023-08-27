@@ -85,7 +85,7 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
-		add(logoBl)
+		add(logoBl);
 	}
 
 	
