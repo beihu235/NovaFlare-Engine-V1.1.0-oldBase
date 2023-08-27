@@ -105,14 +105,19 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.animation.play('bump');
 		logoBl.offset.x = 0;
 		logoBl.offset.y = 0;
+		
 		logoBl.scale.x = 0.75;
 		logoBl.scale.y = 0.75;
+		logoBl.updateHitbox();
+		logoBl.offset.width = logoBl.width;
+		logoBl.offset.height = logoBl.height;
 		logoBl.updateHitbox();
 		add(logoBl);
 		logoBl.x = 320 - logoBl.width / 2;
 		logoBl.y = 360 - logoBl.height / 2;
 		//logoBl.cameras = [camLogo];
-		//logoBl.screenCenter(XY);
+		logoBl.screenCenter(Y);
+		logoBl.updateHitbox();
 		
 		
 		waveformVoiceSprite = new FlxSprite(1280 - 640, 50).makeGraphic(640 - 50, 100, 0xFF000000);
@@ -128,7 +133,7 @@ class OSTSubstate extends MusicBeatSubstate
 	override function update(elapsed:Float)
 	{
 
-		FlxSpriteUtil.cameraBound(logoBl, camGame, ANY);
+	//	FlxSpriteUtil.cameraBound(logoBl, camGame, ANY);
 		
 		updateVoiceWaveform();		
 		
@@ -259,8 +264,8 @@ class OSTSubstate extends MusicBeatSubstate
 	}	
 	
 	function camBeat() {
-	    camGame.zoom = 1 + 0.03;
-	    FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
+	    //camGame.zoom = 1 + 0.03;
+	   // FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
 	
 	}
 
