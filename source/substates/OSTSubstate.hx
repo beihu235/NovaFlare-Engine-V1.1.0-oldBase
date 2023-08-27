@@ -106,7 +106,7 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.offset.x = 0;
 		logoBl.offset.y = 0;
 		if(logoBl.frameWidth / 2 >= 320){
-		logoBl.scale.x = (320 / logoBl.frameWidth / 2) - 0.25;
+		logoBl.scale.x = (320 / logoBl.frameWidth / 2);
 		logoBl.scale.y = logoBl.scale.x;
 		}
 		else{
