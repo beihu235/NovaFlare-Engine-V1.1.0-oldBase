@@ -91,7 +91,10 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.x = 320 - logoBl.width / 2;
 		logoBl.x = 360 - logoBl.height / 2;
 	}
-
+    
+    var SoundTime:Float = 0;
+	var BeatTime:Float = 0;
+	
 	var canBeat:Bool = true;
 	override function update(elapsed:Float)
 	{
