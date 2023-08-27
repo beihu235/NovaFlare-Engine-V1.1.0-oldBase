@@ -49,9 +49,36 @@ class OSTSubstate extends MusicBeatSubstate
 {
     public static var vocals:FlxSound = null;
     var left:FlxSprite;
-    var flashGFX:FlxSprite;
+    var flashSpr:FlxSprite;
     var _rect:Rectangle;
     var _temprect:Rectangle;
+    
+    var snd = FlxG.sound.music;
+
+		var currentTime:Float = 0;
+		
+		var buffer:AudioBuffer;
+		var bytes:Bytes = FlxG.sound.music._sound.__buffer.data.toBytes();
+		
+		var byteLength:Float = 0;
+		var khz:Float = 0;
+		var channels:Float = 0;
+		var stereo:Float = 0;
+		
+		var index:Float = 0;
+		var samples:Float = 0;//Math.floor((currentTime + (((60 / Conductor.bpm) * 1000 / 4) * 16)) * khz - index);
+		var samplesPerRow:Float = 0;
+
+		var lmin:Float = 0;
+		var lmax:Float = 0;
+
+		var rmin:Float = 0;
+		var rmax:Float = 0;
+
+		var rows:Float = 0;
+		var render:Int = 0;
+		var prevRows:Float = 0;
+        var midx:Float = 0;
     
 	public function new(needVoices:Bool,bpm:Float)
 	{
@@ -73,11 +100,36 @@ class OSTSubstate extends MusicBeatSubstate
 		left.alpha = 0.5;
 		add(left);
 		
+		flashSpr = new FlxSprite();
+		flashGFX = flashSpr.graphics;
 		
+		currentTime = snd.time;
+		
+		buffer = snd._sound.__buffer;
+		bytes = buffer.data.buffer;
+		
+		byteLength = bytes.byteLength - 1;
+		khz = (buffer.sampleRate / 1000);
+		channels = buffer.channels;
+		stereo = channels > 1;
+		
+		index = Math.floor(currentTime * khz);
+		samples = 720;//Math.floor((currentTime + (((60 / Conductor.bpm) * 1000 / 4) * 16)) * khz - index);
+		samplesPerRow = samples / 720;
+
+		lmin = 0;
+		lmax = 0;
+
+		rmin = 0;
+		rmax = 0;
+
+		rows = 0;
+		render = 0;
+		prevRows = 0;
 		
 		//game.add(right);
 		
-		flashGFX = FlxSpriteUtil.flashGfx;
+		//flashGFX = FlxSpriteUtil.flashGfx;
 		
 		_rect = new Rectangle(0, 0, 1280, 720);
 		_temprect = new Rectangle(0, 0, 0, 0);
@@ -112,35 +164,11 @@ class OSTSubstate extends MusicBeatSubstate
 		//right.pixels.fillRect(_rect, 0xFF000000);
 
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
-		//flashGFX2.clear(); flashGFX2.beginFill(0xFFFFFF, 1);
+		flashGFX.clear(); flashGFX.beginFill(0xFFFFFF, 1);
 		
-		var snd = FlxG.sound.music;
-
-		var currentTime = snd.time;
 		
-		var buffer = snd._sound.__buffer;
-		var bytes = buffer.data.buffer;
 		
-		var length = bytes.length - 1;
-		var khz = (buffer.sampleRate / 1000);
-		var channels = buffer.channels;
-		var stereo = channels > 1;
-		
-		var index = Math.floor(currentTime * khz);
-		var samples = 720;//Math.floor((currentTime + (((60 / Conductor.bpm) * 1000 / 4) * 16)) * khz - index);
-		var samplesPerRow = samples / 720;
-
-		var lmin:Float = 0;
-		var lmax:Float = 0;
-
-		var rmin:Float = 0;
-		var rmax:Float = 0;
-
-		var rows:Float = 0;
-		var render:Int = 0;
-		var prevRows:Float = 0;
-		
-		while (index < length) {
+		while (index < byteLength) {
 			if (index >= 0) {
 				var byte = bytes.getUInt16(index * channels * 2);
 
@@ -155,11 +183,11 @@ class OSTSubstate extends MusicBeatSubstate
 				}
 
 				if (stereo) {
-					var byte = bytes.getUInt16((index * channels * 2) + 2);
+					var byte:Float = bytes.getUInt16((index * channels * 2) + 2);
 
 					if (byte > 65535 / 2) byte -= 65535;
 
-					var sample = (byte / 65535);
+					var sample:Float = (byte / 65535);
 
 					if (sample > 0) {
 						if (sample > rmax) rmax = sample;
@@ -186,10 +214,9 @@ class OSTSubstate extends MusicBeatSubstate
 			if (render > 720-1) break;
 		}
 		
-		flashGFX.endFill(); //flashGFX2.endFill();
-		left.pixels.draw(FlxSpriteUtil.flashGfxSprite); //right.pixels.draw(flashSpr2);
-		left.pixels.unlock(); //right.pixels.unlock();
-		//left.dirty = true;
+		flashGFX.endFill();
+		left.pixels.draw(flashSpr);
+		left.pixels.unlock();
 		
 		return;
 		
