@@ -37,7 +37,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		loadLeft.antialiasing = ClientPrefs.data.antialiasing;
 		add(loadLeft);
 		loadLeft.scale.x = loadLeft.width / 1280;
-		loadLeft.scale.y = loadLeft.height / 720
+		loadLeft.scale.y = loadLeft.height / 720;
 		
 		
 		loadRight = new FlxSprite(isTransIn ? 0 : 1280, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingR'));
@@ -45,7 +45,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		loadRight.antialiasing = ClientPrefs.data.antialiasing;		
 		add(loadRight);
 		loadLeft.scale.x = loadLeft.width / 1280;
-		loadLeft.scale.y = loadLeft.height / 720
+		loadLeft.scale.y = loadLeft.height / 720;
 		
 		WaterMark = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 50 * 2, 0, 'NF ENGINE V1.1.0', 50);
 		WaterMark.scrollFactor.set();
