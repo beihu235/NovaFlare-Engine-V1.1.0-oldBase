@@ -194,7 +194,7 @@ class OSTSubstate extends MusicBeatSubstate
 		
 		var length = bytes.length - 1;
 		
-		for (i in 1...waveformVoiceSprite.width){
+		for (i in 1...590){
 		
 		var khz = (buffer.sampleRate / 1000) * (i/waveformVoiceSprite.width);
 		var channels = buffer.channels;
@@ -259,11 +259,12 @@ class OSTSubstate extends MusicBeatSubstate
 			rows++;
 			if (render > (640 - 50 - 1)) break;
 		}
-		}
-		
 		flashGFX.endFill(); 
 		waveformVoiceSprite.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		waveformVoiceSprite.pixels.unlock(); 
+		}
+		
+		
 		
 		return;
 	}	
