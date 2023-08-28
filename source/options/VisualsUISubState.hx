@@ -55,7 +55,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		if(Mods.mergeAllTextsNamed('images/noteSkins/list.txt', 'shared').length > 0)
 			noteSkins = Mods.mergeAllTextsNamed('images/noteSkins/list.txt', 'shared');
 		else
-			noteSkins = CoolUtil.coolTextFile(SUtil.getPath() + 'shared/images/noteSkins/list.txt');
+			noteSkins = CoolUtil.coolTextFile(Paths.getPreloadPath('shared/images/noteSkins/list.txt'));
 
 		if(noteSkins.length > 0)
 		{
