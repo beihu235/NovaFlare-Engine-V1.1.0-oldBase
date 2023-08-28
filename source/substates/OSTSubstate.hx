@@ -106,7 +106,7 @@ class OSTSubstate extends MusicBeatSubstate
 		logoBl.offset.x = 0;
 		logoBl.offset.y = 0;
 		if(logoBl.frameWidth / 2 >= 320){
-		logoBl.scale.x = (320 / logoBl.frameWidth / 2);
+		logoBl.scale.x = (320 / logoBl.frameWidth);
 		logoBl.scale.y = logoBl.scale.x;
 		}
 		else{
@@ -193,7 +193,10 @@ class OSTSubstate extends MusicBeatSubstate
 		var bytes = buffer.data.buffer;
 		
 		var length = bytes.length - 1;
-		var khz = (buffer.sampleRate / 1000);
+		
+		for (i in 1...waveformVoiceSprite.width){
+		
+		var khz = (buffer.sampleRate / 1000) * (i/waveformVoiceSprite.width);
 		var channels = buffer.channels;
 		var stereo = channels > 1;
 		
@@ -208,7 +211,7 @@ class OSTSubstate extends MusicBeatSubstate
 		var rmax:Float = 0;
 
 		var rows = 0;
-		var render = 0;
+		var render = i;
 		var prevRows = 0;
 		
 		while (index < length) {
@@ -243,7 +246,7 @@ class OSTSubstate extends MusicBeatSubstate
 			if (rows - prevRows >= samplesPerRow) {
 				prevRows = rows + ((rows - prevRows) - 1);
 				
-				flashGFX.drawRect(render, midx + (rmin * midx * 2), 1, (rmax - rmin) * midx * 2);
+				flashGFX.drawRect(render, 50, 1, -(rmax - rmin) * midx * 2);
 				//flashGFX.drawRect(midx + (rmin * midx * 2), render, (rmax - rmin) * midx * 2, 1);
 				
 				
@@ -255,6 +258,7 @@ class OSTSubstate extends MusicBeatSubstate
 			index++;
 			rows++;
 			if (render > (640 - 50 - 1)) break;
+		}
 		}
 		
 		flashGFX.endFill(); 
