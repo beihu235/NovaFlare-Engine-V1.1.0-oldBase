@@ -8,18 +8,15 @@ import states.TitleState;
 
 // Add a variable here and it will get automatically saved
 class SaveVariables {
-    public var noteSkin:String = 'Default';
-	public var splashSkin:String = 'Psych';
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
-	public var filpChart:Bool = false;
 	public var opponentStrums:Bool = true;
 	public var showFPS:Bool = true;
-	public var rainbowFPS:Bool = false;
 	public var flashing:Bool = true;
-	public var ResultsScreen:Bool = true;
 	public var autoPause:Bool = true;
-	public var antialiasing:Bool = true;	
+	public var antialiasing:Bool = true;
+	public var noteSkin:String = 'Default';
+	public var splashSkin:String = 'Psych';
 	public var splashAlpha:Float = 0.6;
 	public var lowQuality:Bool = false;
 	public var shaders:Bool = true;
@@ -76,14 +73,19 @@ class SaveVariables {
 	public var goodWindow:Int = 90;
 	public var badWindow:Int = 135;
 	public var safeFrames:Float = 10;
-	public var discordRPC:Bool = true;	
+	public var discordRPC:Bool = true;
 	
-	public var hitboxmode:String = 'New';  //it be delete   
+	
+	
+	public var hitboxmode:String = 'New';  //it be deleted
 	public var hitboxExtend:Bool = true;
 	public var hitboxLocation:String = 'Bottom';
 	public var hitboxalpha:Float = 0.2;
-	public var VirtualPadAlpha:Float = 0.75;    
-     
+	public var VirtualPadAlpha:Float = 0.75;
+    
+    
+    
+    
 	public function new()
 	{
 		//Why does haxe needs this again?
