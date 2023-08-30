@@ -276,7 +276,6 @@ class Paths
 		var bitmap:BitmapData = null;
 		var file:String = null;
 
-		#if MODS_ALLOWED
 		file = modsImages(key);
 		if (currentTrackedAssets.exists(file))
 		{
@@ -285,8 +284,16 @@ class Paths
 		}
 		else if (FileSystem.exists(file))
 			bitmap = BitmapData.fromFile(file);
-		else
-		#end
+		else{
+		    file = SUtil.getPath() + 'assets/images' + file + '.png';
+		    if (currentTrackedAssets.exists(file))
+		    {
+			    localTrackedAssets.push(file);
+			    return currentTrackedAssets.get(file);
+		    }
+		    else if (FileSystem.exists(file))
+			    bitmap = BitmapData.fromFile(file);
+		else		
 		{
 			file = getPath('images/$key.png', IMAGE, library);
 			if (currentTrackedAssets.exists(file))
@@ -296,6 +303,7 @@ class Paths
 			}
 			else if (OpenFlAssets.exists(file, IMAGE))
 				bitmap = OpenFlAssets.getBitmapData(file);
+		}
 		}
 
 		if (bitmap != null)
@@ -438,7 +446,7 @@ class Paths
 
 	inline static public function formatToSongPath(path:String) {
 		var invalidChars = ~/[~&\\;:<>#]/;
-		var hideChars = ~/[.,'"%?!]/;
+		var hideChars = ~/[.,'"%?!]/;  //'
 
 		var path = invalidChars.split(path.replace(' ', '-')).join("-");
 		return hideChars.split(path).join("").toLowerCase();
