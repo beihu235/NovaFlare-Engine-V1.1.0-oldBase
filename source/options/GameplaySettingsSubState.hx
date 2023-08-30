@@ -25,12 +25,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'filpChart',
 			'bool');
 		addOption(option);
-		
-		var option:Option = new Option('Play Opponent',
-			'If checked, Control Opponent for play',
-			'playOpponent',
-			'bool');
-		addOption(option);
 
 		var option:Option = new Option('Opponent Notes',
 			'If unchecked, opponent notes get hidden.',
