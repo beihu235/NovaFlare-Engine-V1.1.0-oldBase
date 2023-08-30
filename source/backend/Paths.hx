@@ -285,7 +285,7 @@ class Paths
 		else if (FileSystem.exists(file))
 			bitmap = BitmapData.fromFile(file);
 		else{
-		    file = SUtil.getPath() + 'assets/images' + file + '.png';
+		    file = SUtil.getPath() + 'assets/images/' + file + '.png';
 		    if (currentTrackedAssets.exists(file))
 		    {
 			    localTrackedAssets.push(file);
