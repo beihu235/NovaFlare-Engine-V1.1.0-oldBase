@@ -116,7 +116,15 @@ class VisualsUISubState extends BaseOptionsMenu
 			'string',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
-
+		
+		/*
+		var option:Option = new Option('GradientColor TimeBar ',
+			"If chacked timebar will have gradient color\nbut maybe will have bug when you change timebar color again",
+			'gradientTimeBar',
+			'bool');
+		addOption(option);
+        */
+        
 		var option:Option = new Option('Flashing Lights',
 			"Uncheck this if you're sensitive to flashing lights!",
 			'flashing',
@@ -153,6 +161,12 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 		option.onChange = onChangeFPSCounter;
+		
+		var option:Option = new Option('FPS Rainbow',
+			'If unchecked, FPS not change color',
+			'rainbowFPS',
+			'bool');
+		addOption(option);
 		
 		var option:Option = new Option('Pause Screen Song:',
 			"What song do you prefer for the Pause Screen?",
@@ -229,7 +243,7 @@ class VisualsUISubState extends BaseOptionsMenu
 	{
 		var skin:String = Note.defaultNoteSkin;
 		var customSkin:String = skin + Note.getNoteSkinPostfix();
-		if(Paths.fileExists('images/$customSkin.png', IMAGE)) skin = customSkin;
+		skin = customSkin;
 
 		note.texture = skin; //Load texture and anims
 		note.reloadNote();
