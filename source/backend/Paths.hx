@@ -314,6 +314,7 @@ class Paths
 			    }			    
 		    }
 		}
+		// update by NF|beihu it can load images at .PsychEngine/assets/image or .PsychEngine/shared now
 
 		if (bitmap != null)
 		{
