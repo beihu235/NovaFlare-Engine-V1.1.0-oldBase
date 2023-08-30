@@ -10,7 +10,6 @@ import states.TitleState;
 class SaveVariables {
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
-	public var playOpponent:Bool = false;
 	public var filpChart:Bool = false;
 	public var opponentStrums:Bool = true;
 	public var showFPS:Bool = true;
