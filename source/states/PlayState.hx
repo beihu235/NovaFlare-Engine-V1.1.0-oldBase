@@ -34,7 +34,6 @@ import openfl.utils.Assets as OpenFlAssets;
 import openfl.events.KeyboardEvent;
 import tjson.TJSON as Json;
 
-
 import cutscenes.CutsceneHandler;
 import cutscenes.DialogueBoxPsych;
 
@@ -493,8 +492,6 @@ class PlayState extends MusicBeatState
 		timeBar.visible = showTime;
 		add(timeBar);
 		add(timeTxt);
-		
-		
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
@@ -643,7 +640,17 @@ class PlayState extends MusicBeatState
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 		callOnScripts('onCreatePost');
-
+		
+		setOnScripts('portType', 'beihu'); //idk but someone tell that  use getProperty('portType') in lua
+		
+		if (startTimer != null){
+		    if(startTimer.finished){
+		    #if android
+    		    MusicBeatState.androidc.visible = true;
+    			if (MusicBeatState.checkHitbox != true) MusicBeatState.androidc.alpha = 1;
+    		    #end		
+    		}   //fix mod use setProperty('startTimer.finished') android control cant change alpha
+        }
 		cacheCountdown();
 		cachePopUpScore();
 		
@@ -1293,22 +1300,6 @@ class PlayState extends MusicBeatState
 			{
 				var daStrumTime:Float = songNotes[0];
 				var daNoteData:Int = Std.int(songNotes[1] % 4);
-				
-				if (ClientPrefs.data.filpChart) {
-				    if (daNoteData == 0) {
-				        daNoteData = 3;
-				    }    
-				    else if (daNoteData == 1) {
-				        daNoteData = 2;
-				    }    
-				    else if (daNoteData == 2) {
-				        daNoteData = 1;
-				    }   
-				    else if (daNoteData == 3) {
-				        daNoteData = 0;
-				    } 
-				}
-				
 				var gottaHitNote:Bool = section.mustHitSection;
 
 				if (songNotes[1] > 3)
@@ -1437,7 +1428,6 @@ class PlayState extends MusicBeatState
 
 				var newCharacter:String = event.value2;
 				addCharacterToList(newCharacter, charType);
-				
 			
 			case 'Play Sound':
 				precacheList.set(event.value1, 'sound');
@@ -2155,7 +2145,6 @@ class PlayState extends MusicBeatState
 						}
 				}
 				reloadHealthBarColors();
-				
 
 			case 'Change Scroll Speed':
 				if (songSpeedType != "constant")
@@ -2357,7 +2346,7 @@ class PlayState extends MusicBeatState
 					}
 					
 					#if android		
-                		MusicBeatState.androidc.visible = false;				
+                		MusicBeatState.androidc.y = 720;				
             		#end
             		
 					MusicBeatState.switchState(new StoryMenuState());
@@ -2389,7 +2378,7 @@ class PlayState extends MusicBeatState
 					cancelMusicFadeTween();
 					
 					#if android		
-                		MusicBeatState.androidc.visible = false;				
+                		MusicBeatState.androidc.y = 720;				
             		#end
             		
 					LoadingState.loadAndSwitchState(new PlayState());
@@ -2407,7 +2396,7 @@ class PlayState extends MusicBeatState
 				}
 				
 				#if android		
-                		MusicBeatState.androidc.visible = false;				
+                		MusicBeatState.androidc.y = 720;				
             	#end
 				
 				MusicBeatState.switchState(new FreeplayState());
@@ -2689,7 +2678,7 @@ class PlayState extends MusicBeatState
 					{
 						for (doubleNote in pressNotes) {
 							if (Math.abs(doubleNote.strumTime - epicNote.strumTime) < 1) {
-								//doubleNote.kill();
+								doubleNote.kill();
 								notes.remove(doubleNote, true);
 								doubleNote.destroy();
 							} else
