@@ -45,7 +45,7 @@ import states.editors.CharacterEditorState;
 
 import substates.PauseSubState;
 import substates.GameOverSubstate;
-
+import substates.ResetScoreSubState;
 //import flixel.system.FlxAssets.FlxShader;
 
 #if !flash 
@@ -643,6 +643,17 @@ class PlayState extends MusicBeatState
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 		callOnScripts('onCreatePost');
+		
+		setOnScripts('portType', 'beihu'); //idk but someone tell that  use getProperty('portType') in lua
+		
+		if (startTimer != null){
+		    if(startTimer.finished){
+		    #if android
+    		    MusicBeatState.androidc.visible = true;
+    			if (MusicBeatState.checkHitbox != true) MusicBeatState.androidc.alpha = 1;
+    		    #end		
+    		}   //fix mod use setProperty('startTimer.finished') android control cant change alpha
+        }
 
 		cacheCountdown();
 		cachePopUpScore();
@@ -2410,7 +2421,11 @@ class PlayState extends MusicBeatState
                 		MusicBeatState.androidc.visible = false;				
             	#end
 				
+				if(ClientPrefs.data.ResultsScreen)
+				openSubState(new ResetScoreSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+				else
 				MusicBeatState.switchState(new FreeplayState());
+				
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				changedDifficulty = false;
 			}
