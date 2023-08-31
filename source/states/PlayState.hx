@@ -45,7 +45,7 @@ import states.editors.CharacterEditorState;
 
 import substates.PauseSubState;
 import substates.GameOverSubstate;
-import substates.ResetScoreSubState;
+import substates.ResultsScreen;
 //import flixel.system.FlxAssets.FlxShader;
 
 #if !flash 
@@ -2422,7 +2422,7 @@ class PlayState extends MusicBeatState
             	#end
 				
 				if(ClientPrefs.data.ResultsScreen)
-				openSubState(new ResetScoreSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+				openSubState(new ResultsScreen(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				else
 				MusicBeatState.switchState(new FreeplayState());
 				
