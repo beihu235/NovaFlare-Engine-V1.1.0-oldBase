@@ -28,7 +28,7 @@ import flixel.util.FlxColor;
 import openfl.display.Sprite;
 import flixel.FlxSprite;
 
-class PauseSubState extends MusicBeatSubstate
+class ResultsScreen extends MusicBeatSubstate
 {
 	public var background:FlxSprite;
 	public var text:FlxText;
