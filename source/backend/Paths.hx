@@ -521,17 +521,36 @@ class Paths
 		return modFolders('images/' + key + '.json');
 
 	static public function modFolders(key:String) {
+	    var assetsCheck = true;
 		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0) {
 			var fileToCheck:String = mods(Mods.currentModDirectory + '/' + key);
-			if(FileSystem.exists(fileToCheck)) return fileToCheck;
+			if(FileSystem.exists(fileToCheck)) {
+			assetsCheck = false;
+			return fileToCheck;
+			}
 		}
 		for(mod in Mods.getGlobalMods())
 		{
 			var fileToCheck:String = mods(mod + '/' + key);
-			if(FileSystem.exists(fileToCheck))
-				return fileToCheck;
+			if(FileSystem.exists(fileToCheck)) {
+			assetsCheck = false;
+			return fileToCheck;
+			}
 
 		}
+		if (assetsCheck){
+		    var fileToCheck:String = SUtil.getPath() + 'assets/' + key;
+			if(FileSystem.exists(fileToCheck)) {
+			return fileToCheck;
+		    }
+		    else{
+		    var fileToCheck:String = SUtil.getPath() + 'assets/shared/' + key;
+			if(FileSystem.exists(fileToCheck)) {
+			return fileToCheck;
+		    }
+		    }
+		}
+		
 		return SUtil.getPath() + 'mods/' + key;
 	}
 	#end
