@@ -185,6 +185,11 @@ class PlayState extends MusicBeatState
 	public static var rsNoteMs:Array<Float> = [];
     public static var rsNoteTime:Array<Float> = [];
     public static var rsSongLength:Float = 0;
+    public static var rsSicks:Int = 0;
+	public static var rsGoods:Int = 0;
+	public static var rsBads:Int = 0;
+	public static var rsShits:Int = 0;
+    
     
 	public var healthBar:HealthBar;
 	public var timeBar:HealthBar;
@@ -217,9 +222,9 @@ class PlayState extends MusicBeatState
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
-	public var songScore:Int = 0;
-	public var songHits:Int = 0;
-	public var songMisses:Int = 0;
+	public static var songScore:Int = 0;
+	public static var songHits:Int = 0;
+	public static var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
