@@ -40,10 +40,10 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBackground.pixels.lock();
 		graphBackground.pixels.fillRect(_rect, 0xFF000000);
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
-		//rsNoteTime
-		//rsNoteMs
+	    
+	    var noteSize = 2;
 		for (i in 0...PlayState.rsNoteTime.length){
-		what.drawRect(graphBackground.width * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) , graphBackground.height * (PlayState.rsNoteMs[i] / 166.6), 1, 1);		
+		what.drawRect(graphBackground.width * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphBackground.height * 0.5 + graphBackground.height * 0.8 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize);		
 		}
 		graphBackground.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		
