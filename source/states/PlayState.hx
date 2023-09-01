@@ -180,7 +180,12 @@ class PlayState extends MusicBeatState
 	public var gfSpeed:Int = 1;
 	public var health:Float = 1;
 	public var combo:Int = 0;
-
+	public static var highestCombo:Int = 0;
+	
+	public static var rsNoteMs:Array<Bool> = [];
+    public static var rsNoteTime:Array<Bool> = [];
+    public static var rsSongLength:Float = 0;
+    
 	public var healthBar:HealthBar;
 	public var timeBar:HealthBar;
 	var songPercent:Float = 0;
@@ -372,6 +377,10 @@ class PlayState extends MusicBeatState
 		GF_Y = stageData.girlfriend[1];
 		DAD_X = stageData.opponent[0];
 		DAD_Y = stageData.opponent[1];
+		
+		highestCombo = 0;
+		rsNoteMs = [];
+		rsNoteTime = [];		
 
 		if(stageData.camera_speed != null)
 			cameraSpeed = stageData.camera_speed;
@@ -1237,6 +1246,7 @@ class PlayState extends MusicBeatState
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
+		rsSongLength = FlxG.sound.music.length;
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
@@ -3001,8 +3011,12 @@ class PlayState extends MusicBeatState
 			if (!note.isSustainNote)
 			{
 				combo++;
-				if(combo > 9999) combo = 9999;
+				if (combo > highestCombo)highestCombo = combo;
 				popUpScore(note);
+				
+				var noteDiff:Float = Conductor.songPosition - note.strumTime + ClientPrefs.data.ratingOffset;
+				rsNoteMs.push(noteDiff);
+				rsNoteTime.push(note.strumTime);
 			}
 			health += note.hitHealth * healthGain;
 
