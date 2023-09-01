@@ -182,8 +182,8 @@ class PlayState extends MusicBeatState
 	public var combo:Int = 0;
 	public static var highestCombo:Int = 0;
 	
-	public static var rsNoteMs:Array<Bool> = [];
-    public static var rsNoteTime:Array<Bool> = [];
+	public static var rsNoteMs:Array<Float> = [];
+    public static var rsNoteTime:Array<Float> = [];
     public static var rsSongLength:Float = 0;
     
 	public var healthBar:HealthBar;
