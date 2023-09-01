@@ -190,11 +190,12 @@ class PlayState extends MusicBeatState
 	public static var rsGoods:Int = 0;
 	public static var rsBads:Int = 0;
 	public static var rsShits:Int = 0;
+	public static var rsMisses:Int = 0;
 	
 	public static var rsACC:Float = 0;
     public static var rsScore:Int = 0;
 	public static var rsHits:Int = 0;
-	public static var rsMisses:Int = 0;
+	
     
 	public var healthBar:HealthBar;
 	public var timeBar:HealthBar;
@@ -395,7 +396,11 @@ class PlayState extends MusicBeatState
 	    rsGoods = 0;
 	    rsBads = 0;
 	    rsShits = 0;
-
+	    rsMisses = 0;
+        rsACC = 0;
+        rsScore = 0;
+	    rsHits = 0;
+	
 		if(stageData.camera_speed != null)
 			cameraSpeed = stageData.camera_speed;
 
@@ -2445,6 +2450,9 @@ class PlayState extends MusicBeatState
                 		MusicBeatState.androidc.visible = false;				
             	#end
 				
+				
+				FlxG.sound.playMusic(Paths.music('freakyMenu'),0);
+				FlxG.sound.music.fadeIn(4, 0, 0.7);
 				if(ClientPrefs.data.ResultsScreen){
 				
 				    rsSicks = ratingsData[0].hits;
@@ -2462,7 +2470,8 @@ class PlayState extends MusicBeatState
 				else{
 				    MusicBeatState.switchState(new FreeplayState());
 				}
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				persistentUpdate = false;
+				persistentDraw = false;
 				changedDifficulty = false;
 			}
 			transitioning = true;
