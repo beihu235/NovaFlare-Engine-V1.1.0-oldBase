@@ -82,7 +82,7 @@ class ResultsScreen extends MusicBeatSubstate
 		graphSizeRight.alpha = 0;		
 		add(graphSizeRight);		
 		
-		
+		//-----------------------BG
 		
 		clearText = new FlxText(20, -55, 0, 'Song Cleared!\n' + PlayState.SONG.song + ' - ' + Difficulty.getString() + '\n');
 		clearText.size = 34;
@@ -90,8 +90,9 @@ class ResultsScreen extends MusicBeatSubstate
 		clearText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
 		clearText.scrollFactor.set();
 		add(clearText);		
-	                
-		judgeText = new FlxText(-300, 200, 0, 'Judgements:\nSicks: ' + PlayState.rsSicks + '\nGoods: ' + PlayState.rsGoods + '\nBads: ' + PlayState.rsBads + '\nShits: ' + PlayState.rsShits + '\n\nCombe Breaks: ' + PlayState.rsMisses + '\nHighest Combe: ' + PlayState.highestCombo + '\nScore: ' + PlayState.rsScore + '\n');
+	    
+	    var ACC = Math.ceil(PlayState.rsACC * 10000) * 100;
+		judgeText = new FlxText(-300, 200, 0, 'Judgements:\nSicks: ' + PlayState.rsSicks + '\nGoods: ' + PlayState.rsGoods + '\nBads: ' + PlayState.rsBads + '\nShits: ' + PlayState.rsShits + '\n\nCombe Breaks: ' + PlayState.rsMisses + '\nHighest Combe: ' + PlayState.highestCombo + '\nScore: ' + PlayState.rsScore + '\nAccuracy: ' + ACC + '%\n\n');
 		judgeText.size = 25;
 		judgeText.font = Paths.font('vcr.ttf');
 		judgeText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
