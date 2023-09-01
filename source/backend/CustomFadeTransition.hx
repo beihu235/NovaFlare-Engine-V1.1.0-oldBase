@@ -32,16 +32,6 @@ class CustomFadeTransition extends MusicBeatSubstate {
 
 		this.isTransIn = isTransIn;
 		
-		loadLeft = new FlxSprite(isTransIn ? 0 : -1280, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingL'));
-		loadLeft.scrollFactor.set();
-		loadLeft.antialiasing = ClientPrefs.data.antialiasing;
-		add(loadLeft);
-		loadLeft.scale.x = loadLeft.width / 1280;
-		loadLeft.scale.y = loadLeft.height / 720;
-		loadLeft.setGraphicSize(FlxG.width, FlxG.height);
-		loadLeft.updateHitbox();
-		
-		
 		loadRight = new FlxSprite(isTransIn ? 0 : 1280, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingR'));
 		loadRight.scrollFactor.set();
 		loadRight.antialiasing = ClientPrefs.data.antialiasing;		
@@ -50,6 +40,15 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		loadRight.scale.y = loadRight.height / 720;
 		loadRight.setGraphicSize(FlxG.width, FlxG.height);
 		loadRight.updateHitbox();
+		
+		loadLeft = new FlxSprite(isTransIn ? 0 : -1280, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingL'));
+		loadLeft.scrollFactor.set();
+		loadLeft.antialiasing = ClientPrefs.data.antialiasing;
+		add(loadLeft);
+		loadLeft.scale.x = loadLeft.width / 1280;
+		loadLeft.scale.y = loadLeft.height / 720;
+		loadLeft.setGraphicSize(FlxG.width, FlxG.height);
+		loadLeft.updateHitbox();
 		
 		WaterMark = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 50 * 2, 0, 'NF ENGINE V1.1.0', 50);
 		WaterMark.scrollFactor.set();
