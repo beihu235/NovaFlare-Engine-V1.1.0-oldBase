@@ -47,6 +47,7 @@ class ResultsScreen extends MusicBeatSubstate
 		add(graphBG);
 		
 		var what = FlxSpriteUtil.flashGfx;		
+		
 		var _rect = new Rectangle(0, 0, graphWidth, graphHeight);
 		graphBG.pixels.lock();
 		graphBG.pixels.fillRect(_rect, 0xFF000000);
@@ -55,10 +56,11 @@ class ResultsScreen extends MusicBeatSubstate
 	    var noteSize = 2;
 	    graphBG.pixels.lock();
 		for (i in 0...PlayState.rsNoteTime.length){
-		
-		what.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.7 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize);		
+		var test = new FlxSprite(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.7 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2).makeGraphic(noteSize, noteSize, FlxColor.WHITE);
+		//what.drawCircle(, noteSize);		
+		graphBG.pixels.draw(test);
 		}
-		graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
+		
 		graphBG.pixels.unlock();
 		what.endFill();
 		
