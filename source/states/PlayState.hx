@@ -391,10 +391,10 @@ class PlayState extends MusicBeatState
 		highestCombo = 0;
 		rsNoteMs = [];
 		rsNoteTime = [];		
-		rsSicks:Int = 0;
-	    rsGoods:Int = 0;
-	    rsBads:Int = 0;
-	    rsShits:Int = 0;
+		rsSicks = 0;
+	    rsGoods = 0;
+	    rsBads = 0;
+	    rsShits = 0;
 
 		if(stageData.camera_speed != null)
 			cameraSpeed = stageData.camera_speed;
@@ -2447,10 +2447,10 @@ class PlayState extends MusicBeatState
 				
 				if(ClientPrefs.data.ResultsScreen){
 				
-				    rsSicks= ratingsData[0].hits;
+				    rsSicks = ratingsData[0].hits;
 	                rsGoods = ratingsData[1].hits;
 	                rsBads = ratingsData[2].hits;
-	                rsShits= ratingsData[3].hits;
+	                rsShits = ratingsData[3].hits;
 	                
 	                rsACC = ratingPercent;
 	                rsScore = songScore;
