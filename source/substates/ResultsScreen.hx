@@ -20,7 +20,7 @@ class ResultsScreen extends MusicBeatSubstate
 {
 	public var background:FlxSprite;
 	public var clearText:FlxText;
-
+    public var graphBackground:FlxSprite;
 	
 
 	public function new(x:Float, y:Float)
