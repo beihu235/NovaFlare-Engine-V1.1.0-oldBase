@@ -204,13 +204,10 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		}
 
 		if(nextCamera != null) {
-		    if(ClientPrefs.data.CustomFade == 'move'){
-			    loadRight.cameras = [nextCamera];
-			    loadLeft.cameras = [nextCamera];
-			}
-			else{
-			    loadAlpha.cameras = [nextCamera];
-			}
+		    if (loadLeft != null) loadLeft.cameras = [nextCamera];
+			if (loadRight != null) loadRight.cameras = [nextCamera];			
+			if (loadAlpha != null) loadAlpha.cameras = [nextCamera];
+			
 			WaterMark.cameras = [nextCamera];
 			EventText.cameras = [nextCamera];
 		}
@@ -222,13 +219,9 @@ class CustomFadeTransition extends MusicBeatSubstate {
 			finishCallback();
 			leTween.cancel();
 			
-			if(ClientPrefs.data.CustomFade == 'move'){
-			    loadLeftTween.cancel();
-			    loadRightTween.cancel();
-			}
-			else{
-			    loadAlphaTween.cancel();
-			}
+			if (loadLeftTween != null) loadLeftTween.cancel();
+			if (loadRightTween != null) loadRightTween.cancel();
+			if (loadAlphaTween != null) loadAlphaTween.cancel();
 			
 			loadTextTween.cancel();
 			EventTextTween.cancel();
