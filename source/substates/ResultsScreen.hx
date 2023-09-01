@@ -42,7 +42,7 @@ class ResultsScreen extends MusicBeatSubstate
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 		//rsNoteTime
 		//rsNoteMs
-		for (i in PlayState.rsNoteTime.length - 1){
+		for (i in 0...PlayState.rsNoteTime.length){
 		what.drawRect(graphBackground.width * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) , graphBackground.height * (PlayState.rsNoteMs[i] / 166.6), 1, 1);		
 		}
 		graphBackground.pixels.draw(FlxSpriteUtil.flashGfxSprite);
