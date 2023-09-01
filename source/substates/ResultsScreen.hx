@@ -6,10 +6,9 @@ import backend.Song;
 
 import flixel.addons.transition.FlxTransitionableState;
 
-
-
-
+import states.PlayState;
 import states.FreeplayState;
+
 import flixel.util.FlxSpriteUtil;
 import openfl.display.Sprite;
 import openfl.geom.Rectangle;
@@ -31,7 +30,7 @@ class ResultsScreen extends MusicBeatSubstate
 		background.alpha = 0;
 		add(background);
 		
-		graphBackground = new FlxSprite(FlxG.width - 50, 50).makeGraphic(550, 300, FlxColor.BLACK);
+		graphBackground = new FlxSprite(FlxG.width - 550 - 50, 50).makeGraphic(550, 300, FlxColor.BLACK);
 		graphBackground.scrollFactor.set();
 		graphBackground.alpha = 0.5;
 		add(graphBackground);
@@ -41,9 +40,10 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBackground.pixels.lock();
 		graphBackground.pixels.fillRect(_rect, 0xFF000000);
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
-		
-		for (i in 0...1){
-		what.drawRect(10, 10, 10, 10);		
+		//rsNoteTime
+		//rsNoteMs
+		for (i in PlayState.rsNoteTime.length - 1){
+		what.drawRect(graphBackground.width * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) , graphBackground.height * (PlayState.rsNoteMs[i] / 166.6), 1, 1);		
 		}
 		graphBackground.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		
