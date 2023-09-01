@@ -32,7 +32,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 
 		this.isTransIn = isTransIn;
 		
-		if(ClientPrefs.data.CustomFade == 'move'){
+		if(ClientPrefs.data.CustomFade == 'Move'){
 		loadRight = new FlxSprite(isTransIn ? 0 : 1280, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingR'));
 		loadRight.scrollFactor.set();
 		loadRight.antialiasing = ClientPrefs.data.antialiasing;		
@@ -125,12 +125,12 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		}
 		}
 		else{
-		loadRight = new FlxSprite( 0, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingR'));
-		loadRight.scrollFactor.set();
-		loadRight.antialiasing = ClientPrefs.data.antialiasing;		
-		add(loadRight);
-		loadRight.setGraphicSize(FlxG.width, FlxG.height);
-		loadRight.updateHitbox();
+		loadAlpha = new FlxSprite( 0, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingAlpha'));
+		loadAlpha.scrollFactor.set();
+		loadAlpha.antialiasing = ClientPrefs.data.antialiasing;		
+		add(loadAlpha);
+		loadAlpha.setGraphicSize(FlxG.width, FlxG.height);
+		loadAlpha.updateHitbox();
 		
 		WaterMark = new FlxText( 50, 720 - 50 - 50 * 2, 0, 'NF ENGINE V1.1.0', 50);
 		WaterMark.scrollFactor.set();
