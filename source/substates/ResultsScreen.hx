@@ -16,10 +16,13 @@ import openfl.geom.Rectangle;
 
 class ResultsScreen extends MusicBeatSubstate
 {
-	public var background:FlxSprite;
-	public var clearText:FlxText;
-	public var judgeText:FlxText;
+	public var background:FlxSprite;	
     public var graphBG:FlxSprite;
+    
+    public var clearText:FlxText;
+	public var judgeText:FlxText;
+	public var dataText:FlxText;
+	public var backText:FlxText;
     
     public var graphSizeUp:FlxSprite;
 	public var graphSizeDown:FlxSprite;
@@ -84,7 +87,19 @@ class ResultsScreen extends MusicBeatSubstate
 		clearText.scrollFactor.set();
 		add(clearText);
 		
-		judgeText = new FlxText(20, -55, 0, 'Song Cleared!\n' + PlayState.SONG.song + ' - ' + Difficulty.getString() + '\n');
+		highestCombo = 0;
+		rsNoteMs = [];
+		rsNoteTime = [];		
+		rsSicks = 0;
+	    rsGoods = 0;
+	    rsBads = 0;
+	    rsShits = 0;
+		rsACC = ratingPercent;
+	                rsScore = songScore;
+	                rsHits = songHits;
+	                rsMisses = songMisses;
+	                
+		judgeText = new FlxText(20, 55, 0, 'Judgements:\nSicks: ' + PlayState.rsSicks + '\nGoods: ' + PlayState.rsGoods + '\nBads: ' + PlayState.rsBads + '\nShits: ' + PlayState.rsShits + '\n\nCombe Breaks: ' + PlayState.rsMisses + '\nHighest Combe: ' + PlayState.highestCombo) + '\nScore: ' + PlayState.rsScore;
 		judgeText.size = 34;
 		judgeText.font = Paths.font('vcr.ttf');
 		judgeText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
@@ -93,13 +108,24 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		
 		FlxTween.tween(background, {alpha: 0.5}, 0.5);
-		FlxTween.tween(graphBG, {alpha: 0.5}, 0.5);
-		FlxTween.tween(graphSizeUp, {alpha: 0.5}, 0.5);
-		FlxTween.tween(graphSizeDown, {alpha: 0.5}, 0.5);
-		FlxTween.tween(graphSizeLeft, {alpha: 0.5}, 0.5);
-		FlxTween.tween(graphSizeRight, {alpha: 0.5}, 0.5);
 		
-		FlxTween.tween(clearText, {y: ClientPrefs.data.showFPS ? 35 : 5}, 0.5, {ease: FlxEase.expoInOut});
+		FlxTween.tween(clearText, {y: ClientPrefs.data.showFPS ? 50 : 5}, 0.5, {ease: FlxEase.expoInOut});
+		
+		new FlxTimer().start(0.5, function(tmr:FlxTimer){
+				
+		});
+		new FlxTimer().start(1, function(tmr:FlxTimer){
+			FlxTween.tween(graphBG, {alpha: 0.5}, 0.5);
+		    FlxTween.tween(graphSizeUp, {alpha: 0.5}, 0.5);
+		    FlxTween.tween(graphSizeDown, {alpha: 0.5}, 0.5);
+		    FlxTween.tween(graphSizeLeft, {alpha: 0.5}, 0.5);
+		    FlxTween.tween(graphSizeRight, {alpha: 0.5}, 0.5);	
+		});
+		new FlxTimer().start(1.5, function(tmr:FlxTimer){
+				
+		});
+		
+		
 		
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 		
