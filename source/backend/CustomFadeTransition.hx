@@ -23,6 +23,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 	
 	var loadLeftTween:FlxTween;
 	var loadRightTween:FlxTween;
+	var loadAlphaTween:FlxTween;
 	var EventTextTween:FlxTween;
 	var loadTextTween:FlxTween;
 
