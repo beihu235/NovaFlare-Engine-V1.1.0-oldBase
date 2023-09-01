@@ -196,6 +196,9 @@ class PlayState extends MusicBeatState
     public static var rsScore:Int = 0;
 	public static var rsHits:Int = 0;
 	
+	public static var rsRatingFC:String = '';
+    public static var rsRatingName:String = '';
+	
     
 	public var healthBar:HealthBar;
 	public var timeBar:HealthBar;
@@ -392,15 +395,7 @@ class PlayState extends MusicBeatState
 		highestCombo = 0;
 		rsNoteMs = [];
 		rsNoteTime = [];		
-		rsSicks = 0;
-	    rsGoods = 0;
-	    rsBads = 0;
-	    rsShits = 0;
-	    rsMisses = 0;
-        rsACC = 0;
-        rsScore = 0;
-	    rsHits = 0;
-	
+		
 		if(stageData.camera_speed != null)
 			cameraSpeed = stageData.camera_speed;
 
@@ -2464,6 +2459,9 @@ class PlayState extends MusicBeatState
 	                rsScore = songScore;
 	                rsHits = songHits;
 	                rsMisses = songMisses;
+	                
+	                rsRatingFC = ratingFC;
+                    rsRatingName = ratingName;
                     
 				    openSubState(new ResultsScreen(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				}
