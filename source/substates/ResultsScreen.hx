@@ -35,39 +35,41 @@ class ResultsScreen extends MusicBeatSubstate
 		background.alpha = 0;
 		add(background);
 		
+		var graphWidth =550;
+		var graphHeight =300;
 		graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).makeGraphic(550, 300, FlxColor.BLACK);
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
 		add(graphBG);
 		
 		var what = FlxSpriteUtil.flashGfx;		
-		var _rect = new Rectangle(0, 0, graphBG.width, graphBG.height);
+		var _rect = new Rectangle(0, 0, graphWidth, graphHeight);
 		graphBG.pixels.lock();
 		graphBG.pixels.fillRect(_rect, 0xFF000000);
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 	    
 	    var noteSize = 2;
 		for (i in 0...PlayState.rsNoteTime.length){
-		what.drawRect(graphBG.width * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphBG.height * 0.5 + graphBG.height * 0.5 * 0.8 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize);		
+		what.drawRect(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize);		
 		}
 		graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		
-		graphSizeUp = new FlxSprite(graphBG.x - 1, graphBG.y - 1).makeGraphic(graphBG.Width + 2, 2, FlxColor.WRITE);
+		graphSizeUp = new FlxSprite(graphBG.x - 1, graphBG.y - 1).makeGraphic(graphWidth + 2, 2, FlxColor.WRITE);
 		graphSizeUp.scrollFactor.set();
 		graphSizeUp.alpha = 0;		
 		add(graphSizeUp);
 		
-		graphSizeDown = new FlxSprite(graphBG.x - 1, graphBG.y + graphBG.Height + 1).makeGraphic(graphBG.Width + 2, 2, FlxColor.WRITE);
+		graphSizeDown = new FlxSprite(graphBG.x - 1, graphBG.y + graphHeight + 1).makeGraphic(graphWidth + 2, 2, FlxColor.WRITE);
 		graphSizeDown.scrollFactor.set();
 		graphSizeDown.alpha = 0;		
 		add(graphSizeDown);
 		
-		graphSizeLeft = new FlxSprite(graphBG.x - 1, graphBG.y - 1).makeGraphic(2, graphBG.Height + 2, FlxColor.WRITE);
+		graphSizeLeft = new FlxSprite(graphBG.x - 1, graphBG.y - 1).makeGraphic(2, graphHeight + 2, FlxColor.WRITE);
 		graphSizeLeft.scrollFactor.set();
 		graphSizeLeft.alpha = 0;		
 		add(graphSizeLeft);
 		
-		graphSizeRight = new FlxSprite(graphBG.x + graphBG.Width + 1, graphBG.y - 1).makeGraphic(2, graphBG.Height + 2, FlxColor.WRITE);
+		graphSizeRight = new FlxSprite(graphBG.x + graphWidth + 1, graphBG.y - 1).makeGraphic(2, graphHeight + 2, FlxColor.WRITE);
 		graphSizeRight.scrollFactor.set();
 		graphSizeRight.alpha = 0;		
 		add(graphSizeRight);		
