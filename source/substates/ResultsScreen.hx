@@ -8,45 +8,17 @@ import flixel.addons.transition.FlxTransitionableState;
 
 import flixel.util.FlxStringUtil;
 
-import states.StoryMenuState;
-import states.FreeplayState;
-import options.OptionsState;
-import states.editors.ChartingState;
 
-import haxe.ds.StringMap;
-import flixel.math.FlxMath;
-import psychlua.CustomSubstate as Substate;
-import flixel.text.FlxText;
-import flixel.addons.display.FlxBackdrop;
-import flixel.addons.display.FlxGridOverlay;
-import Type;
-import backend.Difficulty;
-import backend.CoolUtil;
-import flixel.sound.FlxSound;
-import backend.Controls;
-import flixel.util.FlxColor;
-import openfl.display.Sprite;
-import flixel.FlxSprite;
+import states.FreeplayState;
+
+
 
 class ResultsScreen extends MusicBeatSubstate
 {
 	public var background:FlxSprite;
-	public var text:FlxText;
+	public var clearText:FlxText;
 
-	public var anotherBackground:FlxSprite;
-	//public var graph:HitGraph;
-	//public var graphSprite:OFLSprite;
-
-	public var comboText:FlxText;
-	public var contText:FlxText;
-	public var settingsText:FlxText;
-
-	public var music:FlxSound;
-
-	//public var graphData:BitmapData;
-
-	public var ranking:String;
-	public var accuracy:String;
+	
 
 	public function new(x:Float, y:Float)
 	{
@@ -54,7 +26,19 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		background = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		background.scrollFactor.set();
+		background.alpha = 0;
 		add(background);
+		
+		clearText = new FlxText(20, -55, 0, "Song Cleared!");
+		clearText.size = 34;
+		clearText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
+		clearText.color = FlxColor.WHITE;
+		clearText.scrollFactor.set();
+		add(clearText);
+		
+		
+		FlxTween.tween(background, {alpha: 0.5}, 0.5);
+		FlxTween.tween(clearText, {y: 20}, 0.5, {ease: FlxEase.expoInOut});
 		
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
