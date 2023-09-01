@@ -54,7 +54,7 @@ class ResultsScreen extends MusicBeatSubstate
 	    
 	    var noteSize = 3;
 		for (i in 0...PlayState.rsNoteTime.length){
-		what.drawRect(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize);		
+		what.drawRect(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.7 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize);		
 		}
 		graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		
