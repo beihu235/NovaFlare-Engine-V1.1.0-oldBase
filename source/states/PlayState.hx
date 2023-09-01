@@ -185,11 +185,16 @@ class PlayState extends MusicBeatState
 	public static var rsNoteMs:Array<Float> = [];
     public static var rsNoteTime:Array<Float> = [];
     public static var rsSongLength:Float = 0;
+    
     public static var rsSicks:Int = 0;
 	public static var rsGoods:Int = 0;
 	public static var rsBads:Int = 0;
 	public static var rsShits:Int = 0;
-    
+	
+	public static var rsACC:Float = 0;
+    public static var rsScore:Int = 0;
+	public static var rsHits:Int = 0;
+	public static var rsMisses:Int = 0;
     
 	public var healthBar:HealthBar;
 	public var timeBar:HealthBar;
@@ -386,6 +391,10 @@ class PlayState extends MusicBeatState
 		highestCombo = 0;
 		rsNoteMs = [];
 		rsNoteTime = [];		
+		rsSicks:Int = 0;
+	    rsGoods:Int = 0;
+	    rsBads:Int = 0;
+	    rsShits:Int = 0;
 
 		if(stageData.camera_speed != null)
 			cameraSpeed = stageData.camera_speed;
@@ -2436,11 +2445,23 @@ class PlayState extends MusicBeatState
                 		MusicBeatState.androidc.visible = false;				
             	#end
 				
-				if(ClientPrefs.data.ResultsScreen)
-				openSubState(new ResultsScreen(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
-				else
-				MusicBeatState.switchState(new FreeplayState());
+				if(ClientPrefs.data.ResultsScreen){
 				
+				    rsSicks= ratingsData[0].hits;
+	                rsGoods = ratingsData[1].hits;
+	                rsBads = ratingsData[2].hits;
+	                rsShits= ratingsData[3].hits;
+	                
+	                rsACC = ratingPercent
+	                rsScore = songScore;
+	                rsHits = songHits;
+	                rsMisses = songMisses;
+                    
+				    openSubState(new ResultsScreen(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+				}
+				else{
+				    MusicBeatState.switchState(new FreeplayState());
+				}
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				changedDifficulty = false;
 			}
