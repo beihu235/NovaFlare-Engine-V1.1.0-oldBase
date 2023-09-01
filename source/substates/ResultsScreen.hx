@@ -89,7 +89,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		
 	                
-		judgeText = new FlxText(20, 55, 0, 'Judgements:\nSicks: ' + PlayState.rsSicks + '\nGoods: ' + PlayState.rsGoods + '\nBads: ' + PlayState.rsBads + '\nShits: ' + PlayState.rsShits + '\n\nCombe Breaks: ' + PlayState.rsMisses + '\nHighest Combe: ' + PlayState.highestCombo + '\nScore: ' + PlayState.rsScore + '\n');
+		judgeText = new FlxText(20, -200, 0, 'Judgements:\nSicks: ' + PlayState.rsSicks + '\nGoods: ' + PlayState.rsGoods + '\nBads: ' + PlayState.rsBads + '\nShits: ' + PlayState.rsShits + '\n\nCombe Breaks: ' + PlayState.rsMisses + '\nHighest Combe: ' + PlayState.highestCombo + '\nScore: ' + PlayState.rsScore + '\n');
 		judgeText.size = 34;
 		judgeText.font = Paths.font('vcr.ttf');
 		judgeText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
@@ -97,12 +97,11 @@ class ResultsScreen extends MusicBeatSubstate
 		add(judgeText);
 		
 		
-		FlxTween.tween(background, {alpha: 0.5}, 0.5);
-		
+		FlxTween.tween(background, {alpha: 0.5}, 0.5);		
 		FlxTween.tween(clearText, {y: ClientPrefs.data.showFPS ? 50 : 5}, 0.5, {ease: FlxEase.expoInOut});
 		
 		new FlxTimer().start(0.5, function(tmr:FlxTimer){
-				
+		FlxTween.tween(judgeText, {x: 20}, 0.5, {ease: FlxEase.backInOut});		
 		});
 		new FlxTimer().start(1, function(tmr:FlxTimer){
 			FlxTween.tween(graphBG, {alpha: 0.5}, 0.5);
