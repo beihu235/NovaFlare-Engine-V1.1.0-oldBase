@@ -32,8 +32,9 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		graphBackground = new FlxSprite(FlxG.width - 550 - 50, 50).makeGraphic(550, 300, FlxColor.BLACK);
 		graphBackground.scrollFactor.set();
-		graphBackground.alpha = 0.5;
+		graphBackground.alpha = 0;		
 		add(graphBackground);
+		
 		
 		var what = FlxSpriteUtil.flashGfx;		
 		var _rect = new Rectangle(0, 0, graphBackground.width, graphBackground.height);
@@ -43,7 +44,7 @@ class ResultsScreen extends MusicBeatSubstate
 	    
 	    var noteSize = 2;
 		for (i in 0...PlayState.rsNoteTime.length){
-		what.drawRect(graphBackground.width * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphBackground.height * 0.5 + graphBackground.height * 0.8 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize);		
+		what.drawRect(graphBackground.width * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphBackground.height * 0.5 + graphBackground.height * 0.5 * 0.8 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize);		
 		}
 		graphBackground.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		
@@ -56,6 +57,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		
 		FlxTween.tween(background, {alpha: 0.5}, 0.5);
+		FlxTween.tween(graphBackground, {alpha: 0.5}, 0.5);
 		FlxTween.tween(clearText, {y: ClientPrefs.data.showFPS ? 35 : 5}, 0.5, {ease: FlxEase.expoInOut});
 		
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
