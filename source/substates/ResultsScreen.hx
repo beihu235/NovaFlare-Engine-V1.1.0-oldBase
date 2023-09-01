@@ -18,7 +18,12 @@ class ResultsScreen extends MusicBeatSubstate
 {
 	public var background:FlxSprite;
 	public var clearText:FlxText;
-    public var graphBackground:FlxSprite;
+    public var graphBG:FlxSprite;
+    
+    public var graphSizeUp:FlxSprite;
+	public var graphSizeDown:FlxSprite;
+	public var graphSizeLeft:FlxSprite;
+	public var graphSizeRight:FlxSprite;
 	
 
 	public function new(x:Float, y:Float)
@@ -30,23 +35,44 @@ class ResultsScreen extends MusicBeatSubstate
 		background.alpha = 0;
 		add(background);
 		
-		graphBackground = new FlxSprite(FlxG.width - 550 - 50, 50).makeGraphic(550, 300, FlxColor.BLACK);
-		graphBackground.scrollFactor.set();
-		graphBackground.alpha = 0;		
-		add(graphBackground);
-		
+		graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).makeGraphic(550, 300, FlxColor.BLACK);
+		graphBG.scrollFactor.set();
+		graphBG.alpha = 0;		
+		add(graphBG);
 		
 		var what = FlxSpriteUtil.flashGfx;		
-		var _rect = new Rectangle(0, 0, graphBackground.width, graphBackground.height);
-		graphBackground.pixels.lock();
-		graphBackground.pixels.fillRect(_rect, 0xFF000000);
+		var _rect = new Rectangle(0, 0, graphBG.width, graphBG.height);
+		graphBG.pixels.lock();
+		graphBG.pixels.fillRect(_rect, 0xFF000000);
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 	    
 	    var noteSize = 2;
 		for (i in 0...PlayState.rsNoteTime.length){
-		what.drawRect(graphBackground.width * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphBackground.height * 0.5 + graphBackground.height * 0.5 * 0.8 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize);		
+		what.drawRect(graphBG.width * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphBG.height * 0.5 + graphBG.height * 0.5 * 0.8 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize);		
 		}
-		graphBackground.pixels.draw(FlxSpriteUtil.flashGfxSprite);
+		graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
+		
+		graphSizeUp = new FlxSprite(graphBG.x - 1, graphBG.y - 1).makeGraphic(graphBG.width + 2, 2, FlxColor.WRITE);
+		graphSizeUp.scrollFactor.set();
+		graphSizeUp.alpha = 0;		
+		add(graphSizeUp);
+		
+		graphSizeDown = new FlxSprite(graphBG.x - 1, graphBG.y + graphBG.height + 1).makeGraphic(graphBG.width + 2, 2, FlxColor.WRITE);
+		graphSizeDown.scrollFactor.set();
+		graphSizeDown.alpha = 0;		
+		add(graphSizeDown);
+		
+		graphSizeLeft = new FlxSprite(graphBG.x - 1, graphBG.y - 1).makeGraphic(2, graphBG.height + 2, FlxColor.WRITE);
+		graphSizeLeft.scrollFactor.set();
+		graphSizeLeft.alpha = 0;		
+		add(graphSizeLeft);
+		
+		graphSizeRight = new FlxSprite(graphBG.x + graphBG.width + 1, graphBG.y - 1).makeGraphic(2, graphBG.height + 2, FlxColor.WRITE);
+		graphSizeRight.scrollFactor.set();
+		graphSizeRight.alpha = 0;		
+		add(graphSizeRight);		
+		
+		
 		
 		clearText = new FlxText(20, -55, 0, 'Song Cleared!\n' + PlayState.SONG.song + ' - ' + Difficulty.getString() + '\n');
 		clearText.size = 34;
@@ -57,7 +83,12 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		
 		FlxTween.tween(background, {alpha: 0.5}, 0.5);
-		FlxTween.tween(graphBackground, {alpha: 0.5}, 0.5);
+		FlxTween.tween(graphBG, {alpha: 0.5}, 0.5);
+		FlxTween.tween(graphSizeUp, {alpha: 0.5}, 0.5);
+		FlxTween.tween(graphSizeDown, {alpha: 0.5}, 0.5);
+		FlxTween.tween(graphSizeLeft, {alpha: 0.5}, 0.5);
+		FlxTween.tween(graphSizeRight, {alpha: 0.5}, 0.5);
+		
 		FlxTween.tween(clearText, {y: ClientPrefs.data.showFPS ? 35 : 5}, 0.5, {ease: FlxEase.expoInOut});
 		
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
