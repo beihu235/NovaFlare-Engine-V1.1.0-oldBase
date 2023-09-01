@@ -34,8 +34,8 @@ class ResultsScreen extends MusicBeatSubstate
 	public var text:FlxText;
 
 	public var anotherBackground:FlxSprite;
-	public var graph:HitGraph;
-	public var graphSprite:OFLSprite;
+	//public var graph:HitGraph;
+	//public var graphSprite:OFLSprite;
 
 	public var comboText:FlxText;
 	public var contText:FlxText;
@@ -43,7 +43,7 @@ class ResultsScreen extends MusicBeatSubstate
 
 	public var music:FlxSound;
 
-	public var graphData:BitmapData;
+	//public var graphData:BitmapData;
 
 	public var ranking:String;
 	public var accuracy:String;
@@ -73,7 +73,6 @@ class ResultsScreen extends MusicBeatSubstate
 
 	override function destroy()
 	{
-		pauseMusic.destroy();
 
 		super.destroy();
 	}
