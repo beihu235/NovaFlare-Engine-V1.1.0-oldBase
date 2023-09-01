@@ -14,11 +14,10 @@ class CustomFadeTransition extends MusicBeatSubstate {
 	private var leTween:FlxTween = null;
 	public static var nextCamera:FlxCamera;
 	var isTransIn:Bool = false;
-	var transBlack:FlxSprite;
-	var transGradient:FlxSprite;
 	
 	var loadLeft:FlxSprite;
 	var loadRight:FlxSprite;
+	var loadAlpha:FlxSprite
 	var WaterMark:FlxText;
 	var EventText:FlxText;
 	
@@ -32,6 +31,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 
 		this.isTransIn = isTransIn;
 		
+		if(ClientPrefs.data.CustomFade == 'move'){
 		loadRight = new FlxSprite(isTransIn ? 0 : 1280, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingR'));
 		loadRight.scrollFactor.set();
 		loadRight.antialiasing = ClientPrefs.data.antialiasing;		
@@ -122,10 +122,94 @@ class CustomFadeTransition extends MusicBeatSubstate {
 			
 			
 		}
+		}
+		else{
+		loadRight = new FlxSprite( 0, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingR'));
+		loadRight.scrollFactor.set();
+		loadRight.antialiasing = ClientPrefs.data.antialiasing;		
+		add(loadRight);
+		loadRight.setGraphicSize(FlxG.width, FlxG.height);
+		loadRight.updateHitbox();
+		
+		WaterMark = new FlxText( 50, 720 - 50 - 50 * 2, 0, 'NF ENGINE V1.1.0', 50);
+		WaterMark.scrollFactor.set();
+		WaterMark.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		WaterMark.antialiasing = ClientPrefs.data.antialiasing;
+		add(WaterMark);
+        
+        EventText= new FlxText( 50, 720 - 50 - 50, 0, 'LOADING . . . . . . ', 50);
+		EventText.scrollFactor.set();
+		EventText.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		EventText.antialiasing = ClientPrefs.data.antialiasing;
+		add(EventText);
+		
+		if(!isTransIn) {
+			FlxG.sound.play(Paths.sound('loading_close'));
+			
+			loadAlphaTween = FlxTween.tween(loadAlpha, {alpha: 1}, duration, {
+				onComplete: function(twn:FlxTween) {
+					if(finishCallback != null) {
+						finishCallback();
+					}
+				},
+			ease: FlxEase.sineInOut});
+			
+			loadTextTween = FlxTween.tween(WaterMark, {alpha: 1}, duration, {
+				onComplete: function(twn:FlxTween) {
+					if(finishCallback != null) {
+						finishCallback();
+					}
+				},
+			ease: FlxEase.sineInOut});
+			
+			EventTextTween = FlxTween.tween(EventText, {alpha: 1}, duration, {
+				onComplete: function(twn:FlxTween) {
+					if(finishCallback != null) {
+						finishCallback();
+					}
+				},
+			ease: FlxEase.sineInOut});
+			
+		} else {
+			FlxG.sound.play(Paths.sound('loading_open'));
+			EventText.text = 'COMPLETED !';
+			
+			loadAlphaTween = FlxTween.tween(loadAlpha, {alpha: 0}, duration, {
+				onComplete: function(twn:FlxTween) {
+					if(finishCallback != null) {
+						finishCallback();
+					}
+				},
+			ease: FlxEase.sineInOut});
+			
+			loadTextTween = FlxTween.tween(WaterMark, {alpha: 0}, duration, {
+				onComplete: function(twn:FlxTween) {
+					if(finishCallback != null) {
+						finishCallback();
+					}
+				},
+			ease: FlxEase.sineInOut});
+			
+			EventTextTween = FlxTween.tween(EventText, {alpha: 0}, duration, {
+				onComplete: function(twn:FlxTween) {
+					if(finishCallback != null) {
+						finishCallback();
+					}
+				},
+			ease: FlxEase.sineInOut});
+			
+			
+		}
+		}
 
 		if(nextCamera != null) {
-			loadRight.cameras = [nextCamera];
-			loadLeft.cameras = [nextCamera];
+		    if(ClientPrefs.data.CustomFade == 'move'){
+			    loadRight.cameras = [nextCamera];
+			    loadLeft.cameras = [nextCamera];
+			}
+			else{
+			    loadAlpha.cameras = [nextCamera];
+			}
 			WaterMark.cameras = [nextCamera];
 			EventText.cameras = [nextCamera];
 		}
@@ -136,8 +220,15 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		if(leTween != null) {
 			finishCallback();
 			leTween.cancel();
-			loadLeftTween.cancel();
-			loadRightTween.cancel();
+			
+			if(ClientPrefs.data.CustomFade == 'move'){
+			    loadLeftTween.cancel();
+			    loadRightTween.cancel();
+			}
+			else{
+			    loadAlphaTween.cancel();
+			}
+			
 			loadTextTween.cancel();
 			EventTextTween.cancel();
 		}
