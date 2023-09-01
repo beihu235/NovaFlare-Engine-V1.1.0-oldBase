@@ -18,6 +18,7 @@ class ResultsScreen extends MusicBeatSubstate
 {
 	public var background:FlxSprite;
 	public var clearText:FlxText;
+	public var judgeText:FlxText;
     public var graphBG:FlxSprite;
     
     public var graphSizeUp:FlxSprite;
@@ -35,8 +36,8 @@ class ResultsScreen extends MusicBeatSubstate
 		background.alpha = 0;
 		add(background);
 		
-		var graphWidth =550;
-		var graphHeight =300;
+		var graphWidth = 550;
+		var graphHeight = 300;
 		graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).makeGraphic(550, 300, FlxColor.BLACK);
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
@@ -54,22 +55,22 @@ class ResultsScreen extends MusicBeatSubstate
 		}
 		graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		
-		graphSizeUp = new FlxSprite(graphBG.x - 1, graphBG.y - 1).makeGraphic(graphWidth + 2, 2, FlxColor.WRITE);
+		graphSizeUp = new FlxSprite(graphBG.x - 1, graphBG.y - 1).makeGraphic(graphWidth + 2, 2, FlxColor.WHITE);
 		graphSizeUp.scrollFactor.set();
 		graphSizeUp.alpha = 0;		
 		add(graphSizeUp);
 		
-		graphSizeDown = new FlxSprite(graphBG.x - 1, graphBG.y + graphHeight + 1).makeGraphic(graphWidth + 2, 2, FlxColor.WRITE);
+		graphSizeDown = new FlxSprite(graphBG.x - 1, graphBG.y + graphHeight + 1).makeGraphic(graphWidth + 2, 2, FlxColor.WHITE);
 		graphSizeDown.scrollFactor.set();
 		graphSizeDown.alpha = 0;		
 		add(graphSizeDown);
 		
-		graphSizeLeft = new FlxSprite(graphBG.x - 1, graphBG.y - 1).makeGraphic(2, graphHeight + 2, FlxColor.WRITE);
+		graphSizeLeft = new FlxSprite(graphBG.x - 1, graphBG.y - 1).makeGraphic(2, graphHeight + 2, FlxColor.WHITE);
 		graphSizeLeft.scrollFactor.set();
 		graphSizeLeft.alpha = 0;		
 		add(graphSizeLeft);
 		
-		graphSizeRight = new FlxSprite(graphBG.x + graphWidth + 1, graphBG.y - 1).makeGraphic(2, graphHeight + 2, FlxColor.WRITE);
+		graphSizeRight = new FlxSprite(graphBG.x + graphWidth + 1, graphBG.y - 1).makeGraphic(2, graphHeight + 2, FlxColor.WHITE);
 		graphSizeRight.scrollFactor.set();
 		graphSizeRight.alpha = 0;		
 		add(graphSizeRight);		
@@ -82,6 +83,13 @@ class ResultsScreen extends MusicBeatSubstate
 		clearText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
 		clearText.scrollFactor.set();
 		add(clearText);
+		
+		judgeText = new FlxText(20, -55, 0, 'Song Cleared!\n' + PlayState.SONG.song + ' - ' + Difficulty.getString() + '\n');
+		judgeText.size = 34;
+		judgeText.font = Paths.font('vcr.ttf');
+		judgeText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
+		judgeText.scrollFactor.set();
+		add(judgeText);
 		
 		
 		FlxTween.tween(background, {alpha: 0.5}, 0.5);
