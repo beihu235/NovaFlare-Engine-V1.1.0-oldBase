@@ -10,8 +10,7 @@ import flixel.addons.transition.FlxTransitionableState;
 
 
 import states.FreeplayState;
-
-import flixel.util.FlxStringUtil;
+import flixel.util.FlxSpriteUtil;
 import openfl.display.Sprite;
 import openfl.geom.Rectangle;
 
@@ -44,7 +43,7 @@ class ResultsScreen extends MusicBeatSubstate
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 		
 		for (i in 0...1){
-		what.drawRect(1, 1, 10, 10);		
+		what.drawRect(10, 10, 10, 10);		
 		}
 		graphBackground.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		
