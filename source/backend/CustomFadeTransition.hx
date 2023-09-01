@@ -36,8 +36,6 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		loadRight.scrollFactor.set();
 		loadRight.antialiasing = ClientPrefs.data.antialiasing;		
 		add(loadRight);
-		loadRight.scale.x = loadRight.width / 1280;
-		loadRight.scale.y = loadRight.height / 720;
 		loadRight.setGraphicSize(FlxG.width, FlxG.height);
 		loadRight.updateHitbox();
 		
@@ -45,8 +43,6 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		loadLeft.scrollFactor.set();
 		loadLeft.antialiasing = ClientPrefs.data.antialiasing;
 		add(loadLeft);
-		loadLeft.scale.x = loadLeft.width / 1280;
-		loadLeft.scale.y = loadLeft.height / 720;
 		loadLeft.setGraphicSize(FlxG.width, FlxG.height);
 		loadLeft.updateHitbox();
 		
