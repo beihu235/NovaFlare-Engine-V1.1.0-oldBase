@@ -46,20 +46,21 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBG.alpha = 0;		
 		add(graphBG);
 		
-		var what = FlxSpriteUtil.flashGfx;		
+		var noteSpr = FlxSpriteUtil.flashGfx;		
 		var _rect = new Rectangle(0, 0, graphWidth, graphHeight);
 		graphBG.pixels.fillRect(_rect, 0xFF000000);
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 	    
-	    var noteSize = 2;
-	    graphBG.pixels.lock();
+	    var noteSize = 1;
+	    //graphBG.pixels.lock();
 		for (i in 0...PlayState.rsNoteTime.length){
 		
-		what.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.7 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize);		
+		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.7 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize);		
+		
 		graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		}
-		graphBG.pixels.unlock();
-		what.endFill();
+		//graphBG.pixels.unlock();
+		//noteSpr.endFill();
 		
 		graphSizeUp = new FlxSprite(graphBG.x, graphBG.y - 1).makeGraphic(graphWidth - 1, 2, FlxColor.WHITE);
 		graphSizeUp.scrollFactor.set();
@@ -71,12 +72,12 @@ class ResultsScreen extends MusicBeatSubstate
 		graphSizeDown.alpha = 0;		
 		add(graphSizeDown);
 		
-		graphSizeLeft = new FlxSprite(graphBG.x - 1, graphBG.y - 1).makeGraphic(2, graphHeight + 2, FlxColor.WHITE);
+		graphSizeLeft = new FlxSprite(graphBG.x - 1, graphBG.y - 3).makeGraphic(2, graphHeight + 2, FlxColor.WHITE);
 		graphSizeLeft.scrollFactor.set();
 		graphSizeLeft.alpha = 0;		
 		add(graphSizeLeft);
 		
-		graphSizeRight = new FlxSprite(graphBG.x + graphWidth - 1, graphBG.y - 1).makeGraphic(2, graphHeight + 2, FlxColor.WHITE);
+		graphSizeRight = new FlxSprite(graphBG.x + graphWidth - 1, graphBG.y - 1).makeGraphic(2, graphHeight + 3, FlxColor.WHITE);
 		graphSizeRight.scrollFactor.set();
 		graphSizeRight.alpha = 0;		
 		add(graphSizeRight);		
@@ -91,7 +92,7 @@ class ResultsScreen extends MusicBeatSubstate
 		add(clearText);		
 	                
 		judgeText = new FlxText(-300, 200, 0, 'Judgements:\nSicks: ' + PlayState.rsSicks + '\nGoods: ' + PlayState.rsGoods + '\nBads: ' + PlayState.rsBads + '\nShits: ' + PlayState.rsShits + '\n\nCombe Breaks: ' + PlayState.rsMisses + '\nHighest Combe: ' + PlayState.highestCombo + '\nScore: ' + PlayState.rsScore + '\n');
-		judgeText.size = 34;
+		judgeText.size = 25;
 		judgeText.font = Paths.font('vcr.ttf');
 		judgeText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
 		judgeText.scrollFactor.set();
