@@ -87,17 +87,7 @@ class ResultsScreen extends MusicBeatSubstate
 		clearText.scrollFactor.set();
 		add(clearText);
 		
-		highestCombo = 0;
-		rsNoteMs = [];
-		rsNoteTime = [];		
-		rsSicks = 0;
-	    rsGoods = 0;
-	    rsBads = 0;
-	    rsShits = 0;
-		rsACC = ratingPercent;
-	                rsScore = songScore;
-	                rsHits = songHits;
-	                rsMisses = songMisses;
+		
 	                
 		judgeText = new FlxText(20, 55, 0, 'Judgements:\nSicks: ' + PlayState.rsSicks + '\nGoods: ' + PlayState.rsGoods + '\nBads: ' + PlayState.rsBads + '\nShits: ' + PlayState.rsShits + '\n\nCombe Breaks: ' + PlayState.rsMisses + '\nHighest Combe: ' + PlayState.highestCombo) + '\nScore: ' + PlayState.rsScore;
 		judgeText.size = 34;
