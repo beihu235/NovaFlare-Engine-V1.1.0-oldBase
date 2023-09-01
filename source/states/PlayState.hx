@@ -2452,7 +2452,7 @@ class PlayState extends MusicBeatState
 	                rsBads = ratingsData[2].hits;
 	                rsShits= ratingsData[3].hits;
 	                
-	                rsACC = ratingPercent
+	                rsACC = ratingPercent;
 	                rsScore = songScore;
 	                rsHits = songHits;
 	                rsMisses = songMisses;
