@@ -94,7 +94,18 @@ class ResultsScreen extends MusicBeatSubstate
 	    var noteSize = 1;
 	    var MoveSize = 0.6;
 		for (i in 0...PlayState.rsNoteTime.length){		
-    		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize);				
+		    var color:String = '';
+		    if (Math.abs(PlayState.rsNoteMs[i] < 200) color = ColorArray[4]
+		    if (Math.abs(PlayState.rsNoteMs[i] < 166) color = ColorArray[3]
+		    if (Math.abs(PlayState.rsNoteMs[i] < 135) color = ColorArray[2]
+		    if (Math.abs(PlayState.rsNoteMs[i] < 90) color = ColorArray[1]
+		    if (Math.abs(PlayState.rsNoteMs[i] < 45) color = ColorArray[0]
+		    
+		    if (Math.abs(PlayState.rsNoteMs[i] < 166){
+    		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize,color);				   }
+    		else{
+    		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 - noteSize / 2, noteSize,color);		
+    		}
 		    graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		}
 		
@@ -213,10 +224,10 @@ class ResultsScreen extends MusicBeatSubstate
 		judgeText.antialiasing = ClientPrefs.data.antialiasing;
 		add(judgeText);
 		
-		public var botplay:String = 'Close';
+		var botplay:String = 'Close';
 		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Open';
-		public var practice:String = 'Close';
-		public var realTime = Date.now();
+		var practice:String = 'Close';
+		var realTime = Date.now();
 		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Open';
 
 		setGameText = new FlxText(FlxG.width + 400, 420, 0, 
@@ -326,8 +337,23 @@ class ResultsScreen extends MusicBeatSubstate
 
 	override function update(elapsed:Float)
 	{   
-	    public var realTime = Date.now();
-	    setGameText.text = 'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain') + '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss') + '\n' + 'SongSpeed: X' + ClientPrefs.getGameplaySetting('scrollspeed') + '  PlaybackRate: X' + ClientPrefs.getGameplaySetting('songspeed') + '\n' + 'BotPlay: ' + botplay + '  PracticeMode: ' + practice + '\n' + 'Finished time: ' + realTime.getYear() + '.' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds() + '\n';
+	    var botplay:String = 'Close';
+		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Open';
+		var practice:String = 'Close';
+		var realTime = Date.now();
+		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Open';
+
+		setGameText.text = 'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
+		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
+		+ '\n'
+		+ 'SongSpeed: X' + ClientPrefs.getGameplaySetting('scrollspeed')
+		+ '  PlaybackRate: X' + ClientPrefs.getGameplaySetting('songspeed')
+		+ '\n'
+		+ 'BotPlay: ' + botplay
+		+ '  PracticeMode: ' + practice
+		+ '\n'
+		+ 'Finished time: ' + realTime.getYear() + '.' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds()
+		+ '\n';
 		
 	
 		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
