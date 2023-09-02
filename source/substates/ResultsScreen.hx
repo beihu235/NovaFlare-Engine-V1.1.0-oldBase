@@ -96,7 +96,7 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBG.pixels.fillRect(_rect, 0xFF000000);
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 	    
-	    var noteSize = 1;
+	    var noteSize = 2;
 	    var MoveSize = 0.6;
 		for (i in 0...PlayState.rsNoteTime.length){
 		    if (Math.abs(PlayState.rsNoteMs[i]) < 200) color = ColorArray[4];
@@ -106,11 +106,9 @@ class ResultsScreen extends MusicBeatSubstate
 		    if (Math.abs(PlayState.rsNoteMs[i]) < 45) color = ColorArray[0];
 		    FlxSpriteUtil.beginDraw(color);
 		    if (Math.abs(PlayState.rsNoteMs[i]) < 166){
-		    //makeNote(graphBG,graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize, color);
     		noteSpr.drawRect(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize);
     		}
     		else{
-    		//makeNote(graphBG,graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize, color);
     		noteSpr.drawRect(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 - noteSize / 2, noteSize, noteSize);		
     		}
     		
@@ -163,7 +161,7 @@ class ResultsScreen extends MusicBeatSubstate
 		graphShitDown.alpha = 0;		
 		add(graphShitDown);
 		
-		graphMiss = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * 0.4 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[4]);
+		graphMiss = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * 0.8 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[4]);
 		graphMiss.scrollFactor.set();
 		graphMiss.alpha = 0;		
 		add(graphMiss);
@@ -343,9 +341,6 @@ class ResultsScreen extends MusicBeatSubstate
 		
 	}
 	
-    function makeNote(Sprite:FlxSprite, X:Float, Y:Float, Width:Float, Height:Float, Color:FlxColor = 0xFFFFFFFF){
-        FlxSpriteUtil.drawRect(Sprite, X, Y, Width, Height, Color);
-    }
     
 	override function update(elapsed:Float)
 	{   
