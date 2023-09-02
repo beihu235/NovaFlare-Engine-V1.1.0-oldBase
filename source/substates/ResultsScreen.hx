@@ -1,9 +1,9 @@
 package substates;
-
+/*
 import backend.WeekData;
 import backend.Highscore;
 import backend.Song;
-
+*/
 import flixel.addons.transition.FlxTransitionableState;
 
 import states.PlayState;
@@ -18,17 +18,16 @@ class ResultsScreen extends MusicBeatSubstate
 {
 	public var background:FlxSprite;	
     public var graphBG:FlxSprite;
-    
-    public var clearText:FlxText;
-	public var judgeText:FlxText;
-	public var dataText:FlxText;
-	public var backText:FlxText;
-    
     public var graphSizeUp:FlxSprite;
 	public var graphSizeDown:FlxSprite;
 	public var graphSizeLeft:FlxSprite;
 	public var graphSizeRight:FlxSprite;
-	
+    
+    public var clearText:FlxText;
+	public var judgeText:FlxText;
+	public var satDataText:FlxText;
+	public var backText:FlxText;
+    
 
 	public function new(x:Float, y:Float)
 	{
@@ -52,15 +51,12 @@ class ResultsScreen extends MusicBeatSubstate
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 	    
 	    var noteSize = 1;
-	    //graphBG.pixels.lock();
 		for (i in 0...PlayState.rsNoteTime.length){
 		
 		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.7 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize);		
 		
 		graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		}
-		//graphBG.pixels.unlock();
-		//noteSpr.endFill();
 		
 		graphSizeUp = new FlxSprite(graphBG.x, graphBG.y - 1).makeGraphic(graphWidth - 1, 2, FlxColor.WHITE);
 		graphSizeUp.scrollFactor.set();
@@ -93,13 +89,29 @@ class ResultsScreen extends MusicBeatSubstate
 		add(clearText);		
 	    
 	    var ACC = Math.ceil(PlayState.rsACC * 10000) * 100;
-		judgeText = new FlxText(-400, 200, 0, 'Judgements:\nSicks: ' + PlayState.rsSicks + '\nGoods: ' + PlayState.rsGoods + '\nBads: ' + PlayState.rsBads + '\nShits: ' + PlayState.rsShits + '\n\nCombe Breaks: ' + PlayState.rsMisses + '\nHighest Combe: ' + PlayState.highestCombo + '\nScore: ' + PlayState.rsScore + '\nAccuracy: ' + ACC + '%\n\nRank: ' + PlayState.rsRatingName + '(' + PlayState.rsRatingFC + ')\n');
+		judgeText = new FlxText(-400, 200, 0, 
+		'Judgements:\nSicks: ' + PlayState.rsSicks 
+		+ '\nGoods: ' + PlayState.rsGoods 
+		+ '\nBads: ' + PlayState.rsBads 
+		+ '\nShits: ' + PlayState.rsShits 
+		+ '\n\nCombe Breaks: ' + PlayState.rsMisses 
+		+ '\nHighest Combe: ' + PlayState.highestCombo 
+		+ '\nScore: ' + PlayState.rsScore 
+		+ '\nAccuracy: ' + ACC + '%'
+		+ '\n\nRank: ' + PlayState.rsRatingName + '(' + PlayState.rsRatingFC + ')\n'
+		);
 		judgeText.size = 28;
 		judgeText.font = Paths.font('vcr.ttf');
 		judgeText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
 		judgeText.scrollFactor.set();
 		judgeText.antialiasing = ClientPrefs.data.antialiasing;
 		add(judgeText);
+		
+		var Main:Float = 0;
+		for (i in 0...PlayState.rsNoteTime.length){
+		Main = Main + Math.abs(PlayState.rsNoteTime[i]);
+		}
+		Main = Main / PlayState.rsNoteTime.length;
 		
 		
 		FlxTween.tween(background, {alpha: 0.5}, 0.5);		
