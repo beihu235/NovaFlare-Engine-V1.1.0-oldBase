@@ -18,11 +18,11 @@ import tjson.TJSON as Json;
 typedef NoteTypeColorData =
 {
 
-	sick:String,
-	good:String,
-    bad:String,
-    shit:String,
-    miss:String
+	sick:FlxColor,
+	good:FlxColor,
+    bad:FlxColor,
+    shit:FlxColor,
+    miss:FlxColor
     
 }
 
@@ -54,8 +54,8 @@ class ResultsScreen extends MusicBeatSubstate
     
     public var NoteTypeColor:NoteTypeColorData;
     
-    public var ColorArray:Array<String> = [];
-    public var color:String;
+    public var ColorArray:Array<FlxColor> = [];
+    public var color:FlxColor;
 	public function new(x:Float, y:Float)
 	{
 		super();
@@ -70,6 +70,14 @@ class ResultsScreen extends MusicBeatSubstate
 		ColorArray.push(NoteTypeColor.bad);
 		ColorArray.push(NoteTypeColor.shit);
 		ColorArray.push(NoteTypeColor.miss);
+		
+		ColorArray = [
+		0xFF00FFFF,
+	    0xFF00FF00,
+	    0xFFFF7F00,
+	    0xFF580000,
+	    0xFFFF0000
+		];
 		
 		background = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		background.scrollFactor.set();
