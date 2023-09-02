@@ -2933,8 +2933,11 @@ class PlayState extends MusicBeatState
 		}
 		combo = 0;
         
-        rsNoteMs.push(167);
-		rsNoteTime.push(note.strumTime);
+        if (!note.isSustainNote){
+		    rsNoteMs.push(167);
+		    rsNoteTime.push(note.strumTime);
+		}
+        
 		
 		if(!practiceMode) songScore -= 10;
 		if(!endingSong) songMisses++;
