@@ -104,9 +104,9 @@ class ResultsScreen extends MusicBeatSubstate
     		drawCircle(graphBG,graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, color);
     		}
     		else{
-    	    drawCircle(graphBG,graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 - noteSize / 2, noteSize, color);		
+    	    FlxSpriteUtil.drawCircle(graphBG,graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 - noteSize / 2, noteSize, color);		
     		}
-		    graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
+		    FlxSpriteUtil.graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		}
 		
 		var judgeHeight = 2;
