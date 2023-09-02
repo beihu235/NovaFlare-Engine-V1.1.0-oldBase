@@ -44,6 +44,7 @@ class ResultsScreen extends MusicBeatSubstate
 	public var graphBadDown:FlxSprite;
 	public var graphShitUp:FlxSprite;
 	public var graphShitDown:FlxSprite;
+    public var graphMiss:FlxSprite;
     
     public var clearText:FlxText;
 	public var judgeText:FlxText;
@@ -52,6 +53,8 @@ class ResultsScreen extends MusicBeatSubstate
 	public var backText:FlxText;
     
     public var NoteTypeColor:NoteTypeColorData;
+    
+    
 
 	public function new(x:Float, y:Float)
 	{
@@ -61,6 +64,15 @@ class ResultsScreen extends MusicBeatSubstate
 		NoteTypeColor = Json.parse(SUtil.getPath() + 'assets/images/mainmenu_sprite/rsNoteColor.json');
 		else
 		NoteTypeColor = Json.parse(Paths.getPath('images/mainmenu_sprite/rsNoteColor.json', TEXT));
+		
+		var ColorArray:Array<String> = [
+		    NoteTypeColor.sick,
+		    NoteTypeColor.good,
+		    NoteTypeColor.bad,
+		    NoteTypeColor.shit,
+		    NoteTypeColor.miss,
+	                                
+	    ];
 		
 		background = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		background.scrollFactor.set();
@@ -131,6 +143,11 @@ class ResultsScreen extends MusicBeatSubstate
 		graphShitDown.scrollFactor.set();
 		graphShitDown.alpha = 0;		
 		add(graphShitDown);
+		
+		graphMiss = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * 0.4 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphMiss.scrollFactor.set();
+		graphMiss.alpha = 0;		
+		add(graphMiss);
 		
 		graphJudgeCenter = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
 		graphJudgeCenter.scrollFactor.set();
@@ -288,6 +305,7 @@ class ResultsScreen extends MusicBeatSubstate
 			FlxTween.tween(graphBadDown, {alpha: 0.25}, 0.5);	
 			FlxTween.tween(graphShitUp, {alpha: 0.25}, 0.5);
 			FlxTween.tween(graphBadDown, {alpha: 0.25}, 0.5);	
+			FlxTween.tween(graphMiss, {alpha: 0.25}, 0.5);	
 				
 		    FlxTween.tween(graphSizeUp, {alpha: 0.5}, 0.5);
 		    FlxTween.tween(graphSizeDown, {alpha: 0.5}, 0.5);
@@ -309,17 +327,7 @@ class ResultsScreen extends MusicBeatSubstate
 	override function update(elapsed:Float)
 	{   
 	    public var realTime = Date.now();
-	    setGameText.text = 'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
-		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
-		+ '\n'
-		+ 'SongSpeed: X' + ClientPrefs.getGameplaySetting('scrollspeed')
-		+ '  PlaybackRate: X' + ClientPrefs.getGameplaySetting('songspeed')
-		+ '\n'
-		+ 'BotPlay: ' + botplay
-		+ '  PracticeMode: ' + practice
-		+ '\n'
-		+ 'Finished time: ' + realTime.getYear() + '.' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds()
-		+ '\n';
+	    setGameText.text = 'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain') + '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss') + '\n' + 'SongSpeed: X' + ClientPrefs.getGameplaySetting('scrollspeed') + '  PlaybackRate: X' + ClientPrefs.getGameplaySetting('songspeed') + '\n' + 'BotPlay: ' + botplay + '  PracticeMode: ' + practice + '\n' + 'Finished time: ' + realTime.getYear() + '.' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds() + '\n';
 		
 	
 		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
