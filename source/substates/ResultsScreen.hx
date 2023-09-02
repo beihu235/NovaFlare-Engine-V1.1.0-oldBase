@@ -65,7 +65,7 @@ class ResultsScreen extends MusicBeatSubstate
 		else
 		NoteTypeColor = Json.parse(Paths.getPath('images/mainmenu_sprite/rsNoteColor.json', TEXT));
 		
-		var ColorArray:Array<String> = [
+		var ColorArray:Array<FlxColor> = [
 		    NoteTypeColor.sick,
 		    NoteTypeColor.good,
 		    NoteTypeColor.bad,
@@ -228,7 +228,7 @@ class ResultsScreen extends MusicBeatSubstate
 		var botplay:String = 'Close';
 		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Open';
 		var practice:String = 'Close';
-		var realTime = Date.now();
+
 		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Open';
 
 		setGameText = new FlxText(FlxG.width + 400, 420, 0, 
@@ -241,7 +241,7 @@ class ResultsScreen extends MusicBeatSubstate
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
 		+ '\n'
-		+ 'Finished time: ' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds()
+		+ 'Finished time: ' + Date.now().toString()
 		+ '\n'
 		);
 		setGameText.size = 25;
@@ -341,7 +341,6 @@ class ResultsScreen extends MusicBeatSubstate
 	    var botplay:String = 'Close';
 		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Open';
 		var practice:String = 'Close';
-		var realTime = Date.now();
 		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Open';
 
 		setGameText.text = 'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
@@ -353,7 +352,7 @@ class ResultsScreen extends MusicBeatSubstate
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
 		+ '\n'
-		+ 'Finished time: ' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds()
+		+ 'Finished time: ' + Date.now().toString()
 		+ '\n';
 		
 	
