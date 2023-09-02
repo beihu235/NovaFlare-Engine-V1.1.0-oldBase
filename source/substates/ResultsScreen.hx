@@ -259,7 +259,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		var Main:Float = 0;
 		for (i in 0...PlayState.rsNoteTime.length){
-		Main = Main + Math.abs(PlayState.rsNoteMs[i]));
+		Main = Main + Math.abs(PlayState.rsNoteMs[i]);
 		}
 		Main = Math.ceil(Main / PlayState.rsNoteTime.length * 100) / 100;
 
