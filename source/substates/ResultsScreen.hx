@@ -203,6 +203,7 @@ class ResultsScreen extends MusicBeatSubstate
 		var botplay:String = 'Close';
 		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Open';
 		var practice:String = 'Close';
+		var time = Date.now();
 		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Open';
 
 		setGameText = new FlxText(FlxG.width + 400, 420, 0, 
@@ -214,6 +215,8 @@ class ResultsScreen extends MusicBeatSubstate
 		+ '\n'
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
+		+ '\n\n'
+		+ 'Finished time: ' + leDate.getYear() + '.' + leDate.getMonth() + '.' + leDate.getDay() + '.' + leDate.getHours() + '.' + leDate.getSeconds()
 		+ '\n'
 		);
 		setGameText.size = 25;
@@ -226,9 +229,9 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		var Main:Float = 0;
 		for (i in 0...PlayState.rsNoteTime.length){
-		Main = Main + Math.abs(PlayState.rsNoteTime[i]);
+		Main = (Main + Math.abs(PlayState.rsNoteTime[i]) / 2);
 		}
-		Main = Main / PlayState.rsNoteTime.length;
+		Main = Math.ceil(Main * 10000) / 100;
 
 		setMsText = new FlxText(20, FlxG.height + 150, 0, 
 		'Main: ' + Main + 'ms'
@@ -309,7 +312,18 @@ class ResultsScreen extends MusicBeatSubstate
 
 	override function update(elapsed:Float)
 	{
-	
+	    setGameText.text = 'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
+		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
+		+ '\n'
+		+ 'SongSpeed: X' + ClientPrefs.getGameplaySetting('scrollspeed')
+		+ '  PlaybackRate: X' + ClientPrefs.getGameplaySetting('songspeed')
+		+ '\n'
+		+ 'BotPlay: ' + botplay
+		+ '  PracticeMode: ' + practice
+		+ '\n\n'
+		+ 'Finished time: ' + leDate.getYear() + '.' + leDate.getMonth() + '.' + leDate.getDay() + '.' + leDate.getHours() + '.' + leDate.getSeconds()
+		+ '\n';
+		
 	
 		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
 		{
