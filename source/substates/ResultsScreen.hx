@@ -106,7 +106,7 @@ class ResultsScreen extends MusicBeatSubstate
     		//FlxSpriteUtil.drawRect(graphBG,graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 - noteSize / 2, noteSize, noteSize, color);		
     		}
     		
-		    //graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
+		    graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		}
 		
 		var judgeHeight = 2;
