@@ -315,12 +315,12 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		
 		new FlxTimer().start(1, function(tmr:FlxTimer){
-			FlxTween.tween(setMsText, {y: FlxG.height - 30 * 2 - 5}, 0.5, {ease: FlxEase.backInOut});			
+			FlxTween.tween(setMsText, {y: FlxG.height - 30 * 2}, 0.5, {ease: FlxEase.backInOut});			
 		});
 		
 		new FlxTimer().start(1.5, function(tmr:FlxTimer){
 		    FlxTween.tween(judgeText, {x: 20}, 0.5, {ease: FlxEase.backInOut});		
-		    FlxTween.tween(setGameText, {x: FlxG.width - setGameText.width - 18 }, 0.5, {ease: FlxEase.backInOut});		
+		    FlxTween.tween(setGameText, {x: FlxG.width - setGameText.width - 20}, 0.5, {ease: FlxEase.backInOut});		
 		});
 		
 		new FlxTimer().start(2, function(tmr:FlxTimer){
