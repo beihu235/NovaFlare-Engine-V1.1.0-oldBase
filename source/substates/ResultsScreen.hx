@@ -13,6 +13,10 @@ import flixel.util.FlxSpriteUtil;
 import openfl.display.Sprite;
 import openfl.geom.Rectangle;
 
+#if sys
+import sys.io.File;
+import sys.FileSystem;
+#end
 import tjson.TJSON as Json;
 
 typedef NoteTypeColorData =
@@ -57,7 +61,10 @@ class ResultsScreen extends MusicBeatSubstate
 	{
 		super();
 		
+		if (FileSystem.exists(SUtil.getPath() + 'assets/images/mainmenu_sprite/rsNoteColor.json'))
 		NoteTypeColor = Json.parse(SUtil.getPath() + 'assets/images/mainmenu_sprite/rsNoteColor.json');
+		else
+		NoteTypeColor = Json.parse(Paths.getPath('images/mainmenu_sprite/rsNoteColor.json', TEXT));
 		
 		background = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		background.scrollFactor.set();
