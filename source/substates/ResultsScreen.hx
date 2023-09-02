@@ -101,10 +101,10 @@ class ResultsScreen extends MusicBeatSubstate
 		    if (Math.abs(PlayState.rsNoteMs[i]) < 45) color = ColorArray[0];
 		    
 		    if (Math.abs(PlayState.rsNoteMs[i]) < 166){
-    		noteSpr.drawRect(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize, color);
+    		FlxSpriteUtil.drawRect(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize, color);
     		}
     		else{
-    		noteSpr.drawRect(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 - noteSize / 2, noteSize, noteSize, color);		
+    		FlxSpriteUtil.drawRect(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 - noteSize / 2, noteSize, noteSize, color);		
     		}
     		
 		    graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
