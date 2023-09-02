@@ -70,8 +70,7 @@ class ResultsScreen extends MusicBeatSubstate
 		    NoteTypeColor.good,
 		    NoteTypeColor.bad,
 		    NoteTypeColor.shit,
-		    NoteTypeColor.miss,
-	                                
+		    NoteTypeColor.miss
 	    ];
 		
 		background = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
