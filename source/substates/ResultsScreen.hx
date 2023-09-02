@@ -277,7 +277,12 @@ class ResultsScreen extends MusicBeatSubstate
 
 	override function update(elapsed:Float)
 	{
-		
+	
+	
+		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
+		{
+		 MusicBeatState.switchState(new FreeplayState());
+		}
 	}
 
 	override function destroy()
