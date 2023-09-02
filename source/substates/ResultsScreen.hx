@@ -1,5 +1,17 @@
 package substates;
 
+/*
+    ResultsScreen made by NF|beihu (北狐丶逐梦)
+    youtube: https://b23.tv/SnqG443
+    bilbil: https://youtube.com/@beihu235?si=NHnWxcUWPS46EqUt
+    discord: beihu235
+    
+    you can use it but must give me credit(dont forget my icon)
+    logic is very easy so I think everyone can understand it
+    
+    Who cares about rudy's hscript so I continue to choose to use my lua logic
+    Her hscript weren't worth stole and I didn't stole it
+*/
 import flixel.addons.transition.FlxTransitionableState;
 
 import states.PlayState;
@@ -25,6 +37,7 @@ typedef NoteTypeColorData =
     miss:FlxColor
     
 }
+
 
 class ResultsScreen extends MusicBeatSubstate
 {
