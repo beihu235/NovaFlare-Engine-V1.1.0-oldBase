@@ -1,9 +1,5 @@
 package substates;
-/*
-import backend.WeekData;
-import backend.Highscore;
-import backend.Song;
-*/
+
 import flixel.addons.transition.FlxTransitionableState;
 
 import states.PlayState;
@@ -200,10 +196,10 @@ class ResultsScreen extends MusicBeatSubstate
 		judgeText.antialiasing = ClientPrefs.data.antialiasing;
 		add(judgeText);
 		
-		var botplay:String = 'Close';
+		public var botplay:String = 'Close';
 		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Open';
-		var practice:String = 'Close';
-		var time = Date.now();
+		public var practice:String = 'Close';
+		public var realTime = Date.now();
 		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Open';
 
 		setGameText = new FlxText(FlxG.width + 400, 420, 0, 
@@ -216,7 +212,7 @@ class ResultsScreen extends MusicBeatSubstate
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
 		+ '\n'
-		+ 'Finished time: ' + leDate.getYear() + '.' + leDate.getMonth() + '.' + leDate.getDay() + '.' + leDate.getHours() + '.' + leDate.getSeconds()
+		+ 'Finished time: ' + realTime.getYear() + '.' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds()
 		+ '\n'
 		);
 		setGameText.size = 25;
@@ -311,7 +307,8 @@ class ResultsScreen extends MusicBeatSubstate
 	}
 
 	override function update(elapsed:Float)
-	{
+	{   
+	    public var realTime = Date.now();
 	    setGameText.text = 'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
 		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
 		+ '\n'
@@ -321,7 +318,7 @@ class ResultsScreen extends MusicBeatSubstate
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
 		+ '\n'
-		+ 'Finished time: ' + leDate.getYear() + '.' + leDate.getMonth() + '.' + leDate.getDay() + '.' + leDate.getHours() + '.' + leDate.getSeconds()
+		+ 'Finished time: ' + realTime.getYear() + '.' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds()
 		+ '\n';
 		
 	
