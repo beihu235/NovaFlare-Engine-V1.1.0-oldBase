@@ -18,11 +18,11 @@ import tjson.TJSON as Json;
 typedef NoteTypeColorData =
 {
 
-	sick:String,
-	good:String,
-    bad:String,
-    shit:String,
-    miss:String
+	sick:FlxColor,
+	good:FlxColor,
+    bad:FlxColor,
+    shit:FlxColor,
+    miss:FlxColor
     
 }
 
