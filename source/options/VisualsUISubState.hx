@@ -104,7 +104,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.decimals = 1;
 		addOption(option);
 		
-		var option:Option = new Option('Custom Fade',
+		var option:Option = new Option('Custom Fade:',
 			"Change CustomFade Ways",
 			'CustomFade',
 			'string',
