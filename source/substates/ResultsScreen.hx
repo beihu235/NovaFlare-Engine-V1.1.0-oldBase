@@ -95,13 +95,13 @@ class ResultsScreen extends MusicBeatSubstate
 	    var MoveSize = 0.6;
 		for (i in 0...PlayState.rsNoteTime.length){
 		    var color:String = '';
-		    if (Math.abs(PlayState.rsNoteMs[i] < 200)) color = ColorArray[4];
-		    if (Math.abs(PlayState.rsNoteMs[i] < 166)) color = ColorArray[3];
-		    if (Math.abs(PlayState.rsNoteMs[i] < 135)) color = ColorArray[2];
-		    if (Math.abs(PlayState.rsNoteMs[i] < 90)) color = ColorArray[1];
-		    if (Math.abs(PlayState.rsNoteMs[i] < 45)) color = ColorArray[0];
+		    if (Math.abs(PlayState.rsNoteMs[i]) < 200) color = ColorArray[4];
+		    if (Math.abs(PlayState.rsNoteMs[i]) < 166) color = ColorArray[3];
+		    if (Math.abs(PlayState.rsNoteMs[i]) < 135) color = ColorArray[2];
+		    if (Math.abs(PlayState.rsNoteMs[i]) < 90) color = ColorArray[1];
+		    if (Math.abs(PlayState.rsNoteMs[i]) < 45) color = ColorArray[0];
 		    
-		    if (Math.abs(PlayState.rsNoteMs[i] < 166)){
+		    if (Math.abs(PlayState.rsNoteMs[i]) < 166){
     		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize,color);				   }
     		else{
     		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 - noteSize / 2, noteSize,color);		
@@ -240,7 +240,7 @@ class ResultsScreen extends MusicBeatSubstate
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
 		+ '\n'
-		+ 'Finished time: ' + realTime.getYear() + '.' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds()
+		+ 'Finished time: ' + realTime.getYears() + '.' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds()
 		+ '\n'
 		);
 		setGameText.size = 25;
@@ -352,7 +352,7 @@ class ResultsScreen extends MusicBeatSubstate
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
 		+ '\n'
-		+ 'Finished time: ' + realTime.getYear() + '.' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds()
+		+ 'Finished time: ' + realTime.getYears() + '.' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds()
 		+ '\n';
 		
 	
