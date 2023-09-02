@@ -128,7 +128,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		loadAlpha = new FlxSprite( 0, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingAlpha'));
 		loadAlpha.scrollFactor.set();
 		loadAlpha.antialiasing = ClientPrefs.data.antialiasing;		
-		loadAlpha.alpha = isTransIn ? 0 : 1;
+		loadAlpha.alpha = isTransIn ? 1 : 0;
 		add(loadAlpha);
 		loadAlpha.setGraphicSize(FlxG.width, FlxG.height);
 		loadAlpha.updateHitbox();
