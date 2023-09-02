@@ -180,7 +180,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		var botplay:String = 'Close';
 		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Open';
-		var practice:Strinv = 'Close';
+		var practice:String = 'Close';
 		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Open';
 
 		setGameText = new FlxText(FlxG.width + 400, 400, 0, 
@@ -221,9 +221,16 @@ class ResultsScreen extends MusicBeatSubstate
 		setMsText.scrollFactor.set();
 		setMsText.antialiasing = ClientPrefs.data.antialiasing;
 		add(setMsText);		
-		/*
 		
-		*/
+		backText = new FlxText(FlxG.width - 475, FlxG.height - 45, 0, 'Press Back to continue.');
+		backText.size = 28;
+		backText.font = Paths.font('vcr.ttf');
+		backText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
+		backText.scrollFactor.set();
+		backText.antialiasing = ClientPrefs.data.antialiasing;
+		add(backText);		
+		backText.alpha = 0;
+		//--------------text
 		
 		//time = 0
 		FlxTween.tween(background, {alpha: 0.5}, 0.5);		
@@ -258,9 +265,8 @@ class ResultsScreen extends MusicBeatSubstate
 		});
 		
 		new FlxTimer().start(2, function(tmr:FlxTimer){
-				
+			FlxTween.tween(backText, {alpha: 1}, 1);	
 		});
-		
 		
 		
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
@@ -273,13 +279,6 @@ class ResultsScreen extends MusicBeatSubstate
 	{
 		
 	}
-
-	function deleteSkipTimeText()
-	{
-		
-	}
-
-	
 
 	override function destroy()
 	{
