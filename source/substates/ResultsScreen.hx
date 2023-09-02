@@ -18,11 +18,11 @@ import tjson.TJSON as Json;
 typedef NoteTypeColorData =
 {
 
-	sick:FlxColor,
-	good:FlxColor,
-    bad:FlxColor,
-    shit:FlxColor,
-    miss:FlxColor
+	sick:String,
+	good:String,
+    bad:String,
+    shit:String,
+    miss:String
     
 }
 
@@ -54,8 +54,8 @@ class ResultsScreen extends MusicBeatSubstate
     
     public var NoteTypeColor:NoteTypeColorData;
     
-    public var ColorArray:Array<FlxColor> = [];
-    public var color:FlxColor;
+    public var ColorArray:Array<String> = [];
+    public var color:String;
 	public function new(x:Float, y:Float)
 	{
 		super();
