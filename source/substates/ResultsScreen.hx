@@ -85,7 +85,7 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBG.alpha = 0;		
 		add(graphBG);
 		
-		var noteSpr = FlxSpriteUtil.flashGfx;		
+		//var noteSpr = FlxSpriteUtil.flashGfx;		
 		var _rect = new Rectangle(0, 0, graphWidth, graphHeight);
 		graphBG.pixels.fillRect(_rect, 0xFF000000);
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
@@ -101,10 +101,10 @@ class ResultsScreen extends MusicBeatSubstate
 		    if (Math.abs(PlayState.rsNoteMs[i]) < 45) color = ColorArray[0];
 		    
 		    if (Math.abs(PlayState.rsNoteMs[i]) < 166){
-    		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, color);
+    		drawCircle(graphBG,graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, color);
     		}
     		else{
-    		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 - noteSize / 2, noteSize, color);		
+    	    drawCircle(graphBG,graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 - noteSize / 2, noteSize, color);		
     		}
 		    graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		}
