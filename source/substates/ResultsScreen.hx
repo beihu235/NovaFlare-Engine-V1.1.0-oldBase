@@ -95,11 +95,11 @@ class ResultsScreen extends MusicBeatSubstate
 	    var MoveSize = 0.6;
 		for (i in 0...PlayState.rsNoteTime.length){		
 		    var color:String = '';
-		    if (Math.abs(PlayState.rsNoteMs[i] < 200) color = ColorArray[4]
-		    if (Math.abs(PlayState.rsNoteMs[i] < 166) color = ColorArray[3]
-		    if (Math.abs(PlayState.rsNoteMs[i] < 135) color = ColorArray[2]
-		    if (Math.abs(PlayState.rsNoteMs[i] < 90) color = ColorArray[1]
-		    if (Math.abs(PlayState.rsNoteMs[i] < 45) color = ColorArray[0]
+		    if (Math.abs(PlayState.rsNoteMs[i] < 200) color = ColorArray[4];
+		    if (Math.abs(PlayState.rsNoteMs[i] < 166) color = ColorArray[3];
+		    if (Math.abs(PlayState.rsNoteMs[i] < 135) color = ColorArray[2];
+		    if (Math.abs(PlayState.rsNoteMs[i] < 90) color = ColorArray[1];
+		    if (Math.abs(PlayState.rsNoteMs[i] < 45) color = ColorArray[0];
 		    
 		    if (Math.abs(PlayState.rsNoteMs[i] < 166){
     		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize,color);				   }
@@ -115,47 +115,47 @@ class ResultsScreen extends MusicBeatSubstate
 		graphJudgeCenter.alpha = 0;		
 		add(graphJudgeCenter);
 		
-		graphSickUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphSickUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[0]);
 		graphSickUp.scrollFactor.set();
 		graphSickUp.alpha = 0;		
 		add(graphSickUp);
 		
-		graphSickDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphSickDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[0]);
 		graphSickDown.scrollFactor.set();
 		graphSickDown.alpha = 0;		
 		add(graphSickDown);
 		
-		graphGoodUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphGoodUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[1]);
 		graphGoodUp.scrollFactor.set();
 		graphGoodUp.alpha = 0;		
 		add(graphGoodUp);
 		
-		graphGoodDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphGoodDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[1]);
 		graphGoodDown.scrollFactor.set();
 		graphGoodDown.alpha = 0;		
 		add(graphGoodDown);
 		
-		graphBadUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphBadUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[2]);
 		graphBadUp.scrollFactor.set();
 		graphBadUp.alpha = 0;		
 		add(graphBadUp);
 		
-		graphBadDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphBadDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[2]);
 		graphBadDown.scrollFactor.set();
 		graphBadDown.alpha = 0;		
 		add(graphBadDown);
 		
-		graphShitUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (166.6 / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphShitUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (166.6 / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[3]);
 		graphShitUp.scrollFactor.set();
 		graphShitUp.alpha = 0;		
 		add(graphShitUp);
 		
-		graphShitDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (166.6 / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphShitDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (166.6 / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[3]);
 		graphShitDown.scrollFactor.set();
 		graphShitDown.alpha = 0;		
 		add(graphShitDown);
 		
-		graphMiss = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * 0.4 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphMiss = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * 0.4 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[4]);
 		graphMiss.scrollFactor.set();
 		graphMiss.alpha = 0;		
 		add(graphMiss);
