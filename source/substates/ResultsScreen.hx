@@ -75,7 +75,7 @@ class ResultsScreen extends MusicBeatSubstate
 		0xFF00FFFF,
 	    0xFF00FF00,
 	    0xFFFF7F00,
-	    0xFF580000,
+	    0xFFFF5858,
 	    0xFFFF0000
 		];
 		
