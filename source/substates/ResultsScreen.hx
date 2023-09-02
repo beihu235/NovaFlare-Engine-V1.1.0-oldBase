@@ -35,7 +35,8 @@ class ResultsScreen extends MusicBeatSubstate
     
     public var clearText:FlxText;
 	public var judgeText:FlxText;
-	public var satDataText:FlxText;
+	public var setGameText:FlxText;
+	public var setMsText:FlxText;
 	public var backText:FlxText;
     
 
@@ -177,13 +178,33 @@ class ResultsScreen extends MusicBeatSubstate
 		judgeText.antialiasing = ClientPrefs.data.antialiasing;
 		add(judgeText);
 		
+		var botplay:String = 'Close';
+		if ClientPrefs.getGameplaySetting('botplay') botplay = 'Open'
+		var practice:Strinv = 'Close';
+		if ClientPrefs.getGameplaySetting('practice') practice = 'Open'
+
+		setGameText = new FlxText(FlxG.width + 400, 400, 0, 
+		'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
+		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
+		+'\n'
+		+ 'BotPlay: ' + botplay
+		+ '  PracticeMode: ' + practice
+		+'\n'
+		);
+		setGameText.size = 25;
+		setGameText.font = Paths.font('vcr.ttf');
+		setGameText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
+		setGameText.scrollFactor.set();
+		setGameText.antialiasing = ClientPrefs.data.antialiasing;
+		add(setGameText);
+		
 		var Main:Float = 0;
 		for (i in 0...PlayState.rsNoteTime.length){
 		Main = Main + Math.abs(PlayState.rsNoteTime[i]);
 		}
 		Main = Main / PlayState.rsNoteTime.length;
 
-		satDataText = new FlxText(20, FlxG.height + 150, 0, 
+		setMsText = new FlxText(20, FlxG.height + 150, 0, 
 		'Main: ' + Main + 'ms'
 		+ '\n'
 		+ '('
@@ -192,31 +213,29 @@ class ResultsScreen extends MusicBeatSubstate
 		+ 'BAD:' + ClientPrefs.data.badWindow + 'ms,'
 		+ 'SHIT:' + '166.6' + 'ms'
 		+ ')'		
+		+ '\n'
 		);
-		satDataText.size = 16;
-		satDataText.font = Paths.font('vcr.ttf');
-		satDataText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
-		satDataText.scrollFactor.set();
-		satDataText.antialiasing = ClientPrefs.data.antialiasing;
-		add(satDataText);		
+		setMsText.size = 16;
+		setMsText.font = Paths.font('vcr.ttf');
+		setMsText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
+		setMsText.scrollFactor.set();
+		setMsText.antialiasing = ClientPrefs.data.antialiasing;
+		add(setMsText);		
 		/*
-		healthGain = ClientPrefs.getGameplaySetting('healthgain');
-		healthLoss = ClientPrefs.getGameplaySetting('healthloss');
-		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill');
-		practiceMode = ClientPrefs.getGameplaySetting('practice');
-		cpuControlled = ClientPrefs.getGameplaySetting('botplay');
+		
 		*/
 		
-		
+		//time = 0
 		FlxTween.tween(background, {alpha: 0.5}, 0.5);		
 		FlxTween.tween(clearText, {y: ClientPrefs.data.showFPS ? 60 : 5}, 0.5, {ease: FlxEase.backInOut});
 		
 		new FlxTimer().start(0.5, function(tmr:FlxTimer){
-			FlxTween.tween(satDataText, {y: FlxG.height - 16 * 2 - 5}, 0.5, {ease: FlxEase.backInOut});			
+			FlxTween.tween(setMsText, {y: FlxG.height - 16 * 2 - 5}, 0.5, {ease: FlxEase.backInOut});			
 		});
 		
 		new FlxTimer().start(1, function(tmr:FlxTimer){
 		    FlxTween.tween(judgeText, {x: 20}, 0.5, {ease: FlxEase.backInOut});		
+		    FlxTween.tween(setGameText, {x: FlxG.width - setGameText.width - 20 }, 0.5, {ease: FlxEase.backInOut});		
 		});
 		
 		new FlxTimer().start(1.5, function(tmr:FlxTimer){
