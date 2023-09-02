@@ -54,13 +54,7 @@ class ResultsScreen extends MusicBeatSubstate
     
     public var NoteTypeColor:NoteTypeColorData;
     
-    public var ColorArray:Array<FlxColor> = [
-		    NoteTypeColor.sick,
-		    NoteTypeColor.good,
-		    NoteTypeColor.bad,
-		    NoteTypeColor.shit,
-		    NoteTypeColor.miss
-	    ];
+    public var ColorArray:Array<FlxColor> = [];
 
 	public function new(x:Float, y:Float)
 	{
@@ -71,7 +65,11 @@ class ResultsScreen extends MusicBeatSubstate
 		else
 		NoteTypeColor = Json.parse(Paths.getPath('images/mainmenu_sprite/rsNoteColor.json', TEXT));
 		
-		
+		ColorArray.push(NoteTypeColor.sick);
+		ColorArray.push(NoteTypeColor.good);
+		ColorArray.push(NoteTypeColor.bad);
+		ColorArray.push(NoteTypeColor.shit);
+		ColorArray.push(NoteTypeColor.miss);
 		
 		background = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		background.scrollFactor.set();
