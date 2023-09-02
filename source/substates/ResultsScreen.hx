@@ -94,7 +94,7 @@ class ResultsScreen extends MusicBeatSubstate
 	    var noteSize = 1;
 	    var MoveSize = 0.6;
 		for (i in 0...PlayState.rsNoteTime.length){
-		    var color:String = '';
+		    var color:FlxColor;
 		    if (Math.abs(PlayState.rsNoteMs[i]) < 200) color = ColorArray[4];
 		    if (Math.abs(PlayState.rsNoteMs[i]) < 166) color = ColorArray[3];
 		    if (Math.abs(PlayState.rsNoteMs[i]) < 135) color = ColorArray[2];
