@@ -1,9 +1,11 @@
 {
 
-    "sick":'00FFFF',
-	"good":'00FF00',
-	"bad":'FF7F00',
-	"shit":'580000,
-	"miss":'FF0000',
+    "sick":'0xFF00FFFF',
+	"good":'0xFF00FF00',
+	"bad":'0xFFFF7F00',
+	"shit":'0xFF580000',
+	"miss":'0xFFFF0000'
 	
 }
+
+//change color: 0xFF + colordata(likeFF0000)
