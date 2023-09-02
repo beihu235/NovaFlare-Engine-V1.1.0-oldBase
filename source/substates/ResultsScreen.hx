@@ -215,7 +215,7 @@ class ResultsScreen extends MusicBeatSubstate
 		+ '\n'
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
-		+ '\n\n'
+		+ '\n'
 		+ 'Finished time: ' + leDate.getYear() + '.' + leDate.getMonth() + '.' + leDate.getDay() + '.' + leDate.getHours() + '.' + leDate.getSeconds()
 		+ '\n'
 		);
@@ -320,7 +320,7 @@ class ResultsScreen extends MusicBeatSubstate
 		+ '\n'
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
-		+ '\n\n'
+		+ '\n'
 		+ 'Finished time: ' + leDate.getYear() + '.' + leDate.getMonth() + '.' + leDate.getDay() + '.' + leDate.getHours() + '.' + leDate.getSeconds()
 		+ '\n';
 		
