@@ -61,14 +61,68 @@ class ResultsScreen extends MusicBeatSubstate
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 	    
 	    var noteSize = 1;
-		for (i in 0...PlayState.rsNoteTime.length){
-		
-		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.6 * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize);		
-		
-		graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
+	    var MoveSize = 0.6;
+		for (i in 0...PlayState.rsNoteTime.length){		
+    		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize);				
+		    graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		}
 		
 		var judgeHeight = 2;
+		graphJudgeCenter = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphJudgeCenter.scrollFactor.set();
+		graphJudgeCenter.alpha = 0;		
+		add(graphJudgeCenter);
+		
+		graphSickUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphSickUp.scrollFactor.set();
+		graphSickUp.alpha = 0;		
+		add(graphSickUp);
+		
+		graphSickDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphSickDown.scrollFactor.set();
+		graphSickDown.alpha = 0;		
+		add(graphSickDown);
+		
+		graphGoodUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphGoodUp.scrollFactor.set();
+		graphGoodUp.alpha = 0;		
+		add(graphGoodUp);
+		
+		graphGoodDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphGoodDown.scrollFactor.set();
+		graphGoodDown.alpha = 0;		
+		add(graphGoodDown);
+		
+		graphBadUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphBadUp.scrollFactor.set();
+		graphBadUp.alpha = 0;		
+		add(graphBadUp);
+		
+		graphBadDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphBadDown.scrollFactor.set();
+		graphBadDown.alpha = 0;		
+		add(graphBadDown);
+		
+		graphShitUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (166.6 / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphShitUp.scrollFactor.set();
+		graphShitUp.alpha = 0;		
+		add(graphShitUp);
+		
+		graphShitDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (166.6 / 166.6) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphShitDown.scrollFactor.set();
+		graphShitDown.alpha = 0;		
+		add(graphShitDown);
+		
+		graphJudgeCenter = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphJudgeCenter.scrollFactor.set();
+		graphJudgeCenter.alpha = 0;		
+		add(graphJudgeCenter);
+		
+		graphJudgeCenter = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
+		graphJudgeCenter.scrollFactor.set();
+		graphJudgeCenter.alpha = 0;		
+		add(graphJudgeCenter);
+		
 		graphJudgeCenter = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
 		graphJudgeCenter.scrollFactor.set();
 		graphJudgeCenter.alpha = 0;		
@@ -105,7 +159,7 @@ class ResultsScreen extends MusicBeatSubstate
 		add(clearText);		
 	    
 	    var ACC = Math.ceil(PlayState.rsACC * 10000) / 100;
-		judgeText = new FlxText(-400, 220, 0, 
+		judgeText = new FlxText(-400, 200, 0, 
 		'Judgements:\nSicks: ' + PlayState.rsSicks 
 		+ '\nGoods: ' + PlayState.rsGoods 
 		+ '\nBads: ' + PlayState.rsBads 
@@ -129,6 +183,14 @@ class ResultsScreen extends MusicBeatSubstate
 		}
 		Main = Main / PlayState.rsNoteTime.length;
 		
+		/*
+		healthGain = ClientPrefs.getGameplaySetting('healthgain');
+		healthLoss = ClientPrefs.getGameplaySetting('healthloss');
+		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill');
+		practiceMode = ClientPrefs.getGameplaySetting('practice');
+		cpuControlled = ClientPrefs.getGameplaySetting('botplay');
+		*/
+		
 		
 		FlxTween.tween(background, {alpha: 0.5}, 0.5);		
 		FlxTween.tween(clearText, {y: ClientPrefs.data.showFPS ? 60 : 5}, 0.5, {ease: FlxEase.backInOut});
@@ -139,7 +201,17 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		new FlxTimer().start(1, function(tmr:FlxTimer){
 			FlxTween.tween(graphBG, {alpha: 0.5}, 0.5);
+			
 			FlxTween.tween(graphJudgeCenter, {alpha: 0.25}, 0.5);	
+			FlxTween.tween(graphSickUp, {alpha: 0.25}, 0.5);	
+			FlxTween.tween(graphSickDown, {alpha: 0.25}, 0.5);	
+			FlxTween.tween(graphGoodUp, {alpha: 0.25}, 0.5);	
+			FlxTween.tween(graphGoodDown, {alpha: 0.25}, 0.5);	
+			FlxTween.tween(graphBadUp, {alpha: 0.25}, 0.5);	
+			FlxTween.tween(graphBadDown, {alpha: 0.25}, 0.5);	
+			FlxTween.tween(graphShitUp, {alpha: 0.25}, 0.5);
+			FlxTween.tween(graphBadDown, {alpha: 0.25}, 0.5);	
+				
 		    FlxTween.tween(graphSizeUp, {alpha: 0.5}, 0.5);
 		    FlxTween.tween(graphSizeDown, {alpha: 0.5}, 0.5);
 		    FlxTween.tween(graphSizeLeft, {alpha: 0.5}, 0.5);
