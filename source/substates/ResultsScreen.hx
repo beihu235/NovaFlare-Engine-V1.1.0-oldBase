@@ -179,9 +179,9 @@ class ResultsScreen extends MusicBeatSubstate
 		add(judgeText);
 		
 		var botplay:String = 'Close';
-		if ClientPrefs.getGameplaySetting('botplay') botplay = 'Open'
+		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Open';
 		var practice:Strinv = 'Close';
-		if ClientPrefs.getGameplaySetting('practice') practice = 'Open'
+		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Open';
 
 		setGameText = new FlxText(FlxG.width + 400, 400, 0, 
 		'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
