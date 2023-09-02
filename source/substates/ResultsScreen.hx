@@ -205,15 +205,19 @@ class ResultsScreen extends MusicBeatSubstate
 		var practice:String = 'Close';
 		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Open';
 
-		setGameText = new FlxText(FlxG.width + 400, 400, 0, 
+		setGameText = new FlxText(FlxG.width + 400, 420, 0, 
 		'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
 		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
-		+'\n'
+		+ '\n'
+		+ 'SongSpeed: X' + ClientPrefs.getGameplaySetting('scrollspeed')
+		+ '  PlaybackRate: X' + ClientPrefs.getGameplaySetting('songspeed')
+		+ 'n'
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
-		+'\n'
+		+ '\n'
 		);
 		setGameText.size = 25;
+		setGameText.alignment = RIGHT;
 		setGameText.font = Paths.font('vcr.ttf');
 		setGameText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
 		setGameText.scrollFactor.set();
@@ -250,24 +254,29 @@ class ResultsScreen extends MusicBeatSubstate
 		backText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
 		backText.scrollFactor.set();
 		backText.antialiasing = ClientPrefs.data.antialiasing;
+	    backText.alignment = RIGHT;
 		add(backText);		
 		backText.alpha = 0;
 		//--------------text
 		
 		//time = 0
 		FlxTween.tween(background, {alpha: 0.5}, 0.5);		
-		FlxTween.tween(clearText, {y: ClientPrefs.data.showFPS ? 60 : 5}, 0.5, {ease: FlxEase.backInOut});
 		
 		new FlxTimer().start(0.5, function(tmr:FlxTimer){
-			FlxTween.tween(setMsText, {y: FlxG.height - 16 * 2 - 5}, 0.5, {ease: FlxEase.backInOut});			
+			FlxTween.tween(clearText, {y: ClientPrefs.data.showFPS ? 60 : 5}, 0.5, {ease: FlxEase.backInOut});
 		});
 		
+		
 		new FlxTimer().start(1, function(tmr:FlxTimer){
+			FlxTween.tween(setMsText, {y: FlxG.height - 20 * 2 - 5}, 0.5, {ease: FlxEase.backInOut});			
+		});
+		
+		new FlxTimer().start(1.5, function(tmr:FlxTimer){
 		    FlxTween.tween(judgeText, {x: 20}, 0.5, {ease: FlxEase.backInOut});		
 		    FlxTween.tween(setGameText, {x: FlxG.width - setGameText.width - 20 }, 0.5, {ease: FlxEase.backInOut});		
 		});
 		
-		new FlxTimer().start(1.5, function(tmr:FlxTimer){
+		new FlxTimer().start(2, function(tmr:FlxTimer){
 			FlxTween.tween(graphBG, {alpha: 0.5}, 0.5);
 			
 			FlxTween.tween(graphJudgeCenter, {alpha: 0.25}, 0.5);	
@@ -286,7 +295,7 @@ class ResultsScreen extends MusicBeatSubstate
 		    FlxTween.tween(graphSizeRight, {alpha: 0.5}, 0.5);	
 		});
 		
-		new FlxTimer().start(2, function(tmr:FlxTimer){
+		new FlxTimer().start(2.5, function(tmr:FlxTimer){
 			FlxTween.tween(backText, {alpha: 1}, 1);	
 		});
 		
