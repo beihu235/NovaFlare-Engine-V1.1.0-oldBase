@@ -179,7 +179,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 			loadAlphaTween = FlxTween.tween(loadAlpha, {alpha: 0}, duration, {
 				onComplete: function(twn:FlxTween) {
 					if(finishCallback != null) {
-						finishCallback();
+						close();
 					}
 				},
 			ease: FlxEase.sineInOut});
@@ -187,7 +187,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 			loadTextTween = FlxTween.tween(WaterMark, {alpha: 0}, duration, {
 				onComplete: function(twn:FlxTween) {
 					if(finishCallback != null) {
-						finishCallback();
+						close();
 					}
 				},
 			ease: FlxEase.sineInOut});
@@ -195,7 +195,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 			EventTextTween = FlxTween.tween(EventText, {alpha: 0}, duration, {
 				onComplete: function(twn:FlxTween) {
 					if(finishCallback != null) {
-						finishCallback();
+						close();
 					}
 				},
 			ease: FlxEase.sineInOut});
