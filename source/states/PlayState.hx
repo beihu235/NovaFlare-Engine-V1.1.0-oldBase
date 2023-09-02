@@ -2468,8 +2468,8 @@ class PlayState extends MusicBeatState
 				else{
 				    MusicBeatState.switchState(new FreeplayState());
 				}
-				persistentUpdate = false;
-				persistentDraw = false;
+				//persistentUpdate = false;
+				//persistentDraw = false;
 				changedDifficulty = false;
 			}
 			transitioning = true;
@@ -2903,6 +2903,8 @@ class PlayState extends MusicBeatState
 			}
 		});
 		
+		
+		
 		noteMissCommon(daNote.noteData, daNote);
 		var result:Dynamic = callOnLuas('noteMiss', [notes.members.indexOf(daNote), daNote.noteData, daNote.noteType, daNote.isSustainNote]);
 		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('noteMiss', [daNote]);
@@ -2930,7 +2932,10 @@ class PlayState extends MusicBeatState
 			doDeathCheck(true);
 		}
 		combo = 0;
-
+        
+        rsNoteMs.push(180);
+		rsNoteTime.push(note.strumTime);
+		
 		if(!practiceMode) songScore -= 10;
 		if(!endingSong) songMisses++;
 		totalPlayed++;
