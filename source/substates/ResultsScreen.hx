@@ -13,6 +13,18 @@ import flixel.util.FlxSpriteUtil;
 import openfl.display.Sprite;
 import openfl.geom.Rectangle;
 
+import tjson.TJSON as Json;
+
+typedef NoteTypeColorData =
+{
+
+	sick:String,
+	good:String,
+    bad:String,
+    shit:String,
+    miss:String
+    
+}
 
 class ResultsScreen extends MusicBeatSubstate
 {
@@ -39,10 +51,13 @@ class ResultsScreen extends MusicBeatSubstate
 	public var setMsText:FlxText;
 	public var backText:FlxText;
     
+    public var NoteTypeColor:NoteTypeColorData;
 
 	public function new(x:Float, y:Float)
 	{
 		super();
+		
+		NoteTypeColor = Json.parse(SUtil.getPath() + 'assets/images/mainmenu_sprite/rsNoteColor.json');
 		
 		background = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		background.scrollFactor.set();
