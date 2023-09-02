@@ -253,9 +253,9 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		var Main:Float = 0;
 		for (i in 0...PlayState.rsNoteTime.length){
-		Main = (Main + Math.abs(PlayState.rsNoteTime[i]) / 2);
+		Main = (Main + Math.abs(PlayState.rsNoteMs[i]) / 2);
 		}
-		Main = Math.ceil(Main * 10000) / 100;
+		Main = Math.ceil(Main * 100) / 100;
 
 		setMsText = new FlxText(20, FlxG.height + 150, 0, 
 		'Main: ' + Main + 'ms'
@@ -296,7 +296,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		
 		new FlxTimer().start(1, function(tmr:FlxTimer){
-			FlxTween.tween(setMsText, {y: FlxG.height - 20 * 2 - 5}, 0.5, {ease: FlxEase.backInOut});			
+			FlxTween.tween(setMsText, {y: FlxG.height - 40 * 2 - 5}, 0.5, {ease: FlxEase.backInOut});			
 		});
 		
 		new FlxTimer().start(1.5, function(tmr:FlxTimer){
