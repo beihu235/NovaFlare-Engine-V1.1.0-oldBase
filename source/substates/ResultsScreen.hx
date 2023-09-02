@@ -99,13 +99,13 @@ class ResultsScreen extends MusicBeatSubstate
 	    var noteSize = 2;
 	    var MoveSize = 0.6;
 		for (i in 0...PlayState.rsNoteTime.length){
-		    if (Math.abs(PlayState.rsNoteMs[i]) < 200) color = ColorArray[4];
-		    if (Math.abs(PlayState.rsNoteMs[i]) < 166) color = ColorArray[3];
-		    if (Math.abs(PlayState.rsNoteMs[i]) < 135) color = ColorArray[2];
-		    if (Math.abs(PlayState.rsNoteMs[i]) < 90) color = ColorArray[1];
-		    if (Math.abs(PlayState.rsNoteMs[i]) < 45) color = ColorArray[0];
+		    if (Math.abs(PlayState.rsNoteMs[i]) <= 200) color = ColorArray[4];
+		    if (Math.abs(PlayState.rsNoteMs[i]) <= 166) color = ColorArray[3];
+		    if (Math.abs(PlayState.rsNoteMs[i]) <= 135) color = ColorArray[2];
+		    if (Math.abs(PlayState.rsNoteMs[i]) <= 90) color = ColorArray[1];
+		    if (Math.abs(PlayState.rsNoteMs[i]) <= 45) color = ColorArray[0];
 		    FlxSpriteUtil.beginDraw(color);
-		    if (Math.abs(PlayState.rsNoteMs[i]) < 166){
+		    if (Math.abs(PlayState.rsNoteMs[i]) <= 166){
     		noteSpr.drawRect(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize);
     		}
     		else{
@@ -307,7 +307,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		new FlxTimer().start(1.5, function(tmr:FlxTimer){
 		    FlxTween.tween(judgeText, {x: 20}, 0.5, {ease: FlxEase.backInOut});		
-		    FlxTween.tween(setGameText, {x: FlxG.width - setGameText.width - 20 }, 0.5, {ease: FlxEase.backInOut});		
+		    FlxTween.tween(setGameText, {x: FlxG.width - setGameText.width - 18 }, 0.5, {ease: FlxEase.backInOut});		
 		});
 		
 		new FlxTimer().start(2, function(tmr:FlxTimer){
@@ -321,7 +321,7 @@ class ResultsScreen extends MusicBeatSubstate
 			FlxTween.tween(graphBadUp, {alpha: 0.25}, 0.5);	
 			FlxTween.tween(graphBadDown, {alpha: 0.25}, 0.5);	
 			FlxTween.tween(graphShitUp, {alpha: 0.25}, 0.5);
-			FlxTween.tween(graphBadDown, {alpha: 0.25}, 0.5);	
+			FlxTween.tween(graphShitDown, {alpha: 0.25}, 0.5);	
 			FlxTween.tween(graphMiss, {alpha: 0.25}, 0.5);	
 				
 		    FlxTween.tween(graphSizeUp, {alpha: 0.5}, 0.5);
