@@ -137,12 +137,14 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		WaterMark.scrollFactor.set();
 		WaterMark.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		WaterMark.antialiasing = ClientPrefs.data.antialiasing;
+		WaterMark.alpha = isTransIn ? 1 : 0;
 		add(WaterMark);
         
         EventText= new FlxText( 50, 720 - 50 - 50, 0, 'LOADING . . . . . . ', 50);
 		EventText.scrollFactor.set();
 		EventText.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		EventText.antialiasing = ClientPrefs.data.antialiasing;
+		EventText.alpha = isTransIn ? 1 : 0;
 		add(EventText);
 		
 		if(!isTransIn) {
