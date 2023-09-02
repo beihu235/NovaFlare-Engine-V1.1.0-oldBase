@@ -139,7 +139,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		new FlxTimer().start(1, function(tmr:FlxTimer){
 			FlxTween.tween(graphBG, {alpha: 0.5}, 0.5);
-			FlxTween.tween(graphJudgeCenter, {alpha: 0.5}, 0.5);	
+			FlxTween.tween(graphJudgeCenter, {alpha: 0.25}, 0.5);	
 		    FlxTween.tween(graphSizeUp, {alpha: 0.5}, 0.5);
 		    FlxTween.tween(graphSizeDown, {alpha: 0.5}, 0.5);
 		    FlxTween.tween(graphSizeLeft, {alpha: 0.5}, 0.5);
