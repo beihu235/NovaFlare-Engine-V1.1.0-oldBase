@@ -68,8 +68,8 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		}
 		
-		var judgeWidth = 2;
-		graphJudgeCenter = new FlxSprite(graphBG.x, graphBG.y + graphWidth * 0.5 - judgeWidth * 0.5).makeGraphic(graphWidth, judgeWidth, FlxColor.WHITE);
+		var judgeHeight = 2;
+		graphJudgeCenter = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
 		graphJudgeCenter.scrollFactor.set();
 		graphJudgeCenter.alpha = 0;		
 		add(graphJudgeCenter);
@@ -105,7 +105,7 @@ class ResultsScreen extends MusicBeatSubstate
 		add(clearText);		
 	    
 	    var ACC = Math.ceil(PlayState.rsACC * 10000) / 100;
-		judgeText = new FlxText(-400, 150, 0, 
+		judgeText = new FlxText(-400, 220, 0, 
 		'Judgements:\nSicks: ' + PlayState.rsSicks 
 		+ '\nGoods: ' + PlayState.rsGoods 
 		+ '\nBads: ' + PlayState.rsBads 
