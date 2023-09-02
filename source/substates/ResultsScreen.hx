@@ -241,7 +241,7 @@ class ResultsScreen extends MusicBeatSubstate
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
 		+ '\n'
-		+ 'Finished time: ' + realTime.getYears() + '.' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds()
+		+ 'Finished time: ' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds()
 		+ '\n'
 		);
 		setGameText.size = 25;
@@ -353,7 +353,7 @@ class ResultsScreen extends MusicBeatSubstate
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
 		+ '\n'
-		+ 'Finished time: ' + realTime.getYears() + '.' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds()
+		+ 'Finished time: ' + realTime.getMonth() + '.' + realTime.getDay() + '.' + realTime.getHours() + '.' + realTime.getSeconds()
 		+ '\n';
 		
 	
