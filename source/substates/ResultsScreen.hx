@@ -176,7 +176,7 @@ class ResultsScreen extends MusicBeatSubstate
 		clearText = new FlxText(20, -155, 0, 'Song Cleared!\n' + PlayState.SONG.song + ' - ' + Difficulty.getString() + '\n');
 		clearText.size = 34;
 		clearText.font = Paths.font('vcr.ttf');
-		clearText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
+		clearText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
 		clearText.scrollFactor.set();
 		clearText.antialiasing = ClientPrefs.data.antialiasing;
 		add(clearText);		
@@ -195,7 +195,7 @@ class ResultsScreen extends MusicBeatSubstate
 		);
 		judgeText.size = 25;
 		judgeText.font = Paths.font('vcr.ttf');
-		judgeText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
+		judgeText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
 		judgeText.scrollFactor.set();
 		judgeText.antialiasing = ClientPrefs.data.antialiasing;
 		add(judgeText);
@@ -211,7 +211,7 @@ class ResultsScreen extends MusicBeatSubstate
 		+ '\n'
 		+ 'SongSpeed: X' + ClientPrefs.getGameplaySetting('scrollspeed')
 		+ '  PlaybackRate: X' + ClientPrefs.getGameplaySetting('songspeed')
-		+ 'n'
+		+ '\n'
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
 		+ '\n'
@@ -219,7 +219,7 @@ class ResultsScreen extends MusicBeatSubstate
 		setGameText.size = 25;
 		setGameText.alignment = RIGHT;
 		setGameText.font = Paths.font('vcr.ttf');
-		setGameText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
+		setGameText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
 		setGameText.scrollFactor.set();
 		setGameText.antialiasing = ClientPrefs.data.antialiasing;
 		add(setGameText);
@@ -243,20 +243,21 @@ class ResultsScreen extends MusicBeatSubstate
 		);
 		setMsText.size = 16;
 		setMsText.font = Paths.font('vcr.ttf');
-		setMsText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
+		setMsText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
 		setMsText.scrollFactor.set();
 		setMsText.antialiasing = ClientPrefs.data.antialiasing;
 		add(setMsText);		
 		
-		backText = new FlxText(FlxG.width - 475, FlxG.height - 45, 0, 'Press Back to continue.');
+		backText = new FlxText(0, FlxG.height - 45, 0, 'Press Back to continue.');
 		backText.size = 28;
 		backText.font = Paths.font('vcr.ttf');
-		backText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 4, 1);
+		backText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
 		backText.scrollFactor.set();
 		backText.antialiasing = ClientPrefs.data.antialiasing;
 	    backText.alignment = RIGHT;
 		add(backText);		
 		backText.alpha = 0;
+		backText.x = FlxG.width - backText.width - 20;
 		//--------------text
 		
 		//time = 0
