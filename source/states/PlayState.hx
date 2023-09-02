@@ -3052,8 +3052,8 @@ class PlayState extends MusicBeatState
 				if (combo > highestCombo)highestCombo = combo;
 				popUpScore(note);
 				
-				var noteDiff:Float = Conductor.songPosition - note.strumTime + ClientPrefs.data.ratingOffset;
-				rsNoteMs.push(noteDiff);
+				var noteDiff:Float = (Conductor.songPosition - note.strumTime + ClientPrefs.data.ratingOffset) / playbackRate;
+				rsNoteMs.push((noteDiff));
 				rsNoteTime.push(note.strumTime);
 			}
 			health += note.hitHealth * healthGain;
