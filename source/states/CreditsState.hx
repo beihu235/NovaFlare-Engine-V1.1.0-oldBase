@@ -46,11 +46,16 @@ class CreditsState extends MusicBeatState
 		var beihuLink:String = 'https://b23.tv/LVj0JVk';
 		var yanqiangLink:String = 'https://b23.tv/FBxHIwT';
 		var Xx_angelkawaii_XLink:String = 'https://space.bilibili.com/1991407094';
-		
+
+		#if Android
 		if (DeviceLanguage.getLang() != 'zh') {
 		beihuLink = 'https://youtube.com/@beihu235';
 		Xx_angelkawaii_XLink = 'https://www.youtube.com/@angelkawaii9826';
-		}		
+		#else
+		beihuLink = 'https://youtube.com/@beihu235';
+		Xx_angelkawaii_XLink = 'https://www.youtube.com/@angelkawaii9826';
+		}
+		#end
 								
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 		    ['Psych Engine Android Team'],
