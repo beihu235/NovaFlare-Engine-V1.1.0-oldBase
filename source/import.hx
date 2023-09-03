@@ -22,7 +22,7 @@ import backend.BaseStage;
 import backend.Difficulty;
 import backend.Mods;
 import backend.SUtil;
-#if Android
+#if android
 import backend.AndroidDialogsExtend;
 import extension.devicelang.DeviceLanguage;
 #end
