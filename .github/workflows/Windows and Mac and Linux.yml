@@ -37,6 +37,7 @@ jobs:
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null --quiet
           haxelib install hmm --quiet
+          haxelib install SScript 4.0.1
           haxelib run hmm install
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
@@ -63,6 +64,7 @@ jobs:
           haxelib setup C:/haxelib
           haxelib install hxcpp > /dev/null --quiet
           haxelib install hmm --quiet
+          haxelib install SScript 4.0.1
           haxelib run hmm install
         shell: cmd
       - name: Create Version Tag
@@ -102,8 +104,6 @@ jobs:
           path: |
             ~/haxelib
             ~/.gradle
-            export/release/android/haxe
-            export/release/android/obj
           key: cache-windows-build
       - name: Publish Artifact
         uses: actions/upload-artifact@v2.2.4
@@ -126,6 +126,7 @@ jobs:
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null --quiet
           haxelib install hmm --quiet
+          haxelib install SScript 4.0.1
           haxelib run hmm install
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
