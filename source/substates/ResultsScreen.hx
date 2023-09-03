@@ -128,7 +128,7 @@ class ResultsScreen extends MusicBeatSubstate
 		    graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		}
 		
-		var judgeHeight = 2;
+		var judgeHeight = 3;
 		graphJudgeCenter = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
 		graphJudgeCenter.scrollFactor.set();
 		graphJudgeCenter.alpha = 0;		
