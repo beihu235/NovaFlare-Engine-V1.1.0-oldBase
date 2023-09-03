@@ -97,7 +97,9 @@ class TitleState extends MusicBeatState
 		FlxTransitionableState.skipNextTransOut = true;
 										
 		checkOpenFirst = true;
+		#if android
 		AndroidDialogsExtend.OpenToast(lang,2);
+		#end
 		
 		}
 		
