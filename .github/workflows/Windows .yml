@@ -54,7 +54,7 @@ jobs:
           haxelib install tjson
           haxelib install hxjsonast
           haxelib install hxCode
-          haxelib git linc_luajit https://github.com/sirox/linc_luajit
+          haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit.git
           haxelib install hscript
           haxelib install SScript
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
