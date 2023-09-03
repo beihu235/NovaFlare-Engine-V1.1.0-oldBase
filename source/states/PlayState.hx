@@ -198,6 +198,7 @@ class PlayState extends MusicBeatState
 	
 	public static var rsRatingFC:String = '';
     public static var rsRatingName:String = '';
+    var rsCheck:Bool = false;
 	
     
 	public var healthBar:HealthBar;
@@ -1941,7 +1942,7 @@ class PlayState extends MusicBeatState
 
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
 	function doDeathCheck(?skipHealthCheck:Bool = false) {
-		if (((skipHealthCheck && instakillOnMiss) || health <= 0) && !practiceMode && !isDead)
+		if (((skipHealthCheck && instakillOnMiss) || health <= 0) && !practiceMode && !isDead && !rsCheck)
 		{
 			var ret:Dynamic = callOnScripts('onGameOver', null, true);
 			if(ret != FunkinLua.Function_Stop) {
@@ -2462,6 +2463,7 @@ class PlayState extends MusicBeatState
 	                
 	                rsRatingFC = ratingFC;
                     rsRatingName = ratingName;
+                    rsCheck = true;
                     
 				    openSubState(new ResultsScreen(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				}
