@@ -104,11 +104,28 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.decimals = 1;
 		addOption(option);
 		
-		var option:Option = new Option('Custom Fade:',
-			"Change CustomFade Ways",
+		var option:Option = new Option('Custom Fade Type:',
+			"Change Custom Fade Type",
 			'CustomFade',
 			'string',
 			['Move', 'Alpha']);
+		addOption(option);
+		
+		var option:Option = new Option('Custom Fade Sound',
+			'Change Custom Fade Sound Volume.',
+			'CustomFadeSound',
+			'percent');
+		option.scrollSpeed = 1.6;
+		option.minValue = 0.0;
+		option.maxValue = 1;
+		option.changeValue = 0.1;
+		option.decimals = 1;
+		addOption(option);
+		
+		var option:Option = new Option('Custom Fade Text',
+			'Showcase Engine Version Text In Custom Fade.',
+			'CustomFadeText',
+			'bool');
 		addOption(option);
 
 		var option:Option = new Option('Hide HUD',
