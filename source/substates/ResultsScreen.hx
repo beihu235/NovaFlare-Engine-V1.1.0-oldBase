@@ -84,14 +84,14 @@ class ResultsScreen extends MusicBeatSubstate
 		ColorArray.push(NoteTypeColor.shit);
 		ColorArray.push(NoteTypeColor.miss);
 		
-		ColorArray = [
+		/*ColorArray = [
 		0xFF00FFFF,
 	    0xFF00FF00,
 	    0xFFFF7F00,
 	    0xFFFF5858,
 	    0xFFFF0000
 		];
-		
+		*/
 		background = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		background.scrollFactor.set();
 		background.alpha = 0;
