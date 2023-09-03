@@ -119,8 +119,9 @@
 	<haxelib name="flixel-ui" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="tjson" />
-	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/> 
-        <haxelib name="extension-androidtools" if="android"/>
+	<haxelib name="hxCodec" if="VIDEOS_ALLOWED && android"/> 
+        <haxelib name="hxCode" if="VIDEOS_ALLOWED && desktop"/>
+	<haxelib name="extension-androidtools" if="android"/>
 	<haxelib name="faxe" if='switch'/>
 	<!--<haxelib name="polymod"/> -->
 	<haxelib name="discord_rpc" if="desktop || android"/>
