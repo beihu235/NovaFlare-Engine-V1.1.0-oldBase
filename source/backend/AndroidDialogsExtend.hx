@@ -1,7 +1,7 @@
 package backend;
 
 //https://github.com/beihu235/AndroidDialogs
-#if Android
+#if android
 import extension.androiddialogs.AndroidDialogs;
 //import extension.androiddialogs.CallbackHandler;
 
