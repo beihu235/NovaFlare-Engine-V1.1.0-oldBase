@@ -109,7 +109,7 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBG.pixels.fillRect(_rect, 0xFF000000);
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 	    
-	    var noteSize = 2;
+	    var noteSize = 2.3;
 	    var MoveSize = 0.6;
 		for (i in 0...PlayState.rsNoteTime.length){
 		    if (Math.abs(PlayState.rsNoteMs[i]) <= 200) color = ColorArray[4];
@@ -128,7 +128,7 @@ class ResultsScreen extends MusicBeatSubstate
 		    graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		}
 		
-		var judgeHeight = 2;
+		var judgeHeight = 3;
 		graphJudgeCenter = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
 		graphJudgeCenter.scrollFactor.set();
 		graphJudgeCenter.alpha = 0;		
