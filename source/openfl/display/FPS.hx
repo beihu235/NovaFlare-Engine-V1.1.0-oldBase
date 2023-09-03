@@ -163,7 +163,7 @@ class FPS extends TextField
 				text += "\nMemory: " + newmemoryMegas + " GB";            
 			}
 						
-            text += "\nNF Engine V1.1.0\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
+            text += "\nNF Engine V1.1.0(bata)\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
                      
 			text += "\n";
 	
