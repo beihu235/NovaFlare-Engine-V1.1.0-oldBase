@@ -53,7 +53,7 @@ jobs:
           haxelib install flixel-addons
           haxelib install tjson
           haxelib install hxjsonast
-          haxelib install hxCode
+          haxelib git hxCode https://github.com/polybiusproxy/hxCodec
           haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit.git
           haxelib install hscript
           haxelib install SScript
