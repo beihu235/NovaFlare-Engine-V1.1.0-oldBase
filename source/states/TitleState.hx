@@ -87,9 +87,9 @@ class TitleState extends MusicBeatState
 		//https://github.com/beihu235/AndroidDialogs
 		var lang:String = '';
 		if (DeviceLanguage.getLang() == 'zh') 
-		lang = 'NF1.1.0测试\nb站-北狐丶逐梦移植\n禁止上传到任何资源网站';
+		lang = 'NF1.1.0测试版\nb站-北狐丶逐梦制作\n禁止上传到任何资源网站';
 		else
-		lang = 'NF1.1.0 android port test\nport by NF|beihu';
+		lang = 'NF1.1.0 android port test\nmade by NF|beihu';
 		if(!checkOpenFirst){
 		
 		FlxTransitionableState.skipNextTransOut = true;
