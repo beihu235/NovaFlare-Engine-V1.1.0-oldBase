@@ -518,7 +518,43 @@ class PlayState extends MusicBeatState
 		add(timeBar);
 		add(timeTxt);
 		
-		
+		healthBar = new HealthBar(0, FlxG.height * (!ClientPrefs.data.downScroll ? 0.89 : 0.11), 'healthBar', function() return health, 0, 2);
+		healthBar.screenCenter(X);
+		healthBar.leftToRight = false;
+		healthBar.scrollFactor.set();
+		healthBar.visible = !ClientPrefs.data.hideHud;
+		healthBar.alpha = ClientPrefs.data.healthBarAlpha;
+		reloadHealthBarColors();
+		add(healthBar);
+
+		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
+		iconP1.y = healthBar.y - 75;
+		iconP1.visible = !ClientPrefs.data.hideHud;
+		iconP1.alpha = ClientPrefs.data.healthBarAlpha;
+		add(iconP1);
+
+		iconP2 = new HealthIcon(dad.healthIcon, false);
+		iconP2.y = healthBar.y - 75;
+		iconP2.visible = !ClientPrefs.data.hideHud;
+		iconP2.alpha = ClientPrefs.data.healthBarAlpha;
+		add(iconP2);
+
+		scoreTxt = new FlxText(0, healthBar.y + 40, FlxG.width, "", 20);
+		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.scrollFactor.set();
+		scoreTxt.borderSize = 1.25;
+		scoreTxt.visible = !ClientPrefs.data.hideHud;
+		add(scoreTxt);
+
+		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "BOTPLAY", 32);
+		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		botplayTxt.scrollFactor.set();
+		botplayTxt.borderSize = 1.25;
+		botplayTxt.visible = cpuControlled;
+		add(botplayTxt);
+		if(ClientPrefs.data.downScroll) {
+			botplayTxt.y = timeBar.y - 78;
+		}
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
@@ -557,43 +593,7 @@ class PlayState extends MusicBeatState
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 		moveCameraSection();
 
-		healthBar = new HealthBar(0, FlxG.height * (!ClientPrefs.data.downScroll ? 0.89 : 0.11), 'healthBar', function() return health, 0, 2);
-		healthBar.screenCenter(X);
-		healthBar.leftToRight = false;
-		healthBar.scrollFactor.set();
-		healthBar.visible = !ClientPrefs.data.hideHud;
-		healthBar.alpha = ClientPrefs.data.healthBarAlpha;
-		reloadHealthBarColors();
-		add(healthBar);
-
-		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
-		iconP1.y = healthBar.y - 75;
-		iconP1.visible = !ClientPrefs.data.hideHud;
-		iconP1.alpha = ClientPrefs.data.healthBarAlpha;
-		add(iconP1);
-
-		iconP2 = new HealthIcon(dad.healthIcon, false);
-		iconP2.y = healthBar.y - 75;
-		iconP2.visible = !ClientPrefs.data.hideHud;
-		iconP2.alpha = ClientPrefs.data.healthBarAlpha;
-		add(iconP2);
-
-		scoreTxt = new FlxText(0, healthBar.y + 40, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		scoreTxt.scrollFactor.set();
-		scoreTxt.borderSize = 1.25;
-		scoreTxt.visible = !ClientPrefs.data.hideHud;
-		add(scoreTxt);
-
-		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "BOTPLAY", 32);
-		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		botplayTxt.scrollFactor.set();
-		botplayTxt.borderSize = 1.25;
-		botplayTxt.visible = cpuControlled;
-		add(botplayTxt);
-		if(ClientPrefs.data.downScroll) {
-			botplayTxt.y = timeBar.y - 78;
-		}
+		
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
