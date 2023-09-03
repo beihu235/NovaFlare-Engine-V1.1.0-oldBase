@@ -324,23 +324,23 @@ class ResultsScreen extends MusicBeatSubstate
 		});
 		
 		new FlxTimer().start(2, function(tmr:FlxTimer){
-			FlxTween.tween(graphBG, {alpha: 0.5}, 0.5);
+			FlxTween.tween(graphBG, {alpha: 0.75}, 0.5);
 			
-			FlxTween.tween(graphJudgeCenter, {alpha: 0.25}, 0.5);	
-			FlxTween.tween(graphSickUp, {alpha: 0.25}, 0.5);	
-			FlxTween.tween(graphSickDown, {alpha: 0.25}, 0.5);	
-			FlxTween.tween(graphGoodUp, {alpha: 0.25}, 0.5);	
-			FlxTween.tween(graphGoodDown, {alpha: 0.25}, 0.5);	
-			FlxTween.tween(graphBadUp, {alpha: 0.25}, 0.5);	
-			FlxTween.tween(graphBadDown, {alpha: 0.25}, 0.5);	
-			FlxTween.tween(graphShitUp, {alpha: 0.25}, 0.5);
-			FlxTween.tween(graphShitDown, {alpha: 0.25}, 0.5);	
-			FlxTween.tween(graphMiss, {alpha: 0.25}, 0.5);	
+			FlxTween.tween(graphJudgeCenter, {alpha: 0.3}, 0.5);	
+			FlxTween.tween(graphSickUp, {alpha: 0.3}, 0.5);	
+			FlxTween.tween(graphSickDown, {alpha: 0.3}, 0.5);	
+			FlxTween.tween(graphGoodUp, {alpha: 0.3}, 0.5);	
+			FlxTween.tween(graphGoodDown, {alpha: 0.3}, 0.5);	
+			FlxTween.tween(graphBadUp, {alpha: 0.3}, 0.5);	
+			FlxTween.tween(graphBadDown, {alpha: 0.3}, 0.5);	
+			FlxTween.tween(graphShitUp, {alpha: 0.3}, 0.5);
+			FlxTween.tween(graphShitDown, {alpha: 0.3}, 0.5);	
+			FlxTween.tween(graphMiss, {alpha: 0.3}, 0.5);	
 				
-		    FlxTween.tween(graphSizeUp, {alpha: 0.5}, 0.5);
-		    FlxTween.tween(graphSizeDown, {alpha: 0.5}, 0.5);
-		    FlxTween.tween(graphSizeLeft, {alpha: 0.5}, 0.5);
-		    FlxTween.tween(graphSizeRight, {alpha: 0.5}, 0.5);	
+		    FlxTween.tween(graphSizeUp, {alpha: 0.75}, 0.5);
+		    FlxTween.tween(graphSizeDown, {alpha: 0.75}, 0.5);
+		    FlxTween.tween(graphSizeLeft, {alpha: 0.75}, 0.5);
+		    FlxTween.tween(graphSizeRight, {alpha: 0.75}, 0.5);	
 		});
 		
 		new FlxTimer().start(2.5, function(tmr:FlxTimer){
