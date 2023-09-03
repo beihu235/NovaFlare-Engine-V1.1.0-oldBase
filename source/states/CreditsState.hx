@@ -51,9 +51,6 @@ class CreditsState extends MusicBeatState
 		if (DeviceLanguage.getLang() != 'zh') {
 		beihuLink = 'https://youtube.com/@beihu235';
 		Xx_angelkawaii_XLink = 'https://www.youtube.com/@angelkawaii9826';
-		#else
-		beihuLink = 'https://youtube.com/@beihu235';
-		Xx_angelkawaii_XLink = 'https://www.youtube.com/@angelkawaii9826';
 		}
 		#end
 								
