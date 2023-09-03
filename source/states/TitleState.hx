@@ -122,19 +122,26 @@ class TitleState extends MusicBeatState
 
 		ClientPrefs.loadPrefs();
 
-		#if CHECK_FOR_UPDATES
-		if(ClientPrefs.data.checkForUpdates && !closedState) {
-			trace('checking for update');
-			var http = new haxe.Http("https://raw.githubusercontent.com/ShadowMario/FNF-PsychEngine/main/gitVersion.txt");
+		//#if CHECK_FOR_UPDATES
+		//if(ClientPrefs.data.checkForUpdates && !closedState) {
+			//trace('checking for update');
+			var http = new haxe.Http("https://github.com/beihu235/NF-Engine-new/blob/main/gitVersion.txt");
 
 			http.onData = function (data:String)
 			{
 				updateVersion = data.split('\n')[0].trim();
 				var curVersion:String = MainMenuState.psychEngineVersion.trim();
-				trace('version online: ' + updateVersion + ', your version: ' + curVersion);
-				if(updateVersion != curVersion) {
-					trace('versions arent matching!');
-					mustUpdate = true;
+				
+				if(updateVersion != '1.1.0(beta)') {
+				var lang:String = '';
+		                if (DeviceLanguage.getLang() == 'zh') 
+		                lang = '发现新版本! 请前往作者主页了解略详';
+		                else
+		                lang = "find new version! press ok toGo to the author's home page for more details";
+		                AndroidDialogsExtend.OpenToast(lang,2);
+		                SUtil.applicationAlert('!', 'find new version!');
+		                CoolUtil.browserLoad('https://b23.tv/jvrOG5G');
+		            
 				}
 			}
 
@@ -143,8 +150,8 @@ class TitleState extends MusicBeatState
 			}
 
 			http.request();
-		}
-		#end
+		//}
+		//#end
 
 		Highscore.load();
 
