@@ -27,6 +27,8 @@ class SaveVariables {
 	public var cacheOnGPU:Bool = #if !switch false #else true #end; //From Stilic
 	public var framerate:Int = 60;
 	public var CustomFade:String = 'Move';
+	public var CustomFadeSound:Float = 0.7;
+	public var CustomFadeText:Bool = true;
 	public var camZooms:Bool = true;
 	public var hideHud:Bool = false;
 	public var noteOffset:Int = 0;
