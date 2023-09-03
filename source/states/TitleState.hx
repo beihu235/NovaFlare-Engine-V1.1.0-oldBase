@@ -91,7 +91,7 @@ class TitleState extends MusicBeatState
 		lang = 'NF1.1.0测试版\nb站-北狐丶逐梦制作\n禁止上传到任何资源网站';
 		else
 		lang = 'NF1.1.0 android port test\nmade by NF|beihu';
-		#end
+		
 			
 		if(!checkOpenFirst){
 		
@@ -99,6 +99,7 @@ class TitleState extends MusicBeatState
 										
 		checkOpenFirst = true;
 		AndroidDialogsExtend.OpenToast(lang,2);
+			#end
 		}
 		
 		#if android
