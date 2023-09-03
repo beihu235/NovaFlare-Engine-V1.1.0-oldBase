@@ -72,7 +72,7 @@ class ResultsScreen extends MusicBeatSubstate
 	public function new(x:Float, y:Float)
 	{
 		super();
-		
+		/*
 		if (FileSystem.exists(SUtil.getPath() + 'assets/images/mainmenu_sprite/rsNoteColor.json'))
 		NoteTypeColor = Json.parse(SUtil.getPath() + 'assets/images/mainmenu_sprite/rsNoteColor.json');
 		else
@@ -83,15 +83,15 @@ class ResultsScreen extends MusicBeatSubstate
 		ColorArray.push(NoteTypeColor.bad);
 		ColorArray.push(NoteTypeColor.shit);
 		ColorArray.push(NoteTypeColor.miss);
-		
-		/*ColorArray = [
+		*/
+		ColorArray = [
 		0xFF00FFFF,
 	    0xFF00FF00,
 	    0xFFFF7F00,
 	    0xFFFF5858,
 	    0xFFFF0000
 		];
-		*/
+		
 		background = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		background.scrollFactor.set();
 		background.alpha = 0;
@@ -119,10 +119,10 @@ class ResultsScreen extends MusicBeatSubstate
 		    if (Math.abs(PlayState.rsNoteMs[i]) <= 45) color = ColorArray[0];
 		    FlxSpriteUtil.beginDraw(color);
 		    if (Math.abs(PlayState.rsNoteMs[i]) <= 166){
-    		noteSpr.drawRect(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize, noteSize);
+    		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / 166.6) - noteSize / 2, noteSize);
     		}
     		else{
-    		noteSpr.drawRect(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 - noteSize / 2, noteSize, noteSize);		
+    		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 - noteSize / 2, noteSize);		
     		}
     		
 		    graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);

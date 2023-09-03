@@ -60,7 +60,11 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		add(EventText);
 		
 		if(!isTransIn) {
-			FlxG.sound.play(Paths.sound('loading_close'));
+			FlxG.sound.play(Paths.sound('loading_close'),ClientPrefs.data.CustomFadeSound);
+			if (!ClientPrefs.data.CustomFadeText) {
+			    EventText.text = '';
+			    WaterMark.text = '';
+			}
 			loadLeftTween = FlxTween.tween(loadLeft, {x: 0}, duration, {
 				onComplete: function(twn:FlxTween) {
 					if(finishCallback != null) {
@@ -94,9 +98,12 @@ class CustomFadeTransition extends MusicBeatSubstate {
 			ease: FlxEase.expoInOut});
 			
 		} else {
-			FlxG.sound.play(Paths.sound('loading_open'));
+			FlxG.sound.play(Paths.sound('loading_open'),ClientPrefs.data.CustomFadeSound);
 			EventText.text = 'COMPLETED !';
-			
+			if (!ClientPrefs.data.CustomFadeText) {
+			    EventText.text = '';
+			    WaterMark.text = '';
+			}
 			loadLeftTween = FlxTween.tween(loadLeft, {x: -1280}, duration, {
 				onComplete: function(twn:FlxTween) {
 					close();
