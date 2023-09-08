@@ -16,7 +16,6 @@ import substates.OSTSubstate;
 
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.transition.FlxTransitionableState;
-import states.FreeplaySearchState;
 import flixel.ui.FlxButton;
 
 #if MODS_ALLOWED
@@ -177,19 +176,19 @@ class FreeplayState extends MusicBeatState
 		searchInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		searchInput.backgroundColor = FlxColor.TRANSPARENT;
 		searchInput.fieldBorderColor = FlxColor.TRANSPARENT;
-		searchInput.font = Language.font();
+		searchInput.font = Paths.font("vcr.ttf");
 		
 		var underline:FlxSprite = new FlxSprite(FlxG.width-425, 260).makeGraphic(400, 6, FlxColor.WHITE);
 		underline.alpha = 0.6;
 		
 		var searchButton:FlxButton = new FlxButton(FlxG.width-205, 313, "Search Songs", function() {
-			doSearch();
+			//doSearch();
 		});
 		searchButton.scale.set(2.75, 2.75);
 		searchButton.alpha = 0;
 		
 		var searchText:FlxText = new FlxText(FlxG.width-290, 310, 0, 'Search Songs' + #if android '(Touch)' #else '(S)' #end, 24);
-		searchText.setFormat(Language.font(), 24, FlxColor.WHITE);
+		searchText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE);
 		
 		add(searchTextBG);
 		add(searchInput);
