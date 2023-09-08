@@ -323,10 +323,10 @@ class FreeplayState extends MusicBeatState
 		
 		if (searchInput.text != '' && searchSongNamesTexts.members[0].text == null){
 		    notFoundSongTextSine += 180 * elapsed;
-			notFoundSongTextText.alpha = 1 - Math.sin((Math.PI * notFoundSongTextSine) / 180);
+			notFoundSongText.alpha = 1 - Math.sin((Math.PI * notFoundSongTextSine) / 180);
 		}
 		else {
-		    notFoundSongTextText.alpha = 0;
+		    notFoundSongText.alpha = 0;
 		}
 		
 		
