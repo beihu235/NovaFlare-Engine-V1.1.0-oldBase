@@ -213,11 +213,11 @@ class FreeplayState extends MusicBeatState
 		
 		for (i in 1...5)
 		{
-			var searchSongNamesText:FlxText = new FlxText(FlxG.width - width + 20, showY + 100 + 40 * (i - 1) + 5, 0, 'test' + i, 30);
-		    searchSongNamesText(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			var searchSongNamesText:FlxText = new FlxText(FlxG.width - width + 5, showY + 100 + 40 * (i - 1) + 5, 0, 'test' + i, 30);
+		    searchSongNamesText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		    searchSongNamesText.scrollFactor.set();
 			searchSongNamesText.ID = i;
-			searchSongNamesText.add(searchSongNamesText);
+			searchSongNamesTexts.add(searchSongNamesText);
         }
 		
 		#if PRELOAD_ALL
