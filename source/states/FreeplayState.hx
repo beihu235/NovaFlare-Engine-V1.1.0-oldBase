@@ -502,11 +502,11 @@ class FreeplayState extends MusicBeatState
 	{
 	    var songName:Array<String> = [];
 		var songNum:Array<Int> = [];
-		var searchString = searchInput.text;
+		var searchString:String = searchInput.text;
 		for (i in 0...songs.length)
 		{
 			var name:String = songs[i].songName.toLowerCase();
-			if (name.indexOf(searchString) != -1)
+			if (name.indexOf(searchString.toLowerCase()) != -1)
 			{
 				songName.push(songs[i].songName);
 				songNum.push(i)
