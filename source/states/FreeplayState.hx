@@ -182,12 +182,12 @@ class FreeplayState extends MusicBeatState
 		
         var width = 500;
         var height = 300;
-        var showX = 200;
+        var showX = 150;
         var showY = 0;
         searchTextBG = new FlxSprite(showX, showY).makeGraphic(width, height, FlxColor.BLACK);
 		searchTextBG.alpha = 0.6;
 		
-		searchInput = new FlxInputText(FlxG.width - width + 50, showY + 20, width - 100, '', 30, 0x00FFFFFF);
+		searchInput = new FlxInputText(showX + 50, showY + 20, width - 100, '', 30, 0x00FFFFFF);
 		searchInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		searchInput.backgroundColor = FlxColor.TRANSPARENT;
 		searchInput.fieldBorderColor = FlxColor.TRANSPARENT;
