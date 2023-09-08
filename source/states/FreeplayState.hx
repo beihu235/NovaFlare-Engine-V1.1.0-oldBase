@@ -512,13 +512,18 @@ class FreeplayState extends MusicBeatState
 				songNum.push(i);
 			}
 		}
-		
-		for (i in 0...searchSongNamesTexts.length)
-		{
-			var songNameText:FlxText = searchSongNamesTexts.members[i];
-			songNameText.text = songName[i];
-		}
-		
+		if (searchInput.text != '')
+    		for (i in 0...searchSongNamesTexts.length)
+    		{
+    			var songNameText:FlxText = i + ': ' + searchSongNamesTexts.members[i];
+    			songNameText.text = songName[i];
+    		}
+		else
+    		for (i in 0...searchSongNamesTexts.length)
+    		{
+    			var songNameText:FlxText = '';
+    			songNameText.text = songName[i];
+		    }
 	}
 
 	function changeDiff(change:Int = 0)
