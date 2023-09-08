@@ -201,7 +201,7 @@ class FreeplayState extends MusicBeatState
 		lineText.visible = true;
 		
 		notFoundSongText = new FlxText(showX + 5, showY + 100 + 40 * 2, 0, 'Not Found Song!', 30);
-		notFoundSongText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.RED, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		notFoundSongText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		notFoundSongText.scrollFactor.set();
 		
 		underline_text = new FlxSprite(showX + 50, showY + 20 + 40).makeGraphic(width - 100, 6, FlxColor.WHITE);
