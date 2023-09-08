@@ -14,6 +14,11 @@ import substates.GameplayChangersSubstate;
 import substates.ResetScoreSubState;
 import substates.OSTSubstate;
 
+import flixel.addons.ui.FlxInputText;
+import flixel.addons.transition.FlxTransitionableState;
+import states.FreeplaySearchState;
+import flixel.ui.FlxButton;
+
 #if MODS_ALLOWED
 import sys.FileSystem;
 #end
@@ -35,6 +40,8 @@ class FreeplayState extends MusicBeatState
 	var lerpRating:Float = 0;
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
+	
+	var searchInput:FlxInputText;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -162,7 +169,34 @@ class FreeplayState extends MusicBeatState
 		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
 		textBG.alpha = 0.6;
 		add(textBG);
-
+        
+        var searchTextBG:FlxSprite = new FlxSprite(FlxG.width-450, 200).makeGraphic(450, 166, FlxColor.BLACK);
+		searchTextBG.alpha = 0.6;
+		
+		searchInput = new FlxInputText(FlxG.width-425, 220, 400, '', 30, 0x00FFFFFF);
+		searchInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
+		searchInput.backgroundColor = FlxColor.TRANSPARENT;
+		searchInput.fieldBorderColor = FlxColor.TRANSPARENT;
+		searchInput.font = Language.font();
+		
+		var underline:FlxSprite = new FlxSprite(FlxG.width-425, 260).makeGraphic(400, 6, FlxColor.WHITE);
+		underline.alpha = 0.6;
+		
+		var searchButton:FlxButton = new FlxButton(FlxG.width-205, 313, "Search Songs", function() {
+			doSearch();
+		});
+		searchButton.scale.set(2.75, 2.75);
+		searchButton.alpha = 0;
+		
+		var searchText:FlxText = new FlxText(FlxG.width-290, 310, 0, 'Search Songs' + #if android '(Touch)' #else '(S)' #end, 24);
+		searchText.setFormat(Language.font(), 24, FlxColor.WHITE);
+		
+		add(searchTextBG);
+		add(searchInput);
+		add(underline);
+		add(searchText);
+		add(searchButton);
+		
 		#if PRELOAD_ALL
 		#if android
 		var leText:String = "Press X to listen to the Song / Press C to open the Gameplay Changers Menu / Press Y to Reset your Score and Accuracy.";
