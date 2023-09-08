@@ -182,8 +182,9 @@ class FreeplayState extends MusicBeatState
 		
         var width = 500;
         var height = 300;
-        var showY = 150;
-        searchTextBG = new FlxSprite(FlxG.width-width, showY).makeGraphic(width, height, FlxColor.BLACK);
+        var showX = 200
+        var showY = 0;
+        searchTextBG = new FlxSprite(showX, showY).makeGraphic(width, height, FlxColor.BLACK);
 		searchTextBG.alpha = 0.6;
 		
 		searchInput = new FlxInputText(FlxG.width - width + 50, showY + 20, width - 100, '', 30, 0x00FFFFFF);
@@ -192,10 +193,10 @@ class FreeplayState extends MusicBeatState
 		searchInput.fieldBorderColor = FlxColor.TRANSPARENT;
 		searchInput.font = Paths.font("vcr.ttf");
 		
-		underline_text = new FlxSprite(FlxG.width - width + 50, showY + 20 + 40).makeGraphic(width - 100, 6, FlxColor.WHITE);
+		underline_text = new FlxSprite(showX + 50, showY + 20 + 40).makeGraphic(width - 100, 6, FlxColor.WHITE);
 		underline_text.alpha = 0.6;
 		var lineHeight = 3;
-		underline_BG = new FlxSprite(FlxG.width - width, showY + 100).makeGraphic(width , lineHeight, 0xFF00FFFF);
+		underline_BG = new FlxSprite(showX, showY + 100).makeGraphic(width , lineHeight, 0xFF00FFFF);
 		
 		textIntervals = new FlxTypedGroup<FlxSprite>();
 		searchSongNamesTexts = new FlxTypedGroup<FlxText>();
@@ -209,14 +210,14 @@ class FreeplayState extends MusicBeatState
 		
 		for (bgNum in 1...5)
 		{
-			var textInterval:FlxSprite = new FlxSprite(FlxG.width - width, showY + 100 + 40 * bgNum).makeGraphic(width , lineHeight, FlxColor.WHITE);
+			var textInterval:FlxSprite = new FlxSprite(showX, showY + 100 + 40 * bgNum).makeGraphic(width , lineHeight, FlxColor.WHITE);
 			textInterval.ID = bgNum;
 			textIntervals.add(textInterval);
         }
 		
 		for (textNum in 1...6)
 		{
-			var searchSongNamesText:FlxText = new FlxText(FlxG.width - width + 5, showY + 100 + 40 * (textNum-1), 0, 'test' + textNum, 30);
+			var searchSongNamesText:FlxText = new FlxText(showX + 5, showY + 100 + 40 * (textNum-1), 0, 'test' + textNum, 30);
 		    searchSongNamesText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		    searchSongNamesText.scrollFactor.set();
 			searchSongNamesText.ID = textNum;
