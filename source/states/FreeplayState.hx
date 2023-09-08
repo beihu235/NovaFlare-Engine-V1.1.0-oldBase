@@ -192,8 +192,8 @@ class FreeplayState extends MusicBeatState
 		
 		underline_text = new FlxSprite(FlxG.width - width + 50, showY + 20 + 40).makeGraphic(width - 100, 6, FlxColor.WHITE);
 		underline_text.alpha = 0.6;
-		
-		underline_BG = new FlxSprite(FlxG.width - width, showY + 100).makeGraphic(width , 3, 0xFF00FFFF);
+		var lineHeight = 3;
+		underline_BG = new FlxSprite(FlxG.width - width, showY + 100 - lineHeight/2).makeGraphic(width , lineHeight, 0xFF00FFFF);
 		
 		textIntervals = new FlxTypedGroup<FlxSprite>();
 		searchSongNamesTexts = new FlxTypedGroup<FlxText>();
@@ -205,16 +205,16 @@ class FreeplayState extends MusicBeatState
 		add(textIntervals);
 		add(searchSongNamesTexts);
 		
-		for (bgNum in 0...4)
+		for (bgNum in 1...5)
 		{
-			var textInterval:FlxSprite = new FlxSprite(FlxG.width - width, showY + 100 + 40 * (bgNum + 1)).makeGraphic(width , 3, FlxColor.WHITE);
+			var textInterval:FlxSprite = new FlxSprite(FlxG.width - width, showY + 100 + 40 * bgNum - lineHeight/2).makeGraphic(width , lineHeight, FlxColor.WHITE);
 			textInterval.ID = bgNum;
 			textIntervals.add(textInterval);
         }
 		
-		for (textNum in 0...4)
+		for (textNum in 1...6)
 		{
-			var searchSongNamesText:FlxText = new FlxText(FlxG.width - width + 5, showY + 100 + 40 * textNum + 5, 0, 'test' + textNum, 30);
+			var searchSongNamesText:FlxText = new FlxText(FlxG.width - width + 5, showY + 100 + 40 * (textNum-1) + 5, 0, 'test' + textNum, 30);
 		    searchSongNamesText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		    searchSongNamesText.scrollFactor.set();
 			searchSongNamesText.ID = textNum;
