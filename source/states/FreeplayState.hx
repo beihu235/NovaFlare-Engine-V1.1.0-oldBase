@@ -51,7 +51,8 @@ class FreeplayState extends MusicBeatState
     
     var searchCheck:String = '';
     var lineText:FlxText;
-    //var lineTextSine:Float = 0;
+    var notFoundSongText:FlxText;
+    var notFoundSongTextSine:Float = 0;
     
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -199,6 +200,10 @@ class FreeplayState extends MusicBeatState
 		lineText.alpha = 0.6;
 		lineText.visible = true;
 		
+		notFoundSongText = new FlxText(showX + 5, showY + 100 + 40 * 2, 0, 'Not Found Song!', 30);
+		notFoundSongText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.RED, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		notFoundSongText.scrollFactor.set();
+		
 		underline_text = new FlxSprite(showX + 50, showY + 20 + 40).makeGraphic(width - 100, 6, FlxColor.WHITE);
 		underline_text.alpha = 0.6;
 		var lineHeight = 3;
@@ -210,6 +215,7 @@ class FreeplayState extends MusicBeatState
 		add(searchTextBG);
 		add(searchInput);
 		add(lineText);
+		add(notFoundSongText);
 		add(underline_text);
 		add(underline_BG);
 		add(textIntervals);
@@ -312,6 +318,17 @@ class FreeplayState extends MusicBeatState
 		    searchCheck = searchInput.text;
 		    updateSearch();
 		}
+		
+    	//var songNameText:FlxText = searchSongNamesTexts.members[0];
+		
+		if (searchInput.text != '' && searchSongNamesTexts.members[0].text == null){
+		    notFoundSongTextSine += 180 * elapsed;
+			notFoundSongTextTxt.alpha = 1 - Math.sin((Math.PI * notFoundSongTextSine) / 180);
+		}
+		else {
+		    notFoundSongTextTxt.alpha = 0;
+		}
+		
 		
 		var ratingSplit:Array<String> = Std.string(CoolUtil.floorDecimal(lerpRating * 100, 2)).split('.');
 		if(ratingSplit.length < 2) { //No decimals, add an empty space
