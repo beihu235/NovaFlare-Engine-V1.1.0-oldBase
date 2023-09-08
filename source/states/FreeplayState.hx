@@ -41,6 +41,7 @@ class FreeplayState extends MusicBeatState
 	var intendedRating:Float = 0;
 	
 	
+	
 	var searchInput:FlxInputText;
     var underline_text:FlxSprite;
     var underline_BG:FlxSprite;
@@ -49,6 +50,8 @@ class FreeplayState extends MusicBeatState
     var searchSongNamesTexts:FlxTypedGroup<FlxText>;
     
     var searchCheck:String = '';
+    var lineText:FlxText;
+    //var lineTextSine:Float = 0;
     
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -190,6 +193,12 @@ class FreeplayState extends MusicBeatState
 		searchInput.fieldBorderColor = FlxColor.TRANSPARENT;
 		searchInput.font = Paths.font("vcr.ttf");
 		
+		lineText = new FlxText(showX + 50, showY + 20, width - 100, 'Song Name', 30);
+		lineText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		lineText.scrollFactor.set();
+		lineText.alpha = 0.6;
+		lineText.visible = true;
+		
 		underline_text = new FlxSprite(showX + 50, showY + 20 + 40).makeGraphic(width - 100, 6, FlxColor.WHITE);
 		underline_text.alpha = 0.6;
 		var lineHeight = 3;
@@ -200,6 +209,7 @@ class FreeplayState extends MusicBeatState
 		
 		add(searchTextBG);
 		add(searchInput);
+		add(lineText);
 		add(underline_text);
 		add(underline_BG);
 		add(textIntervals);
@@ -295,12 +305,14 @@ class FreeplayState extends MusicBeatState
 			lerpScore = intendedScore;
 		if (Math.abs(lerpRating - intendedRating) <= 0.01)
 			lerpRating = intendedRating;
-			
+		
+		lineText.visible = (searchInput.text == '');		
+		
 		if (searchCheck != searchInput.text){
 		    searchCheck = searchInput.text;
 		    updateSearch();
 		}
-
+		
 		var ratingSplit:Array<String> = Std.string(CoolUtil.floorDecimal(lerpRating * 100, 2)).split('.');
 		if(ratingSplit.length < 2) { //No decimals, add an empty space
 			ratingSplit.push('');
