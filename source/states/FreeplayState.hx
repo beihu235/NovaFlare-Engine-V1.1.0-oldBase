@@ -182,7 +182,7 @@ class FreeplayState extends MusicBeatState
 		
         var width = 500;
         var height = 300;
-        var showX = 200
+        var showX = 200;
         var showY = 0;
         searchTextBG = new FlxSprite(showX, showY).makeGraphic(width, height, FlxColor.BLACK);
 		searchTextBG.alpha = 0.6;
