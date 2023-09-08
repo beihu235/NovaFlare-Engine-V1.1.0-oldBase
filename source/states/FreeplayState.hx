@@ -176,13 +176,10 @@ class FreeplayState extends MusicBeatState
 		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
 		textBG.alpha = 0.6;
 		add(textBG);
-        
-        
-        
 		
         var width = 500;
         var height = 300;
-        var showX = 150;
+        var showX = 220;
         var showY = 0;
         searchTextBG = new FlxSprite(showX, showY).makeGraphic(width, height, FlxColor.BLACK);
 		searchTextBG.alpha = 0.6;
@@ -208,7 +205,7 @@ class FreeplayState extends MusicBeatState
 		add(textIntervals);
 		add(searchSongNamesTexts);
 		
-		for (bgNum in 1...5)
+		for (bgNum in 1...6)
 		{
 			var textInterval:FlxSprite = new FlxSprite(showX, showY + 100 + 40 * bgNum).makeGraphic(width , lineHeight, FlxColor.WHITE);
 			textInterval.ID = bgNum;
@@ -516,15 +513,17 @@ class FreeplayState extends MusicBeatState
 		if (searchInput.text != ''){
     		for (i in 0...searchSongNamesTexts.length)
     		{
+    		    var numFix:Int = i + 1;
     			var songNameText:FlxText = searchSongNamesTexts.members[i];
-    			songNameText.text = i + ': ' + songName[i];
+    			if (songName[i] != null) songNameText.text = numFix + ': ' + songName[i];
+    			else songNameText.text = numFix + ': ';
     		}
     	}	
 		else{
     		for (i in 0...searchSongNamesTexts.length)
     		{
     			var songNameText:FlxText = searchSongNamesTexts.members[i];
-    			songNameText.text = i + ': ';
+    			songNameText.text = numFix + ': ';
 		    }
 		}
 	}
