@@ -46,6 +46,7 @@ class FreeplayState extends MusicBeatState
     var underline_BG:FlxSprite;
     var searchTextBG:FlxSprite;
     var textIntervals:FlxTypedGroup<FlxSprite>;
+    var searchSongNamesTexts:FlxTypedGroup<FlxText>;
     
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -201,15 +202,23 @@ class FreeplayState extends MusicBeatState
 		add(underline_text);
 		add(underline_BG);
 		add(textIntervals);
+		add(searchSongNamesTexts);
 		
 		for (i in 1...4)
 		{
-			var textInterval:FlxSprite = new FlxSprite(FlxG.width - width, showY + 100 + 100 * i).makeGraphic(width , 3, FlxColor.WHITE);
+			var textInterval:FlxSprite = new FlxSprite(FlxG.width - width, showY + 100 + 40 * i).makeGraphic(width , 3, FlxColor.WHITE);
 			textInterval.ID = i;
 			textIntervals.add(textInterval);
         }
 		
-		
+		for (i in 1...5)
+		{
+			var searchSongNamesText:FlxText = new FlxText(FlxG.width - width + 20, showY + 100 + 40 * (i - 1) + 5, 0, 'test' + i, 30);
+		    searchSongNamesText(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		    searchSongNamesText.scrollFactor.set();
+			searchSongNamesText.ID = i;
+			searchSongNamesText.add(searchSongNamesText);
+        }
 		
 		#if PRELOAD_ALL
 		#if android
