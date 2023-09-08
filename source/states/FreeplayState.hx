@@ -14,6 +14,10 @@ import substates.GameplayChangersSubstate;
 import substates.ResetScoreSubState;
 import substates.OSTSubstate;
 
+import flixel.addons.ui.FlxInputText;
+import flixel.addons.transition.FlxTransitionableState;
+import flixel.ui.FlxButton;
+
 #if MODS_ALLOWED
 import sys.FileSystem;
 #end
@@ -35,7 +39,17 @@ class FreeplayState extends MusicBeatState
 	var lerpRating:Float = 0;
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
-
+	
+	
+	var searchInput:FlxInputText;
+    var underline_text:FlxSprite;
+    var underline_BG:FlxSprite;
+    var searchTextBG:FlxSprite;
+    var textIntervals:FlxTypedGroup<FlxSprite>;
+    var searchSongNamesTexts:FlxTypedGroup<FlxText>;
+    
+    var searchCheck:String = '';
+    
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
@@ -162,7 +176,54 @@ class FreeplayState extends MusicBeatState
 		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
 		textBG.alpha = 0.6;
 		add(textBG);
-
+        
+        
+        
+		
+        var width = 500;
+        var height = 300;
+        var showX = 150;
+        var showY = 0;
+        searchTextBG = new FlxSprite(showX, showY).makeGraphic(width, height, FlxColor.BLACK);
+		searchTextBG.alpha = 0.6;
+		
+		searchInput = new FlxInputText(showX + 50, showY + 20, width - 100, '', 30, 0x00FFFFFF);
+		searchInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
+		searchInput.backgroundColor = FlxColor.TRANSPARENT;
+		searchInput.fieldBorderColor = FlxColor.TRANSPARENT;
+		searchInput.font = Paths.font("vcr.ttf");
+		
+		underline_text = new FlxSprite(showX + 50, showY + 20 + 40).makeGraphic(width - 100, 6, FlxColor.WHITE);
+		underline_text.alpha = 0.6;
+		var lineHeight = 3;
+		underline_BG = new FlxSprite(showX, showY + 100).makeGraphic(width , lineHeight, 0xFF00FFFF);
+		
+		textIntervals = new FlxTypedGroup<FlxSprite>();
+		searchSongNamesTexts = new FlxTypedGroup<FlxText>();
+		
+		add(searchTextBG);
+		add(searchInput);
+		add(underline_text);
+		add(underline_BG);
+		add(textIntervals);
+		add(searchSongNamesTexts);
+		
+		for (bgNum in 1...5)
+		{
+			var textInterval:FlxSprite = new FlxSprite(showX, showY + 100 + 40 * bgNum).makeGraphic(width , lineHeight, FlxColor.WHITE);
+			textInterval.ID = bgNum;
+			textIntervals.add(textInterval);
+        }
+		
+		for (textNum in 1...6)
+		{
+			var searchSongNamesText:FlxText = new FlxText(showX + 5, showY + 100 + 40 * (textNum-1), 0, 'test' + textNum, 30);
+		    searchSongNamesText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		    searchSongNamesText.scrollFactor.set();
+			searchSongNamesText.ID = textNum;
+			searchSongNamesTexts.add(searchSongNamesText);
+        }
+		
 		#if PRELOAD_ALL
 		#if android
 		var leText:String = "Press X to listen to the Song / Press C to open the Gameplay Changers Menu / Press Y to Reset your Score and Accuracy.";
@@ -237,6 +298,11 @@ class FreeplayState extends MusicBeatState
 			lerpScore = intendedScore;
 		if (Math.abs(lerpRating - intendedRating) <= 0.01)
 			lerpRating = intendedRating;
+			
+		if (searchCheck != searchInput.text){
+		    searchCheck = searchInput.text;
+		    updateSearch();
+		}
 
 		var ratingSplit:Array<String> = Std.string(CoolUtil.floorDecimal(lerpRating * 100, 2)).split('.');
 		if(ratingSplit.length < 2) { //No decimals, add an empty space
@@ -306,7 +372,7 @@ class FreeplayState extends MusicBeatState
 			_updateSongLastDifficulty();
 		}
 
-		if (controls.BACK)
+		if (FlxG.keys.justPressed.ESCAPE #if android || MusicBeatState._virtualpad.buttonB.justPressed #end)
 		{
 			persistentUpdate = false;
 			if(colorTween != null) {
@@ -431,6 +497,36 @@ class FreeplayState extends MusicBeatState
 			vocals.destroy();
 		}
 		vocals = null;
+	}
+	
+	function updateSearch()
+	{
+	    var songName:Array<String> = [];
+		var songNum:Array<Int> = [];
+		var searchString:String = searchInput.text;
+		for (i in 0...songs.length)
+		{
+			var name:String = songs[i].songName.toLowerCase();
+			if (name.indexOf(searchString.toLowerCase()) != -1)
+			{
+				songName.push(songs[i].songName);
+				songNum.push(i);
+			}
+		}
+		if (searchInput.text != ''){
+    		for (i in 0...searchSongNamesTexts.length)
+    		{
+    			var songNameText:FlxText = searchSongNamesTexts.members[i];
+    			songNameText.text = i + ': ' + songName[i];
+    		}
+    	}	
+		else{
+    		for (i in 0...searchSongNamesTexts.length)
+    		{
+    			var songNameText:FlxText = searchSongNamesTexts.members[i];
+    			songNameText.text = i + ': ';
+		    }
+		}
 	}
 
 	function changeDiff(change:Int = 0)
