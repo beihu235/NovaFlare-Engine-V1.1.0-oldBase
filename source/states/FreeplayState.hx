@@ -43,6 +43,7 @@ class FreeplayState extends MusicBeatState
 	
 	
 	var searchInput:FlxInputText;
+	var chooseBG:FlxSprite;
     var underline_text:FlxSprite;
     var underline_BG:FlxSprite;
     var searchTextBG:FlxSprite;
@@ -183,7 +184,7 @@ class FreeplayState extends MusicBeatState
 		
         var width = 500;
         var height = 300;
-        var showX = 220;
+        var showX = 180;
         var showY = 0;
         searchTextBG = new FlxSprite(showX, showY).makeGraphic(width, height, FlxColor.BLACK);
 		searchTextBG.alpha = 0.6;
@@ -209,11 +210,15 @@ class FreeplayState extends MusicBeatState
 		var lineHeight = 3;
 		underline_BG = new FlxSprite(showX, showY + 100).makeGraphic(width , lineHeight, 0xFF00FFFF);
 		
+		chooseBG = new FlxSprite(showX, showY + 100).makeGraphic(width , 40, FlxColor.WHITE);
+		chooseBG.alpha = 0.5;
+		
 		textIntervals = new FlxTypedGroup<FlxSprite>();
 		searchSongNamesTexts = new FlxTypedGroup<FlxText>();
 		
 		add(searchTextBG);
 		add(searchInput);
+		add(chooseBG);
 		add(lineText);
 		add(notFoundSongText);
 		add(underline_text);
