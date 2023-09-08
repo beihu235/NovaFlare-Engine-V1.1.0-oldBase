@@ -205,19 +205,19 @@ class FreeplayState extends MusicBeatState
 		add(textIntervals);
 		add(searchSongNamesTexts);
 		
-		for (i in 1...4)
+		for (bgNum in 1...5)
 		{
-			var textInterval:FlxSprite = new FlxSprite(FlxG.width - width, showY + 100 + 40 * i).makeGraphic(width , 3, FlxColor.WHITE);
-			textInterval.ID = i;
+			var textInterval:FlxSprite = new FlxSprite(FlxG.width - width, showY + 100 + 40 * bgNum).makeGraphic(width , 3, FlxColor.WHITE);
+			textInterval.ID = bgNum;
 			textIntervals.add(textInterval);
         }
 		
-		for (i in 1...5)
+		for (textNum in 1...5)
 		{
-			var searchSongNamesText:FlxText = new FlxText(FlxG.width - width + 5, showY + 100 + 40 * (i - 1) + 5, 0, 'test' + i, 30);
+			var searchSongNamesText:FlxText = new FlxText(FlxG.width - width + 5, showY + 100 + 40 * (textNum - 1) + 5, 0, 'test' + textNum, 30);
 		    searchSongNamesText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		    searchSongNamesText.scrollFactor.set();
-			searchSongNamesText.ID = i;
+			searchSongNamesText.ID = textNum;
 			searchSongNamesTexts.add(searchSongNamesText);
         }
 		
