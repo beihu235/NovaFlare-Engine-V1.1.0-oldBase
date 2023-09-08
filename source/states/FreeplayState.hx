@@ -40,8 +40,13 @@ class FreeplayState extends MusicBeatState
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
 	
+	
 	var searchInput:FlxInputText;
-
+    var underline_text:FlxSprite;
+    var underline_BG:FlxSprite;
+    var searchTextBG:FlxSprite;
+    var textIntervals:FlxTypedGroup<FlxSprite>;
+    
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
@@ -169,10 +174,13 @@ class FreeplayState extends MusicBeatState
 		textBG.alpha = 0.6;
 		add(textBG);
         
+        
+        
+		
         var width = 500;
         var height = 300;
         var showY = 150;
-        var searchTextBG:FlxSprite = new FlxSprite(FlxG.width-width, showY).makeGraphic(width, height, FlxColor.BLACK);
+        searchTextBG = new FlxSprite(FlxG.width-width, showY).makeGraphic(width, height, FlxColor.BLACK);
 		searchTextBG.alpha = 0.6;
 		
 		searchInput = new FlxInputText(FlxG.width - width + 50, showY + 20, width - 100, '', 30, 0x00FFFFFF);
@@ -181,13 +189,27 @@ class FreeplayState extends MusicBeatState
 		searchInput.fieldBorderColor = FlxColor.TRANSPARENT;
 		searchInput.font = Paths.font("vcr.ttf");
 		
-		var underline:FlxSprite = new FlxSprite(FlxG.width - width + 50, showY + 20 + 40).makeGraphic(width - 100, 6, FlxColor.WHITE);
-		underline.alpha = 0.6;
+		underline_text = new FlxSprite(FlxG.width - width + 50, showY + 20 + 40).makeGraphic(width - 100, 6, FlxColor.WHITE);
+		underline_text.alpha = 0.6;
 		
+		underline_BG = new FlxSprite(FlxG.width - width, showY + 100).makeGraphic(width , 3, 0xFF00FFFF);
+		
+		textIntervals = new FlxTypedGroup<FlxSprite>();
 		
 		add(searchTextBG);
 		add(searchInput);
-		add(underline);
+		add(underline_text);
+		add(underline_BG);
+		add(textIntervals);
+		
+		for (i in 1...4)
+		{
+			var textInterval:FlxSprite = new FlxSprite(FlxG.width - width, showY + 100 + 100 * i).makeGraphic(width , 3, FlxColor.WHITE);
+			textInterval.ID = i;
+			textIntervals.add(textInterval);
+        }
+		
+		
 		
 		#if PRELOAD_ALL
 		#if android
