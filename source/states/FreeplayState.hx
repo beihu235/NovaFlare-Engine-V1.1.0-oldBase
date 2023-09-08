@@ -169,32 +169,25 @@ class FreeplayState extends MusicBeatState
 		textBG.alpha = 0.6;
 		add(textBG);
         
-        var searchTextBG:FlxSprite = new FlxSprite(FlxG.width-450, 200).makeGraphic(450, 166, FlxColor.BLACK);
+        var width = 500;
+        var height = 300;
+        var showY = 150;
+        var searchTextBG:FlxSprite = new FlxSprite(FlxG.width-width, showY).makeGraphic(width, height, FlxColor.BLACK);
 		searchTextBG.alpha = 0.6;
 		
-		searchInput = new FlxInputText(FlxG.width-425, 220, 400, '', 30, 0x00FFFFFF);
+		searchInput = new FlxInputText(FlxG.width - width + 50, showY + 20, width - 100, '', 30, 0x00FFFFFF);
 		searchInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		searchInput.backgroundColor = FlxColor.TRANSPARENT;
 		searchInput.fieldBorderColor = FlxColor.TRANSPARENT;
 		searchInput.font = Paths.font("vcr.ttf");
 		
-		var underline:FlxSprite = new FlxSprite(FlxG.width-425, 260).makeGraphic(400, 6, FlxColor.WHITE);
+		var underline:FlxSprite = new FlxSprite(FlxG.width - width + 50, showY + 20 + 40).makeGraphic(width - 100, 6, FlxColor.WHITE);
 		underline.alpha = 0.6;
 		
-		var searchButton:FlxButton = new FlxButton(FlxG.width-205, 313, "Search Songs", function() {
-			//doSearch();
-		});
-		searchButton.scale.set(2.75, 2.75);
-		searchButton.alpha = 0;
-		
-		var searchText:FlxText = new FlxText(FlxG.width-290, 310, 0, 'Search Songs' + #if android '(Touch)' #else '(S)' #end, 24);
-		searchText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE);
 		
 		add(searchTextBG);
 		add(searchInput);
 		add(underline);
-		add(searchText);
-		add(searchButton);
 		
 		#if PRELOAD_ALL
 		#if android
