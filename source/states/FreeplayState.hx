@@ -214,7 +214,7 @@ class FreeplayState extends MusicBeatState
 		
 		for (textNum in 1...6)
 		{
-			var searchSongNamesText:FlxText = new FlxText(showX + 5, showY + 100 + 40 * (textNum-1), 0, 'test' + textNum, 30);
+			var searchSongNamesText:FlxText = new FlxText(showX + 5, showY + 100 + 40 * (textNum-1), 0, '', 30);
 		    searchSongNamesText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		    searchSongNamesText.scrollFactor.set();
 			searchSongNamesText.ID = textNum;
@@ -516,7 +516,7 @@ class FreeplayState extends MusicBeatState
     		    var numFix:Int = i + 1;
     			var songNameText:FlxText = searchSongNamesTexts.members[i];
     			if (songName[i] != null) songNameText.text = numFix + ': ' + songName[i];
-    			else songNameText.text = numFix + ': ';
+    			else songNameText.text = '';
     		}
     	}	
 		else{
@@ -524,7 +524,7 @@ class FreeplayState extends MusicBeatState
     		{
     		    var numFix:Int = i + 1;
     			var songNameText:FlxText = searchSongNamesTexts.members[i];
-    			songNameText.text = numFix + ': ';
+    			songNameText.text = '';
 		    }
 		}
 	}
