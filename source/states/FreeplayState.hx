@@ -48,6 +48,8 @@ class FreeplayState extends MusicBeatState
     var textIntervals:FlxTypedGroup<FlxSprite>;
     var searchSongNamesTexts:FlxTypedGroup<FlxText>;
     
+    var searchCheck:String = '';
+    
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
@@ -193,7 +195,7 @@ class FreeplayState extends MusicBeatState
 		underline_text = new FlxSprite(FlxG.width - width + 50, showY + 20 + 40).makeGraphic(width - 100, 6, FlxColor.WHITE);
 		underline_text.alpha = 0.6;
 		var lineHeight = 3;
-		underline_BG = new FlxSprite(FlxG.width - width, showY + 100 - lineHeight/2).makeGraphic(width , lineHeight, 0xFF00FFFF);
+		underline_BG = new FlxSprite(FlxG.width - width, showY + 100).makeGraphic(width , lineHeight, 0xFF00FFFF);
 		
 		textIntervals = new FlxTypedGroup<FlxSprite>();
 		searchSongNamesTexts = new FlxTypedGroup<FlxText>();
@@ -207,7 +209,7 @@ class FreeplayState extends MusicBeatState
 		
 		for (bgNum in 1...5)
 		{
-			var textInterval:FlxSprite = new FlxSprite(FlxG.width - width, showY + 100 + 40 * bgNum - lineHeight/2).makeGraphic(width , lineHeight, FlxColor.WHITE);
+			var textInterval:FlxSprite = new FlxSprite(FlxG.width - width, showY + 100 + 40 * bgNum).makeGraphic(width , lineHeight, FlxColor.WHITE);
 			textInterval.ID = bgNum;
 			textIntervals.add(textInterval);
         }
@@ -295,6 +297,11 @@ class FreeplayState extends MusicBeatState
 			lerpScore = intendedScore;
 		if (Math.abs(lerpRating - intendedRating) <= 0.01)
 			lerpRating = intendedRating;
+			
+		if (searchCheck != searchInput.text){
+		    searchCheck = searchInput.text;
+		    updateSearch();
+		}
 
 		var ratingSplit:Array<String> = Std.string(CoolUtil.floorDecimal(lerpRating * 100, 2)).split('.');
 		if(ratingSplit.length < 2) { //No decimals, add an empty space
@@ -489,6 +496,23 @@ class FreeplayState extends MusicBeatState
 			vocals.destroy();
 		}
 		vocals = null;
+	}
+	
+	function updateSearch()
+	{
+	    var songName:Array<String> = [];
+		var songNum:Array<Int> = [];
+		var searchString = searchInput.text;
+		for (i in 0...songs.length)
+		{
+			var name:String = songs[i].songName.toLowerCase();
+			if (name.indexOf(searchString) != -1)
+			{
+				songName.push(songs[i].songName);
+				songNum.push(i)
+			}
+		}
+		
 	}
 
 	function changeDiff(change:Int = 0)
