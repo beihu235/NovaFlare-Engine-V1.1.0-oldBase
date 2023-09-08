@@ -196,6 +196,7 @@ class FreeplayState extends MusicBeatState
 		underline_BG = new FlxSprite(FlxG.width - width, showY + 100).makeGraphic(width , 3, 0xFF00FFFF);
 		
 		textIntervals = new FlxTypedGroup<FlxSprite>();
+		searchSongNamesTexts = new FlxTypedGroup<FlxText>();
 		
 		add(searchTextBG);
 		add(searchInput);
