@@ -40,7 +40,7 @@ class FreeplayState extends MusicBeatState
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
 	
-	var openSearchCheck:Bool = false;
+	var openSearch:Bool = false;
 	
 	var searchInput:FlxInputText;
 	var chooseBG:FlxSprite;
@@ -262,33 +262,34 @@ class FreeplayState extends MusicBeatState
         var CH_Y = 150;
         var text1size = 50;
         var text2size = 30;
-        showCaseBG = new FlxSprite(FlxG.width - CHsize, CH_Y).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
+        showCaseBG = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
 		showCaseBG.alpha = 0.6;
+		showCaseBG.color = 0xFF000000;
 		
-		showCaseText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize / 2 - text1size / 2, CHsize, '<<', text1size);
+		showCaseText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50 + CHsize / 2 - text1size / 2, CHsize, '<<', text1size);
 		showCaseText.setFormat(Paths.font("vcr.ttf"), text1size, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		showCaseText.scrollFactor.set();
 		showCaseText.antialiasing = ClientPrefs.data.antialiasing;
 		
-		reduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
+		reduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y + CHsize).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
 		reduceDataBG.alpha = 0.6;
 		reduceDataBG.color = 0xFF000000;
 		
-		reduceDataText = new FlxText(FlxG.width - CHsize * 2, CH_Y + CHsize * 2 - 50 + CHsize / 2 - text2size / 2, CHsize, 'UP', text2size);
+		reduceDataText = new FlxText(FlxG.width - CHsize * 2, CH_Y + CHsize / 2 - text2size / 2, CHsize, 'UP', text2size);
 		reduceDataText.setFormat(Paths.font("vcr.ttf"), text2size, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		reduceDataText.scrollFactor.set();
 		reduceDataText.antialiasing = ClientPrefs.data.antialiasing;
 		
-		addDataBG = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
+		addDataBG = new FlxSprite(FlxG.width - CHsize, CH_Y).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
 		addDataBG.alpha = 0.6;
 		addDataBG.color = 0xFF000000;
 		
-		addDataText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50 + CHsize / 2 - text2size / 2, CHsize, 'DOWN', text2size);
+		addDataText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize / 2 - text2size / 2, CHsize, 'DOWN', text2size);
 		addDataText.setFormat(Paths.font("vcr.ttf"), text2size, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		addDataText.scrollFactor.set();
 		addDataText.antialiasing = ClientPrefs.data.antialiasing;
 		
-		centerLine = new FlxSprite(FlxG.width - CHsize - 0.5, CH_Y + CHsize * 2 - 50).makeGraphic(1 , CHsize, FlxColor.WHITE);
+		centerLine = new FlxSprite(FlxG.width - CHsize - 0.5, CH_Y).makeGraphic(1 , CHsize, FlxColor.WHITE);
 		
 		add(showCaseBG);
         add(showCaseText);
