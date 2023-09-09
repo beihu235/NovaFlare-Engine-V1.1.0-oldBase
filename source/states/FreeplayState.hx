@@ -269,7 +269,7 @@ class FreeplayState extends MusicBeatState
 		reduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
 		reduceDataBG.alpha = 0.6;
 		
-		reduceDataText = new FlxText(FlxG.width - CHsize * 2, CH_Y + CHsize * 2 - 50 + CHsize / 2 - text2size / 2,, CHsize, 'UP', text2size);
+		reduceDataText = new FlxText(FlxG.width - CHsize * 2, CH_Y + CHsize * 2 - 50 + CHsize / 2 - text2size / 2, CHsize, 'UP', text2size);
 		reduceDataText.setFormat(Paths.font("vcr.ttf"), text2size, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		reduceDataText.scrollFactor.set();
 		reduceDataText.antialiasing = ClientPrefs.data.antialiasing;
@@ -277,7 +277,7 @@ class FreeplayState extends MusicBeatState
 		addDataBG = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
 		addDataBG.alpha = 0.6;
 		
-		addDataText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50 + CHsize / 2 - text2size / 2,, CHsize, 'DOWN', text2size);
+		addDataText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50 + CHsize / 2 - text2size / 2, CHsize, 'DOWN', text2size);
 		addDataText.setFormat(Paths.font("vcr.ttf"), text2size, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		addDataText.scrollFactor.set();
 		addDataText.antialiasing = ClientPrefs.data.antialiasing;
