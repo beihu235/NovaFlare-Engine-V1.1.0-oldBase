@@ -594,12 +594,14 @@ class FreeplayState extends MusicBeatState
                 addDataBG.color = 0xFFFFFFFF;
                 if (addBGTween != null) addBGTween.cancel();
                 addBGTween = FlxTween.color(addDataBG, 0.5, 0xFFFFFFFF, 0xFF000000, {ease: FlxEase.sineInOut});
+                addDataBG.alpha = 0.6;
             }    
 		    if (FlxG.mouse.overlaps(reduceDataBG)){
 		        ChangeChoose(-1);
 		        reduceDataBG.color = 0xFFFFFFFF;
 		        if (reduceBGTween != null) reduceBGTween.cancel();
                 reduceBGTween = FlxTween.color(reduceDataBG, 0.5, 0xFFFFFFFF, 0xFF000000, {ease: FlxEase.sineInOut});
+                reduceDataBG.alpha = 0.6;
 		    }
 		}    
 	}
