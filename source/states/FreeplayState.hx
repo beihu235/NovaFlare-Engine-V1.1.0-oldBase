@@ -274,12 +274,12 @@ class FreeplayState extends MusicBeatState
 		addDataText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		addDataText.scrollFactor.set();
 		
-		add(showCaseBG)
-        add(showCaseText)
-        add(addDataBG)
-        add(addDataText)
-        add(reduceDataBG)
-        add(reduceDataText)
+		add(showCaseBG);
+        add(showCaseText);
+        add(addDataBG);
+        add(addDataText);
+        add(reduceDataBG);
+        add(reduceDataText);
     
 		#if PRELOAD_ALL
 		#if android
