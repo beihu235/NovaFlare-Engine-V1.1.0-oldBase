@@ -273,7 +273,7 @@ class FreeplayState extends MusicBeatState
 		showCaseText.scrollFactor.set();
 		showCaseText.antialiasing = ClientPrefs.data.antialiasing;
 		
-		reduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y + CHsize).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
+		reduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
 		reduceDataBG.alpha = 0.6;
 		reduceDataBG.color = 0xFF000000;
 		
@@ -619,6 +619,21 @@ class FreeplayState extends MusicBeatState
 	
 	function openSearchCheck() 
 	{
+	    if (!openSearch){
+	        openSearch = true;
+	        showCaseText.text = '>>';
+	        moveSearch('open');
+	    }
+	    else{
+	        openSearch = false;
+	        showCaseText.text = '<<';
+	        moveSearch('close');
+	    }
+	}
+	
+    function moveSearch(Type:String) 
+	{
+	
 	}
 	
 	function updateSearch() 
