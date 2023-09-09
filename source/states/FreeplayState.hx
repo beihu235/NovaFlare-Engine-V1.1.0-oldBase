@@ -69,6 +69,19 @@ class FreeplayState extends MusicBeatState
     var notFoundSongText:FlxText;
     var notFoundSongTextSine:Float = 0;
     
+    public var showWidth = 500;
+    public var showHeight = 300;
+    public var showX = 180;
+    public var showY = -300;
+    
+    public var lineHeight = 3;
+    
+    public var CHsize = 100;
+    public var CH_Y = 150;
+    public var CH_X = 0;
+    public var text1size = 50;
+    public var text2size = 30;
+        
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
@@ -196,10 +209,7 @@ class FreeplayState extends MusicBeatState
 		textBG.alpha = 0.6;
 		add(textBG);
 		
-        public var showWidth = 500;
-        public var showHeight = 300;
-        public var showX = 180;
-        public var showY = -300;
+        
         searchTextBG = new FlxSprite(showX, showY).makeGraphic(showWidth, showHeight, FlxColor.BLACK);
 		searchTextBG.alpha = 0.6;
 		
@@ -224,7 +234,7 @@ class FreeplayState extends MusicBeatState
 		
 		underline_text_BG = new FlxSprite(showX + 50, showY + 20 + 40).makeGraphic(showWidth - 100, 6, FlxColor.WHITE);
 		underline_text_BG.alpha = 0.6;
-		public var lineHeight = 3;
+		
 		underline_BG = new FlxSprite(showX, showY + 100).makeGraphic(showWidth , lineHeight, 0xFF00FFFF);
 		
 		chooseBG = new FlxSprite(showX, showY + 100).makeGraphic(showWidth , 40, FlxColor.WHITE);
@@ -261,11 +271,7 @@ class FreeplayState extends MusicBeatState
         }
 		
         
-        public var CHsize = 100;
-        public var CH_Y = 150;
-        public var CH_X = 0;
-        public var text1size = 50;
-        public var text2size = 30;
+        
         showCaseBG = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
 		showCaseBG.alpha = 0.6;
 		showCaseBG.color = 0xFF000000;
