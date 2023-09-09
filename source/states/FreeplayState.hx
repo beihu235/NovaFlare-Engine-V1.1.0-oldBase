@@ -201,16 +201,19 @@ class FreeplayState extends MusicBeatState
 		searchInput.backgroundColor = FlxColor.TRANSPARENT;
 		searchInput.fieldBorderColor = FlxColor.TRANSPARENT;
 		searchInput.font = Paths.font("vcr.ttf");
+		searchInput.antialiasing = ClientPrefs.data.antialiasing;
 		
 		lineText = new FlxText(showX + 50, showY + 20, width - 100, 'Song Name For Search', 30);
 		lineText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		lineText.scrollFactor.set();
 		lineText.alpha = 0.6;
 		lineText.visible = true;
+		lineText.antialiasing = ClientPrefs.data.antialiasing;
 		
-		notFoundSongText = new FlxText(showX + 5, showY + 100 + 40 * 2, width, 'Not Found Song!', 30);
+		notFoundSongText = new FlxText(showX, showY + 100 + 40 * 2, width, 'Not Found Song!', 30);
 		notFoundSongText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		notFoundSongText.scrollFactor.set();
+		notFoundSongText.antialiasing = ClientPrefs.data.antialiasing;
 		
 		underline_text_BG = new FlxSprite(showX + 50, showY + 20 + 40).makeGraphic(width - 100, 6, FlxColor.WHITE);
 		underline_text_BG.alpha = 0.6;
@@ -246,6 +249,7 @@ class FreeplayState extends MusicBeatState
 		    searchSongNamesText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		    searchSongNamesText.scrollFactor.set();
 			searchSongNamesText.ID = textNum;
+			searchSongNamesText.antialiasing = ClientPrefs.data.antialiasing;
 			searchSongNamesTexts.add(searchSongNamesText);
         }
 		
@@ -257,22 +261,25 @@ class FreeplayState extends MusicBeatState
 		showCaseBG.alpha = 0.6;
 		
 		showCaseText = new FlxText(FlxG.width - CHsize, CH_Y, CHsize, '<<', 50);
-		showCaseText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		showCaseText.setFormat(Paths.font("vcr.ttf"), 50, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		showCaseText.scrollFactor.set();
+		showCaseText.antialiasing = ClientPrefs.data.antialiasing;
 		
 		reduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
 		reduceDataBG.alpha = 0.6;
 		
 		reduceDataText = new FlxText(FlxG.width - CHsize * 2, CH_Y + CHsize * 2 - 50, CHsize, 'UP', 30);
-		reduceDataText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		reduceDataText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		reduceDataText.scrollFactor.set();
+		reduceDataText.antialiasing = ClientPrefs.data.antialiasing;
 		
 		addDataBG = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
 		addDataBG.alpha = 0.6;
 		
 		addDataText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50, CHsize, 'DOWN', 30);
-		addDataText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		addDataText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		addDataText.scrollFactor.set();
+		addDataText.antialiasing = ClientPrefs.data.antialiasing;
 		
 		add(showCaseBG);
         add(showCaseText);
