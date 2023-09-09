@@ -308,6 +308,7 @@ class FreeplayState extends MusicBeatState
         add(upLine);
         add(downLine);
         add(leftLine);
+        
 		#if PRELOAD_ALL
 		#if android
 		var leText:String = "Press X to listen to the Song / Press C to open the Gameplay Changers Menu / Press Y to Reset your Score and Accuracy.";
@@ -656,14 +657,14 @@ class FreeplayState extends MusicBeatState
 	    
 	    var moveTime = 0.5;
 	    if (Type == 'open'){
-	        SearchTween[1] = FlxTween.tween(addDataBG, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[2] = FlxTween.tween(addDataText, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[3] = FlxTween.tween(reduceDataBG, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[4] = FlxTween.tween(reduceDataText, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[5] = FlxTween.tween(centerLine, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[6] = FlxTween.tween(upLine, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[7] = FlxTween.tween(downLine, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[8] = FlxTween.tween(leftLine, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(addDataBG, {x: FlxG.width - CHsize * 2}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[2] = FlxTween.tween(addDataText, {x: FlxG.width - CHsize * 2}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[3] = FlxTween.tween(reduceDataBG, {x: FlxG.width - CHsize * 1}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[4] = FlxTween.tween(reduceDataText, {x: FlxG.width - CHsize * 1}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[5] = FlxTween.tween(centerLine, {x: FlxG.width - CHsize - 0.5}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[6] = FlxTween.tween(upLine, {x: FlxG.width - CHsize * 2}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[7] = FlxTween.tween(downLine, {x: FlxG.width - CHsize * 2}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[8] = FlxTween.tween(leftLine, {x: FlxG.width - CHsize * 2 - 0.5}, moveTime, {ease: FlxEase.backInOut});
 	        /*
 	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
 	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
