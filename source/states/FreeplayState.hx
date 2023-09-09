@@ -271,7 +271,7 @@ class FreeplayState extends MusicBeatState
 		showCaseText.scrollFactor.set();
 		showCaseText.antialiasing = ClientPrefs.data.antialiasing;
 		
-		reduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y + CHsize).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
+		reduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
 		reduceDataBG.alpha = 0.6;
 		reduceDataBG.color = 0xFF000000;
 		
