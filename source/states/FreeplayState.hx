@@ -57,6 +57,8 @@ class FreeplayState extends MusicBeatState
     var reduceDataBG:FlxSprite;
     var reduceDataText:FlxText;
     var centerLine:FlxSprite;
+    var addBGTween:FlxTween;
+    var reduceBGTween:FlxTween;
     
     var searchCheck:String = ''; // update check song name change
     var lineText:FlxText;
@@ -583,8 +585,7 @@ class FreeplayState extends MusicBeatState
 		    notFoundSongText.alpha = 0;
 		}
 		
-		var addBGTween:FlxTween;
-		var reduceBGTween:FlxTween;
+		
 		if (FlxG.mouse.justPressed){
 		    if (FlxG.mouse.overlaps(addDataBG)){
                 ChangeChoose(1);
