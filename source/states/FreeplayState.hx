@@ -44,13 +44,20 @@ class FreeplayState extends MusicBeatState
 	
 	var searchInput:FlxInputText;
 	var chooseBG:FlxSprite;
-    var underline_text:FlxSprite;
+    var underline_text_BG:FlxSprite;
     var underline_BG:FlxSprite;
     var searchTextBG:FlxSprite;
     var textIntervals:FlxTypedGroup<FlxSprite>;
     var searchSongNamesTexts:FlxTypedGroup<FlxText>;
     
-    var searchCheck:String = '';
+    var showCaseBG:FlxSprite;
+    var showCaseText:FlxText;
+    var addDataBG:FlxSprite;
+    var addDataText:FlxText;
+    var reduceDataBG:FlxSprite;
+    var reduceDataText:FlxText;
+    
+    var searchCheck:String = ''; // update check song name change
     var lineText:FlxText;
     var notFoundSongText:FlxText;
     var notFoundSongTextSine:Float = 0;
@@ -195,7 +202,7 @@ class FreeplayState extends MusicBeatState
 		searchInput.fieldBorderColor = FlxColor.TRANSPARENT;
 		searchInput.font = Paths.font("vcr.ttf");
 		
-		lineText = new FlxText(showX + 50, showY + 20, width - 100, 'Song Name', 30);
+		lineText = new FlxText(showX + 50, showY + 20, width - 100, 'Song Name For Search', 30);
 		lineText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		lineText.scrollFactor.set();
 		lineText.alpha = 0.6;
@@ -205,8 +212,8 @@ class FreeplayState extends MusicBeatState
 		notFoundSongText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		notFoundSongText.scrollFactor.set();
 		
-		underline_text = new FlxSprite(showX + 50, showY + 20 + 40).makeGraphic(width - 100, 6, FlxColor.WHITE);
-		underline_text.alpha = 0.6;
+		underline_text_BG = new FlxSprite(showX + 50, showY + 20 + 40).makeGraphic(width - 100, 6, FlxColor.WHITE);
+		underline_text_BG.alpha = 0.6;
 		var lineHeight = 3;
 		underline_BG = new FlxSprite(showX, showY + 100).makeGraphic(width , lineHeight, 0xFF00FFFF);
 		
@@ -221,7 +228,7 @@ class FreeplayState extends MusicBeatState
 		add(chooseBG);
 		add(lineText);
 		add(notFoundSongText);
-		add(underline_text);
+		add(underline_text_BG);
 		add(underline_BG);
 		add(textIntervals);
 		add(searchSongNamesTexts);
@@ -242,6 +249,38 @@ class FreeplayState extends MusicBeatState
 			searchSongNamesTexts.add(searchSongNamesText);
         }
 		
+        
+        var CHsize = 100;
+        var CH_Y = 200;
+        
+        showCaseBG = new FlxSprite(FlxG.width - CHsize, CH_Y).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
+		showCaseBG.alpha = 0.6;
+		
+		showCaseText = new FlxText(FlxG.width - CHsize, CH_Y, CHsize, '<<', CHsize);
+		showCaseText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		showCaseText.scrollFactor.set();
+		
+		ruduceDataBG = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
+		ruduceDataBG.alpha = 0.6;
+		
+		reduceDataText = new FlxText(FlxG.width - CHsize,  + CHsize * 2, CHsize, '↑', CHsize);
+		reduceDataText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		reduceDataText.scrollFactor.set();
+		
+		addDataBG = new FlxSprite(FlxG.width - CHsize,  + CHsize * 3).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
+		addDataBG.alpha = 0.6;
+		
+		addDataText = new FlxText(FlxG.width - CHsize,  + CHsize * 3, CHsize, '↓', CHsize);
+		addDataText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		addDataText.scrollFactor.set();
+		
+		add(showCaseBG)
+        add(showCaseText)
+        add(addDataBG)
+        add(addDataText)
+        add(reduceDataBG)
+        add(reduceDataText)
+    
 		#if PRELOAD_ALL
 		#if android
 		var leText:String = "Press X to listen to the Song / Press C to open the Gameplay Changers Menu / Press Y to Reset your Score and Accuracy.";
