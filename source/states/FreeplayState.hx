@@ -260,17 +260,17 @@ class FreeplayState extends MusicBeatState
 		showCaseText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		showCaseText.scrollFactor.set();
 		
-		ruduceDataBG = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
+		ruduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y + CHsize * 2).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
 		ruduceDataBG.alpha = 0.6;
 		
-		reduceDataText = new FlxText(FlxG.width - CHsize,  + CHsize * 2, CHsize, '↑', CHsize);
+		reduceDataText = new FlxText(FlxG.width - CHsize * 2, CH_Y + CHsize * 2, CHsize, '↑', CHsize);
 		reduceDataText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		reduceDataText.scrollFactor.set();
 		
-		addDataBG = new FlxSprite(FlxG.width - CHsize,  + CHsize * 3).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
+		addDataBG = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
 		addDataBG.alpha = 0.6;
 		
-		addDataText = new FlxText(FlxG.width - CHsize,  + CHsize * 3, CHsize, '↓', CHsize);
+		addDataText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize * 2, CHsize, '↓', CHsize);
 		addDataText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		addDataText.scrollFactor.set();
 		
