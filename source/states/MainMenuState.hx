@@ -15,6 +15,7 @@ import lime.app.Application;
 import objects.AchievementPopup;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
+import openfl.Lib;
 
 class MainMenuState extends MusicBeatState
 {
@@ -74,6 +75,8 @@ class MainMenuState extends MusicBeatState
 	{
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
+
+		Lib.application.window.title = "NF Engine - MainMenuState";
 		
         Mainbpm = TitleState.bpm;
         bpm = TitleState.bpm;
