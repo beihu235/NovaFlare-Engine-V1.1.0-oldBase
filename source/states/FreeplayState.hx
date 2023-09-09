@@ -368,7 +368,7 @@ class FreeplayState extends MusicBeatState
 		if (Math.abs(lerpRating - intendedRating) <= 0.01)
 			lerpRating = intendedRating;
 		
-		checkSearch();
+		checkSearch(elapsed);
 		
 		
 		var ratingSplit:Array<String> = Std.string(CoolUtil.floorDecimal(lerpRating * 100, 2)).split('.');
@@ -566,7 +566,7 @@ class FreeplayState extends MusicBeatState
 		vocals = null;
 	}
 	
-	function checkSearch()
+	function checkSearch(elapsed)
 	{
 	    lineText.visible = (searchInput.text == '');		
 		
@@ -634,7 +634,7 @@ class FreeplayState extends MusicBeatState
 		}
 	}
 	
-	function updateSearch(change:Int = 0) 
+	function ChangeChoose(change:Int = 0) 
 	{
 	
 	}
