@@ -661,44 +661,44 @@ class FreeplayState extends MusicBeatState
 	    if (SearchTween[i] != null) SearchTween[i].cancel();
 	    } //close all move
 	    
-	    var moveTime = 0.5;
+	    var moveTime = 0.25;
 	    if (Type == 'open'){
-	        SearchTween[1] = FlxTween.tween(addDataBG, {x: FlxG.width - CHsize * 2}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[2] = FlxTween.tween(addDataText, {x: FlxG.width - CHsize * 2}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[3] = FlxTween.tween(reduceDataBG, {x: FlxG.width - CHsize * 1}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[4] = FlxTween.tween(reduceDataText, {x: FlxG.width - CHsize * 1}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[5] = FlxTween.tween(centerLine, {x: FlxG.width - CHsize - 0.5}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[6] = FlxTween.tween(upLine, {x: FlxG.width - CHsize * 2}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[7] = FlxTween.tween(downLine, {x: FlxG.width - CHsize * 2}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[8] = FlxTween.tween(leftLine, {x: FlxG.width - CHsize * 2 - 0.5}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(addDataBG, {x: FlxG.width - CHsize * 2}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[2] = FlxTween.tween(addDataText, {x: FlxG.width - CHsize * 2}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[3] = FlxTween.tween(reduceDataBG, {x: FlxG.width - CHsize * 1}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[4] = FlxTween.tween(reduceDataText, {x: FlxG.width - CHsize * 1}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[5] = FlxTween.tween(centerLine, {x: FlxG.width - CHsize - 0.5}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[6] = FlxTween.tween(upLine, {x: FlxG.width - CHsize * 2}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[7] = FlxTween.tween(downLine, {x: FlxG.width - CHsize * 2}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[8] = FlxTween.tween(leftLine, {x: FlxG.width - CHsize * 2 - 0.5}, moveTime, {ease: FlxEase.expoInOut});
 	        /*
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
 	        */
 	    }
 	    else{
-	        SearchTween[1] = FlxTween.tween(addDataBG, {x: FlxG.width}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[2] = FlxTween.tween(addDataText, {x: FlxG.width}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[3] = FlxTween.tween(reduceDataBG, {x: FlxG.width + CHsize}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[4] = FlxTween.tween(reduceDataText, {x: FlxG.width + CHsize}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[5] = FlxTween.tween(centerLine, {x: FlxG.width + CHsize - 0.5}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[6] = FlxTween.tween(upLine, {x: FlxG.width}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[7] = FlxTween.tween(downLine, {x: FlxG.width}, moveTime, {ease: FlxEase.backInOut});
-	        SearchTween[8] = FlxTween.tween(leftLine, {x: FlxG.width - 0.5}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(addDataBG, {x: FlxG.width}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[2] = FlxTween.tween(addDataText, {x: FlxG.width}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[3] = FlxTween.tween(reduceDataBG, {x: FlxG.width + CHsize}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[4] = FlxTween.tween(reduceDataText, {x: FlxG.width + CHsize}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[5] = FlxTween.tween(centerLine, {x: FlxG.width + CHsize - 0.5}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[6] = FlxTween.tween(upLine, {x: FlxG.width}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[7] = FlxTween.tween(downLine, {x: FlxG.width}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[8] = FlxTween.tween(leftLine, {x: FlxG.width - 0.5}, moveTime, {ease: FlxEase.expoInOut});
 	    
 	    }	    
 	}
