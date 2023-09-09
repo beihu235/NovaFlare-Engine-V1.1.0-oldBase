@@ -13,6 +13,7 @@ import flixel.input.gamepad.FlxGamepad;
 import tjson.TJSON as Json;
 
 import openfl.Assets;
+import openfl.Lib;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 
@@ -82,7 +83,8 @@ class TitleState extends MusicBeatState
 	override public function create():Void
 	{
 		Paths.clearStoredMemory();
-		Paths.clearUnusedMemory();		
+		Paths.clearUnusedMemory();
+		Lib.application.window.title = " NF - Engine - Title";
 		
 		//https://github.com/beihu235/AndroidDialogs
 		var lang:String = '';
