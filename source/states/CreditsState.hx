@@ -4,7 +4,8 @@ package states;
 import sys.FileSystem;
 import sys.io.File;
 #end
-
+import openfl.Lib;
+	
 import objects.AttachedSprite;
 
 class CreditsState extends MusicBeatState
@@ -29,6 +30,8 @@ class CreditsState extends MusicBeatState
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end
+
+		Lib.application.window.title = "NF Engine - CreditsState";
 
 		persistentUpdate = true;
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
@@ -55,6 +58,10 @@ class CreditsState extends MusicBeatState
 		#end
 								
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+		
+		    ['NF Engine Team'],
+		    ['beihu',		'beihu',		'NF EngineFounder/nAndroid Porter',							beihuLink,	'FFC0CB'],
+		    [''],
 		    ['Psych Engine Android Team'],
 		    ['beihu',		'beihu',		'Main Android Porter\nport owner',							beihuLink,	'FFC0CB'],
 			['yanqiang',     'yanqiang',	    'Android Porter\nBug fix',							yanqiangLink,	'7192FD'],
