@@ -260,8 +260,8 @@ class FreeplayState extends MusicBeatState
 		showCaseText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		showCaseText.scrollFactor.set();
 		
-		ruduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y + CHsize * 2).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
-		ruduceDataBG.alpha = 0.6;
+		reduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y + CHsize * 2).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
+		reduceDataBG.alpha = 0.6;
 		
 		reduceDataText = new FlxText(FlxG.width - CHsize * 2, CH_Y + CHsize * 2, CHsize, '↑', CHsize);
 		reduceDataText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
