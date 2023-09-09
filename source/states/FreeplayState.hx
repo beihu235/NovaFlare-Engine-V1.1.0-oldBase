@@ -41,7 +41,7 @@ class FreeplayState extends MusicBeatState
 	var intendedRating:Float = 0;
 	
 	var openSearch:Bool = false;
-	
+	var SearchTween:Array<FlxTween> = [];
 	var searchInput:FlxInputText;
 	var chooseBG:FlxSprite;
     var underline_text_BG:FlxSprite;
@@ -57,6 +57,9 @@ class FreeplayState extends MusicBeatState
     var reduceDataBG:FlxSprite;
     var reduceDataText:FlxText;
     var centerLine:FlxSprite;
+    var upLine:FlxSprite;
+    var downLine:FlxSprite;
+    var leftLine:FlxSprite;
     var showCaseBGTween:FlxTween;
     var addBGTween:FlxTween;
     var reduceBGTween:FlxTween;
@@ -196,7 +199,7 @@ class FreeplayState extends MusicBeatState
         var width = 500;
         var height = 300;
         var showX = 180;
-        var showY = 0;
+        var showY = -300;
         searchTextBG = new FlxSprite(showX, showY).makeGraphic(width, height, FlxColor.BLACK);
 		searchTextBG.alpha = 0.6;
 		
@@ -260,6 +263,7 @@ class FreeplayState extends MusicBeatState
         
         var CHsize = 100;
         var CH_Y = 150;
+        var CH_X = 0;
         var text1size = 50;
         var text2size = 30;
         showCaseBG = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
@@ -271,25 +275,28 @@ class FreeplayState extends MusicBeatState
 		showCaseText.scrollFactor.set();
 		showCaseText.antialiasing = ClientPrefs.data.antialiasing;
 		
-		reduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
+		reduceDataBG = new FlxSprite(FlxG.width + CHsize * 2, CH_Y).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
 		reduceDataBG.alpha = 0.6;
 		reduceDataBG.color = 0xFF000000;
 		
-		reduceDataText = new FlxText(FlxG.width - CHsize * 2, CH_Y + CHsize / 2 - text2size / 2, CHsize, 'UP', text2size);
+		reduceDataText = new FlxText(FlxG.width + CHsize * 2, CH_Y + CHsize / 2 - text2size / 2, CHsize, 'UP', text2size);
 		reduceDataText.setFormat(Paths.font("vcr.ttf"), text2size, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		reduceDataText.scrollFactor.set();
 		reduceDataText.antialiasing = ClientPrefs.data.antialiasing;
 		
-		addDataBG = new FlxSprite(FlxG.width - CHsize, CH_Y).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
+		addDataBG = new FlxSprite(FlxG.width + CHsize, CH_Y).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
 		addDataBG.alpha = 0.6;
 		addDataBG.color = 0xFF000000;
 		
-		addDataText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize / 2 - text2size / 2, CHsize, 'DOWN', text2size);
+		addDataText = new FlxText(FlxG.width + CHsize, CH_Y + CHsize / 2 - text2size / 2, CHsize, 'DOWN', text2size);
 		addDataText.setFormat(Paths.font("vcr.ttf"), text2size, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		addDataText.scrollFactor.set();
 		addDataText.antialiasing = ClientPrefs.data.antialiasing;
 		
-		centerLine = new FlxSprite(FlxG.width - CHsize - 0.5, CH_Y).makeGraphic(1 , CHsize, FlxColor.WHITE);
+		centerLine = new FlxSprite(FlxG.width + CHsize + 0.5, CH_Y).makeGraphic(1 , CHsize, FlxColor.WHITE);
+		upLine = new FlxSprite(FlxG.width, CH_Y - 0.5).makeGraphic(CHsize * 2, 1, FlxColor.WHITE);
+		downLine = new FlxSprite(FlxG.width, CH_Y + CHsize - 0.5).makeGraphic(CHsize * 2, 1, FlxColor.WHITE);
+		leftLine = new FlxSprite(FlxG.width - 0.5, CH_Y).makeGraphic(1 , CHsize, FlxColor.WHITE);
 		
 		add(showCaseBG);
         add(showCaseText);
@@ -298,7 +305,9 @@ class FreeplayState extends MusicBeatState
         add(reduceDataBG);
         add(reduceDataText);
         add(centerLine);
-        
+        add(upLine);
+        add(downLine);
+        add(leftLine);
 		#if PRELOAD_ALL
 		#if android
 		var leText:String = "Press X to listen to the Song / Press C to open the Gameplay Changers Menu / Press Y to Reset your Score and Accuracy.";
@@ -629,9 +638,62 @@ class FreeplayState extends MusicBeatState
 	    }
 	}
 	
+	/*
+    var addDataBG:FlxSprite;
+    var addDataText:FlxText;
+    var reduceDataBG:FlxSprite;
+    var reduceDataText:FlxText;
+    var centerLine:FlxSprite;
+    var showCaseBGTween:FlxTween;
+    var addBGTween:FlxTween;
+    var reduceBGTween:FlxTween;*/
+	
     function moveSearch(Type:String) 
 	{
-	
+	    for (i in 0...SearchTween.length){
+	    if (SearchTween[i] != null) SearchTween[i].cancel();
+	    } //close all move
+	    
+	    var moveTime = 0.5;
+	    if (Type == 'open'){
+	        SearchTween[1] = FlxTween.tween(addDataBG, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[2] = FlxTween.tween(addDataText, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[3] = FlxTween.tween(reduceDataBG, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[4] = FlxTween.tween(reduceDataText, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[5] = FlxTween.tween(centerLine, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[6] = FlxTween.tween(upLine, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[7] = FlxTween.tween(downLine, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[8] = FlxTween.tween(leftLine, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        /*
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        */
+	    }
+	    else{
+	        SearchTween[1] = FlxTween.tween(addDataBG, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[2] = FlxTween.tween(addDataText, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[3] = FlxTween.tween(reduceDataBG, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[4] = FlxTween.tween(reduceDataText, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[5] = FlxTween.tween(centerLine, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[6] = FlxTween.tween(upLine, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[7] = FlxTween.tween(downLine, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	        SearchTween[8] = FlxTween.tween(leftLine, {x: 100}, moveTime, {ease: FlxEase.backInOut});
+	    
+	    }	    
 	}
 	
 	function updateSearch() 
