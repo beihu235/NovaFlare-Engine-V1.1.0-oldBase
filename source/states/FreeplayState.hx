@@ -262,8 +262,9 @@ class FreeplayState extends MusicBeatState
         var CH_Y = 150;
         var text1size = 50;
         var text2size = 30;
-        showCaseBG = new FlxSprite(FlxG.width - CHsize, CH_Y).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
+        showCaseBG = new FlxSprite(FlxG.width - CHsize, CH_Y).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
 		showCaseBG.alpha = 0.6;
+		showCaseBG.color = 0xFF000000;
 		
 		showCaseText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize / 2 - text1size / 2, CHsize, '<<', text1size);
 		showCaseText.setFormat(Paths.font("vcr.ttf"), text1size, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
