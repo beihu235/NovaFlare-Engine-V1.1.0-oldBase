@@ -6,6 +6,7 @@ import backend.Song;
 
 import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
+import openfl.Lib;
 
 import objects.HealthIcon;
 import states.editors.ChartingState;
@@ -82,6 +83,7 @@ class FreeplayState extends MusicBeatState
 	{
 		//Paths.clearStoredMemory();
 		//Paths.clearUnusedMemory();
+		Lib.application.window.title = "NF Engine - FreeplayState";
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
