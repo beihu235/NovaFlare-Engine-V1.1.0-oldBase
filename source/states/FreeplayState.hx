@@ -208,7 +208,7 @@ class FreeplayState extends MusicBeatState
 		lineText.alpha = 0.6;
 		lineText.visible = true;
 		
-		notFoundSongText = new FlxText(showX + 5, showY + 100 + 40 * 2, 0, 'Not Found Song!', 30);
+		notFoundSongText = new FlxText(showX + 5, showY + 100 + 40 * 2, width, 'Not Found Song!', 30);
 		notFoundSongText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		notFoundSongText.scrollFactor.set();
 		
@@ -218,8 +218,8 @@ class FreeplayState extends MusicBeatState
 		underline_BG = new FlxSprite(showX, showY + 100).makeGraphic(width , lineHeight, 0xFF00FFFF);
 		
 		chooseBG = new FlxSprite(showX, showY + 100).makeGraphic(width , 40, FlxColor.WHITE);
-		chooseBG.alpha = 0.5;
-		
+		chooseBG.alpha = 0;
+
 		textIntervals = new FlxTypedGroup<FlxSprite>();
 		searchSongNamesTexts = new FlxTypedGroup<FlxText>();
 		
@@ -251,26 +251,26 @@ class FreeplayState extends MusicBeatState
 		
         
         var CHsize = 100;
-        var CH_Y = 200;
+        var CH_Y = 150;
         
         showCaseBG = new FlxSprite(FlxG.width - CHsize, CH_Y).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
 		showCaseBG.alpha = 0.6;
 		
-		showCaseText = new FlxText(FlxG.width - CHsize, CH_Y, CHsize, '<<', CHsize);
+		showCaseText = new FlxText(FlxG.width - CHsize, CH_Y, CHsize, '<<', 50);
 		showCaseText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		showCaseText.scrollFactor.set();
 		
-		reduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y + CHsize * 2).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
+		reduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
 		reduceDataBG.alpha = 0.6;
 		
-		reduceDataText = new FlxText(FlxG.width - CHsize * 2, CH_Y + CHsize * 2, CHsize, '↑', CHsize);
+		reduceDataText = new FlxText(FlxG.width - CHsize * 2, CH_Y + CHsize * 2 - 50, CHsize, 'UP', 30);
 		reduceDataText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		reduceDataText.scrollFactor.set();
 		
-		addDataBG = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
+		addDataBG = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
 		addDataBG.alpha = 0.6;
 		
-		addDataText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize * 2, CHsize, '↓', CHsize);
+		addDataText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50, CHsize, 'DOWN', 30);
 		addDataText.setFormat(Paths.font("vcr.ttf"), CHsize, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		addDataText.scrollFactor.set();
 		
