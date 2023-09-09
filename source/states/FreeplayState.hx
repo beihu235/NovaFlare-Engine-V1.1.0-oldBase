@@ -256,28 +256,29 @@ class FreeplayState extends MusicBeatState
         
         var CHsize = 100;
         var CH_Y = 150;
-        
+        var text1size = 50;
+        var text2size = 30;
         showCaseBG = new FlxSprite(FlxG.width - CHsize, CH_Y).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
 		showCaseBG.alpha = 0.6;
 		
-		showCaseText = new FlxText(FlxG.width - CHsize, CH_Y, CHsize, '<<', 50);
-		showCaseText.setFormat(Paths.font("vcr.ttf"), 50, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		showCaseText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize / 2 - text1size / 2, CHsize, '<<', text1size);
+		showCaseText.setFormat(Paths.font("vcr.ttf"), text1size, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		showCaseText.scrollFactor.set();
 		showCaseText.antialiasing = ClientPrefs.data.antialiasing;
 		
 		reduceDataBG = new FlxSprite(FlxG.width - CHsize * 2, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
 		reduceDataBG.alpha = 0.6;
 		
-		reduceDataText = new FlxText(FlxG.width - CHsize * 2, CH_Y + CHsize * 2 - 50, CHsize, 'UP', 30);
-		reduceDataText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		reduceDataText = new FlxText(FlxG.width - CHsize * 2, CH_Y + CHsize * 2 - 50 + CHsize / 2 - text2size / 2,, CHsize, 'UP', text2size);
+		reduceDataText.setFormat(Paths.font("vcr.ttf"), text2size, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		reduceDataText.scrollFactor.set();
 		reduceDataText.antialiasing = ClientPrefs.data.antialiasing;
 		
 		addDataBG = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , CHsize, FlxColor.BLACK);
 		addDataBG.alpha = 0.6;
 		
-		addDataText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50, CHsize, 'DOWN', 30);
-		addDataText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		addDataText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50 + CHsize / 2 - text2size / 2,, CHsize, 'DOWN', text2size);
+		addDataText.setFormat(Paths.font("vcr.ttf"), text2size, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		addDataText.scrollFactor.set();
 		addDataText.antialiasing = ClientPrefs.data.antialiasing;
 		
