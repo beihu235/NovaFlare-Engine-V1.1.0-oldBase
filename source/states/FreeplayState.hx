@@ -40,7 +40,7 @@ class FreeplayState extends MusicBeatState
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
 	
-	
+	var openSearchCheck:Bool = false;
 	
 	var searchInput:FlxInputText;
 	var chooseBG:FlxSprite;
@@ -57,6 +57,7 @@ class FreeplayState extends MusicBeatState
     var reduceDataBG:FlxSprite;
     var reduceDataText:FlxText;
     var centerLine:FlxSprite;
+    var showCaseBGTween:FlxTween;
     var addBGTween:FlxTween;
     var reduceBGTween:FlxTween;
     
@@ -589,21 +590,32 @@ class FreeplayState extends MusicBeatState
 		
 		
 		if (FlxG.mouse.justPressed){
+		    if (FlxG.mouse.overlaps(showCaseBG)){
+		        openSearchCheck();
+		        showCaseBG.color = 0xFFFFFFFF;
+		        if (showCaseBGTween != null) showCaseBGTween.cancel();
+                showCaseBGTween = FlxTween.color(showCaseBG, 0.5, 0xFFFFFFFF, 0xFF000000, {ease: FlxEase.sineInOut});                
+		    }
 		    if (FlxG.mouse.overlaps(addDataBG)){
                 ChangeChoose(1);
                 addDataBG.color = 0xFFFFFFFF;
                 if (addBGTween != null) addBGTween.cancel();
                 addBGTween = FlxTween.color(addDataBG, 0.5, 0xFFFFFFFF, 0xFF000000, {ease: FlxEase.sineInOut});
-                addDataBG.alpha = 0.6;
             }    
 		    if (FlxG.mouse.overlaps(reduceDataBG)){
 		        ChangeChoose(-1);
 		        reduceDataBG.color = 0xFFFFFFFF;
 		        if (reduceBGTween != null) reduceBGTween.cancel();
-                reduceBGTween = FlxTween.color(reduceDataBG, 0.5, 0xFFFFFFFF, 0xFF000000, {ease: FlxEase.sineInOut});
-                reduceDataBG.alpha = 0.6;
+                reduceBGTween = FlxTween.color(reduceDataBG, 0.5, 0xFFFFFFFF, 0xFF000000, {ease: FlxEase.sineInOut});                
 		    }
 		}    
+		addDataBG.alpha = 0.6;
+		reduceDataBG.alpha = 0.6;
+		showCaseBG.alpha = 0.6;
+	}
+	
+	function openSearchCheck() 
+	{
 	}
 	
 	function updateSearch() 
