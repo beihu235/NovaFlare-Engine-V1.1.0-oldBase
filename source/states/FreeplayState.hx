@@ -566,7 +566,7 @@ class FreeplayState extends MusicBeatState
 		vocals = null;
 	}
 	
-	function checkSearch(elapsed)
+	function checkSearch(elapsed:Float)
 	{
 	    lineText.visible = (searchInput.text == '');		
 		
