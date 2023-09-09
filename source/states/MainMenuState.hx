@@ -341,7 +341,7 @@ class MainMenuState extends MusicBeatState
 				    if (curSelected == spr.ID) {
 				        selectSomething();
 				    }
-				    else    {					    
+				    else    { 
 					    curSelected = spr.ID;
 					    
 					    		
@@ -367,17 +367,18 @@ class MainMenuState extends MusicBeatState
 			    }
 			}
 			else{
-	
+	            /*
 				    menuItems.forEach(function(spr:FlxSprite){
 			        spr.animation.play('idle');
 			        //spr.updateHitbox();
 
-			        if (spr.ID == curSelected )
+			        if (spr.ID == curSelected  && spr.animation.curAnim.name != 'selected')
 			        {
 			        	spr.animation.play('selected');
 			        	//spr.centerOffsets();
 			        }
 		        });
+		        */
 			}
 		});
 		

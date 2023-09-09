@@ -56,6 +56,7 @@ class FreeplayState extends MusicBeatState
     var addDataText:FlxText;
     var reduceDataBG:FlxSprite;
     var reduceDataText:FlxText;
+    var centerLine:FlxSprite;
     
     var searchCheck:String = ''; // update check song name change
     var lineText:FlxText;
@@ -282,13 +283,16 @@ class FreeplayState extends MusicBeatState
 		addDataText.scrollFactor.set();
 		addDataText.antialiasing = ClientPrefs.data.antialiasing;
 		
+		centerLine = new FlxSprite(FlxG.width - CHsize - 0.5, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , 1, FlxColor.WHITE);
+		
 		add(showCaseBG);
         add(showCaseText);
         add(addDataBG);
         add(addDataText);
         add(reduceDataBG);
         add(reduceDataText);
-    
+        add(centerLine);
+        
 		#if PRELOAD_ALL
 		#if android
 		var leText:String = "Press X to listen to the Song / Press C to open the Gameplay Changers Menu / Press Y to Reset your Score and Accuracy.";
@@ -364,22 +368,7 @@ class FreeplayState extends MusicBeatState
 		if (Math.abs(lerpRating - intendedRating) <= 0.01)
 			lerpRating = intendedRating;
 		
-		lineText.visible = (searchInput.text == '');		
-		
-		if (searchCheck != searchInput.text){
-		    searchCheck = searchInput.text;
-		    updateSearch();
-		}
-		
-    	//var songNameText:FlxText = searchSongNamesTexts.members[0];
-		
-		if (searchInput.text != '' && searchSongNamesTexts.members[0].text == ''){
-		    notFoundSongTextSine += 180 * elapsed;
-			notFoundSongText.alpha = 1 - Math.sin((Math.PI * notFoundSongTextSine) / 180);
-		}
-		else {
-		    notFoundSongText.alpha = 0;
-		}
+		checkSearch();
 		
 		
 		var ratingSplit:Array<String> = Std.string(CoolUtil.floorDecimal(lerpRating * 100, 2)).split('.');
@@ -577,7 +566,42 @@ class FreeplayState extends MusicBeatState
 		vocals = null;
 	}
 	
-	function updateSearch()
+	function checkSearch()
+	{
+	    lineText.visible = (searchInput.text == '');		
+		
+		if (searchCheck != searchInput.text){
+		    searchCheck = searchInput.text;
+		    updateSearch();
+		}
+		
+		if (searchInput.text != '' && searchSongNamesTexts.members[0].text == ''){
+		    notFoundSongTextSine += 180 * elapsed;
+			notFoundSongText.alpha = 1 - Math.sin((Math.PI * notFoundSongTextSine) / 180);
+		}
+		else {
+		    notFoundSongText.alpha = 0;
+		}
+		
+		var addBGTween:FlxTween;
+		var reduceBGTween:FlxTween;
+		if (FlxG.mouse.justPressed){
+		    if (FlxG.mouse.overlaps(addDataBG)){
+                ChangeChoose(1);
+                addDataBG.color = 0xFFFFFFFF;
+                if (addBGTween != null) addBGTween.cancel();
+                addBGTween = FlxTween.color(addDataBG, 0.5, 0xFFFFFFFF, 0xFF000000, {ease: FlxEase.sineInOut});
+            }    
+		    if (FlxG.mouse.overlaps(reduceDataBG)){
+		        ChangeChoose(-1);
+		        reduceDataBG.color = 0xFFFFFFFF;
+		        if (reduceBGTween != null) reduceBGTween.cancel();
+                reduceBGTween = FlxTween.color(reduceDataBG, 0.5, 0xFFFFFFFF, 0xFF000000, {ease: FlxEase.sineInOut});
+		    }
+		}    
+	}
+	
+	function updateSearch() 
 	{
 	    var songName:Array<String> = [];
 		var songNum:Array<Int> = [];
@@ -608,6 +632,11 @@ class FreeplayState extends MusicBeatState
     			songNameText.text = '';
 		    }
 		}
+	}
+	
+	function updateSearch(change:Int = 0) 
+	{
+	
 	}
 
 	function changeDiff(change:Int = 0)
