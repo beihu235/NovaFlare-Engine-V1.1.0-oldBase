@@ -629,7 +629,7 @@ class FreeplayState extends MusicBeatState
 	    }
 	}
 	
-    function updateSearch(Type:String) 
+    function moveSearch(Type:String) 
 	{
 	
 	}
