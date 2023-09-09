@@ -617,6 +617,21 @@ class FreeplayState extends MusicBeatState
 	
 	function openSearchCheck() 
 	{
+	    if (!openSearch){
+	        openSearch = true;
+	        showCaseText.text = '>>';
+	        moveSearch('open');
+	    }
+	    else{
+	        openSearch = false;
+	        showCaseText.text = '>>';
+	        moveSearch('close');
+	    }
+	}
+	
+    function updateSearch(Type:String) 
+	{
+	
 	}
 	
 	function updateSearch() 
