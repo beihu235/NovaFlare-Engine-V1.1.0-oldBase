@@ -2,7 +2,7 @@ package states;
 
 import backend.WeekData;
 import backend.Highscore;
-
+import backend.AndroidDialogsExtend;
 
 import flixel.input.keyboard.FlxKey;
 import flixel.addons.transition.FlxTransitionableState;
@@ -13,6 +13,7 @@ import flixel.input.gamepad.FlxGamepad;
 import tjson.TJSON as Json;
 
 import openfl.Assets;
+import openfl.Lib;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 
@@ -82,21 +83,27 @@ class TitleState extends MusicBeatState
 	override public function create():Void
 	{
 		Paths.clearStoredMemory();
-		Paths.clearUnusedMemory();		
+		Paths.clearUnusedMemory();
+		Lib.application.window.title = " NF - Engine - Title";
 		
 		//https://github.com/beihu235/AndroidDialogs
 		var lang:String = '';
+		#if android
 		if (DeviceLanguage.getLang() == 'zh') 
 		lang = 'NF1.1.0测试版\nb站-北狐丶逐梦制作\n禁止上传到任何资源网站';
 		else
 		lang = 'NF1.1.0 android port test\nmade by NF|beihu';
+		#end
+			
 		if(!checkOpenFirst){
 		
 		FlxTransitionableState.skipNextTransOut = true;
 										
 		checkOpenFirst = true;
+
+		#if android
 		AndroidDialogsExtend.OpenToast(lang,2);
-		
+		#end
 		}
 		
 		#if android

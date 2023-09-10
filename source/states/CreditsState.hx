@@ -4,7 +4,8 @@ package states;
 import sys.FileSystem;
 import sys.io.File;
 #end
-
+import openfl.Lib;
+	
 import objects.AttachedSprite;
 
 class CreditsState extends MusicBeatState
@@ -30,6 +31,8 @@ class CreditsState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 
+		Lib.application.window.title = "NF Engine - CreditsState";
+
 		persistentUpdate = true;
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
@@ -46,13 +49,19 @@ class CreditsState extends MusicBeatState
 		var beihuLink:String = 'https://b23.tv/LVj0JVk';
 		var yanqiangLink:String = 'https://b23.tv/FBxHIwT';
 		var Xx_angelkawaii_XLink:String = 'https://space.bilibili.com/1991407094';
-		
+
+		#if android
 		if (DeviceLanguage.getLang() != 'zh') {
 		beihuLink = 'https://youtube.com/@beihu235';
 		Xx_angelkawaii_XLink = 'https://www.youtube.com/@angelkawaii9826';
-		}		
+		}
+		#end
 								
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+		
+		    ['NF Engine Team'],
+		    ['beihu',		'beihu',		'NF EngineFounder/nAndroid Porter',							beihuLink,	'FFC0CB'],
+		    [''],
 		    ['Psych Engine Android Team'],
 		    ['beihu',		'beihu',		'Main Android Porter\nport owner',							beihuLink,	'FFC0CB'],
 			['yanqiang',     'yanqiang',	    'Android Porter\nBug fix',							yanqiangLink,	'7192FD'],

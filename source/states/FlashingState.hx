@@ -5,6 +5,7 @@ import flixel.FlxSubState;
 import flixel.effects.FlxFlicker;
 import lime.app.Application;
 import flixel.addons.transition.FlxTransitionableState;
+import openfl.Lib;
 
 class FlashingState extends MusicBeatState
 {
@@ -44,6 +45,8 @@ class FlashingState extends MusicBeatState
 		#if android
                 addVirtualPad(NONE, A_B);
                 #end
+
+		Lib.application.window.title = "NF Engine - FlashingState";
 	}
 
 	override function update(elapsed:Float)

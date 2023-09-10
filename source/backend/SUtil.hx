@@ -5,7 +5,8 @@ import android.Tools;
 import android.Permissions;
 import android.PermissionsList;
 #end
-
+import backend.AndroidDialogsExtend;
+	
 import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
 import openfl.utils.Assets as OpenFlAssets;

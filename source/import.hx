@@ -24,8 +24,10 @@ import backend.Mods;
 import backend.SUtil;
 
 import backend.AndroidDialogsExtend;
+#if android
 import extension.devicelang.DeviceLanguage;
-
+#end
+  
 import objects.Alphabet;
 import objects.BGSprite;
 
