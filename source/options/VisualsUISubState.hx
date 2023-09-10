@@ -29,7 +29,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			note.playAnim('static');
 			notes.add(note);
 		}
-		#if Android
+		#if android
 		if (!FileSystem.exists(SUtil.getPath() + 'assets/shared/images/noteSkins') && !FileSystem.exists(SUtil.getPath() + 'assets/shared/images/noteSplashes') && Mods.mergeAllTextsNamed('images/noteSplashes/list.txt', 'shared').length == 0 && Mods.mergeAllTextsNamed('images/noteSkins/list.txt', 'shared').length == 0)//make sure people use 0.71h assets not old shits
 				{
 				
