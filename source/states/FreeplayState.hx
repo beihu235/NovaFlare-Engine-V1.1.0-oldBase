@@ -32,6 +32,10 @@ class FreeplayState extends MusicBeatState
 	var lerpSelected:Float = 0;
 	var curDifficulty:Int = -1;
 	private static var lastDifficultyName:String = Difficulty.getDefault();
+	
+	public var camGame:FlxCamera;
+	public var camSearch:FlxCamera;
+	public var camBlackFade:FlxCamera;
 
 	var scoreBG:FlxSprite;
 	var scoreText:FlxText;
@@ -73,7 +77,7 @@ class FreeplayState extends MusicBeatState
     public var showWidth = 500;
     public var showHeight = 300;
     public var showX = 180;
-    public var showY = -300;
+    public var showY = 0;
     
     public var lineHeight = 3;
     
@@ -97,8 +101,23 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
-		//Paths.clearStoredMemory();
-		//Paths.clearUnusedMemory();
+		Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
+		
+		camGame = new FlxCamera();
+		camSearch = new FlxCamera();
+		camBlackFade = new FlxCamera();
+		camBlackFade.bgColor.alpha = 0;
+		camSearch.bgColor.alpha = 0;
+
+		FlxG.cameras.reset(camGame);		
+		FlxG.cameras.add(camSearch, false);
+		FlxG.cameras.add(camBlackFade, false);
+		FlxG.cameras.setDefaultDrawTarget(camGame, true);
+		CustomFadeTransition.nextCamera = camBlackFade;
+		
+		camSearch.y = -300;
+		
 		Lib.application.window.title = "NF Engine - FreeplayState";
 		
 		persistentUpdate = true;
@@ -214,13 +233,15 @@ class FreeplayState extends MusicBeatState
         
         searchTextBG = new FlxSprite(showX, showY).makeGraphic(showWidth, showHeight, FlxColor.BLACK);
 		searchTextBG.alpha = 0.6;
-		
+		searchTextBG.cameras = [camSearch];
+		 
 		searchInput = new FlxInputText(showX + 50, showY + 20, showWidth - 100, '', 30, 0x00FFFFFF);
 		searchInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		searchInput.backgroundColor = FlxColor.TRANSPARENT;
 		searchInput.fieldBorderColor = FlxColor.TRANSPARENT;
 		searchInput.font = Paths.font("vcr.ttf");
 		searchInput.antialiasing = ClientPrefs.data.antialiasing;
+		searchInput.cameras = [camSearch];
 		
 		lineText = new FlxText(showX + 50, showY + 20, showWidth - 100, 'Song Name For Search', 30);
 		lineText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -228,22 +249,31 @@ class FreeplayState extends MusicBeatState
 		lineText.alpha = 0.6;
 		lineText.visible = true;
 		lineText.antialiasing = ClientPrefs.data.antialiasing;
+		lineText.cameras = [camSearch];
 		
 		notFoundSongText = new FlxText(showX, showY + 100 + 40 * 2, showWidth, 'Not Found Song!', 30);
 		notFoundSongText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		notFoundSongText.scrollFactor.set();
 		notFoundSongText.antialiasing = ClientPrefs.data.antialiasing;
+		notFoundSongText.cameras = [camSearch];
 		
 		underline_text_BG = new FlxSprite(showX + 50, showY + 20 + 40).makeGraphic(showWidth - 100, 6, FlxColor.WHITE);
 		underline_text_BG.alpha = 0.6;
+		underline_text_BG.cameras = [camSearch];
 		
 		underline_BG = new FlxSprite(showX, showY + 100).makeGraphic(showWidth , lineHeight, 0xFF00FFFF);
+		underline_BG.cameras = [camSearch];
 		
 		chooseBG = new FlxSprite(showX, showY + 100).makeGraphic(showWidth , 40, FlxColor.WHITE);
 		chooseBG.alpha = 0;
-
+        chooseBG.cameras = [camSearch];
+        
 		textIntervals = new FlxTypedGroup<FlxSprite>();
+		textIntervals.cameras = [camSearch];
+		
 		searchSongNamesTexts = new FlxTypedGroup<FlxText>();
+		searchSongNamesTexts.cameras = [camSearch];
+		
 		
 		add(searchTextBG);
 		add(searchInput);
@@ -259,6 +289,7 @@ class FreeplayState extends MusicBeatState
 		{
 			var textInterval:FlxSprite = new FlxSprite(showX, showY + 100 + 40 * bgNum).makeGraphic(showWidth , lineHeight, FlxColor.WHITE);
 			textInterval.ID = bgNum;
+			textInterval.cameras = [camSearch];
 			textIntervals.add(textInterval);
         }
 		
@@ -270,6 +301,7 @@ class FreeplayState extends MusicBeatState
 			searchSongNamesText.ID = textNum;
 			searchSongNamesText.antialiasing = ClientPrefs.data.antialiasing;
 			searchSongNamesTexts.add(searchSongNamesText);
+			searchSongNamesText.cameras = [camSearch];
         }
 		
         
@@ -341,6 +373,7 @@ class FreeplayState extends MusicBeatState
                 #end
                 
 		super.create();
+		CustomFadeTransition.nextCamera = camBlackFade;
 	}
 
 	override function closeSubState() {
@@ -673,24 +706,9 @@ class FreeplayState extends MusicBeatState
 	        SearchTween[6] = FlxTween.tween(upLine, {x: FlxG.width - CHsize * 2}, moveTime, {ease: FlxEase.expoInOut});
 	        SearchTween[7] = FlxTween.tween(downLine, {x: FlxG.width - CHsize * 2}, moveTime, {ease: FlxEase.expoInOut});
 	        SearchTween[8] = FlxTween.tween(leftLine, {x: FlxG.width - CHsize * 2 - 0.5}, moveTime, {ease: FlxEase.expoInOut});
-	        /*
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[1] = FlxTween.tween(option, {x: 100}, moveTime, {ease: FlxEase.expoInOut});
-	        */
+	      
+	        SearchTween[9] = FlxTween.tween(camSearch, {y: 0}, moveTime, {ease: FlxEase.expoInOut});
+	        
 	    }
 	    else{
 	        SearchTween[1] = FlxTween.tween(addDataBG, {x: FlxG.width}, moveTime, {ease: FlxEase.expoInOut});
@@ -701,6 +719,8 @@ class FreeplayState extends MusicBeatState
 	        SearchTween[6] = FlxTween.tween(upLine, {x: FlxG.width}, moveTime, {ease: FlxEase.expoInOut});
 	        SearchTween[7] = FlxTween.tween(downLine, {x: FlxG.width}, moveTime, {ease: FlxEase.expoInOut});
 	        SearchTween[8] = FlxTween.tween(leftLine, {x: FlxG.width - 0.5}, moveTime, {ease: FlxEase.expoInOut});
+	        
+	        SearchTween[9] = FlxTween.tween(camSearch, {y: -300}, moveTime, {ease: FlxEase.expoInOut});
 	    
 	    }	    
 	}
