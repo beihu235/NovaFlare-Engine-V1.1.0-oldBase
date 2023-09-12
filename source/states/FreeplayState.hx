@@ -826,6 +826,7 @@ class FreeplayState extends MusicBeatState
                 }
             }
             else{
+                if (chooseShow < maxDown) chooseShow++;
                 if (chooseShow > maxDown){
                     startShow = 1;              
                     chooseShow = 1;
@@ -836,13 +837,14 @@ class FreeplayState extends MusicBeatState
         
         if (change < 0){
             if (!isStart){
-                if (chooseShow < maxUP) chooseShow--;
+                if (chooseShow > maxUP) chooseShow--;
                 if (chooseShow == maxUP) {                
                     startShow--;
                     updateSongText();
                 }
             }
             else{
+                if (chooseShow > maxUP) chooseShow--;
                 if (chooseShow < maxUP){
                     if (songNum.length >= 5){
                     startShow = songNum.length - 5;
@@ -856,9 +858,8 @@ class FreeplayState extends MusicBeatState
 	    chooseBG.alpha = 0.6;	    
 		chooseBG.y = showY + 100 +chooseShow * 40;
 		
-		var realChoose:Int = startShow + chooseShow;
+		var realChoose:Int = startShow + chooseShow - 1;
 		curSelected = songNum[realChoose]; //main move freeplay choose
-		lerpSelected = curSelected;
 	}
 	
 	function updateSongText()
