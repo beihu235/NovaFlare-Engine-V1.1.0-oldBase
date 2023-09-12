@@ -824,7 +824,7 @@ class FreeplayState extends MusicBeatState
             else{
                 if (chooseShow > maxDown){
                     startShow = 1;              
-                    chooseShow = 1
+                    chooseShow = 1;
                 }
             }
         }
@@ -844,8 +844,8 @@ class FreeplayState extends MusicBeatState
             }
         }
 
-	    chooseBG.alpha = 0.5;	    
-		chooseBG.y = mainshowY + chooseShow * 40
+	    chooseBG.alpha = 0.6;	    
+		chooseBG.y = mainshowY + chooseShow * 40;
 	}
 
 	function changeDiff(change:Int = 0)
