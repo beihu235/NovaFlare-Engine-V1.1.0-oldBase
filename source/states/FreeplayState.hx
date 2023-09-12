@@ -819,12 +819,16 @@ class FreeplayState extends MusicBeatState
         if (change > 0){
             if(!isEnd){
                 if (chooseShow < maxDown) chooseShow++;
-                if (chooseShow == maxDown) startShow++;
+                if (chooseShow == maxDown){
+                    startShow++;
+                    updateSongText();
+                }
             }
             else{
                 if (chooseShow > maxDown){
                     startShow = 1;              
                     chooseShow = 1;
+                    updateSongText();
                 }
             }
         }
@@ -832,13 +836,17 @@ class FreeplayState extends MusicBeatState
         if (change < 0){
             if (!isStart){
                 if (chooseShow < maxUP) chooseShow--;
-                if (chooseShow == maxUP) startShow--;
+                if (chooseShow == maxUP) {                
+                    startShow--;
+                    updateSongText();
+                }
             }
             else{
                 if (chooseShow < maxUP){
                     if (songNum.length >= 5){
                     startShow = songNum.length - 5;
                     chooseShow = 5;
+                    updateSongText();
                     }                    
                 }    
             }
@@ -846,6 +854,22 @@ class FreeplayState extends MusicBeatState
 
 	    chooseBG.alpha = 0.6;	    
 		chooseBG.y = showY + chooseShow * 40;
+		
+		curSelected = startShow + chooseShow;
+	}
+	
+	function updateSongText()
+	{
+	    var numStart = startShow - 1;
+	    var numEnd = startShow + 5;
+	    for (num in numStart...numEnd)
+    		{
+    		    var numFix:Int = num + 1;
+    			var songNameText:FlxText = searchSongNamesTexts.members[num];
+    			if (songName[i] != null) songNameText.text = numFix + ': ' + songName[num];
+    			else songNameText.text = '';
+    		}
+	
 	}
 
 	function changeDiff(change:Int = 0)
