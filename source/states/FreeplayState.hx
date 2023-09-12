@@ -869,7 +869,7 @@ class FreeplayState extends MusicBeatState
 	    for (num in numStart...numEnd)
     		{
     		    var numFix:Int = num + 1;
-    			var songNameText:FlxText = searchSongNamesTexts.members[num + 1];
+    			var songNameText:FlxText = searchSongNamesTexts.members[num - numStart];
     			if (songName[num] != null) songNameText.text = numFix + ': ' + songName[num];
     			else songNameText.text = '';
     		}
