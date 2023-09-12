@@ -78,6 +78,7 @@ class FreeplayState extends MusicBeatState
     
     var CHsize = 0; 
     var showY = 0;
+    var showOffset = 5;
     
     var songName:Array<String> = [];
 	var songNum:Array<Int> = [];
@@ -119,7 +120,7 @@ class FreeplayState extends MusicBeatState
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		CustomFadeTransition.nextCamera = camBlackFade;
 		
-		camSearch.y = -300;
+		camSearch.y = -300 - showOffset;
 		
 		Lib.application.window.title = "NF Engine - FreeplayState";
 		
@@ -734,16 +735,16 @@ class FreeplayState extends MusicBeatState
 	        
 	    }
 	    else{
-	        SearchTween[1] = FlxTween.tween(addDataBG, {x: FlxG.width}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[2] = FlxTween.tween(addDataText, {x: FlxG.width}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[3] = FlxTween.tween(reduceDataBG, {x: FlxG.width + CHsize}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[4] = FlxTween.tween(reduceDataText, {x: FlxG.width + CHsize}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[5] = FlxTween.tween(centerLine, {x: FlxG.width + CHsize - 0.5}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[6] = FlxTween.tween(upLine, {x: FlxG.width}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[7] = FlxTween.tween(downLine, {x: FlxG.width}, moveTime, {ease: FlxEase.expoInOut});
-	        SearchTween[8] = FlxTween.tween(leftLine, {x: FlxG.width - 0.5}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[1] = FlxTween.tween(addDataBG, {x: FlxG.width + showOffset}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[2] = FlxTween.tween(addDataText, {x: FlxG.width + showOffset}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[3] = FlxTween.tween(reduceDataBG, {x: FlxG.width + CHsize + showOffset}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[4] = FlxTween.tween(reduceDataText, {x: FlxG.width + CHsize + showOffset}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[5] = FlxTween.tween(centerLine, {x: FlxG.width + CHsize - 0.5 + showOffset}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[6] = FlxTween.tween(upLine, {x: FlxG.width + showOffset}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[7] = FlxTween.tween(downLine, {x: FlxG.width + showOffset}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[8] = FlxTween.tween(leftLine, {x: FlxG.width - 0.5 + showOffset}, moveTime, {ease: FlxEase.expoInOut});
 	        
-	        SearchTween[9] = FlxTween.tween(camSearch, {y: -301}, moveTime, {ease: FlxEase.expoInOut});
+	        SearchTween[9] = FlxTween.tween(camSearch, {y: -300 - showOffset}, moveTime, {ease: FlxEase.expoInOut});
 	    
 	    }	    
 	}
@@ -857,6 +858,7 @@ class FreeplayState extends MusicBeatState
 		
 		var realChoose:Int = startShow + chooseShow;
 		curSelected = songNum[realChoose]; //main move freeplay choose
+		lerpSelected = curSelected;
 	}
 	
 	function updateSongText()
@@ -866,7 +868,7 @@ class FreeplayState extends MusicBeatState
 	    for (num in numStart...numEnd)
     		{
     		    var numFix:Int = num + 1;
-    			var songNameText:FlxText = searchSongNamesTexts.members[num];
+    			var songNameText:FlxText = searchSongNamesTexts.members[num + 1];
     			if (songName[num] != null) songNameText.text = numFix + ': ' + songName[num];
     			else songNameText.text = '';
     		}
