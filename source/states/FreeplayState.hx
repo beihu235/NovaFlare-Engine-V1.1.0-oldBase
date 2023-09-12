@@ -76,7 +76,8 @@ class FreeplayState extends MusicBeatState
     var notFoundSongText:FlxText;
     var notFoundSongTextSine:Float = 0;
     
-    var mainshowY = 0; //fix data
+    var CHsize = 0; 
+    var showY = 0;
     
     var songName:Array<String> = [];
 	var songNum:Array<Int> = [];
@@ -235,8 +236,7 @@ class FreeplayState extends MusicBeatState
         var showWidth = 500;
         var showHeight = 300;
         var showX = 180;
-        var showY = -1;
-        mainshowY = showY; //Fix data
+        showY = -1;
         
         searchTextBG = new FlxSprite(showX, showY).makeGraphic(showWidth, showHeight, FlxColor.BLACK);
 		searchTextBG.alpha = 0.6;
@@ -323,7 +323,7 @@ class FreeplayState extends MusicBeatState
         }
 		
         
-        var CHsize = 100;
+        CHsize = 100;
         var CH_Y = 150;
         var CH_X = 0;
         var text1size = 50;
@@ -819,7 +819,7 @@ class FreeplayState extends MusicBeatState
         if (change > 0){
             if(!isEnd){
                 if (chooseShow < maxDown) chooseShow++;
-                if (chooseShow = maxDown) startShow++;
+                if (chooseShow == maxDown) startShow++;
             }
             else{
                 if (chooseShow > maxDown){
@@ -832,7 +832,7 @@ class FreeplayState extends MusicBeatState
         if (change < 0){
             if (!isStart){
                 if (chooseShow < maxUP) chooseShow--;
-                if (chooseShow = maxUP) startShow--;
+                if (chooseShow == maxUP) startShow--;
             }
             else{
                 if (chooseShow < maxUP){
@@ -845,7 +845,7 @@ class FreeplayState extends MusicBeatState
         }
 
 	    chooseBG.alpha = 0.6;	    
-		chooseBG.y = mainshowY + chooseShow * 40;
+		chooseBG.y = showY + chooseShow * 40;
 	}
 
 	function changeDiff(change:Int = 0)
