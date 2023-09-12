@@ -855,7 +855,8 @@ class FreeplayState extends MusicBeatState
 	    chooseBG.alpha = 0.6;	    
 		chooseBG.y = showY + chooseShow * 40;
 		
-		curSelected = startShow + chooseShow;
+		var realchoose:Int = startShow + chooseShow;
+		curSelected = songNum[realchoose]; //main move freeplay choose
 	}
 	
 	function updateSongText()
@@ -866,7 +867,7 @@ class FreeplayState extends MusicBeatState
     		{
     		    var numFix:Int = num + 1;
     			var songNameText:FlxText = searchSongNamesTexts.members[num];
-    			if (songName[i] != null) songNameText.text = numFix + ': ' + songName[num];
+    			if (songName[num] != null) songNameText.text = numFix + ': ' + songName[num];
     			else songNameText.text = '';
     		}
 	
