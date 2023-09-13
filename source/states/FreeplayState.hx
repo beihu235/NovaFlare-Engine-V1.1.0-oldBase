@@ -832,9 +832,11 @@ class FreeplayState extends MusicBeatState
                 }    
             }
         }
-
-	    chooseBG.alpha = 0.6;	    
-		chooseBG.y = showY + 100 + (chooseShow - 1) * 40;
+        
+        if (chooseShow >= 1 && chooseShow <= 5){
+	        chooseBG.alpha = 0.6;	    
+		    chooseBG.y = showY + 100 + (chooseShow - 1) * 40;
+		}
 		
 		var realChoose:Int = startShow + chooseShow; 
 		realChoose -= 2; // -2 is fix code to 0
