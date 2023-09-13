@@ -270,12 +270,10 @@ class FreeplayState extends MusicBeatState
 		underline_text_BG.alpha = 0.6;
 		underline_text_BG.cameras = [camSearch];
 		
-		line_Left_BG = new FlxSprite(showX - 3, showY).makeGraphic(lineHeight, showHeight + 1, FlxColor.WHITE);
-		line_Left_BG.alpha = 0.6;
+		line_Left_BG = new FlxSprite(showX - 3, showY).makeGraphic(lineHeight, showHeight + 2, FlxColor.WHITE);
 		line_Left_BG.cameras = [camSearch];
 		
-		line_Right_BG = new FlxSprite(showX + showWidth, showY).makeGraphic(lineHeight, showHeight + 1, FlxColor.WHITE);
-		line_Right_BG.alpha = 0.6;
+		line_Right_BG = new FlxSprite(showX + showWidth, showY).makeGraphic(lineHeight, showHeight + 2, FlxColor.WHITE);
 		line_Right_BG.cameras = [camSearch];
 		
 		underline_BG = new FlxSprite(showX, showY + 100).makeGraphic(showWidth , lineHeight, 0xFF00FFFF);
@@ -780,19 +778,7 @@ class FreeplayState extends MusicBeatState
 		startShow = 0;
         chooseShow = 0;
     
-		if (songNum.length >= 5){
-		    maxDown = 4;
-		}
-		else {
-		    maxDown = songNum.length;
-		}
-		
-		if (songNum.length < 2){
-		    maxUP = 1;
-		}
-		else{
-		    maxUP = 2;
-		}
+		checkPosition();
 		
 	}
 
@@ -810,7 +796,7 @@ class FreeplayState extends MusicBeatState
             }
             else{
                 if (chooseShow < maxDown) chooseShow++;
-                else if (chooseShow > maxDown){
+                else if (chooseShow == maxDown){
                     startShow = 1;              
                     chooseShow = 1;
                     updateSongText();
@@ -828,7 +814,7 @@ class FreeplayState extends MusicBeatState
             }
             else{
                 if (chooseShow > maxUP) chooseShow--;
-                if (chooseShow < maxUP){
+                if (chooseShow == maxUP){
                     if (songNum.length >= 5){
                     startShow = songNum.length - 5;
                     chooseShow = 5;
