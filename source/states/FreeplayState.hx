@@ -45,7 +45,7 @@ class FreeplayState extends MusicBeatState
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
 	
-	var openSearch:Bool = false;
+	var openSearch:Bool = false; //it not use 
 	var SearchTween:Array<FlxTween> = [];
 	var searchInput:FlxInputText;
 	var chooseBG:FlxSprite;
@@ -656,7 +656,7 @@ class FreeplayState extends MusicBeatState
 		    updateSearch();
 		}
 		
-		if (searchInput.text != '' && searchSongNamesTexts.members[0].text == ''){
+		if (searchInput.text != '' && songNum[0] != null){
 		    notFoundSongTextSine += 180 * elapsed;
 			notFoundSongText.alpha = 1 - Math.sin((Math.PI * notFoundSongTextSine) / 180);
 		}
@@ -702,14 +702,6 @@ class FreeplayState extends MusicBeatState
 	        openSearch = false;
 	        showCaseText.text = '<<';
 	        moveSearch('close');
-	        /*
-	        searchInput.text = '';
-	        maxUP = 0;
-            maxDown = 0;
-            startShow = 0;
-            chooseShow = 0;
-            upCheck = false;
-            DownCheck= false;*/
 	    }
 	}
 	
@@ -817,17 +809,19 @@ class FreeplayState extends MusicBeatState
 	*/
 	function ChangeChoose(change:Int = 0) 
 	{
+	    checkPosition();
+	    
         if (change > 0){
             if(!isEnd){
                 if (chooseShow < maxDown) chooseShow++;
-                if (chooseShow == maxDown){
+                else if (chooseShow == maxDown){
                     startShow++;
                     updateSongText();
                 }
             }
             else{
                 if (chooseShow < maxDown) chooseShow++;
-                if (chooseShow > maxDown){
+                else if (chooseShow > maxDown){
                     startShow = 1;              
                     chooseShow = 1;
                     updateSongText();
@@ -877,7 +871,32 @@ class FreeplayState extends MusicBeatState
     			if (songName[num] != null) songNameText.text = numFix + ': ' + songName[num];
     			else songNameText.text = '';
     		}
+	    
+	}
 	
+	function checkPosition()
+	{
+	    if((startShow - 1 + 5) == songNum.length) isEnd = true;
+	    else isEnd = false;
+	    if(startShow == 1) isStart = true;
+	    else isStart = false;
+	    
+	    if (songNum.length >= 5){
+		    maxDown = 4;
+		}
+		else {
+		    maxDown = songNum.length;
+		}
+		
+		if (songNum.length < 2){
+		    maxUP = 1;
+		}
+		else{
+		    maxUP = 2;
+		}
+		
+		if (isStart) maxUP = 1;
+		if (isEnd) maxDown = 5;
 	}
 
 	function changeDiff(change:Int = 0)
