@@ -804,7 +804,7 @@ class FreeplayState extends MusicBeatState
             else{
                 if (chooseShow < maxDown) chooseShow++;
                 else if (chooseShow == maxDown){
-                    startShow = 1;              
+                    startShow = 0;              
                     chooseShow = 1;
                     updateSongText();
                 }
