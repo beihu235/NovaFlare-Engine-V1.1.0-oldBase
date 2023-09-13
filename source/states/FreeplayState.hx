@@ -806,7 +806,7 @@ class FreeplayState extends MusicBeatState
             else{
                 if (chooseShow < maxDown) chooseShow++;
                 else if (chooseShow == maxDown){
-                    startShow = 1;              
+                    startShow = 0;              
                     chooseShow = 1;
                     updateSongText();
                 }
@@ -855,8 +855,8 @@ class FreeplayState extends MusicBeatState
 	
 	function updateSongText()
 	{
-	    var numStart = startShow - 1;
-	    var numEnd = startShow + 4;
+	    var numStart = startShow;
+	    var numEnd = startShow + 5;
 	    for (num in numStart...numEnd)
     		{
     		    var numFix:Int = num + 1;
@@ -890,6 +890,9 @@ class FreeplayState extends MusicBeatState
 		
 		if (isStart) maxUP = 1;
 		if (isEnd) maxDown = 5;
+		
+		if (songNum.length < 5) maxDown = songNum.length; //check again
+		if (songNum.length < 2) maxUP = 1; //check again
 	}
 
 	function changeDiff(change:Int = 0)
