@@ -834,9 +834,16 @@ class FreeplayState extends MusicBeatState
         }
         
         if (chooseShow >= 1 && chooseShow <= 5){
-	        chooseBG.alpha = 0.6;	    
 		    chooseBG.y = showY + 100 + (chooseShow - 1) * 40;
 		}
+		
+		if (searchSongNamesTexts.members[0].text != ''){
+            chooseBG.alpha = 0.6;
+        }
+        else{
+            chooseBG.alpha = 0;
+        }
+		
 		
 		var realChoose:Int = startShow + chooseShow; 
 		realChoose -= 2; // -2 is fix code to 0
