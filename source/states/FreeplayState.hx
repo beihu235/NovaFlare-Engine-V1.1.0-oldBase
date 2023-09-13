@@ -860,7 +860,7 @@ class FreeplayState extends MusicBeatState
 		
 		var realChoose:Int = startShow + chooseShow; 
 		realChoose -= 2; // -2 is fix code to 0
-		if realChoose != null) {
+		if (realChoose != null) {
 		    curSelected = songNum[realChoose]; //main move freeplay choose
 		    SearchChangeSelection(true);
 		}
