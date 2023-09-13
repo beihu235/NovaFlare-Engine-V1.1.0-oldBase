@@ -656,7 +656,7 @@ class FreeplayState extends MusicBeatState
 		    updateSearch();
 		}
 		
-		if (searchInput.text != '' && songNum[0] != null){
+		if (searchInput.text != '' && songNum.length == 0){
 		    notFoundSongTextSine += 180 * elapsed;
 			notFoundSongText.alpha = 1 - Math.sin((Math.PI * notFoundSongTextSine) / 180);
 		}
@@ -795,18 +795,7 @@ class FreeplayState extends MusicBeatState
 		}
 		
 	}
-	/*
-	var songName:Array<String> = [];
-	var songNum:Array<Int> = [];
-    var maxUP:Int = 0;
-    var maxDown:Int = 0;
-    var startShow:Int = 0;
-    var chooseShow:Int = 0;
-    var isStart:Bool = false;
-    var isEnd:Bool = false;
-    var upCheck:Bool = false;
-    var DownCheck:Bool = false;
-	*/
+
 	function ChangeChoose(change:Int = 0) 
 	{
 	    checkPosition();
