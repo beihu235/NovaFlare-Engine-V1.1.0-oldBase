@@ -664,7 +664,6 @@ class FreeplayState extends MusicBeatState
 		    notFoundSongText.alpha = 0;
 		}
 		
-		if
 		
 		if (FlxG.mouse.justPressed){
 		    if (FlxG.mouse.overlaps(showCaseBG)){
@@ -859,8 +858,8 @@ class FreeplayState extends MusicBeatState
 	    chooseBG.alpha = 0.6;	    
 		chooseBG.y = showY + 100 + (chooseShow - 1) * 40;
 		
-		var realChoose:Int = startShow + chooseShow; // -2 is fix code to 0
-		realChoose -= 2;
+		var realChoose:Int = startShow + chooseShow; 
+		realChoose -= 2; // -2 is fix code to 0
 		if realChoose != null) {
 		    curSelected = songNum[realChoose]; //main move freeplay choose
 		    SearchChangeSelection(true);
