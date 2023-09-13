@@ -664,6 +664,7 @@ class FreeplayState extends MusicBeatState
 		    notFoundSongText.alpha = 0;
 		}
 		
+		if
 		
 		if (FlxG.mouse.justPressed){
 		    if (FlxG.mouse.overlaps(showCaseBG)){
@@ -858,8 +859,11 @@ class FreeplayState extends MusicBeatState
 	    chooseBG.alpha = 0.6;	    
 		chooseBG.y = showY + 100 + (chooseShow - 1) * 40;
 		
-		var realChoose:Int = startShow + chooseShow - 2;
-		if realChoose != null) curSelected = songNum[realChoose]; //main move freeplay choose
+		var realChoose:Int = (startShow + chooseShow - 2); // -2 is fix code to 0
+		if realChoose != null) {
+		    curSelected = songNum[realChoose]; //main move freeplay choose
+		    SearchChangeSelection(true);
+		}
 	}
 	
 	function updateSongText()
@@ -899,6 +903,64 @@ class FreeplayState extends MusicBeatState
 		positionHighscore();
 		missingText.visible = false;
 		missingTextBG.visible = false;
+	}
+	
+	function SearchChangeSelection(playSound:Bool = true)
+	{
+		_updateSongLastDifficulty();
+		if(playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+
+		var lastList:Array<String> = Difficulty.list;
+			
+		var newColor:Int = songs[curSelected].color;
+		if(newColor != intendedColor) {
+			if(colorTween != null) {
+				colorTween.cancel();
+			}
+			intendedColor = newColor;
+			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {
+				onComplete: function(twn:FlxTween) {
+					colorTween = null;
+				}
+			});
+		}
+
+		// selector.y = (70 * curSelected) + 30;
+
+		var bullShit:Int = 0;
+
+		for (i in 0...iconArray.length)
+		{
+			iconArray[i].alpha = 0.6;
+		}
+
+		iconArray[curSelected].alpha = 1;
+
+		for (item in grpSongs.members)
+		{
+			bullShit++;
+			item.alpha = 0.6;
+			if (item.targetY == curSelected)
+				item.alpha = 1;
+		}
+		
+		Mods.currentModDirectory = songs[curSelected].folder;
+		PlayState.storyWeek = songs[curSelected].week;
+		Difficulty.loadFromWeek();
+		
+		var savedDiff:String = songs[curSelected].lastDifficulty;
+		var lastDiff:Int = Difficulty.list.indexOf(lastDifficultyName);
+		if(savedDiff != null && !lastList.contains(savedDiff) && Difficulty.list.contains(savedDiff))
+			curDifficulty = Math.round(Math.max(0, Difficulty.list.indexOf(savedDiff)));
+		else if(lastDiff > -1)
+			curDifficulty = lastDiff;
+		else if(Difficulty.list.contains(Difficulty.getDefault()))
+			curDifficulty = Math.round(Math.max(0, Difficulty.defaultList.indexOf(Difficulty.getDefault())));
+		else
+			curDifficulty = 0;
+
+		changeDiff();
+		_updateSongLastDifficulty();
 	}
 
 	function changeSelection(change:Int = 0, playSound:Bool = true)
