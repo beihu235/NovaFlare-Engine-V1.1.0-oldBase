@@ -270,10 +270,10 @@ class FreeplayState extends MusicBeatState
 		underline_text_BG.alpha = 0.6;
 		underline_text_BG.cameras = [camSearch];
 		
-		line_Left_BG = new FlxSprite(showX - 3, showY).makeGraphic(lineHeight, showHeight + 2.5, FlxColor.WHITE);
+		line_Left_BG = new FlxSprite(showX - 3, showY).makeGraphic(lineHeight, showHeight + 3, FlxColor.WHITE);
 		line_Left_BG.cameras = [camSearch];
 		
-		line_Right_BG = new FlxSprite(showX + showWidth, showY).makeGraphic(lineHeight, showHeight + 2.5, FlxColor.WHITE);
+		line_Right_BG = new FlxSprite(showX + showWidth, showY).makeGraphic(lineHeight, showHeight + 3, FlxColor.WHITE);
 		line_Right_BG.cameras = [camSearch];
 		
 		underline_BG = new FlxSprite(showX, showY + 100).makeGraphic(showWidth , lineHeight, 0xFF00FFFF);
