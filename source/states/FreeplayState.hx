@@ -856,16 +856,16 @@ class FreeplayState extends MusicBeatState
         }
 
 	    chooseBG.alpha = 0.6;	    
-		chooseBG.y = showY + 100 +chooseShow * 40;
+		chooseBG.y = showY + 100 + (chooseShow - 1) * 40;
 		
-		var realChoose:Int = startShow + chooseShow - 1;
-		curSelected = songNum[realChoose]; //main move freeplay choose
+		var realChoose:Int = startShow + chooseShow - 2;
+		if realChoose != null) curSelected = songNum[realChoose]; //main move freeplay choose
 	}
 	
 	function updateSongText()
 	{
 	    var numStart = startShow - 1;
-	    var numEnd = startShow + 5;
+	    var numEnd = startShow + 4;
 	    for (num in numStart...numEnd)
     		{
     		    var numFix:Int = num + 1;
