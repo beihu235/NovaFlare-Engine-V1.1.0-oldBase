@@ -270,10 +270,10 @@ class FreeplayState extends MusicBeatState
 		underline_text_BG.alpha = 0.6;
 		underline_text_BG.cameras = [camSearch];
 		
-		line_Left_BG = new FlxSprite(showX - 3, showY).makeGraphic(lineHeight, showHeight + 2, FlxColor.WHITE);
+		line_Left_BG = new FlxSprite(showX - 3, showY).makeGraphic(lineHeight, showHeight + 2.5, FlxColor.WHITE);
 		line_Left_BG.cameras = [camSearch];
 		
-		line_Right_BG = new FlxSprite(showX + showWidth, showY).makeGraphic(lineHeight, showHeight + 2, FlxColor.WHITE);
+		line_Right_BG = new FlxSprite(showX + showWidth, showY).makeGraphic(lineHeight, showHeight + 2.5, FlxColor.WHITE);
 		line_Right_BG.cameras = [camSearch];
 		
 		underline_BG = new FlxSprite(showX, showY + 100).makeGraphic(showWidth , lineHeight, 0xFF00FFFF);
@@ -806,7 +806,7 @@ class FreeplayState extends MusicBeatState
             else{
                 if (chooseShow < maxDown) chooseShow++;
                 else if (chooseShow == maxDown){
-                    startShow = 0;              
+                    startShow = 1;              
                     chooseShow = 1;
                     updateSongText();
                 }
@@ -816,14 +816,14 @@ class FreeplayState extends MusicBeatState
         if (change < 0){
             if (!isStart){
                 if (chooseShow > maxUP) chooseShow--;
-                if (chooseShow == maxUP) {                
+                else if (chooseShow == maxUP) {                
                     startShow--;
                     updateSongText();
                 }
             }
             else{
                 if (chooseShow > maxUP) chooseShow--;
-                if (chooseShow == maxUP){
+                else if (chooseShow == maxUP){
                     if (songNum.length >= 5){
                     startShow = songNum.length - 5 - 1;
                     chooseShow = 5;
@@ -871,7 +871,7 @@ class FreeplayState extends MusicBeatState
 	{
 	    if((startShow - 1 + 5) >= songNum.length) isEnd = true;
 	    else isEnd = false;
-	    if(startShow == 1) isStart = true;
+	    if(startShow == 0) isStart = true;
 	    else isStart = false;
 	    
 	    if (songNum.length >= 5){
