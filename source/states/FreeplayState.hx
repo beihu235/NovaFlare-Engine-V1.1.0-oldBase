@@ -773,10 +773,17 @@ class FreeplayState extends MusicBeatState
 		    }
 		}
 		
-		chooseBG.alpha = 0;
+		
 		
 		startShow = 0;
         chooseShow = 0;
+        
+        if (searchSongNamesTexts.members[0].text != ''){
+            chooseShow = 1;
+        }
+        else{
+            chooseBG.alpha = 0;
+        }
     
 		checkPosition();
 		
