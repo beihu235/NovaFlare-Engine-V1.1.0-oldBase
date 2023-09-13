@@ -825,7 +825,7 @@ class FreeplayState extends MusicBeatState
                 if (chooseShow > maxUP) chooseShow--;
                 if (chooseShow == maxUP){
                     if (songNum.length >= 5){
-                    startShow = songNum.length - 5;
+                    startShow = songNum.length - 5 - 1;
                     chooseShow = 5;
                     updateSongText();
                     }                    
