@@ -858,7 +858,7 @@ class FreeplayState extends MusicBeatState
 	
 	function checkPosition()
 	{
-	    if((startShow - 1 + 5) == songNum.length) isEnd = true;
+	    if((startShow - 1 + 5) >= songNum.length) isEnd = true;
 	    else isEnd = false;
 	    if(startShow == 1) isStart = true;
 	    else isStart = false;
