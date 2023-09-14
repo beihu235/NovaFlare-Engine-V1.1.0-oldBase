@@ -878,7 +878,7 @@ class FreeplayState extends MusicBeatState
 		    maxDown = songNum.length;
 		}
 		
-		if (songNum.length < 2){
+		if (songNum.length <= 5){
 		    maxUP = 1;
 		}
 		else{
