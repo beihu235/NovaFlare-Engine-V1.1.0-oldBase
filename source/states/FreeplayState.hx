@@ -778,16 +778,8 @@ class FreeplayState extends MusicBeatState
 		startShow = 0;
         chooseShow = 0;
         
-        /*
-        if (searchSongNamesTexts.members[0].text != ''){
-            chooseShow = 1;
-            chooseBG.alpha = 0.6;
-            chooseBG.y = showY + 100 + (chooseShow - 1) * 40;
-        }
-        else{
-            chooseBG.alpha = 0;
-        }
-        */
+        chooseBG.alpha = 0;
+        chooseBG.y = showY + 100;
     
 		checkPosition();
 		
@@ -846,6 +838,7 @@ class FreeplayState extends MusicBeatState
         }
         else{
             chooseBG.alpha = 0;
+            chooseBG.y = showY + 100;
         }
 		
 		
