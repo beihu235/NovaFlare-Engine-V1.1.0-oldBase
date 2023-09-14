@@ -391,9 +391,9 @@ class Paths
 				return true;
 		}
 		#end
-		if (FileSystem.exists(SUtil.getPath() + 'assets/' + key)
+		if (FileSystem.exists(SUtil.getPath() + 'assets/' + key))
 		    return true;
-		if (FileSystem.exists(SUtil.getPath() + 'assets/shared/' + key)
+		if (FileSystem.exists(SUtil.getPath() + 'assets/shared/' + key))
 		    return true;   
 		
 		if(OpenFlAssets.exists(getPath(key, type, library, false))) {
