@@ -841,7 +841,7 @@ class FreeplayState extends MusicBeatState
 		    chooseBG.y = showY + 100 + (chooseShow - 1) * 40;
 		}
 		
-		if (searchSongNamesTexts.members[0].text != ''){
+		if (searchSongNamesTexts.members[0].text != '' && chooseShow >= 1 && chooseShow <= 5){
             chooseBG.alpha = 0.6;
         }
         else{
@@ -850,7 +850,7 @@ class FreeplayState extends MusicBeatState
 		
 		
 		var realChoose:Int = startShow + chooseShow; 
-		realChoose -= 2; // -2 is fix code to 0
+		realChoose -= 1; // -1 is fix code to 0
 		if (realChoose >= 0 && realChoose <= songNum.length){
 		    curSelected = songNum[realChoose]; //main move freeplay choose
 		    SearchChangeSelection(true);
