@@ -749,7 +749,7 @@ class FreeplayState extends MusicBeatState
 		for (i in 0...songs.length)
 		{
 			var name:String = songs[i].songName.toLowerCase();
-			if (name.indexOf(searchString.toLowerCase()) != -1)
+			if (name.indexOf(searchString.toLowerCase()) != -1 && searchInput.text != '')
 			{
 				songName.push(songs[i].songName);
 				songNum.push(i);
@@ -778,6 +778,7 @@ class FreeplayState extends MusicBeatState
 		startShow = 0;
         chooseShow = 0;
         
+        /*
         if (searchSongNamesTexts.members[0].text != ''){
             chooseShow = 1;
             chooseBG.alpha = 0.6;
@@ -786,6 +787,7 @@ class FreeplayState extends MusicBeatState
         else{
             chooseBG.alpha = 0;
         }
+        */
     
 		checkPosition();
 		
@@ -795,7 +797,7 @@ class FreeplayState extends MusicBeatState
 	{
 	    checkPosition();
 	    
-        if (change > 0){
+        if (change > 0 && songNum.length != 0){
             if(!isEnd){
                 if (chooseShow < maxDown) chooseShow++;
                 else if (chooseShow == maxDown){
@@ -813,7 +815,7 @@ class FreeplayState extends MusicBeatState
             }
         }
         
-        if (change < 0){
+        if (change < 0 && songNum.length != 0){
             if (!isStart){
                 if (chooseShow > maxUP) chooseShow--;
                 else if (chooseShow == maxUP) {                
@@ -825,13 +827,15 @@ class FreeplayState extends MusicBeatState
                 if (chooseShow > maxUP) chooseShow--;
                 else if (chooseShow == maxUP){
                     if (songNum.length >= 5){
-                    startShow = songNum.length - 5 - 1;
+                    startShow = songNum.length - 5;
                     chooseShow = 5;
                     updateSongText();
                     }                    
                 }    
             }
         }
+        
+        if (chooseShow < 0) chooseShow = 0; //fix someone press up at start
         
         if (chooseShow >= 1 && chooseShow <= 5){
 		    chooseBG.y = showY + 100 + (chooseShow - 1) * 40;
@@ -869,7 +873,7 @@ class FreeplayState extends MusicBeatState
 	
 	function checkPosition()
 	{
-	    if((startShow - 1 + 5) >= songNum.length) isEnd = true;
+	    if((startShow + 5) >= songNum.length) isEnd = true;
 	    else isEnd = false;
 	    if(startShow == 0) isStart = true;
 	    else isStart = false;
@@ -893,31 +897,6 @@ class FreeplayState extends MusicBeatState
 		
 		if (songNum.length < 5) maxDown = songNum.length; //check again
 		if (songNum.length < 2) maxUP = 1; //check again
-	}
-
-	function changeDiff(change:Int = 0)
-	{
-		curDifficulty += change;
-
-		if (curDifficulty < 0)
-			curDifficulty = Difficulty.list.length-1;
-		if (curDifficulty >= Difficulty.list.length)
-			curDifficulty = 0;
-
-		#if !switch
-		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
-		intendedRating = Highscore.getRating(songs[curSelected].songName, curDifficulty);
-		#end
-
-		lastDifficultyName = Difficulty.getString(curDifficulty);
-		if (Difficulty.list.length > 1)
-			diffText.text = '< ' + lastDifficultyName.toUpperCase() + ' >';
-		else
-			diffText.text = lastDifficultyName.toUpperCase();
-
-		positionHighscore();
-		missingText.visible = false;
-		missingTextBG.visible = false;
 	}
 	
 	function SearchChangeSelection(playSound:Bool = true)
@@ -977,6 +956,33 @@ class FreeplayState extends MusicBeatState
 		changeDiff();
 		_updateSongLastDifficulty();
 	}
+
+	function changeDiff(change:Int = 0)
+	{
+		curDifficulty += change;
+
+		if (curDifficulty < 0)
+			curDifficulty = Difficulty.list.length-1;
+		if (curDifficulty >= Difficulty.list.length)
+			curDifficulty = 0;
+
+		#if !switch
+		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
+		intendedRating = Highscore.getRating(songs[curSelected].songName, curDifficulty);
+		#end
+
+		lastDifficultyName = Difficulty.getString(curDifficulty);
+		if (Difficulty.list.length > 1)
+			diffText.text = '< ' + lastDifficultyName.toUpperCase() + ' >';
+		else
+			diffText.text = lastDifficultyName.toUpperCase();
+
+		positionHighscore();
+		missingText.visible = false;
+		missingTextBG.visible = false;
+	}
+	
+	
 
 	function changeSelection(change:Int = 0, playSound:Bool = true)
 	{
