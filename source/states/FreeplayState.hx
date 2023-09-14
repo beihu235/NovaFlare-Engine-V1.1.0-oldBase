@@ -58,6 +58,9 @@ class FreeplayState extends MusicBeatState
     var searchSongNamesTexts:FlxTypedGroup<FlxText>;
     
     var showCaseBG:FlxSprite;
+    var showCaseBGLeft:FlxSprite;
+    var showCaseBGUp:FlxSprite;
+    var showCaseBGDown:FlxSprite;
     var showCaseText:FlxText;
     var addDataBG:FlxSprite;
     var addDataText:FlxText;
@@ -332,17 +335,17 @@ class FreeplayState extends MusicBeatState
 		showCaseBG.alpha = 0.6;
 		showCaseBG.color = 0xFF000000;
 		
-		showCaseBG_Left = new FlxSprite(FlxG.width - CHsize - 1, CH_Y + CHsize * 2 - 50 - 2).makeGraphic(1 , CHsize + 2, 0xFFFFFFFF);
-		showCaseBG_Left.alpha = 0.6;
-		showCaseBG_Left.color = 0xFF000000;
+		showCaseBGLeft = new FlxSprite(FlxG.width - CHsize - 1, CH_Y + CHsize * 2 - 50 - 2).makeGraphic(1 , CHsize + 2, 0xFFFFFFFF);
+		showCaseBGLeft.alpha = 0.6;
+		showCaseBGLeft.color = 0xFF000000;
 		
-		showCaseBG_Up = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50 - 1).makeGraphic(CHsize , 1, 0xFFFFFFFF);
-		showCaseBG_Up.alpha = 0.6;
-		showCaseBG_Up.color = 0xFF000000;
+		showCaseBGUp = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50 - 1).makeGraphic(CHsize , 1, 0xFFFFFFFF);
+		showCaseBGUp.alpha = 0.6;
+		showCaseBGUp.color = 0xFF000000;
 		
-		showCaseBG_Down = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50 + CHsize).makeGraphic(CHsize , 1, 0xFFFFFFFF);
-		showCaseBG_Down.alpha = 0.6;
-		showCaseBG_Down.color = 0xFF000000;
+		showCaseBGDown = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50 + CHsize).makeGraphic(CHsize , 1, 0xFFFFFFFF);
+		showCaseBGDown.alpha = 0.6;
+		showCaseBGDown.color = 0xFF000000;
 		
 		showCaseText = new FlxText(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50 + CHsize / 2 - text1size / 2, CHsize, '<<', text1size);
 		showCaseText.setFormat(Paths.font("vcr.ttf"), text1size, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -373,9 +376,9 @@ class FreeplayState extends MusicBeatState
 		leftLine = new FlxSprite(FlxG.width - 0.5, CH_Y).makeGraphic(1 , CHsize, FlxColor.WHITE);
 		
 		add(showCaseBG);
-		add(showCaseBG_Left);
-		add(showCaseBG_Up);
-		add(showCaseBG_Down);
+		add(showCaseBGLeft);
+		add(showCaseBGUp);
+		add(showCaseBGDown);
         add(showCaseText);
         add(addDataBG);
         add(addDataText);
