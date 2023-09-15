@@ -848,7 +848,6 @@ class FreeplayState extends MusicBeatState
                         startShow = 0;
                         chooseShow = songNum.length;
                         updateSongText();
-                        }
                     }
                 }    
             }
