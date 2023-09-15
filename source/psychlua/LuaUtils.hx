@@ -76,12 +76,16 @@ class LuaUtils
 	}
 	public static function getVarInArray(instance:Dynamic, variable:String, allowMaps:Bool = false):Any
 	{
-	
+	    var test:Dynamic;
 	    #if android
-			if (variable == 'keys.justPressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justPressed && MusicBeatState.androidc.newhbox.buttonSpace != null)
-            return true;
-            else if (variable == 'keys.pressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.pressed && MusicBeatState.androidc.newhbox.buttonSpace != null)
-            return true;
+			if (variable == 'keys.justPressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justPressed && MusicBeatState.androidc.newhbox.buttonSpace != null){
+			test = true;
+            return test;
+            }
+            else if (variable == 'keys.pressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.pressed && MusicBeatState.androidc.newhbox.buttonSpace != null){
+            test = true;
+            return test;
+            }
         #end
         
 		var splitProps:Array<String> = variable.split('[');
