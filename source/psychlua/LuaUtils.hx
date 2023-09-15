@@ -96,6 +96,14 @@ class LuaUtils
 			}
 			return target;
 		}
+		
+		#if android
+			if (instance == 'FlxG'){
+			    if (variable == 'keys.justPressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justPressed && MusicBeatState.androidc.newhbox.buttonSpace != null)
+                return true;
+            }
+        #end
+            
 
 		if(allowMaps && isMap(instance))
 		{
