@@ -98,10 +98,9 @@ class LuaUtils
 		}
 		
 		#if android
-			if (instance == 'FlxG'){
 			    if (variable == 'keys.justPressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justPressed && MusicBeatState.androidc.newhbox.buttonSpace != null)
                 return true;
-            }
+            
         #end
             
 
