@@ -37,7 +37,13 @@ class ReflectionFunctions
 				FunkinLua.luaTrace('getPropertyFromClass: Class $classVar not found', false, false, FlxColor.RED);
 				return null;
 			}
-
+			
+            #if android
+			if (variable == 'keys.justPressed.SPACE')
+            return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+            else if (variable == 'keys.pressed.SPACE')
+            return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+            #end
 			var split:Array<String> = variable.split('.');
 			if(split.length > 1) {
 				var obj:Dynamic = LuaUtils.getVarInArray(myClass, split[0], allowMaps);
