@@ -23,6 +23,17 @@ import flixel.ui.FlxButton;
 import sys.FileSystem;
 #end
 
+    /*
+    Song Search extend made by NF|beihu (北狐丶逐梦)
+    youtube: https://b23.tv/SnqG443
+    bilbil: https://youtube.com/@beihu235?si=NHnWxcUWPS46EqUt
+    discord: beihu235
+    
+    you can use it but must give me credit(dont forget my icon)
+    logic is very easy so I think everyone can understand it
+        
+    */
+    
 class FreeplayState extends MusicBeatState
 {
 	var songs:Array<SongMetadata> = [];
@@ -91,8 +102,6 @@ class FreeplayState extends MusicBeatState
     var chooseShow:Int = 0;
     var isStart:Bool = false;
     var isEnd:Bool = false;
-    var upCheck:Bool = false;
-    var DownCheck:Bool = false;
         
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
