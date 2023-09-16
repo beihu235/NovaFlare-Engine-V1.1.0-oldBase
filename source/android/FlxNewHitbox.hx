@@ -20,7 +20,11 @@ class FlxNewHitbox extends FlxSpriteGroup
 	public var buttonRight:FlxButton = new FlxButton(0, 0);
     
     public var buttonSpace:FlxButton = new FlxButton(0, 0);
-    
+    public var buttonShift:FlxButton = new FlxButton(0, 0);
+    public var buttonExtend1:FlxButton = new FlxButton(0, 0);
+    public var buttonExtend2:FlxButton = new FlxButton(0, 0);
+    public var buttonExtend3:FlxButton = new FlxButton(0, 0);
+    public var buttonExtend4:FlxButton = new FlxButton(0, 0);
 	/**
 	 * Create the zone.
 	 */
