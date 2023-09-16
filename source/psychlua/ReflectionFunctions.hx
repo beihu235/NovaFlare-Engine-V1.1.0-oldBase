@@ -39,10 +39,28 @@ class ReflectionFunctions
 			}
 			
             #if android
-            
-			if (variable == 'keys.justPressed.SPACE' || variable == 'keys.pressed.SPACE' || variable == 'keys.justReleased.SPACE' || variable == 'keys.justPressed.SHIFT' || variable == 'keys.pressed.SHIFT' || variable == 'keys.justReleased.SHIFT')
-                return LuaUtils.getVarInArray(myClass, variable, allowMaps);    
+            if (MusicBeatState.androidc != null){ //check for android control and dont check for keyboard
+			    if (variable == 'keys.justPressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justPressed){
+    			    return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+                }
+                else if (variable == 'keys.pressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.pressed){
+                    return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+                }
+                else if (variable == 'keys.justReleased.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justReleased){
+                    return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+                }
                 
+                if (variable == 'keys.justPressed.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.justPressed){
+    			    return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+                }
+                else if (variable == 'keys.pressed.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.pressed){
+                    return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+                }
+                else if (variable == 'keys.justReleased.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.justReleased){
+                    return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+                }
+            }
+            
             #end
             
 			var split:Array<String> = variable.split('.');
