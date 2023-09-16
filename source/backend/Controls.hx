@@ -287,7 +287,7 @@ class Controls
         		result = (MusicBeatState.androidc.newhbox.buttonRight.justPressed == true);
         		if(result) {controllerMode = true; return true;}
     		    }
-    		    if (key == 'space' && ClientPrefs.data.hitboxExtend){
+    		    if (key == 'space' && ClientPrefs.data.spaceExtend){
     		    result = (MusicBeatState.androidc.newhbox.buttonSpace.justPressed == true);
         		if(result) {controllerMode = true; return true;}
     		    }
@@ -349,7 +349,7 @@ class Controls
         		result = (MusicBeatSubstate.androidc.newhbox.buttonRight.justPressed == true);
         		if(result) {controllerMode = true; return true;}
     		    }
-    		    if (key == 'space' && ClientPrefs.data.hitboxExtend){
+    		    if (key == 'space' && ClientPrefs.data.spaceExtend){
     		    result = (MusicBeatSubstate.androidc.newhbox.buttonSpace.justPressed == true);
         		if(result) {controllerMode = true; return true;}
     		    }
@@ -482,7 +482,7 @@ class Controls
         		result = (MusicBeatState.androidc.newhbox.buttonRight.pressed == true);
         		if(result) {controllerMode = true; return true;}
     		    }
-    		    if (key == 'space' && ClientPrefs.data.hitboxExtend){
+    		    if (key == 'space' && ClientPrefs.data.spaceExtend){
     		    result = (MusicBeatState.androidc.newhbox.buttonSpace.pressed == true);
         		if(result) {controllerMode = true; return true;}
     		    }
@@ -544,7 +544,7 @@ class Controls
         		result = (MusicBeatSubstate.androidc.newhbox.buttonRight.pressed == true);
         		if(result) {controllerMode = true; return true;}
     		    }
-    		    if (key == 'space' && ClientPrefs.data.hitboxExtend){
+    		    if (key == 'space' && ClientPrefs.data.spaceExtend){
     		    result = (MusicBeatSubstate.androidc.newhbox.buttonSpace.pressed == true);
         		if(result) {controllerMode = true; return true;}
     		    }
@@ -677,7 +677,7 @@ class Controls
         		result = (MusicBeatState.androidc.newhbox.buttonRight.justReleased == true);
         		if(result) {controllerMode = true; return true;}
     		    }
-    		    if (key == 'space' && ClientPrefs.data.hitboxExtend){
+    		    if (key == 'space' && ClientPrefs.data.spaceExtend){
     		    result = (MusicBeatState.androidc.newhbox.buttonSpace.justReleased == true);
         		if(result) {controllerMode = true; return true;}
     		    }
@@ -739,7 +739,7 @@ class Controls
         		result = (MusicBeatSubstate.androidc.newhbox.buttonRight.justReleased == true);
         		if(result) {controllerMode = true; return true;}
     		    }
-    		    if (key == 'space' && ClientPrefs.data.hitboxExtend){
+    		    if (key == 'space' && ClientPrefs.data.spaceExtend){
     		    result = (MusicBeatSubstate.androidc.newhbox.buttonSpace.justReleased == true);
         		if(result) {controllerMode = true; return true;}
     		    }
