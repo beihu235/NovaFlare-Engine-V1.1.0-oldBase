@@ -41,9 +41,16 @@ class HitboxSettingsSubState extends BaseOptionsMenu
 
 		var option:Option = new Option('Space Extend',
 			"Allow Extend Space Control --Made by NF|Beihu",
-			'hitboxExtend',
+			'spaceExtend',
 			'bool');
 		  addOption(option);
+		 
+		var option:Option = new Option('Shift Extend',
+			"Allow Extend Shift Control --Made by NF|Beihu",
+			'shiftExtend',
+			'bool');
+		  addOption(option);   
+		  
 		  
 		var option:Option = new Option('Space Location:',
 			"Choose Space Control Location",
