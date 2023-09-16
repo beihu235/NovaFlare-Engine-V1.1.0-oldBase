@@ -39,11 +39,12 @@ class ReflectionFunctions
 			}
 			
             #if android
-			if (variable == 'keys.justPressed.SPACE')
-            return LuaUtils.getVarInArray(myClass, variable, allowMaps);
-            else if (variable == 'keys.pressed.SPACE')
-            return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+            
+			if (variable == 'keys.justPressed.SPACE' || variable == 'keys.pressed.SPACE' || variable == 'keys.justReleased.SPACE' || variable == 'keys.justPressed.SHIFT' || variable == 'keys.pressed.SHIFT' || variable == 'keys.justReleased.SHIFT')
+                return LuaUtils.getVarInArray(myClass, variable, allowMaps);    
+                
             #end
+            
 			var split:Array<String> = variable.split('.');
 			if(split.length > 1) {
 				var obj:Dynamic = LuaUtils.getVarInArray(myClass, split[0], allowMaps);

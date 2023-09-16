@@ -76,15 +76,35 @@ class LuaUtils
 	}
 	public static function getVarInArray(instance:Dynamic, variable:String, allowMaps:Bool = false):Any
 	{
-	    var test:Dynamic;
+	    
 	    #if android
-			if (variable == 'keys.justPressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justPressed && MusicBeatState.androidc.newhbox.buttonSpace != null){
-			test = true;
-            return test;
-            }
-            else if (variable == 'keys.pressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.pressed && MusicBeatState.androidc.newhbox.buttonSpace != null){
-            test = true;
-            return test;
+	        var pressCheck:Dynamic;
+	        if (MusicBeatState.androidc != null){ //check for android control and dont check for keyboard
+			    if (variable == 'keys.justPressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justPressed){
+    			    pressCheck = true;
+                    return pressCheck;
+                }
+                else if (variable == 'keys.pressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.pressed){
+                    pressCheck = true;
+                    return pressCheck;
+                }
+                else if (variable == 'keys.justReleased.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justReleased){
+                    pressCheck = true;
+                    return pressCheck;
+                }
+                
+                if (variable == 'keys.justPressed.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.justPressed){
+    			    pressCheck = true;
+                    return pressCheck;
+                }
+                else if (variable == 'keys.pressed.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.pressed){
+                    pressCheck = true;
+                    return pressCheck;
+                }
+                else if (variable == 'keys.justReleased.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.justReleased){
+                    pressCheck = true;
+                    return pressCheck;
+                }
             }
         #end
         
