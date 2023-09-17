@@ -93,15 +93,15 @@ class LuaUtils
                     return pressCheck;
                 }
                 
-                if (variable == 'keys.justPressed.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.justPressed || MusicBeatState.androidc.vpad.buttonF.justPressed)){
+                if (variable == 'keys.justPressed.SHIFT' && (MusicBeatState.androidc.newhbox.buttonShift.justPressed || MusicBeatState.androidc.vpad.buttonF.justPressed)){
     			    pressCheck = true;
                     return pressCheck;
                 }
-                else if (variable == 'keys.pressed.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.pressed || MusicBeatState.androidc.vpad.buttonF.pressed)){
+                else if (variable == 'keys.pressed.SHIFT' && (MusicBeatState.androidc.newhbox.buttonShift.pressed || MusicBeatState.androidc.vpad.buttonF.pressed)){
                     pressCheck = true;
                     return pressCheck;
                 }
-                else if (variable == 'keys.justReleased.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.justReleased || MusicBeatSubstate.androidc.vpad.buttonF.justReleased)){
+                else if (variable == 'keys.justReleased.SHIFT' && (MusicBeatState.androidc.newhbox.buttonShift.justReleased || MusicBeatSubstate.androidc.vpad.buttonF.justReleased)){
                     pressCheck = true;
                     return pressCheck;
                 }
