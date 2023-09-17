@@ -6,7 +6,6 @@ import flixel.util.FlxSave;
 import flixel.math.FlxPoint;
 
 import android.FlxVirtualPad;
-import android.FlxHitbox;
 
 class Config {
 	var save:FlxSave;
@@ -79,7 +78,6 @@ class Config {
 class AndroidControls extends FlxSpriteGroup {
 	public var mode:ControlsGroup = HITBOX;
 
-	public var hbox:FlxHitbox;
 	public var newhbox:FlxNewHitbox;
 	public var vpad:FlxVirtualPad;
 
