@@ -62,8 +62,6 @@ class Config {
 	public function loadcustom(_pad:FlxVirtualPad):FlxVirtualPad {
 		if (save.data.buttons == null) 
 			return _pad; 
-		if (save.data.buttons != null){
-		
 		var tempCount:Int = 0;
 		
 		if (!isExtend){
@@ -80,7 +78,6 @@ class Config {
 			_pad.buttonF.y = save.data.buttons[1].y;
 		}
 		return _pad;
-		}
 	}
 }
 
