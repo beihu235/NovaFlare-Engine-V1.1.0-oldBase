@@ -55,8 +55,6 @@ class AndroidControlsMenu extends MusicBeatState
 		vpad = new FlxVirtualPad(RIGHT_FULL, controlExtend, 0.75, ClientPrefs.data.antialiasing);
 		vpad.alpha = 0;
 		add(vpad);
-		loadcustom(false);
-		save();
     
 		newhbox = new FlxNewHitbox();
 		newhbox.visible = false;
