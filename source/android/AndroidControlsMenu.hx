@@ -164,7 +164,7 @@ class AndroidControlsMenu extends MusicBeatState
 	
 		inputvari.changeText(controlitems[curSelected]);
 		
-		
+		buttonistouched = false;
 
 		var daChoice:String = controlitems[Math.floor(curSelected)];
 
@@ -201,12 +201,19 @@ class AndroidControlsMenu extends MusicBeatState
 		if (daChoice != "Hitbox")
 		{
 			newhbox.visible = false;
+		}
+		else
+		{
+		    newhbox.visible = true;
+		}
+		
+		if (daChoice != "Hitbox" && daChoice != "Keyboard")
+		{
 			spacePozition.visible = true;
 			shiftPozition.visible = true;
 		}
 		else
 		{
-		    newhbox.visible = true;
 		    spacePozition.visible = false;
 			shiftPozition.visible = false;
 		}
