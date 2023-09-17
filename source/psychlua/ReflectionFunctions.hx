@@ -39,24 +39,46 @@ class ReflectionFunctions
 			}
 			
             #if android // Extend for check control for android,you can try to extend other key at same way but I'm so lazy. --Write by NF|beihu(北狐丶逐梦)
-            if (MusicBeatState.androidc != null){ //check for android control and dont check for keyboard
-			    if (variable == 'keys.justPressed.SPACE' && (MusicBeatState.androidc.newhbox.buttonSpace.justPressed || MusicBeatState.androidc.vpad.buttonG.justPressed)){
+           if (MusicBeatState.androidc.newhbox != null){ //check for android control and dont check for keyboard
+			    if (variable == 'keys.justPressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justPressed){
     			    return LuaUtils.getVarInArray(myClass, variable, allowMaps);
                 }
-                else if (variable == 'keys.pressed.SPACE' && (MusicBeatState.androidc.newhbox.buttonSpace.pressed || MusicBeatState.androidc.vpad.buttonG.pressed)){
+                else if (variable == 'keys.pressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.pressed){
                     return LuaUtils.getVarInArray(myClass, variable, allowMaps);
                 }
-                else if (variable == 'keys.justReleased.SPACE' && (MusicBeatState.androidc.newhbox.buttonSpace.justReleased || MusicBeatSubstate.androidc.vpad.buttonG.justReleased)){
+                else if (variable == 'keys.justReleased.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justReleased){
                     return LuaUtils.getVarInArray(myClass, variable, allowMaps);
                 }
                 
-                if (variable == 'keys.justPressed.SHIFT' && (MusicBeatState.androidc.newhbox.buttonShift.justPressed || MusicBeatState.androidc.vpad.buttonF.justPressed)){
+                if (variable == 'keys.justPressed.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.justPressed){
     			    return LuaUtils.getVarInArray(myClass, variable, allowMaps);
                 }
-                else if (variable == 'keys.pressed.SHIFT' && (MusicBeatState.androidc.newhbox.buttonShift.pressed || MusicBeatState.androidc.vpad.buttonF.pressed)){
+                else if (variable == 'keys.pressed.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.pressed){
                     return LuaUtils.getVarInArray(myClass, variable, allowMaps);
                 }
-                else if (variable == 'keys.justReleased.SHIFT' && (MusicBeatState.androidc.newhbox.buttonShift.justReleased || MusicBeatSubstate.androidc.vpad.buttonF.justReleased)){
+                else if (variable == 'keys.justReleased.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.justReleased){
+                    return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+                }
+            }
+            
+            if (MusicBeatState.androidc.vpad != null){ //check for android control and dont check for keyboard
+			    if (variable == 'keys.justPressed.SPACE' && MusicBeatState.androidc.vpad.buttonG.justPressed){
+    			    return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+                }
+                else if (variable == 'keys.pressed.SPACE' && MusicBeatState.androidc.vpad.buttonG.pressed){
+                    return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+                }
+                else if (variable == 'keys.justReleased.SPACE' && MusicBeatState.androidc.vpad.buttonG.justReleased){
+                    return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+                }
+                
+                if (variable == 'keys.justPressed.SHIFT' && MusicBeatState.androidc.vpad.buttonF.justPressed){
+    			    return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+                }
+                else if (variable == 'keys.pressed.SHIFT' && MusicBeatState.androidc.vpad.buttonF.pressed){
+                    return LuaUtils.getVarInArray(myClass, variable, allowMaps);
+                }
+                else if (variable == 'keys.justReleased.SHIFT' && MusicBeatState.androidc.vpad.buttonF.justReleased){
                     return LuaUtils.getVarInArray(myClass, variable, allowMaps);
                 }
             }
