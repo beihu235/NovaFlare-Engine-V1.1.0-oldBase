@@ -143,7 +143,7 @@ class AndroidControlsMenu extends MusicBeatState
 
 	function changeSelection(change:Int = 0)
 	{
-	    save();
+	    if (change != 0) save(); //fix start load
 		curSelected += change;
 	
 		if (curSelected < 0)
