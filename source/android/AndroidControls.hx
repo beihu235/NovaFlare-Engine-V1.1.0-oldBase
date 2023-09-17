@@ -34,8 +34,14 @@ class Config {
 		if (save.data.buttons == null)
 		{
 			save.data.buttons = new Array();
-			for (buttons in _pad){
-				save.data.buttons.push(FlxPoint.get(buttons.x, buttons.y));
+			if (!isExtend){
+    			for (buttons in _pad){
+    				save.data.buttons.push(FlxPoint.get(buttons.x, buttons.y));
+    			}
+			}
+			else{
+			    save.data.buttons.push(_pad.buttonG.x, _pad.buttonG.y);
+			    save.data.buttons.push(_pad.buttonF.x, _pad.buttonF.y);
 			}
 		}else{
 		    if (!isExtend){
@@ -54,9 +60,9 @@ class Config {
 	}
 
 	public function loadcustom(_pad:FlxVirtualPad):FlxVirtualPad {
-	/*	if (save.data.buttons == null) 
-			return _pad; */
-		if (save.data.buttons != null)	{
+		if (save.data.buttons == null) 
+			return _pad; 
+		if (save.data.buttons != null){
 		
 		var tempCount:Int = 0;
 		
