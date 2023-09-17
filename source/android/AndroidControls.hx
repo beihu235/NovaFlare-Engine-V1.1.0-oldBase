@@ -40,8 +40,8 @@ class Config {
     			}
 			}
 			else{
-			    save.data.buttons.push(_pad.buttonG.x, _pad.buttonG.y);
-			    save.data.buttons.push(_pad.buttonF.x, _pad.buttonF.y);
+			    save.data.buttons[0] = FlxPoint.get(_pad.buttonG.x, _pad.buttonG.y);
+			    save.data.buttons[1] = FlxPoint.get(_pad.buttonF.x, _pad.buttonF.y);
 			}
 		}else{
 		    if (!isExtend){
