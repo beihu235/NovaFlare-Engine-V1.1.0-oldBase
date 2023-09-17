@@ -210,8 +210,8 @@ class FlxVirtualPad extends FlxSpriteGroup {
 				actions.add(add(buttonA = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "a", 0xFF0000)));
 				
 			case controlExtend:
-				actions.add(add(buttonF = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "F", 0xFF0000)));
-				actions.add(add(buttonG = createButton(FlxG.width - 86 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "G", 0xFFFF00)));	
+				actions.add(add(buttonF = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "f", 0xFF0000)));
+				actions.add(add(buttonG = createButton(FlxG.width - 86 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "g", 0xFFFF00)));	
 				
 			case CHART_EDITOR:			    
 				actions.add(add(buttonV = createButton(FlxG.width - 170 * 3, FlxG.height - 85 * 3, 44 * 3, 127, "v", 0x49A9B2)));            
