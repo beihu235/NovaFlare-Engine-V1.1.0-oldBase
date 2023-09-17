@@ -90,7 +90,7 @@ class AndroidControls extends FlxSpriteGroup {
 		super();
 
 		config = new Config('saved-controls');
-		extendConfig = new Config('saved-extendControls')
+		extendConfig = new Config('saved-extendControls');
 
 		mode = getModeFromNumber(config.getcontrolmode());
 
@@ -105,7 +105,8 @@ class AndroidControls extends FlxSpriteGroup {
 				initControler(3);
 			case HITBOX:
 		        initControler(4);		    
-			case KEYBOARD:// nothing
+			case KEYBOARD:
+			    // nothing happened
 		}
 	}
 
