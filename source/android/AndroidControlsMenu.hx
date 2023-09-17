@@ -247,7 +247,7 @@ class AndroidControlsMenu extends MusicBeatState
 				}
 			}
 		}
-		else if (daChoice != 'Hitbox'){
+		if (daChoice != 'Hitbox'){
 		    if (buttonistouched){
 				if (bindbutton.justReleased && touch.justReleased)
 				{
