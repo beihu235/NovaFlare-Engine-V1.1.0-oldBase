@@ -85,11 +85,7 @@ class AndroidControls extends FlxSpriteGroup {
 			case DUO:
 				initControler(3);
 			case HITBOX:
-		    if(ClientPrefs.data.hitboxmode != 'New'){
-				initControler(4);
-		    }else{
-		    initControler(5);
-		    }
+		        initControler(4);		    
 			case KEYBOARD:// nothing
 		}
 	}
@@ -97,26 +93,23 @@ class AndroidControls extends FlxSpriteGroup {
 	function initControler(vpadMode:Int) {
 		switch (vpadMode){
 			case 0:
-				vpad = new FlxVirtualPad(RIGHT_FULL, A_B, 0.75, ClientPrefs.data.antialiasing);	
+				vpad = new FlxVirtualPad(RIGHT_FULL, controlExtend, 0.75, ClientPrefs.data.antialiasing);	
 				add(vpad);						
 			case 1:
-				vpad = new FlxVirtualPad(FULL, NONE, 0.75, ClientPrefs.data.antialiasing);
+				vpad = new FlxVirtualPad(FULL, controlExtend, 0.75, ClientPrefs.data.antialiasing);
 				add(vpad);			
 			case 2:
-				vpad = new FlxVirtualPad(FULL, NONE, 0.75, ClientPrefs.data.antialiasing);
+				vpad = new FlxVirtualPad(FULL, controlExtend, 0.75, ClientPrefs.data.antialiasing);
 				vpad = config.loadcustom(vpad);
 				add(vpad);	
 			case 3:
-				vpad = new FlxVirtualPad(DUO, NONE, 0.75, ClientPrefs.data.antialiasing);
+				vpad = new FlxVirtualPad(DUO, controlExtend, 0.75, ClientPrefs.data.antialiasing);
 				add(vpad);		
 			case 4:
-				hbox = new FlxHitbox(0.75, ClientPrefs.data.antialiasing);
-				add(hbox);
-			case 5:
 			  newhbox = new FlxNewHitbox();
 			  add(newhbox);
 			default:
-				vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, ClientPrefs.data.antialiasing);	
+				vpad = new FlxVirtualPad(RIGHT_FULL, controlExtend, 0.75, ClientPrefs.data.antialiasing);	
 				add(vpad);					
 		}
 	}
@@ -131,9 +124,7 @@ class AndroidControls extends FlxSpriteGroup {
 				VIRTUALPAD_CUSTOM;
 			case 3: 
 				DUO;
-			case 4:	
-				HITBOX;
-			case 5: 
+			case 4: 
 				KEYBOARD;
 			default: 
 				VIRTUALPAD_RIGHT;

@@ -17,10 +17,13 @@ class FlxVirtualPad extends FlxSpriteGroup {
 	public var buttonC:FlxButton;
 	public var buttonD:FlxButton;
 	public var buttonE:FlxButton;
+	public var buttonF:FlxButton;
+	public var buttonG:FlxButton;
 	public var buttonV:FlxButton;
 	public var buttonX:FlxButton;
 	public var buttonY:FlxButton;
 	public var buttonZ:FlxButton;
+	
 
 	//DPad
 	public var buttonLeft:FlxButton;
@@ -66,6 +69,8 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		buttonC = new FlxButton(0, 0);
 		buttonD = new FlxButton(0, 0);
 		buttonE = new FlxButton(0, 0);
+		buttonF = new FlxButton(0, 0);
+		buttonG = new FlxButton(0, 0);
 		buttonV = new FlxButton(0, 0);
 		buttonX = new FlxButton(0, 0);
 		buttonY = new FlxButton(0, 0);
@@ -204,6 +209,10 @@ class FlxVirtualPad extends FlxSpriteGroup {
 				actions.add(add(buttonB = createButton(FlxG.width - 86 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "b", 0xFFCB00)));								
 				actions.add(add(buttonA = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "a", 0xFF0000)));
 				
+			case controlExtend:
+				actions.add(add(buttonF = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "F", 0xFF0000)));
+				actions.add(add(buttonG = createButton(FlxG.width - 86 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "G", 0xFFFF00)));	
+				
 			case CHART_EDITOR:			    
 				actions.add(add(buttonV = createButton(FlxG.width - 170 * 3, FlxG.height - 85 * 3, 44 * 3, 127, "v", 0x49A9B2)));            
 				actions.add(add(buttonX = createButton(FlxG.width - 128 * 3, FlxG.height - 85 * 3, 44 * 3, 127, "x", 0x99062D)));
@@ -278,7 +287,9 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		buttonC = null;
 		buttonD = null;
 		buttonE = null;
-
+        buttonF = null;
+		buttonG = null;
+		
 		buttonV = null;	
 		buttonX = null;	
 		buttonY = null;
@@ -330,6 +341,7 @@ enum FlxActionMode {
 	A_B_X_Y;	
 	A_B_C_X_Y;
 	A_B_C_X_Y_Z;
+	controlExtend;
 	FULL;
 	CHART_EDITOR;
 	MenuCharacterEditor;

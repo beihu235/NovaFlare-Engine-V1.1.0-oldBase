@@ -2,7 +2,6 @@ package android;
 
 import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
-//import flixel.ui.FlxButton;
 import android.flixel.FlxButton;
 import flixel.text.FlxText;
 import flixel.FlxG;
@@ -18,7 +17,6 @@ using StringTools;
 class AndroidControlsMenu extends MusicBeatState
 {
 	var vpad:FlxVirtualPad;
-	//var hbox:FlxHitbox;
 	var newhbox:FlxNewHitbox;
 	var upPozition:FlxText;
 	var downPozition:FlxText;
@@ -52,14 +50,10 @@ class AndroidControlsMenu extends MusicBeatState
 		titleText.alpha = 0.4;
 		add(titleText);
 
-		vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, ClientPrefs.data.antialiasing);
+		vpad = new FlxVirtualPad(RIGHT_FULL, controlExtend, 0.75, ClientPrefs.data.antialiasing);
 		vpad.alpha = 0;
 		add(vpad);
-        /*
-		hbox = new FlxHitbox(0.75, ClientPrefs.data.antialiasing);
-		hbox.visible = false;
-		add(hbox);
-		*/
+    
 		newhbox = new FlxNewHitbox();
 		newhbox.visible = false;
 		add(newhbox);
@@ -161,20 +155,20 @@ class AndroidControlsMenu extends MusicBeatState
 		{
 				case 'Pad-Right':
 					remove(vpad);
-					vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, ClientPrefs.data.antialiasing);
+					vpad = new FlxVirtualPad(RIGHT_FULL, controlExtend, 0.75, ClientPrefs.data.antialiasing);
 					add(vpad);
 				case 'Pad-Left':
 					remove(vpad);
-					vpad = new FlxVirtualPad(FULL, NONE, 0.75, ClientPrefs.data.antialiasing);
+					vpad = new FlxVirtualPad(FULL, controlExtend, 0.75, ClientPrefs.data.antialiasing);
 					add(vpad);
 				case 'Pad-Custom':
 					remove(vpad);
-					vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, ClientPrefs.data.antialiasing);
+					vpad = new FlxVirtualPad(RIGHT_FULL, controlExtend, 0.75, ClientPrefs.data.antialiasing);
 					add(vpad);
 					loadcustom();
 				case 'Duo':
 					remove(vpad);
-					vpad = new FlxVirtualPad(DUO, NONE, 0.75, ClientPrefs.data.antialiasing);
+					vpad = new FlxVirtualPad(DUO, controlExtend, 0.75, ClientPrefs.data.antialiasing);
 					add(vpad);
 				case 'Hitbox':
 					vpad.alpha = 0;
@@ -185,12 +179,10 @@ class AndroidControlsMenu extends MusicBeatState
 
 		if (daChoice != "Hitbox")
 		{
-			//hbox.visible = false;
 			newhbox.visible = false;
 		}
 		else
 		{
-		    //hbox.visible = true;
 		    newhbox.visible = true;
 		     
 		}
