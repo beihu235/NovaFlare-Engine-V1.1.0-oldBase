@@ -11,11 +11,11 @@ import android.FlxHitbox;
 class Config {
 	var save:FlxSave;
     var isExtend:Bool = false;
-	public function new(var:String) {
+	public function new(saveName:String) {
 		save = new FlxSave();
-		save.bind(var);
+		save.bind(saveName);
 		
-		if (var == 'saved-extendControls') isExtend = true;
+		if (saveName == 'saved-extendControls') isExtend = true;
 	}
 
 	public function getcontrolmode():Int {
