@@ -26,17 +26,20 @@ class AndroidControlsMenu extends MusicBeatState
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 	var controlitems:Array<String> = ['Pad-Right','Pad-Left','Pad-Custom','Duo','Hitbox','Keyboard'];
-	var curSelected:Int = 4;
+	var curSelected:Int = 0;
 	var buttonistouched:Bool = false;
 	var bindbutton:FlxButton;
 	var config:Config;
-
+    var extendConfig:Config;
+    
 	override public function create():Void
 	{
 		super.create();
 		
-		config = new Config();
+		config = new Config('saved-controls');
 		curSelected = config.getcontrolmode();
+		
+		extendConfig = new Config('saved-extendControls');  //use for update control for shift and space --write by NF|beihu(b站-北狐丶逐梦)
 
 		var bg:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
@@ -140,6 +143,7 @@ class AndroidControlsMenu extends MusicBeatState
 
 	function changeSelection(change:Int = 0)
 	{
+	    save();
 		curSelected += change;
 	
 		if (curSelected < 0)
@@ -148,6 +152,8 @@ class AndroidControlsMenu extends MusicBeatState
 			curSelected = 0;
 	
 		inputvari.changeText(controlitems[curSelected]);
+		
+		
 
 		var daChoice:String = controlitems[Math.floor(curSelected)];
 
@@ -157,24 +163,28 @@ class AndroidControlsMenu extends MusicBeatState
 					remove(vpad);
 					vpad = new FlxVirtualPad(RIGHT_FULL, controlExtend, 0.75, ClientPrefs.data.antialiasing);
 					add(vpad);
+					loadcustom(false);
 				case 'Pad-Left':
 					remove(vpad);
 					vpad = new FlxVirtualPad(FULL, controlExtend, 0.75, ClientPrefs.data.antialiasing);
 					add(vpad);
+					loadcustom(false);
 				case 'Pad-Custom':
 					remove(vpad);
 					vpad = new FlxVirtualPad(RIGHT_FULL, controlExtend, 0.75, ClientPrefs.data.antialiasing);
 					add(vpad);
-					loadcustom();
+					loadcustom(true);
 				case 'Duo':
 					remove(vpad);
 					vpad = new FlxVirtualPad(DUO, controlExtend, 0.75, ClientPrefs.data.antialiasing);
 					add(vpad);
+					loadcustom(false);
 				case 'Hitbox':
 					vpad.alpha = 0;
 				case 'Keyboard':
 					remove(vpad);
 					vpad.alpha = 0;
+					
 		}
 
 		if (daChoice != "Hitbox")
@@ -237,6 +247,29 @@ class AndroidControlsMenu extends MusicBeatState
 				}
 			}
 		}
+		else if (daChoice != 'Hitbox'){
+		    if (buttonistouched){
+				if (bindbutton.justReleased && touch.justReleased)
+				{
+					bindbutton = null;
+					buttonistouched = false;
+				}else 
+				{
+					movebutton(touch, bindbutton);
+					setbuttontexts();
+				}
+			}
+			else 
+			{
+				if (vpad.buttonG.justPressed) {
+					movebutton(touch, vpad.buttonG);
+				}
+				
+				if (vpad.buttonF.justPressed) {
+					movebutton(touch, vpad.buttonF);
+				}
+			}
+		}
 	}
 
 	function movebutton(touch:flixel.input.touch.FlxTouch, button:android.flixel.FlxButton) {
@@ -260,9 +293,18 @@ class AndroidControlsMenu extends MusicBeatState
 		if (daChoice == 'Pad-Custom'){
 			config.savecustom(vpad);
 		}
+		if (daChoice != 'Hitbox'){
+		    extendConfig.savecustom(vpad);
+		}
 	}
 
-	function loadcustom():Void{
+	function loadcustom(needFix:Bool):Void{
+	    if (needFix){
 		vpad = config.loadcustom(vpad);	
+		vpad = extendConfig.loadcustom(vpad);
+		}
+		else{
+		vpad = extendConfig.loadcustom(vpad);
+		}
 	}
 }
