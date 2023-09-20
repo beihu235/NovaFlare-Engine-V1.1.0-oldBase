@@ -207,6 +207,15 @@ class FreeplayState extends MusicBeatState
 		}
 		WeekData.setDirectoryFromWeek();
 		
+		if(curSelected >= songs.length) curSelected = 0;
+		bg.color = songs[curSelected].color;
+		intendedColor = bg.color;
+		lerpSelected = curSelected;
+
+		curDifficulty = Math.round(Math.max(0, Difficulty.defaultList.indexOf(lastDifficultyName)));
+		
+		changeSelection();
+		
 		scoreBG = new FlxSprite(FlxG.width * 0.7 - 6, 0).makeGraphic(1, 92, 0xFF000000);
 		scoreBG.alpha = 0.6;
 
@@ -221,6 +230,8 @@ class FreeplayState extends MusicBeatState
         add(scoreBG);
 		add(scoreText);
 		add(diffText);
+		
+		
 
 		missingTextBG = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		missingTextBG.alpha = 0.6;
@@ -403,15 +414,6 @@ class FreeplayState extends MusicBeatState
 		text.antialiasing = ClientPrefs.data.antialiasing;
 		text.screenCenter(X);
 		add(text);
-		
-        if(curSelected >= songs.length) curSelected = 0;
-		bg.color = songs[curSelected].color;
-		intendedColor = bg.color;
-		lerpSelected = curSelected;
-
-		curDifficulty = Math.round(Math.max(0, Difficulty.defaultList.indexOf(lastDifficultyName)));
-		
-		changeSelection();
 		
 		updateTexts();
 		
