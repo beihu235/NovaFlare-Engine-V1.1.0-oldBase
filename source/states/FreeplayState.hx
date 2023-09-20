@@ -38,7 +38,7 @@ class FreeplayState extends MusicBeatState
 {
 	var songs:Array<SongMetadata> = [];
 
-	var selector:FlxText;
+	//var selector:FlxText;
 	private static var curSelected:Int = 0;
 	var lerpSelected:Float = 0;
 	var curDifficulty:Int = -1;
@@ -90,9 +90,9 @@ class FreeplayState extends MusicBeatState
     var notFoundSongText:FlxText;
     var notFoundSongTextSine:Float = 0;
     
-    var CHsize = 0; 
-    var showY = 0;
-    var showOffset = 5;
+    var CHsize:Int = 0; 
+    var showY:Int = 0;
+    var showOffset:Int = 5;
     
     var songName:Array<String> = [];
 	var songNum:Array<Int> = [];
@@ -206,25 +206,23 @@ class FreeplayState extends MusicBeatState
 			// songText.screenCenter(X);
 		}
 		WeekData.setDirectoryFromWeek();
+		
+		scoreBG = new FlxSprite(FlxG.width * 0.7 - 6, 0).makeGraphic(1, 92, 0xFF000000);
+		scoreBG.alpha = 0.6;
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, '', 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         scoreText.scrollFactor.set();
 		scoreText.cameras = [camGame];
-        
-		scoreBG = new FlxSprite(FlxG.width * 0.7 - 6, 0).makeGraphic(1, 92, 0xFF000000);
-		scoreBG.alpha = 0.6;
-		add(scoreBG);
-		
-		add(scoreText);
 
-		diffText = new FlxText(FlxG.width * 0.7, 5 + 36, 0, '   ', 24);
+		diffText = new FlxText(FlxG.width * 0.7, 5 + 36, 0, '', 24);
 		diffText.font = Paths.font("vcr.ttf");
 		diffText.scrollFactor.set();
 		diffText.cameras = [camGame];
+	
+        add(scoreBG);
+		add(scoreText);
 		add(diffText);
-        
-		
 
 		missingTextBG = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		missingTextBG.alpha = 0.6;
@@ -252,10 +250,10 @@ class FreeplayState extends MusicBeatState
 		textBG.alpha = 0.6;
 		add(textBG);
 		
-        var showWidth = 500;
-        var showHeight = 300;
-        var showX = 180;
-        showY = -1;
+        var showWidth:Int = 500;
+        var showHeight:Int = 300;
+        var showX:Int = 180;
+        showY:Int = -1;
         
         searchTextBG = new FlxSprite(showX, showY).makeGraphic(showWidth, showHeight, FlxColor.BLACK);
 		searchTextBG.alpha = 0.6;
@@ -283,7 +281,7 @@ class FreeplayState extends MusicBeatState
 		notFoundSongText.antialiasing = ClientPrefs.data.antialiasing;
 		notFoundSongText.cameras = [camSearch];
 		
-		var lineHeight = 3;
+		var lineHeight:Int = 3;
 		underline_text_BG = new FlxSprite(showX + 50, showY + 20 + 40).makeGraphic(showWidth - 100, 6, FlxColor.WHITE);
 		underline_text_BG.alpha = 0.6;
 		underline_text_BG.cameras = [camSearch];
@@ -341,10 +339,10 @@ class FreeplayState extends MusicBeatState
 		
         
         CHsize = 100;
-        var CH_Y = 150;
-        var CH_X = 0;
-        var text1size = 50;
-        var text2size = 30;
+        var CH_Y:Int = 150;
+        var CH_X:Int = 0;
+        var text1size:Int = 50;
+        var text2size:Int = 30;
         
         showCaseBG = new FlxSprite(FlxG.width - CHsize, CH_Y + CHsize * 2 - 50).makeGraphic(CHsize , CHsize, 0xFFFFFFFF);
 		showCaseBG.alpha = 0.6;
