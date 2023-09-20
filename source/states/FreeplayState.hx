@@ -230,8 +230,6 @@ class FreeplayState extends MusicBeatState
         add(scoreBG);
 		add(scoreText);
 		add(diffText);
-		
-		
 
 		missingTextBG = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		missingTextBG.alpha = 0.6;
@@ -997,13 +995,15 @@ class FreeplayState extends MusicBeatState
 		#end
 
 		lastDifficultyName = Difficulty.getString(curDifficulty);
+		if (diffText != null){ //fix shit bug
 		if (Difficulty.list.length > 1)
 			diffText.text = '< ' + lastDifficultyName.toUpperCase() + ' >';
 		else
 			diffText.text = lastDifficultyName.toUpperCase();
-
+        
 		positionHighscore();
 		missingText.visible = false;
+		}
 		missingTextBG.visible = false;
 	}
 	
