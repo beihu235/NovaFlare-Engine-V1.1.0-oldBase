@@ -14,7 +14,7 @@ class DiscordClient
 		details: "In the Menus",
 		state: null,
 		largeImageKey: 'icon',
-		largeImageText: "Psych Engine",
+		largeImageText: "NF Engine",
 		smallImageKey : null,
 		startTimestamp : null,
 		endTimestamp : null
@@ -117,7 +117,7 @@ class DiscordClient
 		_options.details = details;
 		_options.state = state;
 		_options.largeImageKey = 'icon';
-		_options.largeImageText = "Engine Version: " + states.MainMenuState.psychEngineVersion;
+		_options.largeImageText = "Engine Version: " + 1.1.0;
 		_options.smallImageKey = smallImageKey;
 		// Obtained times are in milliseconds so they are divided so Discord can use it
 		_options.startTimestamp = Std.int(startTimestamp / 1000);
