@@ -44,10 +44,6 @@ class FreeplayState extends MusicBeatState
 	var curDifficulty:Int = -1;
 	private static var lastDifficultyName:String = Difficulty.getDefault();
 	
-	var camGame:FlxCamera;
-	var camSearch:FlxCamera;
-	var camBlackFade:FlxCamera;
-
 	var scoreBG:FlxSprite;
 	var scoreText:FlxText;
 	var diffText:FlxText;
@@ -55,6 +51,10 @@ class FreeplayState extends MusicBeatState
 	var lerpRating:Float = 0;
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
+	
+	var camGame:FlxCamera;
+	var camSearch:FlxCamera;
+	var camBlackFade:FlxCamera;
 	
 	var openSearch:Bool = false; //it not use 
 	var SearchTween:Array<FlxTween> = [];
@@ -242,6 +242,8 @@ class FreeplayState extends MusicBeatState
 		
 		changeSelection();
 		
+		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		diffText.font = Paths.font("vcr.ttf");
 
 		var swag:Alphabet = new Alphabet(1, 0, "swag");
 
