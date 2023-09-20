@@ -44,9 +44,9 @@ class FreeplayState extends MusicBeatState
 	var curDifficulty:Int = -1;
 	private static var lastDifficultyName:String = Difficulty.getDefault();
 	
-	public var camGame:FlxCamera;
-	public var camSearch:FlxCamera;
-	public var camBlackFade:FlxCamera;
+	var camGame:FlxCamera;
+	var camSearch:FlxCamera;
+	var camBlackFade:FlxCamera;
 
 	var scoreBG:FlxSprite;
 	var scoreText:FlxText;
@@ -84,7 +84,7 @@ class FreeplayState extends MusicBeatState
     var showCaseBGTween:FlxTween;
     var addBGTween:FlxTween;
     var reduceBGTween:FlxTween;
-    
+
     var searchCheck:String = ''; // update check song name change
     var lineText:FlxText;
     var notFoundSongText:FlxText;
@@ -213,12 +213,10 @@ class FreeplayState extends MusicBeatState
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, '', 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         scoreText.scrollFactor.set();
-		scoreText.cameras = [camGame];
 
-		diffText = new FlxText(FlxG.width * 0.7, 5 + 36, 0, '', 24);
+		diffText = new FlxText(FlxG.width * 0.7, 5 + 44, 0, '', 24);
 		diffText.font = Paths.font("vcr.ttf");
 		diffText.scrollFactor.set();
-		diffText.cameras = [camGame];
 	
         add(scoreBG);
 		add(scoreText);
@@ -234,15 +232,6 @@ class FreeplayState extends MusicBeatState
 		missingText.scrollFactor.set();
 		missingText.visible = false;
 		add(missingText);
-
-		if(curSelected >= songs.length) curSelected = 0;
-		bg.color = songs[curSelected].color;
-		intendedColor = bg.color;
-		lerpSelected = curSelected;
-
-		curDifficulty = Math.round(Math.max(0, Difficulty.defaultList.indexOf(lastDifficultyName)));
-		
-		changeSelection();
 
 		var swag:Alphabet = new Alphabet(1, 0, "swag");
 
@@ -414,6 +403,15 @@ class FreeplayState extends MusicBeatState
 		text.antialiasing = ClientPrefs.data.antialiasing;
 		text.screenCenter(X);
 		add(text);
+		
+        if(curSelected >= songs.length) curSelected = 0;
+		bg.color = songs[curSelected].color;
+		intendedColor = bg.color;
+		lerpSelected = curSelected;
+
+		curDifficulty = Math.round(Math.max(0, Difficulty.defaultList.indexOf(lastDifficultyName)));
+		
+		changeSelection();
 		
 		updateTexts();
 		
