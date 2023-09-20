@@ -206,16 +206,7 @@ class FreeplayState extends MusicBeatState
 			// songText.screenCenter(X);
 		}
 		WeekData.setDirectoryFromWeek();
-		
-		if (curSelected >= songs.length) curSelected = 0;
-		bg.color = songs[curSelected].color;
-		intendedColor = bg.color;
-		lerpSelected = curSelected;
-
-		curDifficulty = Math.round(Math.max(0, Difficulty.defaultList.indexOf(lastDifficultyName)));
-		
-		changeSelection();
-		
+				
 		scoreBG = new FlxSprite(FlxG.width * 0.7 - 6, 0).makeGraphic(1, 92, 0xFF000000);
 		scoreBG.alpha = 0.6;
 
@@ -241,6 +232,16 @@ class FreeplayState extends MusicBeatState
 		missingText.scrollFactor.set();
 		missingText.visible = false;
 		add(missingText);
+		
+		if (curSelected >= songs.length) curSelected = 0;
+		bg.color = songs[curSelected].color;
+		intendedColor = bg.color;
+		lerpSelected = curSelected;
+
+		curDifficulty = Math.round(Math.max(0, Difficulty.defaultList.indexOf(lastDifficultyName)));
+		
+		changeSelection();
+		
 
 		var swag:Alphabet = new Alphabet(1, 0, "swag");
 
@@ -995,7 +996,6 @@ class FreeplayState extends MusicBeatState
 		#end
 
 		lastDifficultyName = Difficulty.getString(curDifficulty);
-		if (diffText != null){ //fix shit bug
 		if (Difficulty.list.length > 1)
 			diffText.text = '< ' + lastDifficultyName.toUpperCase() + ' >';
 		else
@@ -1003,7 +1003,6 @@ class FreeplayState extends MusicBeatState
         
 		positionHighscore();
 		missingText.visible = false;
-		}
 		missingTextBG.visible = false;
 	}
 	
