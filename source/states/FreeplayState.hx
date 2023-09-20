@@ -120,6 +120,10 @@ class FreeplayState extends MusicBeatState
 		//Paths.clearStoredMemory();
 		//Paths.clearUnusedMemory();
 		
+		persistentUpdate = true;
+		PlayState.isStoryMode = false;
+		WeekData.reloadWeekFiles(false);
+		
 		camGame = new FlxCamera();
 		camSearch = new FlxCamera();
 		camBlackFade = new FlxCamera();
@@ -134,11 +138,7 @@ class FreeplayState extends MusicBeatState
 		
 		camSearch.y = -300 - showOffset;
 		
-		Lib.application.window.title = "NF Engine - FreeplayState";
-		
-		persistentUpdate = true;
-		PlayState.isStoryMode = false;
-		WeekData.reloadWeekFiles(false);
+		Lib.application.window.title = "NF Engine - FreeplayState";		
 
 		#if desktop
 		// Updating Discord Rich Presence
@@ -207,7 +207,7 @@ class FreeplayState extends MusicBeatState
 		}
 		WeekData.setDirectoryFromWeek();
 		
-		if(curSelected >= songs.length) curSelected = 0;
+		if (curSelected >= songs.length) curSelected = 0;
 		bg.color = songs[curSelected].color;
 		intendedColor = bg.color;
 		lerpSelected = curSelected;
