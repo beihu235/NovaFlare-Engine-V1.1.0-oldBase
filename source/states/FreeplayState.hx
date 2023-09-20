@@ -209,7 +209,7 @@ class FreeplayState extends MusicBeatState
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, '', 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		
+		scoreText.cameras = [camGame];
         
 		scoreBG = new FlxSprite(FlxG.width * 0.7 - 6, 0).makeGraphic(1, 92, 0xFF000000);
 		scoreBG.alpha = 0.6;
@@ -219,8 +219,9 @@ class FreeplayState extends MusicBeatState
 
 		diffText = new FlxText(FlxG.width * 0.7, 5 + 36, 0, '   ', 24);
 		diffText.font = Paths.font("vcr.ttf");
+		diffText.cameras = [camGame];
 		add(diffText);
-
+        
 		
 
 		missingTextBG = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
