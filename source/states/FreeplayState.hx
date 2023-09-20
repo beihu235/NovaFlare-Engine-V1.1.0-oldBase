@@ -209,6 +209,7 @@ class FreeplayState extends MusicBeatState
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, '', 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+        scoreText.scrollFactor.set();
 		scoreText.cameras = [camGame];
         
 		scoreBG = new FlxSprite(FlxG.width * 0.7 - 6, 0).makeGraphic(1, 92, 0xFF000000);
@@ -219,6 +220,7 @@ class FreeplayState extends MusicBeatState
 
 		diffText = new FlxText(FlxG.width * 0.7, 5 + 36, 0, '   ', 24);
 		diffText.font = Paths.font("vcr.ttf");
+		diffText.scrollFactor.set();
 		diffText.cameras = [camGame];
 		add(diffText);
         
@@ -409,7 +411,7 @@ class FreeplayState extends MusicBeatState
 		var size:Int = 18;
 		#end
 		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, size);
-		text.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, RIGHT);
+		text.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, CENTER);
 		text.scrollFactor.set();
 		text.antialiasing = ClientPrefs.data.antialiasing;
 		text.screenCenter(X);
