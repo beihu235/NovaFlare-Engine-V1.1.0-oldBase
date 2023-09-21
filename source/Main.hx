@@ -10,7 +10,7 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
-//import flixel.system.scaleModes;
+import flixel.system.scaleModes.FixedScaleAdjustSizeScaleMode;
 import lime.app.Application;
 import states.TitleState;
 import backend.SUtil;
@@ -94,9 +94,9 @@ class Main extends Sprite
 		
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
-		Lib.current.stage.align = 5;
-		Lib.current.stage.scaleMode = StageScaleMode.EXACT_FIT;
-		//FlxG.scaleMode = new FixedScaleAdjustSizeScaleMode();
+		//Lib.current.stage.align = 5;
+		//Lib.current.stage.scaleMode = StageScaleMode.EXACT_FIT;
+		FlxG.scaleMode = new FixedScaleAdjustSizeScaleMode();
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}
