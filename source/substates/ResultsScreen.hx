@@ -294,7 +294,7 @@ class ResultsScreen extends MusicBeatSubstate
 		setMsText.antialiasing = ClientPrefs.data.antialiasing;
 		add(setMsText);		
 		
-		backText = new FlxText(0, FlxG.height - 45, 0, 'Press Back to continue.');
+		backText = new FlxText(0, FlxG.height - 45, 0, 'Press Back to continue');
 		backText.size = 28;
 		backText.font = Paths.font('vcr.ttf');
 		backText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
@@ -315,7 +315,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		
 		new FlxTimer().start(1, function(tmr:FlxTimer){
-			FlxTween.tween(setMsText, {y: FlxG.height - 30 * 2}, 0.5, {ease: FlxEase.backInOut});			
+			FlxTween.tween(setMsText, {y: FlxG.height - 25 * 2}, 0.5, {ease: FlxEase.backInOut});			
 		});
 		
 		new FlxTimer().start(1.5, function(tmr:FlxTimer){
@@ -377,8 +377,9 @@ class ResultsScreen extends MusicBeatSubstate
 	
 		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
 		{
-		 MusicBeatState.switchState(new FreeplayState());
+		    MusicBeatState.switchState(new FreeplayState());
 		}
+		    PlayState.cancelMusicFadeTween();
 	}
 
 	override function destroy()
