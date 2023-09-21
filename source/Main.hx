@@ -94,8 +94,8 @@ class Main extends Sprite
 		
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
-		Lib.current.stage.align = "tl";
-		Lib.current.stage.scaleMode = StageScaleMode.SHOW_ALL;
+		Lib.current.stage.align = 5;
+		Lib.current.stage.scaleMode = StageScaleMode.EXACT_FIT;
 		//FlxG.scaleMode = new FixedScaleAdjustSizeScaleMode();
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.data.showFPS;
