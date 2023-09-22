@@ -219,9 +219,11 @@ class OSTSubstate extends MusicBeatSubstate
 		var render = 0;
 		var prevRows = 0;
 		
+		var byte = 0;
+		
 		while (index < length) {
 			if (index >= 0) {
-				var byte = bytes.getUInt16(index * channels * 2);
+				byte = bytes.getUInt16(index * channels * 2);
 
 				if (byte > 65535 / 2) byte -= 65535;
 
@@ -234,7 +236,7 @@ class OSTSubstate extends MusicBeatSubstate
 				}
 
 				if (stereo) {
-					var byte = bytes.getUInt16((index * channels * 2) + 2);
+					 byte = bytes.getUInt16((index * channels * 2) + 2);
 
 					if (byte > 65535 / 2) byte -= 65535;
 
