@@ -24,7 +24,6 @@ import backend.Song;
 import backend.Section;
 import backend.StageData;
 
-
 import objects.AttachedSprite;
 import substates.Prompt;
 
@@ -56,6 +55,7 @@ class OSTSubstate extends MusicBeatSubstate
     public var camGame:FlxCamera;
 	public var camHUD:FlxCamera;
 	public var camLogo:FlxCamera;
+	var scoreText:FlxText;
 	
 	public function new(needVoices:Bool,songBpm:Float)
 	{
@@ -118,6 +118,11 @@ class OSTSubstate extends MusicBeatSubstate
 		waveformVoiceSprite = new FlxSprite(1280 - 640, 50).makeGraphic(640 - 50, 100, 0xFF000000);
 		waveformVoiceSprite.alpha = 0.5;
 		add(waveformVoiceSprite);
+		
+		scoreText = new FlxText(FlxG.width * 0.5, FlxG.height * 0.5, 0, '', 32);
+		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+        scoreText.scrollFactor.set();
+        add(scoreText);
 	    
 	}
     
@@ -160,6 +165,10 @@ class OSTSubstate extends MusicBeatSubstate
 			#end
 		}
 		
+		var volue:Float = Math.exp(-1 * 2 * Math.PI * i *200 * FlxG.sound.music.time);
+		
+		var data:Float = vocals.amplitude * volue;
+		scoreText.text = '' + data;
 		super.update(elapsed);
 	}
 	
