@@ -168,8 +168,8 @@ class OSTSubstate extends MusicBeatSubstate
 		var volue:Float = Math.exp(-1 * 2 * Math.PI * 200 * FlxG.sound.music.time);
 		var volue2:Float = Math.exp(-1 * 2 * Math.PI * 44100 * FlxG.sound.music.time);
 		
-		var data:Float = vocals.amplitude;
-		var data2:Float = vocals.amplitude;
+		var data:Float = FlxG.sound.music.amplitude;
+		var data2:Float = FlxG.sound.music.amplitude;
 		scoreText.text = 'data1:' + data + '\ndata2:' + data2 + '\n';
 		super.update(elapsed);
 	}
