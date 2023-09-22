@@ -269,7 +269,7 @@ class OSTSubstate extends MusicBeatSubstate
 		waveformVoiceSprite.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		waveformVoiceSprite.pixels.unlock(); 
 		
-		scoreText.text = 'bytes:' + bytes + '\nchannels:' + channels + '\nkhz:' + khz + '\nsrc:' + src + '\nbitsPerSample:' + bitsPerSample + '\n';
+		scoreText.text = 'byte:' + byte + '\nindex:' + index +  '\nchannels:' + channels + '\nkhz:' + khz + '\n';
 		
 		return;
 	}	
