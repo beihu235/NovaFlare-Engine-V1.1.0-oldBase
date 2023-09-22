@@ -167,11 +167,12 @@ class OSTSubstate extends MusicBeatSubstate
 		
 		var volue:Float = Math.exp(-1 * 2 * Math.PI * 200 * FlxG.sound.music.time);
 		var volue2:Float = Math.exp(-1 * 2 * Math.PI * 44100 * FlxG.sound.music.time);
-		
+		/*
 		var data:Float = FlxG.sound.music.amplitude;
 		var data2:Float = FlxG.sound.music.amplitude;
 		scoreText.text = 'data1:' + data + '\ndata2:' + data2 + '\n';
 		super.update(elapsed);
+		*/
 	}
 	
 
@@ -201,6 +202,8 @@ class OSTSubstate extends MusicBeatSubstate
 		var khz = (buffer.sampleRate / 1000);
 		var channels = buffer.channels;
 		var stereo = channels > 1;
+		var src = buffer.src;
+		var bitsPerSample = buffer.bitsPerSample;
 		
 		var index = Math.floor(currentTime * khz);
 		var samples = 720;//Math.floor((currentTime + (((60 / Conductor.bpm) * 1000 / 4) * 16)) * khz - index);
@@ -265,6 +268,8 @@ class OSTSubstate extends MusicBeatSubstate
 		flashGFX.endFill(); 
 		waveformVoiceSprite.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		waveformVoiceSprite.pixels.unlock(); 
+		
+		scoreText.text = 'bytes:' + bytes + '\nchannels:' + channels + '\nkhz:' + khz + '\nsrc:' + src + '\nbitsPerSample:' + bitsPerSample + '\n';
 		
 		return;
 	}	
