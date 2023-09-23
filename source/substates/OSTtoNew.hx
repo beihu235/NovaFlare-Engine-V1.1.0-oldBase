@@ -85,7 +85,7 @@ class OSTtoNew extends MusicBeatSubstate
         for (i in 0...frequencyBandCount) {
             var startIndex:Float = i * frequencyBandwidth;
             var endIndex:Float = (i + 1) * frequencyBandwidth;
-            var frequencyBandData:Array<Int> = Std.int(audioDataArray.slice(startIndex, endIndex));
+            var frequencyBandData:Array<Int> = audioDataArray.slice(Std.int(startIndex), Std.int(endIndex));
             
             for (j in 0...frequencyBandData.length) {
                 var sample:Int = frequencyBandData[j];
