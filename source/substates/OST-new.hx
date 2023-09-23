@@ -1,9 +1,8 @@
 package substates;
 
 import hxmath.Math;
-import haxmath.Point;
-import haxmath.Vector;
-import sys.io.File;
+import haxmath.*;
+//import sys.io.File;
 
 class OST-new extends MusicBeatSubstate
 {
