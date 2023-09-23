@@ -14,7 +14,7 @@ import states.editors.ChartingState;
 import substates.GameplayChangersSubstate;
 import substates.ResetScoreSubState;
 import substates.OSTSubstate;
-import substates.OST-new;
+import substates.OSTtoNew;
 
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.transition.FlxTransitionableState;
