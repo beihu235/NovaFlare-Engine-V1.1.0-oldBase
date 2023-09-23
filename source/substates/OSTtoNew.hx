@@ -18,7 +18,7 @@ class OSTtoNew extends MusicBeatSubstate
     // 设定音频数据的采样率和位深度
     var sampleRate:Int = 44100;
     var bitsPerSample:Int = 16;
-    var visualizationData:Array<Float> = new Array();
+    var visualizationData:Array<Float> = [];
     
     public function new(needVoices:Bool,songBpm:Float)
 	{
@@ -59,8 +59,7 @@ class OSTtoNew extends MusicBeatSubstate
         // 计算音频数据的长度（以秒为单位）
         var length:Float = audioDataArray.length / (sampleRate * bitsPerSample / 8);
 
-        // 创建一个Vector对象来存储音乐可视化数据
-        visualizationData = [];
+      
 
         // 计算频率段数量
         frequencyBandCount = Std.int(sampleRate / frequencyBandwidth);
@@ -81,12 +80,13 @@ class OSTtoNew extends MusicBeatSubstate
 	}
 	
 	function updateVisualizationData():Void {
+	    visualizationData = [];
         // 遍历音频数据，并为每个样本生成一个正弦波
         for (i in 0...frequencyBandCount) {
             var startIndex:Float = i * frequencyBandwidth;
             var endIndex:Float = (i + 1) * frequencyBandwidth;
             var frequencyBandData:Array<Int> = Std.int(audioDataArray.slice(startIndex, endIndex));
-            visualizationData = [];
+            
             for (j in 0...frequencyBandData.length) {
                 var sample:Int = frequencyBandData[j];
                 var amplitude:Float = sample / 32768.0; // 将样本值映射到-1.0到1.0之间
