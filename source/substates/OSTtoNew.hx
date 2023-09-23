@@ -1,6 +1,7 @@
 package substates;
 
-import haxe.audio.AudioBuffer;
+//import haxe.audio.AudioBuffer;
+import lime.media.AudioBuffer;
 import haxe.io.Path;
 
 @:access(flixel.sound.FlxSound._sound)
@@ -9,6 +10,7 @@ import haxe.io.Path;
 class OSTtoNew extends MusicBeatSubstate
 {
     public static var vocals:FlxSound;
+    var frequencyBandwidth:Float = 1000;
     
     public function new(needVoices:Bool,songBpm:Float)
 	{
@@ -34,14 +36,14 @@ class OSTtoNew extends MusicBeatSubstate
         var audioBuffer:AudioBuffer = snd._sound.__buffer;
         
         // 获取音频数据的字节数组
-        var bytes:Array<Int> = audioBuffer.toByteArray();
+        var audioData:Array<Int> = audioBuffer.toByteArray();
 
         // 设定音频数据的采样率和位深度
         var sampleRate:Int = 44100;
         var bitsPerSample:Int = 16;
 
         // 设置频率段大小（以赫兹为单位）
-        var frequencyBandwidth:Float = 1000;
+        
 
         // 计算音频数据的长度（以秒为单位）
         var length:Float = audioData.length / (sampleRate * bitsPerSample / 8);
