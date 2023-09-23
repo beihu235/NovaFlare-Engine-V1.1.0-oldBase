@@ -1,6 +1,8 @@
 package substates;
 
-import hxmath.Math;
+//import hxmath.Math;
+import haxe.ds.Math;
+
 //import haxmath.*;
 //import sys.io.File;
 
