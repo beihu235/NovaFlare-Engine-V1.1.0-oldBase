@@ -3251,7 +3251,31 @@ function startCharacterScripts(name:String)
 		setOnScripts('curSection', curSection);
 		callOnScripts('onSectionHit');
 	}
-
+	
+    #if LUA_ALLOWED
+	public function startLuasNamed(luaFile:String)
+	{
+		#if MODS_ALLOWED
+		var luaToLoad:String = Paths.modFolders(luaFile);
+		if(!FileSystem.exists(luaToLoad))
+			luaToLoad = SUtil.getPath() + Paths.getPreloadPath(luaFile);
+		
+		if(FileSystem.exists(luaToLoad))
+		#elseif sys
+		var luaToLoad:String = Paths.getPreloadPath(luaFile);
+		if(OpenFlAssets.exists(luaToLoad))
+		#end
+		{
+			for (script in luaArray)
+				if(script.scriptName == luaToLoad) return false;
+	
+			new FunkinLua(luaToLoad);
+			return true;
+		}
+		return false;
+	}
+	#end
+	
     #if HSCRIPT_ALLOWED
 	public function startHScriptsNamed(scriptFile:String)
 	{
