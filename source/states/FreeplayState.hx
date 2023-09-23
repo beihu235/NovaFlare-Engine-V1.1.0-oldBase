@@ -14,6 +14,7 @@ import states.editors.ChartingState;
 import substates.GameplayChangersSubstate;
 import substates.ResetScoreSubState;
 import substates.OSTSubstate;
+import substates.OST-new;
 
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.transition.FlxTransitionableState;
@@ -587,7 +588,7 @@ class FreeplayState extends MusicBeatState
 				if (PlayState.SONG.needsVoices)needsVoices = true;				
 					
 				persistentUpdate = false;
-				openSubState(new OSTSubstate(needsVoices,PlayState.SONG.bpm));
+				openSubState(new OST-new(needsVoices,PlayState.SONG.bpm));
 			}
 			
 			
