@@ -8,6 +8,7 @@ class OSTtoNew extends MusicBeatSubstate
 {
     public function new(needVoices:Bool,songBpm:Float)
 	{
+	    super();		
         // 读取音频文件
         var audioFile = Paths.inst(PlayState.SONG.song);
         var audioData:Array<Int> = audioFile.getBytes();
@@ -23,7 +24,7 @@ class OSTtoNew extends MusicBeatSubstate
         var length:Float = audioData.length / (sampleRate * bitsPerSample / 8);
 
         // 创建一个Vector对象来存储音乐可视化数据
-        var visualizationData:Vector<Float> = new Vector();
+        var visualizationData:Vector<Float> = new haxe.ds.Vector();
 
         // 计算频率段数量
         var frequencyBandCount:Int = Std.int(sampleRate / frequencyBandwidth);
