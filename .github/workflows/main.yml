@@ -61,6 +61,7 @@ jobs:
           haxelib install flixel-ui
           haxelib install flixel-addons 3.0.2
           haxelib install tjson
+          haxelib install hxmath
           haxelib install hxjsonast
           haxelib install SScript 4.0.1
           haxelib git hxCodec https://github.com/SPLCoding/hxCodec-but-it-works-xd.git
