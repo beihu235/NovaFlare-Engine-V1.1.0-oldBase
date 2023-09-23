@@ -10,7 +10,17 @@ import haxe.io.Bytes;
 
 class OSTtoNew extends MusicBeatSubstate
 {
+    var waveformVoiceSprite:FlxSprite;
+    var logoBl:FlxSprite;
+    var bpm:Float = 0;
     public static var vocals:FlxSound;
+    var songVoice:Bool = false;
+    
+    public var camGame:FlxCamera;
+	public var camHUD:FlxCamera;
+	public var camLogo:FlxCamera;
+	var scoreText:FlxText;
+	
     // 设置频率段大小（以赫兹为单位）
     var frequencyBandwidth:Float = 1000;
     
@@ -24,10 +34,23 @@ class OSTtoNew extends MusicBeatSubstate
 	{
 	    super();		
         
-        /*
-        var audioFile = PlayState.SONG.song;
-        var audioBuffer:AudioBuffer = AudioBuffer.fromFile(audioFile);
-        */
+        camGame = new FlxCamera();
+		camHUD = new FlxCamera();
+		camLogo = new FlxCamera();
+		camLogo.bgColor.alpha = 0;
+		camHUD.bgColor.alpha = 0;
+
+		FlxG.cameras.reset(camGame);
+		FlxG.cameras.add(camLogo, false);
+		FlxG.cameras.add(camHUD, false);
+		FlxG.cameras.setDefaultDrawTarget(camGame, true);
+		
+		camLogo.x = -320;
+		
+		bpm = songBpm;		
+		
+		songVoice = needVoices;
+		
         if (needVoices)
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
 		else
@@ -40,6 +63,39 @@ class OSTtoNew extends MusicBeatSubstate
 		vocals.looped = true;
 		vocals.volume = 0.7;		
 		
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+		bg.scrollFactor.set(0,0);
+		bg.setGraphicSize(Std.int(bg.width));
+		bg.updateHitbox();
+		bg.screenCenter();
+		bg.antialiasing = ClientPrefs.data.antialiasing;
+		add(bg);
+		
+		logoBl = new FlxSprite(0, 0);
+		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+		logoBl.antialiasing = ClientPrefs.data.antialiasing;
+		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
+		logoBl.animation.play('bump');
+		logoBl.offset.x = 0;
+		logoBl.offset.y = 0;
+		logoBl.scale.x = (640 / logoBl.frameWidth);
+		logoBl.scale.y = logoBl.scale.x;
+		logoBl.updateHitbox();
+		add(logoBl);
+		logoBl.x = 320 - logoBl.width / 2;
+		logoBl.y = 360 - logoBl.height / 2;
+		//logoBl.cameras = [camLogo];
+		//logoBl.screenCenter(Y);
+		
+		
+		waveformVoiceSprite = new FlxSprite(1280 - 640, 50).makeGraphic(640 - 50, 100, 0xFF000000);
+		waveformVoiceSprite.alpha = 0.5;
+		add(waveformVoiceSprite);
+		
+		scoreText = new FlxText(FlxG.width * 0.5, FlxG.height * 0.5, 0, '', 32);
+		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+        scoreText.scrollFactor.set();
+        add(scoreText);
 
 		
         var snd = FlxG.sound.music;
@@ -72,6 +128,25 @@ class OSTtoNew extends MusicBeatSubstate
     override function update(elapsed:Float)
 	{
 	    updateVisualizationData();
+	    var text:String = '' + visualizationData.length;
+	    scoreText.text = text;
+	    
+	    if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
+		{
+		    FlxG.sound.music.volume = 0;
+		    destroyVocals();
+		
+		    FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+			FlxG.sound.music.fadeIn(4, 0, 0.7);		
+		    
+			#if android
+			FlxTransitionableState.skipNextTransOut = true;
+			FlxG.resetState();
+			#else
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+			close();
+			#end
+		}
 	}
 	
 	function updateVisualizationData():Void {
