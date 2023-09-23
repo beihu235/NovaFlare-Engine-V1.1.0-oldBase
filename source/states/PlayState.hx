@@ -77,8 +77,8 @@ import psychlua.LuaUtils;
 import psychlua.HScript;
 #end
 
-#if (SScript >= "3.0.0")
-import tea.SScript;
+#if BrewScript
+import brew.BrewScript;
 #end
 
 class PlayState extends MusicBeatState
@@ -796,7 +796,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	function startCharacterScripts(name:String)
+function startCharacterScripts(name:String)
 	{
 		// Lua
 		#if LUA_ALLOWED
@@ -853,7 +853,7 @@ class PlayState extends MusicBeatState
 		
 		if(doPush)
 		{
-			if(SScript.global.exists(scriptFile))
+			if(BrewScript.global.exists(scriptFile))
 				doPush = false;
 
 			if(doPush) initHScript(scriptFile);
@@ -3252,31 +3252,7 @@ class PlayState extends MusicBeatState
 		callOnScripts('onSectionHit');
 	}
 
-	#if LUA_ALLOWED
-	public function startLuasNamed(luaFile:String)
-	{
-		#if MODS_ALLOWED
-		var luaToLoad:String = Paths.modFolders(luaFile);
-		if(!FileSystem.exists(luaToLoad))
-			luaToLoad = SUtil.getPath() + Paths.getPreloadPath(luaFile);
-		
-		if(FileSystem.exists(luaToLoad))
-		#elseif sys
-		var luaToLoad:String = Paths.getPreloadPath(luaFile);
-		if(OpenFlAssets.exists(luaToLoad))
-		#end
-		{
-			for (script in luaArray)
-				if(script.scriptName == luaToLoad) return false;
-	
-			new FunkinLua(luaToLoad);
-			return true;
-		}
-		return false;
-	}
-	#end
-	
-	#if HSCRIPT_ALLOWED
+    #if HSCRIPT_ALLOWED
 	public function startHScriptsNamed(scriptFile:String)
 	{
 		var scriptToLoad:String = Paths.modFolders(scriptFile);
@@ -3285,7 +3261,7 @@ class PlayState extends MusicBeatState
 		
 		if(FileSystem.exists(scriptToLoad))
 		{
-			if (SScript.global.exists(scriptToLoad)) return false;
+			if (BrewScript.global.exists(scriptToLoad)) return false;
 	
 			initHScript(scriptToLoad);
 			return true;
@@ -3298,14 +3274,10 @@ class PlayState extends MusicBeatState
 		try
 		{
 			var newScript:HScript = new HScript(null, file);
-			@:privateAccess
-			if(newScript.parsingExceptions != null && newScript.parsingExceptions.length > 0)
+			if(newScript.parsingException != null)
 			{
-				@:privateAccess
-				for (e in newScript.parsingExceptions)
-					if(e != null)
-						addTextToDebug('ERROR ON LOADING ($file): ${e.message.substr(0, e.message.indexOf('\n'))}', FlxColor.RED);
-				newScript.destroy();
+				addTextToDebug('ERROR ON LOADING ($file): ${newScript.parsingException.message}', FlxColor.RED);
+				newScript.kill();
 				return;
 			}
 
@@ -3319,21 +3291,21 @@ class PlayState extends MusicBeatState
 						if (e != null)
 							addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, e.message.indexOf('\n'))}', FlxColor.RED);
 
-					newScript.destroy();
+					newScript.kill();
 					hscriptArray.remove(newScript);
-					trace('failed to initialize sscript interp!!! ($file)');
+					trace('failed to initialize BrewScript interp!!! ($file)');
 				}
-				else trace('initialized sscript interp successfully: $file');
+				else trace('initialized BrewScript interp successfully: $file');
 			}
 			
 		}
 		catch(e)
 		{
 			addTextToDebug('ERROR ($file) - ' + e.message.substr(0, e.message.indexOf('\n')), FlxColor.RED);
-			var newScript:HScript = cast (SScript.global.get(file), HScript);
+			var newScript:HScript = cast (BrewScript.global.get(file), HScript);
 			if(newScript != null)
 			{
-				newScript.destroy();
+				newScript.kill();
 				hscriptArray.remove(newScript);
 			}
 		}
