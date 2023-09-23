@@ -3,6 +3,7 @@ package substates;
 //import haxe.audio.AudioBuffer;
 import lime.media.AudioBuffer;
 import haxe.io.Path;
+import haxe.io.Bytes;
 
 @:access(flixel.sound.FlxSound._sound)
 @:access(openfl.media.Sound.__buffer)
@@ -11,7 +12,7 @@ class OSTtoNew extends MusicBeatSubstate
 {
     public static var vocals:FlxSound;
     var frequencyBandwidth:Float = 1000;
-    
+    var frequencyBandCount:Int = 0;
     public function new(needVoices:Bool,songBpm:Float)
 	{
 	    super();		
@@ -56,7 +57,7 @@ class OSTtoNew extends MusicBeatSubstate
         var visualizationData:Array<Float> = new Array();
 
         // 计算频率段数量
-        var frequencyBandCount:Int = Std.int(sampleRate / frequencyBandwidth);
+        frequencyBandCount = Std.int(sampleRate / frequencyBandwidth);
 
         updateVisualizationData();
         
@@ -70,8 +71,7 @@ class OSTtoNew extends MusicBeatSubstate
     
     override function update(elapsed:Float)
 	{
-	
-	    frequencyBandCount();
+	    updateVisualizationData();
 	}
 	
 	function updateVisualizationData():Void {
