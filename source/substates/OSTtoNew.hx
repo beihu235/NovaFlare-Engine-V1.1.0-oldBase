@@ -33,8 +33,8 @@ class OSTtoNew extends MusicBeatSubstate
 
         // 遍历音频数据，并为每个样本生成一个正弦波
         for (i in 0...frequencyBandCount) {
-            var startIndex:Int = i * frequencyBandwidth;
-            var endIndex:Int = (i + 1) * frequencyBandwidth;
+            var startIndex:Float = i * frequencyBandwidth;
+            var endIndex:Float = (i + 1) * frequencyBandwidth;
             var frequencyBandData:Array<Int> = audioData.slice(startIndex, endIndex);
 
             for (j in 0...frequencyBandData.length) {
@@ -46,7 +46,7 @@ class OSTtoNew extends MusicBeatSubstate
                 var sineWave:Float = Math.sin(phase) * amplitude;
 
                 // 将正弦波数据添加到可视化数据向量中
-                visualizationData.add(sineWave);
+                visualizationData.push(sineWave);
             }
         }
 
