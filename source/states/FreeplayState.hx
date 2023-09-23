@@ -588,7 +588,7 @@ class FreeplayState extends MusicBeatState
 				if (PlayState.SONG.needsVoices)needsVoices = true;				
 					
 				persistentUpdate = false;
-				openSubState(new OST-new(needsVoices,PlayState.SONG.bpm));
+				openSubState(new OSTtoNew(needsVoices,PlayState.SONG.bpm));
 			}
 			
 			
