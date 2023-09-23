@@ -5,6 +5,8 @@ import lime.media.AudioBuffer;
 import haxe.io.Path;
 import haxe.io.Bytes;
 
+import flixel.addons.transition.FlxTransitionableState;
+
 @:access(flixel.sound.FlxSound._sound)
 @:access(openfl.media.Sound.__buffer)
 
@@ -170,6 +172,14 @@ class OSTtoNew extends MusicBeatSubstate
             }
         }
     }
+    
+    public static function destroyVocals() {
+		if(vocals != null) {
+			vocals.stop();
+			vocals.destroy();
+		}
+		vocals = null;
+	}
 }
 
 
