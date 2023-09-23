@@ -1,11 +1,7 @@
 package substates;
 
+import haxe.audio.AudioBuffer;
 import haxe.io.Path;
-//import hxmath.Math;
-//import haxe.ds.Math;
-
-//import haxmath.*;
-//import sys.io.File;
 
 class OSTtoNew extends MusicBeatSubstate
 {
@@ -13,8 +9,15 @@ class OSTtoNew extends MusicBeatSubstate
 	{
 	    super();		
         // 读取音频文件
+        /*
         var audioFile = Paths.inst(PlayState.SONG.song);
         var audioData:Array<Int> = audioFile.getBytes();
+        */
+        var audioFile = PlayState.SONG.song;
+        var audioBuffer:AudioBuffer = AudioBuffer.fromFile(audioFile);
+        
+        // 获取音频数据的字节数组
+        var bytes:Array<Int> = audioBuffer.toByteArray();
 
         // 设定音频数据的采样率和位深度
         var sampleRate:Int = 44100;
@@ -146,3 +149,4 @@ class AudioVisualizerComponent extends Component {
     }
 }
 */
+
