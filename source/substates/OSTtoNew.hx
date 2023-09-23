@@ -43,7 +43,7 @@ class OSTtoNew extends MusicBeatSubstate
         for (i in 0...visualizationData.length) {
             trace(visualizationData[i]);
         }
-    }
+    
     
     override function update(elapsed:Float)
 	{
@@ -70,11 +70,9 @@ class OSTtoNew extends MusicBeatSubstate
                 visualizationData.push(sineWave);
             }
         }
-
-        // 更新组件
-        update();
     }
 }
+
 
 /*
 import haxe.io.Path;
