@@ -45,20 +45,15 @@ class OSTtoNew extends MusicBeatSubstate
         var snd = FlxG.sound.music;
         var audioBuffer:AudioBuffer = snd._sound.__buffer;
         
-        var audioData:Bytes = audioBuffer.getData();
+        //var audioData:Bytes = audioBuffer.getData();
         
         // 获取音频数据的字节数组
-        audioDataArray = audioData.toArray();
+        //audioDataArray = audioData.toArray();
 
-        
-        
-
-        
-        
 
         // 计算音频数据的长度（以秒为单位）
-        var length:Float = audioDataArray.length / (sampleRate * bitsPerSample / 8);
-
+        //var length:Float = audioDataArray.length / (sampleRate * bitsPerSample / 8);
+        var length:Float = snd.length;
       
 
         // 计算频率段数量
@@ -93,7 +88,7 @@ class OSTtoNew extends MusicBeatSubstate
                 var phase:Float = Math.PI * j / sampleRate; // 计算当前样本的相位
 
                 // 生成正弦波数据
-                var sineWave:Float = Math.sin(phase) * amplitude;
+                var sineWave:Float = Math.abs(Math.sin(phase) * amplitude);
 
                 // 将正弦波数据添加到可视化数据向量中
                 visualizationData.push(sineWave);
