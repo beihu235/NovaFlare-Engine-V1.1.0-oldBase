@@ -19,7 +19,7 @@ class OSTtoNew extends MusicBeatSubstate
     var sampleRate:Int = 44100;
     var bitsPerSample:Int = 16;
     var visualizationData:Array<Float> = [];
-    
+    var audioDataArray:Array<Int> = [];
     public function new(needVoices:Bool,songBpm:Float)
 	{
 	    super();		
@@ -48,7 +48,7 @@ class OSTtoNew extends MusicBeatSubstate
         var audioData:Bytes = audioBuffer.getData();
         
         // 获取音频数据的字节数组
-        var audioDataArray:Array<Int> = audioData.toArray();
+        audioDataArray = audioData.toArray();
 
         
         
