@@ -37,13 +37,13 @@ class OSTtoNew extends MusicBeatSubstate
 
         updateVisualizationData();
         
-        }
+        
 
         // 在控制台中打印可视化数据
         for (i in 0...visualizationData.length) {
             trace(visualizationData[i]);
         }
-    
+    }
     
     override function update(elapsed:Float)
 	{
