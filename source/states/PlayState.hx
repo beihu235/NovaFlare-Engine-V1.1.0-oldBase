@@ -3143,7 +3143,7 @@ function startCharacterScripts(name:String)
 			if(script != null)
 			{
 				script.call('onDestroy');
-				script.destroy();
+				script.kill();
 			}
 
 		while (hscriptArray.length > 0)
