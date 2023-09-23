@@ -13,6 +13,10 @@ class OSTtoNew extends MusicBeatSubstate
     public static var vocals:FlxSound;
     var frequencyBandwidth:Float = 1000;
     var frequencyBandCount:Int = 0;
+    
+    var sampleRate:Int = 44100;
+    var bitsPerSample:Int = 16;
+        
     public function new(needVoices:Bool,songBpm:Float)
 	{
 	    super();		
@@ -44,8 +48,7 @@ class OSTtoNew extends MusicBeatSubstate
         var audioDataArray:Array<Int> = audioData.toArray();
 
         // 设定音频数据的采样率和位深度
-        var sampleRate:Int = 44100;
-        var bitsPerSample:Int = 16;
+        
 
         // 设置频率段大小（以赫兹为单位）
         
