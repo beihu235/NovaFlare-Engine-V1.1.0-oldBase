@@ -1,7 +1,7 @@
 package substates;
 
 //import hxmath.Math;
-import haxe.ds.Math;
+//import haxe.ds.Math;
 
 //import haxmath.*;
 //import sys.io.File;
@@ -26,7 +26,7 @@ class OSTtoNew extends MusicBeatSubstate
         var length:Float = audioData.length / (sampleRate * bitsPerSample / 8);
 
         // 创建一个Vector对象来存储音乐可视化数据
-        var visualizationData:Vector<Float> = new haxe.ds.Vector();
+        var visualizationData:Array<Float> = new Array();
 
         // 计算频率段数量
         var frequencyBandCount:Int = Std.int(sampleRate / frequencyBandwidth);
@@ -40,7 +40,7 @@ class OSTtoNew extends MusicBeatSubstate
             for (j in 0...frequencyBandData.length) {
                 var sample:Int = frequencyBandData[j];
                 var amplitude:Float = sample / 32768.0; // 将样本值映射到-1.0到1.0之间
-                var phase:Float = Math.TAU * j / sampleRate; // 计算当前样本的相位
+                var phase:Float = Math.PI * j / sampleRate; // 计算当前样本的相位
 
                 // 生成正弦波数据
                 var sineWave:Float = Math.sin(phase) * amplitude;
