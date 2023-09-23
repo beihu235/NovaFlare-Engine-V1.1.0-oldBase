@@ -3,18 +3,35 @@ package substates;
 import haxe.audio.AudioBuffer;
 import haxe.io.Path;
 
+@:access(flixel.sound.FlxSound._sound)
+@:access(openfl.media.Sound.__buffer)
+
 class OSTtoNew extends MusicBeatSubstate
 {
+    public static var vocals:FlxSound;
+    
     public function new(needVoices:Bool,songBpm:Float)
 	{
 	    super();		
-        // 读取音频文件
+        
         /*
-        var audioFile = Paths.inst(PlayState.SONG.song);
-        var audioData:Array<Int> = audioFile.getBytes();
-        */
         var audioFile = PlayState.SONG.song;
         var audioBuffer:AudioBuffer = AudioBuffer.fromFile(audioFile);
+        */
+        if (needVoices)
+			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
+		else
+			vocals = new FlxSound();
+		
+		FlxG.sound.list.add(vocals);
+		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
+		vocals.play();
+		vocals.persist = true;
+		vocals.looped = true;
+		vocals.volume = 0.7;		
+		
+        var snd = FlxG.sound.music;
+        var audioBuffer:AudioBuffer = snd._sound.__buffer;
         
         // 获取音频数据的字节数组
         var bytes:Array<Int> = audioBuffer.toByteArray();
