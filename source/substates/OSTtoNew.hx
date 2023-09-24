@@ -134,11 +134,11 @@ class OSTtoNew extends MusicBeatSubstate
 	public function updateFrequencyData() {
     frequencyData = [];
     var audioData = audioBuffer.data;
-    var samplesPerFrame = audioBuffer.samplesPerFrame;
     var sampleRate = audioBuffer.sampleRate;
+    var length = audioBuffer.length;
     var frequencySegmentWidth = (sampleRate / frequencySegments);
     var maxPossibleIntensity = 255; // or any other maximum possible value
-
+    
     for (i in 0...frequencySegments) {
         var startSample = i * frequencySegmentWidth;
         var endSample = (i + 1) * frequencySegmentWidth;
@@ -148,10 +148,10 @@ class OSTtoNew extends MusicBeatSubstate
             sum += audioData[j];
         }
 
-        // Normalize the intensity to a value between 0 and 1
-        frequencyData[i] = sum / (endSample - startSample) / maxPossibleIntensity;
+        frequencyData.push(sum / (endSample - startSample) / maxPossibleIntensity);
     }
 }
+
 
     
     public static function destroyVocals() {
