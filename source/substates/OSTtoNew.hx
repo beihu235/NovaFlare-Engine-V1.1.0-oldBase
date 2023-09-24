@@ -34,7 +34,7 @@ class OSTtoNew extends MusicBeatSubstate
     var currentTime:Float;
     var frequencyRanges:Array<Float>;
     
-    var sample = 0;
+    var sample:Float = 0;
 		
     public function new(needVoices:Bool,songBpm:Float)
 	{
@@ -177,7 +177,7 @@ class OSTtoNew extends MusicBeatSubstate
     	currentTime = snd.time;
     	
     	if (byte > 44100 / 2) byte -= 44100;
-        sample = (byte / 44100); 
+        sample = Math.abs((byte / 44100)); 
         
         sampleRate = audioBuffer.sampleRate;
         frequencyBandCount = 128;
