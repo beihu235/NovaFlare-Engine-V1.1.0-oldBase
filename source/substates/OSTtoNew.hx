@@ -26,13 +26,13 @@ class OSTtoNew extends MusicBeatSubstate
 	public var camLogo:FlxCamera;
 	var scoreText:FlxText;
 	
-    public var audioBuffer:AudioBuffer;
-    public var sampleRate:Float;
-    public var frequencyBandCount:Int;
-    public var frequencyBandwidth:Float;
-    public var audioData:Array<Float>;
-    public var currentTime:Float;
-    public var frequencyRanges:Array<Float>;
+    var audioBuffer:AudioBuffer;
+    var sampleRate:Float;
+    var frequencyBandCount:Int;
+    var frequencyBandwidth:Float;
+    var audioData:Array<Float>;
+    var currentTime:Float;
+    var frequencyRanges:Array<Float>;
     
     var snd = FlxG.sound.music;
     var audioBuffer:AudioBuffer = snd._sound.__buffer;
@@ -110,9 +110,7 @@ class OSTtoNew extends MusicBeatSubstate
 		scoreText = new FlxText(FlxG.width * 0.5, FlxG.height * 0.5, 0, '', 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         scoreText.scrollFactor.set();
-        add(scoreText);
-
-        updateAudioData()
+        add(scoreText);        
         
         sampleRate = audioBuffer.sampleRate;
         frequencyBandCount = 128;
@@ -120,6 +118,8 @@ class OSTtoNew extends MusicBeatSubstate
         audioData = [];
         currentTime = 0;
         frequencyRanges = [0.0, 1000.0, 2000.0, 3000.0, 4000.0, 5000.0, 6000.0, 7000.0, 8000.0, 9000.0, 10000.0]; // 假设你想获取10个频率段的音量大小
+        
+        updateAudioData()
     }
     
     override function update(elapsed:Float)
@@ -148,44 +148,44 @@ class OSTtoNew extends MusicBeatSubstate
 	
 	public function updateAudioData():Void {
         audioData = [];
-    var startTime:Float = currentTime;
-    var endTime:Float = startTime; // 假设你想获取当前帧的数据
+        var startTime:Float = currentTime;
+        var endTime:Float = startTime; // 假设你想获取当前帧的数据
 
-    for (i in 0...frequencyRanges.length) {
-        var startIndex:Float = frequencyRanges[i] * frequencyBandwidth;
-        var endIndex:Float = (i + 1) * frequencyBandwidth;
+        for (i in 0...frequencyRanges.length) {
+            var startIndex:Float = frequencyRanges[i] * frequencyBandwidth;
+            var endIndex:Float = (i + 1) * frequencyBandwidth;
 
-        // 计算当前时间段内的音频数据范围
-        var startSample:Int = Math.floor(startTime * sampleRate);
-        var endSample:Int = Math.floor(endTime * sampleRate);
+            // 计算当前时间段内的音频数据范围
+            var startSample:Int = Math.floor(startTime * sampleRate);
+            var endSample:Int = Math.floor(endTime * sampleRate);
 
-        getSample();
+            getSample();
         
-        var amplitude:Float = sample; /*/ 32768.0;*/ // 将样本值映射到-1.0到1.0之间
-        var phase:Float = Math.PI * j / sampleRate; // 计算当前样本的相位
+            var amplitude:Float = sample; /*/ 32768.0;*/ // 将样本值映射到-1.0到1.0之间
+            var phase:Float = Math.PI * j / sampleRate; // 计算当前样本的相位
 
-        // 生成正弦波数据
-        var sineWave:Float = Math.abs(Math.sin(phase) * amplitude);
+            // 生成正弦波数据
+            var sineWave:Float = Math.abs(Math.sin(phase) * amplitude);
 
-        // 将正弦波数据添加到音频数据向量中
-        audioData.push(sineWave);
-        
+            // 将正弦波数据添加到音频数据向量中
+            audioData.push(sineWave);
+        }
     }
     
     public function updateAudioData(){
-    snd = FlxG.sound.music;
-    audioBuffer:AudioBuffer = snd._sound.__buffer;
-    bytes = audioBuffer.data.buffer;
-	currentTime = snd.time;
+        snd = FlxG.sound.music;
+        audioBuffer:AudioBuffer = snd._sound.__buffer;
+        bytes = audioBuffer.data.buffer;
+    	currentTime = snd.time;
 		
-	khz = (buffer.sampleRate / 1000);
-    channels = buffer.channels;
-    index = Math.floor(currentTime * khz);		
+    	khz = (buffer.sampleRate / 1000);
+        channels = buffer.channels;
+        index = Math.floor(currentTime * khz);		
 		
-	byte = bytes.getUInt16(index * channels * 2);
-	if (byte > 44100 / 2) byte -= 44100;
-    sample = (byte / 44100); 
-    }
+    	byte = bytes.getUInt16(index * channels * 2);
+    	if (byte > 44100 / 2) byte -= 44100;
+        sample = (byte / 44100); 
+        }
     }
 
 
