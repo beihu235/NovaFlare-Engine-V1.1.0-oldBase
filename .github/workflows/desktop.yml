@@ -53,7 +53,7 @@ jobs:
           haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
           haxelib install hscript
-          haxelib install BrewScript
+          haxelib git SScript https://github.com/SScript-Guy/SScript-new
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib install hxcpp-debug-server
           haxelib list
@@ -114,7 +114,7 @@ jobs:
           haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
           haxelib install hscript
-          haxelib install BrewScript
+          haxelib git SScript https://github.com/SScript-Guy/SScript-new
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib install hxcpp-debug-server
           haxelib list
@@ -155,7 +155,7 @@ jobs:
           haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
           haxelib install hscript
-          haxelib install BrewScript
+          haxelib git SScript https://github.com/SScript-Guy/SScript-new
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib install hxcpp-debug-server
           haxelib list
