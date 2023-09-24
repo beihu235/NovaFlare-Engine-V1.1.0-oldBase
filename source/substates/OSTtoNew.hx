@@ -100,7 +100,7 @@ class OSTtoNew extends MusicBeatSubstate
         add(scoreText);        
        
        
-       audioBuffer = snd._sound.__buffer;
+       
        updateFrequencyData();
     }
     
@@ -135,6 +135,7 @@ class OSTtoNew extends MusicBeatSubstate
 	
 	public function updateFrequencyData() {
     frequencyData = [];
+    audioBuffer = snd._sound.__buffer;
     var audioData = audioBuffer.data;
     var sampleRate = audioBuffer.sampleRate;
     //var length = audioBuffer.samples.length;
@@ -187,25 +188,23 @@ class VisualMusic {
     }
 
     public function updateFrequencyData() {
-    if (!isPlaying) return;
-
+    frequencyData = [];
     var audioData = audioBuffer.data;
-    var samplesPerFrame = audioBuffer.samplesPerFrame;
     var sampleRate = audioBuffer.sampleRate;
+    //var length = audioBuffer.samples.length;
     var frequencySegmentWidth = (sampleRate / frequencySegments);
     var maxPossibleIntensity = 255; // or any other maximum possible value
-
+    
     for (i in 0...frequencySegments) {
-        var startSample = i * frequencySegmentWidth;
-        var endSample = (i + 1) * frequencySegmentWidth;
+        var startSample:Int = Std.int(i * frequencySegmentWidth);
+        var endSample:Int = Std.int((i + 1) * frequencySegmentWidth);
         var sum = 0;
 
         for (j in startSample...endSample) {
             sum += audioData[j];
         }
 
-        // Normalize the intensity to a value between 0 and 1
-        frequencyData[i] = sum / (endSample - startSample) / maxPossibleIntensity;
+        frequencyData.push(sum / (endSample - startSample) / maxPossibleIntensity);
     }
 }
 
