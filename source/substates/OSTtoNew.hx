@@ -1,6 +1,6 @@
 package substates;
 
-
+import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.media.AudioBuffer;
 import lime.system.System;
@@ -115,7 +115,7 @@ class OSTtoNew extends MusicBeatSubstate
     override function update(elapsed:Float)
 	{
 	    updateVisualizationData();
-	    var text:String = '' + visualizationData.length;
+	    var text:String = '' + audioData.length;
 	    scoreText.text = text;
 	    
 	    if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
@@ -215,8 +215,9 @@ class Visualization {
             // 获取当前时间段内的音频数据
             var frequencyBandData:Float = 0.0;
             for (j in startSample...endSample) {
-                var sample:Int = audioBuffer.readSample();
-                frequencyBandData += sample / (endSample - startSample);
+                var sampleData:Int = audioBuffer.getSample(j); // 读取音频样本数据（以整数形式）
+                var normalizedSample:Float = sampleData / 32768.0; // 将样本数据归一化到0.0到1.0之间
+                frequencyBandData += normalizedSample / (endSample - startSample);
             }
 
             // 将频率段数据添加到音频数据向量中
@@ -232,4 +233,5 @@ class Visualization {
         frequencyRanges = ranges;
     }
 }
+
 */
