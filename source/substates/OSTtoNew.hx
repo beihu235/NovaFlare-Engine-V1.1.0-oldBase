@@ -132,24 +132,27 @@ class OSTtoNew extends MusicBeatSubstate
 	}
 	
 	public function updateFrequencyData() {
-        frequencyData = [];
-        var audioData = audioBuffer.data;
-        var samplesPerFrame = audioBuffer.samplesPerFrame;
-        var sampleRate = audioBuffer.sampleRate;
-        var frequencySegmentWidth = (sampleRate / frequencySegments);
+    frequencyData = [];
+    var audioData = audioBuffer.data;
+    var samplesPerFrame = audioBuffer.samplesPerFrame;
+    var sampleRate = audioBuffer.sampleRate;
+    var frequencySegmentWidth = (sampleRate / frequencySegments);
+    var maxPossibleIntensity = 255; // or any other maximum possible value
 
-        for (i in 0...frequencySegments) {
-            var startSample = i * frequencySegmentWidth;
-            var endSample = (i + 1) * frequencySegmentWidth;
-            var sum = 0;
+    for (i in 0...frequencySegments) {
+        var startSample = i * frequencySegmentWidth;
+        var endSample = (i + 1) * frequencySegmentWidth;
+        var sum = 0;
 
-            for (j in startSample...endSample) {
-                sum += audioData[j];
-            }
-
-            frequencyData[i] = sum / (endSample - startSample);
+        for (j in startSample...endSample) {
+            sum += audioData[j];
         }
+
+        // Normalize the intensity to a value between 0 and 1
+        frequencyData[i] = sum / (endSample - startSample) / maxPossibleIntensity;
     }
+}
+
     
     public static function destroyVocals() {
 		if(vocals != null) {
@@ -182,25 +185,28 @@ class VisualMusic {
     }
 
     public function updateFrequencyData() {
-        if (!isPlaying) return;
+    if (!isPlaying) return;
 
-        var audioData = audioBuffer.data;
-        var samplesPerFrame = audioBuffer.samplesPerFrame;
-        var sampleRate = audioBuffer.sampleRate;
-        var frequencySegmentWidth = (sampleRate / frequencySegments);
+    var audioData = audioBuffer.data;
+    var samplesPerFrame = audioBuffer.samplesPerFrame;
+    var sampleRate = audioBuffer.sampleRate;
+    var frequencySegmentWidth = (sampleRate / frequencySegments);
+    var maxPossibleIntensity = 255; // or any other maximum possible value
 
-        for (i in 0...frequencySegments) {
-            var startSample = i * frequencySegmentWidth;
-            var endSample = (i + 1) * frequencySegmentWidth;
-            var sum = 0;
+    for (i in 0...frequencySegments) {
+        var startSample = i * frequencySegmentWidth;
+        var endSample = (i + 1) * frequencySegmentWidth;
+        var sum = 0;
 
-            for (j in startSample...endSample) {
-                sum += audioData[j];
-            }
-
-            frequencyData[i] = sum / (endSample - startSample);
+        for (j in startSample...endSample) {
+            sum += audioData[j];
         }
+
+        // Normalize the intensity to a value between 0 and 1
+        frequencyData[i] = sum / (endSample - startSample) / maxPossibleIntensity;
     }
+}
+
 
     public function draw(renderContext:RenderContext) {
         renderContext.drawImage(image);
