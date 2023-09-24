@@ -155,7 +155,7 @@ class OSTtoNew extends MusicBeatSubstate
             var phase:Float = Math.PI * endSample / sampleRate; // 计算当前样本的相位
 
             // 生成正弦波数据
-            var sineWave:Float = Math.abs(Math.sin(phase) * amplitude);
+            var sineWave:Float = Math.floor(Math.abs(Math.sin(phase) * amplitude) * 10) /10;
 
             // 将正弦波数据添加到音频数据向量中
             audioData.push(sineWave);
