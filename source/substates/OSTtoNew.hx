@@ -27,14 +27,9 @@ class OSTtoNew extends MusicBeatSubstate
 	
 	var scoreText:FlxText;
 	
-    var sampleRate:Float;
-    var frequencyBandCount:Int;
-    var frequencyBandwidth:Float;
-    var audioData:Array<Float>;
-    var currentTime:Float;
-    var frequencyRanges:Int = 10;
-    
-    var sample:Float = 0;
+    public var audioBuffer:AudioBuffer;
+    public var frequencyData:Array<Float>;
+    public var frequencySegments:Int = 10;
 		
     public function new(needVoices:Bool,songBpm:Float)
 	{
@@ -103,19 +98,18 @@ class OSTtoNew extends MusicBeatSubstate
         scoreText.scrollFactor.set();
         add(scoreText);        
         
-        audioData = [];
-        currentTime = 0;
         
-        updateAudioData();
+       updateFrequencyData();
     }
     
     override function update(elapsed:Float)
 	{
-	    updateAudioData();
-	    var text:String = '' + sample;
+	    updateFrequencyData();
+	    
+	    var text:String = '' + frequencyData.length;
 	    scoreText.text = text;
-	    for (i in 1...frequencyRanges){
-	    scoreText.text += '\n' + audioData[i];
+	    for (i in 1...frequencySegments){
+	    scoreText.text += '\n' + frequencyData[i];
 	    }
 	    scoreText.text += '\n';
 	    
@@ -137,51 +131,24 @@ class OSTtoNew extends MusicBeatSubstate
 		}
 	}
 	
-	public function updateAudioData():Void {
-    audioData = [];
-    getSample();
-    var startTime:Float = currentTime;
-    var endTime:Float = startTime; // 假设你想获取当前帧的数据
+	public function updateFrequencyData() {
+        frequencyData = [];
+        var audioData = audioBuffer.data;
+        var samplesPerFrame = audioBuffer.samplesPerFrame;
+        var sampleRate = audioBuffer.sampleRate;
+        var frequencySegmentWidth = (sampleRate / frequencySegments);
 
-    for (i in 0...frequencyRanges) {
-        //var startIndex:Float = frequencyRanges[i] * frequencyBandwidth;
-        var endIndex:Float = (i + 1) * frequencyBandwidth;
+        for (i in 0...frequencySegments) {
+            var startSample = i * frequencySegmentWidth;
+            var endSample = (i + 1) * frequencySegmentWidth;
+            var sum = 0;
 
-        // 计算当前时间段内的音频数据范围
-        var startSample:Int = Math.floor(startTime * sampleRate);
-        var endSample:Int = Math.floor(endTime * sampleRate);
+            for (j in startSample...endSample) {
+                sum += audioData[j];
+            }
 
-        // 计算正弦波数据
-        var amplitude:Float = sample; // / 32768.0; // 将样本值映射到-1.0到1.0之间
-        var phase:Float = Math.PI * endSample; // / sampleRate; // 计算当前样本的相位
-        var sineWave:Float = Math.abs(Math.sin(phase) * amplitude);
-
-        // 将正弦波数据添加到音频数据向量中
-        audioData.push(sineWave);
-    }
-}
-
-    
-    public function getSample(){
-    
-        var snd = FlxG.sound.music;
-        var audioBuffer = snd._sound.__buffer;
-    	var bytes = audioBuffer.data.buffer;
-		
-    	var khz = (audioBuffer.sampleRate / 1000);
-    	var channels = audioBuffer.channels;
-    	var index = Math.floor(currentTime * khz);				
-    	var byte = bytes.getUInt16(index * channels * 2);
-    	
-    	currentTime = snd.time;
-    	
-    	if (byte > 44100 / 2) byte -= 44100;
-        sample = Math.abs((byte / 44100)); 
-        
-        sampleRate = audioBuffer.sampleRate;
-        frequencyBandCount = frequencyRanges;
-        frequencyBandwidth = sampleRate / frequencyBandCount;
-        
+            frequencyData[i] = sum / (endSample - startSample);
+        }
     }
     
     public static function destroyVocals() {
@@ -193,4 +160,64 @@ class OSTtoNew extends MusicBeatSubstate
 	}
 }
 
+/*
+import lime.media.AudioBuffer;
 
+class VisualMusic {
+    public var audioBuffer:AudioBuffer;
+    public var frequencyData:Array<Float>;
+    public var frequencySegments:Int;
+
+    public function new(audioBuffer:AudioBuffer, frequencySegments:Int) {
+        this.audioBuffer = audioBuffer;
+        this.frequencySegments = frequencySegments;
+        this.frequencyData = new Array();
+
+        for (i in 0...frequencySegments) {
+            frequencyData.push(0);
+        }
+
+        image = new Image(0, 0);
+        isPlaying = false;
+    }
+
+    public function updateFrequencyData() {
+        if (!isPlaying) return;
+
+        var audioData = audioBuffer.data;
+        var samplesPerFrame = audioBuffer.samplesPerFrame;
+        var sampleRate = audioBuffer.sampleRate;
+        var frequencySegmentWidth = (sampleRate / frequencySegments);
+
+        for (i in 0...frequencySegments) {
+            var startSample = i * frequencySegmentWidth;
+            var endSample = (i + 1) * frequencySegmentWidth;
+            var sum = 0;
+
+            for (j in startSample...endSample) {
+                sum += audioData[j];
+            }
+
+            frequencyData[i] = sum / (endSample - startSample);
+        }
+    }
+
+    public function draw(renderContext:RenderContext) {
+        renderContext.drawImage(image);
+    }
+
+    public function onMouseDown(event:MouseEvent) {
+        if (!isPlaying) {
+            isPlaying = true;
+            audioBuffer.play();
+        }
+    }
+
+    public function onMouseUp(event:MouseEvent) {
+        if (isPlaying) {
+            isPlaying = false;
+            audioBuffer.stop();
+        }
+    }
+}
+*/
