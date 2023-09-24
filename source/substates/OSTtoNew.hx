@@ -34,7 +34,6 @@ class OSTtoNew extends MusicBeatSubstate
     var currentTime:Float;
     var frequencyRanges:Array<Float>;
     
-    
     var sample = 0;
 		
     public function new(needVoices:Bool,songBpm:Float)
@@ -104,12 +103,6 @@ class OSTtoNew extends MusicBeatSubstate
         scoreText.scrollFactor.set();
         add(scoreText);        
         
-        sampleRate = audioBuffer.sampleRate;
-        frequencyBandCount = 128;
-        frequencyBandwidth = sampleRate / frequencyBandCount;
-        audioData = [];
-        currentTime = 0;
-        frequencyRanges = [0.0, 1000.0, 2000.0, 3000.0, 4000.0, 5000.0, 6000.0, 7000.0, 8000.0, 9000.0, 10000.0]; // 假设你想获取10个频率段的音量大小
         
         updateAudioData();
     }
@@ -119,7 +112,7 @@ class OSTtoNew extends MusicBeatSubstate
 	    updateAudioData();
 	    var text:String = '' + audioData.length;
 	    scoreText.text = text;
-	    for (i in frequencyRanges.length){
+	    for (i in 1...frequencyRanges.length){
 	    scoreText.text += '\n' + audioData[i];
 	    }
 	    scoreText.text += '\n';
@@ -158,7 +151,7 @@ class OSTtoNew extends MusicBeatSubstate
             getSample();
         
             var amplitude:Float = sample; /*/ 32768.0;*/ // 将样本值映射到-1.0到1.0之间
-            var phase:Float = Math.PI * j / sampleRate; // 计算当前样本的相位
+            var phase:Float = Math.PI * endSample / sampleRate; // 计算当前样本的相位
 
             // 生成正弦波数据
             var sineWave:Float = Math.abs(Math.sin(phase) * amplitude);
@@ -183,6 +176,13 @@ class OSTtoNew extends MusicBeatSubstate
     	
     	if (byte > 44100 / 2) byte -= 44100;
         sample = (byte / 44100); 
+        
+        sampleRate = audioBuffer.sampleRate;
+        frequencyBandCount = 128;
+        frequencyBandwidth = sampleRate / frequencyBandCount;
+        audioData = [];
+        currentTime = 0;
+        frequencyRanges = [0.0, 1000.0, 2000.0, 3000.0, 4000.0, 5000.0, 6000.0, 7000.0, 8000.0, 9000.0, 10000.0]; // 假设你想获取10个频率段的音量大小
     }
     
     public static function destroyVocals() {
