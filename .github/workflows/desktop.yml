@@ -1,7 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-
-name: desktopBuild
-
+name: desktop Build
 
 # Controls when the action will run.
 on:
@@ -18,7 +15,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   BuildWindows:
-    runs-on: windows-build
+    runs-on: windows-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -87,7 +84,7 @@ jobs:
           path: export/release/windows/bin
   buildLinux:
     # The type of runner that the job will run on
-    runs-on: linux-build
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -131,7 +128,7 @@ jobs:
           name: Linux
           path: 'export/release/linux/bin'
   buildMac:
-    runs-on: mac-build
+    runs-on: macos-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
