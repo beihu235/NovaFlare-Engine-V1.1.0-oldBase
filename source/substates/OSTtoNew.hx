@@ -94,8 +94,8 @@ class OSTtoNew extends MusicBeatSubstate
 		waveformVoiceSprite.alpha = 0.5;
 		add(waveformVoiceSprite);
 		
-		scoreText = new FlxText(FlxG.width * 0.5, FlxG.height * 0.5, 0, '', 32);
-		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreText = new FlxText(FlxG.width * 0.5, FlxG.height * 0.2, 0, '', 32);
+		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         scoreText.scrollFactor.set();
         add(scoreText);        
        
@@ -141,7 +141,7 @@ class OSTtoNew extends MusicBeatSubstate
     //var length = audioBuffer.samples.length;
     var frequencySegmentWidth = (sampleRate / frequencySegments);
     var maxPossibleIntensity = 255; // or any other maximum possible value
-    
+
     for (i in 0...frequencySegments) {
         var startSample:Int = Std.int(i * frequencySegmentWidth);
         var endSample:Int = Std.int((i + 1) * frequencySegmentWidth);
@@ -151,9 +151,11 @@ class OSTtoNew extends MusicBeatSubstate
             sum += audioData[j];
         }
 
-        frequencyData.push(sum / (endSample - startSample) / maxPossibleIntensity);
+        var frameFrequencyData = sum / (endSample - startSample) / maxPossibleIntensity;
+        frequencyData.push(frameFrequencyData);
     }
 }
+
 
 
     
@@ -190,6 +192,7 @@ class VisualMusic {
     public function updateFrequencyData() {
     frequencyData = [];
     var audioData = audioBuffer.data;
+    audioBuffer = snd._sound.__buffer;
     var sampleRate = audioBuffer.sampleRate;
     //var length = audioBuffer.samples.length;
     var frequencySegmentWidth = (sampleRate / frequencySegments);
