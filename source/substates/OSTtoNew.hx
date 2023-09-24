@@ -1,7 +1,10 @@
 package substates;
 
-//import haxe.audio.AudioBuffer;
+
+import lime.graphics.RenderContext;
 import lime.media.AudioBuffer;
+import lime.system.System;
+
 import haxe.io.Path;
 import haxe.io.Bytes;
 
@@ -23,15 +26,13 @@ class OSTtoNew extends MusicBeatSubstate
 	public var camLogo:FlxCamera;
 	var scoreText:FlxText;
 	
-    // 设置频率段大小（以赫兹为单位）
-    var frequencyBandwidth:Float = 1000;
-    
-    var frequencyBandCount:Int = 0;
-    // 设定音频数据的采样率和位深度
-    var sampleRate:Int = 44100;
-    var bitsPerSample:Int = 16;
-    var visualizationData:Array<Float> = [];
-    var audioDataArray:Array<Int> = [];
+    public var audioBuffer:AudioBuffer;
+    public var sampleRate:Float;
+    public var frequencyBandCount:Int;
+    public var frequencyBandwidth:Float;
+    public var audioData:Array<Float>;
+    public var currentTime:Float;
+    public var frequencyRanges:Array<Float>;
     public function new(needVoices:Bool,songBpm:Float)
 	{
 	    super();		
@@ -103,28 +104,12 @@ class OSTtoNew extends MusicBeatSubstate
         var snd = FlxG.sound.music;
         var audioBuffer:AudioBuffer = snd._sound.__buffer;
         
-        //var audioData:Bytes = audioBuffer.getData();
-        
-        // 获取音频数据的字节数组
-        //audioDataArray = audioData.toArray();
-
-
-        // 计算音频数据的长度（以秒为单位）
-        //var length:Float = audioDataArray.length / (sampleRate * bitsPerSample / 8);
-        var length:Float = snd.length;
-      
-
-        // 计算频率段数量
-        frequencyBandCount = Std.int(sampleRate / frequencyBandwidth);
-
-        updateVisualizationData();
-        
-        
-
-        // 在控制台中打印可视化数据
-        for (i in 0...visualizationData.length) {
-            trace(visualizationData[i]);
-        }
+        sampleRate = audioBuffer.sampleRate;
+        frequencyBandCount = 128;
+        frequencyBandwidth = sampleRate / frequencyBandCount;
+        audioData = [];
+        currentTime = 0;
+        frequencyRanges = [0.0, 1000.0, 2000.0, 3000.0, 4000.0, 5000.0, 6000.0, 7000.0, 8000.0, 9000.0, 10000.0]; // 假设你想获取10个频率段的音量大小
     }
     
     override function update(elapsed:Float)
@@ -151,27 +136,31 @@ class OSTtoNew extends MusicBeatSubstate
 		}
 	}
 	
-	function updateVisualizationData():Void {
-	    visualizationData = [];
-        // 遍历音频数据，并为每个样本生成一个正弦波
-        for (i in 0...frequencyBandCount) {
-            var startIndex:Float = i * frequencyBandwidth;
+	public function updateVisualizationData():Void {
+        audioData = [];
+        var startTime:Float = currentTime;
+        var endTime:Float = startTime + 1; // 假设你想获取1秒的数据
+
+        for (i in 0...frequencyRanges.length) {
+            var startIndex:Float = frequencyRanges[i] * frequencyBandwidth;
             var endIndex:Float = (i + 1) * frequencyBandwidth;
-            var frequencyBandData:Array<Int> = audioDataArray.slice(Std.int(startIndex), Std.int(endIndex));
-            
-            for (j in 0...frequencyBandData.length) {
-                var sample:Int = frequencyBandData[j];
-                var amplitude:Float = sample / 32768.0; // 将样本值映射到-1.0到1.0之间
-                var phase:Float = Math.PI * j / sampleRate; // 计算当前样本的相位
 
-                // 生成正弦波数据
-                var sineWave:Float = Math.abs(Math.sin(phase) * amplitude);
+            // 计算当前时间段内的音频数据范围
+            var startSample:Int = Math.floor(startTime * sampleRate);
+            var endSample:Int = Math.floor(endTime * sampleRate);
 
-                // 将正弦波数据添加到可视化数据向量中
-                visualizationData.push(sineWave);
+            // 获取当前时间段内的音频数据
+            var frequencyBandData:Float = 0.0;
+            for (j in startSample...endSample) {
+                var sample:Int = audioBuffer.readSample();
+                frequencyBandData += sample / (endSample - startSample);
             }
+
+            // 将频率段数据添加到音频数据向量中
+            audioData.push(frequencyBandData);
         }
     }
+}
     
     public static function destroyVocals() {
 		if(vocals != null) {
@@ -183,3 +172,64 @@ class OSTtoNew extends MusicBeatSubstate
 }
 
 
+/*
+import lime.app.Application;
+import lime.graphics.RenderContext;
+import lime.media.AudioBuffer;
+import lime.system.System;
+
+class Visualization {
+    public var app:Application;
+    public var audioBuffer:AudioBuffer;
+    public var sampleRate:Float;
+    public var frequencyBandCount:Int;
+    public var frequencyBandwidth:Float;
+    public var audioData:Array<Float>;
+    public var currentTime:Float;
+    public var frequencyRanges:Array<Float>;
+
+    public function new(app:Application, audioBuffer:AudioBuffer) {
+        this.app = app;
+        this.audioBuffer = audioBuffer;
+        this.sampleRate = audioBuffer.sampleRate;
+        this.frequencyBandCount = 128;
+        this.frequencyBandwidth = sampleRate / frequencyBandCount;
+        this.audioData = [];
+        this.currentTime = 0;
+        this.frequencyRanges = [0.0, 1000.0, 2000.0, 3000.0, 4000.0, 5000.0, 6000.0, 7000.0, 8000.0, 9000.0, 10000.0]; // 假设你想获取10个频率段的音量大小
+    }
+
+    public function updateAudioData():Void {
+        audioData = [];
+        var startTime:Float = currentTime;
+        var endTime:Float = startTime + 1; // 假设你想获取1秒的数据
+
+        for (i in 0...frequencyRanges.length) {
+            var startIndex:Float = frequencyRanges[i] * frequencyBandwidth;
+            var endIndex:Float = (i + 1) * frequencyBandwidth;
+
+            // 计算当前时间段内的音频数据范围
+            var startSample:Int = Math.floor(startTime * sampleRate);
+            var endSample:Int = Math.floor(endTime * sampleRate);
+
+            // 获取当前时间段内的音频数据
+            var frequencyBandData:Float = 0.0;
+            for (j in startSample...endSample) {
+                var sample:Int = audioBuffer.readSample();
+                frequencyBandData += sample / (endSample - startSample);
+            }
+
+            // 将频率段数据添加到音频数据向量中
+            audioData.push(frequencyBandData);
+        }
+    }
+
+    public function setCurrentTime(time:Float):Void {
+        currentTime = time;
+    }
+
+    public function setFrequencyRanges(ranges:Array<Float>):Void {
+        frequencyRanges = ranges;
+    }
+}
+*/
