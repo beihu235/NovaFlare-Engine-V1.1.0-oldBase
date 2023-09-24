@@ -97,8 +97,9 @@ class OSTtoNew extends MusicBeatSubstate
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         scoreText.scrollFactor.set();
         add(scoreText);        
-        
-        
+       
+       snd = FlxG.sound.music;
+       audioBuffer = snd._sound.__buffer;
        updateFrequencyData();
     }
     
