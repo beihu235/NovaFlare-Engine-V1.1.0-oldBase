@@ -112,7 +112,7 @@ class OSTtoNew extends MusicBeatSubstate
     override function update(elapsed:Float)
 	{
 	    updateAudioData();
-	    var text:String = '' + audioData.length;
+	    var text:String = '' + sample;
 	    scoreText.text = text;
 	    for (i in 1...frequencyRanges){
 	    scoreText.text += '\n' + audioData[i];
@@ -155,7 +155,7 @@ class OSTtoNew extends MusicBeatSubstate
             var phase:Float = Math.PI * endSample / sampleRate; // 计算当前样本的相位
 
             // 生成正弦波数据
-            var sineWave:Float = Math.floor(Math.abs(Math.sin(phase) * amplitude) * 10) /10;
+            var sineWave:Float = Math.floor(Math.abs(Math.sin(phase) * amplitude) * 1000) /1000;
 
             // 将正弦波数据添加到音频数据向量中
             audioData.push(sineWave);
