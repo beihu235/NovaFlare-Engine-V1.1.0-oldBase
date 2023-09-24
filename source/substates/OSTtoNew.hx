@@ -27,9 +27,10 @@ class OSTtoNew extends MusicBeatSubstate
 	
 	var scoreText:FlxText;
 	
-    public var audioBuffer:AudioBuffer;
-    public var frequencyData:Array<Float>;
-    public var frequencySegments:Int = 10;
+    var audioBuffer:AudioBuffer;
+    var frequencyData:Array<Float>;
+    var frequencySegments:Int = 10;
+    var snd = FlxG.sound.music;
 		
     public function new(needVoices:Bool,songBpm:Float)
 	{
@@ -98,7 +99,7 @@ class OSTtoNew extends MusicBeatSubstate
         scoreText.scrollFactor.set();
         add(scoreText);        
        
-       snd = FlxG.sound.music;
+       
        audioBuffer = snd._sound.__buffer;
        updateFrequencyData();
     }
