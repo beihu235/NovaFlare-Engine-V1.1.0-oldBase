@@ -24,6 +24,7 @@ class OSTtoNew extends MusicBeatSubstate
     public var camGame:FlxCamera;
 	public var camHUD:FlxCamera;
 	public var camLogo:FlxCamera;
+	
 	var scoreText:FlxText;
 	
     var audioBuffer:AudioBuffer;
@@ -119,7 +120,7 @@ class OSTtoNew extends MusicBeatSubstate
         currentTime = 0;
         frequencyRanges = [0.0, 1000.0, 2000.0, 3000.0, 4000.0, 5000.0, 6000.0, 7000.0, 8000.0, 9000.0, 10000.0]; // 假设你想获取10个频率段的音量大小
         
-        updateAudioData()
+        updateAudioData();
     }
     
     override function update(elapsed:Float)
@@ -127,6 +128,10 @@ class OSTtoNew extends MusicBeatSubstate
 	    updateAudioData();
 	    var text:String = '' + audioData.length;
 	    scoreText.text = text;
+	    for (i in frequencyRanges.length){
+	    scoreText.text += '\n' + audioData[i];
+	    }
+	    scoreText.text += '\n';
 	    
 	    if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
 		{
