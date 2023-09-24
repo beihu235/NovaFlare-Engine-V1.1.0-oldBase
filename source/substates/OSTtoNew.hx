@@ -135,13 +135,13 @@ class OSTtoNew extends MusicBeatSubstate
     frequencyData = [];
     var audioData = audioBuffer.data;
     var sampleRate = audioBuffer.sampleRate;
-    var length = audioBuffer.length;
+    var length = audioBuffer.samples.length;
     var frequencySegmentWidth = (sampleRate / frequencySegments);
     var maxPossibleIntensity = 255; // or any other maximum possible value
     
     for (i in 0...frequencySegments) {
-        var startSample = i * frequencySegmentWidth;
-        var endSample = (i + 1) * frequencySegmentWidth;
+        var startSample:Int = Std.int(i * frequencySegmentWidth);
+        var endSample:Int = Std.int((i + 1) * frequencySegmentWidth);
         var sum = 0;
 
         for (j in startSample...endSample) {
@@ -227,3 +227,4 @@ class VisualMusic {
     }
 }
 */
+
