@@ -138,29 +138,29 @@ class OSTtoNew extends MusicBeatSubstate
 	}
 	
 	public function updateAudioData():Void {
-        audioData = [];
-        getSample();
-        var startTime:Float = currentTime;
-        var endTime:Float = startTime; // 假设你想获取当前帧的数据
+    audioData = [];
+    getSample();
+    var startTime:Float = currentTime;
+    var endTime:Float = startTime; // 假设你想获取当前帧的数据
 
-        for (i in 0...frequencyRanges) {
-            //var startIndex:Float = frequencyRanges[i] * frequencyBandwidth;
-            var endIndex:Float = (i + 1) * frequencyBandwidth;
+    for (i in 0...frequencyRanges) {
+        //var startIndex:Float = frequencyRanges[i] * frequencyBandwidth;
+        var endIndex:Float = (i + 1) * frequencyBandwidth;
 
-            // 计算当前时间段内的音频数据范围
-            var startSample:Int = Math.floor(startTime * sampleRate);
-            var endSample:Int = Math.floor(endTime * sampleRate);
-        
-            var amplitude:Float = sample; /*/ 32768.0;*/ // 将样本值映射到-1.0到1.0之间
-            var phase:Float = Math.PI * endSample; /// sampleRate; // 计算当前样本的相位
+        // 计算当前时间段内的音频数据范围
+        var startSample:Int = Math.floor(startTime * sampleRate);
+        var endSample:Int = Math.floor(endTime * sampleRate);
 
-            // 生成正弦波数据
-            var sineWave:Float = Math.abs(Math.sin(phase) * amplitude) ;
+        // 计算正弦波数据
+        var amplitude:Float = sample; // / 32768.0; // 将样本值映射到-1.0到1.0之间
+        var phase:Float = Math.PI * endSample; // / sampleRate; // 计算当前样本的相位
+        var sineWave:Float = Math.abs(Math.sin(phase) * amplitude);
 
-            // 将正弦波数据添加到音频数据向量中
-            audioData.push(sineWave);
-        }
+        // 将正弦波数据添加到音频数据向量中
+        audioData.push(sineWave);
     }
+}
+
     
     public function getSample(){
     
