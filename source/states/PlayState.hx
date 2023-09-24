@@ -77,8 +77,8 @@ import psychlua.LuaUtils;
 import psychlua.HScript;
 #end
 
-#if BrewScript
-import brew.BrewScript;
+#if (SScript >= "3.0.0")
+import tea.SScript;
 #end
 
 class PlayState extends MusicBeatState
@@ -796,7 +796,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-function startCharacterScripts(name:String)
+	function startCharacterScripts(name:String)
 	{
 		// Lua
 		#if LUA_ALLOWED
@@ -853,7 +853,7 @@ function startCharacterScripts(name:String)
 		
 		if(doPush)
 		{
-			if(BrewScript.global.exists(scriptFile))
+			if(SScript.global.exists(scriptFile))
 				doPush = false;
 
 			if(doPush) initHScript(scriptFile);
@@ -3143,7 +3143,7 @@ function startCharacterScripts(name:String)
 			if(script != null)
 			{
 				script.call('onDestroy');
-				script.kill();
+				script.destroy();
 			}
 
 		while (hscriptArray.length > 0)
@@ -3251,8 +3251,8 @@ function startCharacterScripts(name:String)
 		setOnScripts('curSection', curSection);
 		callOnScripts('onSectionHit');
 	}
-	
-    #if LUA_ALLOWED
+
+	#if LUA_ALLOWED
 	public function startLuasNamed(luaFile:String)
 	{
 		#if MODS_ALLOWED
@@ -3276,7 +3276,7 @@ function startCharacterScripts(name:String)
 	}
 	#end
 	
-    #if HSCRIPT_ALLOWED
+	#if HSCRIPT_ALLOWED
 	public function startHScriptsNamed(scriptFile:String)
 	{
 		var scriptToLoad:String = Paths.modFolders(scriptFile);
@@ -3285,7 +3285,7 @@ function startCharacterScripts(name:String)
 		
 		if(FileSystem.exists(scriptToLoad))
 		{
-			if (BrewScript.global.exists(scriptToLoad)) return false;
+			if (SScript.global.exists(scriptToLoad)) return false;
 	
 			initHScript(scriptToLoad);
 			return true;
@@ -3298,10 +3298,14 @@ function startCharacterScripts(name:String)
 		try
 		{
 			var newScript:HScript = new HScript(null, file);
-			if(newScript.parsingException != null)
+			@:privateAccess
+			if(newScript.parsingExceptions != null && newScript.parsingExceptions.length > 0)
 			{
-				addTextToDebug('ERROR ON LOADING ($file): ${newScript.parsingException.message}', FlxColor.RED);
-				newScript.kill();
+				@:privateAccess
+				for (e in newScript.parsingExceptions)
+					if(e != null)
+						addTextToDebug('ERROR ON LOADING ($file): ${e.message.substr(0, e.message.indexOf('\n'))}', FlxColor.RED);
+				newScript.destroy();
 				return;
 			}
 
@@ -3315,21 +3319,21 @@ function startCharacterScripts(name:String)
 						if (e != null)
 							addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, e.message.indexOf('\n'))}', FlxColor.RED);
 
-					newScript.kill();
+					newScript.destroy();
 					hscriptArray.remove(newScript);
-					trace('failed to initialize BrewScript interp!!! ($file)');
+					trace('failed to initialize sscript interp!!! ($file)');
 				}
-				else trace('initialized BrewScript interp successfully: $file');
+				else trace('initialized sscript interp successfully: $file');
 			}
 			
 		}
 		catch(e)
 		{
 			addTextToDebug('ERROR ($file) - ' + e.message.substr(0, e.message.indexOf('\n')), FlxColor.RED);
-			var newScript:HScript = cast (BrewScript.global.get(file), HScript);
+			var newScript:HScript = cast (SScript.global.get(file), HScript);
 			if(newScript != null)
 			{
-				newScript.kill();
+				newScript.destroy();
 				hscriptArray.remove(newScript);
 			}
 		}
@@ -3658,7 +3662,7 @@ function startCharacterScripts(name:String)
 		}
 		FlxG.log.warn('Missing shader $name .frag AND .vert files!');
 		#else
-		FlxG.log.warn('This platform doesn\'t support Runtime Shaders!');
+		FlxG.log.warn("This platform doesn\'t support Runtime Shaders!");
 		#end
 		return false;
 	}
