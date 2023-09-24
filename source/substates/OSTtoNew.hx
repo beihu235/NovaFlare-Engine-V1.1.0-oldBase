@@ -135,7 +135,7 @@ class OSTtoNew extends MusicBeatSubstate
     frequencyData = [];
     var audioData = audioBuffer.data;
     var sampleRate = audioBuffer.sampleRate;
-    var length = audioBuffer.samples.length;
+    //var length = audioBuffer.samples.length;
     var frequencySegmentWidth = (sampleRate / frequencySegments);
     var maxPossibleIntensity = 255; // or any other maximum possible value
     
