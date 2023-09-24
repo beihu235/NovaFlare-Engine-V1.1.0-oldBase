@@ -283,12 +283,12 @@ class HScript extends SScript
 	}
 
 	#if (SScript >= "3.0.3")
-	override public function destroy()
+	override public function kill()
 	{
 		origin = null;
 		parentLua = null;
 
-		super.destroy();
+		super.kill();
 	}
 	#else
 	public function destroy()
