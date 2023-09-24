@@ -133,12 +133,13 @@ class OSTtoNew extends MusicBeatSubstate
 		}
 	}
 	
-	public function updateFrequencyData(numSegments) {
+	public function updateFrequencyData() {
     frequencyData = [];
     audioBuffer = snd._sound.__buffer;
     var audioData = audioBuffer.data;
     var sampleRate = audioBuffer.sampleRate;
-    var length = audioBuffer.samples.length;
+    var numSegments = 10;
+    //var length = audioBuffer.samples.length;
 
     var frequencySegmentWidth = sampleRate / numSegments;
     var maxPossibleIntensity = 255; // or any other maximum possible value
