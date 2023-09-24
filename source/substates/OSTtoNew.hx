@@ -32,7 +32,7 @@ class OSTtoNew extends MusicBeatSubstate
     var frequencyBandwidth:Float;
     var audioData:Array<Float>;
     var currentTime:Float;
-    var frequencyRanges:Array<Float> = [0.0, 1000.0, 2000.0, 3000.0, 4000.0, 5000.0, 6000.0, 7000.0, 8000.0, 9000.0, 10000.0];;
+    var frequencyRanges:Array<Float> = [0.0, 1000.0, 2000.0, 3000.0, 4000.0, 5000.0, 6000.0, 7000.0, 8000.0, 9000.0, 10000.0];
     
     var sample:Float = 0;
 		
@@ -139,6 +139,7 @@ class OSTtoNew extends MusicBeatSubstate
 	
 	public function updateAudioData():Void {
         audioData = [];
+        getSample();
         var startTime:Float = currentTime;
         var endTime:Float = startTime; // 假设你想获取当前帧的数据
 
@@ -150,7 +151,7 @@ class OSTtoNew extends MusicBeatSubstate
             var startSample:Int = Math.floor(startTime * sampleRate);
             var endSample:Int = Math.floor(endTime * sampleRate);
 
-            getSample();
+            
         
             var amplitude:Float = sample; /*/ 32768.0;*/ // 将样本值映射到-1.0到1.0之间
             var phase:Float = Math.PI * endSample / sampleRate; // 计算当前样本的相位
@@ -180,7 +181,7 @@ class OSTtoNew extends MusicBeatSubstate
         sample = Math.abs((byte / 44100)); 
         
         sampleRate = audioBuffer.sampleRate;
-        frequencyBandCount = 128;
+        frequencyBandCount = frequencyRanges.length;
         frequencyBandwidth = sampleRate / frequencyBandCount;
         
     }
