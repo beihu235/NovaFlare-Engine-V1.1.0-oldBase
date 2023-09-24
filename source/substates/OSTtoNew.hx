@@ -103,6 +103,8 @@ class OSTtoNew extends MusicBeatSubstate
         scoreText.scrollFactor.set();
         add(scoreText);        
         
+        audioData = [];
+        currentTime = 0;
         
         updateAudioData();
     }
@@ -180,8 +182,6 @@ class OSTtoNew extends MusicBeatSubstate
         sampleRate = audioBuffer.sampleRate;
         frequencyBandCount = 128;
         frequencyBandwidth = sampleRate / frequencyBandCount;
-        audioData = [];
-        currentTime = 0;
         frequencyRanges = [0.0, 1000.0, 2000.0, 3000.0, 4000.0, 5000.0, 6000.0, 7000.0, 8000.0, 9000.0, 10000.0]; // 假设你想获取10个频率段的音量大小
     }
     
