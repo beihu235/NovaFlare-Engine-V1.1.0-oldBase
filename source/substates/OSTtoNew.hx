@@ -133,16 +133,17 @@ class OSTtoNew extends MusicBeatSubstate
 		}
 	}
 	
-	public function updateFrequencyData() {
+	public function updateFrequencyData(numSegments) {
     frequencyData = [];
     audioBuffer = snd._sound.__buffer;
     var audioData = audioBuffer.data;
     var sampleRate = audioBuffer.sampleRate;
-    //var length = audioBuffer.samples.length;
-    var frequencySegmentWidth = (sampleRate / frequencySegments);
+    var length = audioBuffer.samples.length;
+
+    var frequencySegmentWidth = sampleRate / numSegments;
     var maxPossibleIntensity = 255; // or any other maximum possible value
 
-    for (i in 0...frequencySegments) {
+    for (i in 0...numSegments) {
         var startSample:Int = Std.int(i * frequencySegmentWidth);
         var endSample:Int = Std.int((i + 1) * frequencySegmentWidth);
         var sum = 0;
@@ -151,9 +152,12 @@ class OSTtoNew extends MusicBeatSubstate
             sum += audioData[j];
         }
 
-        var frameFrequencyData = sum / (endSample - startSample) / maxPossibleIntensity;
-        frequencyData.push(frameFrequencyData);
+        // 获取该分段的音量大小
+        var frequencyFrameData = sum / (endSample - startSample) / maxPossibleIntensity;
+        frequencyData.push(frequencyFrameData);
     }
+
+
 }
 
 
