@@ -33,6 +33,18 @@ class OSTtoNew extends MusicBeatSubstate
     public var audioData:Array<Float>;
     public var currentTime:Float;
     public var frequencyRanges:Array<Float>;
+    
+    var snd = FlxG.sound.music;
+    var audioBuffer:AudioBuffer = snd._sound.__buffer;
+	var bytes = audioBuffer.data.buffer;
+		
+	var khz = (buffer.sampleRate / 1000);
+	var channels = buffer.channels;
+	var index = Math.floor(currentTime * khz);
+		
+	var byte = 0;
+    var sample = 0;
+		
     public function new(needVoices:Bool,songBpm:Float)
 	{
 	    super();		
@@ -100,9 +112,7 @@ class OSTtoNew extends MusicBeatSubstate
         scoreText.scrollFactor.set();
         add(scoreText);
 
-		
-        var snd = FlxG.sound.music;
-        var audioBuffer:AudioBuffer = snd._sound.__buffer;
+        updateAudioData()
         
         sampleRate = audioBuffer.sampleRate;
         frequencyBandCount = 128;
@@ -114,7 +124,7 @@ class OSTtoNew extends MusicBeatSubstate
     
     override function update(elapsed:Float)
 	{
-	    updateVisualizationData();
+	    updateAudioData();
 	    var text:String = '' + audioData.length;
 	    scoreText.text = text;
 	    
@@ -136,30 +146,48 @@ class OSTtoNew extends MusicBeatSubstate
 		}
 	}
 	
-	public function updateVisualizationData():Void {
+	public function updateAudioData():Void {
         audioData = [];
-        var startTime:Float = currentTime;
-        var endTime:Float = startTime + 1; // 假设你想获取1秒的数据
+    var startTime:Float = currentTime;
+    var endTime:Float = startTime; // 假设你想获取当前帧的数据
 
-        for (i in 0...frequencyRanges.length) {
-            var startIndex:Float = frequencyRanges[i] * frequencyBandwidth;
-            var endIndex:Float = (i + 1) * frequencyBandwidth;
+    for (i in 0...frequencyRanges.length) {
+        var startIndex:Float = frequencyRanges[i] * frequencyBandwidth;
+        var endIndex:Float = (i + 1) * frequencyBandwidth;
 
-            // 计算当前时间段内的音频数据范围
-            var startSample:Int = Math.floor(startTime * sampleRate);
-            var endSample:Int = Math.floor(endTime * sampleRate);
+        // 计算当前时间段内的音频数据范围
+        var startSample:Int = Math.floor(startTime * sampleRate);
+        var endSample:Int = Math.floor(endTime * sampleRate);
 
-            // 获取当前时间段内的音频数据
-            var frequencyBandData:Float = 0.0;
-            for (j in startSample...endSample) {
-                var sample:Int = audioBuffer.readSample();
-                frequencyBandData += sample / (endSample - startSample);
-            }
+        getSample();
+        
+        var amplitude:Float = sample; /*/ 32768.0;*/ // 将样本值映射到-1.0到1.0之间
+        var phase:Float = Math.PI * j / sampleRate; // 计算当前样本的相位
 
-            // 将频率段数据添加到音频数据向量中
-            audioData.push(frequencyBandData);
-        }
+        // 生成正弦波数据
+        var sineWave:Float = Math.abs(Math.sin(phase) * amplitude);
+
+        // 将正弦波数据添加到音频数据向量中
+        audioData.push(sineWave);
+        
     }
+    
+    public function updateAudioData(){
+    snd = FlxG.sound.music;
+    audioBuffer:AudioBuffer = snd._sound.__buffer;
+    bytes = audioBuffer.data.buffer;
+	currentTime = snd.time;
+		
+	khz = (buffer.sampleRate / 1000);
+    channels = buffer.channels;
+    index = Math.floor(currentTime * khz);		
+		
+	byte = bytes.getUInt16(index * channels * 2);
+	if (byte > 44100 / 2) byte -= 44100;
+    sample = (byte / 44100); 
+    }
+    }
+
 
     
     public static function destroyVocals() {
@@ -172,66 +200,3 @@ class OSTtoNew extends MusicBeatSubstate
 }
 
 
-/*
-import lime.app.Application;
-import lime.graphics.RenderContext;
-import lime.media.AudioBuffer;
-import lime.system.System;
-
-class Visualization {
-    public var app:Application;
-    public var audioBuffer:AudioBuffer;
-    public var sampleRate:Float;
-    public var frequencyBandCount:Int;
-    public var frequencyBandwidth:Float;
-    public var audioData:Array<Float>;
-    public var currentTime:Float;
-    public var frequencyRanges:Array<Float>;
-
-    public function new(app:Application, audioBuffer:AudioBuffer) {
-        this.app = app;
-        this.audioBuffer = audioBuffer;
-        this.sampleRate = audioBuffer.sampleRate;
-        this.frequencyBandCount = 128;
-        this.frequencyBandwidth = sampleRate / frequencyBandCount;
-        this.audioData = [];
-        this.currentTime = 0;
-        this.frequencyRanges = [0.0, 1000.0, 2000.0, 3000.0, 4000.0, 5000.0, 6000.0, 7000.0, 8000.0, 9000.0, 10000.0]; // 假设你想获取10个频率段的音量大小
-    }
-
-    public function updateAudioData():Void {
-        audioData = [];
-        var startTime:Float = currentTime;
-        var endTime:Float = startTime + 1; // 假设你想获取1秒的数据
-
-        for (i in 0...frequencyRanges.length) {
-            var startIndex:Float = frequencyRanges[i] * frequencyBandwidth;
-            var endIndex:Float = (i + 1) * frequencyBandwidth;
-
-            // 计算当前时间段内的音频数据范围
-            var startSample:Int = Math.floor(startTime * sampleRate);
-            var endSample:Int = Math.floor(endTime * sampleRate);
-
-            // 获取当前时间段内的音频数据
-            var frequencyBandData:Float = 0.0;
-            for (j in startSample...endSample) {
-                var sampleData:Int = audioBuffer.getSample(j); // 读取音频样本数据（以整数形式）
-                var normalizedSample:Float = sampleData / 32768.0; // 将样本数据归一化到0.0到1.0之间
-                frequencyBandData += normalizedSample / (endSample - startSample);
-            }
-
-            // 将频率段数据添加到音频数据向量中
-            audioData.push(frequencyBandData);
-        }
-    }
-
-    public function setCurrentTime(time:Float):Void {
-        currentTime = time;
-    }
-
-    public function setFrequencyRanges(ranges:Array<Float>):Void {
-        frequencyRanges = ranges;
-    }
-}
-
-*/
