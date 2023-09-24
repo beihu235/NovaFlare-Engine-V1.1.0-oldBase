@@ -177,9 +177,9 @@ class OSTtoNew extends MusicBeatSubstate
         }
     }
     
-    public function updateAudioData(){
+    public function getSample(){
         snd = FlxG.sound.music;
-        audioBuffer:AudioBuffer = snd._sound.__buffer;
+        audioBuffer = snd._sound.__buffer;
         bytes = audioBuffer.data.buffer;
     	currentTime = snd.time;
 		
