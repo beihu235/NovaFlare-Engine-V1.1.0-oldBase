@@ -27,7 +27,6 @@ class OSTtoNew extends MusicBeatSubstate
 	
 	var scoreText:FlxText;
 	
-    var audioBuffer:AudioBuffer;
     var sampleRate:Float;
     var frequencyBandCount:Int;
     var frequencyBandwidth:Float;
@@ -35,15 +34,7 @@ class OSTtoNew extends MusicBeatSubstate
     var currentTime:Float;
     var frequencyRanges:Array<Float>;
     
-    var snd = FlxG.sound.music;
-    var audioBuffer:AudioBuffer = snd._sound.__buffer;
-	var bytes = audioBuffer.data.buffer;
-		
-	var khz = (buffer.sampleRate / 1000);
-	var channels = buffer.channels;
-	var index = Math.floor(currentTime * khz);
-		
-	var byte = 0;
+    
     var sample = 0;
 		
     public function new(needVoices:Bool,songBpm:Float)
@@ -178,16 +169,18 @@ class OSTtoNew extends MusicBeatSubstate
     }
     
     public function getSample(){
-        snd = FlxG.sound.music;
-        audioBuffer = snd._sound.__buffer;
-        bytes = audioBuffer.data.buffer;
+    
+        var snd = FlxG.sound.music;
+        var audioBuffer = snd._sound.__buffer;
+    	var bytes = audioBuffer.data.buffer;
+		
+    	var khz = (audioBuffer.sampleRate / 1000);
+    	var channels = audioBuffer.channels;
+    	var index = Math.floor(currentTime * khz);				
+    	var byte = bytes.getUInt16(index * channels * 2);
+    	
     	currentTime = snd.time;
-		
-    	khz = (buffer.sampleRate / 1000);
-        channels = buffer.channels;
-        index = Math.floor(currentTime * khz);		
-		
-    	byte = bytes.getUInt16(index * channels * 2);
+    	
     	if (byte > 44100 / 2) byte -= 44100;
         sample = (byte / 44100); 
     }
