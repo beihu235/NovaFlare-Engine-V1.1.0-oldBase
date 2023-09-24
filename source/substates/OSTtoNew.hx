@@ -160,7 +160,7 @@ class OSTtoNew extends MusicBeatSubstate
             audioData.push(frequencyBandData);
         }
     }
-}
+
     
     public static function destroyVocals() {
 		if(vocals != null) {
