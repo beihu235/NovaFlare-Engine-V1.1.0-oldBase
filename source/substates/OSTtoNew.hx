@@ -190,10 +190,7 @@ class OSTtoNew extends MusicBeatSubstate
     	byte = bytes.getUInt16(index * channels * 2);
     	if (byte > 44100 / 2) byte -= 44100;
         sample = (byte / 44100); 
-        }
     }
-
-
     
     public static function destroyVocals() {
 		if(vocals != null) {
