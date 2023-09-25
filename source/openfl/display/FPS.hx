@@ -169,13 +169,15 @@ class FPS extends TextField
 						
             text += "\nNF Engine V1.1.0(bata)\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
                      
-			text += "\n";
+			
 	    var gpuCpuUsage = getGPUCPUUsage();
+	    text += gpuCpuUsage;
+	    text += "\n";
 	}
 	
 	public function getGPUCPUUsage() {
         var gpuUsage = getGPUUsage();
-        var cpuUsage = getCPUUsage();
+        //var cpuUsage = getCPUUsage();
         return gpuUsage;
     }
 
@@ -183,16 +185,16 @@ class FPS extends TextField
         var gpuUsage = 0;
         try {
             var file = File.read(Path.withoutExtension(Assets.getPath("assets/gpu_busy_percent")));
-            gpuUsage = Std.parseFloat(file.readLine());
+            gpuUsage = /*Std.parseFloat(*/file.readLine()/*);*/;
         } catch (e: Eof) {}
         return gpuUsage;
     }
-
+    /*
     private function getCPUUsage(): Float {
         var cpuUsage = Lib.getCpuUsage() / 100;
         return cpuUsage;
     }
-
+    */
     
 }
 
