@@ -17,8 +17,6 @@ import sys.io.File;
 import sys.FileSystem;
 
 
-import android.app.ActivityManager
-import android.content.Context
 
 import openfl.utils.Assets;
 
