@@ -16,11 +16,6 @@ import haxe.io.Eof;
 import sys.io.File;
 import sys.FileSystem;
 
-typedef GPUCPUUsage = {
-        var gpuUsage: Float;
-        var cpuUsage: Float;
-    }
-
 import openfl.utils.Assets;
 
 #if openfl
@@ -178,10 +173,10 @@ class FPS extends TextField
 	    var gpuCpuUsage = getGPUCPUUsage(FlxG.getGame().create());
 	}
 	
-	public function getGPUCPUUsage(context: Context): GPUCPUUsage {
+	public function getGPUCPUUsage(context: Context) {
         var gpuUsage = getGPUUsage();
         var cpuUsage = getCPUUsage();
-        return GPUCPUUsage(gpuUsage, cpuUsage);
+        return gpuUsage;
     }
 
     private function getGPUUsage(): Float {
