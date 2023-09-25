@@ -25,7 +25,7 @@ import flash.system.System;
 class SUtil
 {
 	#if android
-	private static var aDir:String = null; // android dir
+	private var aDir:String = null; // android dir
 	#end
 
 	public function getPath():String
@@ -36,9 +36,11 @@ class SUtil
 			return aDir;
 		else
 		*/
-		if (ClientPrefs.data.filesLoad == 'NF Engine') return aDir = Tools.getExternalStorageDirectory() + '/' + '.' + Application.current.meta.get('file') + '/';
+		if (ClientPrefs.data.filesLoad == 'NF Engine') 
+		    return aDir = Tools.getExternalStorageDirectory() + '/' + '.' + Application.current.meta.get('file') + '/';
 		else
 			return aDir = Tools.getExternalStorageDirectory() + '/' + '.' + ClientPrefs.data.filesLoad + '/';
+
 		#else
 		return '';
 		#end
