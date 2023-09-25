@@ -5,7 +5,7 @@ import android.Tools;
 import android.Permissions;
 import android.PermissionsList;
 #end
-	
+
 import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
 import openfl.utils.Assets as OpenFlAssets;
@@ -31,14 +31,10 @@ class SUtil
 	public static function getPath():String
 	{
 		#if android
-		/*
 		if (aDir != null && aDir.length > 0)
 			return aDir;
 		else
-		*/
-		if (ClientPrefs.data.filesLoad == 'NF Engine') return aDir = Tools.getExternalStorageDirectory() + '/' + '.' + Application.current.meta.get('file') + '/';
-		else
-			return aDir = Tools.getExternalStorageDirectory() + '/' + '.' + ClientPrefs.data.filesLoad + '/';
+			return aDir = Tools.getExternalStorageDirectory() + '/' + '.' + Application.current.meta.get('file') + '/';
 		#else
 		return '';
 		#end
@@ -60,7 +56,7 @@ class SUtil
 
 			if (!FileSystem.exists(SUtil.getPath() + 'assets') && !FileSystem.exists(SUtil.getPath() + 'mods'))
 			{
-				SUtil.applicationAlert('Uncaught Error :(!', "Whoops, seems you didn't extract the files to the .NF Engine!\nPlease watch the tutorial by pressing OK.");
+				SUtil.applicationAlert('Uncaught Error :(!', "Whoops, seems you didn't extract the files to the .PsychEngine!\nPlease watch the tutorial by pressing OK.");
                 if (DeviceLanguage.getLang() == 'zh') CoolUtil.browserLoad('https://b23.tv/KqRRT8N');
 		        else CoolUtil.browserLoad('https://youtu.be/AmoNoYjJgHs?si=LvgXbRRn7eJlwL0w');				
 				System.exit(0);
@@ -69,7 +65,7 @@ class SUtil
 			{
 				if (!FileSystem.exists(SUtil.getPath() + 'assets'))
 				{
-					SUtil.applicationAlert('Uncaught Error :(!', "Whoops, seems you didn't extract the assets folder to the .NF Engine!\nPlease watch the tutorial by pressing OK.");
+					SUtil.applicationAlert('Uncaught Error :(!', "Whoops, seems you didn't extract the assets folder to the .PsychEngine!\nPlease watch the tutorial by pressing OK.");
 					if (DeviceLanguage.getLang() == 'zh') CoolUtil.browserLoad('https://b23.tv/KqRRT8N');
 		            else CoolUtil.browserLoad('https://youtu.be/AmoNoYjJgHs?si=LvgXbRRn7eJlwL0w');
 					System.exit(0);
@@ -77,7 +73,7 @@ class SUtil
 
 				if (!FileSystem.exists(SUtil.getPath() + 'mods'))
 				{
-					SUtil.applicationAlert('Uncaught Error :(!', "Whoops, seems you didn't extract the mods folder to the .NF Engine!\nPlease watch the tutorial by pressing OK.");
+					SUtil.applicationAlert('Uncaught Error :(!', "Whoops, seems you didn't extract the mods folder to the .PsychEngine!\nPlease watch the tutorial by pressing OK.");
 					if (DeviceLanguage.getLang() == 'zh') CoolUtil.browserLoad('https://b23.tv/KqRRT8N');
 		            else CoolUtil.browserLoad('https://youtu.be/AmoNoYjJgHs?si=LvgXbRRn7eJlwL0w');
 					System.exit(0);
@@ -92,6 +88,14 @@ class SUtil
 		            else
 		            lang = 'noteskin and noteSplashes folders not detected, these options will not appear in Settings.';
 		            AndroidDialogsExtend.OpenToast(lang,2);
+		
+		        
+		            /*
+					SUtil.applicationAlert('Uncaught Error :(!', "Whoops, seems you didn't update new assets to the .PsychEngine!\n(Not found noteskin or noteSplashes files)\nPlease watch the tutorial by pressing OK.");
+					if (DeviceLanguage.getLang() == 'zh') CoolUtil.browserLoad('https://b23.tv/KqRRT8N');
+		            else CoolUtil.browserLoad('https://youtu.be/AmoNoYjJgHs?si=LvgXbRRn7eJlwL0w');
+				    System.exit(0);
+				    */
 				}
 			}
 		}
@@ -160,6 +164,7 @@ class SUtil
 			FileSystem.createDirectory(SUtil.getPath() + 'saves');
 
 		File.saveContent(SUtil.getPath() + 'saves/' + fileName + fileExtension, fileData);
+		//SUtil.applicationAlert('Done :)!', 'File Saved Successfully!');
 	}
 	
 	public static function saveClipboard(fileData:String = 'you forgot something to add in your code')
