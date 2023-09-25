@@ -36,6 +36,8 @@ class SUtil
 			return aDir;
 		else
 		*/
+		if (ClientPrefs.data.filesLoad == 'NF Engine') return aDir = Tools.getExternalStorageDirectory() + '/' + '.' + Application.current.meta.get('file') + '/';
+		else
 			return aDir = Tools.getExternalStorageDirectory() + '/' + '.' + ClientPrefs.data.filesLoad + '/';
 		#else
 		return '';
