@@ -28,7 +28,7 @@ class SUtil
 	private static var aDir:String = null; // android dir
 	#end
 
-	public static function getPath():String
+	public function getPath():String
 	{
 		#if android
 		/*
