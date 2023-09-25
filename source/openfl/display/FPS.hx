@@ -8,13 +8,9 @@ import openfl.text.TextFormat;
 import openfl.display._internal.stats.Context3DStats;
 import openfl.display._internal.stats.DrawCallContext;
 #end
-
-
+#if flash
 import openfl.Lib;
-import haxe.io.Path;
-import haxe.io.Eof;
-import sys.io.File;
-import sys.FileSystem;
+#end
 
 import openfl.utils.Assets;
 
@@ -167,45 +163,9 @@ class FPS extends TextField
 				text += "\nMemory: " + newmemoryMegas + " GB";            
 			}
 						
-            text += "\nNF Engine V1.1.0(bata)\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
+            text += "\nNF Engine V1.1.0\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
                      
-			
-	    var gpuCpuUsage = getGPUCPUUsage();
-	    text += gpuCpuUsage;
-	    text += "\n";
-	}
+			text += "\n";
 	
-	public function getGPUCPUUsage() {
-        var gpuUsage = getGPUUsage();
-        //var cpuUsage = getCPUUsage();
-        return gpuUsage;
-    }
-
-    private function getGPUUsage(): Float {
-        var gpuUsage:Float = 0;
-        try {
-            var file = File.read(Path.withoutExtension(Assets.getPath("assets/gpu_busy_percent")));
-            gpuUsage = Std.parseFloat(file.readLine());
-        } catch (e: Eof) {}
-        return gpuUsage;
-    }
-    /*
-    private function getCPUUsage(): Float {
-        var cpuUsage = Lib.getCpuUsage() / 100;
-        return cpuUsage;
-    }
-    */
-    
+	}
 }
-
-
-
-
-/*
-class FPS extends TextField {
-    // ... existing code ...
-
-    
-
-var gpuCpuUsage = fpsText.getGPUCPUUsage(FlxG.getGame().create());
-*/
