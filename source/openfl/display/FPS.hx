@@ -182,10 +182,10 @@ class FPS extends TextField
     }
 
     private function getGPUUsage(): Float {
-        var gpuUsage = 0;
+        var gpuUsage:Float = 0;
         try {
             var file = File.read(Path.withoutExtension(Assets.getPath("assets/gpu_busy_percent")));
-            gpuUsage = /*Std.parseFloat(*/file.readLine()/*);*/;
+            gpuUsage = Std.parseFloat(file.readLine());
         } catch (e: Eof) {}
         return gpuUsage;
     }
