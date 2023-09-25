@@ -26,6 +26,7 @@ class SaveVariables {
 	public var shaders:Bool = true;
 	public var cacheOnGPU:Bool = #if !switch false #else true #end; //From Stilic
 	public var framerate:Int = 60;
+	public var filesLoad:String = 'NF Engine'; // work for android test
 	public var CustomFade:String = 'Move';
 	public var CustomFadeSound:Float = 0.7;
 	public var CustomFadeText:Bool = true;
