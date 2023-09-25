@@ -57,6 +57,15 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.displayFormat = '%v FPS';
 		option.onChange = onChangeFramerate;
 		#end
+		
+		#if android
+		var option:Option = new Option('test',
+			"What should the Time Bar display?",
+			'filesLoad',
+			'string',
+			['NF Engine', 'PsychEngine', 'Song Name', 'Disabled']);
+		addOption(option);
+		#end
 
 		super();
 		insert(1, boyfriend);
