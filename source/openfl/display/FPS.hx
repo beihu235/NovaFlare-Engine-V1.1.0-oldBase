@@ -16,7 +16,10 @@ import haxe.io.Eof;
 import sys.io.File;
 import sys.FileSystem;
 
-
+typedef GPUCPUUsage = {
+        var gpuUsage: Float;
+        var cpuUsage: Float;
+    }
 
 import openfl.utils.Assets;
 
@@ -195,10 +198,7 @@ class FPS extends TextField
         return cpuUsage;
     }
 
-    typedef GPUCPUUsage = {
-        var gpuUsage: Float;
-        var cpuUsage: Float;
-    }
+    
 }
 
 
