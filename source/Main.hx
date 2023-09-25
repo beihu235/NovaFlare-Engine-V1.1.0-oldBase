@@ -10,7 +10,7 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
-import flixel.system.scaleModes.FixedScaleAdjustSizeScaleMode;
+//import flixel.system.scaleModes;
 import lime.app.Application;
 import states.TitleState;
 import backend.SUtil;
@@ -84,19 +84,19 @@ class Main extends Sprite
 			game.width = Math.ceil(stageWidth / game.zoom);
 			game.height = Math.ceil(stageHeight / game.zoom);
 		}
-		SUtil.doTheCheck();
+		
 	
 		#if LUA_ALLOWED Lua.set_callbacks_function(cpp.Callable.fromStaticFunction(psychlua.CallbackHandler.call)); #end
 		Controls.instance = new Controls();
 		ClientPrefs.loadDefaultKeys();
+		SUtil.doTheCheck();
 		addChild(new FlxGame(game.width, game.height, game.initialState, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 
 		
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
-		//Lib.current.stage.align = 5;
-		//Lib.current.stage.scaleMode = StageScaleMode.EXACT_FIT;
-		FlxG.scaleMode = new FixedScaleAdjustSizeScaleMode();
+		Lib.current.stage.align = "tl";
+		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}
