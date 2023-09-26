@@ -19,6 +19,7 @@ import substates.OSTtoNew;
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.ui.FlxButton;
+import flixel.addons.display.FlxBackdrop;
 
 #if MODS_ALLOWED
 import sys.FileSystem;
@@ -52,6 +53,8 @@ class FreeplayState extends MusicBeatState
 	var lerpRating:Float = 0;
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
+	
+	var bgMove:FlxBackdrop;
 	
 	var camGame:FlxCamera;
 	var camSearch:FlxCamera;
@@ -176,6 +179,14 @@ class FreeplayState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 		bg.screenCenter();
+		
+		bgMove = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), XY, 0, 0);
+		bgMove.alpha = 0.1;
+		bgMove.color = ColorArray[currentColor];
+		bgMove.screenCenter();
+		bgMove.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
+		bgMove.antialiasing = ClientPrefs.data.antialiasing;
+		add(bgMove);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
@@ -418,6 +429,10 @@ class FreeplayState extends MusicBeatState
 		add(text);
 		
 		updateTexts();
+		
+		#if !android
+		FlxG.mouse.visible = true;
+		#end
 		
 		#if android
         addVirtualPad(FULL, A_B_C_X_Y_Z);
