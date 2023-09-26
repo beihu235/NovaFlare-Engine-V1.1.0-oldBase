@@ -42,12 +42,6 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
-	/*
-	
-	var test1:FlxText;
-	var test3:FlxText;
-	var test2:FlxText;
-	*/
 	
 	
 	
@@ -238,22 +232,10 @@ class MainMenuState extends MusicBeatState
 			}
 		}
 		#end*/
-		/*
-		 test1 = new FlxText(12, FlxG.height - 84, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
-		test1.scrollFactor.set();
-		test1.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(test1);
 		
-	test2 = new FlxText(12, FlxG.height - 72, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
-		test2.scrollFactor.set();
-		test2.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(test2);
-		
-		test3 = new FlxText(12, FlxG.height - 60, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
-		test3.scrollFactor.set();
-		test3.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(test3);
-        */
+		#if !android
+		FlxG.mouse.visible = true;
+		#end
         
 		#if android
 		addVirtualPad(MainMenuState, A_B_E);
@@ -304,6 +286,7 @@ class MainMenuState extends MusicBeatState
 			    usingMouse = false;
 				FlxG.sound.play(Paths.sound('scrollMenu'));				
 				curSelected--;
+				checkChoose();
 			}
 
 			if (controls.UI_DOWN_P)
@@ -311,6 +294,7 @@ class MainMenuState extends MusicBeatState
 			    usingMouse = false;
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				curSelected++;
+				checkChoose();
 			}
 			
 			if (curSelected >= menuItems.length)
@@ -330,58 +314,28 @@ class MainMenuState extends MusicBeatState
 			{
 				if (!FlxG.mouse.overlaps(spr) && canClick)
 					spr.animation.play('idle');
-					//spr.offset.x = spr.offset.x * 0.8;
-			        //spr.offset.y = spr.offset.y * 0.8;
 			        spr.updateHitbox();
-			        
-			
-
-			if (FlxG.mouse.overlaps(spr))
-			{
-			    //usingMouse = true;
-                if (FlxG.mouse.justPressed && canClick && spr.animation.curAnim.name != 'idle')
-				{
-				    if (curSelected == spr.ID) {
-				        selectSomething();
-				    }
-				    else    { 
-					    curSelected = spr.ID;
-					    
+			        			
+    			if (FlxG.mouse.overlaps(spr)){
+                    if (FlxG.mouse.justPressed && canClick && spr.animation.curAnim.name != 'idle')
+    				{
+    				    if (curSelected == spr.ID) {
+    				        selectSomething();
+    				    }
+    				    else    { 
+    					    curSelected = spr.ID;
 					    		
-					    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	    
-					    spr.animation.play('selected');						    
-					   
-					    //spr.offset.x = spr.offset.x * 0.8;
-			            //spr.offset.y = spr.offset.y * 0.8 + spr.width / 2;
-			            
-			            
-					}
-				}
-				if (FlxG.mouse.pressed && canClick){
-			    curSelected = spr.ID;
+    					    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	    
+    					    spr.animation.play('selected');
+    					}
+    				}
+    				if (FlxG.mouse.pressed && canClick){
+        			    curSelected = spr.ID;
 			    	
-			    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	 
-			    spr.animation.play('selected');	
-			    //spr.offset.x = spr.offset.x * 0.8;
-			    //spr.offset.y = spr.offset.y * 0.8 + spr.width / 2;
-			    
-			    
+        			    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	 
+        			    spr.animation.play('selected');				    
+    			    }
 			    }
-			    }
-			}
-			else{
-	            /*
-				    menuItems.forEach(function(spr:FlxSprite){
-			        spr.animation.play('idle');
-			        //spr.updateHitbox();
-
-			        if (spr.ID == curSelected  && spr.animation.curAnim.name != 'selected')
-			        {
-			        	spr.animation.play('selected');
-			        	//spr.centerOffsets();
-			        }
-		        });
-		        */
 			}
 		});
 		
@@ -417,7 +371,7 @@ class MainMenuState extends MusicBeatState
             
             FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});
            
-			camGame.zoom = 1 + 0.03;
+			camGame.zoom = 1 + 0.015;
 			
 			//FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
 			cameraTween[0] = FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
@@ -503,15 +457,10 @@ class MainMenuState extends MusicBeatState
 		
 		
 		FlxTween.tween(camGame, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
-		//camGame.fade(FlxColor.BLACK, 1.2, false);
-		//camHUD.fade(FlxColor.BLACK, 1.2, false);
 		FlxTween.tween(camGame, {angle: 0}, 0.8, {
 		ease: FlxEase.cubeInOut,
 		onComplete: function(twn:FlxTween)
 				{
-				
-				//CustomFadeTransition.nextCamera = camGame;
-				
 			    var daChoice:String = optionShit[curSelected];
 
 				    switch (daChoice)
@@ -529,5 +478,19 @@ class MainMenuState extends MusicBeatState
 					    }
 				}    
 		});
+	}
+	
+	function checkChoose()
+	{
+	    menuItems.forEach(function(spr:FlxSprite){
+			spr.animation.play('idle');
+		    spr.updateHitbox();
+
+            if (spr.ID == curSelected  && spr.animation.curAnim.name != 'selected')
+			{
+			    spr.animation.play('selected');
+			    spr.centerOffsets();
+		    }
+        });
 	}
 }
