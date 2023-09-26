@@ -13,7 +13,6 @@ import openfl.display.BitmapData;
 import flash.geom.Rectangle;
 import lime.utils.Assets;
 import tjson.TJSON as Json;
-import backend.SUtil;
 
 #if sys
 import sys.io.File;
@@ -275,7 +274,7 @@ class ModsMenuState extends MusicBeatState
 		#end
 
 		#if android
-		addVirtualPad(UP_DOWN, B);
+		addVirtualPad(UP_DOWN, B_C);
 		#end
 
 		super.create();
@@ -353,6 +352,7 @@ class ModsMenuState extends MusicBeatState
 
 	var noModsSine:Float = 0;
 	var canExit:Bool = true;
+	var holdTime:Float = 0;
 	override function update(elapsed:Float)
 	{
 		if(noModsTxt.visible)
@@ -389,17 +389,33 @@ class ModsMenuState extends MusicBeatState
 				MusicBeatState.switchState(new MainMenuState());
 			}
 		}
-
+        
+        var shiftMult = 1;
+        if(FlxG.keys.pressed.SHIFT  #if android || MusicBeatState._virtualpad.buttonC.pressed #end) shiftMult = 3;
+        
 		if(controls.UI_UP_P)
 		{
-			changeSelection(-1);
+			changeSelection(-shiftMult);
 			FlxG.sound.play(Paths.sound('scrollMenu'));
+			holdTime = 0;
 		}
 		if(controls.UI_DOWN_P)
 		{
-			changeSelection(1);
+			changeSelection(shiftMult);
 			FlxG.sound.play(Paths.sound('scrollMenu'));
+			holdTime = 0;
 		}
+		if(controls.UI_DOWN || controls.UI_UP){
+			var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);
+			holdTime += elapsed;
+			var checkNewHold:Int = Math.floor((holdTime - 0.5) * 10);
+
+			if(holdTime > 0.5 && checkNewHold - checkLastHold > 0){
+				changeSelection((checkNewHold - checkLastHold) * (controls.UI_UP ? -shiftMult : shiftMult));
+				FlxG.sound.play(Paths.sound('scrollMenu'));
+			}
+		}
+		
 		updatePosition(elapsed);
 		super.update(elapsed);
 	}
