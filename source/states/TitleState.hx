@@ -243,9 +243,11 @@ class TitleState extends MusicBeatState
 		}
 		introspr = new FlxSprite(0, 0, Paths.image('mainmenu_sprite/titleintro'));
 		introspr.setGraphicSize(FlxG.width, FlxG.height);
+		introspr.scrollFactor.set();
+		introspr.antialiasing = ClientPrefs.data.antialiasing;
 		add(introspr);
 		introspr.alpha = 0;
-		var imaTween = FlxTween.tween(introspr, {alpha: 1}, 0.5, {onComplete: function(twn:FlxTween) {
+		var imaTween = FlxTween.tween(introspr, {alpha: 1}, 1, {onComplete: function(twn:FlxTween) {
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
 				startCutscenesOut();
@@ -255,7 +257,7 @@ class TitleState extends MusicBeatState
 	
 	function startCutscenesOut()
 	{
-		var imaTween = FlxTween.tween(introspr, {alpha: 0}, 0.5, {onComplete: function(twn:FlxTween) {
+		var imaTween = FlxTween.tween(introspr, {alpha: 0}, 1, {onComplete: function(twn:FlxTween) {
 			introfaded = true;
 			inGame = true;
 			startIntro();
