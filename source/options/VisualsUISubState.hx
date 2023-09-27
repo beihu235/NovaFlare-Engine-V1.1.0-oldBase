@@ -83,12 +83,6 @@ class VisualsUISubState extends BaseOptionsMenu
 				noteSplashes);
 			addOption(option);
 		}
-		
-		var option:Option = new Option('Disable Note RGB',
-			'Easier to close disableNoteRGB for all chart.',
-			'disableNoteRGB',
-			'bool');
-		addOption(option);
 
 		var option:Option = new Option('Note Splash Opacity',
 			'How much transparent should the Note Splashes be.',
@@ -99,6 +93,18 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.maxValue = 1;
 		option.changeValue = 0.1;
 		option.decimals = 1;
+		addOption(option);
+		
+		var option:Option = new Option('Disable Note RGB',
+			'Easier to disableNoteRGB for Note.',
+			'disableNoteRGB',
+			'bool');
+		addOption(option);
+		
+		var option:Option = new Option('Disable Splash RGB',
+			'Easier to disableNoteRGB for Splash.',
+			'disableSplashRGB',
+			'bool');
 		addOption(option);
 		
 		var option:Option = new Option('Custom Fade Type:',
