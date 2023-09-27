@@ -22,6 +22,7 @@ class SaveVariables {
 	public var noteSkin:String = 'Default';
 	public var splashSkin:String = 'Psych';
 	public var disableNoteRGB:Bool = false;
+	public var disableSplashRGB:Bool = false;
 	public var splashAlpha:Float = 0.6;
 	public var lowQuality:Bool = false;
 	public var shaders:Bool = true;
@@ -51,7 +52,7 @@ class SaveVariables {
 	public var healthBarAlpha:Float = 1;
 	public var hitsoundVolume:Float = 0;
 	public var pauseMusic:String = 'Tea Time';
-	public var checkForUpdates:Bool = true;
+	public var checkForUpdates:Bool = false;
 	public var comboStacking:Bool = true;
 	public var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
