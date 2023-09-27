@@ -306,6 +306,7 @@ class ResultsScreen extends MusicBeatSubstate
 		add(backText);		
 		backText.alpha = 0;
 		backText.x = FlxG.width - backText.width - 20;
+
 		//--------------text
 		
 		//time = 0
