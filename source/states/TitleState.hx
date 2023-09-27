@@ -242,11 +242,11 @@ class TitleState extends MusicBeatState
 			return;
 		}
 		introspr = new FlxSprite(0, 0).loadGraphic(Paths.image('mainmenu_sprite/titleintro'));
-		introspr.scrollFactor.set();
 		introspr.antialiasing = ClientPrefs.data.antialiasing;
 		add(introspr);
-		introspr.screenCenter(XY);
 		introspr.setGraphicSize(FlxG.width, FlxG.height);
+		introspr.scrollFactor.set();
+		introspr.updateHitbox();
 		introspr.alpha = 0;
 		var imaTween = FlxTween.tween(introspr, {alpha: 1}, 1, {onComplete: function(twn:FlxTween) {
 			new FlxTimer().start(1, function(tmr:FlxTimer)
