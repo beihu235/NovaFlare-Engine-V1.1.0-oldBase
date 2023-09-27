@@ -51,8 +51,6 @@ class TitleState extends MusicBeatState
 	public static var inGame:Bool = false;
 	public static var introfaded:Bool = false;
 	
-	public static var initialized:Bool = false;
-
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
 	var credTextShit:Alphabet;
