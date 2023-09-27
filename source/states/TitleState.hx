@@ -212,12 +212,12 @@ class TitleState extends MusicBeatState
 			MusicBeatState.switchState(new FlashingState());
 		} else {
 			if (initialized)
-				startIntro();
+				startCutscenesIn();
 			else
 			{
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					startIntro();
+					startCutscenesIn();
 				});
 			}
 		}
@@ -231,7 +231,34 @@ class TitleState extends MusicBeatState
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
 	var swagShader:ColorSwap = null;
-
+    var introspr:FlxSprite;
+	
+	function startCutscenesIn()
+	{
+		if (inGame) {
+			startIntro();
+			return;
+		}
+		introspr = new FlxSprite(0, 0, Paths.image('mainmenu_sprite/titleintro'));
+		introspr.setGraphicSize(FlxG.width, FlxG.height);
+		add(introspr);
+		introspr.alpha = 0;
+		var imaTween = FlxTween.tween(introspr, {alpha: 1}, 0.5, {onComplete: function(twn:FlxTween) {
+			new FlxTimer().start(1, function(tmr:FlxTimer)
+			{
+				startCutscenesOut();
+			});
+		}, ease: FlxEase.linear});
+	}
+	
+	function startCutscenesOut()
+	{
+		var imaTween = FlxTween.tween(introspr, {alpha: 0}, 0.5, {onComplete: function(twn:FlxTween) {
+			introfaded = true;
+			inGame = true;
+			startIntro();
+		}, ease: FlxEase.linear});
+	}
 	function startIntro()
 	{
 		if (!initialized)
