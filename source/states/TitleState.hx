@@ -245,7 +245,7 @@ class TitleState extends MusicBeatState
 		introspr.scrollFactor.set();
 		introspr.antialiasing = ClientPrefs.data.antialiasing;
 		add(introspr);
-		ngSpr.screenCenter(XY);
+		introspr.screenCenter(XY);
 		introspr.setGraphicSize(FlxG.width, FlxG.height);
 		introspr.alpha = 0;
 		var imaTween = FlxTween.tween(introspr, {alpha: 1}, 1, {onComplete: function(twn:FlxTween) {
