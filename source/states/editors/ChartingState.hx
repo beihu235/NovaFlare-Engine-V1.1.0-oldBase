@@ -152,7 +152,6 @@ class ChartingState extends MusicBeatState
 	var currentSongName:String;
 	
 	var zoomTxt:FlxText;
-	var testTxt:FlxText;
 
 	var zoomList:Array<Float> = [
 		0.25,
@@ -370,11 +369,6 @@ class ChartingState extends MusicBeatState
 			tipText.scrollFactor.set();
 			add(tipText);
 		}
-		
-		testTxt = new FlxText(10, 100-32, 0, "Zoom: 1 / 1", 16);
-		testTxt.scrollFactor.set();
-		add(testTxt);
-		
 		add(UI_box);
 
 		addSongUI();
@@ -399,7 +393,6 @@ class ChartingState extends MusicBeatState
 		zoomTxt = new FlxText(10, 100-16, 0, "Zoom: 1 / 1", 16);
 		zoomTxt.scrollFactor.set();
 		add(zoomTxt);
-		
 		
 		updateGrid();
 
@@ -693,8 +686,6 @@ class ChartingState extends MusicBeatState
 		}
 		stepperSectionBPM.name = 'section_bpm';
 		blockPressWhileTypingOnStepper.push(stepperSectionBPM);
-		
-		
 
 		var check_eventsSec:FlxUICheckBox = null;
 		var check_notesSec:FlxUICheckBox = null;
@@ -1635,10 +1626,6 @@ class ChartingState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		curStep = recalculateSteps();
-		
-		var zoomThinga:Int = _song.notes[curSec].sectionNotes.length;
-		var test:String = 'what' + zoomThinga;
-		testTxt.text = test;
 
 		if(FlxG.sound.music.time < 0) {
 			FlxG.sound.music.pause();
@@ -1860,7 +1847,7 @@ class ChartingState extends MusicBeatState
 				return;
 			}
 
-			if(FlxG.keys.justPressed.Z #if android || MusicBeatState._virtualpad.buttonV.justPressed #end && curZoom > 0 && !FlxG.keys.pressed.CONTROL) {
+			if((FlxG.keys.justPressed.Z #if android || MusicBeatState._virtualpad.buttonV.justPressed #end) && curZoom > 0 && !FlxG.keys.pressed.CONTROL) {
 				undo();
 			}
 
@@ -1911,7 +1898,7 @@ class ChartingState extends MusicBeatState
 				}
 			}
 
-			if (!FlxG.keys.pressed.ALT && FlxG.keys.justPressed.R #if android || MusicBeatState._virtualpad.buttonV.justPressed #end)
+			if (!FlxG.keys.pressed.ALT && FlxG.keys.justPressed.R /*#if android || MusicBeatState._virtualpad.buttonV.justPressed #end*/)
 			{
 				if (FlxG.keys.pressed.SHIFT #if android || MusicBeatState._virtualpad.buttonC.pressed #end)
 					resetSection(true);
@@ -1955,9 +1942,7 @@ class ChartingState extends MusicBeatState
 				var holdingShift:Float = 1;
 				if (FlxG.keys.pressed.CONTROL) holdingShift = 0.25;
 				else if (FlxG.keys.pressed.SHIFT #if android || MusicBeatState._virtualpad.buttonC.pressed #end) holdingShift = 4;
-				#if android
-                		else if (MusicBeatState._virtualpad.buttonX.pressed) holdingShift = 10;
-				#end
+                else if (MusicBeatState._virtualpad.buttonX.pressed) holdingShift = 10;
 				var daTime:Float = 700 * FlxG.elapsed * holdingShift;
 
 				if (FlxG.keys.pressed.W #if android || MusicBeatState._virtualpad.buttonUp.pressed #end)
@@ -2647,7 +2632,6 @@ class ChartingState extends MusicBeatState
 		}
 		Conductor.songPosition = FlxG.sound.music.time;
 		if(!waveformChanged) updateWaveform();
-		
 	}
 
 	function updateSectionUI():Void
@@ -2660,10 +2644,7 @@ class ChartingState extends MusicBeatState
 		check_altAnim.checked = sec.altAnim;
 		check_changeBPM.checked = sec.changeBPM;
 		stepperSectionBPM.value = sec.bpm;
-		
-		
-		
-        
+
 		updateHeads();
 	}
 
@@ -3136,7 +3117,7 @@ class ChartingState extends MusicBeatState
 	}
 
 	var missingText:FlxText;
-	var missingTextTimer:FlxTimer;
+	var missingTextTimer:FlxTimer;	
 	function loadJson(song:String):Void
 	{
 		//make it look sexier if possible
@@ -3147,7 +3128,7 @@ class ChartingState extends MusicBeatState
 				else
 					PlayState.SONG = Song.loadFromJson(song.toLowerCase() + "-" + Difficulty.getString(), song.toLowerCase());
 			}
-			else PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
+			else PlayState.SONG = Song.loadFromJson(song.toLowerCase() + postfix, song.toLowerCase());
 			MusicBeatState.resetState();
 		}
 		catch(e)
@@ -3303,7 +3284,5 @@ class AttachedFlxText extends FlxText
 			angle = sprTracker.angle;
 			alpha = sprTracker.alpha;
 		}
-		
-		
 	}
 }
