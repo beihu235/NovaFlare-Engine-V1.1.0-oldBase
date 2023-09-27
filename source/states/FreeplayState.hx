@@ -27,8 +27,8 @@ import sys.FileSystem;
 
     /*
     Song Search extend made by NF|beihu (北狐丶逐梦)
-    youtube: https://b23.tv/SnqG443
-    bilbil: https://youtube.com/@beihu235?si=NHnWxcUWPS46EqUt
+    bilbil: https://b23.tv/SnqG443
+    youtube: https://youtube.com/@beihu235?si=NHnWxcUWPS46EqUt
     discord: beihu235
     
     you can use it but must give me credit(dont forget my icon)
@@ -106,6 +106,18 @@ class FreeplayState extends MusicBeatState
     var chooseShow:Int = 0;
     var isStart:Bool = false;
     var isEnd:Bool = false;
+    
+    var ColorArray:Array<Int> = [
+		0xFF9400D3,
+		0xFF4B0082,
+		0xFF0000FF,
+		0xFF00FF00,
+		0xFFFFFF00,
+		0xFFFF7F00,
+		0xFFFF0000	                                
+	    ];
+	private static var currentColor:Int = 1;    
+	private static var currentColorAgain:Int = 0;       
         
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
