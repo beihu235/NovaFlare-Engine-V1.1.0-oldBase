@@ -294,7 +294,9 @@ class ResultsScreen extends MusicBeatSubstate
 		setMsText.antialiasing = ClientPrefs.data.antialiasing;
 		add(setMsText);		
 		
-		backText = new FlxText(0, FlxG.height - 45, 0, 'Press Back to continue');
+		var backTextShow:String = 'Press Space to continue';
+		#if android backTextShow = 'Press Back to continue';
+		backText = new FlxText(0, FlxG.height - 45, 0, backTextShow);
 		backText.size = 28;
 		backText.font = Paths.font('vcr.ttf');
 		backText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
