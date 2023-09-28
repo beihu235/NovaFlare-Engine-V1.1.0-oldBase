@@ -116,12 +116,11 @@ class MainMenuState extends MusicBeatState
 		add(bg);
 		
 	    bgMove = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), XY, 0, 0);
-		//bgMove.scrollFactor.set();
 		bgMove.alpha = 0.1;
 		bgMove.color = ColorArray[currentColor];
 		bgMove.screenCenter();
 		bgMove.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
-		//bgMove.antialiasing = ClientPrefs.data.antialiasing;
+		bgMove.antialiasing = ClientPrefs.data.antialiasing;
 		add(bgMove);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -430,20 +429,10 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			if (curSelected != spr.ID)
-			{
-				/*FlxTween.tween(spr, {x: -800}, 0.6 + 0.1 * Math.abs(curSelected - spr.ID), {
-					ease: FlxEase.backInOut,
-					onComplete: function(twn:FlxTween)
-					{
-						spr.kill();
-					}
-			    });*/
-			}
-			else
+			if (curSelected == spr.ID)
 			{				
 				
-				spr.animation.play('selected');
+				//spr.animation.play('selected');
 			
 			    FlxTween.tween(spr, {y: 360 - spr.height / 2}, 0.6, {
 					ease: FlxEase.backInOut
@@ -457,7 +446,7 @@ class MainMenuState extends MusicBeatState
 		
 		
 		FlxTween.tween(camGame, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
-		FlxTween.tween(camGame, {angle: 0}, 0.8, {
+		FlxTween.tween(camGame, {angle: 0}, 0.8, { //not use for now
 		ease: FlxEase.cubeInOut,
 		onComplete: function(twn:FlxTween)
 				{
