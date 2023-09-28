@@ -17,7 +17,6 @@ import backend.WeekData;
 import backend.Song;
 import backend.Section;
 import backend.Rating;
-import backend.SUtil;
 
 import flixel.FlxBasic;
 import flixel.FlxObject;
@@ -46,7 +45,6 @@ import states.editors.CharacterEditorState;
 import substates.PauseSubState;
 import substates.GameOverSubstate;
 import substates.ResultsScreen;
-//import flixel.system.FlxAssets.FlxShader;
 
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
@@ -2448,8 +2446,7 @@ class PlayState extends MusicBeatState
             	#end
 				
 				
-				FlxG.sound.playMusic(Paths.music('freakyMenu'),0);
-				FlxG.sound.music.fadeIn(4, 0, 0.7);
+				
 				if(ClientPrefs.data.ResultsScreen){
 				
 				    rsSicks = ratingsData[0].hits;
@@ -2470,6 +2467,8 @@ class PlayState extends MusicBeatState
 				}
 				else{
 				    MusicBeatState.switchState(new FreeplayState());
+				    FlxG.sound.playMusic(Paths.music('freakyMenu'),0);
+				    FlxG.sound.music.fadeIn(4, 0, 0.7);
 				}
 				//persistentUpdate = false;
 				//persistentDraw = false;
