@@ -38,10 +38,30 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 		
+		var option:Option = new Option('Long Note Length Fix',
+			'reduce LN Note length\nFix for some mod engines have been reduced',
+			'fixLNL',
+			'int');
+		option.displayFormat = '%vms';
+		option.scrollSpeed = 20;
+		option.minValue = 0;
+		option.maxValue = 2;
+		addOption(option);
+		
 		var option:Option = new Option('Results Screen',
 			"If checked, Open Results Screen at end song",
 			'ResultsScreen',
 			'bool');
+		addOption(option);
+		
+		var option:Option = new Option('Rating Offset',
+			'Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.',
+			'ratingOffset',
+			'int');
+		option.displayFormat = '%vms';
+		option.scrollSpeed = 20;
+		option.minValue = -30;
+		option.maxValue = 30;
 		addOption(option);
 		
 		var option:Option = new Option('Auto Pause',
