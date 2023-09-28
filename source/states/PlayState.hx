@@ -199,7 +199,10 @@ class PlayState extends MusicBeatState
     public static var rsRatingName:String = '';
     var rsCheck:Bool = false;
 	
-    
+    var notesHitArray:Array<Date> = [];
+    var nps:Int = 0;
+	var maxNPS:Int = 0;
+	
 	public var healthBar:HealthBar;
 	public var timeBar:HealthBar;
 	var songPercent:Float = 0;
@@ -1866,6 +1869,25 @@ class PlayState extends MusicBeatState
 			}
 		}
 		#end
+		
+		// reverse iterate to remove oldest notes first and not invalidate the iteration
+		// stop iteration as soon as a note is not removed
+		// all notes should be kept in the correct order and this is optimal, safe to do every frame/update
+		{
+			var balls = notesHitArray.length - 1;
+			while (balls >= 0)
+			{
+				var cock:Date = notesHitArray[balls];
+				if (cock != null && cock.getTime() + 1000 < Date.now().getTime())
+					notesHitArray.remove(cock);
+				else
+					balls = 0;
+				balls--;
+			}
+			nps = notesHitArray.length;
+			if (nps > maxNPS)
+				maxNPS = nps;
+		}
 
 		setOnScripts('cameraX', camFollow.x);
 		setOnScripts('cameraY', camFollow.y);
