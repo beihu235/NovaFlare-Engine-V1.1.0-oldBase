@@ -84,6 +84,10 @@ class ResultsScreen extends MusicBeatSubstate
 		ColorArray.push(NoteTypeColor.shit);
 		ColorArray.push(NoteTypeColor.miss);
 		*/
+		
+		FlxG.sound.playMusic(Paths.music('freakyMenu'),0);
+	    FlxG.sound.music.fadeIn(4, 0, 0.7);
+				
 		ColorArray = [
 		0xFF00FFFF,
 	    0xFF00FF00,
