@@ -51,7 +51,7 @@ class NotesSubState extends MusicBeatSubstate
 	var tipTxt:FlxText;
 	
 	var AndroidColorGet:FlxUIInputText;
-	underline_text_BG:FlxSprite;
+	var underline_text_BG:FlxSprite;
     var LengthCheck:String = '';
     var ColorCheck:String = '';
 	public function new() {
