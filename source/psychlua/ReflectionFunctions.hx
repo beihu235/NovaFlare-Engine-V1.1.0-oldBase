@@ -31,7 +31,7 @@ class ReflectionFunctions
 			return true;
 		});
 		Lua_helper.add_callback(lua, "getPropertyFromClass", function(classVar:String, variable:String, ?allowMaps:Bool = false) {
-		    if (classVar == 'ClientPrefs') classVar = 
+		   // if (classVar == 'ClientPrefs') classVar = 
 			var myClass:Dynamic = Type.resolveClass(classVar);
 			if(myClass == null)
 			{
