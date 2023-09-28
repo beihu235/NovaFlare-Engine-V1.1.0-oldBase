@@ -17,6 +17,7 @@
 
 	<!--Minimum without FLX_NO_GAMEPAD: 11.8, without FLX_NO_NATIVE_CURSOR: 11.2-->
 	<set name="SWF_VERSION" value="11.8" />
+	<set name="debug" value="1" />
 
 	<!-- ____________________________ Window Settings ___________________________ -->
 
@@ -110,7 +111,7 @@
 	<!--In case you want to use the addons package-->
 	<haxelib name="flixel-addons" />
 	<haxelib name="hscript" />
-	<haxelib name="SScript" if="HSCRIPT_ALLOWED"/>
+	<haxelib name="BrewScript" if="HSCRIPT_ALLOWED"/>
 	<define name="hscriptPos" />
 	<haxelib name="androiddialogs" if="android" />
 	<haxelib name="devicelanguage" if="android" />
@@ -127,6 +128,7 @@
 
 	<!-- Enables a terminal log prompt on debug builds -->
 	<haxelib name="hxcpp-debug-server" if="debug"/>
+	
 
 	<!-- <haxelib name="markdown" /> -->
 	<!-- <haxelib name="HtmlParser" /> -->
