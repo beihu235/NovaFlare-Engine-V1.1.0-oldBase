@@ -275,6 +275,7 @@ class ModsMenuState extends MusicBeatState
 
 		#if android
 		addVirtualPad(UP_DOWN, B_C);
+		addPadCamera();
 		#end
 
 		super.create();
@@ -391,7 +392,7 @@ class ModsMenuState extends MusicBeatState
 		}
         
         var shiftMult = 1;
-        if(FlxG.keys.pressed.SHIFT  #if android || (MusicBeatState._virtualpad.buttonC.pressed && MusicBeatState._virtualpad.buttonC != null) #end) shiftMult = 3;
+        if(FlxG.keys.pressed.SHIFT  #if android || (MusicBeatState._virtualpad.buttonC.pressed) #end) shiftMult = 3;
         
 		if(controls.UI_UP_P)
 		{
