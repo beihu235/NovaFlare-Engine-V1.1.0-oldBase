@@ -374,7 +374,7 @@ class ModsMenuState extends MusicBeatState
 			saveTxt();
 			if(needaReset)
 			{
-				//MusicBeatState.switchState(new TitleState());
+				
 				TitleState.initialized = false;
 				TitleState.closedState = false;
 				FlxG.sound.music.fadeOut(0.3);
@@ -383,7 +383,8 @@ class ModsMenuState extends MusicBeatState
 					FreeplayState.vocals.fadeOut(0.3);
 					FreeplayState.vocals = null;
 				}
-				FlxG.camera.fade(FlxColor.BLACK, 0.5, false, FlxG.resetGame, false);
+				MusicBeatState.switchState(new TitleState());
+				//FlxG.camera.fade(FlxColor.BLACK, 0.5, false, FlxG.resetGame, false);
 			}
 			else
 			{
