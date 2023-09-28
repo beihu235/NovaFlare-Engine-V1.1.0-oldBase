@@ -994,14 +994,15 @@ class FunkinLua {
 				obj.animation.addByPrefix(name, prefix, framerate, loop);
 				if(obj.animation.curAnim == null)
 				{
-					if(obj.playAnim != null) obj.playAnim(name, true);
-					else obj.animation.play(name, true);
+					//if(obj.playAnim != null) obj.playAnim(name, true);
+					//else
+					 obj.animation.play(name, true);
 				}
 				return true;
 			}
 			return false;
 		});
-
+		
 		Lua_helper.add_callback(lua, "addAnimation", function(obj:String, name:String, frames:Array<Int>, framerate:Int = 24, loop:Bool = true) {
 			var obj:Dynamic = LuaUtils.getObjectDirectly(obj, false);
 			if(obj != null && obj.animation != null)
