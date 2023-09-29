@@ -56,10 +56,9 @@ class FPS extends TextField
 		backgroundColor = 0x3CFFFF;
 		border = true;
 		borderColor = 0xFFFFFF;
+		borderAlpha = 0.5;
 		multiline = true; //多行文本
 		wordWrap = false; //禁用自动换行
-		
-	    __textEngine.alpha = 0.5;
 		
 		text = "FPS: ";
 				
