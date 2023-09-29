@@ -13,7 +13,7 @@ import openfl.utils.Assets;
 import openfl.system.System;
 #end
 
-class FPSBG extends FlxSprite
+class DisplayObject extends FlxSprite
 {
 	/**
 		The current frame rate, expressed using frames-per-second
