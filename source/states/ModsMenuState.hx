@@ -372,6 +372,7 @@ class ModsMenuState extends MusicBeatState
 			FlxG.mouse.visible = false;
 			#end
 			saveTxt();
+			removeVirtualPad();
 			if(needaReset)
 			{
 				
