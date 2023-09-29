@@ -1,6 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-
-name: desktopBuild
+name: desktop Build
 
 
 # Controls when the action will run.
@@ -18,7 +16,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   BuildWindows:
-    runs-on: windows-build
+    runs-on: windows-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -45,7 +43,7 @@ jobs:
           haxelib install hxcpp 4.2.1 > /dev/null
           haxelib install lime
           haxelib install openfl
-          haxelib git openfl https://github.com/beihu235/openfl
+          haxelib install flixel
           haxelib run lime setup flixel
           haxelib run lime setup
           haxelib install flixel-tools
@@ -56,7 +54,7 @@ jobs:
           haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
           haxelib install hscript
-          haxelib install BrewScript
+          haxelib install SScript
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib install hxcpp-debug-server
           haxelib list
@@ -87,7 +85,7 @@ jobs:
           path: export/release/windows/bin
   buildLinux:
     # The type of runner that the job will run on
-    runs-on: linux-build
+    runs-on: linux-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -106,7 +104,7 @@ jobs:
           haxelib setup ~/haxelib
           haxelib install lime
           haxelib install openfl
-          haxelib git openfl https://github.com/beihu235/openfl
+          haxelib install flixel
           haxelib run lime setup flixel
           haxelib run lime setup
           haxelib install flixel-tools
@@ -117,7 +115,7 @@ jobs:
           haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
           haxelib install hscript
-          haxelib install BrewScript
+          haxelib install SScript
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib install hxcpp-debug-server
           haxelib list
@@ -131,7 +129,7 @@ jobs:
           name: Linux
           path: 'export/release/linux/bin'
   buildMac:
-    runs-on: mac-build
+    runs-on: mac-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -147,7 +145,7 @@ jobs:
           haxelib install hxcpp > /dev/null --quiet
           haxelib install lime
           haxelib install openfl
-          haxelib git openfl https://github.com/beihu235/openfl
+          haxelib install flixel
           haxelib run lime setup flixel
           haxelib run lime setup
           haxelib install flixel-tools
@@ -158,7 +156,7 @@ jobs:
           haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
           haxelib install hscript
-          haxelib install BrewScript
+          haxelib install SScript
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib install hxcpp-debug-server
           haxelib list
