@@ -85,7 +85,7 @@ jobs:
           path: export/release/windows/bin
   buildLinux:
     # The type of runner that the job will run on
-    runs-on: linux-latest
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -129,7 +129,7 @@ jobs:
           name: Linux
           path: 'export/release/linux/bin'
   buildMac:
-    runs-on: mac-latest
+    runs-on: macos-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
