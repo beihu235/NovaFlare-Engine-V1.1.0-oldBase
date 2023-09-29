@@ -49,12 +49,12 @@ class FPS extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 16, color);
+		defaultTextFormat = new TextFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 20, color);
 		autoSize = CENTER;
 		
 		background = true;
 		backgroundColor = 0x3CFFFF;
-		backgroundAlpha = 0.5;
+		__textEngine.backgroundAlpha = 0.5;
 		border = true;
 		borderColor = 0xFFFFFF;		
 		multiline = true; //多行文本
