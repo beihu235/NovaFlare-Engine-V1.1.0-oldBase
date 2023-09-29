@@ -8,12 +8,14 @@ import flixel.FlxSubState;
 import flixel.FlxSprite;
 import openfl.utils.Assets;
 import flixel.FlxObject;
+import openfl.display.Sprite;
+import openfl.Assets;
 
 class FPSBG extends FlxSprite {
 	
 
-    public function addImage(sprite:FlxSprite) {
-        FlxSprite.addChild(Paths.image('mainmenu_sprite/loadingR'));
+    public function addImage(sprite:Sprite) {
+        sprite.addChild(Paths.image('mainmenu_sprite/loadingR'));
     }
 
 
@@ -33,6 +35,16 @@ class Main {
         var myOtherClass = new MyOtherClass();
         myOtherClass.addImage(sprite);
         addChild(sprite);
+    }
+}
+
+
+import openfl.display.Sprite;
+import openfl.Assets;
+
+class MyOtherClass {
+    public function addImage(sprite:Sprite) {
+        sprite.addChild(Assets.getBitmapData("assets/image.png"));
     }
 }
 */
