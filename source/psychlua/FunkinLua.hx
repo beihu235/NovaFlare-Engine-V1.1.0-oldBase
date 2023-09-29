@@ -989,19 +989,28 @@ class FunkinLua {
 		});
 		Lua_helper.add_callback(lua, "addAnimationByPrefix", function(obj:String, name:String, prefix:String, framerate:Int = 24, loop:Bool = true) {
 			var obj:Dynamic = LuaUtils.getObjectDirectly(obj, false);
-		/*	if(obj != null && obj.animation != null)
-			{*/
+		if(obj != null && obj.animation != null)
+			{
 				obj.animation.addByPrefix(name, prefix, framerate, loop);
+				/*
 				if(obj.animation.curAnim == null)
 				{
-					//if(obj.playAnim != null) 
-					obj.playAnim(name, true);
-					//else
-					// obj.animation.play(name, true);
-					 return true;
+					if(obj.playAnim != null) obj.playAnim(name, true);
+					else obj.animation.play(name, true);
 				}
-				
-			//}
+				return true;
+				*/
+				if(obj.playAnim != null)
+    			{
+    				obj.playAnim(name, true);
+    				return true;
+    			}
+    			else
+    			{
+    				obj.animation.play(name, true);
+    				return true;
+    			}
+			}
 			return false;
 		});
 		/*
