@@ -58,7 +58,7 @@ class FPS extends TextField
 		border = true;
 		borderColor = 0xFFFFFF;		
 		multiline = true; //多行文本
-		wordWrap = false; //禁用自动换行
+		wordWrap = true; //禁用自动换行
 		
 		text = "FPS: ";
 				
