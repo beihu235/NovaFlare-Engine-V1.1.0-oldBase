@@ -22,6 +22,9 @@ import sys.io.File;
 import sys.io.Process;
 #end
 
+import flixel.FlxSprite;
+import flixel.FlxObject;
+
 class Main extends Sprite
 {
 	var game = {
@@ -35,7 +38,7 @@ class Main extends Sprite
 	};
 
 	public static var fpsVar:FPS;
-	public static var fpsBG:FPSBG;
+	public static var fpsBG:FlxSprite;
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
 	public static function main():Void
@@ -99,12 +102,16 @@ class Main extends Sprite
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}
-		
+		/*
 		fpsBG = new FPSBG(10, 3, 'test');
 		addChild(fpsBG);
 		if(fpsBG != null) {
 			fpsBG.visible = ClientPrefs.data.showFPS;
 		}
+		*/
+        var myOtherClass = new FPSBG(10, 3, 'test');
+        myOtherClass.addImage(fpsBG);
+        addChild(fpsBG);
 		
 		
 		Lib.current.stage.align = "tl";
