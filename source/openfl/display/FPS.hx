@@ -54,9 +54,9 @@ class FPS extends TextField
 		
 		background = true;
 		backgroundColor = 0x3CFFFF;
+		backgroundAlpha = 0.5;
 		border = true;
-		borderColor = 0xFFFFFF;
-		borderAlpha = 0.5;
+		borderColor = 0xFFFFFF;		
 		multiline = true; //多行文本
 		wordWrap = false; //禁用自动换行
 		
