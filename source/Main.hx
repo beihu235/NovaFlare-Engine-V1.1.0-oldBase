@@ -1,18 +1,16 @@
 package;
 
 import flixel.graphics.FlxGraphic;
-
 import flixel.FlxGame;
 import flixel.FlxState;
 import openfl.Assets;
 import openfl.Lib;
 import openfl.display.FPS;
-import openfl.display.FPSBG;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import lime.app.Application;
-
+import objects.FPSBG;
 import states.TitleState;
 
 //crash handler stuff
@@ -38,7 +36,7 @@ class Main extends Sprite
 	};
 
 	public static var fpsVar:FPS;
-    public static var fpsVarBG:FPSBG;
+    public static var fpsBG:FPSBG;
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
 	public static function main():Void
@@ -103,10 +101,10 @@ class Main extends Sprite
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}
 		
-		fpsVarBG = new FPSBG(10, 3);
-		addChild(fpsVarBG);
-		if(fpsVarBG != null) {
-			fpsVarBG.visible = ClientPrefs.data.showFPS;
+		fpsBG = new FPSBG(10, 3);
+		addChild(fpsBG);
+		if(fpsBG != null) {
+			fpsBG.visible = ClientPrefs.data.showFPS;
 		}
 		
 		Lib.current.stage.align = "tl";
