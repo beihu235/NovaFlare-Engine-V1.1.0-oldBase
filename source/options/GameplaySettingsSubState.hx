@@ -38,11 +38,11 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 		
-		var option:Option = new Option('Long Note Length Fix',
-			'reduce LN Note length\nFix for some mod engines have been reduced',
+		var option:Option = new Option('Long Note Length Reduce',
+			'reduce Long Note length\nFix for some mod engines have been reduced',
 			'fixLNL',
 			'int');
-		option.displayFormat = '%vms';
+		option.displayFormat = '%vgrid';
 		option.scrollSpeed = 20;
 		option.minValue = 0;
 		option.maxValue = 2;
