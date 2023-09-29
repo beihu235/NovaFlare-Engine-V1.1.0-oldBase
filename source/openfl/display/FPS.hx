@@ -50,8 +50,15 @@ class FPS extends TextField
 		selectable = false;
 		mouseEnabled = false;
 		defaultTextFormat = new TextFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 14, color);
-		autoSize = CENTER;
-		multiline = true;
+		autoSize = LEFT;
+		
+		background = true;
+		backgroundColor = 0x3CFFFF;
+		border = true;
+		borderColor = 0xFFFFFF;
+		multiline = true; //多行文本
+		wordWrap = false; //禁用自动换行
+		
 		text = "FPS: ";
 				
 
@@ -151,7 +158,7 @@ class FPS extends TextField
 			var memoryMegas:Float = 0;
 			//memoryMegas = Math.round(actualMem / 1024 / 1024 * 100) / 100;			
 			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
-			text += "\nMemory: " + memoryMegas + " MB";
+			text += "\nMEM: " + memoryMegas + " MB";
 						
             var newmemoryMegas:Float = 0;
 
@@ -160,10 +167,10 @@ class FPS extends TextField
 			newmemoryMegas = Math.ceil( Math.abs( System.totalMemory ) / 10000000 / 1.024)/100;
 			
 				text = "FPS: " + DisplayFPS + "/" + ClientPrefs.data.framerate;
-				text += "\nMemory: " + newmemoryMegas + " GB";            
+				text += "\nMEM: " + newmemoryMegas + " GB";            
 			}
 						
-            text += "\nNF Engine V1.1.0\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
+            text += "\nNF V1.1\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
                      
 			text += "\n";
 	
