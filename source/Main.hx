@@ -12,7 +12,6 @@ import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import lime.app.Application;
 import states.TitleState;
-import SUtil;
 
 //crash handler stuff
 #if CRASH_HANDLER
