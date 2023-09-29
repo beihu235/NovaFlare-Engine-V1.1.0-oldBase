@@ -11,7 +11,7 @@ import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import lime.app.Application;
 import states.TitleState;
-import objects.FPSBG;
+//import objects.FPSBG;
 //crash handler stuff
 #if CRASH_HANDLER
 import openfl.events.UncaughtErrorEvent;
@@ -108,11 +108,11 @@ class Main extends Sprite
 		if(fpsBG != null) {
 			fpsBG.visible = ClientPrefs.data.showFPS;
 		}
-		*/
+		
         var myOtherClass = new FPSBG(10, 3, 'test');
         myOtherClass.addImage(fpsBG);
         addChild(fpsBG);
-		
+		*/
 		
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
