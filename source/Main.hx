@@ -12,7 +12,6 @@ import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import lime.app.Application;
 import states.TitleState;
-import backend.SUtil;
 
 //crash handler stuff
 #if CRASH_HANDLER
@@ -33,7 +32,7 @@ class Main extends Sprite
 		zoom: -1.0, // game state bounds
 		framerate: 60, // default framerate
 		skipSplash: true, // if the default flixel splash screen should be skipped
-		startFullscreen: false // if the game should start at fullscreen mode
+		startFullscreen: true // if the game should start at fullscreen mode
 	};
 
 	public static var fpsVar:FPS;
