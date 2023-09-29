@@ -1003,6 +1003,7 @@ class FunkinLua {
 			//}
 			return false;
 		});
+		/*
 		Lua_helper.add_callback(lua, "addAnimationByPrefix", function(obj:String, name:String, prefix:String, framerate:Int = 24, loop:Bool = true) {
 			if(PlayState.instance.getLuaObject(obj,false)!=null) {
 				var cock:FlxSprite = PlayState.instance.getLuaObject(obj,false);
@@ -1012,7 +1013,7 @@ class FunkinLua {
 				}
 				return;
 			}
-		
+		*/
 		Lua_helper.add_callback(lua, "addAnimation", function(obj:String, name:String, frames:Array<Int>, framerate:Int = 24, loop:Bool = true) {
 			var obj:Dynamic = LuaUtils.getObjectDirectly(obj, false);
 			if(obj != null && obj.animation != null)
