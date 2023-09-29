@@ -994,9 +994,10 @@ class FunkinLua {
 				obj.animation.addByPrefix(name, prefix, framerate, loop);
 				if(obj.animation.curAnim == null)
 				{
-					//if(obj.playAnim != null) obj.playAnim(name, true);
+					//if(obj.playAnim != null) 
+					obj.playAnim(name, true);
 					//else
-					 obj.animation.play(name, true);
+					// obj.animation.play(name, true);
 					 return true;
 				}
 				
