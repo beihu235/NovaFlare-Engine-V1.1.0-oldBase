@@ -1,35 +1,38 @@
 package objects;
 
+import flixel.util.FlxGradient;
+import flixel.text.FlxText;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
+import flixel.FlxSubState;
+import flixel.FlxSprite;
+import openfl.utils.Assets;
+import flixel.FlxObject;
 
 class FPSBG extends FlxSprite {
-	public var sprTracker:FlxSprite;
-	private var tag:String;
-	public function new(x:Float = 0, y:Float = 0, name:String) {
-		super(x, y);
+	
 
-		antialiasing = ClientPrefs.data.antialiasing;
-		changeAchievement(name);
-	}
+    public function addImage(sprite:FlxSprite) {
+        FlxSprite.addChild(Paths.image('mainmenu_sprite/loadingR'));
+    }
 
-	public function changeAchievement(tag:String) {
-		this.tag = tag;
-		reloadAchievementImage();
-	}
-
-	public function reloadAchievementImage() {
-		if(Achievements.isAchievementUnlocked(tag)) {
-			loadGraphic(Paths.image('achievements/' + tag));
-		} else {
-			loadGraphic(Paths.image('achievements/lockedachievement'));
-		}
-		scale.set(0.7, 0.7);
-		updateHitbox();
-	}
 
 	override function update(elapsed:Float) {
-		if (sprTracker != null)
-			setPosition(sprTracker.x - 130, sprTracker.y + 25);
+		//if (sprTracker != null)
+		//	setPosition(sprTracker.x - 130, sprTracker.y + 25);
 
 		super.update(elapsed);
 	}
 }
+/*
+import MyOtherClass;
+
+class Main {
+    static function main() {
+        var sprite:Sprite = new Sprite();
+        var myOtherClass = new MyOtherClass();
+        myOtherClass.addImage(sprite);
+        addChild(sprite);
+    }
+}
+*/
