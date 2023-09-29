@@ -54,7 +54,7 @@ class FPS extends TextField
 		
 		background = true;
 		backgroundColor = 0x3CFFFF;
-		__textEngine.backgroundAlpha = 0.5;
+		backgroundAlpha = 0.5;
 		border = true;
 		borderColor = 0xFFFFFF;		
 		multiline = true; //多行文本
