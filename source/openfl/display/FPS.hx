@@ -49,8 +49,8 @@ class FPS extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 12, color);
-		autoSize = LEFT;
+		defaultTextFormat = new TextFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 14, color);
+		autoSize = CENTER;
 		multiline = true;
 		text = "FPS: ";
 				
