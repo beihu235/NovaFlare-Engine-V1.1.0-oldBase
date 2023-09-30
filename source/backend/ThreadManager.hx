@@ -3,20 +3,24 @@ package backend;
 import hx.concurrent.thread.*;
 
 class ThreadManager {
-    public var thread:Thread;
+    public var pool:ThreadPool;
 
     public function startThread() {
-        thread = new Thread(runThread);
-        thread.start();
+        pool = new ThreadPool(1);
+        
     }
 
     public function stopThread() {
-        if (thread.isRunning()) {
-            thread.stop();
+        if (pool.isRunning()) {
+            pool.cancelPendingTasks();
+            pool.stop();
         }
     }
 
     public function runThread() {
-     
+     pool.submit(function(ctx:ThreadContext) {
+         // do some work here
+        });
     }
 }
+
