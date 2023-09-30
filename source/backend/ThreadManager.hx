@@ -1,6 +1,6 @@
 package backend;
 
-import haxe.concurrent.Thread;
+import hx.concurrent.thread.*;
 
 class ThreadManager {
     public var thread:Thread;
