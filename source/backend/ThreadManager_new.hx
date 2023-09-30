@@ -4,7 +4,7 @@ import hx.concurrent.executor.Schedule;
 import hx.concurrent.executor.Executor;
 
 class ThreadManager_new {
-    public function startThread() {
+    public static function startThread() {
       var executor = Executor.create(3);  // <- 3 means to use a thread pool of 3 threads on platforms that support threads
       // depending on the platform either a thread-based or timer-based implementation is returned
 
