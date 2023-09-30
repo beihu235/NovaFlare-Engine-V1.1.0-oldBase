@@ -296,10 +296,6 @@ class MainMenuState extends MusicBeatState
 				checkChoose();
 			}
 			
-			if (curSelected >= menuItems.length)
-			    curSelected = 0;
-		    if (curSelected < 0)
-			    curSelected = menuItems.length - 1;
 			    
 			if (controls.ACCEPT) {
 			    usingMouse = false;	
@@ -471,6 +467,11 @@ class MainMenuState extends MusicBeatState
 	
 	function checkChoose()
 	{
+	    if (curSelected >= menuItems.length)
+	        curSelected = 0;
+		if (curSelected < 0)
+		    curSelected = menuItems.length - 1;
+		    
 	    menuItems.forEach(function(spr:FlxSprite){
 			spr.animation.play('idle');
 		    spr.updateHitbox();
