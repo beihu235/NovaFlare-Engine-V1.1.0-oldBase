@@ -196,11 +196,34 @@ class ExtraFunctions
 		{
 			try {
 				#if MODS_ALLOWED
+				
+				var str:String = path;
+                var splitStr:Array = str.split(".");
+                var str2:String = splitStr[0];
+                var splitStr2:Array = str.split("/");
+                var filesCheck:String = '';
+                var length:Int = splitStr2.length - 1;
+                if (length >= 0){                
+                    for (i in splitStr2.length - ){
+                    filesCheck = filesCheck + '/' + splitStr2[i];
+                    }
+                }
+                if(!absolute){
+    				if (!FileSystem.exists(SUtil.getPath() + 'mods/' + filesCheck)){
+    			        FileSystem.createDirectory(SUtil.getPath() + 'mods/' + filesCheck);
+    			    }
+			    }
+			    else{
+			        if (!FileSystem.exists(SUtil.getPath() + filesCheck)){
+    			        FileSystem.createDirectory(SUtil.getPath() + filesCheck);
+    			    }
+			    }
+			    
 				if(!absolute)
 					File.saveContent(Paths.mods(path), content);
 				else
 				#end
-					File.saveContent(path, content);
+					File.saveContent(SUtil.getPath() + path, content);
 
 				return true;
 			} catch (e:Dynamic) {
