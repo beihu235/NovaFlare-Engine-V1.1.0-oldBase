@@ -206,7 +206,7 @@ class ExtraFunctions
                 var filesCheck:String = '';
                 var length:Int = splitStr2.length - 1;
                 if (length >= 0){                
-                    for (i in length){
+                    for (i in 0...length){
                     filesCheck = filesCheck + '/' + splitStr2[i];
                     }
                 }
