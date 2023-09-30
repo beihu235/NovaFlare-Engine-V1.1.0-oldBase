@@ -49,7 +49,7 @@ class FPS extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 20, color, false, null, null, 'CENTER', 10, 10);
+		defaultTextFormat = new TextFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 20, color, false, null, null, CENTER, 10, 10);
 		autoSize = CENTER;
 		
 		background = true;
@@ -171,7 +171,7 @@ class FPS extends TextField
 				text += "\nMEM: " + newmemoryMegas + " GB";            
 			}
 						
-            text += "\nNF V1.1\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
+            text += "\nNF V1.1.0\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
                      
 			text += "\n";
 	
