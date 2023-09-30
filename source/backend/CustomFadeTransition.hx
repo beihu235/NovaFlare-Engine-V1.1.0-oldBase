@@ -8,7 +8,7 @@ import flixel.FlxSubState;
 import flixel.FlxSprite;
 import openfl.utils.Assets;
 import flixel.FlxObject;
-import backend.ThreadManager_new;
+//import backend.ThreadManager_new;
  
 class CustomFadeTransition extends MusicBeatSubstate {
 	public static var finishCallback:Void->Void;
@@ -33,7 +33,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 
 		this.isTransIn = isTransIn;
 		
-		ThreadManager_new.startThread();
+		//ThreadManager_new.startThread();
 		
 		if(ClientPrefs.data.CustomFade == 'Move'){
 		loadRight = new FlxSprite(isTransIn ? 0 : 1280, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingR'));
