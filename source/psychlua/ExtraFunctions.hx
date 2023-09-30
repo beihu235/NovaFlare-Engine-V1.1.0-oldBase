@@ -198,9 +198,9 @@ class ExtraFunctions
 				#if MODS_ALLOWED
 				
 				var str:String = path;
-                var splitStr:Array = str.split(".");
+                var splitStr = str.split(".");
                 var str2:String = splitStr[0];
-                var splitStr2:Array = str.split("/");
+                var splitStr2 = str2.split("/");
                 var filesCheck:String = '';
                 var length:Int = splitStr2.length - 1;
                 if (length >= 0){                
