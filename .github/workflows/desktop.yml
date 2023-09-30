@@ -42,7 +42,7 @@ jobs:
           haxelib setup C:/haxelib
           haxelib install hxcpp 4.2.1 > /dev/null
           haxelib install lime
-          haxelib git openfl https://github.com/beihu235/openfl
+          haxelib install openfl
           haxelib install flixel
           haxelib run lime setup flixel
           haxelib run lime setup
@@ -103,7 +103,7 @@ jobs:
           haxelib install hxcpp > /dev/null --quiet
           haxelib setup ~/haxelib
           haxelib install lime
-          haxelib git openfl https://github.com/beihu235/openfl
+          haxelib install openfl
           haxelib install flixel
           haxelib run lime setup flixel
           haxelib run lime setup
@@ -144,7 +144,7 @@ jobs:
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null --quiet
           haxelib install lime
-          haxelib git openfl https://github.com/beihu235/openfl
+          haxelib install openfl
           haxelib install flixel
           haxelib run lime setup flixel
           haxelib run lime setup
