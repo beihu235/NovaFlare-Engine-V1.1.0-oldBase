@@ -1354,10 +1354,7 @@ class PlayState extends MusicBeatState
 
 				if (songNotes[1] > 3)
 				{
-				    if (ClientPrefs.data.playOpponent)
-					gottaHitNote = section.mustHitSection;
-					else
-					gottaHitNote = !section.mustHitSection;
+				    gottaHitNote = !section.mustHitSection;
 				}
 
 				var oldNote:Note;
@@ -1549,16 +1546,11 @@ class PlayState extends MusicBeatState
 			else
 				babyArrow.alpha = targetAlpha;
 
-			if (player == 1){
-			    if (ClientPrefs.data.middleScroll && ClientPrefs.data.playOpponent)
-				{
-					if(i > 1) { //Up and Right
-						babyArrow.x += FlxG.width / 2 + 25;
-					}
-				}
-				playerStrums.add(babyArrow);				
-			}else{
-				if(ClientPrefs.data.middleScroll && !ClientPrefs.data.playOpponent)
+			if (player == 1)
+				playerStrums.add(babyArrow);
+			else
+			{
+				if(ClientPrefs.data.middleScroll)
 				{
 					babyArrow.x += 310;
 					if(i > 1) { //Up and Right
