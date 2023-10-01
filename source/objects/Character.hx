@@ -184,7 +184,7 @@ class Character extends FlxSprite
 
 		if (isPlayer)
 		{
-			flipX = !flipX;
+			if (!ClientPrefs.data.playOpponent) flipX = !flipX;
 
 			/*// Doesn't flip for BF, since his are already in the right place???
 			if (!curCharacter.startsWith('bf'))
