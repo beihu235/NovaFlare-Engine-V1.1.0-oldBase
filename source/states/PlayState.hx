@@ -1416,7 +1416,9 @@ class PlayState extends MusicBeatState
 							oldNote.updateHitbox();
 						}
 
-						if (sustainNote.mustPress) sustainNote.x += FlxG.width / 2; // general offset
+						if (sustainNote.mustPress) {						
+						    if (!ClientPrefs.data.playOpponent) sustainNote.x += FlxG.width / 2; // general offset
+						}
 						else if(ClientPrefs.data.middleScroll)
 						{
 							sustainNote.x += 310;
@@ -1430,7 +1432,7 @@ class PlayState extends MusicBeatState
 
 				if (swagNote.mustPress)
 				{
-					swagNote.x += FlxG.width / 2; // general offset
+					if (!ClientPrefs.data.playOpponent) swagNote.x += FlxG.width / 2; // general offset
 				}
 				else if(ClientPrefs.data.middleScroll)
 				{
@@ -2912,7 +2914,8 @@ class PlayState extends MusicBeatState
 					// hold note functions
 					if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
 					&& daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
-						goodNoteHit(daNote);
+						if (ClientPrefs.data.playOpponent) goodNoteHitForOpponent(daNote);
+						else goodNoteHit(daNote);
 					}
 				});
 			}
