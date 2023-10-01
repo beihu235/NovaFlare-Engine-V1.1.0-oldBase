@@ -1334,19 +1334,62 @@ class PlayState extends MusicBeatState
 				var daStrumTime:Float = songNotes[0];
 				var daNoteData:Int = Std.int(songNotes[1] % 4);
 				
-				if (ClientPrefs.data.filpChart) {
+				if (ClientPrefs.data.playOpponent) {
 				    if (daNoteData == 0) {
-				        daNoteData = 3;
+				        daNoteData = 4;
 				    }    
 				    else if (daNoteData == 1) {
-				        daNoteData = 2;
+				        daNoteData = 5;
 				    }    
 				    else if (daNoteData == 2) {
-				        daNoteData = 1;
+				        daNoteData = 6;
 				    }   
 				    else if (daNoteData == 3) {
-				        daNoteData = 0;
+				        daNoteData = 7;
 				    } 
+				    else if (daNoteData == 4) {
+				        daNoteData = 0;
+				    }    
+				    else if (daNoteData == 5) {
+				        daNoteData = 1;
+				    }   
+				    else if (daNoteData == 6) {
+				        daNoteData = 2;
+				    } 
+				    else if (daNoteData == 7) {
+				        daNoteData = 3;
+				    }
+				}
+				
+				if (ClientPrefs.data.filpChart) {
+			        if (!ClientPrefs.data.playOpponent){			        
+    				    if (daNoteData == 0) {
+    				        daNoteData = 3;
+    				    }    
+    				    else if (daNoteData == 1) {
+    				        daNoteData = 2;
+    				    }    
+    				    else if (daNoteData == 2) {
+    				        daNoteData = 1;
+    				    }   
+    				    else if (daNoteData == 3) {
+    				        daNoteData = 0;
+    				    } 
+				    }
+				    else{
+				        if (daNoteData == 4) {
+    				        daNoteData = 7;
+    				    }    
+    				    else if (daNoteData == 5) {
+    				        daNoteData = 6;
+    				    }    
+    				    else if (daNoteData == 6) {
+    				        daNoteData = 5;
+    				    }   
+    				    else if (daNoteData == 7) {
+    				        daNoteData = 7;
+    				    } 
+				    }
 				}
 				
 				var gottaHitNote:Bool = section.mustHitSection;
@@ -3269,7 +3312,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			var char:Character = boyfriend;
+			var char:Character = dad;
 			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))] + altAnim;
 			if(note.gfNote) {
 				char = gf;
