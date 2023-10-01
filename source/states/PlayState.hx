@@ -2802,7 +2802,8 @@ class PlayState extends MusicBeatState
 
 						// eee jack detection before was not super good
 						if (!notesStopped) {
-							goodNoteHit(epicNote);
+						    if (ClientPrefs.data.playOpponent) goodNoteHitForOpponent(epicNote);
+						    else goodNoteHit(epicNote);
 							pressNotes.push(epicNote);
 						}
 
