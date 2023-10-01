@@ -113,7 +113,6 @@
 	<haxelib name="hscript" />
 	<haxelib name="SScript" if="HSCRIPT_ALLOWED"/>
 	<define name="hscriptPos" />
-	<haxelib name="haxe-concurrent" />
 	<haxelib name="androiddialogs" if="android" />
 	<haxelib name="devicelanguage" if="android" />
 
