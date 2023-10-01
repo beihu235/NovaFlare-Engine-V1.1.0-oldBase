@@ -206,6 +206,9 @@ class Character extends FlxSprite
 				}
 			}*/
 		}
+		else{
+		    if (ClientPrefs.data.playOpponent) flipX = !flipX;
+		}
 
 		switch(curCharacter)
 		{
