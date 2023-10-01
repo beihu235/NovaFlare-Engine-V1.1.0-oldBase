@@ -29,7 +29,7 @@ class SaveVariables {
 	public var cacheOnGPU:Bool = #if !switch false #else true #end; //From Stilic
 	public var framerate:Int = 60;
 	public var CustomFade:String = 'Move';
-	public var CustomFadeSound:Float = 0.7;
+	public var CustomFadeSound:Float = 0.5;
 	public var CustomFadeText:Bool = true;
 	public var camZooms:Bool = true;
 	public var hideHud:Bool = false;
@@ -48,6 +48,7 @@ class SaveVariables {
 
 	public var ghostTapping:Bool = true;
 	public var fixLNL:Int= 0; //fix long note length
+	public var playOpponent:Bool = false;
 	public var timeBarType:String = 'Time Left';
 	public var scoreZoom:Bool = true;
 	public var noReset:Bool = false;
