@@ -1429,7 +1429,7 @@ class PlayState extends MusicBeatState
 
 				if (swagNote.mustPress)
 				{
-					if (!ClientPrefs.data.playOpponent) swagNote.x += FlxG.width / 2; // general offset
+					swagNote.x += FlxG.width / 2; // general offset
 				}
 				else if(ClientPrefs.data.middleScroll)
 				{
