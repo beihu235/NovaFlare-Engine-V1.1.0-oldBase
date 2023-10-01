@@ -1334,68 +1334,29 @@ class PlayState extends MusicBeatState
 				var daStrumTime:Float = songNotes[0];
 				var daNoteData:Int = Std.int(songNotes[1] % 4);
 				
-				if (ClientPrefs.data.playOpponent) {
-				    if (songNotes[1] == 0) {
-				        daNoteData = 4;
-				    }    
-				    else if (songNotes[1] == 1) {
-				        daNoteData = 5;
-				    }    
-				    else if (songNotes[1] == 2) {
-				        daNoteData = 6;
-				    }   
-				    else if (songNotes[1] == 3) {
-				        daNoteData = 7;
-				    } 
-				    else if (songNotes[1] == 4) {
-				        daNoteData = 0;
-				    }    
-				    else if (songNotes[1] == 5) {
-				        daNoteData = 1;
-				    }   
-				    else if (songNotes[1] == 6) {
-				        daNoteData = 2;
-				    } 
-				    else if (songNotes[1] == 7) {
-				        daNoteData = 3;
-				    }
+				if (ClientPrefs.data.filpChart) { 
+    				if (daNoteData == 0) {
+    				    daNoteData = 3;
+    				}    
+    				else if (daNoteData == 1) {
+    				    daNoteData = 2;
+    				}    
+    				else if (daNoteData == 2) {
+    				    daNoteData = 1;
+    				}   
+    				else if (daNoteData == 3) {
+    				    daNoteData = 0;
+    		        } 
 				}
-				
-				if (ClientPrefs.data.filpChart) {
-			        if (!ClientPrefs.data.playOpponent){			        
-    				    if (daNoteData == 0) {
-    				        daNoteData = 3;
-    				    }    
-    				    else if (daNoteData == 1) {
-    				        daNoteData = 2;
-    				    }    
-    				    else if (daNoteData == 2) {
-    				        daNoteData = 1;
-    				    }   
-    				    else if (daNoteData == 3) {
-    				        daNoteData = 0;
-    				    } 
-				    }
-				    else{
-				        if (daNoteData == 4) {
-    				        daNoteData = 7;
-    				    }    
-    				    else if (daNoteData == 5) {
-    				        daNoteData = 6;
-    				    }    
-    				    else if (daNoteData == 6) {
-    				        daNoteData = 5;
-    				    }   
-    				    else if (daNoteData == 7) {
-    				        daNoteData = 7;
-    				    } 
-				    }
-				}
+				    
 				
 				var gottaHitNote:Bool = section.mustHitSection;
 
 				if (songNotes[1] > 3)
 				{
+				    if (ClientPrefs.data.playOpponent)
+					gottaHitNote = section.mustHitSection;
+					else
 					gottaHitNote = !section.mustHitSection;
 				}
 
