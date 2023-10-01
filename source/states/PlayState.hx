@@ -1769,11 +1769,11 @@ class PlayState extends MusicBeatState
 		if (controls.justPressed('debug_1') && !endingSong && !inCutscene)
 			openChartEditor();
 
-		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, 0.50);
+		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, 0.75 * playbackRate);
 		iconP1.scale.set(mult, mult);
 		iconP1.updateHitbox();
 
-		var mult:Float = FlxMath.lerp(1, iconP2.scale.x, 0.50);
+		var mult:Float = FlxMath.lerp(1, iconP2.scale.x, 0.75 * playbackRate);
 		iconP2.scale.set(mult, mult);
 		iconP2.updateHitbox();
 
