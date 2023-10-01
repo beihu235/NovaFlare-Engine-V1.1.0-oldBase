@@ -1350,8 +1350,8 @@ class PlayState extends MusicBeatState
 				}
 				    
 				
-				var gottaHitNote:Bool = section.mustHitSection;
-
+				var gottaHitNote:Bool = ClientPrefs.data.playOpponent ? !section.mustHitSection : section.mustHitSection;
+        
 				if (songNotes[1] > 3)
 				{
 				    gottaHitNote = !section.mustHitSection;
