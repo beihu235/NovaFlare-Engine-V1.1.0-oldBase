@@ -2794,7 +2794,7 @@ class PlayState extends MusicBeatState
 
 						// eee jack detection before was not super good
 						if (!notesStopped) {
-						    if (ClientPrefs.data.playOpponent) goodNoteHitForOpponent(epicNote);
+						    if (ClientPrefs.data.playOpponent) opponentNoteHitForOpponent(epicNote);
 						    else goodNoteHit(epicNote);
 							pressNotes.push(epicNote);
 						}
@@ -2906,7 +2906,7 @@ class PlayState extends MusicBeatState
 					// hold note functions
 					if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
 					&& daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
-						if (ClientPrefs.data.playOpponent) goodNoteHitForOpponent(daNote);
+						if (ClientPrefs.data.playOpponent) opponentNoteHitForOpponent(daNote);
 						else goodNoteHit(daNote);
 					}
 				});
