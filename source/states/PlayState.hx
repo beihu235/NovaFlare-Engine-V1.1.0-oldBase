@@ -2969,7 +2969,7 @@ class PlayState extends MusicBeatState
 		RecalculateRating(true);
 
 		// play character anims
-		var char:Character = boyfriend;
+		var char:Character = (ClientPrefs.data.playOpponent) ? dad : boyfriend;
 		if((note != null && note.gfNote) || (SONG.notes[curSection] != null && SONG.notes[curSection].gfSection)) char = gf;
 		
 		if(char != null && char.hasMissAnimations)
@@ -3008,7 +3008,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			var char:Character = dad;
+			var char:Character = (ClientPrefs.data.playOpponent) ? boyfriend : dad;
 			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))] + altAnim;
 			if(note.gfNote) {
 				char = gf;
@@ -3088,7 +3088,7 @@ class PlayState extends MusicBeatState
 			if(!note.noAnimation) {
 				var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))];
 
-				var char:Character = boyfriend;
+				var char:Character = (ClientPrefs.data.playOpponent) ? dad : boyfriend;
 				var animCheck:String = 'hey';
 				if(note.gfNote)
 				{
