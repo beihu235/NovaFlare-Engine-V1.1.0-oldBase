@@ -522,7 +522,7 @@ class PlayState extends MusicBeatState
 		
 		healthBar = new HealthBar(0, FlxG.height * (!ClientPrefs.data.downScroll ? 0.89 : 0.11), 'healthBar', function() return health, 0, 2);
 		healthBar.screenCenter(X);
-		healthBar.leftToRight = false;
+		healthBar.leftToRight = ClientPrefs.data.playOpponent;
 		healthBar.scrollFactor.set();
 		healthBar.visible = !ClientPrefs.data.hideHud;
 		healthBar.alpha = ClientPrefs.data.healthBarAlpha;
