@@ -3184,8 +3184,8 @@ class PlayState extends MusicBeatState
 			var leData:Int = Math.round(Math.abs(note.noteData));
 			var leType:String = note.noteType;
 			
-			var result:Dynamic = callOnLuas('goodNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
-			if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('goodNoteHit', [note]);
+			var result:Dynamic = callOnLuas('opponentNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
+			if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('opponentNoteHit', [note]);
 
 			if (!note.isSustainNote)
 			{
@@ -3312,7 +3312,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			var char:Character = dad;
+			var char:Character = boyfriend;
 			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))] + altAnim;
 			if(note.gfNote) {
 				char = gf;
