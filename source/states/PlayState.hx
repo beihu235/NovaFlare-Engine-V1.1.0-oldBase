@@ -1803,7 +1803,7 @@ class PlayState extends MusicBeatState
 		{
 			if(!inCutscene)
 			{   
-			    var char:Character = ClientPrefs.data.playOpponent ? dad : char;
+			    var char:Character = ClientPrefs.data.playOpponent ? dad : boyfriend;
 				if(!cpuControlled) {
 					keysCheck();
 				} else if(char.animation.curAnim != null && char.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * char.singDuration && char.animation.curAnim.name.startsWith('sing') && !char.animation.curAnim.name.endsWith('miss')) {
@@ -2887,7 +2887,7 @@ class PlayState extends MusicBeatState
 			for (i in 0...pressArray.length)
 				if(pressArray[i] && strumsBlocked[i] != true)
 					keyPressed(i);
-        var char:Character = ClientPrefs.data.playOpponent ? dad : char;
+        var char:Character = ClientPrefs.data.playOpponent ? dad : boyfriend;
 		if (startedCountdown && !boyfriend.stunned && generatedMusic)
 		{
 			// rewritten inputs???
