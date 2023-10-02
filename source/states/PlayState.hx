@@ -2902,8 +2902,8 @@ class PlayState extends MusicBeatState
 			for (i in 0...pressArray.length)
 				if(pressArray[i] && strumsBlocked[i] != true)
 					keyPressed(i);
-
-		if (startedCountdown && !boyfriend.stunned && generatedMusic)
+        var char:Character = ClientPrefs.data.playOpponent ? dad : boyfriend
+		if (startedCountdown && !char.stunned && generatedMusic)
 		{
 			// rewritten inputs???
 			if(notes.length > 0)
@@ -2926,7 +2926,6 @@ class PlayState extends MusicBeatState
 				});
 			}
             
-            var char:Character = ClientPrefs.data.playOpponent ? dad : boyfriend;
 			if (holdArray.contains(true) && !endingSong) {
 				#if ACHIEVEMENTS_ALLOWED
 				var achieve:String = checkForAchievement(['oversinging']);
