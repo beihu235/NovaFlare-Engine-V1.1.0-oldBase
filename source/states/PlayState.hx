@@ -1825,7 +1825,7 @@ class PlayState extends MusicBeatState
 
 							if(daNote.mustPress)
 							{   
-							    if (!opponentNoteHitForOpponent){
+							    if (!ClientPrefs.data.playOpponent){
 								    if (cpuControlled && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition)){
 									    goodNoteHit(daNote);
 									}    
@@ -1834,7 +1834,7 @@ class PlayState extends MusicBeatState
 								    goodNoteHitForOpponent(daNote);
 								}
 							}else{
-							    if (!opponentNoteHitForOpponent){
+							    if (!ClientPrefs.data.playOpponent){
 							        if (daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote){
 								        opponentNoteHit(daNote);
 								    }
@@ -1844,6 +1844,7 @@ class PlayState extends MusicBeatState
 								    }
                                 }
                             }   
+                            
 							if(daNote.isSustainNote && strum.sustainReduce) daNote.clipToStrumNote(strum);
 
 							// Kill extremely late notes and cause misses
@@ -2798,7 +2799,7 @@ class PlayState extends MusicBeatState
 
 						// eee jack detection before was not super good
 						if (!notesStopped) {
-						    if (!opponentNoteHitForOpponent) goodNoteHit(epicNote);
+						    if (!ClientPrefs.data.playOpponent) goodNoteHit(epicNote);
 						    else opponentNoteHitForOpponent(epicNote);
 							pressNotes.push(epicNote);
 						}
