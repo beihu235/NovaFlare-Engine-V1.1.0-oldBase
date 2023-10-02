@@ -2916,11 +2916,12 @@ class PlayState extends MusicBeatState
     					if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
     					&& daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
     						goodNoteHit(daNote);
-    					}
+    				    }
 					}else{
 					    if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
     					&& daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
     						opponentNoteHitForOpponent(daNote);
+    					}	
 					}
 				});
 			}
