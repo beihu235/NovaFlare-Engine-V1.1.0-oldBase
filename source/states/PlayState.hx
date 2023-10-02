@@ -1364,8 +1364,8 @@ class PlayState extends MusicBeatState
 					oldNote = null;
 
 				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote);
-				if (ClientPrefs.data.playOpponent)  swagNote.mustPress = !gottaHitNote;
-				else swagNote.mustPress = gottaHitNote;
+				//if (ClientPrefs.data.playOpponent)  swagNote.mustPress = !gottaHitNote;
+				//else swagNote.mustPress = gottaHitNote;
 				swagNote.sustainLength = songNotes[2];
 				swagNote.gfNote = (section.gfSection && (songNotes[1]<4));
 				swagNote.noteType = songNotes[3];
@@ -2907,8 +2907,8 @@ class PlayState extends MusicBeatState
 				notes.forEachAlive(function(daNote:Note)
 				{
 					// hold note functions
-					if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
-					&& ((daNote.mustPress && !ClientPrefs.data.playOpponent) || (daNote.mustPress && ClientPrefs.data.playOpponent)) && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
+					if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && ((daNote.canBeHit && !ClientPrefs.data.playOpponent) || (!daNote.canBeHit && ClientPrefs.data.playOpponent))
+					&& ((daNote.mustPress && !ClientPrefs.data.playOpponent) || (!daNote.mustPress && ClientPrefs.data.playOpponent)) && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
 						if (ClientPrefs.data.playOpponent) opponentNoteHitForOpponent(daNote);
 						else goodNoteHit(daNote);
 					}
