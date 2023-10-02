@@ -1714,11 +1714,11 @@ class PlayState extends MusicBeatState
 		if (controls.justPressed('debug_1') && !endingSong && !inCutscene)
 			openChartEditor();
 
-		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, FlxMath.bound(1 - (elapsed * 9 * playbackRate), 0, 1));
+		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, 0.75 * playbackRate);
 		iconP1.scale.set(mult, mult);
 		iconP1.updateHitbox();
 
-		var mult:Float = FlxMath.lerp(1, iconP2.scale.x, FlxMath.bound(1 - (elapsed * 9 * playbackRate), 0, 1));
+		var mult:Float = FlxMath.lerp(1, iconP2.scale.x, 0.75 * playbackRate);
 		iconP2.scale.set(mult, mult);
 		iconP2.updateHitbox();
 
@@ -1726,8 +1726,8 @@ class PlayState extends MusicBeatState
 		if (health > 2) health = 2;
 		iconP1.x = healthBar.barCenter + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 		iconP2.x = healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
-		iconP1.animation.curAnim.curFrame = (healthBar.percent < 20) ? 1 : 0;
-		iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 1 : 0;
+		iconP1.animation.curAnim.curFrame = ((healthBar.percent <= 20 && !ClientPrefs.data.playOpponent) || (healthBar.percent >= 80 && ClientPrefs.data.playOpponent)) ? 1 : 0;
+		iconP2.animation.curAnim.curFrame = ((healthBar.percent >= 80 && !ClientPrefs.data.playOpponent) || (healthBar.percent <= 20 && ClientPrefs.data.playOpponent)) ? 1 : 0;
 
 		if (controls.justPressed('debug_2') && !endingSong && !inCutscene)
 			openCharacterEditor();
