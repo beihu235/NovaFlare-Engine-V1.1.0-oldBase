@@ -25,7 +25,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'filpChart',
 			'bool');
 		addOption(option);
-
+        
+        var option:Option = new Option('Play Opponent',
+			'If checked, playing as opponent\nmay have bug in some mods',
+			'playOpponent',
+			'bool');
+		addOption(option);
+		
 		var option:Option = new Option('Opponent Notes',
 			'If unchecked, opponent notes get hidden.',
 			'opponentStrums',
