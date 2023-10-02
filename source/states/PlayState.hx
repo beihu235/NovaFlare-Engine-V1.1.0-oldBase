@@ -1825,13 +1825,14 @@ class PlayState extends MusicBeatState
 
 							if(daNote.mustPress)
 							{
-								if(cpuControlled && !daNote.blockHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition))
-									if (daNote.canBeHit && !ClientPrefs.data.playOpponent) goodNoteHit(daNote);
-									else if (!daNote.canBeHit && ClientPrefs.data.playOpponent) opponentNoteHitForOpponent(daNote);
+								if(cpuControlled && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition)){
+									if (ClientPrefs.data.playOpponent) goodNoteHit(daNote);
+									else goodNoteHitForOpponent(daNote);
+								}	
 							}
 							else if (daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote){
 								if (!ClientPrefs.data.playOpponent) opponentNoteHit(daNote);
-								else goodNoteHitForOpponent(daNote);
+								else opponentNoteHitForOpponent(daNote);
                             }
 							if(daNote.isSustainNote && strum.sustainReduce) daNote.clipToStrumNote(strum);
 
@@ -2802,8 +2803,10 @@ class PlayState extends MusicBeatState
 
 				// Shubs, this is for the "Just the Two of Us" achievement lol
 				//									- Shadow Mario
+				#if ACHIEVEMENTS_ALLOWED
 				if(!keysPressed.contains(key)) keysPressed.push(key);
-
+                #end
+                
 				//more accurate hit time for the ratings? part 2 (Now that the calculations are done, go back to the time it was before for not causing a note stutter)
 				Conductor.songPosition = lastTime;
 			}
