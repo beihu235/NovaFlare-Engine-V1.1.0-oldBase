@@ -1852,7 +1852,7 @@ class PlayState extends MusicBeatState
 								    if (daNote.mustPress && !cpuControlled &&!daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit))
 									    noteMiss(daNote);
                                 }else{
-                                    if (!daNote.mustPress && !cpuControlled &&!daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit))
+                                    if (!daNote.mustPress && !cpuControlled && !daNote.ignoreNote && !endingSong && (daNote.tooLate || daNote.wasGoodHit))
 									    noteMissForOpponent(daNote);                                
                                 }
                                 
@@ -2919,7 +2919,7 @@ class PlayState extends MusicBeatState
     				    }
 					}else{
 					    if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
-    					&& !daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
+    					&& !daNote.mustPress && !daNote.tooLate && daNote.wasGoodHit && !daNote.blockHit) {
     						opponentNoteHitForOpponent(daNote);
     					}	
 					}
