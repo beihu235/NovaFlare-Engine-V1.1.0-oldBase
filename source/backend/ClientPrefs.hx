@@ -12,7 +12,11 @@ class SaveVariables {
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
 	public var filpChart:Bool = false;
+	public var fixLNL:Int= 0; //fix long note length
+	public var playOpponent:Bool = false;
+	public var OpponentCodeFix:Bool = false;
 	public var opponentStrums:Bool = true;
+	
 	public var showFPS:Bool = true;
 	public var rainbowFPS:Bool = false;
 	public var flashing:Bool = true;
@@ -47,8 +51,6 @@ class SaveVariables {
 		[0xFFFF884E, 0xFFFFFAF5, 0xFF6C0000]];
 
 	public var ghostTapping:Bool = true;
-	public var fixLNL:Int= 0; //fix long note length
-	public var playOpponent:Bool = false;
 	public var timeBarType:String = 'Time Left';
 	public var scoreZoom:Bool = true;
 	public var noReset:Bool = false;
