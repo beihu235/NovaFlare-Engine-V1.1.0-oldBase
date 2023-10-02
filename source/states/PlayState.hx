@@ -2825,7 +2825,7 @@ class PlayState extends MusicBeatState
 				Conductor.songPosition = lastTime;
 			}
 
-			var spr:StrumNote = ClientPrefs.data.playOpponent ? OpponentStrums.members[key] : playerStrums.members[key];
+			var spr:StrumNote = ClientPrefs.data.playOpponent ? opponentStrums.members[key] : playerStrums.members[key];
 			if(strumsBlocked[key] != true && spr != null && spr.animation.curAnim.name != 'confirm')
 			{
 				spr.playAnim('pressed');
@@ -2858,7 +2858,7 @@ class PlayState extends MusicBeatState
 	{
 		if(!cpuControlled && startedCountdown && !paused)
 		{
-			var spr:StrumNote = ClientPrefs.data.playOpponent ? OpponentStrums.members[key] : playerStrums.members[key];
+			var spr:StrumNote = ClientPrefs.data.playOpponent ? opponentStrums.members[key] : playerStrums.members[key];
 			if(spr != null)
 			{
 				spr.playAnim('static');
@@ -3160,7 +3160,7 @@ class PlayState extends MusicBeatState
 
 			if(!cpuControlled)
 			{
-				var spr = OpponentStrums.members[note.noteData];
+				var spr = opponentStrums.members[note.noteData];
 				if(spr != null) spr.playAnim('confirm', true);
 			}
 			else strumPlayAnim(true, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
