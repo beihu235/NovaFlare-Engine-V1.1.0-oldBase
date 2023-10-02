@@ -32,6 +32,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 		
+		var option:Option = new Option('Opponent Code Fix',
+			'If checked, goodNoteHit and opponentNoteHit\nnot follow playOpponent setting to change\n(if you playing it will return goodNoteHit function)',
+			'OpponentCodeFix',
+			'bool');
+		addOption(option);
+		
 		var option:Option = new Option('Opponent Notes',
 			'If unchecked, opponent notes get hidden.',
 			'opponentStrums',
