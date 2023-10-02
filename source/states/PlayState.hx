@@ -1356,6 +1356,8 @@ class PlayState extends MusicBeatState
 				{
 				    gottaHitNote = !section.mustHitSection;
 				}
+				
+				if (ClientPrefs.data.playOpponent) gottaHitNote = !gottaHitNote;
 
 				var oldNote:Note;
 				if (unspawnNotes.length > 0)
@@ -1365,7 +1367,8 @@ class PlayState extends MusicBeatState
 
 				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote);
 				//if (ClientPrefs.data.playOpponent)  swagNote.mustPress = !gottaHitNote;
-				//else swagNote.mustPress = gottaHitNote;
+				//else 
+				swagNote.mustPress = gottaHitNote;
 				swagNote.sustainLength = songNotes[2];
 				swagNote.gfNote = (section.gfSection && (songNotes[1]<4));
 				swagNote.noteType = songNotes[3];
@@ -1385,8 +1388,9 @@ class PlayState extends MusicBeatState
 						oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
 						var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote), daNoteData, oldNote, true);
-						if (ClientPrefs.data.playOpponent)  sustainNote.mustPress = !gottaHitNote;
-				        else sustainNote.mustPress = gottaHitNote;
+						//if (ClientPrefs.data.playOpponent)  sustainNote.mustPress = !gottaHitNote;
+				       // else 
+				        sustainNote.mustPress = gottaHitNote;
 						sustainNote.gfNote = (section.gfSection && (songNotes[1]<4));
 						sustainNote.noteType = swagNote.noteType;
 						sustainNote.scrollFactor.set();
@@ -2907,8 +2911,8 @@ class PlayState extends MusicBeatState
 				notes.forEachAlive(function(daNote:Note)
 				{
 					// hold note functions
-					if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && ((daNote.canBeHit && !ClientPrefs.data.playOpponent) || (!daNote.canBeHit && ClientPrefs.data.playOpponent))
-					&& ((daNote.mustPress && !ClientPrefs.data.playOpponent) || (!daNote.mustPress && ClientPrefs.data.playOpponent)) && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
+					if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
+					&& daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
 						if (ClientPrefs.data.playOpponent) opponentNoteHitForOpponent(daNote);
 						else goodNoteHit(daNote);
 					}
