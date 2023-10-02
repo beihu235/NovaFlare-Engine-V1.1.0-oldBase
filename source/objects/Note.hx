@@ -411,7 +411,7 @@ class Note extends FlxSprite
 			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset * lateHitMult)
 				tooLate = true;
 			
-			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
+			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult) && ClientPrefs.data.playOpponent)
 			{
 				if((isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition)
 					wasGoodHit = true;
@@ -425,7 +425,7 @@ class Note extends FlxSprite
 			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset * lateHitMult)
 				tooLate = true;						
 
-			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
+			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult) && !ClientPrefs.data.playOpponent)
 			{
 				if((isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition)
 					wasGoodHit = true;
