@@ -1830,7 +1830,7 @@ class PlayState extends MusicBeatState
 									    goodNoteHit(daNote);
 									}    
 								}else{
-								    if (daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
+								    if (!daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
 								    goodNoteHitForOpponent(daNote);
 								}
 							}else{
@@ -2776,7 +2776,7 @@ class PlayState extends MusicBeatState
 				var sortedNotesList:Array<Note> = [];
 				notes.forEachAlive(function(daNote:Note)
 				{
-					if (strumsBlocked[daNote.noteData] != true && daNote.canBeHit && daNote.mustPress &&
+					if (strumsBlocked[daNote.noteData] != true && daNote.canBeHit && ((daNote.mustPress && !ClientPrefs.data.playOpponent) || (!daNote.mustPress && ClientPrefs.data.playOpponent)) &&
 						!daNote.tooLate && !daNote.wasGoodHit && !daNote.isSustainNote && !daNote.blockHit)
 					{
 						if(daNote.noteData == key) sortedNotesList.push(daNote);
