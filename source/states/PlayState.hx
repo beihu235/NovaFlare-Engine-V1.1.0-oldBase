@@ -1830,7 +1830,7 @@ class PlayState extends MusicBeatState
 									    goodNoteHit(daNote);
 									}    
 								}else{
-								    if (!daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
+								    if (daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
 								    goodNoteHitForOpponent(daNote);
 								}
 							}else{
