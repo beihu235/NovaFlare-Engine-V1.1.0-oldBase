@@ -1417,8 +1417,8 @@ class PlayState extends MusicBeatState
 							oldNote.updateHitbox();
 						}
 
-						if (sustainNote.mustPress) {						
-						    if (!ClientPrefs.data.playOpponent) sustainNote.x += FlxG.width / 2; // general offset
+						if ((sustainNote.mustPress && !ClientPrefs.data.playOpponent) || (!sustainNote.mustPress && ClientPrefs.data.playOpponent)){
+						 sustainNote.x += FlxG.width / 2; // general offset
 						}
 						else if(ClientPrefs.data.middleScroll)
 						{
@@ -1431,7 +1431,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 
-				if (swagNote.mustPress)
+				if ((swagNote.mustPress && !ClientPrefs.data.playOpponent) || (!swagNote.mustPress && ClientPrefs.data.playOpponent))
 				{
 					swagNote.x += FlxG.width / 2; // general offset
 				}
@@ -1836,15 +1836,10 @@ class PlayState extends MusicBeatState
 							if(daNote.mustPress)
 							{
 								if(cpuControlled && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition))
-									if (!ClientPrefs.data.playOpponent) goodNoteHit(daNote);
-									else goodNoteHitForOpponent(daNote);
+									goodNoteHit(daNote);
 							}
 							else if (daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
-								    if (!ClientPrefs.data.playOpponent) opponentNoteHit(daNote);
-								    else {
-								        if (cpuControlled)
-								        opponentNoteHitForOpponent(daNote);
-								    }
+								opponentNoteHit(daNote);
 
 							if(daNote.isSustainNote && strum.sustainReduce) daNote.clipToStrumNote(strum);
 
