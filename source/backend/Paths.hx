@@ -273,9 +273,9 @@ class Paths
 	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
 	static public function image(key:String, ?library:String = null, ?allowGPU:Bool = true):FlxGraphic
 	{
-	    var bitmap:BitmapData = null;
+		var bitmap:BitmapData = null;
 		var file:String = null;
-	
+
 		#if MODS_ALLOWED
 		file = modsImages(key);
 		if (currentTrackedAssets.exists(file))
@@ -373,10 +373,6 @@ class Paths
 				return true;
 		}
 		#end
-		if (FileSystem.exists(SUtil.getPath() + 'assets/' + key))
-		    return true;
-		if (FileSystem.exists(SUtil.getPath() + 'assets/shared/' + key))
-		    return true;   
 		
 		if(OpenFlAssets.exists(getPath(key, type, library, false))) {
 			return true;
@@ -442,9 +438,9 @@ class Paths
 
 	inline static public function formatToSongPath(path:String) {
 		var invalidChars = ~/[~&\\;:<>#]/;
-		var hideChars = ~/[.,'"%?!]/;  //'
+		var hideChars = ~/[.,'"%?!]/; //'
 
-		var path = invalidChars.split(path.replace(' ', '-')).join("-");
+		var path = invalidChars.split(path.replace(' ', '-')).join("-"); 
 		return hideChars.split(path).join("").toLowerCase();
 	}
 
@@ -507,41 +503,20 @@ class Paths
 		return modFolders('images/' + key + '.json');
 
 	static public function modFolders(key:String) {
-	    var assetsCheck = true;
 		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0) {
 			var fileToCheck:String = mods(Mods.currentModDirectory + '/' + key);
-			if(FileSystem.exists(fileToCheck)) {
-			assetsCheck = false;
-			return fileToCheck;
-			}
+			if(FileSystem.exists(fileToCheck)) return fileToCheck;
 		}
 		for(mod in Mods.getGlobalMods())
 		{
 			var fileToCheck:String = mods(mod + '/' + key);
-			if(FileSystem.exists(fileToCheck)) {
-			assetsCheck = false;
-			return fileToCheck;
-			}
+			if(FileSystem.exists(fileToCheck))
+				return fileToCheck;
 
 		}
-		if (assetsCheck){
-		    var fileToCheck:String = SUtil.getPath() + 'mods/' + key;
-			if(FileSystem.exists(fileToCheck)) {
-			return fileToCheck;
-		    }
-		    var fileToCheck:String = SUtil.getPath() + 'assets/' + key;
-			if(FileSystem.exists(fileToCheck)) {
-			return fileToCheck;
-		    }
-		    else{
-		    var fileToCheck:String = SUtil.getPath() + 'assets/shared/' + key;
-			if(FileSystem.exists(fileToCheck)) {
-			return fileToCheck;
-		    }
-		    }
-		}
-		
 		return SUtil.getPath() + 'mods/' + key;
+		return SUtil.getPath() + 'assets/' + key;
+		return SUtil.getPath() + 'assets/shared/' + key;
 	}
 	#end
 }
