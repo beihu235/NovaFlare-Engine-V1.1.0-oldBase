@@ -1831,7 +1831,7 @@ class PlayState extends MusicBeatState
 								}
 								else{
 								    if (cpuControlled && !daNote.blockHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition))
-									    opponentNoteHitForOpponent(daNote);
+									    goodNoteHitForOpponent(daNote);
 								}
 							}
 							else{
@@ -1840,7 +1840,7 @@ class PlayState extends MusicBeatState
 								        opponentNoteHit(daNote);
 								}else{
 								    if (daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
-								        goodNoteHitForOpponent(daNote);
+								        opponentNoteHitForOpponent(daNote);
 								}
                             
                             }
