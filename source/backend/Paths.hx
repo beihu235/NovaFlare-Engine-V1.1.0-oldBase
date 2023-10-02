@@ -273,9 +273,7 @@ class Paths
 	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
 	static public function image(key:String, ?library:String = null, ?allowGPU:Bool = true):FlxGraphic
 	{
-		var bitmap:BitmapData = null;
-		var file:String = null;
-
+		#if MODS_ALLOWED
 		file = modsImages(key);
 		if (currentTrackedAssets.exists(file))
 		{
@@ -284,37 +282,18 @@ class Paths
 		}
 		else if (FileSystem.exists(file))
 			bitmap = BitmapData.fromFile(file);
-		else{
-		    file = SUtil.getPath() + 'assets/images/' + key + '.png';
-		    if (currentTrackedAssets.exists(file))
-		    {
-			    localTrackedAssets.push(file);
-			    return currentTrackedAssets.get(file);
-		    }
-		    else if (FileSystem.exists(file))
-			    bitmap = BitmapData.fromFile(file);
-		    else{
-		        file = SUtil.getPath() + 'assets/shared/' + key + '.png';
-		        if (currentTrackedAssets.exists(file))
-    		    {
-			        localTrackedAssets.push(file);
-			        return currentTrackedAssets.get(file);
-		        }
-		        else if (FileSystem.exists(file))
-			        bitmap = BitmapData.fromFile(file);
-		        else{
-			        file = getPath('images/$key.png', IMAGE, library);
-			        if (currentTrackedAssets.exists(file))
-    			    {
-    			    	localTrackedAssets.push(file);
-			        	return currentTrackedAssets.get(file);
-    			    }
-			        else if (OpenFlAssets.exists(file, IMAGE))
-			    	    bitmap = OpenFlAssets.getBitmapData(file);
-			    }			    
-		    }
+		else
+		#end
+		{
+			file = getPath('images/$key.png', IMAGE, library);
+			if (currentTrackedAssets.exists(file))
+			{
+				localTrackedAssets.push(file);
+				return currentTrackedAssets.get(file);
+			}
+			else if (OpenFlAssets.exists(file, IMAGE))
+				bitmap = OpenFlAssets.getBitmapData(file);
 		}
-		// update by NF|beihu it can load images at .PsychEngine/assets/image or .PsychEngine/shared now
 
 		if (bitmap != null)
 		{
@@ -543,6 +522,10 @@ class Paths
 
 		}
 		if (assetsCheck){
+		    var fileToCheck:String = SUtil.getPath() + 'mods/' + key;
+			if(FileSystem.exists(fileToCheck)) {
+			return fileToCheck;
+		    }
 		    var fileToCheck:String = SUtil.getPath() + 'assets/' + key;
 			if(FileSystem.exists(fileToCheck)) {
 			return fileToCheck;
