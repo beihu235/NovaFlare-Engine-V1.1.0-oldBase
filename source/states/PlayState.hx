@@ -2902,7 +2902,7 @@ class PlayState extends MusicBeatState
 			for (i in 0...pressArray.length)
 				if(pressArray[i] && strumsBlocked[i] != true)
 					keyPressed(i);
-        var char:Character = ClientPrefs.data.playOpponent ? dad : boyfriend
+        var char:Character = ClientPrefs.data.playOpponent ? dad : boyfriend;
 		if (startedCountdown && !char.stunned && generatedMusic)
 		{
 			// rewritten inputs???
