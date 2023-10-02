@@ -405,21 +405,31 @@ class Note extends FlxSprite
 
 		if (mustPress)
 		{
-			canBeHit = (strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult) &&
+			canBeHit = ClientPrefs.data.playOpponent ? false : (strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult) &&
 						strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult));
+						
+			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult) && !ClientPrefs.data.playOpponent)
+			{
+				if((isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition)
+					wasGoodHit = true;
+			}			
 
-			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit)
+			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit && !ClientPrefs.data.playOpponent)
 				tooLate = true;
 		}
 		else
 		{
-			canBeHit = false;
+			canBeHit = ClientPrefs.data.playOpponent ? (strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult) &&
+						strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult)) : false;
 
-			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
+			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult) && ClientPrefs.data.playOpponent)
 			{
 				if((isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition)
 					wasGoodHit = true;
 			}
+			
+			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit && ClientPrefs.data.playOpponent)
+				tooLate = true;
 		}
 
 		if (tooLate && !inEditor)
