@@ -2825,7 +2825,7 @@ class PlayState extends MusicBeatState
 				Conductor.songPosition = lastTime;
 			}
 
-			var spr:StrumNote = playerStrums.members[key];
+			var spr:StrumNote = ClientPrefs.data.playOpponent ? OpponentStrums.members[key] : playerStrums.members[key];
 			if(strumsBlocked[key] != true && spr != null && spr.animation.curAnim.name != 'confirm')
 			{
 				spr.playAnim('pressed');
@@ -2858,7 +2858,7 @@ class PlayState extends MusicBeatState
 	{
 		if(!cpuControlled && startedCountdown && !paused)
 		{
-			var spr:StrumNote = playerStrums.members[key];
+			var spr:StrumNote = ClientPrefs.data.playOpponent ? OpponentStrums.members[key] : playerStrums.members[key];
 			if(spr != null)
 			{
 				spr.playAnim('static');
@@ -2911,13 +2911,21 @@ class PlayState extends MusicBeatState
 				notes.forEachAlive(function(daNote:Note)
 				{
 					// hold note functions
-					if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
-					&& daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
-						goodNoteHit(daNote);
+					if (!ClientPrefs.data.playOpponent){
+					
+    					if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
+    					&& daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
+    						goodNoteHit(daNote);
+    					}
+					}else{
+					    if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
+    					&& daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
+    						opponentNoteHitForOpponent(daNote);
 					}
 				});
 			}
-
+            
+            var char:Character = ClientPrefs.data.playOpponent ? dad : boyfriend;
 			if (holdArray.contains(true) && !endingSong) {
 				#if ACHIEVEMENTS_ALLOWED
 				var achieve:String = checkForAchievement(['oversinging']);
@@ -2926,9 +2934,9 @@ class PlayState extends MusicBeatState
 				}
 				#end
 			}
-			else if (boyfriend.animation.curAnim != null && boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
+			else if (char.animation.curAnim != null && char.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * char.singDuration && char.animation.curAnim.name.startsWith('sing') && !char.animation.curAnim.name.endsWith('miss'))
 			{
-				boyfriend.dance();
+				char.dance();
 				//boyfriend.animation.curAnim.finish();
 			}
 		}
