@@ -550,6 +550,10 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.data.hideHud;
 		add(scoreTxt);
 
+		strumLineNotes = new FlxTypedGroup<StrumNote>();
+		add(strumLineNotes);
+		add(grpNoteSplashes);
+		
 		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
@@ -559,10 +563,6 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.data.downScroll) {
 			botplayTxt.y = timeBar.y - 78;
 		}
-
-		strumLineNotes = new FlxTypedGroup<StrumNote>();
-		add(strumLineNotes);
-		add(grpNoteSplashes);
 
 		if(ClientPrefs.data.timeBarType == 'Song Name')
 		{
@@ -1828,11 +1828,12 @@ class PlayState extends MusicBeatState
 								if(cpuControlled && !daNote.blockHit && ((daNote.canBeHit && !ClientPrefs.data.playOpponent) || (!daNote.canBeHit && ClientPrefs.data.playOpponent)) && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition)){
 									if (!ClientPrefs.data.playOpponent) goodNoteHit(daNote);
 									else goodNoteHitForOpponent(daNote);
-								}	
-							}
-							else if (daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote){
-								if (!ClientPrefs.data.playOpponent) opponentNoteHit(daNote);
-								else opponentNoteHitForOpponent(daNote);
+								}
+							}else{
+							    if (!daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote){
+								    if (!ClientPrefs.data.playOpponent) opponentNoteHit(daNote);
+								    else opponentNoteHitForOpponent(daNote);
+								}
                             }
 							if(daNote.isSustainNote && strum.sustainReduce) daNote.clipToStrumNote(strum);
 
@@ -3125,7 +3126,7 @@ class PlayState extends MusicBeatState
 				var spr = playerStrums.members[note.noteData];
 				if(spr != null) spr.playAnim('confirm', true);
 			}
-			else strumPlayAnim(false, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
+			else strumPlayAnim(true, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
 			vocals.volume = 1;
 
 			var isSus:Bool = note.isSustainNote; //GET OUT OF MY HEAD, GET OUT OF MY HEAD, GET OUT OF MY HEAD
@@ -3276,7 +3277,7 @@ class PlayState extends MusicBeatState
 		if (SONG.needsVoices)
 			vocals.volume = 1;
 
-		strumPlayAnim(true, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
+		strumPlayAnim(false, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
 		note.hitByOpponent = true;
 
 		var result:Dynamic = callOnLuas('opponentNoteHit', [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
