@@ -515,13 +515,13 @@ class Paths
 
 		}
 		    var fileToCheck:String = SUtil.getPath() + 'assets/' + key;
-			if(FileSystem.exists(fileToCheck)) {
+			if(FileSystem.exists(fileToCheck)) 
 			return fileToCheck;
-		    }
-		    else{
+		    
 		    var fileToCheck:String = SUtil.getPath() + 'assets/shared/' + key;
-			if(FileSystem.exists(fileToCheck)) {
+			if(FileSystem.exists(fileToCheck)) 
 			return fileToCheck;
+			
 	}
 	#end
 }
