@@ -1824,25 +1824,23 @@ class PlayState extends MusicBeatState
 							daNote.followStrumNote(strum, fakeCrochet, songSpeed / playbackRate);
 
 							if(daNote.mustPress)
-							{
+							{   
 							    if (!ClientPrefs.data.playOpponent){
 								    if(cpuControlled && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition))
-									    goodNoteHit(daNote);
-								}
-								else{
-								    if (cpuControlled && !daNote.blockHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition))
-									    goodNoteHitForOpponent(daNote);
-								}
+									goodNoteHit(daNote);
+								}else{
+								    if (daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
+								    goodNoteHitForOpponent(daNote);
+								}	
 							}
 							else{
 							    if (!ClientPrefs.data.playOpponent){
 							        if (daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
-								        opponentNoteHit(daNote);
+								    opponentNoteHit(daNote);
 								}else{
-								    if (daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
-								        opponentNoteHitForOpponent(daNote);
-								}
-                            
+								    if(cpuControlled && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition))
+									opponentNoteHitForOpponent(daNote);
+								}                            
                             }
 							if(daNote.isSustainNote && strum.sustainReduce) daNote.clipToStrumNote(strum);
 
@@ -1850,9 +1848,14 @@ class PlayState extends MusicBeatState
 							// Kill extremely late notes and cause misses
 							if (Conductor.songPosition - daNote.strumTime > noteKillOffset)
 							{
-								if (daNote.mustPress && !cpuControlled &&!daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit))
-									noteMiss(daNote);
-
+							    if (ClientPrefs.data.playOpponent){
+								    if (daNote.mustPress && !cpuControlled &&!daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit))
+									    noteMiss(daNote);
+                                }else{
+                                    if (!daNote.mustPress && !cpuControlled &&!daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit))
+									    noteMissForOpponent(daNote);                                
+                                }
+                                
 								daNote.active = false;
 								daNote.visible = false;
 
@@ -2953,6 +2956,21 @@ class PlayState extends MusicBeatState
 		var result:Dynamic = callOnLuas('noteMiss', [notes.members.indexOf(daNote), daNote.noteData, daNote.noteType, daNote.isSustainNote]);
 		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('noteMiss', [daNote]);
 	}
+	
+	function noteMissForOpponent(daNote:Note):Void { //You didn't hit the key and let it go offscreen, also used by Hurt Notes
+		//Dupe note remove
+		notes.forEachAlive(function(note:Note) {
+			if (daNote != note && !daNote.mustPress && daNote.noteData == note.noteData && daNote.isSustainNote == note.isSustainNote && Math.abs(daNote.strumTime - note.strumTime) < 1) {
+				//note.kill();
+				notes.remove(note, true);
+				note.destroy();
+			}
+		});
+						
+		noteMissCommon(daNote.noteData, daNote);
+		var result:Dynamic = callOnLuas('noteMiss', [notes.members.indexOf(daNote), daNote.noteData, daNote.noteType, daNote.isSustainNote]);
+		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('noteMiss', [daNote]);
+	}
 
 	function noteMissPress(direction:Int = 1):Void //You pressed a key when there was no notes to press for this key
 	{
@@ -2989,7 +3007,7 @@ class PlayState extends MusicBeatState
 		RecalculateRating(true);
 
 		// play character anims
-		var char:Character = boyfriend;
+		var char:Character = ClientPrefs.data.playOpponent ? dad : boyfriend;
 		if((note != null && note.gfNote) || (SONG.notes[curSection] != null && SONG.notes[curSection].gfSection)) char = gf;
 		
 		if(char != null && char.hasMissAnimations)
