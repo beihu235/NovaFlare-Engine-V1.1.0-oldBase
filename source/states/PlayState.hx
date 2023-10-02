@@ -1826,10 +1826,10 @@ class PlayState extends MusicBeatState
 							if(daNote.mustPress)
 							{   
 							    if (!ClientPrefs.data.playOpponent){
-								    if(cpuControlled && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition))
+								    if(cpuControlled && !daNote.blockHit && daNote.canBeHit && daNote.wasGoodHit)
 									goodNoteHit(daNote);
 								}else{
-								    if (!daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote && daNote.strumTime <= Conductor.songPosition)
+								    if (daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
 								    goodNoteHitForOpponent(daNote);
 								}	
 							}
@@ -1838,7 +1838,7 @@ class PlayState extends MusicBeatState
 							        if (daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
 								    opponentNoteHit(daNote);
 								}else{
-								    if(cpuControlled && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition))
+								    if(cpuControlled && !daNote.blockHit && daNote.canBeHit && daNote.wasGoodHit)
 									opponentNoteHitForOpponent(daNote);
 								}                            
                             }
@@ -1849,10 +1849,10 @@ class PlayState extends MusicBeatState
 							if (Conductor.songPosition - daNote.strumTime > noteKillOffset)
 							{
 							    if (ClientPrefs.data.playOpponent){
-								    if (daNote.mustPress && !cpuControlled &&!daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit))
+								    if (daNote.mustPress && !cpuControlled &&!daNote.ignoreNote && !endingSong && daNote.tooLate)
 									    noteMiss(daNote);
                                 }else{
-                                    if (!daNote.mustPress && !cpuControlled && !daNote.ignoreNote && !endingSong && (daNote.tooLate || daNote.wasGoodHit))
+                                    if (!daNote.mustPress && !cpuControlled && !daNote.ignoreNote && !endingSong && daNote.tooLate)
 									    noteMissForOpponent(daNote);                                
                                 }
                                 
@@ -2779,7 +2779,7 @@ class PlayState extends MusicBeatState
 				notes.forEachAlive(function(daNote:Note)
 				{
 					if (strumsBlocked[daNote.noteData] != true && daNote.canBeHit && daNote.mustPress &&
-						!daNote.tooLate && !daNote.wasGoodHit && !daNote.isSustainNote && !daNote.blockHit)
+						daNote.tooLate && !daNote.isSustainNote && !daNote.blockHit)
 					{
 						if(daNote.noteData == key) sortedNotesList.push(daNote);
 						canMiss = true;
@@ -2914,12 +2914,12 @@ class PlayState extends MusicBeatState
 					if (!ClientPrefs.data.playOpponent){
 					
     					if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
-    					&& daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
+    					&& daNote.mustPress && !daNote.blockHit) {
     						goodNoteHit(daNote);
     				    }
 					}else{
 					    if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
-    					&& !daNote.mustPress && !daNote.tooLate && daNote.wasGoodHit && !daNote.blockHit) {
+    					&& !daNote.mustPress && !daNote.blockHit) {
     						opponentNoteHitForOpponent(daNote);
     					}	
 					}
