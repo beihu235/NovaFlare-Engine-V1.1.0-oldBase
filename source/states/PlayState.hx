@@ -1825,37 +1825,33 @@ class PlayState extends MusicBeatState
 
 							if(daNote.mustPress)
 							{   
-							    if (!ClientPrefs.data.playOpponent){
-								    if(cpuControlled && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition))
-									goodNoteHit(daNote);
+							    if (!opponentNoteHitForOpponent){
+								    if (cpuControlled && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition)){
+									    goodNoteHit(daNote);
+									}    
 								}else{
-								    if (!daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote && daNote.strumTime <= Conductor.songPosition)
+								    if (daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
 								    goodNoteHitForOpponent(daNote);
-								}	
-							}
-							else{
-							    if (!ClientPrefs.data.playOpponent){
-							        if (!daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
-								    opponentNoteHit(daNote);
+								}
+							}else{
+							    if (!opponentNoteHitForOpponent){
+							        if (daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote){
+								        opponentNoteHit(daNote);
+								    }
 								}else{
-								    if(cpuControlled && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition))
-									opponentNoteHitForOpponent(daNote);
-								}                            
-                            }
+								    if (cpuControlled && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition)){
+									    opponentNoteHitForOpponent(daNote);
+								    }
+                                }
+                            }   
 							if(daNote.isSustainNote && strum.sustainReduce) daNote.clipToStrumNote(strum);
-
 
 							// Kill extremely late notes and cause misses
 							if (Conductor.songPosition - daNote.strumTime > noteKillOffset)
 							{
-							    if (ClientPrefs.data.playOpponent){
-								    if (daNote.mustPress && !cpuControlled &&!daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit))
-									    noteMiss(daNote);
-                                }else{
-                                    if (!daNote.mustPress && !cpuControlled && !daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit))
-									    noteMissForOpponent(daNote);                                
-                                }
-                                
+								if (daNote.mustPress && !cpuControlled &&!daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit))
+									noteMiss(daNote);
+
 								daNote.active = false;
 								daNote.visible = false;
 
@@ -2764,7 +2760,8 @@ class PlayState extends MusicBeatState
 	{
 		if (!cpuControlled && startedCountdown && !paused && key > -1)
 		{
-			if(notes.length > 0 && !boyfriend.stunned && generatedMusic && !endingSong)
+		    var char:Character = ClientPrefs.data.playOpponent ? dad : boyfriend;
+			if(notes.length > 0 && !char.stunned && generatedMusic && !endingSong)
 			{
 				//more accurate hit time for the ratings?
 				var lastTime:Float = Conductor.songPosition;
@@ -2801,7 +2798,8 @@ class PlayState extends MusicBeatState
 
 						// eee jack detection before was not super good
 						if (!notesStopped) {
-							goodNoteHit(epicNote);
+						    if (!opponentNoteHitForOpponent) goodNoteHit(epicNote);
+						    else opponentNoteHitForOpponent(epicNote);
 							pressNotes.push(epicNote);
 						}
 
@@ -2809,7 +2807,7 @@ class PlayState extends MusicBeatState
 				}
 				else {
 					callOnScripts('onGhostTap', [key]);
-					if (canMiss && !boyfriend.stunned) noteMissPress(key);
+					if (canMiss && !char.stunned) noteMissPress(key);
 				}
 
 				// I dunno what you need this for but here you go
@@ -2911,21 +2909,16 @@ class PlayState extends MusicBeatState
 				notes.forEachAlive(function(daNote:Note)
 				{
 					// hold note functions
-					if (!ClientPrefs.data.playOpponent){
-					
-    					if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
-    					&& daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
-    						goodNoteHit(daNote);
-    				    }
-					}else{
-					    if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
-    					&& !daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
-    						opponentNoteHitForOpponent(daNote);
-    					}	
+					if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
+					&& !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
+						if (daNote.mustPress && !ClientPrefs.data.playOpponent)
+						goodNoteHit(daNote);
+						else
+						opponentNoteHitForOpponent(daNote);
 					}
 				});
 			}
-            
+
 			if (holdArray.contains(true) && !endingSong) {
 				#if ACHIEVEMENTS_ALLOWED
 				var achieve:String = checkForAchievement(['oversinging']);
