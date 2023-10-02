@@ -184,7 +184,7 @@ class Character extends FlxSprite
 
 		if (isPlayer)
 		{
-			if (!ClientPrefs.data.playOpponent) flipX = !flipX;
+			flipX = !flipX;
 
 			/*// Doesn't flip for BF, since his are already in the right place???
 			if (!curCharacter.startsWith('bf'))
@@ -205,9 +205,6 @@ class Character extends FlxSprite
 					animation.getByName('singLEFTmiss').frames = oldMiss;
 				}
 			}*/
-		}
-		else{
-		    if (ClientPrefs.data.playOpponent) flipX = !flipX;
 		}
 
 		switch(curCharacter)
