@@ -182,7 +182,7 @@ class Character extends FlxSprite
 		recalculateDanceIdle();
 		dance();
 
-		if (isPlayer)
+		if ((isPlayer && !ClientPrefs.data.playOpponent) || (!isPlayer && ClientPrefs.data.playOpponent))
 		{
 			flipX = !flipX;
 
@@ -261,10 +261,10 @@ class Character extends FlxSprite
 
 			if (animation.curAnim.name.startsWith('sing'))
 				holdTimer += elapsed;
-			else if(isPlayer)
+			else if ((isPlayer && !ClientPrefs.data.playOpponent) || (!isPlayer && ClientPrefs.data.playOpponent))
 				holdTimer = 0;
 
-			if (!isPlayer && holdTimer >= Conductor.stepCrochet * (0.0011 / (FlxG.sound.music != null ? FlxG.sound.music.pitch : 1)) * singDuration)
+			if (((!isPlayer && !ClientPrefs.data.playOpponent) || (isPlayer && ClientPrefs.data.playOpponent)) && holdTimer >= Conductor.stepCrochet * (0.0011 / (FlxG.sound.music != null ? FlxG.sound.music.pitch : 1)) * singDuration)
 			{
 				dance();
 				holdTimer = 0;
