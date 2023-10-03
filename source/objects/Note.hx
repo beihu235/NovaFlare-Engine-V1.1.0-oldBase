@@ -428,8 +428,8 @@ class Note extends FlxSprite
 					wasGoodHit = true;
 			}
 			
-			//if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit && ClientPrefs.data.playOpponent)
-			//	tooLate = tooLate;
+			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit && ClientPrefs.data.playOpponent)
+				tooLate = tooLate;
 			
 		}
 
