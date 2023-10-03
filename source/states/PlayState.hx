@@ -1866,10 +1866,10 @@ class PlayState extends MusicBeatState
 								if (ClientPrefs.data.playOpponent ? !daNote.mustPress : daNote.mustPress
 								 && ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled 
 								 && !daNote.ignoreNote && !endingSong
-								 && daNote.tooLate
-								 && daNote.wasGoodHit){
+								 && (daNote.tooLate == true || daNote.wasGoodHit == false)
+								 ){
 									noteMiss(daNote);
-                                }
+                                 }
                                 
 								daNote.active = false;
 								daNote.visible = false;
@@ -2980,7 +2980,7 @@ class PlayState extends MusicBeatState
 		});
 		
 		noteMissCommon(daNote.noteData, daNote);
-		var result:Dynamic = callOnLuas('noteMiss', [notes.members.indexOf(daNote), daNote.noteData, daNote.noteType, daNote.isSustainNote, daNote.wasGoodHit, daNote.tooLate]);
+		var result:Dynamic = callOnLuas('noteMiss', [notes.members.indexOf(daNote), daNote.noteData, daNote.noteType, daNote.isSustainNote]);
 		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('noteMiss', [daNote]);
 	}
 
