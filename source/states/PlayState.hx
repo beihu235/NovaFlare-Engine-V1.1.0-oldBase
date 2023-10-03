@@ -2925,8 +2925,8 @@ class PlayState extends MusicBeatState
 				notes.forEachAlive(function(daNote:Note)
 				{
 					// hold note functions
-					if (/*strumsBlocked[daNote.noteData] != true &&*/ daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
-					&& !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
+					if (daNote.isSustainNote && daNote.canBeHit)
+					{
 						if (daNote.mustPress && !ClientPrefs.data.playOpponent)
 						goodNoteHit(daNote);
 						else
