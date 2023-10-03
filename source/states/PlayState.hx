@@ -1866,8 +1866,8 @@ class PlayState extends MusicBeatState
 								if (ClientPrefs.data.playOpponent ? !daNote.mustPress : daNote.mustPress
 								 && ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled 
 								 && !daNote.ignoreNote && !endingSong
-								 && daNote.tooLate 
-								 && !daNote.wasGoodHit){
+								 && daNote.tooLate
+								 && daNote.wasGoodHit){
 									noteMiss(daNote);
                                 }
                                 
@@ -2980,7 +2980,7 @@ class PlayState extends MusicBeatState
 		});
 		
 		noteMissCommon(daNote.noteData, daNote);
-		var result:Dynamic = callOnLuas('noteMiss', [notes.members.indexOf(daNote), daNote.noteData, daNote.noteType, daNote.isSustainNote]);
+		var result:Dynamic = callOnLuas('noteMiss', [notes.members.indexOf(daNote), daNote.noteData, daNote.noteType, daNote.isSustainNote, daNote.wasGoodHit, daNote.tooLate]);
 		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('noteMiss', [daNote]);
 	}
 
@@ -3176,7 +3176,7 @@ class PlayState extends MusicBeatState
 			var leData:Int = Math.round(Math.abs(note.noteData));
 			var leType:String = note.noteType;
 			
-			var result:Dynamic = callOnLuas('opponentNoteHit', [notes.members.indexOf(note), leData, leType, isSus, note.wasGoodHit]);
+			var result:Dynamic = callOnLuas('opponentNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
 			if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('opponentNoteHit', [note]);
 
 			if (!note.isSustainNote)
