@@ -1526,7 +1526,7 @@ class PlayState extends MusicBeatState
 		{
 			// FlxG.log.add(i);
 			var targetAlpha:Float = 1;
-			if(ClientPrefs.data.playOpponent) {
+			if(!ClientPrefs.data.playOpponent) {
 				if (player < 1) {
 					if (!ClientPrefs.data.opponentStrums)
 						targetAlpha = 0;
