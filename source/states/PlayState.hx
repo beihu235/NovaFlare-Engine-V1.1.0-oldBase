@@ -3176,7 +3176,7 @@ class PlayState extends MusicBeatState
 	{
 		if (!note.wasGoodHit)
 		{
-			if(ClientPrefs.data.playOpponent ? cpuControlled_opponent : cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
+			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
 
 			note.wasGoodHit = true;
 			if (ClientPrefs.data.hitsoundVolume > 0 && !note.hitsoundDisabled)
@@ -3245,7 +3245,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			if(ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled)
+			if(!cpuControlled)
 			{
 				var spr = playerStrums.members[note.noteData];
 				if(spr != null) spr.playAnim('confirm', true);
