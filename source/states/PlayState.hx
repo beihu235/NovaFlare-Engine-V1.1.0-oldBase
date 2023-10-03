@@ -1866,8 +1866,8 @@ class PlayState extends MusicBeatState
 								if (((daNote.mustPress && !ClientPrefs.data.playOpponent) || (!daNote.mustPress && ClientPrefs.data.playOpponent))
 								 && ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled 
 								 && !daNote.ignoreNote && !endingSong
-								 && (/*daNote.tooLate ||*/ !daNote.wasGoodHit)){
-									noteMiss(daNote);
+								 && (daNote.tooLate || !daNote.wasGoodHit)){
+									//noteMiss(daNote);
                                 }
                                 
 								daNote.active = false;
@@ -1926,7 +1926,7 @@ class PlayState extends MusicBeatState
 
 		setOnScripts('cameraX', camFollow.x);
 		setOnScripts('cameraY', camFollow.y);
-		setOnScripts('botPlay', ClientPrefs.data.playOpponent ? cpuControlled_opponent : cpuControlled);
+		setOnScripts('botPlay', cpuControlled);
 		callOnScripts('onUpdatePost', [elapsed]);
 	}
 
