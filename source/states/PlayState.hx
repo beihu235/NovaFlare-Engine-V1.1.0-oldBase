@@ -3091,8 +3091,7 @@ class PlayState extends MusicBeatState
 	    if (!note.wasGoodHit)
 		{
 			if(cpuControlled_opponent && (note.ignoreNote || note.hitCausesMiss)) return;
-
-			note.wasGoodHit = true;
+			
 			if (ClientPrefs.data.hitsoundVolume > 0 && !note.hitsoundDisabled)
 				FlxG.sound.play(Paths.sound(note.hitsound), ClientPrefs.data.hitsoundVolume);
 
@@ -3120,6 +3119,8 @@ class PlayState extends MusicBeatState
 				}
 				return;
 			}
+			
+			note.wasGoodHit = true;
 
 			if (!note.isSustainNote)
 			{
