@@ -2925,11 +2925,17 @@ class PlayState extends MusicBeatState
 				notes.forEachAlive(function(daNote:Note)
 				{
 					// hold note functions
-					if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && holdArray[daNote.noteData] && daNote.canBeHit
-					&& !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
+					if (strumsBlocked[daNote.noteData] != true 
+				    && daNote.isSustainNote 
+					&& holdArray[daNote.noteData] 
+					&& daNote.canBeHit
+					&& !daNote.tooLate 
+					&& !daNote.wasGoodHit
+					&& !daNote.blockHit) 
+					{
 						if (daNote.mustPress && !ClientPrefs.data.playOpponent)
 						goodNoteHit(daNote);
-						else
+						if (!daNote.mustPress && ClientPrefs.data.playOpponent)
 						opponentNoteHitForOpponent(daNote);
 					}
 				});
@@ -3078,7 +3084,7 @@ class PlayState extends MusicBeatState
 	
 	function opponentNoteHitForOpponent(note:Note):Void
 	{
-	    if (!note.wasGoodHit)
+	    if (!note.wasGoodHit || note.wasGoodHit)
 		{
 			if(cpuControlled_opponent && (note.ignoreNote || note.hitCausesMiss)) return;
 
