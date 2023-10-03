@@ -2929,7 +2929,7 @@ class PlayState extends MusicBeatState
 					/*&& !daNote.tooLate && !daNote.wasGoodHit*/ && !daNote.blockHit) {
 						if (daNote.mustPress && !ClientPrefs.data.playOpponent)
 						goodNoteHit(daNote);
-						else
+						if (!daNote.mustPress && ClientPrefs.data.playOpponent)
 						opponentNoteHitForOpponent(daNote);
 					}
 				});
