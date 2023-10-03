@@ -371,6 +371,9 @@ class Paths
 
 			if (FileSystem.exists(mods(Mods.currentModDirectory + '/' + key)) || FileSystem.exists(mods(key)))
 				return true;
+			
+				if (FileSystem.exists(SUtil.getPath() + 'assets/shared/' + key) || FileSystem.exists(SUtil.getPath() + 'assets/' + key))
+				return true;
 		}
 		#end
 		
