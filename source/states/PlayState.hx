@@ -222,6 +222,7 @@ class PlayState extends MusicBeatState
 	public var healthLoss:Float = 1;
 	public var instakillOnMiss:Bool = false;
 	public var cpuControlled:Bool = false;
+	public var cpuControlled_opponent:Bool = false;
 	public var practiceMode:Bool = false;
 
 	public var botplaySine:Float = 0;
@@ -323,7 +324,9 @@ class PlayState extends MusicBeatState
 		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill');
 		practiceMode = ClientPrefs.getGameplaySetting('practice');
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay');
-
+        cpuControlled_opponent = ClientPrefs.getGameplaySetting('botplay');
+        if (ClientPrefs.data.playOpponent) cpuControlled = true;
+        
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
@@ -558,7 +561,7 @@ class PlayState extends MusicBeatState
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
-		botplayTxt.visible = cpuControlled;
+		botplayTxt.visible = ClientPrefs.data.playOpponent ? cpuControlled_opponent : cpuControlled;
 		add(botplayTxt);
 		if(ClientPrefs.data.downScroll) {
 			botplayTxt.y = timeBar.y - 78;
@@ -1199,7 +1202,7 @@ class PlayState extends MusicBeatState
 		+ ' | Misses: ' + songMisses
 		+ ' | Rating: ' + str;
 
-		if(ClientPrefs.data.scoreZoom && !miss && !cpuControlled)
+		if(ClientPrefs.data.scoreZoom && !miss && ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled)
 		{
 			if(scoreTxtTween != null) {
 				scoreTxtTween.cancel();
@@ -1803,7 +1806,7 @@ class PlayState extends MusicBeatState
 		{
 			if(!inCutscene)
 			{
-				if(!cpuControlled) {
+				if(ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled) {
 					keysCheck();
 				} else if(boyfriend.animation.curAnim != null && boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss')) {
 					boyfriend.dance();
@@ -1839,7 +1842,7 @@ class PlayState extends MusicBeatState
 								        opponentNoteHit(daNote);
 								    }
 								}else{
-								    if (cpuControlled && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition)){
+								    if (cpuControlled_opponent && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition)){
 									    opponentNoteHitForOpponent(daNote);
 								    }
                                 }
@@ -1850,7 +1853,7 @@ class PlayState extends MusicBeatState
 							// Kill extremely late notes and cause misses
 							if (Conductor.songPosition - daNote.strumTime > noteKillOffset)
 							{
-								if (((daNote.mustPress && !ClientPrefs.data.playOpponent) || (!daNote.mustPress && ClientPrefs.data.playOpponent)) && !cpuControlled && !daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit)){
+								if (((daNote.mustPress && !ClientPrefs.data.playOpponent) || (!daNote.mustPress && ClientPrefs.data.playOpponent)) && ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled && !daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit)){
 									noteMiss(daNote);
                                 }
                                 
@@ -1910,7 +1913,7 @@ class PlayState extends MusicBeatState
 
 		setOnScripts('cameraX', camFollow.x);
 		setOnScripts('cameraY', camFollow.y);
-		setOnScripts('botPlay', cpuControlled);
+		setOnScripts('botPlay', ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled);
 		callOnScripts('onUpdatePost', [elapsed]);
 	}
 
@@ -1937,7 +1940,7 @@ class PlayState extends MusicBeatState
 			MusicBeatState.androidc.y = 720;
 			//MusicBeatState.androidc.visible = true;
 		#end
-		if(!cpuControlled)
+		if(ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled)
 		{
 			for (note in playerStrums)
 				if(note.animation.curAnim != null && note.animation.curAnim.name != 'static')
@@ -1982,7 +1985,7 @@ class PlayState extends MusicBeatState
 
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
 	function doDeathCheck(?skipHealthCheck:Bool = false) {
-		if (((skipHealthCheck && instakillOnMiss) || health <= 0) && !practiceMode && !isDead && !rsCheck)
+		if (((skipHealthCheck && instakillOnMiss) || health <= 0) && !practiceMode && !isDead && !rsCheck && ClientPrefs.getGameplaySetting('botplay') == false)
 		{
 			var ret:Dynamic = callOnScripts('onGameOver', null, true);
 			if(ret != FunkinLua.Function_Stop) {
@@ -2602,7 +2605,7 @@ class PlayState extends MusicBeatState
 		if(daRating.noteSplash && !note.noteSplashData.disabled)
 			spawnNoteSplashOnNote(note);
 
-		if(!practiceMode && !cpuControlled) {
+		if(!practiceMode && ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled) {
 			songScore += score;
 			if(!note.ratingDisabled)
 			{
@@ -2760,7 +2763,7 @@ class PlayState extends MusicBeatState
 
 	private function keyPressed(key:Int)
 	{
-		if (!cpuControlled && startedCountdown && !paused && key > -1)
+		if (ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled && startedCountdown && !paused && key > -1)
 		{
 		    var char:Character = ClientPrefs.data.playOpponent ? dad : boyfriend;
 			if(notes.length > 0 && !char.stunned && generatedMusic && !endingSong)
@@ -2856,7 +2859,7 @@ class PlayState extends MusicBeatState
 
 	private function keyReleased(key:Int)
 	{
-		if(!cpuControlled && startedCountdown && !paused)
+		if(cpuControlled_opponent && startedCountdown && !paused)
 		{
 			var spr:StrumNote = ClientPrefs.data.playOpponent ? opponentStrums.members[key] : playerStrums.members[key];
 			if(spr != null)
@@ -3066,7 +3069,7 @@ class PlayState extends MusicBeatState
 	{
 	    if (!note.wasGoodHit)
 		{
-			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
+			if(ClientPrefs.data.playOpponent ? cpuControlled_opponent : cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
 
 			note.wasGoodHit = true;
 			if (ClientPrefs.data.hitsoundVolume > 0 && !note.hitsoundDisabled)
@@ -3135,7 +3138,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			if(!cpuControlled)
+			if(ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled)
 			{
 				var spr = opponentStrums.members[note.noteData];
 				if(spr != null) spr.playAnim('confirm', true);
@@ -3163,7 +3166,7 @@ class PlayState extends MusicBeatState
 	{
 		if (!note.wasGoodHit)
 		{
-			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
+			if(ClientPrefs.data.playOpponent ? cpuControlled_opponent : cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
 
 			note.wasGoodHit = true;
 			if (ClientPrefs.data.hitsoundVolume > 0 && !note.hitsoundDisabled)
@@ -3232,7 +3235,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			if(!cpuControlled)
+			if(ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled)
 			{
 				var spr = playerStrums.members[note.noteData];
 				if(spr != null) spr.playAnim('confirm', true);
@@ -3244,6 +3247,7 @@ class PlayState extends MusicBeatState
 			var leData:Int = Math.round(Math.abs(note.noteData));
 			var leType:String = note.noteType;
 			
+			var functionReturn:String = ClientPrefs.data.playOpponent ? 'opponentNoteHit' : 'goodNoteHit';
 			var result:Dynamic = callOnLuas('goodNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
 			if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('goodNoteHit', [note]);
 
@@ -3293,9 +3297,10 @@ class PlayState extends MusicBeatState
 
 		strumPlayAnim(false, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
 		note.hitByOpponent = true;
-
-		var result:Dynamic = callOnLuas('goodNoteHit', [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
-		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('goodNoteHit', [note]);
+        
+        var functionReturn:String = ClientPrefs.data.playOpponent ? 'opponentNoteHit' : 'goodNoteHit';
+		var result:Dynamic = callOnLuas(functionReturn, [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
+		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript(functionReturn, [note]);
 
 		if (!note.isSustainNote)
 		{
@@ -3729,7 +3734,7 @@ class PlayState extends MusicBeatState
 		var usedPractice:Bool = (ClientPrefs.getGameplaySetting('practice') || ClientPrefs.getGameplaySetting('botplay'));
 		for (i in 0...achievesToCheck.length) {
 			var achievementName:String = achievesToCheck[i];
-			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled && Achievements.getAchievementIndex(achievementName) > -1) {
+			if(!Achievements.isAchievementUnlocked(achievementName) && ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled && Achievements.getAchievementIndex(achievementName) > -1) {
 				var unlock:Bool = false;
 				if (achievementName == WeekData.getWeekFileName() + '_nomiss') // any FC achievements, name should be "weekFileName_nomiss", e.g: "week3_nomiss";
 				{
