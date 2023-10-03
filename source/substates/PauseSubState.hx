@@ -288,9 +288,14 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.unspawnNotes = [];
 					PlayState.instance.finishSong(true);
 				case 'Toggle Botplay':
-					PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
-					PlayState.changedDifficulty = true;
-					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
+				    if(!ClientPrefs.data.playOpponent){
+    					PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
+    					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
+					}else{
+				    	PlayState.instance.cpuControlled_opponent = !PlayState.instance.cpuControlled_opponent;
+				    	PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled_opponent;
+				    }
+					    PlayState.changedDifficulty = true;
 					PlayState.instance.botplayTxt.alpha = 1;
 					PlayState.instance.botplaySine = 0;
 				case 'Options':
