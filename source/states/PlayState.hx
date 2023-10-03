@@ -722,7 +722,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 		songSpeed = value;
-		//noteKillOffset = Math.max(Conductor.stepCrochet, 350 / songSpeed * playbackRate);
+		noteKillOffset = Math.max(Conductor.stepCrochet, 350 / songSpeed * playbackRate);
 		return value;
 	}
 
@@ -1866,7 +1866,7 @@ class PlayState extends MusicBeatState
 								if (ClientPrefs.data.playOpponent ? !daNote.mustPress : daNote.mustPress
 								 && ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled 
 								 && !daNote.ignoreNote && !endingSong
-								 && !daNote.wasGoodHit){
+								 && (daNote.tooLate || !daNote.wasGoodHit)){
 									noteMiss(daNote);
                                 }
                                 
@@ -3121,7 +3121,7 @@ class PlayState extends MusicBeatState
 				return;
 			}
 			
-			note.wasGoodHit = true;
+			
 
 			if (!note.isSustainNote)
 			{
@@ -3182,6 +3182,8 @@ class PlayState extends MusicBeatState
 				notes.remove(note, true);
 				note.destroy();
 			}
+			
+			note.wasGoodHit = true;
 		}
 	}
 
