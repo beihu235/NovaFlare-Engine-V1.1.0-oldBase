@@ -1814,11 +1814,12 @@ class PlayState extends MusicBeatState
 		if (generatedMusic)
 		{
 			if(!inCutscene)
-			{
+			{   
+			    char:Character = ClientPrefs.data.playOpponent ? dad : boyfriend;
 				if(ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled) {
 					keysCheck();
-				} else if(boyfriend.animation.curAnim != null && boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss')) {
-					boyfriend.dance();
+				} else if(char.animation.curAnim != null && char.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * char.singDuration && char.animation.curAnim.name.startsWith('sing') && !char.animation.curAnim.name.endsWith('miss')) {
+					char.dance();
 					//boyfriend.animation.curAnim.finish();
 				}
 
