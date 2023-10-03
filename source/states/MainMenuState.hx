@@ -41,7 +41,6 @@ class MainMenuState extends MusicBeatState
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
-	var camFollowPos:FlxObject;
 	
 	var logoBl:FlxSprite;
 	
@@ -136,9 +135,7 @@ class MainMenuState extends MusicBeatState
 		logoBl.updateHitbox();
 
 		camFollow = new FlxObject(0, 0, 1, 1);
-		camFollowPos = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
-		add(camFollowPos);
 
 		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
 		magenta.scrollFactor.set(0, yScroll);
@@ -172,19 +169,13 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
 			
-			//menuItem.x = menuItem.x - menuItem.width;
-			
-			//menuItem.screenCenter(X);
-			//menuItem.centerOrigin();
-			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.antialiasing = ClientPrefs.data.antialiasing;
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
-			//menuItem.offset.x = menuItem.offset.x * 0.8;
-			//menuItem.offset.y = menuItem.offset.y * 0.8;
+			
 			
 			if (menuItem.ID == curSelected){
 			menuItem.animation.play('selected');
@@ -278,30 +269,6 @@ class MainMenuState extends MusicBeatState
 		if (FlxG.mouse.justPressed) usingMouse = true;
 		
         if(!endCheck){
-		
-		
-		if (controls.UI_UP_P)
-			{
-			    usingMouse = false;
-				FlxG.sound.play(Paths.sound('scrollMenu'));				
-				curSelected--;
-				checkChoose();
-			}
-
-			if (controls.UI_DOWN_P)
-			{
-			    usingMouse = false;
-				FlxG.sound.play(Paths.sound('scrollMenu'));
-				curSelected++;
-				checkChoose();
-			}
-			
-			    
-			if (controls.ACCEPT) {
-			    usingMouse = false;	
-			    //checkChoose();
-				selectSomething();
-		    }
 		    
 		menuItems.forEach(function(spr:FlxSprite)
 		{
@@ -333,7 +300,30 @@ class MainMenuState extends MusicBeatState
 			    }
 			}
 		});
-		
+		    
+		    if (controls.UI_UP_P)
+			{
+			    usingMouse = false;
+				FlxG.sound.play(Paths.sound('scrollMenu'));				
+				curSelected--;
+				checkChoose();
+			}
+
+			if (controls.UI_DOWN_P)
+			{
+			    usingMouse = false;
+				FlxG.sound.play(Paths.sound('scrollMenu'));
+				curSelected++;
+				checkChoose();
+			}
+			
+			    
+			if (controls.ACCEPT) {
+			    usingMouse = false;	
+			    //checkChoose();
+				selectSomething();
+		    }
+		    
 			if (controls.BACK)
 			{
 				endCheck = true;
