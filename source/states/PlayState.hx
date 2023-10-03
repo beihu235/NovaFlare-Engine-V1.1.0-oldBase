@@ -1922,7 +1922,7 @@ class PlayState extends MusicBeatState
 
 		setOnScripts('cameraX', camFollow.x);
 		setOnScripts('cameraY', camFollow.y);
-		setOnScripts('botPlay', ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled);
+		setOnScripts('botPlay', ClientPrefs.data.playOpponent ? cpuControlled_opponent : cpuControlled);
 		callOnScripts('onUpdatePost', [elapsed]);
 	}
 
@@ -1951,7 +1951,8 @@ class PlayState extends MusicBeatState
 		#end
 		if(ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled)
 		{
-			for (note in playerStrums)
+		    var Strums = ClientPrefs.data.playOpponent ? opponentStrums : playerStrums;
+			for (note in Strums)
 				if(note.animation.curAnim != null && note.animation.curAnim.name != 'static')
 				{
 					note.playAnim('static');
