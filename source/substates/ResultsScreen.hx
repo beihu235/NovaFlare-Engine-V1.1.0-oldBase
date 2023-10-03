@@ -219,8 +219,9 @@ class ResultsScreen extends MusicBeatSubstate
 		add(graphSizeRight);		
 		
 		//-----------------------BG
-		
-		clearText = new FlxText(20, -155, 0, 'Song Cleared!\n' + PlayState.SONG.song + ' - ' + Difficulty.getString() + '\n');
+		var opponentExtend:String = '';
+		if (ClientPrefs.data.playOpponent) opponentExtend = '(Opponent)';
+		clearText = new FlxText(20, -155, 0, 'Song Cleared!\n' + PlayState.SONG.song + opponentExtend + ' - ' + Difficulty.getString() + '\n');
 		clearText.size = 34;
 		clearText.font = Paths.font('vcr.ttf');
 		clearText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
