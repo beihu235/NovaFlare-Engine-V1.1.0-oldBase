@@ -182,8 +182,7 @@ class Character extends FlxSprite
 		recalculateDanceIdle();
 		dance();
 
-		if ((isPlayer && !ClientPrefs.data.playOpponent) || (!isPlayer && ClientPrefs.data.playOpponent))
-		{
+	    if (isPlayer){
 			flipX = !flipX;
 
 			/*// Doesn't flip for BF, since his are already in the right place???
