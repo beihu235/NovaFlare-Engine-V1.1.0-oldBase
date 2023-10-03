@@ -144,7 +144,7 @@ class FunkinLua {
 		set('healthLossMult', game.healthLoss);
 		set('playbackRate', game.playbackRate);
 		set('instakillOnMiss', game.instakillOnMiss);
-		set('botPlay', game.cpuControlled);
+		set('botPlay', ClientPrefs.data.playOpponent ? game.cpuControlled_opponent : game.cpuControlled);
 		set('practice', game.practiceMode);
 
 		for (i in 0...4) {
