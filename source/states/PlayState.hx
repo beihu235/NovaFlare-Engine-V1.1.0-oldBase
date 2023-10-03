@@ -1867,7 +1867,7 @@ class PlayState extends MusicBeatState
 								 && ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled 
 								 && !daNote.ignoreNote && !endingSong
 								 && daNote.tooLate 
-								 && !daNote.wasGoodHit)){
+								 && !daNote.wasGoodHit){
 									noteMiss(daNote);
                                 }
                                 
