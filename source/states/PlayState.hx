@@ -1851,7 +1851,7 @@ class PlayState extends MusicBeatState
 								        opponentNoteHit(daNote);
 								    }
 								}else{
-								    if (cpuControlled && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition)){
+								    if (cpuControlled_opponent && !daNote.blockHit && daNote.canBeHit && (daNote.isSustainNote || daNote.strumTime <= Conductor.songPosition)){
 									    opponentNoteHitForOpponent(daNote);
 								    }
                                 }
@@ -3079,7 +3079,7 @@ class PlayState extends MusicBeatState
 	{
 	    if (!note.wasGoodHit)
 		{
-			if(ClientPrefs.data.playOpponent ? cpuControlled_opponent : cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
+			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
 
 			note.wasGoodHit = true;
 			if (ClientPrefs.data.hitsoundVolume > 0 && !note.hitsoundDisabled)
@@ -3148,7 +3148,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			if(ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled)
+			if(!cpuControlled)
 			{
 				var spr = opponentStrums.members[note.noteData];
 				if(spr != null) spr.playAnim('confirm', true);
@@ -3159,9 +3159,9 @@ class PlayState extends MusicBeatState
 			var isSus:Bool = note.isSustainNote; //GET OUT OF MY HEAD, GET OUT OF MY HEAD, GET OUT OF MY HEAD
 			var leData:Int = Math.round(Math.abs(note.noteData));
 			var leType:String = note.noteType;
-			var functionReturn:String = ClientPrefs.data.OpponentCodeFix ? 'goodNoteHit' : 'opponentNoteHit';
-			var result:Dynamic = callOnLuas(functionReturn, [notes.members.indexOf(note), leData, leType, isSus]);
-			if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript(functionReturn, [note]);
+			
+			var result:Dynamic = callOnLuas('opponentNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
+			if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('opponentNoteHit', [note]);
 
 			if (!note.isSustainNote)
 			{
