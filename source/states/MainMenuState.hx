@@ -299,7 +299,7 @@ class MainMenuState extends MusicBeatState
 			    
 			if (controls.ACCEPT) {
 			    usingMouse = false;	
-			    checkChoose();
+			    //checkChoose();
 				selectSomething();
 		    }
 		    
