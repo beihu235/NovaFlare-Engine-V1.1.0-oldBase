@@ -1098,11 +1098,10 @@ class PlayState extends MusicBeatState
 				}
 
 				notes.forEachAlive(function(note:Note) {
-					if(ClientPrefs.data.opponentStrums || note.mustPress)
-					{
+					if (ClientPrefs.data.opponentStrums || note.mustPress) {
 						note.copyAlpha = false;
 						note.alpha = note.multAlpha;
-						if(ClientPrefs.data.middleScroll && !note.mustPress)
+						if ((ClientPrefs.data.middleScroll && !note.mustPress && !ClientPrefs.data.playOpponent) || (ClientPrefs.data.middleScroll && note.mustPress && ClientPrefs.data.playOpponent))
 							note.alpha *= 0.35;
 					}
 				});
@@ -1527,10 +1526,20 @@ class PlayState extends MusicBeatState
 		{
 			// FlxG.log.add(i);
 			var targetAlpha:Float = 1;
-			if (player < 1)
-			{
-				if(!ClientPrefs.data.opponentStrums) targetAlpha = 0;
-				else if(ClientPrefs.data.middleScroll) targetAlpha = 0.35;
+			if(ClientPrefs.data.playOpponent) {
+				if (player < 1) {
+					if (!ClientPrefs.data.opponentStrums)
+						targetAlpha = 0;
+					else if (ClientPrefs.data.middleScroll)
+						targetAlpha = 0.35;
+				}
+			} else {
+				if (player == 1) {
+					if (!ClientPrefs.data.opponentStrums)
+						targetAlpha = 0;
+					else if (ClientPrefs.data.middleScroll)
+						targetAlpha = 0.35;
+				}
 			}
 
 			var babyArrow:StrumNote = new StrumNote(strumLineX, strumLineY, i, player);
