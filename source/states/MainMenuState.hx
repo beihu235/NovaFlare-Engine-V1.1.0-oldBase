@@ -265,8 +265,6 @@ class MainMenuState extends MusicBeatState
 		}
 
 		FlxG.camera.followLerp = FlxMath.bound(elapsed * 9 / (FlxG.updateFramerate / 60), 0, 1);
-
-		if (FlxG.mouse.justPressed) usingMouse = true;
 		
         if(!endCheck){
 		    
@@ -300,6 +298,8 @@ class MainMenuState extends MusicBeatState
 			    }
 			}
 		});
+		
+		    if (FlxG.mouse.justPressed) usingMouse = true;
 		    
 		    if (controls.UI_UP_P)
 			{
