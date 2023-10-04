@@ -3094,6 +3094,9 @@ class PlayState extends MusicBeatState
 		{
 			if(cpuControlled_opponent && (note.ignoreNote || note.hitCausesMiss)) return;
 			
+			if (Paths.formatToSongPath(SONG.song) != 'tutorial')
+			camZooming = true;
+			
 			if (ClientPrefs.data.hitsoundVolume > 0 && !note.hitsoundDisabled)
 				FlxG.sound.play(Paths.sound(note.hitsound), ClientPrefs.data.hitsoundVolume);
 
@@ -3292,9 +3295,9 @@ class PlayState extends MusicBeatState
 	
 	function goodNoteHitForOpponent(note:Note):Void
 	{
-	    if (Paths.formatToSongPath(SONG.song) != 'tutorial')
+	    /*if (Paths.formatToSongPath(SONG.song) != 'tutorial')
 			camZooming = true;
-
+        */
 		if(note.noteType == 'Hey!' && boyfriend.animOffsets.exists('hey')) {
 			boyfriend.playAnim('hey', true);
 			boyfriend.specialAnim = true;
