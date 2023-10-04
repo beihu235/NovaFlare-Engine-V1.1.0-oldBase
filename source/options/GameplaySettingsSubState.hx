@@ -38,6 +38,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 		
+		var option:Option = new Option('Opponent Botplay Fix',
+			'If checked, cpuControlled is open for boyfriend when open playOpponent\nfix some mode need press somthing',
+			'botOpponentFix',
+			'bool');
+		addOption(option);
+		
 		var option:Option = new Option('Opponent Notes',
 			'If unchecked, opponent notes get hidden.',
 			'opponentStrums',
