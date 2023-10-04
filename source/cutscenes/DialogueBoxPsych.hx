@@ -77,7 +77,6 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		bgFade.visible = true;
 		bgFade.alpha = 0;
 		add(bgFade);
-		bgFade.camera = PlayState.instance.camDialogue;
 
 		this.dialogueList = dialogueList;
 		spawnCharacters();
@@ -85,7 +84,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		box = new FlxSprite(70, 370);
 		box.frames = Paths.getSparrowAtlas('speech_bubble');
 		box.scrollFactor.set();
-		box.antialiasing = ClientPrefs.globalAntialiasing;
+		box.antialiasing = ClientPrefs.data.antialiasing;
 		box.animation.addByPrefix('normal', 'speech bubble normal', 24);
 		box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
 		box.animation.addByPrefix('angry', 'AHH speech bubble', 24);
@@ -99,11 +98,9 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		box.setGraphicSize(Std.int(box.width * 0.9));
 		box.updateHitbox();
 		add(box);
-		box.camera = PlayState.instance.camDialogue;
 
 		daText = initializeText(220 , PlayState.DEFAULT_TEXT_Y, 700, PlayState.DEFAULT_TEXT_SIZE, 'test');
 		add(daText);
-		daText.camera = PlayState.instance.camDialogue;
 
 		startNextDialog();
 	}
@@ -144,7 +141,6 @@ class DialogueBoxPsych extends FlxSpriteGroup
 			char.scrollFactor.set();
 			char.alpha = 0.00001;
 			add(char);
-			char.camera = PlayState.instance.camDialogue;
 
 			var saveY:Bool = false;
 			switch (char.jsonFile.dialogue_pos)
@@ -194,9 +190,19 @@ class DialogueBoxPsych extends FlxSpriteGroup
 			if (bgFade.alpha > 0.5)
 				bgFade.alpha = 0.5;
 
-			// If accept pressed
-			if (!PlayState.isLockDialogue && PlayerSettings.player1.controls.ACCEPT)
-			{
+			#if android
+                var justTouched:Bool = false;
+
+		        for (touch in FlxG.touches.list)
+		        {
+			        if (touch.justPressed)
+			        {
+				        justTouched = true;
+			        }
+		        }
+		        #end
+
+			if(FlxG.keys.justPressed.ESCAPE #if android || justTouched #end) {
 				// If the current dialogue still going
 				if (!finishedText)
 				{
