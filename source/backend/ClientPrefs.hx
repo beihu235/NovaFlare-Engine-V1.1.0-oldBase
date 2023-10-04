@@ -15,6 +15,7 @@ class SaveVariables {
 	public var fixLNL:Int= 0; //fix long note length
 	public var playOpponent:Bool = false;
 	public var OpponentCodeFix:Bool = false;
+	public var botOpponentFix:Bool = true;
 	public var opponentStrums:Bool = true;
 	
 	public var showFPS:Bool = true;
@@ -89,7 +90,6 @@ class SaveVariables {
 	public var safeFrames:Float = 10;
 	public var discordRPC:Bool = true;	
 	
-	public var hitboxmode:String = 'New';  //it be delete   
 	public var spaceExtend:Bool = true;
 	public var shiftExtend:Bool = true;
 	public var hitboxLocation:String = 'Bottom';
