@@ -655,7 +655,6 @@ class TitleState extends MusicBeatState
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
 				case 6:
-					#if PSYCH_WATERMARKS
 					createCoolText(['NF Engine by'], 40);
 				// credTextShit.visible = true;
 				case 7:
