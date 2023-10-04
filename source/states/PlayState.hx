@@ -325,7 +325,7 @@ class PlayState extends MusicBeatState
 		practiceMode = ClientPrefs.getGameplaySetting('practice');
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay');
         cpuControlled_opponent = ClientPrefs.getGameplaySetting('botplay');
-        if (ClientPrefs.data.playOpponent) cpuControlled = true;
+        if (ClientPrefs.data.playOpponent) cpuControlled = ClientPrefs.data.botOpponentFix;
         
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
@@ -2421,7 +2421,7 @@ class PlayState extends MusicBeatState
 			#if !switch
 			var percent:Float = ratingPercent;
 			if(Math.isNaN(percent)) percent = 0;
-			Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent);
+			if (!ClientPrefs.data.playOpponent)Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent);
 			#end
 			playbackRate = 1;
 
@@ -2456,7 +2456,7 @@ class PlayState extends MusicBeatState
 					MusicBeatState.switchState(new StoryMenuState());
 
 					// if ()
-					if(!ClientPrefs.getGameplaySetting('practice') && !ClientPrefs.getGameplaySetting('botplay')) {
+					if(!ClientPrefs.getGameplaySetting('practice') && !ClientPrefs.getGameplaySetting('botplay') && !ClientPrefs.data.playOpponent) {
 						StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
 						Highscore.saveWeekScore(WeekData.getWeekFileName(), campaignScore, storyDifficulty);
 
@@ -2505,6 +2505,7 @@ class PlayState extends MusicBeatState
 				
 				
 				
+				
 				if(ClientPrefs.data.ResultsScreen){
 				
 				    rsSicks = ratingsData[0].hits;
@@ -2521,12 +2522,15 @@ class PlayState extends MusicBeatState
                     rsRatingName = ratingName;
                     rsCheck = true;
                     
+                    FlxG.sound.playMusic(Paths.music('freakyMenu'),0.7);
+                    
 				    openSubState(new ResultsScreen(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				}
 				else{
 				    MusicBeatState.switchState(new FreeplayState());
 				    FlxG.sound.playMusic(Paths.music('freakyMenu'),0);
 				    FlxG.sound.music.fadeIn(4, 0, 0.7);
+				    
 				}
 				//persistentUpdate = false;
 				//persistentDraw = false;
