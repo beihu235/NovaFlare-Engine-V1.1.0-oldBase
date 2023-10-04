@@ -39,7 +39,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 		
 		var option:Option = new Option('Opponent Botplay Fix',
-			'If checked, cpuControlled is open for boyfriend when open playOpponent\nfix some mode need press somthing',
+			'If checked, cpuControlled is open for boyfriend\nwhen open playOpponent\n(fix some mode need press somthing)',
 			'botOpponentFix',
 			'bool');
 		addOption(option);
