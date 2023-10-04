@@ -23,6 +23,8 @@ import cutscenes.DialogueCharacter;
 // love u Shubs no homo :flushedh4:
 typedef DialogueFile = {
 	var dialogue:Array<DialogueLine>;
+	var textFont:Null<String>;
+	var textColor:Null<Int>;
 }
 
 typedef DialogueLine = {
@@ -525,8 +527,10 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		if (!box.flipX)
 			box.offset.y += 10;
 	}
-
-	var font = Paths.font("dialogueFont.ttf");
+    var fontName:String;
+    if (DialogueFile.textFont != null) fontName:String = DialogueFile.textFont + '.ttf';
+    else fontName = 'dialogueFont.ttf';
+	var font = Paths.font(fontName);
 	var textSounds = FlxG.sound.load(Paths.sound('dialogueSoundFX'));
 
 	function initializeText(x:Float, y:Float, width:Int, size:Int, content:String):FlxTypeText
@@ -541,7 +545,9 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		daText.showCursor = false;
 		daText.skipKeys = null;
 		daText.sounds = [textSounds];
-		daText.color = FlxColor.WHITE;
+		if (DialogueFile.textColor != null)
+		daText.color = DialogueFile.textColor;
+		else daText.color = FlxColor.BLACK;
 		daText.alpha = 1;
 		daText.prefix = "";
 
