@@ -1553,18 +1553,30 @@ class PlayState extends MusicBeatState
 			else
 				babyArrow.alpha = targetAlpha;
 
-			if (player == 1)
-				playerStrums.add(babyArrow);
-			else
-			{
-				if(ClientPrefs.data.middleScroll)
-				{
-					babyArrow.x += 310;
-					if(i > 1) { //Up and Right
-						babyArrow.x += FlxG.width / 2 + 25;
+			if(!ClientPrefs.data.playOpponent) {
+				if (player == 1)
+					playerStrums.add(babyArrow);
+				else {
+					if (ClientPrefs.data.middleScroll) {
+						babyArrow.x += 310;
+						if (i > 1) { // Up and Right
+							babyArrow.x += FlxG.width / 2 + 25;
+						}
 					}
+					opponentStrums.add(babyArrow);
 				}
-				opponentStrums.add(babyArrow);
+			} else {
+				if (player == 1)
+					opponentStrums.add(babyArrow);
+				else {
+					if (ClientPrefs.data.middleScroll) {
+						babyArrow.x += 310;
+						if (i > 1) { // Up and Right
+							babyArrow.x += FlxG.width / 2 + 25;
+						}
+					}
+					playerStrums.add(babyArrow);
+				}
 			}
 
 			strumLineNotes.add(babyArrow);
