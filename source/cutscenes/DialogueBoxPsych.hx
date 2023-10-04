@@ -528,7 +528,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 			box.offset.y += 10;
 	}
     var fontName:String;
-    if (DialogueFile.textFont != null) fontName:String = DialogueFile.textFont + '.ttf';
+    if (DialogueFile.textFont != null) fontName = DialogueFile.textFont + '.ttf';
     else fontName = 'dialogueFont.ttf';
 	var font = Paths.font(fontName);
 	var textSounds = FlxG.sound.load(Paths.sound('dialogueSoundFX'));
