@@ -656,42 +656,55 @@ class TitleState extends MusicBeatState
 				// credTextShit.screenCenter();
 				case 6:
 					#if PSYCH_WATERMARKS
+					createCoolText(['NF Engine by'], 40);
+				// credTextShit.visible = true;
+				case 7:
+					addMoreText('beihu', 40);
+				// credTextShit.text += '\npresent...';
+				// credTextShit.addText();
+				case 8:
+					deleteCoolText();
+				// credTextShit.visible = false;
+				// credTextShit.text = 'In association \nwith';
+				// credTextShit.screenCenter();
+				case 9:
+					#if PSYCH_WATERMARKS
 					createCoolText(['Not associated', 'with'], -40);
 					#else
 					createCoolText(['In association', 'with'], -40);
 					#end
-				case 8:
+				case 10:
 					addMoreText('newgrounds', -40);
 					ngSpr.visible = true;
 				// credTextShit.text += '\nNewgrounds';
-				case 9:
+				case 11:
 					deleteCoolText();
 					ngSpr.visible = false;
 				// credTextShit.visible = false;
 
 				// credTextShit.text = 'Shoutouts Tom Fulp';
 				// credTextShit.screenCenter();
-				case 10:
+				case 12:
 					createCoolText([curWacky[0]]);
 				// credTextShit.visible = true;
-				case 12:
+				case 13:
 					addMoreText(curWacky[1]);
 				// credTextShit.text += '\nlmao';
-				case 13:
+				case 14:
 					deleteCoolText();
 				// credTextShit.visible = false;
 				// credTextShit.text = "Friday";
 				// credTextShit.screenCenter();
-				case 14:
+				case 15:
 					addMoreText('Friday');
 				// credTextShit.visible = true;
-				case 15:
+				case 16:
 					addMoreText('Night');
 				// credTextShit.text += '\nNight';
-				case 16:
+				case 17:
 					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
 
-				case 17:
+				case 18:
 					skipIntro();
 			}
 		}

@@ -60,13 +60,16 @@ class CreditsState extends MusicBeatState
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 		
 		    ['NF Engine Team'],
-		    ['beihu',		'beihu',		'NF EngineFounder/nAndroid Porter',							beihuLink,	'FFC0CB'],
+		    ['beihu',		'beihu',		'Main Programmer\nAndroid Porter',							beihuLink,	'FFC0CB'],
+		    ['qwq',		'qwq',		'Windows build helper',				'https://b23.tv/VIWVK0s',	'FF6600'],
 		    [''],
+		    #if android
 		    ['Psych Engine Android Team'],
 		    ['beihu',		'beihu',		'Main Android Porter\nport owner',							beihuLink,	'FFC0CB'],
 			['yanqiang',     'yanqiang',	    'Android Porter\nBug fix',							yanqiangLink,	'7192FD'],
 			['Xx_angelkawaii_X',     'Xx_angelkawaii_X',	    'Bug fix',							Xx_angelkawaii_XLink,	'FFA2DE'],		    
 			[''],
+			#end
 			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
 			['Riveren',				'riveren',			'Main Artist/Animator of Psych Engine',							'https://twitter.com/riverennn',		'B42F71'],
