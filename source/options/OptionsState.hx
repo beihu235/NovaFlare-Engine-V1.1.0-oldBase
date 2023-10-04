@@ -142,8 +142,12 @@ class OptionsState extends MusicBeatState
 				StageData.loadDirectory(PlayState.SONG);
 				LoadingState.loadAndSwitchState(new PlayState());
 				FlxG.sound.music.volume = 0;
+			    onPlayState = false;
 			}
-			else MusicBeatState.switchState(new MainMenuState());
+			else{
+			    MusicBeatState.switchState(new MainMenuState());
+			    onPlayState = false;
+			}
 		}
 		else if (controls.ACCEPT) openSelectedSubstate(options[curSelected]);
 	}
