@@ -44,8 +44,11 @@ class DialogueBoxPsych extends FlxSpriteGroup
 	public var nextDialogueThing:Void->Void = null;
 	public var skipDialogueThing:Void->Void = null;
 
-	public static var DEFAULT_TEXT_X = 175;
-	public static var DEFAULT_TEXT_Y = 432;
+
+	public static var DEFAULT_TEXT_X = 220;
+	public static var DEFAULT_TEXT_Y = 475;
+	public static var DEFAULT_TEXT_WIDTH = 870;
+	public static var DEFAULT_TEXT_SIZE = 32;
 
 	var bgFade:FlxSprite = null;
 	var box:FlxSprite;
@@ -99,7 +102,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		box.updateHitbox();
 		add(box);
 
-		daText = initializeText(220 , PlayState.DEFAULT_TEXT_Y, 700, PlayState.DEFAULT_TEXT_SIZE, 'test');
+		daText = initializeText(DEFAULT_TEXT_X , DEFAULT_TEXT_Y, DEFAULT_TEXT_WIDTH, DEFAULT_TEXT_SIZE, '');
 		add(daText);
 
 		startNextDialog();
