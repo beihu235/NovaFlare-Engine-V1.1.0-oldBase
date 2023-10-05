@@ -321,7 +321,7 @@ class MainMenuState extends MusicBeatState
 			    
 			if (controls.ACCEPT) {
 			    usingMouse = false;	
-			    canClick = false;
+			    canClick = true;
 				selectSomething();
 		    }
 		    
@@ -396,7 +396,6 @@ class MainMenuState extends MusicBeatState
     
     function selectSomething()
 	{
-		endCheck = true;
 		FlxG.sound.play(Paths.sound('confirmMenu'));
 		
 		
