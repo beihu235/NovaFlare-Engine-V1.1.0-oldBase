@@ -315,7 +315,7 @@ class Note extends FlxSprite
 			if(skin == null || skin.length < 1)
 				skin = defaultNoteSkin + postfix;
 		}
-		if (Paths.fileExists('images/NOTE_assets.png', IMAGE)) //fix for load old mods note assets
+		if (Paths.fileExists('images/NOTE_assets.png', IMAGE) && ClientPrefs.data.noteSkin == ClientPrefs.defaultData.noteSkin) //fix for load old mods note assets
 		skin = 'NOTE_assets'; 
 
 		var animName:String = null;
