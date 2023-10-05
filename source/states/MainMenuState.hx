@@ -299,9 +299,9 @@ class MainMenuState extends MusicBeatState
 			    
 			if (controls.ACCEPT) {
 			    usingMouse = false;	
-			    //checkChoose();
+			    canClick = false;
+			    checkChoose();
 				selectSomething();
-				canClick = false;
 		    }
 		    
 		menuItems.forEach(function(spr:FlxSprite)
@@ -408,7 +408,7 @@ class MainMenuState extends MusicBeatState
 		FlxG.sound.play(Paths.sound('confirmMenu'));
 		canClick = false;
 		
-		checkChoose();
+		
 		
 		for (i in 0...optionShit.length)
 		{
@@ -482,7 +482,7 @@ class MainMenuState extends MusicBeatState
 			    spr.centerOffsets();
 		    }			
 
-            if (spr.ID == curSelected  && spr.animation.curAnim.name != 'selected')
+            if (spr.ID == curSelected && spr.animation.curAnim.name != 'selected')
 			{
 			    spr.animation.play('selected');
 			    spr.centerOffsets();
