@@ -287,7 +287,7 @@ class DialogueEditorState extends MusicBeatState
 				if(character.jsonFile.animations.length > 0) {
 					curAnim = 0;
 					if(character.jsonFile.animations.length > curAnim && character.jsonFile.animations[curAnim] != null) {
-						character.playAnim(character.jsonFile.animations[curAnim].anim, daText.finishedText);
+						character.playAnim(character.jsonFile.animations[curAnim].anim, daText..text = curDialogue.text);
 						animText.text = 'Animation: ' + character.jsonFile.animations[curAnim].anim + ' (' + (curAnim + 1) +' / ' + character.jsonFile.animations.length + ') - Press W or S to scroll';
 					} else {
 						animText.text = 'ERROR! NO ANIMATIONS FOUND';
@@ -309,8 +309,8 @@ class DialogueEditorState extends MusicBeatState
 			else if(sender == soundInputText)
 			{
 				daText.finishText();
-				dialogueFile.dialogue[curSelected].sound = soundInputText.text;
-				daText.sounds = soundInputText.text;
+				dialogueFile.dialogue[curSelected].sound = curDialogue.sound;
+				daText.sounds = curDialogue.sound;
 				if(daText.sounds == null) daText.sounds = '';
 			}
 		} else if(id == FlxUINumericStepper.CHANGE_EVENT && (sender == speedStepper)) {
@@ -334,7 +334,7 @@ class DialogueEditorState extends MusicBeatState
 		}
 
 		if(character.animation.curAnim != null) {
-			if(daText.finishedText) {
+			if(daText.text = curDialogue.text) {
 				if(character.animationIsLoop() && character.animation.curAnim.finished) {
 					character.playAnim(character.animation.curAnim.name, true);
 				}
@@ -382,7 +382,7 @@ class DialogueEditorState extends MusicBeatState
 
 					var animToPlay:String = character.jsonFile.animations[curAnim].anim;
 					if(character.dialogueAnimations.exists(animToPlay)) {
-						character.playAnim(animToPlay, daText.finishedText);
+						character.playAnim(animToPlay, daText..text = curDialogue.text);
 						dialogueFile.dialogue[curSelected].expression = animToPlay;
 					}
 					animText.text = 'Animation: ' + animToPlay + ' (' + (curAnim + 1) +' / ' + character.jsonFile.animations.length + ') - Press W or S to scroll';
@@ -424,7 +424,7 @@ class DialogueEditorState extends MusicBeatState
 		soundInputText.text = curDialogue.sound;
 
 		daText.delay = speedStepper.value;
-		daText.sounds = soundInputText.text;
+		daText.sounds = curDialogue.sound;
 		if(daText.sounds != null && daText.sounds.trim() == '') daText.sounds = 'dialogue';
 
 		curAnim = 0;
@@ -442,7 +442,7 @@ class DialogueEditorState extends MusicBeatState
 					break;
 				}
 			}
-			character.playAnim(character.jsonFile.animations[curAnim].anim, daText.finishedText);
+			character.playAnim(character.jsonFile.animations[curAnim].anim, daText..text = curDialogue.text);
 			animText.text = 'Animation: ' + character.jsonFile.animations[curAnim].anim + ' (' + (curAnim + 1) +' / ' + leLength + ') - Press W or S to scroll';
 			#if android
 		    animText.text = 'Animation: ' + character.jsonFile.animations[curAnim].anim + ' (' + (curAnim + 1) +' / ' + leLength + ') - Press UP or Down to scroll';
@@ -476,9 +476,9 @@ class DialogueEditorState extends MusicBeatState
 		daText.delay = 0.05;
 		daText.showCursor = false;
 		daText.skipKeys = null;
-		daText.sounds = [textSounds];
+		daText.sounds = [FlxG.sound.load(Paths.sound('dialogueSoundFX'));];
 		if (colorInputText.text != null)
-		daText.color = colorInputText.text;
+		daText.color = curDialogue.textFont;
 		else daText.color = FlxColor.BLACK;
 		daText.alpha = 1;
 		daText.prefix = "";
