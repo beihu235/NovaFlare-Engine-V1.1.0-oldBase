@@ -224,6 +224,18 @@ class VisualsUISubState extends BaseOptionsMenu
 			'comboStacking',
 			'bool');
 		addOption(option);
+		
+		var option:Option = new Option('Show Combo Num',
+			"If unchecked, Combo Num won't showcase, saving on System Memory and making them easier to read",
+			'showComboNum',
+			'bool');
+		addOption(option);
+		
+		var option:Option = new Option('Show Rating',
+			"If unchecked, Rating won't showcase, saving on System Memory and making them easier to read",
+			'showRating',
+			'bool');
+		addOption(option);
 
 		super();
 		add(notes);
