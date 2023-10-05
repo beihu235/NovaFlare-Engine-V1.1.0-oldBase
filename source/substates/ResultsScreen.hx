@@ -280,7 +280,7 @@ class ResultsScreen extends MusicBeatSubstate
 		Main = Main + Math.abs(PlayState.rsNoteMs[i]);
 		}
 		Main = Math.ceil(Main / PlayState.rsNoteTime.length * 100) / 100;
-        var safeZoneOffset:Float = Math.ceil(Math.flConductor.safeZoneOffset * 10) / 10;
+        var safeZoneOffset:Float = Math.ceil(Conductor.safeZoneOffset * 10) / 10;
 		setMsText = new FlxText(20, FlxG.height + 150, 0, 
 		'Main: ' + Main + 'ms'
 		+ '\n'
