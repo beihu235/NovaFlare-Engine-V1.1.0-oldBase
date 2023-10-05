@@ -280,7 +280,7 @@ class ResultsScreen extends MusicBeatSubstate
 		Main = Main + Math.abs(PlayState.rsNoteMs[i]);
 		}
 		Main = Math.ceil(Main / PlayState.rsNoteTime.length * 100) / 100;
-
+        var safeZoneOffset:Float = Math.ceil(Math.flConductor.safeZoneOffset * 10) / 10;
 		setMsText = new FlxText(20, FlxG.height + 150, 0, 
 		'Main: ' + Main + 'ms'
 		+ '\n'
@@ -288,7 +288,7 @@ class ResultsScreen extends MusicBeatSubstate
 		+ 'SICK:' + ClientPrefs.data.sickWindow + 'ms,'
 		+ 'GOOD:' + ClientPrefs.data.goodWindow + 'ms,'
 		+ 'BAD:' + ClientPrefs.data.badWindow + 'ms,'
-		+ 'SHIT:' + Conductor.safeZoneOffset + 'ms'
+		+ 'SHIT:' + safeZoneOffset + 'ms'
 		+ ')'		
 		+ '\n'
 		);
