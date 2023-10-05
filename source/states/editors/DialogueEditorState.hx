@@ -15,9 +15,8 @@ import tjson.TJSON as Json;
 import sys.io.File;
 #end
 
-import backend.SUtil;
 
-import objects.TypedAlphabet;
+import flixel.addons.text.FlxTypeText;
 
 import cutscenes.DialogueBoxPsych;
 import cutscenes.DialogueCharacter;
@@ -26,7 +25,7 @@ class DialogueEditorState extends MusicBeatState
 {
 	var character:DialogueCharacter;
 	var box:FlxSprite;
-	var daText:TypedAlphabet;
+	var daText:FlxTypeText;
 
 	var selectedText:FlxText;
 	var animText:FlxText;
@@ -44,7 +43,10 @@ class DialogueEditorState extends MusicBeatState
 			text: DEFAULT_TEXT,
 			boxState: DEFAULT_BUBBLETYPE,
 			speed: 0.05,
-			sound: ''
+			sound: '',
+			textFont: 'dialogueFont',
+			textColor: FlxColor.BLACK,
+			
 		};
 
 		dialogueFile = {
@@ -92,8 +94,7 @@ class DialogueEditorState extends MusicBeatState
 		animText.scrollFactor.set();
 		add(animText);
 		
-		daText = new TypedAlphabet(DialogueBoxPsych.DEFAULT_TEXT_X, DialogueBoxPsych.DEFAULT_TEXT_Y, DEFAULT_TEXT);
-		daText.setScale(0.7);
+		daText = initializeText(DEFAULT_TEXT_X , DEFAULT_TEXT_Y, DEFAULT_TEXT_WIDTH, DEFAULT_TEXT_SIZE, '');
 		add(daText);
 		changeText();
 		
@@ -110,7 +111,7 @@ class DialogueEditorState extends MusicBeatState
 			{name: 'Dialogue Line', label: 'Dialogue Line'},
 		];
 		UI_box = new FlxUITabMenu(null, tabs, true);
-		UI_box.resize(250, 210);
+		UI_box.resize(250, 300);
 		UI_box.x = FlxG.width - UI_box.width - 10;
 		UI_box.y = 10;
 		UI_box.scrollFactor.set();
@@ -124,6 +125,8 @@ class DialogueEditorState extends MusicBeatState
 	var angryCheckbox:FlxUICheckBox;
 	var speedStepper:FlxUINumericStepper;
 	var soundInputText:FlxUIInputText;
+	var fontInputText:FlxUIInputText;
+	var colorInputText:FlxUIInputText;
 	function addDialogueLineUI() {
 		var tab_group = new FlxUI(null, UI_box);
 		tab_group.name = "Dialogue Line";
@@ -131,6 +134,14 @@ class DialogueEditorState extends MusicBeatState
 		characterInputText = new FlxUIInputText(10, 20, 80, DialogueCharacter.DEFAULT_CHARACTER, 8);
 		characterInputText.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		blockPressWhileTypingOn.push(characterInputText);
+		
+		fontInputText = new FlxUIInputText(10, 260, 80, DialogueCharacter.DEFAULT_CHARACTER, 8);
+		fontInputText.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
+		blockPressWhileTypingOn.push(fontInputText);
+		
+		colorInputText = new FlxUIInputText(10 + 80 + 10, 260, 80, DialogueCharacter.DEFAULT_CHARACTER, 8);
+		colorInputText.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
+		blockPressWhileTypingOn.push(colorInputText);
 
 		speedStepper = new FlxUINumericStepper(10, characterInputText.y + 40, 0.005, 0.05, 0, 0.5, 3);
 
@@ -149,18 +160,22 @@ class DialogueEditorState extends MusicBeatState
 		lineInputText.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 		blockPressWhileTypingOn.push(lineInputText);
 
-		var loadButton:FlxButton = new FlxButton(20, lineInputText.y + 25, "Load Dialogue", function() {
+		var loadButton:FlxButton = new FlxButton(20, lineInputText.y + 25 + 75, "Load Dialogue", function() {
 			loadDialogue();
 		});
-		var saveButton:FlxButton = new FlxButton(loadButton.x + 120, loadButton.y, "Save Dialogue", function() {
+		var saveButton:FlxButton = new FlxButton(loadButton.x + 120 + 75, loadButton.y, "Save Dialogue", function() {
 			saveDialogue();
 		});
 
 		tab_group.add(new FlxText(10, speedStepper.y - 18, 0, 'Interval/Speed (ms):'));
 		tab_group.add(new FlxText(10, characterInputText.y - 18, 0, 'Character:'));
+		tab_group.add(new FlxText(10, fontInputText.y - 18, 0, 'textFont:'));
+		tab_group.add(new FlxText(10 + 80 + 10, colorInputText.y - 18, 0, 'textColor:'));
 		tab_group.add(new FlxText(10, soundInputText.y - 18, 0, 'Sound file name:'));
 		tab_group.add(new FlxText(10, lineInputText.y - 18, 0, 'Text:'));
 		tab_group.add(characterInputText);
+		tab_group.add(fontInputText);
+		tab_group.add(colorInputText);	
 		tab_group.add(angryCheckbox);
 		tab_group.add(speedStepper);
 		tab_group.add(soundInputText);
