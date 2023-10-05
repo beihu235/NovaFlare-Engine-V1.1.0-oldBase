@@ -27,7 +27,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
         
         var option:Option = new Option('Play Opponent',
-			'If checked, playing as opponent\nmay have bug in some mods\n(If checked your score will not be recorded)',
+			'If checked, playing as opponent\nmay have bug in some mods\n(your score will not be recorded)',
 			'playOpponent',
 			'bool');
 		addOption(option);
