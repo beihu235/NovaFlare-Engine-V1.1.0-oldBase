@@ -315,6 +315,8 @@ class Note extends FlxSprite
 			if(skin == null || skin.length < 1)
 				skin = defaultNoteSkin + postfix;
 		}
+		if Paths.fileExists('images/NOTE_assets.png', IMAGE))
+		skin = 'NOTE_assets'; //fix for load old mods note assets
 
 		var animName:String = null;
 		if(animation.curAnim != null) {
@@ -332,6 +334,7 @@ class Note extends FlxSprite
 			_lastValidChecked = customSkin;
 		}
 		else skinPostfix = '';
+		
 
 		if(PlayState.isPixelStage) {
 			if(isSustainNote) {
