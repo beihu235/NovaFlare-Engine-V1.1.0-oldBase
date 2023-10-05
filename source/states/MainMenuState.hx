@@ -407,6 +407,8 @@ class MainMenuState extends MusicBeatState
 		FlxG.sound.play(Paths.sound('confirmMenu'));
 		canClick = false;
 		
+		checkChoose();
+		
 		for (i in 0...optionShit.length)
 		{
 			var option:FlxSprite = menuItems.members[i];
