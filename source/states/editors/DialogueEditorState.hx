@@ -45,7 +45,7 @@ class DialogueEditorState extends MusicBeatState
 			speed: 0.05,
 			sound: '',
 			textFont: 'dialogueFont',
-			textColor: FlxColor.BLACK,
+			textColor: FlxColor.BLACK
 			
 		};
 
@@ -94,7 +94,7 @@ class DialogueEditorState extends MusicBeatState
 		animText.scrollFactor.set();
 		add(animText);
 		
-		daText = initializeText(DEFAULT_TEXT_X , DEFAULT_TEXT_Y, DEFAULT_TEXT_WIDTH, DEFAULT_TEXT_SIZE, '');
+		daText = initializeText(DialogueBoxPsych.DEFAULT_TEXT_X , DialogueBoxPsych.DEFAULT_TEXT_Y, DialogueBoxPsych.DEFAULT_TEXT_WIDTH, DialogueBoxPsych.DEFAULT_TEXT_SIZE, DEFAULT_TEXT);
 		add(daText);
 		changeText();
 		
@@ -192,7 +192,9 @@ class DialogueEditorState extends MusicBeatState
 			text: defaultLine.text,
 			boxState: defaultLine.boxState,
 			speed: defaultLine.speed,
-			sound: ''
+			sound: '',
+			textFont: 'dialogueFont',
+			textColor: FlxColor.BLACK
 		};
 		return copyLine;
 	}
