@@ -529,6 +529,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 	}
 	
     var fontName:String;
+    var dataGet:currentDialogue;
 	var textSounds = FlxG.sound.load(Paths.sound('dialogueSoundFX'));
 
 	function initializeText(x:Float, y:Float, width:Int, size:Int, content:String):FlxTypeText
@@ -538,7 +539,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		// trace('text content: ' + content);
 
 		daText.autoErase = false;
-		if (DialogueFile.textFont != '') fontName = DialogueFile.textFont + '.ttf';
+		if (dataGet.textFont != null) fontName = dataGet.textFont + '.ttf';
         else fontName = 'dialogueFont.ttf';
 	    var font = Paths.font(fontName);
 		daText.setFormat(font, size);
@@ -546,8 +547,8 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		daText.showCursor = false;
 		daText.skipKeys = null;
 		daText.sounds = [textSounds];
-		if (DialogueFile.textColor != '')
-		daText.color = DialogueFile.textColor;
+		if (dataGet.textColor != null)
+		daText.color = dataGet.textColor;
 		else daText.color = FlxColor.BLACK;
 		daText.alpha = 1;
 		daText.prefix = "";
