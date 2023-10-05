@@ -529,7 +529,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 	}
 	
     var fontName:String;
-    var dataGet:DialogueFile;
+    var dataGet:DialogueLine;
 	var textSounds = FlxG.sound.load(Paths.sound('dialogueSoundFX'));
 
 	function initializeText(x:Float, y:Float, width:Int, size:Int, content:String):FlxTypeText
