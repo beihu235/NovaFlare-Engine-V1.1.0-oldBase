@@ -458,6 +458,30 @@ class DialogueEditorState extends MusicBeatState
 		selectedText.text = 'Line: (' + (curSelected + 1) + ' / ' + dialogueFile.dialogue.length + ') - Press Left or Right to scroll';
 		#end
 	}
+	
+	function initializeText(x:Float, y:Float, width:Int, size:Int, content:String):FlxTypeText
+	{
+		// trace('initialize text');
+		var daText = new FlxTypeText(x, y, width, content, size);
+		// trace('text content: ' + content);
+
+		daText.autoErase = false;
+		if (fontInputText.text != null) fontName = fontInputText.text + '.ttf';
+        else fontName = 'dialogueFont.ttf';
+	    var font = Paths.font(fontName);
+		daText.setFormat(font, size);
+		daText.delay = 0.05;
+		daText.showCursor = false;
+		daText.skipKeys = null;
+		daText.sounds = [textSounds];
+		if (colorInputText.text != null)
+		daText.color = colorInputText.text;
+		else daText.color = FlxColor.BLACK;
+		daText.alpha = 1;
+		daText.prefix = "";
+
+		return daText;
+	}
 
 	function characterAnimSpeed() {
 		if(character.animation.curAnim != null) {
