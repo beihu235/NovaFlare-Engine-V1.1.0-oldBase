@@ -301,16 +301,17 @@ class MainMenuState extends MusicBeatState
 			    usingMouse = false;	
 			    //checkChoose();
 				selectSomething();
+				canClick = false;
 		    }
 		    
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			if (usingMouse)
 			{
-				if (!FlxG.mouse.overlaps(spr) && canClick)
+				if (!FlxG.mouse.overlaps(spr) && !FlxG.mouse.overlaps(MusicBeatState._virtualpad.buttonA)){
 					spr.animation.play('idle');
 			        spr.updateHitbox();
-			        			
+			    }
     			if (FlxG.mouse.overlaps(spr)){
                     if (FlxG.mouse.justPressed && canClick && spr.animation.curAnim.name != 'idle')
     				{
