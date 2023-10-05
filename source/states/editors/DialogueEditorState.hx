@@ -310,8 +310,8 @@ class DialogueEditorState extends MusicBeatState
 			{
 				daText.finishText();
 				dialogueFile.dialogue[curSelected].sound = soundInputText.text;
-				daText.sound = soundInputText.text;
-				if(daText.sound == null) daText.sound = '';
+				daText.sounds = soundInputText.text;
+				if(daText.sounds == null) daText.sounds = '';
 			}
 		} else if(id == FlxUINumericStepper.CHANGE_EVENT && (sender == speedStepper)) {
 			dialogueFile.dialogue[curSelected].speed = speedStepper.value;
@@ -424,8 +424,8 @@ class DialogueEditorState extends MusicBeatState
 		soundInputText.text = curDialogue.sound;
 
 		daText.delay = speedStepper.value;
-		daText.sound = soundInputText.text;
-		if(daText.sound != null && daText.sound.trim() == '') daText.sound = 'dialogue';
+		daText.sounds = soundInputText.text;
+		if(daText.sounds != null && daText.sounds.trim() == '') daText.sounds = 'dialogue';
 
 		curAnim = 0;
 		character.reloadCharacterJson(characterInputText.text);
@@ -466,8 +466,9 @@ class DialogueEditorState extends MusicBeatState
 		// trace('initialize text');
 		var daText = new FlxTypeText(x, y, width, content, size);
 		// trace('text content: ' + content);
-
+        
 		daText.autoErase = false;
+		var fontName:String;
 		if (fontInputText.text != null) fontName = fontInputText.text + '.ttf';
         else fontName = 'dialogueFont.ttf';
 	    var font = Paths.font(fontName);
