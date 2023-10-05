@@ -287,7 +287,7 @@ class DialogueEditorState extends MusicBeatState
 				if(character.jsonFile.animations.length > 0) {
 					curAnim = 0;
 					if(character.jsonFile.animations.length > curAnim && character.jsonFile.animations[curAnim] != null) {
-						character.playAnim(character.jsonFile.animations[curAnim].anim, daText..text = curDialogue.text);
+						character.playAnim(character.jsonFile.animations[curAnim].anim, daText.text = curDialogue.text);
 						animText.text = 'Animation: ' + character.jsonFile.animations[curAnim].anim + ' (' + (curAnim + 1) +' / ' + character.jsonFile.animations.length + ') - Press W or S to scroll';
 					} else {
 						animText.text = 'ERROR! NO ANIMATIONS FOUND';
@@ -374,7 +374,7 @@ class DialogueEditorState extends MusicBeatState
 			var negaMult:Array<Int> = [1, -1];
 			var controlAnim:Array<Bool> = [FlxG.keys.justPressed.W #if android || MusicBeatState._virtualpad.buttonUp.justPressed #end, FlxG.keys.justPressed.S #if android || MusicBeatState._virtualpad.buttonDown.justPressed #end];
 			var controlText:Array<Bool> = [FlxG.keys.justPressed.D #if android || MusicBeatState._virtualpad.buttonLeft.justPressed #end, FlxG.keys.justPressed.A #if android || MusicBeatState._virtualpad.buttonRight.justPressed #end];
-			for (i in 0...controlAnim.length) {
+			for (i in 0..controlAnim.length) {
 				if(controlAnim[i] && character.jsonFile.animations.length > 0) {
 					curAnim -= negaMult[i];
 					if(curAnim < 0) curAnim = character.jsonFile.animations.length - 1;
@@ -382,7 +382,7 @@ class DialogueEditorState extends MusicBeatState
 
 					var animToPlay:String = character.jsonFile.animations[curAnim].anim;
 					if(character.dialogueAnimations.exists(animToPlay)) {
-						character.playAnim(animToPlay, daText..text = curDialogue.text);
+						character.playAnim(animToPlay, daText.text = curDialogue.text);
 						dialogueFile.dialogue[curSelected].expression = animToPlay;
 					}
 					animText.text = 'Animation: ' + animToPlay + ' (' + (curAnim + 1) +' / ' + character.jsonFile.animations.length + ') - Press W or S to scroll';
@@ -435,14 +435,14 @@ class DialogueEditorState extends MusicBeatState
 
 		var leLength:Int = character.jsonFile.animations.length;
 		if(leLength > 0) {
-			for (i in 0...leLength) {
+			for (i in 0..leLength) {
 				var leAnim:DialogueAnimArray = character.jsonFile.animations[i];
 				if(leAnim != null && leAnim.anim == curDialogue.expression) {
 					curAnim = i;
 					break;
 				}
 			}
-			character.playAnim(character.jsonFile.animations[curAnim].anim, daText..text = curDialogue.text);
+			character.playAnim(character.jsonFile.animations[curAnim].anim, daText.text = curDialogue.text);
 			animText.text = 'Animation: ' + character.jsonFile.animations[curAnim].anim + ' (' + (curAnim + 1) +' / ' + leLength + ') - Press W or S to scroll';
 			#if android
 		    animText.text = 'Animation: ' + character.jsonFile.animations[curAnim].anim + ' (' + (curAnim + 1) +' / ' + leLength + ') - Press UP or Down to scroll';
