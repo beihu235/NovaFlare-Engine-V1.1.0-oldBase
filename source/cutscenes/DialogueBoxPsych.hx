@@ -527,10 +527,8 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		if (!box.flipX)
 			box.offset.y += 10;
 	}
+	
     var fontName:String;
-    if (DialogueFile.textFont != null) fontName = DialogueFile.textFont + '.ttf';
-    else fontName = 'dialogueFont.ttf';
-	var font = Paths.font(fontName);
 	var textSounds = FlxG.sound.load(Paths.sound('dialogueSoundFX'));
 
 	function initializeText(x:Float, y:Float, width:Int, size:Int, content:String):FlxTypeText
@@ -540,6 +538,9 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		// trace('text content: ' + content);
 
 		daText.autoErase = false;
+		if (DialogueFile.textFont != null) fontName = DialogueFile.textFont + '.ttf';
+        else fontName = 'dialogueFont.ttf';
+	    var font = Paths.font(fontName);
 		daText.setFormat(font, size);
 		daText.delay = 0.05;
 		daText.showCursor = false;
