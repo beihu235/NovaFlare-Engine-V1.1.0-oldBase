@@ -50,9 +50,7 @@ class DialogueEditorState extends MusicBeatState
 		dialogueFile = {
 			dialogue: [
 				copyDefaultLine()
-			],
-			textFont: 'dialogueFont',
-			textColor: FlxColor.BLACK
+			]
 		};
 		
 		character = new DialogueCharacter();
