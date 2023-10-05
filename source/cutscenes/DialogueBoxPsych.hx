@@ -23,6 +23,8 @@ import cutscenes.DialogueCharacter;
 // love u Shubs no homo :flushedh4:
 typedef DialogueFile = {
 	var dialogue:Array<DialogueLine>;
+	var textFont:Null<String>;
+	var textColor:Null<Int>;
 }
 
 typedef DialogueLine = {
@@ -32,8 +34,6 @@ typedef DialogueLine = {
 	var boxState:Null<String>;
 	var speed:Null<Float>;
 	var sound:Null<String>;
-	var textFont:Null<String>;
-	var textColor:Null<Int>;
 }
 
 // TO DO: Clean code? Maybe? idk
@@ -529,7 +529,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 	}
 	
     var fontName:String;
-    var dataGet:DialogueLine;
+    var dataGet:DialogueFile;
 	var textSounds = FlxG.sound.load(Paths.sound('dialogueSoundFX'));
 
 	function initializeText(x:Float, y:Float, width:Int, size:Int, content:String):FlxTypeText
