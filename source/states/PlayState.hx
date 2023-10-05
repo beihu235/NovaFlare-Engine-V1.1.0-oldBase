@@ -2662,7 +2662,7 @@ class PlayState extends MusicBeatState
 		rating.acceleration.y = 550 * playbackRate * playbackRate;
 		rating.velocity.y -= FlxG.random.int(140, 175) * playbackRate;
 		rating.velocity.x -= FlxG.random.int(0, 10) * playbackRate;
-		rating.visible = (!ClientPrefs.data.hideHud && showRating && ClientPrefs.showRating);
+		rating.visible = (!ClientPrefs.data.hideHud && showRating && ClientPrefs.data.showRating);
 		rating.x += ClientPrefs.data.comboOffset[0];
 		rating.y -= ClientPrefs.data.comboOffset[1];
 		rating.antialiasing = antialias;
@@ -2752,7 +2752,7 @@ class PlayState extends MusicBeatState
 			numScore.antialiasing = antialias;
 
 			//if (combo >= 10 || combo == 0)
-			if(showComboNum && ClientPrefs.showComboNum)
+			if(showComboNum && ClientPrefs.data.showComboNum)
 				insert(members.indexOf(strumLineNotes), numScore);
 
 			FlxTween.tween(numScore, {alpha: 0}, 0.2 / playbackRate, {
