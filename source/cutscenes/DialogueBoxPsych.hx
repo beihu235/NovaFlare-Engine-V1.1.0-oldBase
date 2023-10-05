@@ -109,7 +109,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		daText = initializeText(DEFAULT_TEXT_X , DEFAULT_TEXT_Y, DEFAULT_TEXT_WIDTH, DEFAULT_TEXT_SIZE, '');
 		add(daText);
 		
-		daText_shadow = initializeText_shadow(DEFAULT_TEXT_X + 4, DEFAULT_TEXT_Y + 2, DEFAULT_TEXT_WIDTH, DEFAULT_TEXT_SIZE, '');
+		daText_shadow = initializeText_shadow(DEFAULT_TEXT_X + 2, DEFAULT_TEXT_Y + 1, DEFAULT_TEXT_WIDTH, DEFAULT_TEXT_SIZE, '');
 		add(daText_shadow);
 
 		startNextDialog();
