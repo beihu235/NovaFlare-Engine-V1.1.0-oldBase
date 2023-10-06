@@ -137,4 +137,4 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: androidBuild
-          path: export/release/android/debug/bin/app/build/outputs/apk/debug
+          path: export/release/android-debug/bin/app/build/outputs/apk/debug
