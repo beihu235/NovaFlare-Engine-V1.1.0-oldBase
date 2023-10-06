@@ -267,6 +267,13 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+	
+	    #if (debug && android)
+	        if (FlxG.android.justReleased.BACK)
+		    FlxG.debugger.visible = !FlxG.debugger.visible;
+		#end
+	
+	
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
