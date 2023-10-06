@@ -138,3 +138,5 @@ jobs:
         with:
           name: androidBuild
           path: export/release/android/bin/app/build/outputs/apk/debug
+          if-no-files-found: warn
+              
