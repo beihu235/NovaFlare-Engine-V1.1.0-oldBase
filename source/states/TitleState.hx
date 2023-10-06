@@ -88,7 +88,7 @@ class TitleState extends MusicBeatState
 		Paths.clearUnusedMemory();
 		Lib.application.window.title = " NF - Engine - Title";
 		
-		#if debug		
+		#if (debug && android)
 		FlxG.debugger.visible = true;
 		#end
 		
