@@ -91,7 +91,7 @@ jobs:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
       - name: Building
-        run: haxelib run lime build android -debug
+        run: haxelib run lime build android -debug -${{ matrix.arch }}
         env:
           cert_pass: nullfunni
           cert_alias_pass: nullfunni
@@ -137,4 +137,4 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: androidBuild
-          path: export/release/android/bin/app/build/outputs/apk         
+          path: export/release/android/bin/app/build/outputs/apk/debug
