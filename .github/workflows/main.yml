@@ -91,7 +91,7 @@ jobs:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
       - name: Building
-        run: haxelib run lime build android -${{ matrix.arch }}
+        run: haxelib run lime build android -debug
         env:
           cert_pass: nullfunni
           cert_alias_pass: nullfunni
@@ -121,6 +121,17 @@ jobs:
             } catch (error) {
             	console.log(error.message);
             }
+
+      - name: Save Current Cache
+        id: cache-release-build-android-save
+        uses: actions/cache/save@main
+        with:
+          path: |
+            ~/haxelib
+            ~/.gradle
+            export/release/android/haxe
+            export/release/android/obj
+          key: cache-android-build
 
       - name: Upload Artifact
         uses: actions/upload-artifact@main
