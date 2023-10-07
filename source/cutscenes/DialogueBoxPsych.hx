@@ -33,8 +33,9 @@ typedef DialogueLine = {
 	var sound:Null<String>;
 }
     /*
-        这些源码具体大概可能是吐司老师(toast)写的，最早应该用于R病毒模组(VS Virus.R)
-        我把它从0.63搬到了0.71h并进行了一些扩展，但是有一说一加了个shadow被我整的很乱了
+        这些源码初版由弗雷泽(fraze)所写
+        他的b站链接: https://b23.tv/y40j1RC
+        我把它从0.63h搬到了0.71h并进行了一些扩展，但是有一说一加了个shadow被我整的很乱了
         实际上可以进行些更多的扩展比如说每段都能换颜色和font文件，但是为了兼容模组我就没有整了
         --北狐丶逐梦
     */
@@ -542,7 +543,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 	}
 	
     var fontName:String;
-	var textSounds = FlxG.sound.load(Paths.sound('dialogueSoundFX'));
+	var textSounds = FlxG.sound.load(Paths.sound('dialogueSound'));
 
 	function initializeText(x:Float, y:Float, width:Int, size:Int, content:String):FlxTypeText
 	{
