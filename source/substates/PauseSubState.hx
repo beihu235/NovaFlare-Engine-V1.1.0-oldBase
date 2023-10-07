@@ -311,7 +311,7 @@ class PauseSubState extends MusicBeatSubstate
 						FlxG.sound.music.time = pauseMusic.time;
 					}
 					OptionsState.onPlayState = true;
-				case 'Options':
+				case 'Game Setting':
 					PlayState.instance.paused = true; // For lua
 					MusicBeatState.switchState(new GameplayChangersSubstate());
 					GameplayChangersSubstate.onPlayState = true;
