@@ -17,7 +17,8 @@ import flixel.addons.transition.FlxTransitionableState;
 
 class OptionsState extends MusicBeatState
 {
-	public static var instance:OptionsMenu;
+	public static var instance:OptionsState;
+	public static var onPlayState:Bool = false;
 
 	var selector:FlxText;
 	var curSelected:Int = 0;
