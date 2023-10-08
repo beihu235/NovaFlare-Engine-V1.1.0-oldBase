@@ -1,4 +1,4 @@
-package;
+package options;
 
 import lime.app.Application;
 import lime.system.DisplayMode;
