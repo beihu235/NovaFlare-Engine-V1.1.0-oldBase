@@ -3155,7 +3155,16 @@ class PlayState extends MusicBeatState
 			health += note.hitHealth * healthGain;
 
 			if(!note.noAnimation) {
-				var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))];
+			    var altAnim:String = note.animSuffix;
+
+			    if (SONG.notes[curSection] != null)
+			    {
+				    if (SONG.notes[curSection].altAnim && !SONG.notes[curSection].gfSection) {
+					    altAnim = '-alt';
+				    }
+			    }
+			    
+				var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))] + altAnim;
 
 				var char:Character = dad;
 				var animCheck:String = 'hey';
@@ -3318,17 +3327,9 @@ class PlayState extends MusicBeatState
 			boyfriend.specialAnim = true;
 			boyfriend.heyTimer = 0.6;
 		} else if(!note.noAnimation) {
-			var altAnim:String = note.animSuffix;
-
-			if (SONG.notes[curSection] != null)
-			{
-				if (SONG.notes[curSection].altAnim && !SONG.notes[curSection].gfSection) {
-					altAnim = '-alt';
-				}
-			}
-
+			
 			var char:Character = boyfriend;
-			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))] + altAnim;
+			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))];
 			if(note.gfNote) {
 				char = gf;
 			}
