@@ -282,12 +282,10 @@ class PauseSubState extends MusicBeatSubstate
 				case 'Chart Editor':
 		            MusicBeatState.switchState(new ChartingState());
 		            PlayState.chartingMode = true;
-		            OptionsState.onPlayState = false;
 				case 'End Song':
 					close();
 					PlayState.instance.notes.clear();
 					PlayState.instance.unspawnNotes = [];
-					OptionsState.onPlayState = false;
 					PlayState.instance.finishSong(true);
 				case 'Toggle Botplay':
 				    if(!ClientPrefs.data.playOpponent){
@@ -310,11 +308,6 @@ class PauseSubState extends MusicBeatSubstate
 						FlxTween.tween(FlxG.sound.music, {volume: 1}, 0.8);
 						FlxG.sound.music.time = pauseMusic.time;
 					}
-					OptionsState.onPlayState = true;
-				case 'Game Setting':
-					PlayState.instance.paused = true; // For lua
-					MusicBeatState.switchState(new GameplayChangersSubstate());
-					GameplayChangersSubstate.onPlayState = true;
 				case "Exit to menu":
 					#if desktop DiscordClient.resetClientID(); #end
 					PlayState.deathCounter = 0;
@@ -329,7 +322,7 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.cancelMusicFadeTween();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 					PlayState.changedDifficulty = false;
-					OptionsState.onPlayState = false;
+					
 					PlayState.chartingMode = false;
 					FlxG.camera.followLerp = 0;
 			}
