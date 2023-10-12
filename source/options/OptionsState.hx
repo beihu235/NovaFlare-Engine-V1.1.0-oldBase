@@ -194,8 +194,7 @@ class OptionsState extends FlxSubState
 			new OptionCata(935, 40, "Extra", [
 				//new ResetSettings("Reset some your settings. This is irreversible!")
 				new AutoSave("Turn AutoSaves your chating in Charting state."),
-				new AutoSaveInt("Change Chart AutoSave Interval."),
-                new SkipTitleOption("Skips TitleState."),
+				new AutoSaveInt("Change Chart AutoSave Interval."),               
 			    new PauseCountDownOption("Toggle countdown after pressing 'Resume' in Pause Menu."),
 			]),
 			new OptionCata(-1, 125, "Editing Keybinds", [/* nothing here lol - PurSnake*/], true),
@@ -504,8 +503,7 @@ class OptionsState extends FlxSubState
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						new FlxTimer().start(1.5, function(tmr:FlxTimer)
 						{
-							TitleState.initialized = false;
-                            TitleState.closedState = false;
+							
                             FlxG.sound.music.fadeOut(0.3);
                             FlxG.camera.fade(FlxColor.BLACK, 0.5, false, FlxG.resetGame, false);
 						});
@@ -677,8 +675,7 @@ class OptionsState extends FlxSubState
 							FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 							new FlxTimer().start(1.5, function(tmr:FlxTimer)
 							{
-								TitleState.initialized = false;
-                                TitleState.closedState = false;
+								
                                 FlxG.sound.music.fadeOut(0.3);
                                 FlxG.camera.fade(FlxColor.BLACK, 0.5, false, FlxG.resetGame, false);
 							});
