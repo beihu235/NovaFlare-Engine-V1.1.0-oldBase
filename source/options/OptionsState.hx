@@ -7,16 +7,16 @@ import options.ControlsSubState;
 import options.NoteOffsetState;
 import options.NotesSubState;
 
-import backend.Control;
+import backend.Controls;
 import backend.ClientPrefs;
 import backend.MusicBeatState;
 
 import states.MainMenuState;
 import backend.StageData;
+
 import flixel.addons.transition.FlxTransitionableState;
-
 import flixel.input.gamepad.FlxGamepad;
-
+import flixel.FlxSubState;
 import flash.text.TextField;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
