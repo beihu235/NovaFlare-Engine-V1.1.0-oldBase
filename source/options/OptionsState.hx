@@ -49,8 +49,8 @@ class OptionCata extends FlxSprite
 
 		optionObjects = new FlxTypedGroup();
 
-		titleObject = new FlxText((middleType ? 1180 / 2 : x), y + (middleType ? 0 : 16), 0, title);
-		titleObject.setFormat(Paths.font("vcr.ttf"), 35, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		titleObject = new FlxText((middleType ? 1180 / 2 : x), y + (middleType ? 0 : 16), 1180, title);
+		titleObject.setFormat(Paths.font("vcr.ttf"), 35, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		titleObject.borderSize = 3;
 
 		if (middleType)
