@@ -124,7 +124,7 @@ class OptionsState extends MusicBeatSubstate
 	public var menu:FlxTypedGroup<FlxSprite>;
 
 	public var descText:FlxText;
-	//public var descBack:FlxSprite;
+	public var descBack:FlxSprite;
 
 	override function create()
 	{
@@ -219,7 +219,7 @@ class OptionsState extends MusicBeatSubstate
 		menu = new FlxTypedGroup<FlxSprite>();
 
 		shownStuff = new FlxTypedGroup<FlxText>();
-        /*
+        
 		background = new FlxSprite(50, 40).makeGraphic(1180, 640, FlxColor.BLACK);
 		background.alpha = 0.5;
 		background.scrollFactor.set();
@@ -229,7 +229,7 @@ class OptionsState extends MusicBeatSubstate
 		descBack.alpha = 0.3;
 		descBack.scrollFactor.set();
 		menu.add(descBack);
-        */
+        
 		if (isInPause)
 		{
 			var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -273,7 +273,7 @@ class OptionsState extends MusicBeatSubstate
 		descText.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		descText.borderSize = 2;
 
-		//add(descBack);
+		add(descBack);
 		add(descText);
 
 		isInCat = true;
