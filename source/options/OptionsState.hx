@@ -124,7 +124,7 @@ class OptionsState extends MusicBeatSubstate
 	public var menu:FlxTypedGroup<FlxSprite>;
 
 	public var descText:FlxText;
-	public var descBack:FlxSprite;
+	//public var descBack:FlxSprite;
 
 	override function create()
 	{
@@ -189,13 +189,24 @@ class OptionsState extends MusicBeatSubstate
 				//new Imagepersist("Images loaded will stay in memory until the game is closed."),
         		]),
 			new OptionCata(935, 40, "Extra", [
+			    new HideHud("Shows to you hud."),
 				//new ResetSettings("Reset some your settings. This is irreversible!")
 				//new AutoSave("Turn AutoSaves your chating in Charting state."),
 				//new AutoSaveInt("Change Chart AutoSave Interval."),               
 			 //   new PauseCountDownOption("Toggle countdown after pressing 'Resume' in Pause Menu."),
 			]),
-			new OptionCata(-1, 125, "Editing Keybinds", [/* nothing here lol - PurSnake*/], true),
-
+			new OptionCata(50, 40 + 64, "test4", [
+			    new HideHud("Shows to you hud."),				
+			]),
+			new OptionCata(345, 40 + 64, "test1", [
+			    new HideHud("Shows to you hud."),				
+			]),
+			new OptionCata(640, 40 + 64, "test2", [
+			    new HideHud("Shows to you hud."),				
+			]),
+			new OptionCata(935, 40 + 64, "test3", [
+			    new HideHud("Shows to you hud."),				
+			]),			
 			new OptionCata(-1, 125, "Editing Judgements", [
 				new SickMSOption("How many milliseconds are in the SICK hit window"),
 				new GoodMsOption("How many milliseconds are in the GOOD hit window"),
@@ -208,17 +219,17 @@ class OptionsState extends MusicBeatSubstate
 		menu = new FlxTypedGroup<FlxSprite>();
 
 		shownStuff = new FlxTypedGroup<FlxText>();
-
+        /*
 		background = new FlxSprite(50, 40).makeGraphic(1180, 640, FlxColor.BLACK);
 		background.alpha = 0.5;
 		background.scrollFactor.set();
 		menu.add(background);
-
+        
 		descBack = new FlxSprite(50, 640).makeGraphic(1180, 38, FlxColor.BLACK);
 		descBack.alpha = 0.3;
 		descBack.scrollFactor.set();
 		menu.add(descBack);
-
+        */
 		if (isInPause)
 		{
 			var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -253,7 +264,7 @@ class OptionsState extends MusicBeatSubstate
 		descText.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		descText.borderSize = 2;
 
-		add(descBack);
+		//add(descBack);
 		add(descText);
 
 		isInCat = true;
@@ -510,9 +521,9 @@ class OptionsState extends MusicBeatSubstate
 				{
 					if (!isInPause) {
 					    ClientPrefs.saveSettings();
+					    FlxTransitionableState.skipNextTransOut = true;
 						MusicBeatState.switchState(new MainMenuState());
                         FlxG.sound.music.stop();
-						//ControlsSubState.fromcontrols = false;
 					    }
 					else
 					{
