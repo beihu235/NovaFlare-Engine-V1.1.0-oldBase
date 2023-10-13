@@ -393,7 +393,7 @@ class OptionsState extends FlxSubState
 	public var left = false;
 	public var up = false;
 	public var down = false;
-	public var any = false;
+	public var anyKey = false;
 	public var back = false;
 	public var reset = false;
 		
@@ -421,7 +421,7 @@ class OptionsState extends FlxSubState
 		up = Controls.UI_UP_P;
 		down = Controls.UI_DOWN_P;
 
-		any = FlxG.keys.justPressed.ANY || (gamepad != null ? gamepad.justPressed.ANY : false);
+		anyKey = FlxG.keys.justPressed.ANY || (gamepad != null ? gamepad.justPressed.ANY : false);
 		back = Controls.BACK;
 		reset = FlxG.keys.justPressed.DELETE;
 
@@ -539,7 +539,7 @@ class OptionsState extends FlxSubState
 							//Debug.logTrace("New text: " + object.text);
 							return;
 						}
-						else if (any)
+						else if (anyKey)
 						{
 							var object = selectedCat.optionObjects.members[selectedOptionIndex];
 							selectedOption.onType(gamepad == null ? FlxG.keys.getIsDown()[0].ID.toString() : gamepad.firstJustPressedID());
