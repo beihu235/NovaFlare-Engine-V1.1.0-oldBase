@@ -387,7 +387,16 @@ class OptionsState extends FlxSubState
 			LoadingState.loadAndSwitchState(new NoteOffsetState());
 			ClientPrefs.saveSettings();
 		}
-
+    
+    public var accept = false;
+	public var right = false;
+	public var left = false;
+	public var up = false;
+	public var down = false;
+	public var any = false;
+	public var back = false;
+	public var reset = false;
+		
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
@@ -404,16 +413,7 @@ class OptionsState extends FlxSubState
 			FlxG.fullscreen = !FlxG.fullscreen;
 			}
 
-		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
-
-		public var accept = false;
-		public var right = false;
-		public var left = false;
-		public var up = false;
-		public var down = false;
-		public var any = false;
-		public var back = false;
-		public var reset = false;
+		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;		
 
 		accept = Controls.ACCEPT;
 		right = Controls.UI_RIGHT_P;
