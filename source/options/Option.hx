@@ -460,7 +460,7 @@ class HideHud extends Option
 
 		if (Type.getClass(FlxG.state) == PlayState){
 
-		PlayState.instance.healthBarBG.visible = !ClientPrefs.data.hideHud;
+		/*PlayState.instance.healthBarBG.visible = !ClientPrefs.data.hideHud;
 		PlayState.instance.healthBar.visible = !ClientPrefs.data.hideHud;
 		PlayState.instance.healthBarWN.visible = !ClientPrefs.data.hideHud;
 		PlayState.instance.healthStrips.visible  = !ClientPrefs.data.hideHud;
@@ -476,7 +476,7 @@ class HideHud extends Option
 				if (helem != null) {
 					helem.visible = ClientPrefs.data.visibleHealthbar;
 			}  
-		}
+		}*/
 
 	    }
 		display = updateDisplay();
@@ -552,7 +552,7 @@ class BlurNotes extends Option
 	{
 		return "Blured Notes: < " + (ClientPrefs.data.blurNotes ? "Enabled" : "Disabled") + " >";
 	}
-}*/
+}
 
 class AutoSave extends Option
 {
@@ -582,7 +582,7 @@ class AutoSave extends Option
 		return "Chart AutoSave: < " + (ClientPrefs.data.chartAutoSave ? "Enabled" : "Disabled") + " >";
 	}
 }
-/*
+
 class AutoSaveInt extends Option
 {
 	public function new(desc:String)
@@ -908,7 +908,7 @@ class FPSOption extends Option
 	public override function left():Bool
 	{	
 		ClientPrefs.data.showFPS = !ClientPrefs.data.showFPS;
-		FPSMem.showFPS = ClientPrefs.data.showFPS;
+		//FPSMem.showFPS = ClientPrefs.data.showFPS;
 		display = updateDisplay();
 		return true;
 	}
@@ -921,7 +921,7 @@ class FPSOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "FPS Counter: < " + (FPSMem.showFPS ? "Enabled" : "Disabled") + " >";
+		//return "FPS Counter: < " + (FPSMem.showFPS ? "Enabled" : "Disabled") + " >";
 	} 
 }
 /*
@@ -980,7 +980,7 @@ class AutoPause extends Option
 		return "AutoPause: < " + (ClientPrefs.data.autoPause ? "Enabled" : "Disabled") + " >";
 	} 
 }
-
+/*
 class ShowSplashes extends Option
 {
 	public function new(desc:String)
@@ -1006,7 +1006,7 @@ class ShowSplashes extends Option
 	{
 		return "NoteSplashes: < " + (ClientPrefs.data.noteSplashes ? "Enabled" : "Disabled") + " >";
 	} 
-}
+}*/
 class QualityLow extends Option
 {
 	public function new(desc:String)
@@ -1077,7 +1077,7 @@ class FPSCapOption extends Option
 		if (ClientPrefs.data.framerate > 290)
 			ClientPrefs.data.framerate = 290;
 		else if (ClientPrefs.data.framerate <= 60)
-			ClientPrefs.data.framerate = Application.current.window.displayMode.refreshRate;
+			#if !android ClientPrefs.data.framerate = Application.current.window.displayMode.refreshRate; #end
 		else
 			ClientPrefs.data.framerate = ClientPrefs.data.framerate - 5;
 			onChangeFramerate();
@@ -1127,7 +1127,7 @@ class HideOppStrumsOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Opponent Strums: < " + (!ClientPrefs.data.hideOpponenStrums ? "Enabled" : "Disabled") + " >";
+		return "Opponent Strums: < " + (!ClientPrefs.data.opponentStrums ? "Enabled" : "Disabled") + " >";
 	}
 }
 /*
@@ -1189,12 +1189,12 @@ class OffsetThing extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Note offset: < " + Utils.truncateFloat(ClientPrefs.data.noteOffset, 0) + " >";
+		return "Note offset: < " + ClientPrefs.data.noteOffset + " >";
 	}
 
 	public override function getValue():String
 	{
-		return "Note offset: < " + Utils.truncateFloat(ClientPrefs.data.noteOffset, 0) + " >";
+		return "Note offset: < " + ClientPrefs.data.noteOffset + " >";
 	}
 } 
 
@@ -1286,7 +1286,7 @@ class Imagepersist extends Option
 	{
 		return "Persistent Cached Data: < " + (ClientPrefs.data.imagesPersist ? "Enabled" : "Disabled") + " >";
 	}
-}*/
+}
 
 class ControllerMode extends Option
 {
@@ -1318,7 +1318,7 @@ class ControllerMode extends Option
 	{
 		return "Controller Mode: < " + (ClientPrefs.data.controllerMode ? "Enabled" : "Disabled") + " >";
 	}
-}
+}*/
 
 class MiddleScrollOption extends Option
 {
@@ -1560,12 +1560,12 @@ class HealthBarAlpha extends Option
 		if (ClientPrefs.data.healthBarAlpha > 1)
 			ClientPrefs.data.healthBarAlpha = 1;
 		if (Type.getClass(FlxG.state) == PlayState){
-		PlayState.instance.healthBarBG.alpha = ClientPrefs.data.healthBarAlpha;
+		/*PlayState.instance.healthBarBG.alpha = ClientPrefs.data.healthBarAlpha;
 		PlayState.instance.healthBar.alpha = ClientPrefs.data.healthBarAlpha;
 		PlayState.instance.healthBarWN.alpha = ClientPrefs.data.healthBarAlpha;
 		PlayState.instance.healthStrips.alpha = ClientPrefs.data.healthBarAlpha;
 		PlayState.instance.iconP1.alpha = ClientPrefs.data.healthBarAlpha;
-		PlayState.instance.iconP2.alpha = ClientPrefs.data.healthBarAlpha;
+		PlayState.instance.iconP2.alpha = ClientPrefs.data.healthBarAlpha;*/
 		}
 		return true;
 	}
@@ -1577,12 +1577,12 @@ class HealthBarAlpha extends Option
 		if (ClientPrefs.data.healthBarAlpha < 0)
 			ClientPrefs.data.healthBarAlpha = 0;
 		if (Type.getClass(FlxG.state) == PlayState){
-		PlayState.instance.healthBarBG.alpha = ClientPrefs.data.healthBarAlpha;
+		/*PlayState.instance.healthBarBG.alpha = ClientPrefs.data.healthBarAlpha;
 		PlayState.instance.healthBar.alpha = ClientPrefs.data.healthBarAlpha;
 		PlayState.instance.healthBarWN.alpha = ClientPrefs.data.healthBarAlpha;
 		PlayState.instance.healthStrips.alpha = ClientPrefs.data.healthBarAlpha;
 		PlayState.instance.iconP1.alpha = ClientPrefs.data.healthBarAlpha;
-		PlayState.instance.iconP2.alpha = ClientPrefs.data.healthBarAlpha;
+		PlayState.instance.iconP2.alpha = ClientPrefs.data.healthBarAlpha;*/
 		}
 		return true;
 	}
@@ -1647,7 +1647,7 @@ class HitSoundOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "HitSound volume: < " + Utils.truncateFloat(ClientPrefs.data.hitsoundVolume, 1) + " >";
+		return "HitSound volume: < " + ClientPrefs.data.hitsoundVolume + " >";
 	}
 
 	override function right():Bool

@@ -132,13 +132,13 @@ class OptionsState extends FlxSubState
 	override function create()
 	{
 
-		if (!isInPause)
+		/*if (!isInPause)
 		  if(!ControlsSubState.fromcontrols)
 			if(startSong)
 				FlxG.sound.playMusic(Paths.music('optionsSong'));
 			else
 				startSong = true;
-
+*/
 
 		options = [
 			new OptionCata(50, 40, "Gameplay", [
@@ -149,7 +149,7 @@ class OptionsState extends FlxSubState
 				new NoReset("Toggle pressing R to gameover."),
 				//new InstantRespawn("Toggle if you instantly respawn after dying."),
 				new CamZoomOption("Toggle the camera zoom in-game."),
-                new ControllerMode("Enables you to play with controller."),
+                //new ControllerMode("Enables you to play with controller."),
                 //new DFJKOption(),
                 //new NotesOption(),
                 //new Customizeption(),
@@ -164,9 +164,9 @@ class OptionsState extends FlxSubState
 				new HideOppStrumsOption("Shows/Hides opponent strums on screen.(RESTART SONG)"),
 				//new MissSoundsOption("Toggle miss sounds playing when you don't hit a note."),
 				//new MissAnimsOption("Toggle miss animations playing when you don't hit a note."),
-                new ShowSplashes("Show particles on SICK hit."),
+                //new ShowSplashes("Show particles on SICK hit."),
                // new SustainsAlpha("Change Sustain Notes Alpha."),
-				new HealthBarOption("Toggles health bar visibility"),
+				//new HealthBarOption("Toggles health bar visibility"),
 				//new JudgementCounter("Show your judgements that you've gotten in the song"),
 				//new LaneUnderlayOption("How transparent your lane is, higher = more visible."),
                 new HideHud("Shows to you hud."),
@@ -356,7 +356,7 @@ class OptionsState extends FlxSubState
 		}
 		catch (e)
 		{
-			GrfxLogger.log('error', "oops\n" + e);
+			//GrfxLogger.log('error', "oops\n" + e);
 			selectedCatIndex = 0;
 		}
 	}
@@ -520,11 +520,11 @@ class OptionsState extends FlxSubState
 					    ClientPrefs.saveSettings();
 						MusicBeatState.switchState(new MainMenuState());
                         FlxG.sound.music.stop();
-						ControlsSubState.fromcontrols = false;
+						//ControlsSubState.fromcontrols = false;
 					    }
 					else
 					{
-						PauseSubState.goBack = true;
+						//PauseSubState.goBack = true;
 						ClientPrefs.saveSettings();
 						close();
 					}
