@@ -7,8 +7,6 @@ import options.ControlsSubState;
 import options.NoteOffsetState;
 import options.NotesSubState;
 
-import flixel.FlxSubState;
-
 import backend.ClientPrefs;
 
 import states.MainMenuState;
@@ -88,7 +86,7 @@ class OptionCata extends FlxSprite
 	}
 }
 
-class OptionsState extends MusicBeatSubState
+class OptionsState extends MusicBeatSubstate
 {
 	//public static var instance:OptionsState;
 
