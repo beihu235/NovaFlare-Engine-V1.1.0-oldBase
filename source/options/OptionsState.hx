@@ -261,8 +261,8 @@ class OptionsState extends MusicBeatSubstate
 
 		for (i in 0...options.length - 1)
 		{
-			if (i >= 4)
-				continue;
+			/*if (i >= 4)
+				continue;*/
 			var cat = options[i];
 			add(cat);
 			add(cat.titleObject);
