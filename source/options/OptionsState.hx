@@ -241,6 +241,15 @@ class OptionsState extends MusicBeatSubstate
 			bg.alpha = 0.4;
 
 			cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+		}else{
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+    		bg.scrollFactor.set(0,0);
+    		bg.setGraphicSize(Std.int(bg.width));
+    		bg.updateHitbox();
+    		bg.screenCenter();
+    		bg.antialiasing = ClientPrefs.data.antialiasing;
+    		add(bg);
+		
 		}
 
 		selectedCat = options[0];
