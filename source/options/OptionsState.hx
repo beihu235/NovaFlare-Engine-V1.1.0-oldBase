@@ -530,9 +530,9 @@ class OptionsState extends MusicBeatSubstate
 				{
 					if (!isInPause) {
 					    ClientPrefs.saveSettings();
-					    
+					    FlxTransitionableState.skipNextTransIn = true;
+			            FlxTransitionableState.skipNextTransOut = true;
 						MusicBeatState.switchState(new MainMenuState());
-						FlxTransitionableState.skipNextTransOut = true;
                         //FlxG.sound.music.stop();
 					    }
 					else
