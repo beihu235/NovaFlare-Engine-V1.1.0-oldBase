@@ -1077,7 +1077,7 @@ class FPSCapOption extends Option
 		if (ClientPrefs.data.framerate > 290)
 			ClientPrefs.data.framerate = 290;
 		else if (ClientPrefs.data.framerate <= 60)
-			#if !android ClientPrefs.data.framerate = Application.current.window.displayMode.refreshRate; #end
+			ClientPrefs.data.framerate = Application.current.window.displayMode.refreshRate;
 		else
 			ClientPrefs.data.framerate = ClientPrefs.data.framerate - 5;
 			onChangeFramerate();
