@@ -7,16 +7,14 @@ import options.ControlsSubState;
 import options.NoteOffsetState;
 import options.NotesSubState;
 
-import backend.Controls;
+
 import backend.ClientPrefs;
-import backend.MusicBeatState;
 
 import states.MainMenuState;
 import backend.StageData;
 
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.input.gamepad.FlxGamepad;
-import flixel.FlxSubState;
 import flash.text.TextField;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
@@ -89,9 +87,9 @@ class OptionCata extends FlxSprite
 	}
 }
 
-class OptionsState extends FlxSubState
+class OptionsState extends MusicBeatState
 {
-	public static var instance:OptionsState;
+	//public static var instance:OptionsState;
 
 	public var background:FlxSprite;
 
@@ -206,7 +204,7 @@ class OptionsState extends FlxSubState
 			], true)
 		];
 
-		instance = this;
+		//instance = this;
 
 		menu = new FlxTypedGroup<FlxSprite>();
 
@@ -273,7 +271,7 @@ class OptionsState extends FlxSubState
 		add(restoreSettingsText);
 
 		#if android
-        MusicBeatState.addVirtualPad(FULL, A_B_C);
+        addVirtualPad(FULL, A_B_C);
         #end
 		
 		super.create();
@@ -415,14 +413,14 @@ class OptionsState extends FlxSubState
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;		
 
-		accept = MusicBeatState.controls.ACCEPT;
-		right = MusicBeatState.controls.UI_RIGHT_P;
-		left = MusicBeatState.controls.UI_LEFT_P;
-		up = MusicBeatState.controls.UI_UP_P;
-		down = MusicBeatState.controls.UI_DOWN_P;
+		accept = controls.ACCEPT;
+		right = controls.UI_RIGHT_P;
+		left = controls.UI_LEFT_P;
+		up = controls.UI_UP_P;
+		down = controls.UI_DOWN_P;
 
 		anyKey = FlxG.keys.justPressed.ANY || (gamepad != null ? gamepad.justPressed.ANY : false);
-		back = MusicBeatState.controls.BACK;
+		back = controls.BACK;
 		reset = FlxG.keys.justPressed.DELETE;
 
 		if (selectedCat != null && !isInCat)
