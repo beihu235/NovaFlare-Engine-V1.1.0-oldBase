@@ -180,8 +180,7 @@ class OptionsState extends MusicBeatSubstate
 				new ShadersOption("Shaders used for some visual effects, and also CPU intensive for weaker PCs."),
 				new FPSOption("Toggle the FPS Counter."),
                // new MEMOption("Toggle the MEM Counter."),
-				#if desktop //new FPSCapOption("Change your FPS Cap."),
-				#end
+				new FPSCapOption("Change your FPS Cap."),
                 new AutoPause("Stops game, when its unfocused"),
 				//new VintageOption("Adds 'vintage' on game screen."),
                 new AntialiasingOption("Toggle antialiasing, improving graphics quality at a slight performance penalty."),

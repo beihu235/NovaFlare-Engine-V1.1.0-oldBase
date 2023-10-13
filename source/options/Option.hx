@@ -919,6 +919,12 @@ class FPSOption extends Option
 		left();
 		return true;
 	}
+	
+	public override function press():Bool
+	{
+	    left();
+		return true;
+	}
 
 	private override function updateDisplay():String
 	{
