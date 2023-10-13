@@ -129,7 +129,7 @@ class OptionsState extends FlxSubState
 	public var descText:FlxText;
 	public var descBack:FlxSprite;
 
-	override function create()
+	override public function create()
 	{
 
 		/*if (!isInPause)
@@ -397,7 +397,7 @@ class OptionsState extends FlxSubState
 	public var back = false;
 	public var reset = false;
 		
-	override function update(elapsed:Float)
+	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
