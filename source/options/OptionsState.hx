@@ -406,14 +406,14 @@ class OptionsState extends FlxSubState
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
-		var accept = false;
-		var right = false;
-		var left = false;
-		var up = false;
-		var down = false;
-		var any = false;
-		var back = false;
-		var reset = false;
+		public var accept = false;
+		public var right = false;
+		public var left = false;
+		public var up = false;
+		public var down = false;
+		public var any = false;
+		public var back = false;
+		public var reset = false;
 
 		accept = Controls.ACCEPT;
 		right = Controls.UI_RIGHT_P;
