@@ -35,6 +35,8 @@ class OptionCata extends FlxSprite
 	public var optionObjects:FlxTypedGroup<FlxText>;
 
 	public var titleObject:FlxText;
+	
+	public var positionFix:FlxText;
 
 	public var middle:Bool = false;
 
@@ -65,11 +67,13 @@ class OptionCata extends FlxSprite
 		titleObject.scrollFactor.set();
 
 		scrollFactor.set();
+		
+		positionFix = 40 + 64 + (middleType ? 0 : 16); // work like titleObject.y but set line is two.
 
 		for (i in 0...options.length)
 		{
 			var opt = options[i];
-			var text:FlxText = new FlxText((middleType ? 1180 / 2 : 72), 40 + 64 + (middleType ? 0 : 16) + 54 + (46 * i), 0, opt.getValue());
+			var text:FlxText = new FlxText((middleType ? 1180 / 2 : 72), positionFix + 54 + (46 * i), 0, opt.getValue());
 			if (middleType)
 			{
 				text.screenCenter(X);
@@ -326,7 +330,7 @@ class OptionsState extends MusicBeatSubstate
 		{
 			visibleRange = [114, 640];
 			if (cat.middle)
-				visibleRange = [Std.int(cat.titleObject.y), 640];
+				visibleRange = [Std.int(cat.positionFix), 640];
 			if (selectedOption != null)
 			{
 				var object = selectedCat.optionObjects.members[selectedOptionIndex];
@@ -345,7 +349,7 @@ class OptionsState extends MusicBeatSubstate
 			for (i in 0...selectedCat.options.length)
 			{
 				var opt = selectedCat.optionObjects.members[i];
-				opt.y = selectedCat.titleObject.y + 54 + (46 * i);
+				opt.y = selectedCat.positionFix + 54 + (46 * i);
 			}
 
 			while (shownStuff.members.length != 0)
@@ -369,7 +373,7 @@ class OptionsState extends MusicBeatSubstate
 				for (i in 0...selectedCat.options.length)
 				{
 					var opt = selectedCat.optionObjects.members[i];
-					opt.y = selectedCat.titleObject.y + 54 + (46 * i);
+					opt.y = selectedCat.positionFix + 54 + (46 * i);
 				}
 			}
 
@@ -620,7 +624,7 @@ class OptionsState extends MusicBeatSubstate
 							for (i in 0...selectedCat.options.length)
 							{
 								var opt = selectedCat.optionObjects.members[i];
-								opt.y = selectedCat.titleObject.y + 54 + (46 * i);
+								opt.y = selectedCat.positionFix + 54 + (46 * i);
 							}
 							selectedOptionIndex = 0;
 						}
@@ -673,7 +677,7 @@ class OptionsState extends MusicBeatSubstate
 							for (i in 0...selectedCat.options.length)
 							{
 								var opt = selectedCat.optionObjects.members[i];
-								opt.y = selectedCat.titleObject.y + 54 + (46 * i);
+								opt.y = selectedCat.positionFix + 54 + (46 * i);
 							}
 						}
 
@@ -733,7 +737,7 @@ class OptionsState extends MusicBeatSubstate
 						for (i in 0...selectedCat.options.length)
 						{
 							var opt = selectedCat.optionObjects.members[i];
-							opt.y = selectedCat.titleObject.y + 54 + (46 * i);
+							opt.y = selectedCat.positionFix + 54 + (46 * i);
 						}
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						isInCat = true;
@@ -770,7 +774,7 @@ class OptionsState extends MusicBeatSubstate
 				for (i in 0...selectedCat.options.length)
 				{
 					var opt = selectedCat.optionObjects.members[i];
-					opt.y = selectedCat.titleObject.y + 54 + (46 * i);
+					opt.y = selectedCat.positionFix + 54 + (46 * i);
 				}
 				selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 				isInCat = true;
