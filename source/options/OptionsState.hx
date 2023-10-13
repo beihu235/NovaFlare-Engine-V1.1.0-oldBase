@@ -129,7 +129,7 @@ class OptionsState extends FlxSubState
 	public var descText:FlxText;
 	public var descBack:FlxSprite;
 
-	override public function create()
+	override function create()
 	{
 
 		/*if (!isInPause)
@@ -272,9 +272,9 @@ class OptionsState extends FlxSubState
 		restoreSettingsText.borderQuality = 3;
 		add(restoreSettingsText);
 
-        #if android
-		MusicBeatState.addVirtualPad(FULL, A_B_X_Y);
-		#end
+		#if android
+        MusicBeatState.addVirtualPad(FULL, A_B_C);
+        #end
 		
 		super.create();
 	}
@@ -397,7 +397,7 @@ class OptionsState extends FlxSubState
 	public var back = false;
 	public var reset = false;
 		
-	override public function update(elapsed:Float)
+	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
@@ -415,14 +415,14 @@ class OptionsState extends FlxSubState
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;		
 
-		accept = Controls.ACCEPT;
-		right = Controls.UI_RIGHT_P;
-		left = Controls.UI_LEFT_P;
-		up = Controls.UI_UP_P;
-		down = Controls.UI_DOWN_P;
+		accept = MusicBeatState.controls.ACCEPT;
+		right = MusicBeatState.controls.UI_RIGHT_P;
+		left = MusicBeatState.controls.UI_LEFT_P;
+		up = MusicBeatState.controls.UI_UP_P;
+		down = MusicBeatState.controls.UI_DOWN_P;
 
 		anyKey = FlxG.keys.justPressed.ANY || (gamepad != null ? gamepad.justPressed.ANY : false);
-		back = Controls.BACK;
+		back = MusicBeatState.controls.BACK;
 		reset = FlxG.keys.justPressed.DELETE;
 
 		if (selectedCat != null && !isInCat)
