@@ -1,4 +1,5 @@
 package options;
+import lime.app.Application;
 
 class Option
 {
@@ -494,8 +495,8 @@ class HideHud extends Option
 		return "HUD: < " + (!ClientPrefs.data.hideHud ? "Enabled" : "Disabled") + " >";
 	}
 }
-/*
-class ShowCombo extends Option
+
+class showComboNum extends Option
 {
 	public function new(desc:String)
 	{
@@ -505,7 +506,7 @@ class ShowCombo extends Option
 
 	public override function left():Bool
 	{
-		ClientPrefs.data.showCombo = !ClientPrefs.data.showCombo;
+		ClientPrefs.data.showComboNum = !ClientPrefs.data.showComboNum;
 		display = updateDisplay();
 		return true;
 	}
@@ -518,10 +519,10 @@ class ShowCombo extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Combo Sprite: < " + (ClientPrefs.data.showCombo ? "Enabled" : "Disabled") + " >";
+		return "Combo Sprite: < " + (ClientPrefs.data.showComboNum ? "Enabled" : "Disabled") + " >";
 	}
 }
-
+/*
 class BlurNotes extends Option
 {
 	public function new(desc:String)
@@ -921,7 +922,7 @@ class FPSOption extends Option
 
 	private override function updateDisplay():String
 	{
-		//return "FPS Counter: < " + (FPSMem.showFPS ? "Enabled" : "Disabled") + " >";
+		return "FPS Counter: < " + (ClientPrefs.data.showFPS ? "Enabled" : "Disabled") + " >";
 	} 
 }
 /*
@@ -1589,7 +1590,7 @@ class HealthBarAlpha extends Option
 
 	private override function updateDisplay():String
 		{
-			return "Healthbar Transparceny: < " + Utils.truncateFloat(ClientPrefs.data.healthBarAlpha, 1) + " >";
+			return "Healthbar Transparceny: < " + ClientPrefs.data.healthBarAlpha + " >";
 		}
 	
 }

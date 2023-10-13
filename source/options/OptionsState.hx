@@ -272,14 +272,6 @@ class OptionsState extends FlxSubState
 		restoreSettingsText.borderQuality = 3;
 		add(restoreSettingsText);
 
-		optionsImage = new FlxSprite(0, 0);
-		optionsImage.frames = Paths.getSparrowAtlas('mainmenu/menu_options');
-		optionsImage.animation.addByPrefix('idle', "options white", 24);
-		optionsImage.animation.play('idle');
-		optionsImage.scale.set(0.35, 0.35);
-		optionsImage.screenCenter(X);
-		optionsImage.y -= 39;
-		add(optionsImage);
 
 		super.create();
 	}
@@ -417,17 +409,17 @@ class OptionsState extends FlxSubState
 		var up = false;
 		var down = false;
 		var any = false;
-		var escape = false;
+		var back = false;
 		var reset = false;
 
-		accept = FlxG.keys.justPressed.ENTER || (gamepad != null ? gamepad.justPressed.A : false);
-		right = FlxG.keys.justPressed.RIGHT || (gamepad != null ? gamepad.justPressed.DPAD_RIGHT : false);
-		left = FlxG.keys.justPressed.LEFT || (gamepad != null ? gamepad.justPressed.DPAD_LEFT : false);
-		up = FlxG.keys.justPressed.UP || (gamepad != null ? gamepad.justPressed.DPAD_UP : false);
-		down = FlxG.keys.justPressed.DOWN || (gamepad != null ? gamepad.justPressed.DPAD_DOWN : false);
+		accept = controls.UI_ACCEPT;
+		right = controls.UI_RIGHT_P;
+		left = controls.UI_LEFT_P;
+		up = controls.UI_UP_P;
+		down = controls.UI_UP_P;
 
 		any = FlxG.keys.justPressed.ANY || (gamepad != null ? gamepad.justPressed.ANY : false);
-		escape = FlxG.keys.justPressed.ESCAPE || (gamepad != null ? gamepad.justPressed.B : false);
+		back = controls.UI_BACK;
 		reset = FlxG.keys.justPressed.DELETE;
 
 		if (selectedCat != null && !isInCat)
@@ -514,7 +506,7 @@ class OptionsState extends FlxSubState
 					}
 				}
 
-				if (escape)
+				if (back)
 				{
 					if (!isInPause) {
 					    ClientPrefs.saveSettings();
@@ -535,7 +527,7 @@ class OptionsState extends FlxSubState
 				if (selectedOption != null)
 					if (selectedOption.acceptType)
 					{
-						if (escape && selectedOption.waitingType)
+						if (back && selectedOption.waitingType)
 						{
 							FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 							selectedOption.waitingType = false;
@@ -686,7 +678,7 @@ class OptionsState extends FlxSubState
 						}
 					}
 
-					if (escape)
+					if (back)
 					{
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 
