@@ -469,9 +469,7 @@ class MainMenuState extends MusicBeatState
 						case 'options':
 						    FlxTransitionableState.skipNextTransIn = true;
                 			FlxTransitionableState.skipNextTransOut = true;
-							MusicBeatState.switchState(new options.OptionsState());			
-							FlxTransitionableState.skipNextTransIn = true;
-                			FlxTransitionableState.skipNextTransOut = true;											
+							MusicBeatState.switchState(new options.OptionsState());
 						case 'credits':
 							MusicBeatState.switchState(new CreditsState());	
 					    }
