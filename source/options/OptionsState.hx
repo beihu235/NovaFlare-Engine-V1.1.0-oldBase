@@ -67,7 +67,7 @@ class OptionCata extends FlxSprite
 		for (i in 0...options.length)
 		{
 			var opt = options[i];
-			var text:FlxText = new FlxText((middleType ? 1180 / 2 : 72), titleObject.y + 54 + (46 * i), 0, opt.getValue());
+			var text:FlxText = new FlxText((middleType ? 1180 / 2 : 72), 40 + 64 + (middleType ? 0 : 16) + 54 + (46 * i), 0, opt.getValue());
 			if (middleType)
 			{
 				text.screenCenter(X);
@@ -308,7 +308,7 @@ class OptionsState extends MusicBeatSubstate
 				object.text = selectedOption.getValue();
 			}
 
-			if (selectedCatIndex > options.length - 3 && checkForOutOfBounds)
+			if (selectedCatIndex > options.length - 2 && checkForOutOfBounds)
 				selectedCatIndex = 0;
 
 			if (selectedCat.middle)
@@ -476,10 +476,10 @@ class OptionsState extends MusicBeatSubstate
 					selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 					selectedCatIndex++;
 
-					if (selectedCatIndex > options.length - 3)
+					if (selectedCatIndex > options.length - 2)
 						selectedCatIndex = 0;
 					if (selectedCatIndex < 0)
-						selectedCatIndex = options.length - 3;
+						selectedCatIndex = options.length - 2;
 
 					switchCat(options[selectedCatIndex]);
 				}
@@ -489,10 +489,10 @@ class OptionsState extends MusicBeatSubstate
 					selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 					selectedCatIndex--;
 
-					if (selectedCatIndex > options.length - 3)
+					if (selectedCatIndex > options.length - 2)
 						selectedCatIndex = 0;
 					if (selectedCatIndex < 0)
-						selectedCatIndex = options.length - 3;
+						selectedCatIndex = options.length - 2;
 
 					switchCat(options[selectedCatIndex]);
 				}
