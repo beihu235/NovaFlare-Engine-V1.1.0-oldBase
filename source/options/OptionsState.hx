@@ -273,7 +273,7 @@ class OptionsState extends FlxSubState
 		add(restoreSettingsText);
 
         #if android
-		addVirtualPad(FULL, A_B_X_Y);
+		MusicBeatState.addVirtualPad(FULL, A_B_X_Y);
 		#end
 		
 		super.create();
@@ -415,14 +415,14 @@ class OptionsState extends FlxSubState
 		var back = false;
 		var reset = false;
 
-		accept = controls.UI_ACCEPT;
-		right = controls.UI_RIGHT_P;
-		left = controls.UI_LEFT_P;
-		up = controls.UI_UP_P;
-		down = controls.UI_UP_P;
+		accept = Controls.ACCEPT;
+		right = Controls.UI_RIGHT_P;
+		left = Controls.UI_LEFT_P;
+		up = Controls.UI_UP_P;
+		down = Controls.UI_DOWN_P;
 
 		any = FlxG.keys.justPressed.ANY || (gamepad != null ? gamepad.justPressed.ANY : false);
-		back = controls.UI_BACK;
+		back = Controls.BACK;
 		reset = FlxG.keys.justPressed.DELETE;
 
 		if (selectedCat != null && !isInCat)
