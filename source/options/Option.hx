@@ -496,7 +496,7 @@ class HideHud extends Option
 	}
 }
 
-class showComboNum extends Option
+class ShowComboNum extends Option
 {
 	public function new(desc:String)
 	{
