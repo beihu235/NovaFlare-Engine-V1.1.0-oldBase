@@ -170,7 +170,7 @@ class OptionsState extends FlxSubState
 				//new JudgementCounter("Show your judgements that you've gotten in the song"),
 				//new LaneUnderlayOption("How transparent your lane is, higher = more visible."),
                 new HideHud("Shows to you hud."),
-                new ShowCombo("Combo sprite appearance."),
+                new ShowComboNum("Combo sprite appearance."),
 				new ComboStacking("Ratings and Combo won't stack, saving on System Memory and making them easier to read."),
                 new ScoreZoom("Zoom score on 2'nd beat."),
                 new HealthBarAlpha("Healthbar Transparceny."),
@@ -272,7 +272,10 @@ class OptionsState extends FlxSubState
 		restoreSettingsText.borderQuality = 3;
 		add(restoreSettingsText);
 
-
+        #if android
+		addVirtualPad(FULL, A_B_X_Y);
+		#end
+		
 		super.create();
 	}
 
