@@ -7,6 +7,7 @@ import options.ControlsSubState;
 import options.NoteOffsetState;
 import options.NotesSubState;
 
+import flixel.FlxSubState;
 
 import backend.ClientPrefs;
 
@@ -87,9 +88,9 @@ class OptionCata extends FlxSprite
 	}
 }
 
-class OptionsState extends MusicBeatState
+class OptionsState extends MusicBeatSubState
 {
-	public static var instance:OptionsState;
+	//public static var instance:OptionsState;
 
 	public var background:FlxSprite;
 
@@ -204,7 +205,7 @@ class OptionsState extends MusicBeatState
 			], true)
 		];
 
-		instance = this;
+		//instance = this;
 
 		menu = new FlxTypedGroup<FlxSprite>();
 
