@@ -1656,7 +1656,7 @@ class PlayState extends MusicBeatState
 		}
 		
 		#if android
-			MusicBeatState.androidc.y = 0;
+			if (!PauseSubState.goToOptions) MusicBeatState.androidc.y = 0;
 			//MusicBeatState.androidc.visible = true;
 			#end
 
