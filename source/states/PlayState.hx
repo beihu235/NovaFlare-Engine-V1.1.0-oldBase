@@ -2017,7 +2017,7 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.pause();
 			vocals.pause();
 		}
-		openSubState(new GameplayChangersSubstate());
+		openSubState(new GameplayChangersSubstate(true));
 	}
 	
 	function openOptionMenu()
