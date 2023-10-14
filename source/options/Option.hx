@@ -909,7 +909,10 @@ class FPSOption extends Option
 	public override function left():Bool
 	{	
 		ClientPrefs.data.showFPS = !ClientPrefs.data.showFPS;
-		//FPSMem.showFPS = ClientPrefs.data.showFPS;
+		
+		if(Main.fpsVar != null)
+		Main.fpsVar.visible = ClientPrefs.data.showFPS;
+			
 		display = updateDisplay();
 		return true;
 	}

@@ -328,7 +328,10 @@ class OptionsState extends MusicBeatSubstate
 	{
 		try
 		{
-			visibleRange = [Std.int(cat.positionFix + 64), 640];
+			visibleRange = [Std.int(cat.positionFix + 64), 640]; /l
+			/*变量乱七八糟的我都服了，显示你得加64px去修复到开始第2个格下面
+			  因为text在positionFix那里还加了偏移
+			*/
 			/*if (cat.middle)
 				visibleRange = [Std.int(cat.positionFix), 640];*/
 			if (selectedOption != null)
@@ -433,15 +436,24 @@ class OptionsState extends MusicBeatSubstate
 			ClientPrefs.saveSettings();
 		}
     
-    public var accept = false;
-	public var right = false;
-	public var left = false;
-	public var up = false;
-	public var down = false;
-	public var anyKey = false;
-	public var back = false;
-	public var reset = false;
-		
+     var accept = false;
+     var back = false;
+	 var reset = false;
+	 
+	 var right = false;
+	 var left = false;
+	 var up = false;
+	 var down = false;
+	 
+	 var right_hold = false;
+	 var left_hold = false;
+	 var up_hold = false;
+	 var down_hold = false;
+	 
+	 var anyKey = false;
+	 
+	 var holdTime:Float = 0;	
+	 
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
@@ -465,6 +477,20 @@ class OptionsState extends MusicBeatSubstate
 		left = controls.UI_LEFT_P;
 		up = controls.UI_UP_P;
 		down = controls.UI_DOWN_P;
+		
+		if(controls.UI_DOWN || controls.UI_UP || controls.UI_LEFT || controls.UI_RIGHT)
+			{
+				var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);
+				holdTime += elapsed;
+				var checkNewHold:Int = Math.floor((holdTime - 0.5) * 10);
+
+				if(holdTime > 0.5 && checkNewHold - checkLastHold > 0){
+				    right_hold = controls.UI_RIGHT
+				    left_hold = controls.UI_LEFT;
+				    up_hold = controls.UI_UP;
+				    down_hold = controls.UI_DOWN;
+				}	            
+			}
 
 		anyKey = FlxG.keys.justPressed.ANY || (gamepad != null ? gamepad.justPressed.ANY : false);
 		back = controls.BACK;
@@ -609,7 +635,7 @@ class OptionsState extends MusicBeatSubstate
 						}
 					}
 
-					if (down)
+					if (down || down_hold)
 					{
 						if (selectedOption.acceptType)
 							selectedOption.waitingType = false;
@@ -642,7 +668,7 @@ class OptionsState extends MusicBeatSubstate
 
 						selectOption(options[selectedCatIndex].options[selectedOptionIndex]);
 					}
-					else if (up)
+					else if (up || up_hold)
 					{
 						if (selectedOption.acceptType)
 							selectedOption.waitingType = false;
@@ -684,7 +710,7 @@ class OptionsState extends MusicBeatSubstate
 						selectOption(options[selectedCatIndex].options[selectedOptionIndex]);
 					}
 
-					if (right)
+					if (right || right_hold)
 					{
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						var object = selectedCat.optionObjects.members[selectedOptionIndex];
@@ -695,7 +721,7 @@ class OptionsState extends MusicBeatSubstate
 						object.text = selectedOption.getValue();
 						//Debug.logTrace("New text: " + object.text);
 					}
-					else if (left)
+					else if (left || left_hold)
 					{
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						var object = selectedCat.optionObjects.members[selectedOptionIndex];
@@ -764,7 +790,6 @@ class OptionsState extends MusicBeatSubstate
 		}
 		catch (e)
 		{
-			//Debug.logError("wtf we actually did something wrong, but we dont crash bois.\n" + e);
             FlxG.log.add("wtf we actually did something wrong, but we dont crash bois.\n" + e);
 			selectedCatIndex = 0;
 			selectedOptionIndex = 0;
@@ -784,66 +809,6 @@ class OptionsState extends MusicBeatSubstate
 
 	public static function resetOptions()
 	{
-		FlxG.save.data.autoPause = null;
-		FlxG.save.data.visibleHealthbar = null;
-		FlxG.save.data.showjud = null;
-        FlxG.save.data.showCombo = null;
-        FlxG.save.data.blurNotes = null;
-		FlxG.save.data.playmissanims = null;
-        FlxG.save.data.instantRespawn = null;
-        FlxG.save.data.playmisssounds = null;
-        FlxG.save.data.hitsound = null;
-        FlxG.save.data.shouldcameramove = null;
-        FlxG.save.data.hliconbop = null;
-        FlxG.save.data.hliconbopNum = null;
-        FlxG.save.data.noteSkin = null;
-        FlxG.save.data.noteSkinNum = null;
-		FlxG.save.data.chartautosaveInterval = null;
-        FlxG.save.data.skipTitleState = null;
-		FlxG.save.data.chartautosave = null;
-        FlxG.save.data.downScroll = null;
-		FlxG.save.data.ratingSystem = null;
-		FlxG.save.data.ratingSystemNum = null;
- 		FlxG.save.data.SusTransper = null;
-		FlxG.save.data.songNameDisplay = null;
-		FlxG.save.data.vintageOnGame = null;
-		FlxG.save.data.middleScroll = null;
-		FlxG.save.data.countdownpause = null;
-		FlxG.save.data.showFPS = null;
-        FlxG.save.data.showMEM = null;
-		FlxG.save.data.flashing = null;
-		FlxG.save.data.globalAntialiasing = null;
-		FlxG.save.data.noteSplashes = null;
-		FlxG.save.data.lowQuality = null;
-		FlxG.save.data.framerate = null;
-		FlxG.save.data.ColorBlindType = null;
-		FlxG.save.data.camZooms = null;
-		FlxG.save.data.noteOffset = null;
-		FlxG.save.data.hideHud = null;
-		FlxG.save.data.arrowHSV = null;
-		FlxG.save.data.imagesPersist = null;
-		FlxG.save.data.ghostTapping = null;
-		FlxG.save.data.timeBarType = null;
-		FlxG.save.data.timeBarTypeNum = null;
-		FlxG.save.data.scoreZoom = null;
-		FlxG.save.data.noReset = null;
-        FlxG.save.data.underdelayalpha = null;
-        FlxG.save.data.underdelayonoff = null;
-		FlxG.save.data.hideOpponenStrums = null;
-		FlxG.save.data.healthBarAlpha = 1;
-        FlxG.save.data.hsvol = null;
-		FlxG.save.data.comboOffset = null;
-		FlxG.save.data.ratingOffset = null;
-		FlxG.save.data.sickWindow = null;
-		FlxG.save.data.goodWindow = null;
-		FlxG.save.data.badWindow = null;
-		FlxG.save.data.safeFrames = null;
-		FlxG.save.data.gameplaySettings = null;
-		FlxG.save.data.controllerMode = null;
-		FlxG.save.data.customControls = ClientPrefs.keyBinds;
-		FlxG.save.data.shaders = null;
-	
-        ClientPrefs.loadPrefs();
 
 	}
 }
