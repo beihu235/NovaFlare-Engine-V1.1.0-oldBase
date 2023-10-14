@@ -20,13 +20,14 @@ class PauseSubState extends MusicBeatSubstate
 	public static var goToOptions:Bool = false;
 	public static var goToGameplayChangers:Bool = false;
 	public static var goBack:Bool = false;
-    public static var reOpen = false;
+    public static var reOpen:Bool = false;
     
 	var menuItems:Array<String> = [];
 	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Chart Editor', 'Options', 'Gameplay Changers', 'Exit to menu'];
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
-
+    public static var saveCurSelected:Int = 0;
+    
 	var pauseMusic:FlxSound;
 	var practiceText:FlxText;
 	var skipTimeText:FlxText;
@@ -41,6 +42,9 @@ class PauseSubState extends MusicBeatSubstate
 	public function new(x:Float, y:Float)
 	{
 		super();
+		
+		curSelected = saveCurSelected;
+		
 		if(Difficulty.list.length < 2) menuItemsOG.remove('Change Difficulty'); //No need to change difficulty if there is only one!
 
 		if(PlayState.chartingMode)
@@ -253,6 +257,7 @@ class PauseSubState extends MusicBeatSubstate
 			}
 			
             reOpen = false;
+            saveCurSelected = 0;
             
 			switch (daSelected)
 			{
