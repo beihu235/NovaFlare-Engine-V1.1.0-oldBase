@@ -478,6 +478,11 @@ class OptionsState extends MusicBeatSubstate
 		up = controls.UI_UP_P;
 		down = controls.UI_DOWN_P;
 		
+		right_hold = false;
+        left_hold = false;
+	    up_hold = false;
+		down_hold = false;
+		
 		if (controls.UI_RIGHT_P || controls.UI_LEFT_P || controls.UI_UP_P || controls.UI_DOWN_P)
 		holdTime = 0;
 		
