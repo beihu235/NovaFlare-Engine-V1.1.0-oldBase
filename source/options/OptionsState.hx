@@ -115,7 +115,7 @@ class OptionsState extends MusicBeatSubstate
 
 	public var shownStuff:FlxTypedGroup<FlxText>;
 
-	public static var visibleRange = [114, 640];
+	public static var visibleRange = [178, 640];
 
 	var startSong = true;
 	
@@ -329,8 +329,8 @@ class OptionsState extends MusicBeatSubstate
 		try
 		{
 			visibleRange = [Std.int(cat.positionFix), 640];
-			if (cat.middle)
-				visibleRange = [Std.int(cat.positionFix), 640];
+			/*if (cat.middle)
+				visibleRange = [Std.int(cat.positionFix), 640];*/
 			if (selectedOption != null)
 			{
 				var object = selectedCat.optionObjects.members[selectedOptionIndex];
@@ -663,7 +663,7 @@ class OptionsState extends MusicBeatSubstate
 								}
 						}
 
-						if (selectedOptionIndex != 0 && options[selectedCatIndex].options.length > 10)
+						if (selectedOptionIndex != 0 && options[selectedCatIndex].options.length > 6)
 						{
 							if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)//修改
 								for (i in selectedCat.optionObjects.members)
