@@ -328,7 +328,7 @@ class OptionsState extends MusicBeatSubstate
 	{
 		try
 		{
-			visibleRange = [114, 640];
+			visibleRange = [Std.int(cat.positionFix), 640];
 			if (cat.middle)
 				visibleRange = [Std.int(cat.positionFix), 640];
 			if (selectedOption != null)
