@@ -306,7 +306,6 @@ class PauseSubState extends MusicBeatSubstate
 					close();
 				case 'Gameplay Changers':
 					close();
-					goToOptions = true;
 					PlayState.instance.openChangersMenu();	
 				case "Exit to menu":
 					#if desktop DiscordClient.resetClientID(); #end
