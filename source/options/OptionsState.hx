@@ -328,7 +328,7 @@ class OptionsState extends MusicBeatSubstate
 	{
 		try
 		{
-			visibleRange = [Std.int(cat.positionFix + 64), 640]; /l
+			visibleRange = [Std.int(cat.positionFix + 64), 640]; /*
 			/*变量乱七八糟的我都服了，显示你得加64px去修复到开始第2个格下面
 			  因为text在positionFix那里还加了偏移
 			*/
