@@ -96,7 +96,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		if (isInPause) cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 		
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		bg.alpha = 0.6;
+		bg.alpha = 0.4;
 		add(bg);
 
 		// avoids lagspikes while scrolling through menus!
