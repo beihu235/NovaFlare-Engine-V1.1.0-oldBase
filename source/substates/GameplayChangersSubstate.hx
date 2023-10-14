@@ -172,7 +172,6 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 			    FlxG.resetState();
 			else{
 			    PauseSubState.goBack = true;
-    			PauseSubState.goToGameplayChangers = false;
     			close();    			
 			}
 			#else
@@ -180,7 +179,6 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 			    close();
 			else{
 			    PauseSubState.goBack = true;
-    			PauseSubState.goToGameplayChangers = false;
     			close();    			
 			}
 			#end //我懒得删了
