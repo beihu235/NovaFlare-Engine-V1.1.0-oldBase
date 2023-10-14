@@ -1628,7 +1628,18 @@ class PlayState extends MusicBeatState
 			}
 			else
 				openOptionMenu();
-		}else{		
+		}		
+		else if (PauseSubState.goToGameplayChangers)
+		{
+			if (PauseSubState.goBack)
+			{
+				PauseSubState.goToOptions = false;
+				PauseSubState.goBack = false;
+				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+			}
+			else
+				openChangersMenu();
+		}else{
     		if (paused)
     		{
     			if (FlxG.sound.music != null && !startingSong){
@@ -1996,7 +2007,7 @@ class PlayState extends MusicBeatState
 		#end
 	}
     
-    public function openChangersMenu()
+    function openChangersMenu()
 	{
 	    FlxG.camera.followLerp = 0;
 		persistentUpdate = false;
