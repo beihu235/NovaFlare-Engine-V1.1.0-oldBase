@@ -47,7 +47,7 @@ import substates.GameOverSubstate;
 import substates.ResultsScreen;
 import substates.GameplayChangersSubstate;
 
-import options.OptionsMenu;
+import options.OptionsState;
 
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
