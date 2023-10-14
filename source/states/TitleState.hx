@@ -112,6 +112,7 @@ class TitleState extends MusicBeatState
 										
 		checkOpenFirst = true;
 		
+		}
 		
 		#if android
 		FlxG.android.preventDefaultKeys = [BACK];
@@ -238,7 +239,6 @@ class TitleState extends MusicBeatState
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
 	var swagShader:ColorSwap = null;
-    var introspr:FlxSprite;
 	
 	function startCutscenesIn()
 	{
@@ -251,7 +251,10 @@ class TitleState extends MusicBeatState
 	
 	function startCutscenesOut()
 	{
-		startIntro();
+	    #if android
+		AndroidDialogsExtend.OpenToast(lang,2);
+		#end
+		startIntro();		
 	}
 	
 	function startIntro()
