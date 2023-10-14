@@ -1623,6 +1623,7 @@ class PlayState extends MusicBeatState
 			if (PauseSubState.goBack)
 			{
 				PauseSubState.goToOptions = false;
+				PauseSubState.goToGameplayChangers = false;
 				PauseSubState.goBack = false;
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 			}
@@ -1633,6 +1634,7 @@ class PlayState extends MusicBeatState
 		{
 			if (PauseSubState.goBack)
 			{
+			    PauseSubState.goToOptions = false;
 				PauseSubState.goToGameplayChangers = false;
 				PauseSubState.goBack = false;
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
@@ -1664,13 +1666,12 @@ class PlayState extends MusicBeatState
     			callOnScripts('onResume');
     			resetRPC(startTimer != null && startTimer.finished);
     		}
+    		
+    		#if android
+    		MusicBeatState.androidc.y = 0;
+    		#end
 		}
-		
-		#if android
-			if (!PauseSubState.goToOptions) MusicBeatState.androidc.y = 0;
-			//MusicBeatState.androidc.visible = true;
-			#end
-
+				
 		super.closeSubState();
 	}
 
