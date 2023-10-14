@@ -1622,10 +1622,11 @@ class PlayState extends MusicBeatState
 		{
 			if (PauseSubState.goBack)
 			{
+				
+				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				PauseSubState.goToOptions = false;
 				PauseSubState.goToGameplayChangers = false;
 				PauseSubState.goBack = false;
-				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 			}
 			else
 				openOptionMenu();
@@ -1634,10 +1635,11 @@ class PlayState extends MusicBeatState
 		{
 			if (PauseSubState.goBack)
 			{
-			    PauseSubState.goToOptions = false;
+			    
+				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+                PauseSubState.goToOptions = false;
 				PauseSubState.goToGameplayChangers = false;
 				PauseSubState.goBack = false;
-				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 			}
 			else
 				openChangersMenu();
