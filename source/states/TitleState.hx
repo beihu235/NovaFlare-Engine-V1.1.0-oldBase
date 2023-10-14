@@ -254,6 +254,7 @@ class TitleState extends MusicBeatState
 	    #if android
 		AndroidDialogsExtend.OpenToast(lang,2);
 		#end
+		inGame = true;
 		startIntro();		
 	}
 	
