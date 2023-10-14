@@ -36,7 +36,7 @@ class OptionCata extends FlxSprite
 
 	public var titleObject:FlxText;
 	
-	public var positionFix:FlxText;
+	public var positionFix:Int;
 
 	public var middle:Bool = false;
 
@@ -245,7 +245,7 @@ class OptionsState extends MusicBeatSubstate
 		background.scrollFactor.set();
 		menu.add(background);
         
-		descBack = new FlxSprite(50, 640).makeGraphic(1180, 38, FlxColor.BLACK);
+		descBack = new FlxSprite(50, 640).makeGraphic(1180, 40, FlxColor.BLACK);
 		descBack.alpha = 0.3;
 		descBack.scrollFactor.set();
 		menu.add(descBack);
@@ -344,7 +344,7 @@ class OptionsState extends MusicBeatSubstate
 				remove(selectedCat.titleObject);
 
 			selectedCat.changeColor(FlxColor.BLACK);
-			selectedCat.alpha = 0.3;
+			selectedCat.alpha = 0.4;
 
 			for (i in 0...selectedCat.options.length)
 			{
@@ -663,16 +663,16 @@ class OptionsState extends MusicBeatSubstate
 								}
 						}
 
-						if (selectedOptionIndex != 0 && options[selectedCatIndex].options.length > 6)
+						if (selectedOptionIndex != 0 && options[selectedCatIndex].options.length > 10)
 						{
-							if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)
+							if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)//修改
 								for (i in selectedCat.optionObjects.members)
 								{
 									i.y += 46;
 								}
 						}
 
-						if (selectedOptionIndex < (options[selectedCatIndex].options.length - 1) / 2)
+						if (selectedOptionIndex < (options[selectedCatIndex].options.length - 1) / 2)//修改
 						{
 							for (i in 0...selectedCat.options.length)
 							{
@@ -730,8 +730,8 @@ class OptionsState extends MusicBeatSubstate
 					if (back)
 					{
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
-
-						if (selectedCatIndex >= 4)
+                        
+						if (selectedCatIndex >= 9)
 							selectedCatIndex = 0;
 
 						for (i in 0...selectedCat.options.length)
