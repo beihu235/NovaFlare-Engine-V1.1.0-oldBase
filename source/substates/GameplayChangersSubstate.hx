@@ -15,7 +15,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 	private var checkboxGroup:FlxTypedGroup<CheckboxThingie>;
 	private var grpTexts:FlxTypedGroup<AttachedText>;
 	
-	public static var onPlayState:Bool = false;
+    public static var isInPause = false;
 
 	function getOptions()
 	{
@@ -87,9 +87,13 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		return null;
 	}
 
-	public function new()
+	public function new(pauseMenu:Bool = false)
 	{
 		super();
+		
+		isInPause = pauseMenu;
+		
+		if (isInPause) cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 		
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.alpha = 0.6;
