@@ -303,8 +303,6 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplaySine = 0;										
 				case 'Options':
 				    goToOptions = true;
-					PlayState.instance.paused = true; // For lua
-					PlayState.instance.vocals.volume = 0;
 					close();
 				case 'Gameplay Changers':
 					close();
