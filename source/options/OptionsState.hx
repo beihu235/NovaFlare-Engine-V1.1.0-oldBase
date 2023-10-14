@@ -115,7 +115,7 @@ class OptionsState extends MusicBeatSubstate
 
 	public var shownStuff:FlxTypedGroup<FlxText>;
 
-	public static var visibleRange = [178, 640];
+	public static var visibleRange = [114, 640];
 
 	var startSong = true;
 	
@@ -328,7 +328,7 @@ class OptionsState extends MusicBeatSubstate
 	{
 		try
 		{
-			visibleRange = [Std.int(cat.positionFix), 640];
+			visibleRange = [Std.int(cat.positionFix + 64), 640];
 			/*if (cat.middle)
 				visibleRange = [Std.int(cat.positionFix), 640];*/
 			if (selectedOption != null)
