@@ -594,7 +594,7 @@ class OptionsState extends MusicBeatSubstate
 					    }
 					else
 					{
-						//PauseSubState.goBack = true;
+						PauseSubState.goBack = true;
 						ClientPrefs.saveSettings();
 						close();
 					}
