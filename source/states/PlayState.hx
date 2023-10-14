@@ -1633,7 +1633,7 @@ class PlayState extends MusicBeatState
 		{
 			if (PauseSubState.goBack)
 			{
-				PauseSubState.goToOptions = false;
+				PauseSubState.goToGameplayChangers = false;
 				PauseSubState.goBack = false;
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 			}
