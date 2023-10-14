@@ -165,12 +165,15 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		}
 
 		if (controls.BACK) {
-			FlxTransitionableState.skipNextTransIn = true;
+		
+		    #if android
 			FlxTransitionableState.skipNextTransOut = true;
-			//FlxG.sound.play(Paths.sound('cancelMenu'));
+			if (!isInPause) FlxG.resetState();
+			else close();
+			#else
 			close();
-			ClientPrefs.saveSettings();
-			
+			#end
+			ClientPrefs.saveSettings();			
 		}
 
 		if(nextAccept <= 0)

@@ -19,7 +19,8 @@ class PauseSubState extends MusicBeatSubstate
 	
 	public static var goToOptions:Bool = false;
 	public static var goBack:Bool = false;
-
+    var reOpen = false;
+    
 	var menuItems:Array<String> = [];
 	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Chart Editor', 'Options', 'Gameplay Changers', 'Exit to menu'];
 	var difficultyChoices = [];
@@ -76,7 +77,7 @@ class PauseSubState extends MusicBeatSubstate
 		FlxG.sound.list.add(pauseMusic);
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		bg.alpha = 0;
+		bg.alpha = reOpen ? 0.4 : 0;
 		bg.scrollFactor.set();
 		add(bg);
 
@@ -249,10 +250,13 @@ class PauseSubState extends MusicBeatSubstate
 				menuItems = menuItemsOG;
 				regenMenu();
 			}
-
+			
+            reOpen = false;
+            
 			switch (daSelected)
 			{
 				case "Resume":
+				    
 					close();
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
@@ -303,8 +307,10 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplaySine = 0;										
 				case 'Options':
 				    goToOptions = true;
+				    reOpen = true;
 					close();
 				case 'Gameplay Changers':
+				    reOpen = true;
 					close();
 					PlayState.instance.openChangersMenu();	
 				case "Exit to menu":
