@@ -257,7 +257,6 @@ class PauseSubState extends MusicBeatSubstate
 			switch (daSelected)
 			{
 				case "Resume":
-				    
 					close();
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
@@ -308,9 +307,11 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplaySine = 0;										
 				case 'Options':
 				    goToOptions = true;
+				    goToGameplayChangers = false;
 				    reOpen = true;
 					close();
 				case 'Gameplay Changers':
+				    goToOptions = false;
 				    goToGameplayChangers = true;
 				    reOpen = true;
 					close();
