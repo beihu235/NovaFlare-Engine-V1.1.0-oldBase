@@ -1627,7 +1627,7 @@ class PlayState extends MusicBeatState
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 			}
 			else
-				openSubState(new OptionsState(true));
+				openOptionMenu();
 		}
 		if (paused)
 		{
@@ -2018,6 +2018,30 @@ class PlayState extends MusicBeatState
 			vocals.pause();
 		}
 		openSubState(new GameplayChangersSubstate());
+	}
+	
+	function openOptionMenu()
+	{
+	    FlxG.camera.followLerp = 0;
+		persistentUpdate = false;
+		persistentDraw = true;
+		paused = true;
+		
+		if(FlxG.sound.music != null) {
+			FlxG.sound.music.pause();
+			vocals.pause();
+		}
+		
+		#if android
+			MusicBeatState.androidc.y = 720;
+			//MusicBeatState.androidc.visible = true;
+		#end
+
+		if(FlxG.sound.music != null) {
+			FlxG.sound.music.pause();
+			vocals.pause();
+		}
+		openSubState(new OptionsState(true));
 	}
 	
 	function openChartEditor()
