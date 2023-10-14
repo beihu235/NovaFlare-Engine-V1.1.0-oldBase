@@ -319,6 +319,7 @@ class OptionsState extends MusicBeatSubstate
 
 		#if android
         addVirtualPad(FULL, A_B_C);
+        addPadCamera();
         #end
 		
 		super.create();
