@@ -45,6 +45,9 @@ import states.editors.CharacterEditorState;
 import substates.PauseSubState;
 import substates.GameOverSubstate;
 import substates.ResultsScreen;
+import substates.GameplayChangersSubstate;
+
+import options.OptionsMenu;
 
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
@@ -1615,6 +1618,17 @@ class PlayState extends MusicBeatState
 	override function closeSubState()
 	{
 		stagesFunc(function(stage:BaseStage) stage.closeSubState());
+		if (PauseSubState.goToOptions)
+		{
+			if (PauseSubState.goBack)
+			{
+				PauseSubState.goToOptions = false;
+				PauseSubState.goBack = false;
+				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+			}
+			else
+				openSubState(new OptionsMenu(true));
+		}
 		if (paused)
 		{
 			if (FlxG.sound.music != null && !startingSong)
@@ -1981,7 +1995,31 @@ class PlayState extends MusicBeatState
 		DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 		#end
 	}
+    
+    public function openChangersMenu()
+	{
+	    FlxG.camera.followLerp = 0;
+		persistentUpdate = false;
+		persistentDraw = true;
+		paused = true;
+		
+		if(FlxG.sound.music != null) {
+			FlxG.sound.music.pause();
+			vocals.pause();
+		}
+		
+		#if android
+			MusicBeatState.androidc.y = 720;
+			//MusicBeatState.androidc.visible = true;
+		#end
 
+		if(FlxG.sound.music != null) {
+			FlxG.sound.music.pause();
+			vocals.pause();
+		}
+		openSubState(new GameplayChangersSubstate());
+	}
+	
 	function openChartEditor()
 	{
 		FlxG.camera.followLerp = 0;
