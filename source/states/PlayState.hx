@@ -1628,31 +1628,31 @@ class PlayState extends MusicBeatState
 			}
 			else
 				openOptionMenu();
-		}
-		if (paused)
-		{
-			if (FlxG.sound.music != null && !startingSong)
-			{
-				resyncVocals();
-			}
+		}else{		
+    		if (paused)
+    		{
+    			if (FlxG.sound.music != null && !startingSong){
+				    resyncVocals();
+    			}
 
-			if (startTimer != null && !startTimer.finished) startTimer.active = true;
-			if (finishTimer != null && !finishTimer.finished) finishTimer.active = true;
-			if (songSpeedTween != null) songSpeedTween.active = true;
-
-			var chars:Array<Character> = [boyfriend, gf, dad];
-			for (char in chars)
-				if(char != null && char.colorTween != null)
+    			if (startTimer != null && !startTimer.finished) startTimer.active = true;
+    			if (finishTimer != null && !finishTimer.finished) finishTimer.active = true;
+    			if (songSpeedTween != null) songSpeedTween.active = true;
+        
+    			var chars:Array<Character> = [boyfriend, gf, dad];
+    			for (char in chars)
+    				if(char != null && char.colorTween != null)
 					char.colorTween.active = true;
 
-			#if LUA_ALLOWED
-			for (tween in modchartTweens) tween.active = true;
-			for (timer in modchartTimers) timer.active = true;
-			#end
+    			#if LUA_ALLOWED
+    			for (tween in modchartTweens) tween.active = true;
+    			for (timer in modchartTimers) timer.active = true;
+    			#end
 
-			paused = false;
-			callOnScripts('onResume');
-			resetRPC(startTimer != null && startTimer.finished);
+    			paused = false;
+    			callOnScripts('onResume');
+    			resetRPC(startTimer != null && startTimer.finished);
+    		}
 		}
 		
 		#if android
@@ -2031,16 +2031,10 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.pause();
 			vocals.pause();
 		}
-		
 		#if android
 			MusicBeatState.androidc.y = 720;
 			//MusicBeatState.androidc.visible = true;
 		#end
-
-		if(FlxG.sound.music != null) {
-			FlxG.sound.music.pause();
-			vocals.pause();
-		}
 		openSubState(new OptionsState(true));
 	}
 	
