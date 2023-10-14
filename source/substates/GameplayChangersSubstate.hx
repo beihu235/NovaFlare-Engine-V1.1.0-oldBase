@@ -168,8 +168,12 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		
 		    #if android
 			FlxTransitionableState.skipNextTransOut = true;
-			if (!isInPause) FlxG.resetState();
-			else close();
+			if (!isInPause) 
+			    FlxG.resetState();
+			else{
+    			close();
+    			PauseSubState.goBack = true;
+			}
 			#else
 			close();
 			#end

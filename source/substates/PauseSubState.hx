@@ -18,8 +18,9 @@ class PauseSubState extends MusicBeatSubstate
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 	
 	public static var goToOptions:Bool = false;
+	public static var goToGameplayChangers:Bool = false;
 	public static var goBack:Bool = false;
-    var reOpen = false;
+    public static var reOpen = false;
     
 	var menuItems:Array<String> = [];
 	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Chart Editor', 'Options', 'Gameplay Changers', 'Exit to menu'];
@@ -310,9 +311,9 @@ class PauseSubState extends MusicBeatSubstate
 				    reOpen = true;
 					close();
 				case 'Gameplay Changers':
+				    goToGameplayChangers = true;
 				    reOpen = true;
 					close();
-					PlayState.instance.openChangersMenu();	
 				case "Exit to menu":
 					#if desktop DiscordClient.resetClientID(); #end
 					PlayState.deathCounter = 0;
