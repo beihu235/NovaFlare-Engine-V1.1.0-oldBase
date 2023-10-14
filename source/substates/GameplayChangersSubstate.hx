@@ -171,12 +171,19 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 			if (!isInPause) 
 			    FlxG.resetState();
 			else{
-    			close();
-    			PauseSubState.goBack = true;
+			    PauseSubState.goBack = true;
+    			PauseSubState.goToGameplayChangers = false;
+    			close();    			
 			}
 			#else
-			close();
-			#end
+			if (!isInPause) 
+			    close();
+			else{
+			    PauseSubState.goBack = true;
+    			PauseSubState.goToGameplayChangers = false;
+    			close();    			
+			}
+			#end //我懒得删了
 			ClientPrefs.saveSettings();			
 		}
 
