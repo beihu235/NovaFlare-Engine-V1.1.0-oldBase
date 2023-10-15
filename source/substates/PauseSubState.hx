@@ -66,7 +66,7 @@ class PauseSubState extends MusicBeatSubstate
 		
 		for (num in 0...menuItemsOG.length){
 		
-		    if ((menuItemsOG[num] = 'Options' && curOptions) || (menuItemsOG[num] = 'Gameplay Changers' && curGameplayChangers))
+		    if ((menuItemsOG[num] == 'Options' && curOptions) || (menuItemsOG[num] == 'Gameplay Changers' && curGameplayChangers))
 		        curSelected = num;
 		}
         
