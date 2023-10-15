@@ -62,13 +62,7 @@ class PauseSubState extends MusicBeatSubstate
 			menuItemsOG.insert(4 + num, 'Toggle Practice Mode');
 			menuItemsOG.insert(5 + num, 'Toggle Botplay');
 		}
-		menuItems = menuItemsOG;
-		
-		for (num in 0...menuItemsOG.length){
-		
-		    if ((menuItemsOG[num] == 'Options' && curOptions) || (menuItemsOG[num] == 'Gameplay Changers' && curGameplayChangers))
-		        curSelected = num;
-		}
+		menuItems = menuItemsOG;		
         
 		for (i in 0...Difficulty.list.length) {
 			var diff:String = Difficulty.getString(i);
@@ -448,6 +442,13 @@ class PauseSubState extends MusicBeatSubstate
 			}
 		}
 		curSelected = 0;
+		
+		for (num in 0...menuItemsOG.length){
+		
+		    if ((menuItemsOG[num] == 'Options' && curOptions) || (menuItemsOG[num] == 'Gameplay Changers' && curGameplayChangers))
+		        curSelected = num;
+		}
+		
 		changeSelection();
 	}
 	
