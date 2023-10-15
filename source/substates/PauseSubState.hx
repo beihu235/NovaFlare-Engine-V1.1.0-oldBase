@@ -66,16 +66,17 @@ class PauseSubState extends MusicBeatSubstate
 		
 		for (num in 0...menuItemsOG.length){
 		
-		    var option:Bool = curOptions;
-		    var gameplayChangers:Bool = curGameplayChangers;
+		    var option:String = curOptions ? 'true' : 'false';
+		    var gameplayChangers:String = curGameplayChangers ? 'true' : 'false';
 		    
-		    //这tm为啥要重新定义一遍类型啊我去
+		    //这tm为啥要重新定义一遍类型到string啊我去
 		    
-		    if (options) {
+		    if (option == 'true') {
 		        if (menuItemsOG[num] = 'Options')
 		        curSelected = num;
 		    }
-		    if (gameplayChangers) {
+		    
+		    if (gameplayChangers == 'true') {
 		        if (menuItemsOG[num] = 'Gameplay Changers')
 		        curSelected = num;
 		    }
