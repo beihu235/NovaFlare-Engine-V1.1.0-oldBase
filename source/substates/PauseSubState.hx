@@ -17,16 +17,17 @@ class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 	
-	public static var goToOptions:Bool = false;
-	public static var goToGameplayChangers:Bool = false;
-	public static var goBack:Bool = false;
-    public static var reOpen:Bool = false;
+	public static var goToOptions:Bool = false; //work for open option 
+	public static var goToGameplayChangers:Bool = false; // work for open GameplayChangers 
+	public static var goBack:Bool = false; //work for close option or GameplayChangers then open pause state
+    public static var reOpen:Bool = false; // change bg alpha fix
+    public static var reOptions:Bool = false; // curSelected fix
+	public static var reGameplayChangers:Bool = false; // curSelected fix
     
 	var menuItems:Array<String> = [];
 	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Chart Editor', 'Options', 'Gameplay Changers', 'Exit to menu'];
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
-    public static var saveCurSelected:Int = 0;
     
 	var pauseMusic:FlxSound;
 	var practiceText:FlxText;
@@ -42,8 +43,6 @@ class PauseSubState extends MusicBeatSubstate
 	public function new(x:Float, y:Float)
 	{
 		super();
-		
-		curSelected = saveCurSelected;
 		
 		if(Difficulty.list.length < 2) menuItemsOG.remove('Change Difficulty'); //No need to change difficulty if there is only one!
 
@@ -62,6 +61,17 @@ class PauseSubState extends MusicBeatSubstate
 			menuItemsOG.insert(5 + num, 'Toggle Botplay');
 		}
 		menuItems = menuItemsOG;
+		
+		for (num in 0...menuItemsOG.length){
+		    if (reOptions) {
+		        if (menuItemsOG[num] = 'Options')
+		        curSelected = num;
+		    }
+		    if (reGameplayChangers) {
+		        if (menuItemsOG[num] = 'Gameplay Changers')
+		        curSelected = num;
+		    }
+		}
 
 		for (i in 0...Difficulty.list.length) {
 			var diff:String = Difficulty.getString(i);
@@ -257,6 +267,8 @@ class PauseSubState extends MusicBeatSubstate
 			}
 			
             reOpen = false;
+            reOptions = false;
+            reGameplayChangers = false;
             saveCurSelected = 0;
             
 			switch (daSelected)
@@ -313,10 +325,12 @@ class PauseSubState extends MusicBeatSubstate
 				case 'Options':
 				    goToOptions = true;
 				    reOpen = true;
+				    reOptions = true;
 					close();
 				case 'Gameplay Changers':
 				    goToGameplayChangers = true;
 				    reOpen = true;
+				    reGameplayChangers = true;
 					close();
 				case "Exit to menu":
 					#if desktop DiscordClient.resetClientID(); #end
