@@ -17,13 +17,15 @@ class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
-	public static var curOptions:Bool = false; // curSelected fix
-	public static var curGameplayChangers:Bool = false; // curSelected fix
+	
 	public static var goToOptions:Bool = false; //work for open option 
 	public static var goToGameplayChangers:Bool = false; // work for open GameplayChangers 
 	public static var goBack:Bool = false; //work for close option or GameplayChangers then open pause state
     public static var reOpen:Bool = false; // change bg alpha fix    
     
+    public static var curOptions:Bool = false; // curSelected fix
+	public static var curGameplayChangers:Bool = false; // curSelected fix
+	
 	var menuItems:Array<String> = [];
 	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Chart Editor', 'Options', 'Gameplay Changers', 'Exit to menu'];
 	var difficultyChoices = [];
@@ -63,11 +65,17 @@ class PauseSubState extends MusicBeatSubstate
 		menuItems = menuItemsOG;
 		
 		for (num in 0...menuItemsOG.length){
-		    if (goBack) {
+		
+		    var option:Bool = curOptions;
+		    var gameplayChangers:Bool = curGameplayChangers;
+		    
+		    //这tm为啥要重新定义一遍类型啊我去
+		    
+		    if (options) {
 		        if (menuItemsOG[num] = 'Options')
 		        curSelected = num;
 		    }
-		    if (goBack) {
+		    if (gameplayChangers) {
 		        if (menuItemsOG[num] = 'Gameplay Changers')
 		        curSelected = num;
 		    }
