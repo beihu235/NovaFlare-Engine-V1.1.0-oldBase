@@ -63,11 +63,11 @@ class PauseSubState extends MusicBeatSubstate
 		menuItems = menuItemsOG;
 		
 		for (num in 0...menuItemsOG.length){
-		    if (reOptions) {
+		    if (reOptions == true) {
 		        if (menuItemsOG[num] = 'Options')
 		        curSelected = num;
 		    }
-		    if (reGameplayChangers) {
+		    if (reGameplayChangers == true) {
 		        if (menuItemsOG[num] = 'Gameplay Changers')
 		        curSelected = num;
 		    }
@@ -269,7 +269,6 @@ class PauseSubState extends MusicBeatSubstate
             reOpen = false;
             reOptions = false;
             reGameplayChangers = false;
-            saveCurSelected = 0;
             
 			switch (daSelected)
 			{
