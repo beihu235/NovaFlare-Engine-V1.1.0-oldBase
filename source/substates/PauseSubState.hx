@@ -16,13 +16,13 @@ import states.editors.ChartingState;
 class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
-	
+
+	public static var curOptions:Bool = false; // curSelected fix
+	public static var curGameplayChangers:Bool = false; // curSelected fix
 	public static var goToOptions:Bool = false; //work for open option 
 	public static var goToGameplayChangers:Bool = false; // work for open GameplayChangers 
 	public static var goBack:Bool = false; //work for close option or GameplayChangers then open pause state
-    public static var reOpen:Bool = false; // change bg alpha fix
-    public static var curOptions:Bool = false; // curSelected fix
-	public static var curGameplayChangers:Bool = false; // curSelected fix
+    public static var reOpen:Bool = false; // change bg alpha fix    
     
 	var menuItems:Array<String> = [];
 	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Chart Editor', 'Options', 'Gameplay Changers', 'Exit to menu'];
@@ -63,11 +63,11 @@ class PauseSubState extends MusicBeatSubstate
 		menuItems = menuItemsOG;
 		
 		for (num in 0...menuItemsOG.length){
-		    if (curOptions) {
+		    if (goBack) {
 		        if (menuItemsOG[num] = 'Options')
 		        curSelected = num;
 		    }
-		    if (curGameplayChangers) {
+		    if (goBack) {
 		        if (menuItemsOG[num] = 'Gameplay Changers')
 		        curSelected = num;
 		    }
