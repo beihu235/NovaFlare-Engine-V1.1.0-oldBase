@@ -21,8 +21,8 @@ class PauseSubState extends MusicBeatSubstate
 	public static var goToGameplayChangers:Bool = false; // work for open GameplayChangers 
 	public static var goBack:Bool = false; //work for close option or GameplayChangers then open pause state
     public static var reOpen:Bool = false; // change bg alpha fix
-    public static var reOptions:Bool = false; // curSelected fix
-	public static var reGameplayChangers:Bool = false; // curSelected fix
+    public static var reOptions = false; // curSelected fix
+	public static var reGameplayChangers = false; // curSelected fix
     
 	var menuItems:Array<String> = [];
 	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Chart Editor', 'Options', 'Gameplay Changers', 'Exit to menu'];
