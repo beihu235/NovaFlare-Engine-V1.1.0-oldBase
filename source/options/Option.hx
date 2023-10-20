@@ -89,7 +89,7 @@ class Judgement extends Option
 	{
 		if (OptionsState.isInPause)
 			return false;
-		var num:Int = options.length - 1;	
+		var num:Int = 6;	
 		OptionsState.instance.selectedCatIndex = num;
 		OptionsState.instance.switchCat(OptionsState.instance.options[num], false);
 		return true;
