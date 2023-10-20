@@ -13,7 +13,7 @@ class Option
 	
 	private var acceptValues:Bool = false;
     
-    public var onChange:Void->Void = null; //Pressed enter (on Bool type options) or pressed/held left/right (on other types)
+    public var onChange:Void->Void = null;
     
 	public var acceptType:Bool = false;
 
