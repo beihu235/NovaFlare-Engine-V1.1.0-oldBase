@@ -94,7 +94,7 @@ class OptionCata extends FlxSprite
 
 class OptionsState extends MusicBeatSubstate
 {
-	//public static var instance:OptionsState;
+	public static var instance:OptionsState;
 
 	public var background:FlxSprite;
 
@@ -226,18 +226,13 @@ class OptionsState extends MusicBeatSubstate
 			]),
 			new OptionCata(50, 40 + 64, "Controls", [
 			    new HideHud("Shows to you hud."),				
-			]),
-			#if android
-			new OptionCata(345, 40 + 64, "Controls", [
+			])
+			new OptionCata(345, 40 + 64, "Menu Extend", [
 			    new HideHud("Shows to you hud."),				
 			]),
-			#end
-			new OptionCata(-1, 125, "Editing Judgements", [
-			    
-			], true)
 		];
 
-		//instance = this;
+		instance = this;
 
 		menu = new FlxTypedGroup<FlxSprite>();
 
@@ -544,10 +539,10 @@ class OptionsState extends MusicBeatSubstate
 					selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 					selectedCatIndex++;
 
-					if (selectedCatIndex > options.length - 2)
+					if (selectedCatIndex > options.length - 1)
 						selectedCatIndex = 0;
 					if (selectedCatIndex < 0)
-						selectedCatIndex = options.length - 2;
+						selectedCatIndex = options.length - 1;
 
 					switchCat(options[selectedCatIndex]);
 				}
@@ -557,10 +552,10 @@ class OptionsState extends MusicBeatSubstate
 					selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 					selectedCatIndex--;
 
-					if (selectedCatIndex > options.length - 2)
+					if (selectedCatIndex > options.length - 1)
 						selectedCatIndex = 0;
 					if (selectedCatIndex < 0)
-						selectedCatIndex = options.length - 2;
+						selectedCatIndex = options.length - 1;
 
 					switchCat(options[selectedCatIndex]);
 				}

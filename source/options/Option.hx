@@ -1,4 +1,5 @@
 package options;
+
 import lime.app.Application;
 
 class Option
@@ -72,91 +73,7 @@ class Option
 	}
 }
 
-/*
-class DFJKOption extends Option
-{
-	public function new()
-	{
-		super();
-                if (OptionsState.isInPause)
-			description = "This option cannot be toggled in the pause menu.";
-		else
-		description = "Edit your keybindings";
-	}
 
-	public override function press():Bool
-	{
-		//OptionsState.instance.selectedCatIndex = 4;
-		//OptionsState.instance.switchCat(OptionsState.instance.options[4], false);
-
-        if (OptionsState.isInPause)
-			return false;
-		OptionsState.openControllsState();
-        return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Edit Keybindings";
-	}
-}
-
-class NotesOption extends Option
-{
-	public function new()
-	{
-		super();
-        if (OptionsState.isInPause)
-			description = "This option cannot be toggled in the pause menu.";
-		else
-		description = "Edit notes colors";
-	}
-
-	public override function press():Bool
-	{
-		//OptionsState.instance.selectedCatIndex = 4;
-		//OptionsState.instance.switchCat(OptionsState.instance.options[4], false);
-
-        if (OptionsState.isInPause)
-			return false;
-		OptionsState.openNotesState();
-        return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Edit Notes Colors";
-	}
-}
-
-class Customizeption extends Option
-{
-	public function new()
-	{
-		super();
-        if (OptionsState.isInPause)
-			description = "This option cannot be toggled in the pause menu.";
-		else
-		description = "Edit elements positions / beat offset";
-	}
-
-	public override function press():Bool
-	{
-		//OptionsState.instance.selectedCatIndex = 4;
-		//OptionsState.instance.switchCat(OptionsState.instance.options[4], false);
-
-
-        if (OptionsState.isInPause)
-			return false;
-		OptionsState.openAjustState();
-	    return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Edit elements positions and beat offset";
-	}
-}*/
 
 class OffsetThing extends Option
 {
@@ -354,42 +271,6 @@ class BadMsOption extends Option
 	}
 }
 
-/*class ShitMsOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		description = desc + " (Press R to reset)";
-		acceptType = true;
-	}
-
-	public override function left():Bool
-	{
-		FlxG.save.data.shitMs--;
-		if (FlxG.save.data.shitMs < 0)
-			FlxG.save.data.shitMs = 0;
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function onType(char:String)
-	{
-		if (char.toLowerCase() == "r")
-			FlxG.save.data.shitMs = 160;
-	}
-
-	public override function right():Bool
-	{
-		FlxG.save.data.shitMs++;
-		display = updateDisplay();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "SHIT: < " + FlxG.save.data.shitMs + " ms >";
-	}
-}*/
 
 class DownscrollOption extends Option
 {
@@ -449,66 +330,8 @@ class GhostTapOption extends Option
 		return "Ghost Tapping: < " + (ClientPrefs.data.ghostTapping ? "Enabled" : "Disabled") + " >";
 	}
 }
-/*
-class SkipTitleOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		description = desc;
-	}
 
-	public override function left():Bool
-	{
-		ClientPrefs.data.skipTitleState = !ClientPrefs.data.skipTitleState;
-		display = updateDisplay();
-		return true;
-	}
 
-	public override function right():Bool
-	{
-		left();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "TitleState Skipping: < " + (ClientPrefs.data.skipTitleState ? "Enabled" : "Disabled") + " >";
-	}
-}
-
-class KESustainsOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-         if (OptionsState.isInPause)
-			description = "This option cannot be toggled in the pause menu.";
-		else
-		description = desc;
-	}
-
-	public override function left():Bool
-	{
-        if (OptionsState.isInPause)
-			return false;
-		ClientPrefs.data.keSustains = !ClientPrefs.data.keSustains;
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		left();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Kade Engine Sustains System: < " + (ClientPrefs.data.keSustains ? "Enabled" : "Disabled") + " >";
-	}
-}
-*/
 class ScoreZoom extends Option
 {
 	public function new(desc:String)
@@ -617,100 +440,6 @@ class ShowComboNum extends Option
 		return "Combo Sprite: < " + (ClientPrefs.data.showComboNum ? "Enabled" : "Disabled") + " >";
 	}
 }
-/*
-class BlurNotes extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-              if (OptionsState.isInPause)
-			description = "This option cannot be toggled in the pause menu.";
-		else
-			description = desc;
-	}
-
-	public override function left():Bool
-	{
-           	if (OptionsState.isInPause)
-			return false;
-		ClientPrefs.data.blurNotes = !ClientPrefs.data.blurNotes;
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		left();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Blured Notes: < " + (ClientPrefs.data.blurNotes ? "Enabled" : "Disabled") + " >";
-	}
-}
-
-class AutoSave extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-
-			description = desc;
-	}
-
-	public override function left():Bool
-	{
-
-		ClientPrefs.data.chartAutoSave = !ClientPrefs.data.chartAutoSave;
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		left();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Chart AutoSave: < " + (ClientPrefs.data.chartAutoSave ? "Enabled" : "Disabled") + " >";
-	}
-}
-
-class AutoSaveInt extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		description = desc;
-	}
-
-	public override function left():Bool
-	{
-		ClientPrefs.data.chartAutoSaveInterval--;
-		if (ClientPrefs.data.chartAutoSaveInterval < 1)
-		ClientPrefs.data.chartAutoSaveInterval = 1;
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		ClientPrefs.data.chartAutoSaveInterval++;
-		if (ClientPrefs.data.chartAutoSaveInterval > 15)
-			ClientPrefs.data.chartAutoSaveInterval = 15;
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function getValue():String
-	{
-		return "Chart AutoSave Interval: < " + ClientPrefs.data.chartAutoSaveInterval + " Minutes >";
-	}
-}
-*/
 
 class NoReset extends Option
 {
@@ -738,81 +467,7 @@ class NoReset extends Option
 		return "Reset Button: < " + (!ClientPrefs.data.noReset ? "Enabled" : "Disabled") + " >";
 	}
 }
-/*
-class DistractionsAndEffectsOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		if (OptionsState.isInPause)
-			description = "This option cannot be toggled in the pause menu.";
-		else
-			description = desc;
-	}
 
-	public override function left():Bool
-	{
-		if (OptionsState.isInPause)
-			return false;
-		FlxG.save.data.distractions = !FlxG.save.data.distractions;
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		left();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Distractions: < " + (!FlxG.save.data.distractions ? "off" : "on") + " >";
-	}
-}
-
-class Shouldcameramove extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		description = desc;
-	}
-
-	public override function press():Bool
-	{
-		ClientPrefs.data.shouldCameraMove = !ClientPrefs.data.shouldCameraMove;
-		display = updateDisplay();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Dynamic Camera: < " + (ClientPrefs.data.shouldCameraMove ? "Enabled" : "Disabled") + " >";
-	}
-}
-
-class InstantRespawn extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		description = desc;
-	}
-
-	public override function press():Bool
-	{
-		ClientPrefs.data.instantRespawn = !ClientPrefs.data.instantRespawn;
-		display = updateDisplay();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Instant Respawn: < " + (ClientPrefs.data.instantRespawn ? "Enabled" : "Disabled") + " >";
-	}
-}
-*/
 class FlashingLightsOption extends Option
 {
 	public function new(desc:String)
@@ -856,7 +511,7 @@ class AntialiasingOption extends Option
 		if (OptionsState.isInPause)
 			return false;
 		ClientPrefs.data.antialiasing = !ClientPrefs.data.antialiasing;
-               // onChangeAntiAliasing();
+            onChangeAntiAliasing();
 		display = updateDisplay();
 		return true;
 	}
@@ -872,124 +527,15 @@ class AntialiasingOption extends Option
 		return "Antialiasing: < " + (ClientPrefs.data.antialiasing ? "Enabled" : "Disabled") + " >";
 	}
 
-       /* function onChangeAntiAliasing()
+    function onChangeAntiAliasing()
 	{
 		for (sprite in members)
 		{
-			var sprite:Dynamic = sprite; //Make it check for FlxSprite instead of FlxBasic
-			var sprite:FlxSprite = sprite; //Don't judge me ok
+			var sprite:FlxSprite = cast sprite;
 			if(sprite != null && (sprite is FlxSprite) && !(sprite is FlxText)) {
-				sprite.antialiasing = ClientPrefs.data.globalAntialiasing;
+				sprite.antialiasing = ClientPrefs.data.antialiasing;
 			}
 		}
-	} */
-}
-/*
-class MissSoundsOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-			description = desc;
-	}
-
-	public override function left():Bool
-	{
-		ClientPrefs.data.playMissSounds = !ClientPrefs.data.playMissSounds;
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		left();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Miss Sounds: < " + (ClientPrefs.data.playMissSounds ? "Enabled" : "Disabled") + " >";
-	}
-}
-
-class MissAnimsOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-			description = desc;
-	}
-
-	public override function left():Bool
-	{
-		ClientPrefs.data.playMissAnims = !ClientPrefs.data.playMissAnims;
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		left();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Miss Animations: < " + (ClientPrefs.data.playMissAnims ? "Enabled" : "Disabled") + " >";
-	}
-}
-
-class PauseCountDownOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-			description = desc;
-	}
-
-	public override function left():Bool
-	{
-		ClientPrefs.data.countDownPause = !ClientPrefs.data.countDownPause;
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		left();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "AfterPause CountDown: < " + (ClientPrefs.data.countDownPause ? "Enabled" : "Disabled") + " >";
-	}
-}
-*/
-class Judgement extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		if (OptionsState.isInPause)
-			description = "This option cannot be toggled in the pause menu.";
-		else
-			description = desc;
-		acceptValues = true;
-	}
-
-	public override function press():Bool
-	{
-		if (OptionsState.isInPause)
-			return false;
-		//OptionsState.selectedCatIndex = options.length - 1;
-		//OptionsState.switchCat(OptionsState.options[options.length - 1], false);
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Edit Judgements";
 	}
 }
 
@@ -1194,7 +740,7 @@ class FPSCapOption extends Option
 		if (ClientPrefs.data.framerate >= 290)
 		{
 			ClientPrefs.data.framerate = 290;
-                        onChangeFramerate();
+            onChangeFramerate();
 		}
 		else
 			ClientPrefs.data.framerate = ClientPrefs.data.framerate + 1;
@@ -1263,7 +809,7 @@ class FPSRainbowOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "FPS Rainbow: < " + (ClientPrefs.data.lowQuality ? "Enabled" : "Disabled") + " >";
+		return "FPS Rainbow: < " + (ClientPrefs.data.rainbowFPS ? "Enabled" : "Disabled") + " >";
 	} 
 }
 
@@ -1384,66 +930,7 @@ class JudgementCounter extends Option
 		return "Judgement Counter: < " + (ClientPrefs.data.showJudgement ? "Enabled" : "Disabled") + " >";
 	}
 }
-
-class Imagepersist extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-			description = desc;
-	}
-
-	public override function left():Bool
-	{
-		ClientPrefs.data.imagesPersist = !ClientPrefs.data.imagesPersist;
-        FlxGraphic.defaultPersist = ClientPrefs.data.imagesPersist;
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		left();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Persistent Cached Data: < " + (ClientPrefs.data.imagesPersist ? "Enabled" : "Disabled") + " >";
-	}
-}
-
-class ControllerMode extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		if (OptionsState.isInPause)
-			description = "This option cannot be toggled in the pause menu.";
-		else
-			description = desc;
-	}
-
-	public override function left():Bool
-	{
-		if (OptionsState.isInPause)
-			return false;
-		ClientPrefs.data.controllerMode = !ClientPrefs.data.controllerMode;
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		left();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Controller Mode: < " + (ClientPrefs.data.controllerMode ? "Enabled" : "Disabled") + " >";
-	}
-}*/
+*/ //修改
 
 class MiddleScrollOption extends Option
 {
@@ -1518,77 +1005,8 @@ class NoteskinOption extends Option
 		return "Current Noteskin: < " + OptionsHelpers.getNoteskinByID(ClientPrefs.data.noteSkinNum) + " >";
 	}
 }
-
-class AccTypeOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		description = desc;
-	}
-
-	public override function left():Bool
-	{
-		ClientPrefs.data.ratingSystemNum--;
-		if (ClientPrefs.data.ratingSystemNum < 0)
-			ClientPrefs.data.ratingSystemNum = OptionsHelpers.AccuracyTypeArray.length - 6;
-     	OptionsHelpers.ChangeAccType(ClientPrefs.data.ratingSystemNum);
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		ClientPrefs.data.ratingSystemNum++;
-		if (ClientPrefs.data.ratingSystemNum > OptionsHelpers.AccuracyTypeArray.length - 1)
-			ClientPrefs.data.ratingSystemNum = OptionsHelpers.AccuracyTypeArray.length - 1;
-        OptionsHelpers.ChangeAccType(ClientPrefs.data.ratingSystemNum);
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function getValue():String
-	{
-		return "Current Accuracy Type: < " + OptionsHelpers.getAccTypeID(ClientPrefs.data.ratingSystemNum) + " >";
-	}
-}
-
-class ColorBlindOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		description = desc;
-	}
-
-	public override function left():Bool
-	{
-		ClientPrefs.data.ColorBlindTypeNum--;
-		if (ClientPrefs.data.ColorBlindTypeNum < 0)
-			ClientPrefs.data.ColorBlindTypeNum = OptionsHelpers.ColorBlindArray.length - 1;
-        OptionsHelpers.ChangeColorBlind(ClientPrefs.data.ColorBlindTypeNum);
-		ColorblindFilters.applyFiltersOnGame();
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		ClientPrefs.data.ColorBlindTypeNum++;
-		if (ClientPrefs.data.ColorBlindTypeNum > OptionsHelpers.ColorBlindArray.length - 1)
-			ClientPrefs.data.ColorBlindTypeNum = OptionsHelpers.ColorBlindArray.length - 4;
-        OptionsHelpers.ChangeColorBlind(ClientPrefs.data.ColorBlindTypeNum);
-		ColorblindFilters.applyFiltersOnGame();
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function getValue():String
-	{
-		return "Color Blindness Type: < " + OptionsHelpers.getColorBlindByID(ClientPrefs.data.ColorBlindTypeNum) + " >";
-	}
-}
-
+*/
+/*
 class TimeBarType extends Option
 {
 	public function new(desc:String)
@@ -1794,109 +1212,6 @@ class HitSoundOption extends Option
 		return true;
 	}
 }
-/*
-class LaneUnderlayOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-	    description = desc;
-		acceptValues = true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Lane Transparency: < " + Utils.truncateFloat(ClientPrefs.data.underDelayAlpha, 1) + " >";
-	}
-
-	override function right():Bool
-	{
-		ClientPrefs.data.underDelayAlpha += 0.1;
-
-		if (ClientPrefs.data.underDelayAlpha > 1)
-			ClientPrefs.data.underDelayAlpha = 1;
-
-		if (Type.getClass(FlxG.state) == PlayState){
-			PlayState.instance.laneunderlay.alpha = ClientPrefs.data.underDelayAlpha;
-			PlayState.instance.laneunderlayOpponent.alpha = ClientPrefs.data.underDelayAlpha;
-		}
-
-		return true;
-	}
-
-	override function left():Bool
-	{
-		ClientPrefs.data.underDelayAlpha -= 0.1;
-
-		if (ClientPrefs.data.underDelayAlpha < 0)
-			ClientPrefs.data.underDelayAlpha = 0;
-
-		if (Type.getClass(FlxG.state) == PlayState){
-			PlayState.instance.laneunderlay.alpha = ClientPrefs.data.underDelayAlpha;
-			PlayState.instance.laneunderlayOpponent.alpha = ClientPrefs.data.underDelayAlpha;
-		}
-
-		return true;
-	}
-}
-
-class SongNameOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		description = desc;
-	}
-
-	public override function left():Bool
-	{
-		ClientPrefs.data.songNameDisplay = !ClientPrefs.data.songNameDisplay;
-		display = updateDisplay();
-		if (Type.getClass(FlxG.state) == PlayState)
-		PlayState.instance.songTxt.visible = !(ClientPrefs.data.hideHud || !ClientPrefs.data.songNameDisplay);
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		left();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "SongName Displayed: < " + (ClientPrefs.data.songNameDisplay ? "Enabled" : "Disabled") + " >";
-	}
-}
-
-class VintageOption extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		description = desc;
-	}
-
-	public override function left():Bool
-	{
-		ClientPrefs.data.vintageOnGame = !ClientPrefs.data.vintageOnGame;
-		display = updateDisplay();
-		if (Type.getClass(FlxG.state) == PlayState)
-		PlayState.instance.vintage.visible = ClientPrefs.data.vintageOnGame;
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		left();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Vintage: < " + (ClientPrefs.data.vintageOnGame ? "Enabled" : "Disabled") + " >";
-	}
-}*/
 
 class ShadersOption extends Option
 {
