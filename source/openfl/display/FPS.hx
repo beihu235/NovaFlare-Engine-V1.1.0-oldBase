@@ -165,7 +165,7 @@ class FPS extends TextField
     			text += "\nMEM: " + memoryMegas + " MB";
 			}
 		}
-            text += "\nNF V1.1.0" 
+            text += "\nNF V1.1.0";
             
             if (ClientPrefs.data.showMS) text += '\n' + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
                      
