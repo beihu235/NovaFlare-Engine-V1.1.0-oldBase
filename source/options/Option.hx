@@ -10,11 +10,21 @@ class Option
 
 	private var description:String = "";
 	private var display:String;
+	
 	private var acceptValues:Bool = false;
-
+    
+    public var onChange:Void->Void = null; //Pressed enter (on Bool type options) or pressed/held left/right (on other types)
+    
 	public var acceptType:Bool = false;
 
 	public var waitingType:Bool = false;
+	
+	public function change()
+	{
+		if(onChange != null) {
+			onChange();
+		}
+	}
 
 	public final function getDisplay():String
 	{

@@ -208,7 +208,7 @@ class OptionsState extends MusicBeatSubstate
                 new QualityLow("Turn off some object on stages"),
 				//new Imagepersist("Images loaded will stay in memory until the game is closed."),
         		]),
-			new OptionCata(935, 40, "Extra", [
+			new OptionCata(935, 40, "Menu Extend", [
 			    new HideHud("Shows to you hud."),
 				//new ResetSettings("Reset some your settings. This is irreversible!")
 				//new AutoSave("Turn AutoSaves your chating in Charting state."),
@@ -309,8 +309,9 @@ class OptionsState extends MusicBeatSubstate
 		switchCat(selectedCat);
 
 		selectedOption = selectedCat.options[0];
-
-		restoreSettingsText = new FlxText (62, 680, FlxG.width, 'Press DELETE to reset settings');
+        
+        var resetText = 'Press' +  #if android 'C' #else 'Reset' #end + 'to reset settings';
+		restoreSettingsText = new FlxText (62, 680, FlxG.width, resetText);
 		restoreSettingsText.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		restoreSettingsText.scrollFactor.set();
 		restoreSettingsText.borderSize = 2;
@@ -465,12 +466,12 @@ class OptionsState extends MusicBeatSubstate
 				c.optionObjects.members[o].text = c.options[o].getValue();
 			}
 		}
-
+        /*
 		if(FlxG.keys.justPressed.F11)
 			{
 			FlxG.fullscreen = !FlxG.fullscreen;
 			}
-
+        */
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;		
 
 		accept = controls.ACCEPT;
@@ -503,7 +504,7 @@ class OptionsState extends MusicBeatSubstate
 
 		anyKey = FlxG.keys.justPressed.ANY || (gamepad != null ? gamepad.justPressed.ANY : false);
 		back = controls.BACK;
-		reset = FlxG.keys.justPressed.DELETE;
+		reset = controls.RESET #if android || MusicBeatSubstate._virtualpad.buttonC.justPressed #end;
 
 		if (selectedCat != null && !isInCat)
 		{
@@ -635,7 +636,7 @@ class OptionsState extends MusicBeatSubstate
 						var prev = selectedOptionIndex;
 						var object = selectedCat.optionObjects.members[selectedOptionIndex];
 						selectedOption.press();
-
+                        selectedOption.change();
 						if (selectedOptionIndex == prev)
 						{
 							ClientPrefs.saveSettings();
@@ -724,7 +725,7 @@ class OptionsState extends MusicBeatSubstate
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						var object = selectedCat.optionObjects.members[selectedOptionIndex];
 						selectedOption.right();
-
+                        selectedOption.change();
 						ClientPrefs.saveSettings();
 
 						object.text = selectedOption.getValue();
@@ -735,7 +736,7 @@ class OptionsState extends MusicBeatSubstate
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						var object = selectedCat.optionObjects.members[selectedOptionIndex];
 						selectedOption.left();
-
+                        selectedOption.change();
 						ClientPrefs.saveSettings();
 
 						object.text = selectedOption.getValue();
