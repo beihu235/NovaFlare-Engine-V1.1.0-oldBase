@@ -158,6 +158,46 @@ class Customizeption extends Option
 	}
 }*/
 
+class OffsetThing extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		if (OptionsState.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+		if (OptionsState.isInPause)
+			return false;
+		ClientPrefs.data.noteOffset--;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		if (OptionsState.isInPause)
+			return false;
+		ClientPrefs.data.noteOffset++;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Note offset: < " + ClientPrefs.data.noteOffset + " MS >";
+	}
+
+	public override function getValue():String
+	{
+		return "Note offset: < " + ClientPrefs.data.noteOffset + " MS >";
+	}
+}
+
 class FrameOption extends Option
 {
 	public function new(desc:String)
@@ -232,7 +272,7 @@ class SickMSOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "SICK: < " + ClientPrefs.data.sickWindow + " ms >";
+		return "Sick Hit Window: < " + ClientPrefs.data.sickWindow + " ms >";
 	}
 }
 
@@ -271,7 +311,7 @@ class GoodMsOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "GOOD: < " + ClientPrefs.data.goodWindow + " ms >";
+		return "Good Hit Window: < " + ClientPrefs.data.goodWindow + " ms >";
 	}
 }
 
@@ -310,7 +350,7 @@ class BadMsOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "BAD: < " + ClientPrefs.data.badWindow + " ms >";
+		return "Bad Hit Window: < " + ClientPrefs.data.badWindow + " ms >";
 	}
 }
 
@@ -1223,7 +1263,7 @@ class FPSRainbowOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Low Quality: < " + (ClientPrefs.data.lowQuality ? "Enabled" : "Disabled") + " >";
+		return "FPS Rainbow: < " + (ClientPrefs.data.lowQuality ? "Enabled" : "Disabled") + " >";
 	} 
 }
 
@@ -1281,45 +1321,7 @@ class OffsetMenu extends Option
 		return "Time your offset";
 	}
 }*/
-class OffsetThing extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		if (OptionsState.isInPause)
-			description = "This option cannot be toggled in the pause menu.";
-		else
-			description = desc;
-	}
 
-	public override function left():Bool
-	{
-		if (OptionsState.isInPause)
-			return false;
-		ClientPrefs.data.noteOffset--;
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		if (OptionsState.isInPause)
-			return false;
-		ClientPrefs.data.noteOffset++;
-		display = updateDisplay();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Note offset: < " + ClientPrefs.data.noteOffset + "MS >";
-	}
-
-	public override function getValue():String
-	{
-		return "Note offset: < " + ClientPrefs.data.noteOffset + "MS >";
-	}
-} 
 
 class CamZoomOption extends Option
 {

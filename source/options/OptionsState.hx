@@ -491,9 +491,9 @@ class OptionsState extends MusicBeatSubstate
 		
 		if(controls.UI_DOWN || controls.UI_UP || controls.UI_LEFT || controls.UI_RIGHT)
 			{
-				var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);
+				var checkLastHold:Int = Math.floor((holdTime - 0.5) * 20);
 				holdTime += elapsed;
-				var checkNewHold:Int = Math.floor((holdTime - 0.5) * 10);
+				var checkNewHold:Int = Math.floor((holdTime - 0.5) * 20);
 
 				if(holdTime > 0.5 && checkNewHold - checkLastHold > 0){
 				    right_hold = controls.UI_RIGHT;
