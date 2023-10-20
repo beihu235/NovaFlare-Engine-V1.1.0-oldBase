@@ -22,12 +22,15 @@ class FlxBackdropEX extends FlxBackdrop
 	
 	var canBeat = false;
 	
-	public function new(moveX:Float = 0, moveY:Float = 0,?random:Bool = true,?bpm:Int = TitleState.bpm) {
-		super();		
+	public function new(image:String, RepeatAxes:String, moveX:Float = 0, moveY:Float = 0,?random:Bool = true,?BPM:Int = TitleState.bpm) {			
+		graphic = image;
+		repeatAxes = RepeatAxes;
 		if (random)
 		    velocity.set(FlxG.random.bool(50) ? moveX : -moveX, FlxG.random.bool(50) ? moveY : -moveY);
 		else
     		velocity.set(moveX, moveY);
+    	bpm = BPM;	
+    	super();		
 	}
 
 	override function update(elapsed:Float)
