@@ -944,7 +944,7 @@ class FPSOption extends Option
 		return "FPS Counter: < " + (ClientPrefs.data.showFPS ? "Enabled" : "Disabled") + " >";
 	} 
 }
-/*
+
 class MEMOption extends Option
 {
 	public function new(desc:String)
@@ -956,7 +956,6 @@ class MEMOption extends Option
 	public override function left():Bool
 	{
 	    ClientPrefs.data.showMEM = !ClientPrefs.data.showMEM;
-        FPSMem.showMem =  ClientPrefs.data.showMEM;
 		display = updateDisplay();
 		return true;
 	}
@@ -969,10 +968,37 @@ class MEMOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Memory Counter: < " + (FPSMem.showMem ? "Enabled" : "Disabled") + " >";
+		return "Memory Counter: < " + (ClientPrefs.data.showMEM ? "Enabled" : "Disabled") + " >";
 	} 
 }
-*/
+
+class MSOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function left():Bool
+	{
+	    ClientPrefs.data.showMS = !ClientPrefs.data.showMS;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Update time Counter: < " + (ClientPrefs.data.showMS ? "Enabled" : "Disabled") + " >";
+	} 
+}
+
 class AutoPause extends Option
 {
 	public function new(desc:String)
@@ -1086,7 +1112,7 @@ class FPSCapOption extends Option
                         onChangeFramerate();
 		}
 		else
-			ClientPrefs.data.framerate = ClientPrefs.data.framerate + 5;
+			ClientPrefs.data.framerate = ClientPrefs.data.framerate + 1;
 		    onChangeFramerate();
 
 		return true;
@@ -1099,7 +1125,7 @@ class FPSCapOption extends Option
 		else if (ClientPrefs.data.framerate <= 60)
 			ClientPrefs.data.framerate = Application.current.window.displayMode.refreshRate;
 		else
-			ClientPrefs.data.framerate = ClientPrefs.data.framerate - 5;
+			ClientPrefs.data.framerate = ClientPrefs.data.framerate - 1;
 			onChangeFramerate();
 		return true;
 	}
@@ -1447,7 +1473,7 @@ class AccTypeOption extends Option
 		return "Current Accuracy Type: < " + OptionsHelpers.getAccTypeID(ClientPrefs.data.ratingSystemNum) + " >";
 	}
 }
-
+*/
 class ColorBlindOption extends Option
 {
 	public function new(desc:String)
@@ -1483,7 +1509,7 @@ class ColorBlindOption extends Option
 		return "Color Blindness Type: < " + OptionsHelpers.getColorBlindByID(ClientPrefs.data.ColorBlindTypeNum) + " >";
 	}
 }
-
+/*
 class TimeBarType extends Option
 {
 	public function new(desc:String)
@@ -1822,6 +1848,38 @@ class ShadersOption extends Option
 	private override function updateDisplay():String
 	{
 		return "Shaders: < " + (ClientPrefs.data.shaders ? "Enabled" : "Disabled") + " >";
+	}
+}
+
+class CPUcacheOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		if (OptionsState.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+		if (OptionsState.isInPause)
+			return false;
+		ClientPrefs.data.cacheOnGPU = !ClientPrefs.data.cacheOnGPU;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Shaders: < " + (ClientPrefs.data.cacheOnGPU ? "Enabled" : "Disabled") + " >";
 	}
 }
 

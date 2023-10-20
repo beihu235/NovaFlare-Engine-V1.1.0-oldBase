@@ -129,10 +129,9 @@ class OptionsState extends MusicBeatSubstate
 		0xFFFF0000
 	                                
 	    ];
+	    
 	public static var currentColor:Int = 1;    
 	public static var currentColorAgain:Int = 0;    
-	
-	
 
 	public var optionsImage:FlxSprite;
 	public function new(pauseMenu:Bool = false)
@@ -197,10 +196,12 @@ class OptionsState extends MusicBeatSubstate
 			]),
 			new OptionCata(640, 40, "Misc", [
 				new FlashingLightsOption("Toggle flashing lights that can cause epileptic seizures and strain."),
-				//new ColorBlindOption("You can set colorblind filter (makes the game more playable for colorblind people)."),
+				new ColorBlindOption("You can set colorblind filter (makes the game more playable for colorblind people)."),
 				new ShadersOption("Shaders used for some visual effects, and also CPU intensive for weaker PCs."),
+				nee CPUcacheOption("If checked, allows the GPU to be used for caching textures, decreasing RAM usage.")
 				new FPSOption("Toggle the FPS Counter."),
-               // new MEMOption("Toggle the MEM Counter."),
+                new MEMOption("Toggle the MEM Counter."),
+                new MSOption("Toggle the update time Counter."),
 				new FPSCapOption("Change your FPS Cap."),
                 new AutoPause("Stops game, when its unfocused"),
 				//new VintageOption("Adds 'vintage' on game screen."),
@@ -215,7 +216,7 @@ class OptionsState extends MusicBeatSubstate
 				//new AutoSaveInt("Change Chart AutoSave Interval."),               
 			 //   new PauseCountDownOption("Toggle countdown after pressing 'Resume' in Pause Menu."),
 			]),
-			new OptionCata(50, 40 + 64, "test4", [
+			new OptionCata(50, 40 + 64, "Opponent Mode", [
 			    new HideHud("Shows to you hud."),				
 			]),
 			new OptionCata(345, 40 + 64, "test1", [
