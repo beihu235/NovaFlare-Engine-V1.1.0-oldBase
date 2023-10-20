@@ -166,16 +166,13 @@ class OptionsState extends MusicBeatSubstate
 				//new InstantRespawn("Toggle if you instantly respawn after dying."),
 				new AutoPause("Stops game, when its unfocused"),
 				new NoReset("Toggle pressing R to gameover."),
-				new OffsetThing("Change the note visual offset (how many milliseconds a note looks like it is offset in a chart)"),
-				new FrameOption("Changes how many frames you have for hitting a note earlier or late."),
-				new SickMSOption("How many milliseconds are in the SICK hit window"),
-				new GoodMsOption("How many milliseconds are in the GOOD hit window"),
-				new BadMsOption("How many milliseconds are in the BAD hit window"),
+				
+				
                 //new ControllerMode("Enables you to play with controller."),
                 //new DFJKOption(),
                 //new NotesOption(),
                 //new Customizeption(),
-				//new Judgement("Create a custom judgement preset"),
+				new Judgement("Create a custom judgement preset"),
 				//new Shouldcameramove("Moves camera on opponent/player note hits."),
 			]),
 			new OptionCata(345, 40, "Appearance", [
@@ -230,6 +227,13 @@ class OptionsState extends MusicBeatSubstate
 			new OptionCata(345, 40 + 64, "Menu Extend", [
 			    new HideHud("Shows to you hud."),				
 			]),
+			new OptionCata(-1, 125, "Editing Judgements", [
+				new OffsetThing("Change the note visual offset (how many milliseconds a note looks like it is offset in a chart)"),
+				new FrameOption("Changes how many frames you have for hitting a note earlier or late."),
+				new SickMSOption("How many milliseconds are in the SICK hit window"),
+				new GoodMsOption("How many milliseconds are in the GOOD hit window"),
+				new BadMsOption("How many milliseconds are in the BAD hit window"),
+			], true)
 		];
 
 		instance = this;
@@ -539,10 +543,10 @@ class OptionsState extends MusicBeatSubstate
 					selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 					selectedCatIndex++;
 
-					if (selectedCatIndex > options.length - 1)
+					if (selectedCatIndex > options.length - 2)
 						selectedCatIndex = 0;
 					if (selectedCatIndex < 0)
-						selectedCatIndex = options.length - 1;
+						selectedCatIndex = options.length - 2;
 
 					switchCat(options[selectedCatIndex]);
 				}
@@ -552,10 +556,10 @@ class OptionsState extends MusicBeatSubstate
 					selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 					selectedCatIndex--;
 
-					if (selectedCatIndex > options.length - 1)
+					if (selectedCatIndex > options.length - 2)
 						selectedCatIndex = 0;
 					if (selectedCatIndex < 0)
-						selectedCatIndex = options.length - 1;
+						selectedCatIndex = options.length - 2;
 
 					switchCat(options[selectedCatIndex]);
 				}

@@ -73,7 +73,33 @@ class Option
 	}
 }
 
+class Judgement extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		if (OptionsMenu.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+		acceptValues = true;
+	}
 
+	public override function press():Bool
+	{
+		if (OptionsMenu.isInPause)
+			return false;
+		var num:Int = options.length - 1;	
+		OptionsMenu.instance.selectedCatIndex = num;
+		OptionsMenu.instance.switchCat(OptionsMenu.instance.options[num], false);
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Edit Judgements";
+	}
+}
 
 class OffsetThing extends Option
 {
