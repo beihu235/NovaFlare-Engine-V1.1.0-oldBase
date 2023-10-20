@@ -1851,7 +1851,7 @@ class ShadersOption extends Option
 	}
 }
 
-class CPUcacheOption extends Option
+class GPUcacheOption extends Option
 {
 	public function new(desc:String)
 	{
