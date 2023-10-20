@@ -1178,7 +1178,7 @@ class FPSRainbowOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Low Quality: < " + (ClientPrefs.data.rainbowFPS ? "Enabled" : "Disabled") + " >";
+		return "Low Quality: < " + (ClientPrefs.data.lowQuality ? "Enabled" : "Disabled") + " >";
 	} 
 }
 
@@ -1505,7 +1505,7 @@ class AccTypeOption extends Option
 		return "Current Accuracy Type: < " + OptionsHelpers.getAccTypeID(ClientPrefs.data.ratingSystemNum) + " >";
 	}
 }
-*/
+
 class ColorBlindOption extends Option
 {
 	public function new(desc:String)
@@ -1541,7 +1541,7 @@ class ColorBlindOption extends Option
 		return "Color Blindness Type: < " + OptionsHelpers.getColorBlindByID(ClientPrefs.data.ColorBlindTypeNum) + " >";
 	}
 }
-/*
+
 class TimeBarType extends Option
 {
 	public function new(desc:String)
