@@ -158,6 +158,45 @@ class Customizeption extends Option
 	}
 }*/
 
+class FrameOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc + " (Press R to reset)";
+		acceptType = true;
+	}
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.safeFrames -= 0.1 ;
+		if (ClientPrefs.data.safeFrames < 0)
+			ClientPrefs.data.safeFrames = 0;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		ClientPrefs.data.safeFrames += 0.1;
+		if (ClientPrefs.data.safeFrames > 10)
+			ClientPrefs.data.safeFrames = 10;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function onType(char:String)
+	{
+		if (char.toLowerCase() == "r")
+			ClientPrefs.data.safeFrames = 10;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "safeFrames: < " + safeFrames + " >";
+	}
+}
+
 class SickMSOption extends Option
 {
 	public function new(desc:String)
@@ -179,6 +218,8 @@ class SickMSOption extends Option
 	public override function right():Bool
 	{
 		ClientPrefs.data.sickWindow++;
+		if (ClientPrefs.data.sickWindow > 45)
+			ClientPrefs.data.sickWindow = 45;
 		display = updateDisplay();
 		return true;
 	}
@@ -216,6 +257,8 @@ class GoodMsOption extends Option
 	public override function right():Bool
 	{
 		ClientPrefs.data.goodWindow++;
+		if (ClientPrefs.data.goodWindow > 90)
+			ClientPrefs.data.goodWindow = 90;
 		display = updateDisplay();
 		return true;
 	}
@@ -253,6 +296,8 @@ class BadMsOption extends Option
 	public override function right():Bool
 	{
 		ClientPrefs.data.badWindow++;
+		if (ClientPrefs.data.badWindow > 135)
+			ClientPrefs.data.badWindow = 135;
 		display = updateDisplay();
 		return true;
 	}
@@ -1911,7 +1956,7 @@ class GPUcacheOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Shaders: < " + (ClientPrefs.data.cacheOnGPU ? "Enabled" : "Disabled") + " >";
+		return "GPU Cache: < " + (ClientPrefs.data.cacheOnGPU ? "Enabled" : "Disabled") + " >";
 	}
 }
 

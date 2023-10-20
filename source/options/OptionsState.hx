@@ -170,7 +170,7 @@ class OptionsState extends MusicBeatSubstate
                 //new DFJKOption(),
                 //new NotesOption(),
                 //new Customizeption(),
-				//new Judgement("Create a custom judgement preset"),
+				new Judgement("Create a custom judgement preset"),
 				//new Shouldcameramove("Moves camera on opponent/player note hits."),
 			]),
 			new OptionCata(345, 40, "Appearance", [
@@ -199,11 +199,11 @@ class OptionsState extends MusicBeatSubstate
 				//new ColorBlindOption("You can set colorblind filter (makes the game more playable for colorblind people)."),
 				new ShadersOption("Shaders used for some visual effects, and also CPU intensive for weaker PCs."),
 				new GPUcacheOption("If checked, allows the GPU to be used for caching textures, decreasing RAM usage."),
+				new FPSCapOption("Change your FPS Cap."),		
+				new FPSRainbowOption("Make the FPS Counter flicker through rainbow colors."),
 				new FPSOption("Toggle the FPS Counter."),
                 new MEMOption("Toggle the MEM Counter."),
                 new MSOption("Toggle the update time Counter."),
-				new FPSCapOption("Change your FPS Cap."),
-				new FPSRainbowOption("Make the FPS Counter flicker through rainbow colors."),
                 new AutoPause("Stops game, when its unfocused"),
 				//new VintageOption("Adds 'vintage' on game screen."),
                 new AntialiasingOption("Toggle antialiasing, improving graphics quality at a slight performance penalty."),
@@ -220,16 +220,13 @@ class OptionsState extends MusicBeatSubstate
 			new OptionCata(50, 40 + 64, "Menu Extend", [
 			    new HideHud("Shows to you hud."),				
 			]),
-			new OptionCata(345, 40 + 64, "test1", [
+			#if android
+			new OptionCata(345, 40 + 64, "android", [
 			    new HideHud("Shows to you hud."),				
 			]),
-			new OptionCata(640, 40 + 64, "test2", [
-			    new HideHud("Shows to you hud."),				
-			]),
-			new OptionCata(935, 40 + 64, "test3", [
-			    new HideHud("Shows to you hud."),				
-			]),			
+			#end
 			new OptionCata(-1, 125, "Editing Judgements", [
+			    new FrameOption("Changes how many frames you have for hitting a note earlier or late."),
 				new SickMSOption("How many milliseconds are in the SICK hit window"),
 				new GoodMsOption("How many milliseconds are in the GOOD hit window"),
 				new BadMsOption("How many milliseconds are in the BAD hit window"),
@@ -312,7 +309,7 @@ class OptionsState extends MusicBeatSubstate
 
 		selectedOption = selectedCat.options[0];
         
-        var resetText = 'Press' +  #if android 'C' #else 'Reset' #end + 'to reset settings';
+        var resetText = 'Press' +  #if android ' C' #else ' Reset' #end + ' to reset settings';
 		restoreSettingsText = new FlxText (62, 680, FlxG.width, resetText);
 		restoreSettingsText.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		restoreSettingsText.scrollFactor.set();
