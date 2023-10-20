@@ -90,17 +90,19 @@ class FPS extends TextField
 	// Event Handlers
 	@:noCompletion
 	private #if !flash override #end function __enterFrame(deltaTime:Float):Void
-	{
-	
-	//var elapsed = FlxG.elapsed;    		    		
-		/*currentTime += deltaTime;
-		times.push(currentTime);
-
-		while (times[0] < currentTime - 1000)
-		{
-			times.shift();
-		}
-		*/
+	{	
+		
+		logicFPStime += deltaTime;
+        logicFPSnum ++;
+        
+        if (logicFPStime >= 200) //update data for 0.2s
+        {
+            currentFPS = Math.ceil(currentFPS * 0.5 + 1 / (logicFPStime / logicFPSnum / 1000) * 0.5) ;
+            logicFPStime = 0;
+                logicFPSnum = 0;
+        }
+        
+        if (currentFPS > ClientPrefs.data.framerate) currentFPS = ClientPrefs.data.framerate;
 		
 		if (ClientPrefs.data.rainbowFPS)
 	    {
@@ -120,21 +122,11 @@ class FPS extends TextField
 		else
 		{
 		textColor = 0xFFFFFFFF;		
-		}
+		}                      
         
-        
-        
-        logicFPStime += deltaTime;
-        logicFPSnum ++;
-        if (logicFPStime >= 200) //update data for 0.2s
-        {
-        currentFPS = Math.ceil(currentFPS * 0.5 + 1 / (logicFPStime / logicFPSnum / 1000) * 0.5) ;
-        logicFPStime = 0;
-        logicFPSnum = 0;
-        }
-
-		
-		if (currentFPS > ClientPrefs.data.framerate) currentFPS = ClientPrefs.data.framerate;
+        if (!ClientPrefs.data.rainbowFPS && currentFPS <= ClientPrefs.data.framerate / 2){
+		    textColor = 0xFFFF0000;
+		}				
 		
 		
         if ( DisplayFPS > currentFPS ){
