@@ -19,6 +19,8 @@ class SaveVariables {
 	public var opponentStrums:Bool = true;
 	
 	public var showFPS:Bool = true;
+	public var showMS:Bool = true;
+	public var showMEM:Bool = true;
 	public var rainbowFPS:Bool = false;
 	public var flashing:Bool = true;
 	public var ResultsScreen:Bool = true;
