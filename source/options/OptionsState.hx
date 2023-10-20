@@ -203,20 +203,21 @@ class OptionsState extends MusicBeatSubstate
                 new MEMOption("Toggle the MEM Counter."),
                 new MSOption("Toggle the update time Counter."),
 				new FPSCapOption("Change your FPS Cap."),
+				new FPSRainbowOption("Make the FPS Counter flicker through rainbow colors."),
                 new AutoPause("Stops game, when its unfocused"),
 				//new VintageOption("Adds 'vintage' on game screen."),
                 new AntialiasingOption("Toggle antialiasing, improving graphics quality at a slight performance penalty."),
                 new QualityLow("Turn off some object on stages"),
 				//new Imagepersist("Images loaded will stay in memory until the game is closed."),
         		]),
-			new OptionCata(935, 40, "Menu Extend", [
+			new OptionCata(935, 40, "Opponent Mode", [
 			    new HideHud("Shows to you hud."),
 				//new ResetSettings("Reset some your settings. This is irreversible!")
 				//new AutoSave("Turn AutoSaves your chating in Charting state."),
 				//new AutoSaveInt("Change Chart AutoSave Interval."),               
 			 //   new PauseCountDownOption("Toggle countdown after pressing 'Resume' in Pause Menu."),
 			]),
-			new OptionCata(50, 40 + 64, "Opponent Mode", [
+			new OptionCata(50, 40 + 64, "Menu Extend", [
 			    new HideHud("Shows to you hud."),				
 			]),
 			new OptionCata(345, 40 + 64, "test1", [

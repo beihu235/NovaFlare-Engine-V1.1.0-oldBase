@@ -1150,6 +1150,38 @@ class FPSCapOption extends Option
 	}
 }
 
+class FPSRainbowOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+              if (OptionsState.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+        if (OptionsState.isInPause)
+			return false;
+        ClientPrefs.data.rainbowFPS = !ClientPrefs.data.rainbowFPS;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Low Quality: < " + (ClientPrefs.data.rainbowFPS ? "Enabled" : "Disabled") + " >";
+	} 
+}
+
 class HideOppStrumsOption extends Option
 {
 	public function new(desc:String)
