@@ -53,7 +53,7 @@ class OptionCata extends FlxSprite
 
 		optionObjects = new FlxTypedGroup();
 
-		titleObject = new FlxText((middleType ? 1180 / 2 : x), y + (middleType ? 16 + 64 : 16), 1180, title);
+		titleObject = new FlxText((middleType ? 1180 / 2 : x), y + (middleType ? 64 : 16), 1180, title);
 		titleObject.setFormat(Paths.font("vcr.ttf"), 35, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		titleObject.borderSize = 3;
         if (titleObject.fieldWidth > 295) titleObject.size -= 2;
@@ -68,8 +68,8 @@ class OptionCata extends FlxSprite
 
 		scrollFactor.set();
 		
-		positionFix = 40 + 64 + (middleType ? 0 : 16); // work like titleObject.y but set line is two.
-
+		positionFix = 40 + 64 + (middleType ? 40 : 16); // work like titleObject.y but set line is two.
+        //midd的40是16＋24
 		for (i in 0...options.length)
 		{
 			var opt = options[i];
