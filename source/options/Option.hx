@@ -529,13 +529,14 @@ class AntialiasingOption extends Option
 
     function onChangeAntiAliasing()
 	{
+	    /*
 		for (sprite in members)
 		{
 			var sprite:FlxSprite = cast sprite;
 			if(sprite != null && (sprite is FlxSprite) && !(sprite is FlxText)) {
 				sprite.antialiasing = ClientPrefs.data.antialiasing;
 			}
-		}
+		}*/
 	}
 }
 
