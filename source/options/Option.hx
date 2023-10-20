@@ -78,7 +78,7 @@ class Judgement extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsMenu.isInPause)
+		if (OptionsState.isInPause)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -87,11 +87,11 @@ class Judgement extends Option
 
 	public override function press():Bool
 	{
-		if (OptionsMenu.isInPause)
+		if (OptionsState.isInPause)
 			return false;
 		var num:Int = options.length - 1;	
-		OptionsMenu.instance.selectedCatIndex = num;
-		OptionsMenu.instance.switchCat(OptionsMenu.instance.options[num], false);
+		OptionsState.instance.selectedCatIndex = num;
+		OptionsState.instance.switchCat(OptionsState.instance.options[num], false);
 		return true;
 	}
 
