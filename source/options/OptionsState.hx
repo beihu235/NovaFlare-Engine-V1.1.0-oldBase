@@ -102,8 +102,8 @@ class OptionsState extends MusicBeatSubstate
 
 	public var selectedOption:Option;
 
-	public static var selectedCatIndex = 0;
-	public static var selectedOptionIndex = 0;
+	public var selectedCatIndex = 0;
+	public var selectedOptionIndex = 0;
 
 	public var isInCat:Bool = false;
 
@@ -325,7 +325,7 @@ class OptionsState extends MusicBeatSubstate
 		super.create();
 	}
 
-	public static function switchCat(cat:OptionCata, checkForOutOfBounds:Bool = true)
+	public function switchCat(cat:OptionCata, checkForOutOfBounds:Bool = true)
 	{
 		try
 		{
