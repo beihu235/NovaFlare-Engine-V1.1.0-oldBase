@@ -68,7 +68,7 @@ class OptionCata extends FlxSprite
 
 		scrollFactor.set();
 		
-		positionFix = 40 + 64 + (middleType ? 16 + 64 : 16); // work like titleObject.y but set line is two.
+		positionFix = 40 + 64 + (middleType ? 16 + 64 + 16: 16); // work like titleObject.y but set line is two.
         //midd的40是16＋24
 		for (i in 0...options.length)
 		{
@@ -104,6 +104,9 @@ class OptionsState extends MusicBeatSubstate
 
 	public var selectedCatIndex = 0;
 	public var selectedOptionIndex = 0;
+	
+	public var saveSelectedCatIndex = 0;
+	public var saveSelectedOptionIndex = 0;
 
 	public var isInCat:Bool = false;
 
@@ -227,9 +230,9 @@ class OptionsState extends MusicBeatSubstate
 			new OptionCata(345, 40 + 64, "Menu Extend", [
 			    new HideHud("Shows to you hud."),				
 			]),
-			new OptionCata(-1, 125, "Editing Judgements", [
-				new OffsetThing("Change the note visual offset (how many milliseconds a note looks like it is offset in a chart)"),
+			new OptionCata(-1, 125, "Editing Judgements", [			
 				new FrameOption("Changes how many frames you have for hitting a note earlier or late."),
+				new OffsetThing("Change the note visual offset (how many milliseconds a note looks like it is offset in a chart)"),
 				new SickMSOption("How many milliseconds are in the SICK hit window"),
 				new GoodMsOption("How many milliseconds are in the GOOD hit window"),
 				new BadMsOption("How many milliseconds are in the BAD hit window"),
@@ -769,7 +772,7 @@ class OptionsState extends MusicBeatSubstate
 					{
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
                         
-						if (selectedCatIndex >= 9)
+						if (selectedCatIndex >= 9)  //这是干啥用的
 							selectedCatIndex = 0;
 
 						for (i in 0...selectedCat.options.length)
@@ -779,7 +782,7 @@ class OptionsState extends MusicBeatSubstate
 						}
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						isInCat = true;
-						if (selectedCat.optionObjects != null)
+						if (selectedCat.optionObjects != null){
 							for (i in selectedCat.optionObjects.members)
 							{
 								if (i != null)
@@ -794,8 +797,12 @@ class OptionsState extends MusicBeatSubstate
 									}
 								}
 							}
-						if (selectedCat.middle)
-							switchCat(options[0]);
+						}	
+						if (selectedCat.middle){
+    						selectedOptionIndex = saveSelectedOptionIndex;
+        					isInCat = false;
+        					selectOption(selectedCat.options[saveSelectedCatIndex]);	
+						}
 					}
 				}
 			}

@@ -92,6 +92,9 @@ class Judgement extends Option
 		var num:Int = 6;	
 		OptionsState.instance.selectedCatIndex = num;
 		OptionsState.instance.switchCat(OptionsState.instance.options[num], false);
+		
+		OptionsState.instance.saveSelectedCatIndex = num;
+		OptionsState.instance.saveSelectedOptionIndex = OptionsState.instance.selectedOptionIndex;
 		return true;
 	}
 
