@@ -226,7 +226,7 @@ class OptionsState extends MusicBeatSubstate
 			]),
 			new OptionCata(50, 40 + 64, "Controls", [
 			    new HideHud("Shows to you hud."),				
-			])
+			]),
 			new OptionCata(345, 40 + 64, "Menu Extend", [
 			    new HideHud("Shows to you hud."),				
 			]),
