@@ -175,7 +175,7 @@ class OptionsState extends MusicBeatSubstate
                 //new DFJKOption(),
                 //new NotesOption(),
                 //new Customizeption(),
-				new Judgement("Create a custom judgement preset"),
+				//new Judgement("Create a custom judgement preset"),
 				//new Shouldcameramove("Moves camera on opponent/player note hits."),
 			]),
 			new OptionCata(345, 40, "Appearance", [
@@ -222,11 +222,11 @@ class OptionsState extends MusicBeatSubstate
 				//new AutoSaveInt("Change Chart AutoSave Interval."),               
 			 //   new PauseCountDownOption("Toggle countdown after pressing 'Resume' in Pause Menu."),
 			]),
-			new OptionCata(50, 40 + 64, "Menu Extend", [
+			new OptionCata(50, 40 + 64, "Controls", [
 			    new HideHud("Shows to you hud."),				
 			]),
 			#if android
-			new OptionCata(345, 40 + 64, "android", [
+			new OptionCata(345, 40 + 64, "Controls", [
 			    new HideHud("Shows to you hud."),				
 			]),
 			#end
