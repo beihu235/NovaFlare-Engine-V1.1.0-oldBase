@@ -40,7 +40,7 @@ class FlxBackdropEX extends FlxBackdrop
 	
     	if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true; 
 	
-    	if ( Math.floor(SoundTime/BeatTime) % 4  == 0 && canBeat) l{
+    	if ( Math.floor(SoundTime/BeatTime) % 4  == 0 && canBeat) {
         
             canBeat = false;           
             currentColor++;   
