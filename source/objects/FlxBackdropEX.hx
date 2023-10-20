@@ -1,5 +1,7 @@
 package objects;
 
+import flixel.addons.display.FlxBackdrop;
+
 class FlxBackdropEX extends FlxBackdrop
 {
 	public var ColorArray:Array<Int> = [
