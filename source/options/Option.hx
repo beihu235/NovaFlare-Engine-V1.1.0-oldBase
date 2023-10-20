@@ -942,8 +942,8 @@ class Judgement extends Option
 	{
 		if (OptionsState.isInPause)
 			return false;
-		OptionsState.instance.selectedCatIndex = 5;
-		OptionsState.instance.switchCat(OptionsState.instance.options[5], false);
+		OptionsState.selectedCatIndex = options.length - 1;
+		OptionsState.switchCat(OptionsState.options[options.length - 1], false);
 		return true;
 	}
 
