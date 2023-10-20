@@ -138,35 +138,36 @@ class FPS extends TextField
 		
 		
         if ( DisplayFPS > currentFPS ){
-            if (Math.abs(DisplayFPS - currentFPS) > 10) DisplayFPS = DisplayFPS - 2;
+            if (Math.abs(DisplayFPS - currentFPS) > 20) DisplayFPS = DisplayFPS - 4;
+            else if (Math.abs(DisplayFPS - currentFPS) > 10) DisplayFPS = DisplayFPS - 2;
             else DisplayFPS = DisplayFPS - 1;
         }
         else if ( DisplayFPS < currentFPS ){
-            if (Math.abs(DisplayFPS - currentFPS) > 10) DisplayFPS = DisplayFPS + 2;
+            if (Math.abs(DisplayFPS - currentFPS) > 20) DisplayFPS = DisplayFPS + 4;
+            else if (Math.abs(DisplayFPS - currentFPS) > 10) DisplayFPS = DisplayFPS + 2;
             else DisplayFPS = DisplayFPS + 1;
-        }
-            
-        
-        
-	
+        }                          	
 		
 			text = "FPS: " + DisplayFPS + "/" + ClientPrefs.data.framerate;
-			var memoryMegas:Float = 0;
-			//memoryMegas = Math.round(actualMem / 1024 / 1024 * 100) / 100;			
-			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
-			text += "\nMEM: " + memoryMegas + " MB";
-						
-            var newmemoryMegas:Float = 0;
 
+			var memoryMegas:Float = 0;
+			var newmemoryMegas:Float = 0;		
+
+			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
+			
+		if (ClientPrefs.data.showMEM){
 			if (memoryMegas > 1000)
 			{
-			newmemoryMegas = Math.ceil( Math.abs( System.totalMemory ) / 10000000 / 1.024)/100;
-			
-				text = "FPS: " + DisplayFPS + "/" + ClientPrefs.data.framerate;
+			    newmemoryMegas = Math.ceil( Math.abs( System.totalMemory ) / 10000000 / 1.024)/100;
 				text += "\nMEM: " + newmemoryMegas + " GB";            
 			}
-						
-            text += "\nNF V1.1.0\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
+			else{
+    			text += "\nMEM: " + memoryMegas + " MB";
+			}
+		}
+            text += "\nNF V1.1.0" 
+            
+            if (ClientPrefs.data.showMS) text += '\n' + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
                      
 			text += "\n";
 	
