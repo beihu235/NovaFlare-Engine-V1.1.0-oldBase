@@ -13,7 +13,6 @@ import flixel.input.keyboard.FlxKey;
 import lime.app.Application;
 
 import objects.AchievementPopup;
-import objects.FlxBackdropEX;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
 import openfl.Lib;
@@ -46,9 +45,25 @@ class MainMenuState extends MusicBeatState
 	
 	
 	
-	var bgMove:FlxBackdropEX;
+	var bgMove:FlxBackdrop;
 	public static var Mainbpm:Float = 0;
-	public static var bpm:Float = 0;	
+	public static var bpm:Float = 0;
+	var SoundTime:Float = 0;
+	var BeatTime:Float = 0;
+	
+	var ColorArray:Array<Int> = [
+		0xFF9400D3,
+		0xFF4B0082,
+		0xFF0000FF,
+		0xFF00FF00,
+		0xFFFFFF00,
+		0xFFFF7F00,
+		0xFFFF0000
+	                                
+	    ];
+	public static var currentColor:Int = 1;    
+	public static var currentColorAgain:Int = 0;    
+	
 
 	override function create()
 	{
@@ -100,10 +115,11 @@ class MainMenuState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 		
-	    bgMove = new FlxBackdropEX(Paths.image('mainmenu_sprite/backdrop'), XY, 0, 0);
+	    bgMove = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), XY, 0, 0);
 		bgMove.alpha = 0.1;
-		bgMove.color = bgMove.ColorArray[bgMove.currentColor];
+		bgMove.color = ColorArray[currentColor];
 		bgMove.screenCenter();
+		bgMove.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
 		bgMove.antialiasing = ClientPrefs.data.antialiasing;
 		add(bgMove);
 
@@ -344,12 +360,19 @@ class MainMenuState extends MusicBeatState
 		
         }
       
+        SoundTime = FlxG.sound.music.time / 1000;
+        BeatTime = 60 / bpm;
         
+        if ( Math.floor(SoundTime/BeatTime) % 4  == 0 && canClick && canBeat) {
         
-        if ( Math.floor(SoundTime/BeatTime) % 4  == 0 && canClick && canBeat) {        
-          
+            canBeat = false;
+           
+            currentColor++;            
+            if (currentColor > 6) currentColor = 1;
+            currentColorAgain = currentColor - 1;
+            if (currentColorAgain <= 0) currentColorAgain = 6;
             
-            FlxTween.color(bgMove, 0.6, bgMove.ColorArray[bgMove.currentColorAgain], bgMove.ColorArray[bgMove.currentColor], {ease: FlxEase.cubeOut});
+            FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});
            
 			camGame.zoom = 1 + 0.015;
 			
@@ -444,8 +467,6 @@ class MainMenuState extends MusicBeatState
 						case 'mods':
 							MusicBeatState.switchState(new ModsMenuState());									
 						case 'options':
-						    FlxTransitionableState.skipNextTransIn = true;
-                			FlxTransitionableState.skipNextTransOut = true;
 							MusicBeatState.switchState(new options.OptionsState());
 						case 'credits':
 							MusicBeatState.switchState(new CreditsState());	
