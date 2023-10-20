@@ -193,7 +193,7 @@ class FrameOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "safeFrames: < " + safeFrames + " >";
+		return "safeFrames: < " + ClientPrefs.data.safeFrames + " >";
 	}
 }
 
@@ -925,7 +925,7 @@ class PauseCountDownOption extends Option
 		return "AfterPause CountDown: < " + (ClientPrefs.data.countDownPause ? "Enabled" : "Disabled") + " >";
 	}
 }
-
+*/
 class Judgement extends Option
 {
 	public function new(desc:String)
@@ -952,7 +952,7 @@ class Judgement extends Option
 		return "Edit Judgements";
 	}
 }
-*/
+
 class FPSOption extends Option
 {
 	public function new(desc:String)
