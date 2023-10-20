@@ -198,7 +198,7 @@ class OptionsState extends MusicBeatSubstate
 				new FlashingLightsOption("Toggle flashing lights that can cause epileptic seizures and strain."),
 				new ColorBlindOption("You can set colorblind filter (makes the game more playable for colorblind people)."),
 				new ShadersOption("Shaders used for some visual effects, and also CPU intensive for weaker PCs."),
-				nee GPUcacheOption("If checked, allows the GPU to be used for caching textures, decreasing RAM usage."),
+				new GPUcacheOption("If checked, allows the GPU to be used for caching textures, decreasing RAM usage."),
 				new FPSOption("Toggle the FPS Counter."),
                 new MEMOption("Toggle the MEM Counter."),
                 new MSOption("Toggle the update time Counter."),
