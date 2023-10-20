@@ -164,7 +164,7 @@ class OptionsState extends MusicBeatSubstate
 				new HitSoundOption("Adds 'hitsound' on note hits."),
 				new GhostTapOption("Toggle counting pressing a directional input when no arrow is there as a miss."),				
 				//new InstantRespawn("Toggle if you instantly respawn after dying."),
-				
+				new AutoPause("Stops game, when its unfocused"),
 				new NoReset("Toggle pressing R to gameover."),
 				new OffsetThing("Change the note visual offset (how many milliseconds a note looks like it is offset in a chart)"),
 				new FrameOption("Changes how many frames you have for hitting a note earlier or late."),
@@ -201,6 +201,8 @@ class OptionsState extends MusicBeatSubstate
 			]),
 			new OptionCata(640, 40, "Misc", [
 				new FlashingLightsOption("Toggle flashing lights that can cause epileptic seizures and strain."),
+				new QualityLow("Turn off some object on stages"),
+				new AntialiasingOption("Toggle antialiasing, improving graphics quality at a slight performance penalty."),
 				//new ColorBlindOption("You can set colorblind filter (makes the game more playable for colorblind people)."),
 				new ShadersOption("Shaders used for some visual effects, and also CPU intensive for weaker PCs."),
 				new GPUcacheOption("If checked, allows the GPU to be used for caching textures, decreasing RAM usage."),
@@ -209,10 +211,10 @@ class OptionsState extends MusicBeatSubstate
 				new FPSOption("Toggle the FPS Counter."),
                 new MEMOption("Toggle the MEM Counter."),
                 new MSOption("Toggle the update time Counter."),
-                new AutoPause("Stops game, when its unfocused"),
+                
 				//new VintageOption("Adds 'vintage' on game screen."),
-                new AntialiasingOption("Toggle antialiasing, improving graphics quality at a slight performance penalty."),
-                new QualityLow("Turn off some object on stages"),
+                
+                
 				//new Imagepersist("Images loaded will stay in memory until the game is closed."),
         		]),
 			new OptionCata(935, 40, "Opponent Mode", [
