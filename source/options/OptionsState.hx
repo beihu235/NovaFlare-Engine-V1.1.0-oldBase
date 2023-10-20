@@ -158,14 +158,19 @@ class OptionsState extends MusicBeatSubstate
 */
 
 		options = [
-			new OptionCata(50, 40, "Gameplay", [
-				//new OffsetThing("Change the note visual offset (how many milliseconds a note looks like it is offset in a chart)"),
-				new HitSoundOption("Adds 'hitsound' on note hits."),
-				new GhostTapOption("Toggle counting pressing a directional input when no arrow is there as a miss."),
+			new OptionCata(50, 40, "Gameplay", [				
 				new DownscrollOption("Toggle making the notes scroll down rather than up."),
-				new NoReset("Toggle pressing R to gameover."),
+				new MiddleScrollOption("Put your lane in the center or on the right."), 
+				new HitSoundOption("Adds 'hitsound' on note hits."),
+				new GhostTapOption("Toggle counting pressing a directional input when no arrow is there as a miss."),				
 				//new InstantRespawn("Toggle if you instantly respawn after dying."),
-				new CamZoomOption("Toggle the camera zoom in-game."),
+				
+				new NoReset("Toggle pressing R to gameover."),
+				new OffsetThing("Change the note visual offset (how many milliseconds a note looks like it is offset in a chart)"),
+				new FrameOption("Changes how many frames you have for hitting a note earlier or late."),
+				new SickMSOption("How many milliseconds are in the SICK hit window"),
+				new GoodMsOption("How many milliseconds are in the GOOD hit window"),
+				new BadMsOption("How many milliseconds are in the BAD hit window"),
                 //new ControllerMode("Enables you to play with controller."),
                 //new DFJKOption(),
                 //new NotesOption(),
@@ -176,8 +181,7 @@ class OptionsState extends MusicBeatSubstate
 			new OptionCata(345, 40, "Appearance", [
                 //new NoteskinOption("Change your current noteskin"),
 				//new AccTypeOption("Change your current accuracy type you want!"),
-				//new SongNameOption("Shows to you name of song your playing on HUD"),
-				new MiddleScrollOption("Put your lane in the center or on the right."), 
+				//new SongNameOption("Shows to you name of song your playing on HUD"),			
 				new HideOppStrumsOption("Shows/Hides opponent strums on screen.(RESTART SONG)"),
 				//new MissSoundsOption("Toggle miss sounds playing when you don't hit a note."),
 				//new MissAnimsOption("Toggle miss animations playing when you don't hit a note."),
@@ -186,6 +190,7 @@ class OptionsState extends MusicBeatSubstate
 				//new HealthBarOption("Toggles health bar visibility"),
 				//new JudgementCounter("Show your judgements that you've gotten in the song"),
 				//new LaneUnderlayOption("How transparent your lane is, higher = more visible."),
+				new CamZoomOption("Toggle the camera zoom in-game."),
                 new HideHud("Shows to you hud."),
                 new ShowComboNum("Combo sprite appearance."),
 				new ComboStacking("Ratings and Combo won't stack, saving on System Memory and making them easier to read."),
@@ -226,10 +231,7 @@ class OptionsState extends MusicBeatSubstate
 			]),
 			#end
 			new OptionCata(-1, 125, "Editing Judgements", [
-			    new FrameOption("Changes how many frames you have for hitting a note earlier or late."),
-				new SickMSOption("How many milliseconds are in the SICK hit window"),
-				new GoodMsOption("How many milliseconds are in the GOOD hit window"),
-				new BadMsOption("How many milliseconds are in the BAD hit window"),
+			    
 			], true)
 		];
 

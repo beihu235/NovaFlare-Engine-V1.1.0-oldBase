@@ -1312,12 +1312,12 @@ class OffsetThing extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Note offset: < " + ClientPrefs.data.noteOffset + " >";
+		return "Note offset: < " + ClientPrefs.data.noteOffset + "MS >";
 	}
 
 	public override function getValue():String
 	{
-		return "Note offset: < " + ClientPrefs.data.noteOffset + " >";
+		return "Note offset: < " + ClientPrefs.data.noteOffset + "MS >";
 	}
 } 
 
