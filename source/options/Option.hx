@@ -13,6 +13,10 @@ class Option
 	private var display:String;
 	
 	private var acceptValues:Bool = false;
+	
+	private var disable_O:String = ClientPrefs.data.langCH ? '禁用' : ' Disabled';
+	private var enable_O:String = ClientPrefs.data.langCH ? '启用' : ' Enabled';
+	private var MS_O:String = ClientPrefs.data.langCH ? ' 毫秒' : ' MS';
     
     public var onChange:Void->Void = null;
     
@@ -136,12 +140,12 @@ class OffsetThing extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Note offset: < " + ClientPrefs.data.noteOffset + " MS >";
+		return "Note offset: < " + ClientPrefs.data.noteOffset + MS + " >";
 	}
 
 	public override function getValue():String
 	{
-		return "Note offset: < " + ClientPrefs.data.noteOffset + " MS >";
+		return "Note offset: < " + ClientPrefs.data.noteOffset + MS + " >";
 	}
 }
 
@@ -219,7 +223,7 @@ class SickMSOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Sick Hit Window: < " + ClientPrefs.data.sickWindow + " ms >";
+		return "Sick Hit Window: < " + ClientPrefs.data.sickWindow + MS + " >";
 	}
 }
 
@@ -258,7 +262,7 @@ class GoodMsOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Good Hit Window: < " + ClientPrefs.data.goodWindow + " ms >";
+		return "Good Hit Window: < " + ClientPrefs.data.goodWindow + MS + " >";
 	}
 }
 
@@ -297,7 +301,7 @@ class BadMsOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Bad Hit Window: < " + ClientPrefs.data.badWindow + " ms >";
+		return "Bad Hit Window: < " + ClientPrefs.data.badWindow + MS + " >";
 	}
 }
 
@@ -330,7 +334,7 @@ class DownscrollOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Downscroll: < " + (ClientPrefs.data.downScroll ? "Enabled" : "Disabled") + " >";
+		return "Downscroll: < " + (ClientPrefs.data.downScroll ? enable_O : disable_O) + " >";
 	}
 }
 
@@ -357,7 +361,7 @@ class GhostTapOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Ghost Tapping: < " + (ClientPrefs.data.ghostTapping ? "Enabled" : "Disabled") + " >";
+		return "Ghost Tapping: < " + (ClientPrefs.data.ghostTapping ? enable_O : disable_O) + " >";
 	}
 }
 
@@ -385,7 +389,7 @@ class ScoreZoom extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Score zomming in beats: < " + (ClientPrefs.data.scoreZoom ? "Enabled" : "Disabled") + " >";
+		return "Score zomming in beats: < " + (ClientPrefs.data.scoreZoom ? enable_O : disable_O) + " >";
 	}
 }
 
@@ -440,7 +444,7 @@ class HideHud extends Option
 
 	private override function updateDisplay():String
 	{
-		return "HUD: < " + (!ClientPrefs.data.hideHud ? "Enabled" : "Disabled") + " >";
+		return "HUD: < " + (!ClientPrefs.data.hideHud ? enable_O : disable_O) + " >";
 	}
 }
 
@@ -467,7 +471,7 @@ class ShowComboNum extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Combo Sprite: < " + (ClientPrefs.data.showComboNum ? "Enabled" : "Disabled") + " >";
+		return "Combo Sprite: < " + (ClientPrefs.data.showComboNum ? enable_O : disable_O) + " >";
 	}
 }
 
@@ -494,7 +498,7 @@ class NoReset extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Reset Button: < " + (!ClientPrefs.data.noReset ? "Enabled" : "Disabled") + " >";
+		return "Reset Button: < " + (!ClientPrefs.data.noReset ? enable_O : disable_O) + " >";
 	}
 }
 
@@ -521,7 +525,7 @@ class FlashingLightsOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Flashing Lights: < " + (ClientPrefs.data.flashing ? "Enabled" : "Disabled") + " >";
+		return "Flashing Lights: < " + (ClientPrefs.data.flashing ? enable_O : disable_O) + " >";
 	}
 }
 
@@ -554,7 +558,7 @@ class AntialiasingOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Antialiasing: < " + (ClientPrefs.data.antialiasing ? "Enabled" : "Disabled") + " >";
+		return "Antialiasing: < " + (ClientPrefs.data.antialiasing ? enable_O : disable_O) + " >";
 	}
 
     function onChangeAntiAliasing()
@@ -603,7 +607,7 @@ class FPSOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "FPS Counter: < " + (ClientPrefs.data.showFPS ? "Enabled" : "Disabled") + " >";
+		return "FPS Counter: < " + (ClientPrefs.data.showFPS ? enable_O : disable_O) + " >";
 	} 
 }
 
@@ -630,7 +634,7 @@ class MEMOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Memory Counter: < " + (ClientPrefs.data.showMEM ? "Enabled" : "Disabled") + " >";
+		return "Memory Counter: < " + (ClientPrefs.data.showMEM ? enable_O : disable_O) + " >";
 	} 
 }
 
@@ -657,7 +661,7 @@ class MSOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Update time Counter: < " + (ClientPrefs.data.showMS ? "Enabled" : "Disabled") + " >";
+		return "Update time Counter: < " + (ClientPrefs.data.showMS ? enable_O : disable_O) + " >";
 	} 
 }
 
@@ -685,7 +689,7 @@ class AutoPause extends Option
 
 	private override function updateDisplay():String
 	{
-		return "AutoPause: < " + (ClientPrefs.data.autoPause ? "Enabled" : "Disabled") + " >";
+		return "AutoPause: < " + (ClientPrefs.data.autoPause ? enable_O : disable_O) + " >";
 	} 
 }
 /*
@@ -712,7 +716,7 @@ class ShowSplashes extends Option
 
 	private override function updateDisplay():String
 	{
-		return "NoteSplashes: < " + (ClientPrefs.data.noteSplashes ? "Enabled" : "Disabled") + " >";
+		return "NoteSplashes: < " + (ClientPrefs.data.noteSplashes ? enable_O : disable_O) + " >";
 	} 
 }*/
 class QualityLow extends Option
@@ -743,7 +747,7 @@ class QualityLow extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Low Quality: < " + (ClientPrefs.data.lowQuality ? "Enabled" : "Disabled") + " >";
+		return "Low Quality: < " + (ClientPrefs.data.lowQuality ? enable_O : disable_O) + " >";
 	} 
 }
 
@@ -840,7 +844,7 @@ class FPSRainbowOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "FPS Rainbow: < " + (ClientPrefs.data.rainbowFPS ? "Enabled" : "Disabled") + " >";
+		return "FPS Rainbow: < " + (ClientPrefs.data.rainbowFPS ? enable_O : disable_O) + " >";
 	} 
 }
 
@@ -867,7 +871,7 @@ class HideOppStrumsOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Opponent Strums: < " + (!ClientPrefs.data.opponentStrums ? "Enabled" : "Disabled") + " >";
+		return "Opponent Strums: < " + (!ClientPrefs.data.opponentStrums ? enable_O : disable_O) + " >";
 	}
 }
 /*
@@ -923,7 +927,7 @@ class CamZoomOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Camera Zooming: < " + (ClientPrefs.data.camZooms ? "Enabled" : "Disabled") + " >";
+		return "Camera Zooming: < " + (ClientPrefs.data.camZooms ? enable_O : disable_O) + " >";
 	}
 }
 /*
@@ -958,7 +962,7 @@ class JudgementCounter extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Judgement Counter: < " + (ClientPrefs.data.showJudgement ? "Enabled" : "Disabled") + " >";
+		return "Judgement Counter: < " + (ClientPrefs.data.showJudgement ? enable_O : disable_O) + " >";
 	}
 }
 */ //修改
@@ -991,7 +995,7 @@ class MiddleScrollOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Middle Scroll: < " + (ClientPrefs.data.middleScroll ? "Enabled" : "Disabled") + " >";
+		return "Middle Scroll: < " + (ClientPrefs.data.middleScroll ? enable_O : disable_O) + " >";
 	}
 }
 
@@ -1114,7 +1118,7 @@ class HealthBarOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Health Bar: < " + (ClientPrefs.data.visibleHealthbar ? "Enabled" : "Disabled") + " >";
+		return "Health Bar: < " + (ClientPrefs.data.visibleHealthbar ? enable_O : disable_O) + " >";
 	}
 }*/
 
@@ -1272,7 +1276,7 @@ class ShadersOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Shaders: < " + (ClientPrefs.data.shaders ? "Enabled" : "Disabled") + " >";
+		return "Shaders: < " + (ClientPrefs.data.shaders ? enable_O : disable_O) + " >";
 	}
 }
 
@@ -1304,7 +1308,7 @@ class GPUcacheOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "GPU Cache: < " + (ClientPrefs.data.cacheOnGPU ? "Enabled" : "Disabled") + " >";
+		return "GPU Cache: < " + (ClientPrefs.data.cacheOnGPU ? enable_O : disable_O) + " >";
 	}
 }
 
@@ -1331,6 +1335,6 @@ class ComboStacking extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Combo Stacking: < " + (ClientPrefs.data.comboStacking ? "Enabled" : "Disabled") + " >";
+		return "Combo Stacking: < " + (ClientPrefs.data.comboStacking ? enable_O : disable_O) + " >";
 	}
 }
