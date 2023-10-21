@@ -816,7 +816,7 @@ class OptionsState extends MusicBeatSubstate
 			selectedCatIndex = 0;
 			selectedOptionIndex = 0;
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
-			if (selectedCat != null && !isInCat)
+			if (selectedCat != null && !selectedCat.middle)
 			{
 				for (i in 0...selectedCat.options.length)
 				{
