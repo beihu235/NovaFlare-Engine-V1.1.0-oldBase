@@ -23,7 +23,7 @@ class AndroidControlsMenu extends MusicBeatState
 	var rightPozition:FlxText;
 	var shiftPozition:FlxText;
 	var spacePozition:FlxText;
-	var inputvari:PsychAlphabet;
+	var inputvari:Alphabet;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 	var controlitems:Array<String> = ['Pad-Right','Pad-Left','Pad-Custom','Duo','Hitbox','Keyboard'];
@@ -66,7 +66,7 @@ class AndroidControlsMenu extends MusicBeatState
 		inputvari.screenCenter(X);
 		add(inputvari);
 
-		var ui_tex = Paths.getSparrowAtlas('androidcontrols/menu/arrows');
+		var ui_tex = Paths.getSparrowAtlas('androidcontrols-source/menu/arrows');
 
 		leftArrow = new FlxSprite(inputvari.x - 60, inputvari.y + 50);
 		leftArrow.frames = ui_tex;
