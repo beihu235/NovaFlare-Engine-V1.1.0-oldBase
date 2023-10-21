@@ -619,6 +619,10 @@ class OptionsState extends MusicBeatSubstate
 					{
 						var prev = selectedOptionIndex;
 						var object = selectedCat.optionObjects.members[selectedOptionIndex];
+						
+						saveSelectedOptionIndex = selectedOptionIndex;
+        				saveSelectedCatIndex = selectedCatIndex;
+        					
 						selectedOption.press();
                         selectedOption.change();
 						if (selectedOptionIndex == prev)
@@ -777,7 +781,6 @@ class OptionsState extends MusicBeatSubstate
 						}	
 						
 						if (selectedCat.middle){
-    						if (selectedCat.middle)
 							switchCat(options[saveSelectedCatIndex]);
         					isInCat = false;
         					selectOption(selectedCat.options[saveSelectedOptionIndex]);	

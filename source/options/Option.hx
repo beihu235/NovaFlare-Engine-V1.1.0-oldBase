@@ -89,9 +89,6 @@ class Judgement extends Option
 	{
 		if (OptionsState.isInPause)
 			return false;
-			
-		OptionsState.instance.saveSelectedCatIndex = OptionsState.instance.selectedCatIndex;	
-		OptionsState.instance.saveSelectedOptionIndex = OptionsState.instance.selectedOptionIndex;
 		
 		var num:Int = 6;	
 		OptionsState.instance.selectedCatIndex = num;
