@@ -674,7 +674,7 @@ class OptionsState extends MusicBeatSubstate
 
 						if (selectedOptionIndex < 0)
 						{
-							selectedOptionIndex = options[selectedCatIndex].options.length;
+							selectedOptionIndex = options[selectedCatIndex].options.length - 1;
 
 							if (options[selectedCatIndex].options.length > 6)
 								for (i in selectedCat.optionObjects.members)
