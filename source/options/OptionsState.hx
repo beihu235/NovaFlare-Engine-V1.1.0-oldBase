@@ -683,7 +683,7 @@ class OptionsState extends MusicBeatSubstate
 							for (i in 0...selectedCat.options.length)
 							{
 								var opt = selectedCat.optionObjects.members[i];
-								opt.y = selectedCat.positionFix + 54 + (46 * (i - Math.floor(selectedCat.options.length / 2)));
+								opt.y = selectedCat.positionFix + 54 + (46 * (i - Math.floor(selectedCat.options.length / 2 + 0.5)));
 							}
 						}
 
