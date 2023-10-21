@@ -54,7 +54,7 @@ class OptionCata extends FlxSprite
 		optionObjects = new FlxTypedGroup();
 
 		titleObject = new FlxText((middleType ? 1180 / 2 : x), y + (middleType ? 16 + 64 : 16), 1180, title);
-		titleObject.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr.ttf") : Paths.font("vcr-CH.ttf"), 35, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		titleObject.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr-CH.ttf") : Paths.font("vcr.ttf"), 35, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		titleObject.borderSize = 3;
         if (titleObject.fieldWidth > 295) titleObject.size -= 2;
 		if (middleType)
@@ -78,7 +78,7 @@ class OptionCata extends FlxSprite
 			{
 				text.screenCenter(X);
 			}
-			text.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr.ttf") : Paths.font("vcr-CH.ttf"), 35, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			text.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr-CH.ttf") : Paths.font("vcr.ttf"), 35, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			text.borderSize = 3;
 			text.borderQuality = 1;
 			text.scrollFactor.set();
@@ -304,7 +304,7 @@ class OptionsState extends MusicBeatSubstate
 		}
 
 		descText = new FlxText(62, 648);
-		descText.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr.ttf") : Paths.font("vcr-CH.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		descText.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr-CH.ttf") : Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		descText.borderSize = 2;
 
 		add(descBack);
@@ -318,7 +318,7 @@ class OptionsState extends MusicBeatSubstate
         
         var resetText = 'Press' +  #if android ' C' #else ' Reset' #end + ' to reset settings';
 		restoreSettingsText = new FlxText (62, 680, FlxG.width, resetText);
-		restoreSettingsText.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr.ttf") : Paths.font("vcr-CH.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		restoreSettingsText.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr-CH.ttf") : Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		restoreSettingsText.scrollFactor.set();
 		restoreSettingsText.borderSize = 2;
 		restoreSettingsText.borderQuality = 3;
