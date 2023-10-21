@@ -644,7 +644,7 @@ class OptionsState extends MusicBeatSubstate
 							for (i in 0...selectedCat.options.length)
 							{
 								var opt = selectedCat.optionObjects.members[i];
-								opt.y = selectedCat.titleObject.y + 54 + (46 * i);
+								opt.y = selectedCat.positionFix + 54 + (46 * i);
 							}
 							selectedOptionIndex = 0;
 						}
@@ -683,7 +683,7 @@ class OptionsState extends MusicBeatSubstate
 
 						if (selectedOptionIndex != 0 && options[selectedCatIndex].options.length > 6)
 						{
-							if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)
+							if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)//修改
 								for (i in selectedCat.optionObjects.members)
 								{
 									i.y += 46;
@@ -695,7 +695,7 @@ class OptionsState extends MusicBeatSubstate
 							for (i in 0...selectedCat.options.length)
 							{
 								var opt = selectedCat.optionObjects.members[i];
-								opt.y = selectedCat.titleObject.y + 54 + (46 * i);
+								opt.y = selectedCat.positionFix + 54 + (46 * i);
 							}
 						}
 
