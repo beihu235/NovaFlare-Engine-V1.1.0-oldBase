@@ -766,11 +766,10 @@ class OptionsState extends MusicBeatSubstate
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();													
 						
 						if (selectedCat.middle){
-							switchCat(options[saveSelectedCatIndex]);
-        					isInCat = false;
-        					selectedOptionIndex = saveSelectedOptionIndex;
+						    isInCat = false;
+							switchCat(options[saveSelectedCatIndex]);        					        					
         					selectOption(selectedCat.options[saveSelectedOptionIndex]);	
-        					
+        					selectedOptionIndex = saveSelectedOptionIndex;
         					
         					
 								for (i in selectedCat.optionObjects.members)
@@ -806,6 +805,8 @@ class OptionsState extends MusicBeatSubstate
 				}
 			}
 		}//毫无意义的try		
+		var tes:String = saveSelectedCatIndex + ' ' + saveSelectedOptionIndex;
+		restoreSettingsText.text = tes;
 		
 		if (selectedCat != null && !isInCat)
 		{
