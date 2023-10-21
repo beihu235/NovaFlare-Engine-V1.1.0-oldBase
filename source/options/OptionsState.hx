@@ -799,9 +799,11 @@ class OptionsState extends MusicBeatSubstate
 							}
 						}	
 						if (selectedCat.middle){
-    						selectedOptionIndex = saveSelectedOptionIndex;
-        					isInCat = false;
+    						
+        					
         					selectOption(selectedCat.options[saveSelectedCatIndex]);	
+        					isInCat = false;
+        					selectedOptionIndex = saveSelectedOptionIndex;.
         					
         					saveSelectedOptionIndex = 0;
         					saveSelectedCatIndex = 0;
