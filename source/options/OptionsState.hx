@@ -727,7 +727,7 @@ class OptionsState extends MusicBeatSubstate
 
 					if (right || right_hold)
 					{
-						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+						if (!right_hold) FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						var object = selectedCat.optionObjects.members[selectedOptionIndex];
 						selectedOption.right();
                         selectedOption.change();
@@ -738,7 +738,7 @@ class OptionsState extends MusicBeatSubstate
 					}
 					else if (left || left_hold)
 					{
-						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+						if (!left_hold) FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						var object = selectedCat.optionObjects.members[selectedOptionIndex];
 						selectedOption.left();
                         selectedOption.change();
@@ -799,10 +799,11 @@ class OptionsState extends MusicBeatSubstate
 							}
 						}	
 						if (selectedCat.middle){
-    						
-        					
-        					selectOption(selectedCat.options[saveSelectedCatIndex]);	
+    						if (selectedCat.middle)
+							switchCat(options[saveSelectedCatIndex]);
         					isInCat = false;
+        					selectOption(selectedCat.options[saveSelectedOptionIndex]);	
+        					
         					selectedOptionIndex = saveSelectedOptionIndex;
         					
         					saveSelectedOptionIndex = 0;
@@ -811,24 +812,7 @@ class OptionsState extends MusicBeatSubstate
 					}
 				}
 			}
-		}
-		catch (e)
-		{
-            FlxG.log.add("wtf we actually did something wrong, but we dont crash bois.\n" + e);
-			selectedCatIndex = 0;
-			selectedOptionIndex = 0;
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
-			if (selectedCat != null && !selectedCat.middle)
-			{
-				for (i in 0...selectedCat.options.length)
-				{
-					var opt = selectedCat.optionObjects.members[i];
-					opt.y = selectedCat.positionFix + 54 + (46 * i);
-				}
-				selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
-				isInCat = true;
-			}
-		}
+		}//毫无意义的try		
 	}
 
 	public static function resetOptions()
