@@ -613,7 +613,7 @@ class OptionsState extends MusicBeatSubstate
 						//	Debug.logTrace("New text: " + object.text);
 						}
 					}
-				if (selectedOption.acceptType || !selectedOption.acceptType)
+				if (selectedOption.acceptType || !selectedOption.acceptType) //这啥玩意这
 				{
 					if (accept)
 					{
@@ -763,24 +763,7 @@ class OptionsState extends MusicBeatSubstate
 							var opt = selectedCat.optionObjects.members[i];
 							opt.y = selectedCat.positionFix + 54 + (46 * i);
 						}
-						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
-						isInCat = true;
-						if (selectedCat.optionObjects != null){
-							for (i in selectedCat.optionObjects.members)
-							{
-								if (i != null)
-								{
-									if (i.y < visibleRange[0] - 24)
-										i.alpha = 0;
-									else if (i.y > visibleRange[1] - 24)
-										i.alpha = 0;
-									else
-									{
-										i.alpha = 0.4;
-									}
-								}
-							}
-						}	
+						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();													
 						
 						if (selectedCat.middle){
 							switchCat(options[saveSelectedCatIndex]);
@@ -798,6 +781,26 @@ class OptionsState extends MusicBeatSubstate
         					
         					saveSelectedOptionIndex = 0;
         					saveSelectedCatIndex = 0;
+						}
+						else{
+						    isInCat = true;
+						}
+						
+						if (selectedCat.optionObjects != null){
+							for (i in selectedCat.optionObjects.members)
+							{
+								if (i != null)
+								{
+									if (i.y < visibleRange[0] - 24)
+										i.alpha = 0;
+									else if (i.y > visibleRange[1] - 24)
+										i.alpha = 0;
+									else
+									{
+										i.alpha = 0.4;
+									}
+								}
+							}
 						}
 					}
 				}
