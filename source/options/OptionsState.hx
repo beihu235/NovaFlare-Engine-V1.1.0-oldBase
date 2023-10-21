@@ -809,6 +809,12 @@ class OptionsState extends MusicBeatSubstate
         					
         					selectedOptionIndex = saveSelectedOptionIndex;
         					
+        					if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)//修改
+								for (i in selectedCat.optionObjects.members)
+								{
+									i.y += 46;
+								}
+        					
         					saveSelectedOptionIndex = 0;
         					saveSelectedCatIndex = 0;
 						}
