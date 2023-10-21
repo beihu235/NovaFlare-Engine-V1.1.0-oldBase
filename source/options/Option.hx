@@ -1240,7 +1240,7 @@ class HitSoundOption extends Option
 		ClientPrefs.data.hitsoundVolume -= 0.1;
 		if (ClientPrefs.data.hitsoundVolume < 0)
 			ClientPrefs.data.hitsoundVolume = 0;
-                FlxG.sound.play(Paths.sound('note_click'), ClientPrefs.data.hitsoundVolume);
+                FlxG.sound.play(Paths.sound('hitsound'), ClientPrefs.data.hitsoundVolume);
 		return true;
 	}
 }
