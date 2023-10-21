@@ -514,30 +514,6 @@ class OptionsState extends MusicBeatSubstate
 		back = controls.BACK;
 		reset = controls.RESET #if android || MusicBeatSubstate._virtualpad.buttonC.justPressed #end;
 
-		if (selectedCat != null && !isInCat)
-		{
-			for (i in selectedCat.optionObjects.members)
-			{
-				if (selectedCat.middle)
-				{
-					i.screenCenter(X);
-				}
-
-				// I wanna die!!!
-				if (i.y < visibleRange[0] - 24)
-					i.alpha = 0;
-				else if (i.y > visibleRange[1] - 24)
-					i.alpha = 0;
-				else
-				{
-					if (selectedCat.optionObjects.members[selectedOptionIndex].text != i.text)
-						i.alpha = 0.4;
-					else
-						i.alpha = 1;
-				}
-			}
-		}
-
 		try
 		{
 			if (isInCat)
@@ -809,14 +785,7 @@ class OptionsState extends MusicBeatSubstate
         					
         					selectedOptionIndex = saveSelectedOptionIndex;
         					
-        					if (selectedOptionIndex != 0 && options[selectedCatIndex].options.length > 6)
-						{
-							if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)//修改
-								for (i in selectedCat.optionObjects.members)
-								{
-									i.y += 46;
-								}
-						}
+        				
         					
         					saveSelectedOptionIndex = 0;
         					saveSelectedCatIndex = 0;
@@ -825,6 +794,30 @@ class OptionsState extends MusicBeatSubstate
 				}
 			}
 		}//毫无意义的try		
+		
+		if (selectedCat != null && !isInCat)
+		{
+			for (i in selectedCat.optionObjects.members)
+			{
+				if (selectedCat.middle)
+				{
+					i.screenCenter(X);
+				}
+
+				// I wanna die!!!
+				if (i.y < visibleRange[0] - 24)
+					i.alpha = 0;
+				else if (i.y > visibleRange[1] - 24)
+					i.alpha = 0;
+				else
+				{
+					if (selectedCat.optionObjects.members[selectedOptionIndex].text != i.text)
+						i.alpha = 0.4;
+					else
+						i.alpha = 1;
+				}
+			}
+		}
 	}
 
 	public static function resetOptions()
