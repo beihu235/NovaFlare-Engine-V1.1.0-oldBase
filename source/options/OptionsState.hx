@@ -512,31 +512,7 @@ class OptionsState extends MusicBeatSubstate
 
 		anyKey = FlxG.keys.justPressed.ANY || (gamepad != null ? gamepad.justPressed.ANY : false);
 		back = controls.BACK;
-		reset = controls.RESET #if android || MusicBeatSubstate._virtualpad.buttonC.justPressed #end;
-
-		if (selectedCat != null && !isInCat)
-		{
-			for (i in selectedCat.optionObjects.members)
-			{
-				if (selectedCat.middle)
-				{
-					i.screenCenter(X);
-				}
-
-				// I wanna die!!!
-				if (i.y < visibleRange[0] - 24)
-					i.alpha = 0;
-				else if (i.y > visibleRange[1] - 24)
-					i.alpha = 0;
-				else
-				{
-					if (selectedCat.optionObjects.members[selectedOptionIndex].text != i.text)
-						i.alpha = 0.4;
-					else
-						i.alpha = 1;
-				}
-			}
-		}
+		reset = controls.RESET #if android || MusicBeatSubstate._virtualpad.buttonC.justPressed #end;		
 
 		try
 		{
@@ -822,6 +798,30 @@ class OptionsState extends MusicBeatSubstate
 				}
 			}
 		}//毫无意义的try		
+		
+		if (selectedCat != null && !isInCat)
+		{
+			for (i in selectedCat.optionObjects.members)
+			{
+				if (selectedCat.middle)
+				{
+					i.screenCenter(X);
+				}
+
+				// I wanna die!!!
+				if (i.y < visibleRange[0] - 24)
+					i.alpha = 0;
+				else if (i.y > visibleRange[1] - 24)
+					i.alpha = 0;
+				else
+				{
+					if (selectedCat.optionObjects.members[selectedOptionIndex].text != i.text)
+						i.alpha = 0.4;
+					else
+						i.alpha = 1;
+				}
+			}
+		}
 	}
 
 	public static function resetOptions()
