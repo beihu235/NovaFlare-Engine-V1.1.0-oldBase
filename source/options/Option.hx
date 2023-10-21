@@ -140,12 +140,12 @@ class OffsetThing extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Note offset: < " + ClientPrefs.data.noteOffset + MS + " >";
+		return "Note offset: < " + ClientPrefs.data.noteOffset + MS_O + " >";
 	}
 
 	public override function getValue():String
 	{
-		return "Note offset: < " + ClientPrefs.data.noteOffset + MS + " >";
+		return "Note offset: < " + ClientPrefs.data.noteOffset + MS_O + " >";
 	}
 }
 
@@ -223,7 +223,7 @@ class SickMSOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Sick Hit Window: < " + ClientPrefs.data.sickWindow + MS + " >";
+		return "Sick Hit Window: < " + ClientPrefs.data.sickWindow + MS_O + " >";
 	}
 }
 
@@ -262,7 +262,7 @@ class GoodMsOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Good Hit Window: < " + ClientPrefs.data.goodWindow + MS + " >";
+		return "Good Hit Window: < " + ClientPrefs.data.goodWindow + MS_O + " >";
 	}
 }
 
@@ -301,7 +301,7 @@ class BadMsOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Bad Hit Window: < " + ClientPrefs.data.badWindow + MS + " >";
+		return "Bad Hit Window: < " + ClientPrefs.data.badWindow + MS_O + " >";
 	}
 }
 
@@ -499,6 +499,33 @@ class NoReset extends Option
 	private override function updateDisplay():String
 	{
 		return "Reset Button: < " + (!ClientPrefs.data.noReset ? enable_O : disable_O) + " >";
+	}
+}
+
+class LangCH extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.langCH = !ClientPrefs.data.langCH;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Chinese Language: < " + (ClientPrefs.data.langCH ? enable_O : disable_O) + " >";
 	}
 }
 
