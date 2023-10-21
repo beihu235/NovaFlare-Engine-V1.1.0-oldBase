@@ -497,7 +497,7 @@ class OptionsState extends MusicBeatSubstate
 		
 		if(controls.UI_DOWN || controls.UI_UP || controls.UI_LEFT || controls.UI_RIGHT)
 			{
-			    updatePower = updatePower + elapsed * 0.5; //2秒增加一倍选择
+			    if (Math.floor(holdTime) % 2 == 0) updatePower = updatePower * 1.5; //2秒增加1.5倍选择
 				var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10 * updatePower);
 				holdTime += elapsed;
 				var checkNewHold:Int = Math.floor((holdTime - 0.5) * 10 * updatePower);
