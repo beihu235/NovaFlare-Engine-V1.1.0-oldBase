@@ -803,7 +803,7 @@ class OptionsState extends MusicBeatSubstate
         					
         					selectOption(selectedCat.options[saveSelectedCatIndex]);	
         					isInCat = false;
-        					selectedOptionIndex = saveSelectedOptionIndex;.
+        					selectedOptionIndex = saveSelectedOptionIndex;
         					
         					saveSelectedOptionIndex = 0;
         					saveSelectedCatIndex = 0;
