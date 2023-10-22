@@ -841,6 +841,8 @@ class OptionsState extends MusicBeatSubstate
 			}
 		}//毫无意义的try		
 		
+		descText.text = '' + ClientPrefs.data.language;
+		
 		if (selectedCat != null && !isInCat)
 		{
 			for (i in selectedCat.optionObjects.members)
