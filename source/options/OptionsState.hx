@@ -55,7 +55,8 @@ class OptionCata extends FlxSprite
 
 		titleObject = new FlxText((middleType ? 1180 / 2 : x), y + (middleType ? 16 + 64 : 16), 1180, title);
 		titleObject.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr-CH.ttf") : Paths.font("vcr.ttf"), 35, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		titleObject.borderSize = 3;
+		titleObject.antialiasing = ClientPrefs.data.antialiasing;
+		titleObject.borderSize = 2;
         if (titleObject.fieldWidth > 295) titleObject.size -= 2;
 		if (middleType)
 		{
@@ -79,7 +80,8 @@ class OptionCata extends FlxSprite
 				text.screenCenter(X);
 			}
 			text.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr-CH.ttf") : Paths.font("vcr.ttf"), 35, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			text.borderSize = 3;
+			text.antialiasing = ClientPrefs.data.antialiasing;
+			text.borderSize = 2;
 			text.borderQuality = 1;
 			text.scrollFactor.set();
 			optionObjects.add(text);
@@ -305,6 +307,7 @@ class OptionsState extends MusicBeatSubstate
 
 		descText = new FlxText(62, 648);
 		descText.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr-CH.ttf") : Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		descText.antialiasing = ClientPrefs.data.antialiasing;
 		descText.borderSize = 2;
 
 		add(descBack);
@@ -320,6 +323,7 @@ class OptionsState extends MusicBeatSubstate
 		restoreSettingsText = new FlxText (62, 680, FlxG.width, resetText);
 		restoreSettingsText.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr-CH.ttf") : Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		restoreSettingsText.scrollFactor.set();
+		restoreSettingsText.antialiasing = ClientPrefs.data.antialiasing;
 		restoreSettingsText.borderSize = 2;
 		restoreSettingsText.borderQuality = 3;
 		add(restoreSettingsText);
@@ -676,7 +680,8 @@ class OptionsState extends MusicBeatSubstate
 						if (selectedOptionIndex < 0)
 						{
 							selectedOptionIndex = options[selectedCatIndex].options.length - 1;
-
+							
+                            if (options[selectedCatIndex].options.length > 6)
 							for (i in 0...selectedCat.options.length)
 							{
 								var opt = selectedCat.optionObjects.members[i];
