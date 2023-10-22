@@ -163,7 +163,14 @@ class OptionsState extends MusicBeatSubstate
 
 	public var descText:FlxText;
 	public var descBack:FlxSprite;
-
+	
+	var Gameplay:String;
+    var Appearance:String;
+    var Misc:String;
+    var OpponentMode:String;
+    var MenuExtend:String;
+    var Controls:String;
+    
 	override function create()
 	{
 
@@ -173,10 +180,18 @@ class OptionsState extends MusicBeatSubstate
 				FlxG.sound.playMusic(Paths.music('optionsSong'));
 			else
 				startSong = true;
-*/
-
+        */      
+        
+        Gameplay = OptionsName.setGameplay();
+        Appearance = OptionsName.setAppearance();
+        Misc = OptionsName.setMisc();
+        OpponentMode = OptionsName.setOpponentMode();
+        MenuExtend = OptionsName.setMenuExtend();
+        Controls = OptionsName.setControls();
+        //reset name
+        
 		options = [
-			new OptionCata(50, 40, "Gameplay", [				
+			new OptionCata(50, 40, Gameplay, [				
 				new DownscrollOption("Toggle making the notes scroll down rather than up."),
 				new MiddleScrollOption("Put your lane in the center or on the right."), 
 				new HitSoundOption("Adds 'hitsound' on note hits."),
@@ -193,7 +208,7 @@ class OptionsState extends MusicBeatSubstate
 				new Judgement("Create a custom judgement preset"),
 				//new Shouldcameramove("Moves camera on opponent/player note hits."),
 			]),
-			new OptionCata(345, 40, "Appearance", [
+			new OptionCata(345, 40, Appearance, [
                 //new NoteskinOption("Change your current noteskin"),
 				//new AccTypeOption("Change your current accuracy type you want!"),
 				//new SongNameOption("Shows to you name of song your playing on HUD"),			
@@ -214,7 +229,7 @@ class OptionsState extends MusicBeatSubstate
                 //new BlurNotes("(CONTAINS FPS ISSUES)/Make notes a bit 'blurred'."), // TODO: rework later - Snake
 			    //new TimeBarType("Change the song's current position bar."),
 			]),
-			new OptionCata(640, 40, "Misc", [
+			new OptionCata(640, 40, Misc, [
 			    new Language("Change language to Chinese."),
 				new FlashingLightsOption("Toggle flashing lights that can cause epileptic seizures and strain."),
 				new QualityLow("Turn off some object on stages"),
@@ -233,17 +248,17 @@ class OptionsState extends MusicBeatSubstate
                 
 				//new Imagepersist("Images loaded will stay in memory until the game is closed."),
         		]),
-			new OptionCata(935, 40, "Opponent Mode", [
+			new OptionCata(935, 40, Opponent Mode, [
 			    new HideHud("Shows to you hud."),
 				//new ResetSettings("Reset some your settings. This is irreversible!")
 				//new AutoSave("Turn AutoSaves your chating in Charting state."),
 				//new AutoSaveInt("Change Chart AutoSave Interval."),               
 			 //   new PauseCountDownOption("Toggle countdown after pressing 'Resume' in Pause Menu."),
 			]),
-			new OptionCata(50, 40 + 64, "Controls", [
+			new OptionCata(50, 40 + 64, Controls, [
 			    new HideHud("Shows to you hud."),				
 			]),
-			new OptionCata(345, 40 + 64, "Menu Extend", [
+			new OptionCata(345, 40 + 64, Menu Extend, [
 			    new HideHud("Shows to you hud."),				
 			]),
 			new OptionCata(-1, 125, "Editing Judgements", [			
@@ -823,9 +838,6 @@ class OptionsState extends MusicBeatSubstate
 				}
 			}
 		}//毫无意义的try		
-		
-		var tes:String = saveSelectedCatIndex + ' ' + saveSelectedOptionIndex;
-		restoreSettingsText.text = tes;
 		
 		if (selectedCat != null && !isInCat)
 		{
