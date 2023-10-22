@@ -100,7 +100,7 @@ class SaveVariables {
 	public var hitboxalpha:Float = 0.2;
 	public var VirtualPadAlpha:Float = 0.75;    
 	
-	public var langCH:Bool = false;	
+	public var language:Int = 0; //for english at begin
      
 	public function new()
 	{
