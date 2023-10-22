@@ -58,9 +58,9 @@ class OptionCata extends FlxSprite
 	    switch (ClientPrefs.data.language)
 	    {
 			case 0: //english
-			    langTTF = 'vcr'
+			    langTTF = 'vcr';
 			case 1: //chinese
-			    langTTF = 'vcr-CH'
+			    langTTF = 'vcr-CH';
 		}					
 		langTTF = langTTF + '.ttf'; //fix
 
@@ -321,9 +321,9 @@ class OptionsState extends MusicBeatSubstate
 	    switch (ClientPrefs.data.language)
 	    {
 			case 0: //english
-			    langTTF = 'vcr'
+			    langTTF = 'vcr';
 			case 1: //chinese
-			    langTTF = 'vcr-CH'
+			    langTTF = 'vcr-CH';
 		}					
 		langTTF = langTTF + '.ttf'; //fix
 
