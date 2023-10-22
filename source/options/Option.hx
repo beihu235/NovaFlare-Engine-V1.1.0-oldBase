@@ -14,9 +14,9 @@ class Option
 	
 	private var acceptValues:Bool = false;
 	
-	private var disable_O:String = ClientPrefs.data.langCH ? '禁用' : ' Disabled';
-	private var enable_O:String = ClientPrefs.data.langCH ? '启用' : ' Enabled';
-	private var MS_O:String = ClientPrefs.data.langCH ? ' 毫秒' : ' MS';
+	private var disable_O:String = ClientPrefs.data.langCH ? '禁用' : 'Disabled';
+	private var enable_O:String = ClientPrefs.data.langCH ? '启用' : 'Enabled';
+	private var MS_O:String = ClientPrefs.data.langCH ? ' 毫秒' : 'MS';
     
     public var onChange:Void->Void = null;
     
@@ -520,6 +520,12 @@ class LangCH extends Option
 	public override function right():Bool
 	{
 		left();
+		return true;
+	}
+	
+	public override function press():Bool
+	{
+		FlxG.resetGame();
 		return true;
 	}
 
