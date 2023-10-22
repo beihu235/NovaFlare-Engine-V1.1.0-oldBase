@@ -4,16 +4,17 @@ import lime.app.Application;
 import backend.MusicBeatState;
 
 import flixel.addons.transition.FlxTransitionableState;
+import options.OptionsHelpers;
 
 class Option
 {
 	public function new()
 	{
-	    disable_O = funcDisable();
-	    enable_O = funcEnable();
-	    MS_O = funcMS();
-	    grid_O = funcGrid();
-		display = updateDisplay();
+	    disable_O = OptionsHelpers.funcDisable();
+	    enable_O = OptionsHelpers.funcEnable();
+	    MS_O = OptionsHelpers.funcMS();
+	    grid_O = OptionsHelpers.funcGrid();
+		display = OptionsHelpers.updateDisplay();
 	}
 
 	private var description:String = "";
@@ -25,50 +26,6 @@ class Option
 	private var enable_O:String = '';
 	private var MS_O:String = '';
 	private var grid_O:String = '';
-	
-	private function funcDisable():String{
-	    switch (ClientPrefs.data.language)
-	    {
-			case 0: //english
-			return 'Disabled';
-			case 1: //chinese
-			return '禁用';
-		}			
-		return 'Disabled';
-	}
-	
-	private function funcEnable():String{
-	    switch (ClientPrefs.data.language)
-	    {
-			case 0: //english
-			    return 'Enabled';
-			case 1: //chinese
-			    return '启用';
-		}			
-		return 'Enabled';
-	}
-	
-	private function funcMS():String{
-	    switch (ClientPrefs.data.language)
-	    {
-			case 0: //english
-			    return 'MS';
-			case 1: //chinese
-			    return '毫秒';
-		}			
-		return 'MS';
-	}
-	
-	private function funcGrid():String{
-	    switch (ClientPrefs.data.language)
-	    {
-			case 0: //english
-			    return 'Grid';
-			case 1: //chinese
-			    return '格';
-		}			
-		return 'Grid';
-	}
     
     public var onChange:Void->Void = null;
     

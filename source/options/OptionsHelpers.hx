@@ -80,6 +80,62 @@ class OptionsName
 		}					
 		return "vcr";
     }
+    
+    //--------------TTF SETTING------------------------//
+    
+    public static function funcDisable():String{
+	    switch (ClientPrefs.data.language)
+	    {
+			case 0: //english
+			return 'Disabled';
+			case 1: //chinese
+			return '禁用';
+			case 2: //chinese
+			return '禁用';
+		}			
+		return 'Disabled';
+	}
+	
+	public static function funcEnable():String{
+	    switch (ClientPrefs.data.language)
+	    {
+			case 0: //english
+			    return 'Enabled';
+			case 1: //chinese
+			    return '启用';
+			case 2: //chinese
+			    return '啟用';    
+		}			
+		return 'Enabled';
+	}
+	
+	public static function funcMS():String{
+	    switch (ClientPrefs.data.language)
+	    {
+			case 0: //english
+			    return 'MS';
+			case 1: //chinese
+			    return '毫秒';
+			case 2: //chinese
+			    return '毫秒';    
+		}			
+		return 'MS';
+	}
+	
+	public static function funcGrid():String{
+	    switch (ClientPrefs.data.language)
+	    {
+			case 0: //english
+			    return 'Grid';
+			case 1: //chinese
+			    return '格';
+			case 2: //chinese
+			    return '格';    
+		}			
+		return 'Grid';
+	}
+	
+	//----------OPTION SETTING------------------------//
 
     public static function setGameplay():String{
         switch (ClientPrefs.data.language)

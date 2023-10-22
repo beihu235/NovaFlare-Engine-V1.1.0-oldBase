@@ -4,7 +4,6 @@ import states.MainMenuState;
 import substates.PauseSubState;
 
 import options.Option;
-import options.OptionsHelpers;
 
 import options.ControlsSubState;
 import options.NoteOffsetState;
