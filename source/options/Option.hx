@@ -6,6 +6,10 @@ class Option
 {
 	public function new()
 	{
+	    disable_O = funcDisable();
+	    enable_O = funcEnable();
+	    MS_O = funcMS();
+	    grid_O = funcGrid();
 		display = updateDisplay();
 	}
 
@@ -63,7 +67,7 @@ class Option
 		return 'Grid';
 	}
     
-    public var onChange:Void->Void = ull;
+    public var onChange:Void->Void = null;
     
 	public var acceptType:Bool = false;
 
@@ -564,10 +568,10 @@ class Language extends Option
 		
 		FlxG.resetGame();
 		
-		isInCat = false;
-		switchCat(options[3]);        					        					
-        selectOption(selectedCat.options[0]);	
-        selectedOptionIndex = 0;
+		OptionsState.instance.isInCat = false;
+		OptionsState.instance.switchCat(options[3]);        					        					
+        OptionsState.instance.selectOption(selectedCat.options[0]);	
+        OptionsState.instance.selectedOptionIndex = 0;
 		
 		return true;
 	}
@@ -580,10 +584,10 @@ class Language extends Option
 		
 		FlxG.resetGame();
 		
-		isInCat = false;
-		switchCat(options[3]);        					        					
-        selectOption(selectedCat.options[0]);	
-        selectedOptionIndex = 0;
+		OptionsState.instance.isInCat = false;
+		OptionsState.instance.switchCat(options[3]);        					        					
+        OptionsState.instance.selectOption(selectedCat.options[0]);	
+        OptionsState.instance.selectedOptionIndex = 0;
         
 		return true;
 	}
