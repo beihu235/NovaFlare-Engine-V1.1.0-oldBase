@@ -569,8 +569,8 @@ class Language extends Option
 		FlxG.resetGame();
 		
 		OptionsState.instance.isInCat = false;
-		OptionsState.instance.switchCat(options[3]);        					        					
-        OptionsState.instance.selectOption(selectedCat.options[0]);	
+		OptionsState.instance.switchCat(OptionsState.instance.options[3]);        					        					
+        OptionsState.instance.selectOption(OptionsState.instance.selectedCat.options[0]);	
         OptionsState.instance.selectedOptionIndex = 0;
 		
 		return true;
@@ -585,8 +585,8 @@ class Language extends Option
 		FlxG.resetGame();
 		
 		OptionsState.instance.isInCat = false;
-		OptionsState.instance.switchCat(options[3]);        					        					
-        OptionsState.instance.selectOption(selectedCat.options[0]);	
+		OptionsState.instance.switchCat(OptionsState.instance.options[3]);        					        					
+        OptionsState.instance.selectOption(OptionsState.instance.selectedCat.options[0]);	
         OptionsState.instance.selectedOptionIndex = 0;
         
 		return true;
