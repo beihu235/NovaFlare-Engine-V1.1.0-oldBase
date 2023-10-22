@@ -1,8 +1,11 @@
 package options;
 
+import states.MainMenuState;
 import substates.PauseSubState;
 
 import options.Option;
+import options.OptionsHelpers;
+
 import options.ControlsSubState;
 import options.NoteOffsetState;
 import options.NotesSubState;
@@ -11,13 +14,10 @@ import backend.ClientPrefs;
 
 import flixel.addons.display.FlxBackdrop;
 
-import states.MainMenuState;
 import backend.StageData;
 
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.input.gamepad.FlxGamepad;
-import flash.text.TextField;
-import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
