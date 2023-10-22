@@ -68,6 +68,18 @@ class OptionsHelpers
 
 class OptionsName
 {
+    public static function setTTF():String{
+        switch (ClientPrefs.data.language)
+	    {
+			case 0: //english
+			    return "vcr";
+			case 1: //chinese
+			    return "vcr-CH";
+			case 2: //chinese
+			    return "vcr-CH";    
+		}					
+		return "vcr";
+    }
 
     public static function setGameplay():String{
         switch (ClientPrefs.data.language)

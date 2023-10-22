@@ -53,17 +53,8 @@ class OptionCata extends FlxSprite
 
 		optionObjects = new FlxTypedGroup();
 		
-		var langTTF:String = '';
-		
-	    switch (ClientPrefs.data.language)
-	    {
-			case 0: //english
-			    langTTF = 'vcr';
-			case 1: //chinese
-			    langTTF = 'vcr-CH';
-			case 2: //chinese
-			    langTTF = 'vcr-CH';    
-		}					
+		var langTTF:String = '';		
+	    langTTF = OptionsName.setTTF();
 		langTTF = langTTF + '.ttf'; //fix
 
 		titleObject = new FlxText((middleType ? 1180 / 2 : x), y + (middleType ? 16 + 64 : 16), 1180, title);
@@ -335,17 +326,8 @@ class OptionsState extends MusicBeatSubstate
 			add(cat.titleObject);
 		}
 		
-		var langTTF:String = '';
-		
-	    switch (ClientPrefs.data.language)
-	    {
-			case 0: //english
-			    langTTF = 'vcr';
-			case 1: //chinese
-			    langTTF = 'vcr-CH';
-			case 2: //chinese
-			    langTTF = 'vcr-CH';    
-		}					
+		var langTTF:String = '';		
+	    langTTF = OptionsName.setTTF();
 		langTTF = langTTF + '.ttf'; //fix
 
 		descText = new FlxText(62, 648);
