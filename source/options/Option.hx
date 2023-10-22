@@ -523,8 +523,8 @@ class Language extends Option
 	public override function left():Bool
 	{
 		ClientPrefs.data.language--;
-		if (ClientPrefs.data.language > OptionsHelpers.languageArray.length -1)
-		ClientPrefs.data.language = 0;
+		if (ClientPrefs.data.language < 0)
+		ClientPrefs.data.language = OptionsHelpers.languageArray.length -1;
 		
 		FlxTransitionableState.skipNextTransIn = true;
 		MusicBeatState.switchState(new options.OptionsState(false,true)); //reset substate for real
@@ -535,8 +535,8 @@ class Language extends Option
 	public override function right():Bool
 	{
 		ClientPrefs.data.language++;
-		if (ClientPrefs.data.language < 0)
-		ClientPrefs.data.language = OptionsHelpers.languageArray.length -1;
+		if (ClientPrefs.data.language > OptionsHelpers.languageArray.length -1)
+		ClientPrefs.data.language = 0;
 		
 		FlxTransitionableState.skipNextTransIn = true;
 		MusicBeatState.switchState(new options.OptionsState(false,true));	//reset substate for real		
