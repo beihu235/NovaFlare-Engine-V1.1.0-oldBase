@@ -18,10 +18,10 @@ class Option
 	
 	private var acceptValues:Bool = false;
 	
-	private var disable_O:String = funcDisable();
-	private var enable_O:String = funcEnable();
-	private var MS_O:String = funcMS();
-	private var grid_O:String = funcGrid();
+	private var disable_O:String = '';
+	private var enable_O:String = '';
+	private var MS_O:String = '';
+	private var grid_O:String = '';
 	
 	private function funcDisable():String{
 	    switch (ClientPrefs.data.language)

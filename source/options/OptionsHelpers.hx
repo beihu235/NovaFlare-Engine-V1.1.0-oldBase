@@ -11,7 +11,7 @@ using StringTools;
 class OptionsHelpers
 {
     public static var languageArray = ["Engine", "简体中文"];
-	public static var noteskinArray = ["Default", "Chip", "Future", "Grafex"];
+	/*public static var noteskinArray = ["Default", "Chip", "Future", "Grafex"];
     public static var IconsBopArray = ['Grafex',  'Modern', 'Classic'];
     public static var TimeBarArray = ['Time Left', 'Time Elapsed', 'Disabled'];
     public static var ColorBlindArray = ['None', 'Deuteranopia', 'Protanopia', 'Tritanopia'];
@@ -65,5 +65,5 @@ class OptionsHelpers
     static public function ChangeAccType(id:Int)
     {
         ClientPrefs.ratingSystem = getAccTypeID(id);
-    }
+    }*/
 }
