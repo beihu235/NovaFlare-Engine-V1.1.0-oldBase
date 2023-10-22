@@ -61,6 +61,8 @@ class OptionCata extends FlxSprite
 			    langTTF = 'vcr';
 			case 1: //chinese
 			    langTTF = 'vcr-CH';
+			case 2: //chinese
+			    langTTF = 'vcr-CH';    
 		}					
 		langTTF = langTTF + '.ttf'; //fix
 
