@@ -125,7 +125,8 @@ class OptionsState extends MusicBeatSubstate
 
 	public var options:Array<OptionCata>;
 
-	public static var isInPause = false;
+	public static var isInPause = false;	
+	public static var langChange = false;
 
 	var restoreSettingsText:FlxText;
 
@@ -150,11 +151,12 @@ class OptionsState extends MusicBeatSubstate
 	public static var currentColorAgain:Int = 0;    
 
 	public var optionsImage:FlxSprite;
-	public function new(pauseMenu:Bool = false)
+	public function new(pauseMenu:Bool = false, languageChange:Bool = false)
 	{
 		super();
 
 		isInPause = pauseMenu;
+		langChange = languageChange;
 	}
 
 	public var menu:FlxTypedGroup<FlxSprite>;
@@ -299,9 +301,9 @@ class OptionsState extends MusicBeatSubstate
 		
 		}
 
-		selectedCat = options[0];
+		selectedCat = langChange ? options[2] : options[0];
 
-		selectedOption = selectedCat.options[0];
+		selectedOption = langChange ? selectedCat.options[2] : selectedCat.options[0];
 
 		add(menu);
 
@@ -335,7 +337,7 @@ class OptionsState extends MusicBeatSubstate
 		add(descBack);
 		add(descText);
 
-		isInCat = true;
+		isInCat = langChange ? false : true;
 
 		switchCat(selectedCat);
 

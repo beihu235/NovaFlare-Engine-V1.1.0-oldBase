@@ -570,12 +570,7 @@ class Language extends Option
 		ClientPrefs.data.language = 0;
 		
 		FlxTransitionableState.skipNextTransIn = true;
-		MusicBeatState.switchState(new options.OptionsState()); //reset substate for real
-		
-		OptionsState.instance.isInCat = false;
-		OptionsState.instance.switchCat(OptionsState.instance.options[3]);        					        					
-        OptionsState.instance.selectOption(OptionsState.instance.selectedCat.options[0]);	
-        OptionsState.instance.selectedOptionIndex = 0;
+		MusicBeatState.switchState(new options.OptionsState(false,true)); //reset substate for real
 		
 		return true;
 	}
@@ -587,13 +582,8 @@ class Language extends Option
 		ClientPrefs.data.language = OptionsHelpers.languageArray.length -1;
 		
 		FlxTransitionableState.skipNextTransIn = true;
-		MusicBeatState.switchState(new options.OptionsState());	//reset substate for real
-		
-		OptionsState.instance.isInCat = false;
-		OptionsState.instance.switchCat(OptionsState.instance.options[3]);        					        					
-        OptionsState.instance.selectOption(OptionsState.instance.selectedCat.options[0]);	
-        OptionsState.instance.selectedOptionIndex = 0;
-        
+		MusicBeatState.switchState(new options.OptionsState(false,true));	//reset substate for real		
+		        
 		return true;
 	}
 
