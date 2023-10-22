@@ -565,7 +565,7 @@ class Language extends Option
 
 	public override function left():Bool
 	{
-		ClientPrefs.data.language++;
+		ClientPrefs.data.language--;
 		if (ClientPrefs.data.language > OptionsHelpers.languageArray.length -1)
 		ClientPrefs.data.language = 0;
 		
@@ -577,7 +577,7 @@ class Language extends Option
 
 	public override function right():Bool
 	{
-		ClientPrefs.data.language--;
+		ClientPrefs.data.language++;
 		if (ClientPrefs.data.language < 0)
 		ClientPrefs.data.language = OptionsHelpers.languageArray.length -1;
 		
