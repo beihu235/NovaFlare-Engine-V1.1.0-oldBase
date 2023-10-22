@@ -1,7 +1,9 @@
 package options;
 
 import lime.app.Application;
-import backend.MusicBeatSubstate;
+import backend.MusicBeatState;
+
+import flixel.addons.transition.FlxTransitionableState;
 
 class Option
 {
@@ -567,7 +569,8 @@ class Language extends Option
 		if (ClientPrefs.data.language > OptionsHelpers.languageArray.length -1)
 		ClientPrefs.data.language = 0;
 		
-		MusicBeatSubstate.switchState(new OptionsState());
+		FlxTransitionableState.skipNextTransIn = true;
+		MusicBeatState.switchState(new options.OptionsState()); //reset substate for real
 		
 		OptionsState.instance.isInCat = false;
 		OptionsState.instance.switchCat(OptionsState.instance.options[3]);        					        					
@@ -583,7 +586,8 @@ class Language extends Option
 		if (ClientPrefs.data.language < 0)
 		ClientPrefs.data.language = OptionsHelpers.languageArray.length -1;
 		
-		MusicBeatSubstate.switchState(new OptionsState());	
+		FlxTransitionableState.skipNextTransIn = true;
+		MusicBeatState.switchState(new options.OptionsState());	//reset substate for real
 		
 		OptionsState.instance.isInCat = false;
 		OptionsState.instance.switchCat(OptionsState.instance.options[3]);        					        					
