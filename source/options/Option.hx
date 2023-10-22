@@ -10,11 +10,7 @@ class Option
 {
 	public function new()
 	{
-	    disable_O = OptionsName.funcDisable();
-	    enable_O = OptionsName.funcEnable();
-	    MS_O = OptionsName.funcMS();
-	    grid_O = OptionsName.funcGrid();
-		display = OptionsName.updateDisplay();
+		display = updateDisplay();
 	}
 
 	private var description:String = "";
