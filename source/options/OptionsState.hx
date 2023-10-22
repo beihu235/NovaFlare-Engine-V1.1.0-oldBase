@@ -338,9 +338,8 @@ class OptionsState extends MusicBeatSubstate
 		add(descText);
 
 		isInCat = langChange ? false : true;
-
 		switchCat(selectedCat);
-
+		selectedCatIndex = langChange ? 2 : 0;
 		selectedOption = langChange ? selectedCat.options[2] : selectedCat.options[0];
         
         var resetText = 'Press' +  #if android ' C' #else ' Reset' #end + ' to reset settings';
@@ -433,11 +432,6 @@ class OptionsState extends MusicBeatSubstate
 					i.alpha = 0.4;
 				}
 			}
-		}
-		catch (e)
-		{
-			//GrfxLogger.log('error', "oops\n" + e);
-			selectedCatIndex = 0;
 		}
 	}
 
