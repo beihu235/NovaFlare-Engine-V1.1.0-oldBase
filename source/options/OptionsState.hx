@@ -248,7 +248,7 @@ class OptionsState extends MusicBeatSubstate
                 
 				//new Imagepersist("Images loaded will stay in memory until the game is closed."),
         		]),
-			new OptionCata(935, 40, Opponent Mode, [
+			new OptionCata(935, 40, OpponentMode, [
 			    new HideHud("Shows to you hud."),
 				//new ResetSettings("Reset some your settings. This is irreversible!")
 				//new AutoSave("Turn AutoSaves your chating in Charting state."),
@@ -258,7 +258,7 @@ class OptionsState extends MusicBeatSubstate
 			new OptionCata(50, 40 + 64, Controls, [
 			    new HideHud("Shows to you hud."),				
 			]),
-			new OptionCata(345, 40 + 64, Menu Extend, [
+			new OptionCata(345, 40 + 64, MenuExtend, [
 			    new HideHud("Shows to you hud."),				
 			]),
 			new OptionCata(-1, 125, "Editing Judgements", [			
