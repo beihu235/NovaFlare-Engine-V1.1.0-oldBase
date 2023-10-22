@@ -340,7 +340,9 @@ class OptionsState extends MusicBeatSubstate
 		isInCat = langChange ? false : true;
 		switchCat(selectedCat);
 		selectedCatIndex = langChange ? 2 : 0;
-		selectedOption = langChange ? selectedCat.options[2] : selectedCat.options[0];
+		selectedOption = langChange ? selectedCat.options[0] : selectedCat.options[0];
+		selectedOptionIndex = langChange ? 0 : 0;
+		//相同变量值仅仅是为了以后好开发
         
         var resetText = 'Press' +  #if android ' C' #else ' Reset' #end + ' to reset settings';
 		restoreSettingsText = new FlxText (62, 680, FlxG.width, resetText);
@@ -662,8 +664,6 @@ class OptionsState extends MusicBeatSubstate
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						selectedOptionIndex++;
 
-						// just kinda ignore this math lol
-
 						if (selectedOptionIndex > options[selectedCatIndex].options.length - 1)
 						{
 							for (i in 0...selectedCat.options.length)
@@ -709,7 +709,7 @@ class OptionsState extends MusicBeatSubstate
 
 						if (selectedOptionIndex != 0 && options[selectedCatIndex].options.length > 6)
 						{
-							if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)//修改
+							if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)
 								for (i in selectedCat.optionObjects.members)
 								{
 									i.y += 46;
@@ -737,7 +737,6 @@ class OptionsState extends MusicBeatSubstate
 						ClientPrefs.saveSettings();
 
 						object.text = selectedOption.getValue();
-						//Debug.logTrace("New text: " + object.text);
 					}
 					else if (left || left_hold)
 					{
@@ -748,7 +747,6 @@ class OptionsState extends MusicBeatSubstate
 						ClientPrefs.saveSettings();
 
 						object.text = selectedOption.getValue();
-						//Debug.logTrace("New text: " + object.text);
 					}
 
 					if(reset)
