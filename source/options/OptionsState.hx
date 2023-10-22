@@ -303,7 +303,7 @@ class OptionsState extends MusicBeatSubstate
 
 		selectedCat = langChange ? options[2] : options[0];
 
-		selectedOption = langChange ? selectedCat.options[2] : selectedCat.options[0];
+		//selectedOption = langChange ? selectedCat.options[2] : selectedCat.options[0];
 
 		add(menu);
 
@@ -341,7 +341,7 @@ class OptionsState extends MusicBeatSubstate
 
 		switchCat(selectedCat);
 
-		selectedOption = selectedCat.options[0];
+		selectedOption = langChange ? selectedCat.options[2] : selectedCat.options[0];
         
         var resetText = 'Press' +  #if android ' C' #else ' Reset' #end + ' to reset settings';
 		restoreSettingsText = new FlxText (62, 680, FlxG.width, resetText);
