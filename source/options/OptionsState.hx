@@ -4,7 +4,7 @@ import states.MainMenuState;
 import substates.PauseSubState;
 
 import options.Option;
-
+import options.OptionsHelpers;
 import options.ControlsSubState;
 import options.NoteOffsetState;
 import options.NotesSubState;
@@ -222,7 +222,7 @@ class OptionsState extends MusicBeatSubstate
 			    //new TimeBarType("Change the song's current position bar."),
 			]),
 			new OptionCata(640, 40, Misc, [
-			    new Language("Change language to Chinese."),
+			    new Language("Change language in some state."),
 				new FlashingLightsOption("Toggle flashing lights that can cause epileptic seizures and strain."),
 				new QualityLow("Turn off some object on stages"),
 				new AntialiasingOption("Toggle antialiasing, improving graphics quality at a slight performance penalty."),
