@@ -60,7 +60,13 @@ class OptionCata extends FlxSprite
 		titleObject.setFormat(Paths.font(langTTF), 35, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		titleObject.antialiasing = ClientPrefs.data.antialiasing;
 		titleObject.borderSize = 2;
-        if (titleObject.fieldWidth > 295) titleObject.size -= 2;
+		for (i in 0...4)
+        if (titleObject.fieldWidth > 295) {
+            titleObject.size -= 2;
+            titleObject.updateHitbox();
+        }
+        
+        
 		if (middleType)
 		{
 			titleObject.x = 50 + ((1180 / 2) - (titleObject.fieldWidth / 2));

@@ -180,26 +180,26 @@ class OptionsName
         switch (ClientPrefs.data.language)
 	    {
 			case 0: //english
-			    return "OpponentMode";
+			    return "Opponent Mode";
 			case 1: //chinese
 			    return "对手设置";
 			case 2: //chinese
 			    return "對手設置";    
 		}					
-		return "OpponentMode";
+		return "Opponent Mode";
     }
     
     public static function setMenuExtend():String{
         switch (ClientPrefs.data.language)
 	    {
 			case 0: //english
-			    return "MenuExtend";
+			    return "Menu Extend";
 			case 1: //chinese
 			    return "主菜单扩展";
 			case 2: //chinese
 			    return "主菜單擴展";    
 		}					
-		return "MenuExtend";
+		return "Menu Extend";
     }
     
     public static function setControls():String{
