@@ -8,7 +8,7 @@ using StringTools;
 
 class OptionsHelpers
 {
-    public static var languageArray = ["Engine", "简体中文", "繁體中文"];
+    public static var languageArray = ["English", "简体中文", "繁體中文"];
 	/*public static var noteskinArray = ["Default", "Chip", "Future", "Grafex"];
     public static var IconsBopArray = ['Grafex',  'Modern', 'Classic'];
     public static var TimeBarArray = ['Time Left', 'Time Elapsed', 'Disabled'];

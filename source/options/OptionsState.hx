@@ -236,8 +236,8 @@ class OptionsState extends MusicBeatSubstate
 				new ShadersOption("Shaders used for some visual effects, and also CPU intensive for weaker PCs."),
 				new GPUcacheOption("If checked, allows the GPU to be used for caching textures, decreasing RAM usage."),
 				new FPSCapOption("Change your FPS Cap."),		
-				new FPSRainbowOption("Make the FPS Counter flicker through rainbow colors."),
 				new FPSOption("Toggle the FPS Counter."),
+				new FPSRainbowOption("Make the FPS Counter flicker through rainbow colors."),
                 new MEMOption("Toggle the MEM Counter."),
                 new MSOption("Toggle the update time Counter."),
                 
