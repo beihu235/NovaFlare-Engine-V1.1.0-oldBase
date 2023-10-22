@@ -52,9 +52,20 @@ class OptionCata extends FlxSprite
 		options = _options;
 
 		optionObjects = new FlxTypedGroup();
+		
+		var langTTF:String = '';
+		
+	    switch (ClientPrefs.data.language)
+	    {
+			case 0: //english
+			    langTTF = 'vcr'
+			case 1: //chinese
+			    langTTF = 'vcr-CH'
+		}					
+		langTTF = langTTF + '.ttf'; //fix
 
 		titleObject = new FlxText((middleType ? 1180 / 2 : x), y + (middleType ? 16 + 64 : 16), 1180, title);
-		titleObject.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr-CH.ttf") : Paths.font("vcr.ttf"), 35, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		titleObject.setFormat(Paths.font(langTTF), 35, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		titleObject.antialiasing = ClientPrefs.data.antialiasing;
 		titleObject.borderSize = 2;
         if (titleObject.fieldWidth > 295) titleObject.size -= 2;
@@ -79,7 +90,7 @@ class OptionCata extends FlxSprite
 			{
 				text.screenCenter(X);
 			}
-			text.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr-CH.ttf") : Paths.font("vcr.ttf"), 35, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			text.setFormat(Paths.font(langTTF), 35, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			text.antialiasing = ClientPrefs.data.antialiasing;
 			text.borderSize = 2;
 			text.borderQuality = 1;
@@ -304,9 +315,20 @@ class OptionsState extends MusicBeatSubstate
 			add(cat);
 			add(cat.titleObject);
 		}
+		
+		var langTTF:String = '';
+		
+	    switch (ClientPrefs.data.language)
+	    {
+			case 0: //english
+			    langTTF = 'vcr'
+			case 1: //chinese
+			    langTTF = 'vcr-CH'
+		}					
+		langTTF = langTTF + '.ttf'; //fix
 
 		descText = new FlxText(62, 648);
-		descText.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr-CH.ttf") : Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		descText.setFormat(Paths.font(langTTF), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		descText.antialiasing = ClientPrefs.data.antialiasing;
 		descText.borderSize = 2;
 
@@ -321,7 +343,7 @@ class OptionsState extends MusicBeatSubstate
         
         var resetText = 'Press' +  #if android ' C' #else ' Reset' #end + ' to reset settings';
 		restoreSettingsText = new FlxText (62, 680, FlxG.width, resetText);
-		restoreSettingsText.setFormat(ClientPrefs.data.langCH ? Paths.font("vcr-CH.ttf") : Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		restoreSettingsText.setFormat(Paths.font(langTTF), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		restoreSettingsText.scrollFactor.set();
 		restoreSettingsText.antialiasing = ClientPrefs.data.antialiasing;
 		restoreSettingsText.borderSize = 2;

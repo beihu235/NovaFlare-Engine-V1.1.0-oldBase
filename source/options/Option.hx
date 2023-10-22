@@ -14,11 +14,56 @@ class Option
 	
 	private var acceptValues:Bool = false;
 	
-	private var disable_O:String = ClientPrefs.data.langCH ? '禁用' : 'Disabled';
-	private var enable_O:String = ClientPrefs.data.langCH ? '启用' : 'Enabled';
-	private var MS_O:String = ClientPrefs.data.langCH ? ' 毫秒' : 'MS';
+	private var disable_O:String = funcDisable();
+	private var enable_O:String = funcEnable();
+	private var MS_O:String = funcMS();
+	private var grid_O:String = funcGrid();
+	
+	private function funcDisable():String{
+	    switch (ClientPrefs.data.language)
+	    {
+			case 0: //english
+			return 'Disabled';
+			case 1: //chinese
+			return '禁用';
+		}			
+		return 'Disabled';
+	}
+	
+	private function funcEnable():String{
+	    switch (ClientPrefs.data.language)
+	    {
+			case 0: //english
+			    return 'Enabled';
+			case 1: //chinese
+			    return '启用';
+		}			
+		return 'Enabled';
+	}
+	
+	private function funcMS():String{
+	    switch (ClientPrefs.data.language)
+	    {
+			case 0: //english
+			    return 'MS';
+			case 1: //chinese
+			    return '毫秒';
+		}			
+		return 'MS';
+	}
+	
+	private function funcGrid():String{
+	    switch (ClientPrefs.data.language)
+	    {
+			case 0: //english
+			    return 'Grid';
+			case 1: //chinese
+			    return '格';
+		}			
+		return 'Grid';
+	}
     
-    public var onChange:Void->Void = null;
+    public var onChange:Void->Void = ull;
     
 	public var acceptType:Bool = false;
 
@@ -502,36 +547,50 @@ class NoReset extends Option
 	}
 }
 
-class LangCH extends Option
+class Language extends Option
 {
+    
 	public function new(desc:String)
 	{
 		super();
 		description = desc;
-	}
+	}		
 
 	public override function left():Bool
 	{
-		ClientPrefs.data.langCH = !ClientPrefs.data.langCH;
-		display = updateDisplay();
+		ClientPrefs.data.language++;
+		if (ClientPrefs.data.language > OptionsHelpers.languageArray.length -1)
+		ClientPrefs.data.language = 0;
+		
+		FlxG.resetGame();
+		
+		isInCat = false;
+		switchCat(options[3]);        					        					
+        selectOption(selectedCat.options[0]);	
+        selectedOptionIndex = 0;
+		
 		return true;
 	}
 
 	public override function right():Bool
 	{
-		left();
-		return true;
-	}
-	
-	public override function press():Bool
-	{
+		ClientPrefs.data.language--;
+		if (ClientPrefs.data.language < 0)
+		ClientPrefs.data.language = OptionsHelpers.languageArray.length -1;
+		
 		FlxG.resetGame();
+		
+		isInCat = false;
+		switchCat(options[3]);        					        					
+        selectOption(selectedCat.options[0]);	
+        selectedOptionIndex = 0;
+        
 		return true;
 	}
 
 	private override function updateDisplay():String
 	{
-		return "Chinese Language: < " + (ClientPrefs.data.langCH ? enable_O : disable_O) + " >";
+		return "Language: < " + OptionsHelpers.languageArray[ClientPrefs.data.language] + " >";
 	}
 }
 
