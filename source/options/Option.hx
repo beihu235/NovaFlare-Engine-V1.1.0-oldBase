@@ -1,6 +1,7 @@
 package options;
 
 import lime.app.Application;
+import backend.MusicBeatSubstate;
 
 class Option
 {
@@ -566,7 +567,7 @@ class Language extends Option
 		if (ClientPrefs.data.language > OptionsHelpers.languageArray.length -1)
 		ClientPrefs.data.language = 0;
 		
-		FlxG.resetGame();
+		MusicBeatSubstate.switchState(new OptionsState());
 		
 		OptionsState.instance.isInCat = false;
 		OptionsState.instance.switchCat(OptionsState.instance.options[3]);        					        					
@@ -582,7 +583,7 @@ class Language extends Option
 		if (ClientPrefs.data.language < 0)
 		ClientPrefs.data.language = OptionsHelpers.languageArray.length -1;
 		
-		FlxG.resetGame();
+		MusicBeatSubstate.switchState(new OptionsState());	
 		
 		OptionsState.instance.isInCat = false;
 		OptionsState.instance.switchCat(OptionsState.instance.options[3]);        					        					
