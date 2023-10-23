@@ -156,9 +156,9 @@ class OptionsName
 			case 0: //english
 			    return "Appearance";
 			case 1: //chinese
-			    return "界面设置";
+			    return "视图";
 			case 2: //chinese
-			    return "介面設置";    
+			    return "視圖";    
 		}					
 		return "Appearance";
     }
@@ -214,5 +214,37 @@ class OptionsName
 		}					
 		return "Controls";
     }
-
+    
+    //----------OPTION CAP------------------------//
+    
+    public static function setDownscrollOption():String{
+        switch (ClientPrefs.data.language)
+	    {
+			case 0: //english
+			    return "Toggle making the notes scroll down rather than up.";
+			case 1: //chinese
+			    return "使切换剪头向下移动而不是向上移动";
+			case 2: //chinese
+			    return "使箭頭向下移動而不是向上移動";    
+		}					
+		return "Toggle making the notes scroll down rather than up.";
+    }
+    
+    public static function displayDownscrollOption():String{
+        switch (ClientPrefs.data.language)
+	    {
+			case 0: //english
+			    return "Downscroll";
+			case 1: //chinese
+			    return "下落式";
+			case 2: //chinese
+			    return "下落式";    
+		}					
+		return "Downscroll";
+    }
+    
+    //----------OPTION OptionCata------------------------//
+    
+    
+    
 }
