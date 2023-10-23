@@ -223,10 +223,10 @@ class OptionsName
 			case 0: //english
 			    return "Toggle making the notes scroll down rather than up.";
 			case 1: //chinese
-			    return "使切换剪头向下移动而不是向上移动";
+			    return "让note从上往下接触判定线";
 			case 2: //chinese
-			    return "使箭頭向下移動而不是向上移動";    
-		}					
+			    return "讓note從上往下接觸判定線";    
+		}				
 		return "Toggle making the notes scroll down rather than up.";
     }
     

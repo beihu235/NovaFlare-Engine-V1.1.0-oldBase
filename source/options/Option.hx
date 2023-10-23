@@ -343,7 +343,7 @@ class DownscrollOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return OptionsName.displayDownscrollOption + ": < " + (ClientPrefs.data.downScroll ? enable_O : disable_O) + " >";
+		return OptionsName.displayDownscrollOption() + ": < " + (ClientPrefs.data.downScroll ? enable_O : disable_O) + " >";
 	}
 }
 
