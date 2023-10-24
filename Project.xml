@@ -112,6 +112,7 @@
 	<haxelib name="flixel-addons" />
 	<haxelib name="hscript" />
 	<haxelib name="SScript" if="HSCRIPT_ALLOWED"/>
+	<haxedef name="openflPos"/> <!-- it use for fix Sscript get some weird bug -->
 	<define name="hscriptPos" />
 	<haxelib name="androiddialogs" if="android" />
 	<haxelib name="devicelanguage" if="android" />
