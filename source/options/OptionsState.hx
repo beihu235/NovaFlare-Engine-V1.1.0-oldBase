@@ -226,10 +226,8 @@ class OptionsState extends MusicBeatSubstate
 				new TimeBarType('What should the Time Bar display?'),
 				new PauseMusic('What song do you prefer for the Pause Screen?'),
 				#if CHECK_FOR_UPDATES new CheckForUpdates('On Release builds, turn this on to check for updates when you start the game.'), #end
-				#if desktop new DiscordRPC('Uncheck this to prevent accidental leaks, it will hide the Application from your \"Playing\" box on Discord'),
-				new FilpChart('If checked, filp chart for playing.'),
-				new PlayOpponent('If checked, playing as opponent\nmay have bug in some mods\n(your score will not be recorded)'),
-				new OpponentCodeFix('If checked, goodNoteHit and opponentNoteHit\nnot follow playOpponent setting to change\n(if you playing it will return goodNoteHit function)'),
+				#if desktop new DiscordRPC('Uncheck this to prevent accidental leaks, it will hide the Application from your \"Playing\" box on Discord'), #end
+				new FilpChart('If checked, filp chart for playing.'),				
 				new FixLNL('reduce Long Note length\nFix for some mod engines have been reduced'),
 				new ResultsScreen('If checked, Open Results Screen at end song'),
 				new RatingOffset('Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.'),
@@ -248,7 +246,8 @@ class OptionsState extends MusicBeatSubstate
 				//new Imagepersist("Images loaded will stay in memory until the game is closed."),
         		]),
 			new OptionCata(935, 40, OptionsName.setOpponentMode(), [
-			    new HideHud("Shows to you hud."),
+			    new PlayOpponent('If checked, playing as opponent\nmay have bug in some mods\n(your score will not be recorded.'),
+				new OpponentCodeFix('If checked, goodNoteHit and opponentNoteHit not follow playOpponent setting to change (if you playing it will return goodNoteHit function.'),
 				//new ResetSettings("Reset some your settings. This is irreversible!")
 				//new AutoSave("Turn AutoSaves your chating in Charting state."),
 				//new AutoSaveInt("Change Chart AutoSave Interval."),               
