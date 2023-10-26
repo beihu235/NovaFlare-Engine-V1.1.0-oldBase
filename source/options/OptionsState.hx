@@ -706,17 +706,17 @@ class OptionsState extends MusicBeatSubstate
 						{
 							selectedOptionIndex = options[selectedCatIndex].options.length - 1;
 							
-                            if (options[selectedCatIndex].options.length > 6)
+                            if (options[selectedCatIndex].options.length > 10)
 							for (i in 0...selectedCat.options.length)
 							{
 								var opt = selectedCat.optionObjects.members[i];
-								opt.y = selectedCat.positionFix + 54 + (46 * (i - Math.floor(selectedCat.options.length / 2 + 0.5)));
+								opt.y = selectedCat.positionFix + 54 + (46 * (i - (selectedCat.options.length - 5)));
 							}
 						}
 
 						if (selectedOptionIndex != 0 
 						&& options[selectedCatIndex].options.length > 10
-						&& && selectedOptionIndex < 5)
+						&& selectedOptionIndex < 5)
 						{
 							//if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)
 								for (i in selectedCat.optionObjects.members)
