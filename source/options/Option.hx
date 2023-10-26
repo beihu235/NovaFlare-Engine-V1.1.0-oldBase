@@ -343,7 +343,7 @@ class DownscrollOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return OptionsName.displayDownscrollOption() + ": < " + (ClientPrefs.data.downScroll ? enable_O : disable_O) + " >";
+		return OptionsName.displayDownscrollOption + ": < " + (ClientPrefs.data.downScroll ? enable_O : disable_O) + " >";
 	}
 }
 
@@ -481,6 +481,33 @@ class ShowComboNum extends Option
 	private override function updateDisplay():String
 	{
 		return "Combo Sprite: < " + (ClientPrefs.data.showComboNum ? enable_O : disable_O) + " >";
+	}
+}
+
+class ShowRating extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.showRating = !ClientPrefs.data.showRating;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Rating Sprite: < " + (ClientPrefs.data.showRating ? enable_O : disable_O) + " >";
 	}
 }
 
@@ -1384,5 +1411,467 @@ class ComboStacking extends Option
 	private override function updateDisplay():String
 	{
 		return "Combo Stacking: < " + (ClientPrefs.data.comboStacking ? enable_O : disable_O) + " >";
+	}
+}
+
+class SplashAlpha extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+
+		description = desc;
+		acceptValues = true;
+	}
+
+	override function right():Bool
+	{
+		ClientPrefs.data.splashAlpha += 0.1;
+		if (ClientPrefs.data.splashAlpha > 1)
+			ClientPrefs.data.splashAlpha = 1;
+			
+		return true;
+	}
+
+	override function left():Bool
+	{
+		ClientPrefs.data.splashAlpha -= 0.1;
+
+		if (ClientPrefs.data.splashAlpha < 0)
+			ClientPrefs.data.splashAlpha = 0;
+			
+		return true;
+	}
+
+	private override function updateDisplay():String
+		{
+			return "Splash Transparceny: < " + ClientPrefs.data.splashAlpha + " >";
+		}
+	
+}
+
+class DisableNoteRGB extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		if (OptionsState.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+		if (OptionsState.isInPause)
+			return false;
+		ClientPrefs.data.disableNoteRGB = !ClientPrefs.data.disableNoteRGB;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Disable Note RGB: < " + (ClientPrefs.data.disableNoteRGB ? enable_O : disable_O) + " >";
+	}
+}
+
+class DisableSplashRGB extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		if (OptionsState.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+		if (OptionsState.isInPause)
+			return false;
+		ClientPrefs.data.disableSplashRGB = !ClientPrefs.data.disableSplashRGB;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Disable Splash RGB: < " + (ClientPrefs.data.disableSplashRGB ? enable_O : disable_O) + " >";
+	}
+}
+
+class CustomFadeType extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = 'Change Custom Fade Type';
+	}
+
+	public override function left():Bool
+	{
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Custom Fade Type: < " + ClientPrefs.data.CustomFade + " >";
+	}
+}
+
+
+class CustomFadeSound extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+
+		description = desc;
+		acceptValues = true;
+	}
+
+	override function right():Bool
+	{
+		ClientPrefs.data.CustomFadeSound += 0.1;
+		if (ClientPrefs.data.CustomFadeSound > 1)
+			ClientPrefs.data.CustomFadeSound = 1;
+			
+		return true;
+	}
+
+	override function left():Bool
+	{
+		ClientPrefs.data.CustomFadeSound -= 0.1;
+
+		if (ClientPrefs.data.CustomFadeSound < 0)
+			ClientPrefs.data.CustomFadeSound = 0;
+			
+		return true;
+	}
+
+	private override function updateDisplay():String
+		{
+			return "CustomFadeSound: < " + ClientPrefs.data.CustomFadeSound + " >";
+		}
+	
+}
+
+class TimeBarType extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = 'What should the Time Bar display?';
+	}
+
+	public override function left():Bool
+	{
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Time Bar: < " + ClientPrefs.data.timeBarType + " >";
+	}
+}
+
+class PauseMusic extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = 'What song do you prefer for the Pause Screen?';
+	}
+
+	public override function left():Bool
+	{
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Pause Music: < " + ClientPrefs.data.pauseMusic + " >";
+	}
+}
+
+#if CHECK_FOR_UPDATES
+class CheckForUpdates extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+	}
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.checkForUpdates = !ClientPrefs.data.checkForUpdates;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Check for Updates: < " + (ClientPrefs.data.checkForUpdates ? enable_O : disable_O) + " >";
+	}
+}
+#end
+
+
+#if desktop
+class DiscordRPC extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+	}
+
+	public override function left():Bool
+	{
+		if (OptionsState.isInPause)
+			return false;
+		ClientPrefs.data.discordRPC = !ClientPrefs.data.discordRPC;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Discord Rich Presence: < " + (ClientPrefs.data.discordRPC ? enable_O : disable_O) + " >";
+	}
+}
+#end
+
+class FilpChart extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		if (OptionsState.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+		if (OptionsState.isInPause)
+			return false;
+		ClientPrefs.data.filpChart = !ClientPrefs.data.filpChart;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Filp Chart: < " + (ClientPrefs.data.filpChart ? enable_O : disable_O) + " >";
+	}
+}
+
+class PlayOpponent extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		if (OptionsState.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+		if (OptionsState.isInPause)
+			return false;
+		ClientPrefs.data.playOpponent = !ClientPrefs.data.playOpponent;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Play Opponent: < " + (ClientPrefs.data.playOpponent ? enable_O : disable_O) + " >";
+	}
+}
+
+class OpponentCodeFix extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		if (OptionsState.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+		if (OptionsState.isInPause)
+			return false;
+		ClientPrefs.data.OpponentCodeFix = !ClientPrefs.data.OpponentCodeFix;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Opponent Code Fix: < " + (ClientPrefs.data.OpponentCodeFix ? enable_O : disable_O) + " >";
+	}
+}
+
+class FixLNL extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc + " (Press R to reset)";
+		acceptType = true;
+	}
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.fixLNL--;
+		if (ClientPrefs.data.fixLNL < 0)
+			ClientPrefs.data.fixLNL = 0;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		ClientPrefs.data.fixLNL++;
+		if (ClientPrefs.data.fixLNL > 2)
+			ClientPrefs.data.fixLNL = 2;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Long Note Length Reduce: < " + ClientPrefs.data.fixLNL + " >";
+	}
+}
+
+class ResultsScreen extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		if (OptionsState.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+		if (OptionsState.isInPause)
+			return false;
+		ClientPrefs.data.ResultsScreen = !ClientPrefs.data.ResultsScreen;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "ResultsScreen: < " + (ClientPrefs.data.ResultsScreen ? enable_O : disable_O) + " >";
+	}
+}
+
+class RatingOffset extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc + " (Press R to reset)";
+		acceptType = true;
+	}
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.ratingOffset--;
+		if (ClientPrefs.data.ratingOffset < -30)
+			ClientPrefs.data.ratingOffset = -30;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		ClientPrefs.data.ratingOffset++;
+		if (ClientPrefs.data.ratingOffset > 30)
+			ClientPrefs.data.ratingOffset = 30;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Rating Offset: < " + ClientPrefs.data.ratingOffset + " >";
 	}
 }
