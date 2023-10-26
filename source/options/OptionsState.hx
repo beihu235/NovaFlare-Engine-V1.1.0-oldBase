@@ -682,9 +682,10 @@ class OptionsState extends MusicBeatSubstate
 
 						if (selectedOptionIndex != 0
 							&& selectedOptionIndex != options[selectedCatIndex].options.length - 1
-							&& options[selectedCatIndex].options.length > 6)
+							&& options[selectedCatIndex].options.length > 10 
+							&& selectedOptionIndex > 5)
 						{
-							if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)
+							//if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)
 								for (i in selectedCat.optionObjects.members)
 								{
 									i.y -= 46;
@@ -713,9 +714,11 @@ class OptionsState extends MusicBeatSubstate
 							}
 						}
 
-						if (selectedOptionIndex != 0 && options[selectedCatIndex].options.length > 6)
+						if (selectedOptionIndex != 0 
+						&& options[selectedCatIndex].options.length > 10
+						&& && selectedOptionIndex > 5)
 						{
-							if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)
+							//if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)
 								for (i in selectedCat.optionObjects.members)
 								{
 									i.y += 46;
