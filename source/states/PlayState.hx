@@ -3618,7 +3618,8 @@ class PlayState extends MusicBeatState
 				@:privateAccess
 				for (e in newScript.parsingExceptions)
 					if(e != null)
-						addTextToDebug('ERROR ON LOADING ($file): ${e.message.substr(0, e.message.indexOf('\n'))}', FlxColor.RED);
+					    addTextToDebug('ERROR ($file) - ' + e.toString(), FlxColor.RED);
+						//addTextToDebug('ERROR ON LOADING ($file): ${e.message.substr(0, e.message.indexOf('\n'))}', FlxColor.RED);
 				newScript.destroy();
 				return;
 			}
@@ -3635,15 +3636,15 @@ class PlayState extends MusicBeatState
 
 					newScript.destroy();
 					hscriptArray.remove(newScript);
-					trace('failed to initialize tea interp!!! ($file)');
+					trace('failed to initialize sscript interp!!! ($file)');
 				}
-				else trace('initialized tea interp successfully: $file');
+				else trace('initialized sscript interp successfully: $file');
 			}
 			
 		}
-		catch(e)
+		catch(e:Dynamic)
 		{
-			addTextToDebug('ERROR ($file) - ' + e.message.substr(0, e.message.indexOf('\n')), FlxColor.RED);
+			addTextToDebug('ERROR ($file) - ' + e.toString(), FlxColor.RED);
 			var newScript:HScript = cast (SScript.global.get(file), HScript);
 			if(newScript != null)
 			{
