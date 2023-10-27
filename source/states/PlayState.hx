@@ -3612,9 +3612,9 @@ class PlayState extends MusicBeatState
 		try
 		{
 			var newScript:HScript = new HScript(null, file);
-			if(newScript.parsingException != null)
+			if(newScript.parsingExceptions != null)
 			{
-				addTextToDebug('ERROR ON LOADING: ${newScript.parsingException.message}', FlxColor.RED);
+				addTextToDebug('ERROR ON LOADING: ${newScript.parsingExceptions.message}', FlxColor.RED);
 				newScript.kill();
 				return;
 			}
