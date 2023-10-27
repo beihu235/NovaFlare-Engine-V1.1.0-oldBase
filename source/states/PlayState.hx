@@ -3457,7 +3457,7 @@ class PlayState extends MusicBeatState
 			if(script != null)
 			{
 				script.call('onDestroy');
-				script.kill();
+				script.destroy();
 			}
 
 		while (hscriptArray.length > 0)
@@ -3612,9 +3612,10 @@ class PlayState extends MusicBeatState
 		try
 		{
 			var newScript:HScript = new HScript(null, file);
+			@:privateAccess
 			if(newScript.parsingExceptions != null)
 			{
-				addTextToDebug('ERROR ON LOADING: ${newScript.parsingExceptions.message}', FlxColor.RED);
+				addTextToDebug('ERROR ON LOADING ($file): ${e.message.substr(0, e.message.indexOf('\n'))}', FlxColor.RED);
 				newScript.destroy();
 				return;
 			}
