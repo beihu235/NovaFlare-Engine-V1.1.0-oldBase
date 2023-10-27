@@ -32,9 +32,9 @@ class HScript extends SScript
 		{
 			hs.doScript(code);
 			@:privateAccess
-			if(hs.parsingException != null)
+			if(hs.parsingExceptions != null)
 			{
-				PlayState.instance.addTextToDebug('ERROR ON LOADING (${hs.origin}): ${hs.parsingException.message}', FlxColor.RED);
+				PlayState.instance.addTextToDebug('ERROR ON LOADING (${hs.origin}): ${hs.parsingExceptions.message}', FlxColor.RED);
 			}
 		}
 	}
@@ -292,7 +292,7 @@ class HScript extends SScript
 		});
 		#end
 	}
-
+    /*
 	override public function kill()
 	{
 		origin = null;
@@ -300,6 +300,7 @@ class HScript extends SScript
 
 		super.kill();
 	}
+	*/
 }
 
 class CustomFlxColor
