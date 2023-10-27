@@ -113,7 +113,7 @@
 	<haxelib name="hscript" if="HSCRIPT_ALLOWED"/>
 	<haxelib name="SScript" if="HSCRIPT_ALLOWED"/>
 	<define name="hscriptPos" if="HSCRIPT_ALLOWED"/>
-	<!--haxedef name="openflPos" /-->
+	<haxedef name="openflPos" if="desktop"/>
 	<haxelib name="androiddialogs" if="android" />
 	<haxelib name="devicelanguage" if="android" />
 
