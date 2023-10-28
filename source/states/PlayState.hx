@@ -3595,13 +3595,12 @@ class PlayState extends MusicBeatState
 	{
 		var scriptToLoad:String = Paths.modFolders(scriptFile);
 		if(!FileSystem.exists(scriptToLoad))
-			scriptToLoad = Paths.getPreloadPath(scriptFile);
-		
+			scriptToLoad = SUtil.getPath() + Paths.getPreloadPath(scriptFile);
+
 		if(FileSystem.exists(scriptToLoad))
 		{
-			for (script in hscriptArray)
-				if(script.interpName == scriptFile) return false;
-	
+			if (SScript.global.exists(scriptToLoad)) return false;
+
 			initHScript(scriptToLoad);
 			return true;
 		}
