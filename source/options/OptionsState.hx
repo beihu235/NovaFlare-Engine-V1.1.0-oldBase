@@ -689,8 +689,8 @@ class OptionsState extends MusicBeatSubstate
 							&& selectedOptionIndex != options[selectedCatIndex].options.length - 1
 							&& options[selectedCatIndex].options.length > 10 
 							&& selectedOptionIndex >= 5
-							&& selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5
-							&& !DOWNmoveFix)
+							&& (selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5 || DOWNmoveFix)
+							)
 						{
 							for (i in selectedCat.optionObjects.members)
 							{
@@ -709,7 +709,7 @@ class OptionsState extends MusicBeatSubstate
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
-						if (selectedOptionIndex == 6) UPmoveFix = true;
+						if (selectedOptionIndex == 5) UPmoveFix = true;
 						
 						selectedOptionIndex--;
 						
@@ -728,9 +728,9 @@ class OptionsState extends MusicBeatSubstate
 
 						if (selectedOptionIndex != 0 
     						&& options[selectedCatIndex].options.length > 10
-    						&& selectedOptionIndex >= 5
+    						&& (selectedOptionIndex >= 5 || UPmoveFix)
     						&& selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5
-    						&& !UPmoveFix)						
+    						)						
 						{
 							//if (selectedOptionIndex >= (options[selectedCatIndex].options.length - 1) / 2)
 								for (i in selectedCat.optionObjects.members)
