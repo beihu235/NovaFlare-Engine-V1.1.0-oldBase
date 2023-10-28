@@ -348,8 +348,8 @@ class PlayState extends MusicBeatState
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		CustomFadeTransition.nextCamera = camOther;
 		
-		camGame.width = camGame.width / 2;
-        camGame.height = camGame.height / 2;
+		camGame.width = 1280;
+        camGame.height = 720;
         
 		#if android
 		addAndroidControls();
