@@ -336,6 +336,9 @@ class PlayState extends MusicBeatState
 		camOther = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
+		
+		camGame.width = camGame.width * 2;
+        camGame.height = camGame.height * 2;
 
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
@@ -345,6 +348,9 @@ class PlayState extends MusicBeatState
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		CustomFadeTransition.nextCamera = camOther;
 		
+		camGame.width = camGame.width / 2;
+        camGame.height = camGame.height / 2;
+        
 		#if android
 		addAndroidControls();
 		MusicBeatState.androidc.visible = true;
@@ -706,6 +712,11 @@ class PlayState extends MusicBeatState
 					Paths.music(key);
 			}
 		}
+		
+		camGame.x = -camGame.width / 2;
+		camGame.y = -camGame.height / 2;
+		camGame.width = camGame.width * 2;
+        camGame.height = camGame.height * 2;
 
 		super.create();
 		Paths.clearUnusedMemory();
