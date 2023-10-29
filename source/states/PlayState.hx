@@ -336,12 +336,12 @@ class PlayState extends MusicBeatState
 		camOther = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
-		
+		/*
 		camGame.x = -640;
 		camGame.y = -360;
 		camGame.width = 2560;
         camGame.height = 1440;
-        
+        */
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
@@ -426,12 +426,12 @@ class PlayState extends MusicBeatState
 		girlfriendCameraOffset = stageData.camera_girlfriend;
 		if(girlfriendCameraOffset == null)
 			girlfriendCameraOffset = [0, 0];
-			
+			/*
 		camGame.x = 0;
 		camGame.y = 0;
 		camGame.width = 1280;
         camGame.height = 720;	
-
+        */
 		boyfriendGroup = new FlxSpriteGroup(BF_X, BF_Y);
 		dadGroup = new FlxSpriteGroup(DAD_X, DAD_Y);
 		gfGroup = new FlxSpriteGroup(GF_X, GF_Y);
