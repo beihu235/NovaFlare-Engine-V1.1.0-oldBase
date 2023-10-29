@@ -25,13 +25,12 @@ class AndroidDialogsExtend{
         AndroidDialogs.ShowAlertDialog(Title, Message, ConfirmName, CancelName);
     }
     
-    /*
-    function OtherFunctionGetResult():Void
+    
+    public static function getAlert():String
     {
-        //get string user selection
-        trace(AndroidDialogs.objHaxe.answerDialog);
+        return AndroidDialogs.objHaxe.answerDialog;
     }
-    */ //use AndroidDialogs.objHaxe.answerDialog get data
+     //use AndroidDialogs.objHaxe.answerDialog get data
     
     public static function OpenAlertSelect(Title:String, choose1:String, choose2:String, choose3:String, choose4:String, choose5:String)
     {
@@ -47,13 +46,12 @@ class AndroidDialogsExtend{
         */
         AndroidDialogs.ShowAlertSelectOption(Title, names_players);
     }
-    /*
-    function OtherFunctionGetResult():Void
+    
+    public static function getAlertSelect():Int
     {
-        //get string user selection
-        trace(AndroidDialogs.objHaxe.answerOptionSelected);
+        return AndroidDialogs.objHaxe.answerOptionSelected;
     }
-    */ //use AndroidDialogs.objHaxe.answerOptionSelected get data
+    //use AndroidDialogs.objHaxe.answerOptionSelected get data
     
     /*
     function AnyFuntion():Void
