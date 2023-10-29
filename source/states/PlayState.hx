@@ -331,7 +331,7 @@ class PlayState extends MusicBeatState
         if (ClientPrefs.data.playOpponent) cpuControlled = ClientPrefs.data.botOpponentFix;
         
 		// var gameCam:FlxCamera = FlxG.camera;
-		camGame = new FlxCamera();
+		camGame = new FlxCamera(-640, -360, 2560, 1440);
 		camHUD = new FlxCamera();
 		camOther = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
@@ -426,12 +426,12 @@ class PlayState extends MusicBeatState
 		girlfriendCameraOffset = stageData.camera_girlfriend;
 		if(girlfriendCameraOffset == null)
 			girlfriendCameraOffset = [0, 0];
-			/*
+	
 		camGame.x = 0;
 		camGame.y = 0;
 		camGame.width = 1280;
         camGame.height = 720;	
-        */
+        
 		boyfriendGroup = new FlxSpriteGroup(BF_X, BF_Y);
 		dadGroup = new FlxSpriteGroup(DAD_X, DAD_Y);
 		gfGroup = new FlxSpriteGroup(GF_X, GF_Y);
