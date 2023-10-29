@@ -337,19 +337,18 @@ class PlayState extends MusicBeatState
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
 		
-		camGame.width = camGame.width * 2;
-        camGame.height = camGame.height * 2;
-
+		camGame.x = -640;
+		camGame.y = -360;
+		camGame.width = 2560;
+        camGame.height = 1440;
+        
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
-		CustomFadeTransition.nextCamera = camOther;
-		
-		camGame.width = 1280;
-        camGame.height = 720;
+		CustomFadeTransition.nextCamera = camOther;		
         
 		#if android
 		addAndroidControls();
@@ -427,10 +426,17 @@ class PlayState extends MusicBeatState
 		girlfriendCameraOffset = stageData.camera_girlfriend;
 		if(girlfriendCameraOffset == null)
 			girlfriendCameraOffset = [0, 0];
+			
+		camGame.x = 0;
+		camGame.y = 0;
+		camGame.width = 1280;
+        camGame.height = 720;	
 
 		boyfriendGroup = new FlxSpriteGroup(BF_X, BF_Y);
 		dadGroup = new FlxSpriteGroup(DAD_X, DAD_Y);
 		gfGroup = new FlxSpriteGroup(GF_X, GF_Y);
+		
+		
 
 		switch (curStage)
 		{
@@ -444,6 +450,8 @@ class PlayState extends MusicBeatState
 			case 'schoolEvil': new states.stages.SchoolEvil(); //Week 6 - Thorns
 			case 'tank': new states.stages.Tank(); //Week 7 - Ugh, Guns, Stress
 		}
+		
+		
 
 		if(isPixelStage) {
 			introSoundsSuffix = '-pixel';
@@ -591,9 +599,14 @@ class PlayState extends MusicBeatState
 		playerStrums = new FlxTypedGroup<StrumNote>();
 
 		generateSong(SONG.song);
-
+        
+        camGame.x = -640;
+		camGame.y = -360;
+		camGame.width = 2560;
+        camGame.height = 1440;
+        
 		camFollow = new FlxObject(0, 0, 1, 1);
-		camFollow.setPosition(camPos.x / 2, camPos.y / 2);
+		camFollow.setPosition(camPos.x, camPos.y);
 		camPos.put();
 				
 		if (prevCamFollow != null)
@@ -609,6 +622,11 @@ class PlayState extends MusicBeatState
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 		moveCameraSection();
+		
+		camGame.x = 0;
+		camGame.y = 0;
+		camGame.width = 1280;
+        camGame.height = 720;	
 
 		
 		strumLineNotes.cameras = [camHUD];
@@ -662,6 +680,8 @@ class PlayState extends MusicBeatState
 					initHScript(folder + file);
 			}
 		#end
+		
+		
 
 		startCallback();
 		RecalculateRating();
@@ -713,10 +733,10 @@ class PlayState extends MusicBeatState
 			}
 		}
 		
-		camGame.x = -camGame.width / 2;
-		camGame.y = -camGame.height / 2;
-		camGame.width = camGame.width * 2;
-        camGame.height = camGame.height * 2;
+		camGame.x = -640;
+		camGame.y = -360;
+		camGame.width = 2560;
+        camGame.height = 1440;
 
 		super.create();
 		Paths.clearUnusedMemory();
