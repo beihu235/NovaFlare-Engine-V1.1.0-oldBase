@@ -47,7 +47,7 @@ class AndroidDialogsExtend{
         AndroidDialogs.ShowAlertSelectOption(Title, names_players);
     }
     
-    public static function getAlertSelect():Int
+    public static function getAlertSelect():String
     {
         return AndroidDialogs.objHaxe.answerOptionSelected;
     }
