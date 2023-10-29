@@ -203,7 +203,7 @@ class HScript extends SScript
 	{
 		#if LUA_ALLOWED
 		funk.addLocalCallback("runHaxeCode", function(codeToRun:String, ?varsToBring:Any = null, ?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):Dynamic {
-			var retVal:TeaCall = null;
+			var retVal:SCall = null;
 			#if SScript
 			initHaxeModuleCode(funk, codeToRun);
 			if(varsToBring != null)
