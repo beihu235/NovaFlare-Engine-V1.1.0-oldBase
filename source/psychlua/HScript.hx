@@ -202,7 +202,7 @@ class HScript extends SScript
 	public static function implement(funk:FunkinLua)
 	{
 		#if LUA_ALLOWED
-		funk.addLocalCallback(lua, "runHaxeCode", function(codeToRun:String) {
+		funk.addLocalCallback("runHaxeCode", function(codeToRun:String) {
 			var retVal:Dynamic = null;
 
 			#if SScript
@@ -221,7 +221,7 @@ class HScript extends SScript
 			return retVal;
 		});
 
-		funk.addLocalCallback(lua, "addHaxeLibrary", function(libName:String, ?libPackage:String = '') {
+		funk.addLocalCallback("addHaxeLibrary", function(libName:String, ?libPackage:String = '') {
 			#if SScript
 			initHaxeModule();
 			try {
