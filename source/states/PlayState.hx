@@ -2390,7 +2390,7 @@ class PlayState extends MusicBeatState
 				}
 				catch(e:Dynamic)
 				{
-					addTextToDebug('ERROR ("Set Property" Event) - ' + e.message.substr(0, e.message.indexOf('\n')), FlxColor.RED);
+					addTextToDebug('ERROR ("Set Property" Event) - $e', FlxColor.RED);
 				}
 			
 			case 'Play Sound':
@@ -3640,17 +3640,51 @@ class PlayState extends MusicBeatState
 
 	public function initHScript(file:String)
 	{
+		function doerror(m:String) {
+			addTextToDebug(m, FlxColor.RED);
+			trace(m);
+		}
 		try
 		{
-			var newScript:HScript = new HScript(file);
-			newScript.doString(File.getContent(file));
+			var newScript:HScript = new HScript(null, file);
+			@:privateAccess
+			if(newScript.parsingExceptions != null && newScript.parsingExceptions.length > 0)
+			{
+				@:privateAccess
+				for (e in newScript.parsingExceptions)
+					if(e != null)
+						doerror('ERROR ON LOADING - $e');
+				newScript.destroy();
+				return;
+			}
+
 			hscriptArray.push(newScript);
-			if(newScript.exists('onCreate')) newScript.call('onCreate');
+			if(newScript.exists('onCreate'))
+			{
+				var callValue = newScript.call('onCreate');
+				if(!callValue.succeeded)
+				{
+					for (e in callValue.exceptions)
+						if (e != null)
+							doerror('ERROR (onCreate) - $e');
+
+					newScript.destroy();
+					hscriptArray.remove(newScript);
+					return;
+				}
+			}
+
 			trace('initialized sscript interp successfully: $file');
 		}
-		catch(e:Dynamic)
+		catch(e)
 		{
-			addTextToDebug('ERROR ($file) - ' + e.toString(), FlxColor.RED);
+			doerror('ERROR - $e');
+			var newScript:HScript = cast (SScript.global.get(file), HScript);
+			if(newScript != null)
+			{
+				newScript.destroy();
+				hscriptArray.remove(newScript);
+			}
 		}
 	}
 	#end
@@ -3726,7 +3760,7 @@ class PlayState extends MusicBeatState
 				{
 					var e = callValue.exceptions[0];
 					if(e != null)
-						FunkinLua.luaTrace('ERROR (${script.origin}: ${callValue.calledFunction}) - ' + e.message.substr(0, e.message.indexOf('\n') + 1), true, false, FlxColor.RED);
+						FunkinLua.luaTrace('ERROR (${callValue.calledFunction}) - $e', true, false, FlxColor.RED);
 				}
 				else
 				{
