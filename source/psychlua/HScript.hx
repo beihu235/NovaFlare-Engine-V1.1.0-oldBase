@@ -203,8 +203,8 @@ class HScript extends SScript
 	{
 		#if LUA_ALLOWED
 		funk.addLocalCallback("runHaxeCode", function(codeToRun:String, ?varsToBring:Any = null, ?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):Dynamic {
-			var retVal:SCall = null;
-			#if (SScript >= "3.0.0")
+			var retVal:TeaCall = null;
+			#if SScript
 			initHaxeModuleCode(funk, codeToRun);
 			if(varsToBring != null)
 			{
@@ -221,12 +221,15 @@ class HScript extends SScript
 					return (retVal.returnValue == null || LuaUtils.isOfTypes(retVal.returnValue, [Bool, Int, Float, String, Array])) ? retVal.returnValue : null;
 
 				var e = retVal.exceptions[0];
+				var calledFunc:String = if(funk.hscript.origin == funk.lastCalledFunction) funcToRun else funk.lastCalledFunction;
 				if (e != null)
-					FunkinLua.luaTrace(funk.hscript.origin + ":" + funk.lastCalledFunction + " - " + e, false, false, FlxColor.RED);
+					FunkinLua.luaTrace(funk.hscript.origin + ":" + calledFunc + " - " + e, false, false, FlxColor.RED);
 				return null;
 			}
 			else if (funk.hscript.returnValue != null)
+			{
 				return funk.hscript.returnValue;
+			}
 			#else
 			FunkinLua.luaTrace("runHaxeCode: HScript isn't supported on this platform!", false, false, FlxColor.RED);
 			#end
