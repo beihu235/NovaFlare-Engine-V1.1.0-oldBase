@@ -3457,7 +3457,7 @@ class PlayState extends MusicBeatState
 			if(script != null)
 			{
 				script.call('onDestroy');
-				script.kill();
+				script.destroy();
 			}
 
 		while (hscriptArray.length > 0)
@@ -3594,14 +3594,14 @@ class PlayState extends MusicBeatState
 	public function startHScriptsNamed(scriptFile:String)
 	{
 		var scriptToLoad:String = Paths.modFolders(scriptFile);
-		if(!FileSystem.exists(scriptToLoad))
+		if(!FileSystem.exists(scriptFile))
 			scriptToLoad = SUtil.getPath() + Paths.getPreloadPath(scriptFile);
 		
-		if(FileSystem.exists(scriptToLoad))
+		if(FileSystem.exists(scriptFile))
 		{
-			if (SScript.global.exists(scriptToLoad)) return false;
-	
-			initHScript(scriptToLoad);
+			if (SScript.global.exists(scriptFile)) return false;
+
+			initHScript(scriptFile);
 			return true;
 		}
 		return false;
@@ -3611,41 +3611,15 @@ class PlayState extends MusicBeatState
 	{
 		try
 		{
-			var newScript:HScript = new HScript(null, file);
-			if(newScript.parsingException != null)
-			{
-				addTextToDebug('ERROR ON LOADING: ${newScript.parsingException.message}', FlxColor.RED);
-				newScript.kill();
-				return;
-			}
-
+			var newScript:HScript = new HScript(file);
+			newScript.doString(File.getContent(file));
 			hscriptArray.push(newScript);
-			if(newScript.exists('onCreate'))
-			{
-				var callValue = newScript.call('onCreate');
-				if(!callValue.succeeded)
-				{
-					for (e in callValue.exceptions)
-						if (e != null)
-							addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, e.message.indexOf('\n'))}', FlxColor.RED);
-
-					newScript.kill();
-					hscriptArray.remove(newScript);
-					trace('failed to initialize tea interp!!! ($file)');
-				}
-				else trace('initialized tea interp successfully: $file');
-			}
-			
+			if(newScript.exists('onCreate')) newScript.call('onCreate');
+			trace('initialized sscript interp successfully: $file');
 		}
-		catch(e)
+		catch(e:Dynamic)
 		{
-			addTextToDebug('ERROR ($file) - ' + e.message.substr(0, e.message.indexOf('\n')), FlxColor.RED);
-			var newScript:HScript = cast (SScript.global.get(file), HScript);
-			if(newScript != null)
-			{
-				newScript.kill();
-				hscriptArray.remove(newScript);
-			}
+			addTextToDebug('ERROR ($file) - ' + e.toString(), FlxColor.RED);
 		}
 	}
 	#end
