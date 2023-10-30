@@ -3599,9 +3599,8 @@ class PlayState extends MusicBeatState
 		
 		if(FileSystem.exists(scriptToLoad))
 		{
-			for (script in hscriptArray)
-				if(script.interpName == scriptFile) return false;
-	
+			if (SScript.global.exists(scriptFile)) return false;
+
 			initHScript(scriptToLoad);
 			return true;
 		}
