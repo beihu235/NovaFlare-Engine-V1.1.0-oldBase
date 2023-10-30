@@ -331,25 +331,20 @@ class PlayState extends MusicBeatState
         if (ClientPrefs.data.playOpponent) cpuControlled = ClientPrefs.data.botOpponentFix;
         
 		// var gameCam:FlxCamera = FlxG.camera;
-		camGame = new FlxCamera(-640, -360, 2560, 1440);
+		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
 		camOther = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
-		/*
-		camGame.x = -640;
-		camGame.y = -360;
-		camGame.width = 2560;
-        camGame.height = 1440;
-        */
+
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
-		CustomFadeTransition.nextCamera = camOther;		
-        
+		CustomFadeTransition.nextCamera = camOther;
+		
 		#if android
 		addAndroidControls();
 		MusicBeatState.androidc.visible = true;
@@ -426,17 +421,10 @@ class PlayState extends MusicBeatState
 		girlfriendCameraOffset = stageData.camera_girlfriend;
 		if(girlfriendCameraOffset == null)
 			girlfriendCameraOffset = [0, 0];
-	
-		camGame.x = 0;
-		camGame.y = 0;
-		camGame.width = 1280;
-        camGame.height = 720;	
-        
+
 		boyfriendGroup = new FlxSpriteGroup(BF_X, BF_Y);
 		dadGroup = new FlxSpriteGroup(DAD_X, DAD_Y);
 		gfGroup = new FlxSpriteGroup(GF_X, GF_Y);
-		
-		
 
 		switch (curStage)
 		{
@@ -450,8 +438,6 @@ class PlayState extends MusicBeatState
 			case 'schoolEvil': new states.stages.SchoolEvil(); //Week 6 - Thorns
 			case 'tank': new states.stages.Tank(); //Week 7 - Ugh, Guns, Stress
 		}
-		
-		
 
 		if(isPixelStage) {
 			introSoundsSuffix = '-pixel';
@@ -599,12 +585,7 @@ class PlayState extends MusicBeatState
 		playerStrums = new FlxTypedGroup<StrumNote>();
 
 		generateSong(SONG.song);
-        
-        camGame.x = -640;
-		camGame.y = -360;
-		camGame.width = 2560;
-        camGame.height = 1440;
-        
+
 		camFollow = new FlxObject(0, 0, 1, 1);
 		camFollow.setPosition(camPos.x, camPos.y);
 		camPos.put();
@@ -622,11 +603,6 @@ class PlayState extends MusicBeatState
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 		moveCameraSection();
-		
-		camGame.x = 0;
-		camGame.y = 0;
-		camGame.width = 1280;
-        camGame.height = 720;	
 
 		
 		strumLineNotes.cameras = [camHUD];
@@ -680,8 +656,6 @@ class PlayState extends MusicBeatState
 					initHScript(folder + file);
 			}
 		#end
-		
-		
 
 		startCallback();
 		RecalculateRating();
@@ -732,11 +706,6 @@ class PlayState extends MusicBeatState
 					Paths.music(key);
 			}
 		}
-		
-		camGame.x = -640;
-		camGame.y = -360;
-		camGame.width = 2560;
-        camGame.height = 1440;
 
 		super.create();
 		Paths.clearUnusedMemory();
@@ -2390,7 +2359,7 @@ class PlayState extends MusicBeatState
 				}
 				catch(e:Dynamic)
 				{
-					addTextToDebug('ERROR ("Set Property" Event) - $e', FlxColor.RED);
+					addTextToDebug('ERROR ("Set Property" Event) - ' + e.message.substr(0, e.message.indexOf('\n')), FlxColor.RED);
 				}
 			
 			case 'Play Sound':
@@ -3627,11 +3596,12 @@ class PlayState extends MusicBeatState
 		var scriptToLoad:String = Paths.modFolders(scriptFile);
 		if(!FileSystem.exists(scriptToLoad))
 			scriptToLoad = SUtil.getPath() + Paths.getPreloadPath(scriptFile);
-
+		
 		if(FileSystem.exists(scriptToLoad))
 		{
-			if (SScript.global.exists(scriptToLoad)) return false;
-
+			for (script in hscriptArray)
+				if(script.interpName == scriptFile) return false;
+	
 			initHScript(scriptToLoad);
 			return true;
 		}
@@ -3640,51 +3610,17 @@ class PlayState extends MusicBeatState
 
 	public function initHScript(file:String)
 	{
-		function doerror(m:String) {
-			addTextToDebug(m, FlxColor.RED);
-			trace(m);
-		}
 		try
 		{
-			var newScript:HScript = new HScript(null, file);
-			@:privateAccess
-			if(newScript.parsingExceptions != null && newScript.parsingExceptions.length > 0)
-			{
-				@:privateAccess
-				for (e in newScript.parsingExceptions)
-					if(e != null)
-						doerror('ERROR ON LOADING - $e');
-				newScript.destroy();
-				return;
-			}
-
+			var newScript:HScript = new HScript(file);
+			newScript.doString(File.getContent(file));
 			hscriptArray.push(newScript);
-			if(newScript.exists('onCreate'))
-			{
-				var callValue = newScript.call('onCreate');
-				if(!callValue.succeeded)
-				{
-					for (e in callValue.exceptions)
-						if (e != null)
-							doerror('ERROR (onCreate) - $e');
-
-					newScript.destroy();
-					hscriptArray.remove(newScript);
-					return;
-				}
-			}
-
+			if(newScript.exists('onCreate')) newScript.call('onCreate');
 			trace('initialized sscript interp successfully: $file');
 		}
-		catch(e)
+		catch(e:Dynamic)
 		{
-			doerror('ERROR - $e');
-			var newScript:HScript = cast (SScript.global.get(file), HScript);
-			if(newScript != null)
-			{
-				newScript.destroy();
-				hscriptArray.remove(newScript);
-			}
+			addTextToDebug('ERROR ($file) - ' + e.toString(), FlxColor.RED);
 		}
 	}
 	#end
@@ -3760,7 +3696,7 @@ class PlayState extends MusicBeatState
 				{
 					var e = callValue.exceptions[0];
 					if(e != null)
-						FunkinLua.luaTrace('ERROR (${callValue.calledFunction}) - $e', true, false, FlxColor.RED);
+						FunkinLua.luaTrace('ERROR (${script.origin}: ${callValue.calledFunction}) - ' + e.message.substr(0, e.message.indexOf('\n') + 1), true, false, FlxColor.RED);
 				}
 				else
 				{
