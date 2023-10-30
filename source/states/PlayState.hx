@@ -3611,11 +3611,42 @@ class PlayState extends MusicBeatState
 	{
 		try
 		{
+		    /*
 			var newScript:HScript = new HScript(file);
 			newScript.doString(File.getContent(file));
 			hscriptArray.push(newScript);
 			if(newScript.exists('onCreate')) newScript.call('onCreate');
 			trace('initialized sscript interp successfully: $file');
+			*/
+			var newScript:HScript = new HScript(null, file);
+			newScript.doString(File.getContent(file));
+			if(newScript.parsingException != null)
+			{
+				addTextToDebug('ERROR ON LOADING: ${newScript.parsingException.message}', FlxColor.RED);
+				newScript.kill();
+				return;
+			}
+
+			hscriptArray.push(newScript);
+			if(newScript.exists('onCreate')) newScript.call('onCreate');
+			trace('initialized sscript interp successfully: $file');
+			/*
+			if(newScript.exists('onCreate'))
+			{
+				var callValue = newScript.call('onCreate');
+				if(!callValue.succeeded)
+				{
+					for (e in callValue.exceptions)
+						if (e != null)
+							addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, e.message.indexOf('\n'))}', FlxColor.RED);
+
+					newScript.kill();
+					hscriptArray.remove(newScript);
+					trace('failed to initialize tea interp!!! ($file)');
+				}
+				else trace('initialized tea interp successfully: $file');
+			}
+			*/
 		}
 		catch(e:Dynamic)
 		{
