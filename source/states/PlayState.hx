@@ -3618,20 +3618,12 @@ class PlayState extends MusicBeatState
 			if(newScript.exists('onCreate')) newScript.call('onCreate');
 			trace('initialized sscript interp successfully: $file');
 			*/
-			var newScript:HScript = new HScript(null, file);
+			var newScript:HScript = new HScript(file);
 			newScript.doString(File.getContent(file));
-			if(newScript.parsingExceptions != null)
-			{
-				addTextToDebug('ERROR ON LOADING: ${newScript.parsingException.message}', FlxColor.RED);
-				newScript.destroy();
-				hscriptArray.remove(newScript);
-				return;
-			}
-
 			hscriptArray.push(newScript);
-			if(newScript.exists('onCreate')) newScript.call('onCreate');
-			trace('initialized sscript interp successfully: $file');
-			/*
+			//if(newScript.exists('onCreate')) newScript.call('onCreate');
+			//trace('initialized sscript interp successfully: $file');
+			
 			if(newScript.exists('onCreate'))
 			{
 				var callValue = newScript.call('onCreate');
@@ -3639,15 +3631,17 @@ class PlayState extends MusicBeatState
 				{
 					for (e in callValue.exceptions)
 						if (e != null)
-							addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, e.message.indexOf('\n'))}', FlxColor.RED);
+							addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, e.message.indexOf('\n') + 1)}', FlxColor.RED);
 
-					newScript.kill();
+					newScript.destroy();
 					hscriptArray.remove(newScript);
 					trace('failed to initialize tea interp!!! ($file)');
 				}
 				else trace('initialized tea interp successfully: $file');
 			}
-			*/
+			
+			
+			
 		}
 		catch(e:Dynamic)
 		{
