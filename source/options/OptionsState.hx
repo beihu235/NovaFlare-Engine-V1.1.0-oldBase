@@ -119,7 +119,7 @@ class OptionsState extends MusicBeatState
 	private static var saveSelectedCatIndex = 0;
 	private static var saveSelectedOptionIndex = 0;
 
-	public var isInCat:Bool = false;
+	public var isInMain:Bool = false; //true 是大类，false是小类
 
 	public var options:Array<OptionCata>;
 
@@ -336,7 +336,7 @@ class OptionsState extends MusicBeatState
 		add(descBack);
 		add(descText);
 
-		isInCat = isReset ? false : true;
+		isInMain = isReset ? false : true;
 		switchCat(selectedCat);
 		selectedCatIndex = isReset ? 2 : 0;
 		selectedOption = isReset ? selectedCat.options[0] : selectedCat.options[0];
@@ -419,7 +419,7 @@ class OptionsState extends MusicBeatState
 
 			selectedOptionIndex = 0;
 
-			if (!isInCat)
+			if (!isInMain)
 				selectOption(selectedOption);
 
 			for (i in selectedCat.optionObjects.members)
@@ -442,7 +442,7 @@ class OptionsState extends MusicBeatState
 
 		selectedOption = option;
 
-		if (!isInCat)
+		if (!isInMain)
 		{
 			object.text = option.getValue();
 
@@ -541,7 +541,7 @@ class OptionsState extends MusicBeatState
 
 		try
 		{
-			if (isInCat)
+			if (isInMain)
 			{
 				descText.text = "Please select a category";
 				if (right)
@@ -575,7 +575,7 @@ class OptionsState extends MusicBeatState
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 					selectedOptionIndex = 0;
-					isInCat = false;
+					isInMain = false;
 					selectOption(selectedCat.options[0]);
 				}
 
@@ -800,7 +800,7 @@ class OptionsState extends MusicBeatState
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();													
 						
 						if (selectedCat.middle){
-						    isInCat = false;
+						    isInMain = false;
 							switchCat(options[saveSelectedCatIndex]);        					        					
         					selectOption(selectedCat.options[saveSelectedOptionIndex]);	
         					selectedOptionIndex = saveSelectedOptionIndex;
@@ -816,7 +816,7 @@ class OptionsState extends MusicBeatState
         					saveSelectedCatIndex = 0;
 						}
 						else{
-						    isInCat = true;
+						    isInMain = true;
 						}
 						
 						if (selectedCat.optionObjects != null){ //别删这个if包含的代码，会出问题
@@ -842,7 +842,7 @@ class OptionsState extends MusicBeatState
 		
 		//descText.text = '' + ClientPrefs.data.language;
 		
-		if (selectedCat != null && !isInCat)
+		if (selectedCat != null && !isInMain)
 		{
 			for (i in selectedCat.optionObjects.members)
 			{

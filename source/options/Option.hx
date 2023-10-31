@@ -554,7 +554,7 @@ class Language extends Option
 		ClientPrefs.data.language = OptionsHelpers.languageArray.length -1;
 		
 		FlxTransitionableState.skipNextTransIn = true;
-		MusicBeatState.switchState(new options.OptionsState(false,true)); //reset substate for real
+		MusicBeatState.switchState(new options.OptionsState()); //reset substate for real
 		
 		return true;
 	}
@@ -566,7 +566,7 @@ class Language extends Option
 		ClientPrefs.data.language = 0;
 		
 		FlxTransitionableState.skipNextTransIn = true;
-		MusicBeatState.switchState(new options.OptionsState(false,true));	//reset substate for real		
+		MusicBeatState.switchState(new options.OptionsState());	//reset substate for real		
 		        
 		return true;
 	}
