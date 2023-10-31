@@ -32,7 +32,7 @@ class PauseSubState extends MusicBeatSubstate
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
 	
-	var bgColor:Array<Int> = [
+	var menuColor:Array<Int> = [
 	    0xFFFF26C0,
 		0xFFAA0044,
 		0xFFFF2E00,
@@ -43,7 +43,7 @@ class PauseSubState extends MusicBeatSubstate
 		0xFF3C00C9
 	];
 	
-	var bgShadowColor:Array<Int> = [
+	var menuShadowColor:Array<Int> = [
 	    0xFFCA0083,
 		0xFF77002F,
 		0xFFBF2300,
