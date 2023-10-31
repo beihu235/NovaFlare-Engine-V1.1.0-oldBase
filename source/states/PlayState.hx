@@ -2047,7 +2047,7 @@ class PlayState extends MusicBeatState
 			MusicBeatState.androidc.y = 720;
 			//MusicBeatState.androidc.visible = true;
 		#end
-		openSubState(new OptionsState());
+		//openSubState(new OptionsState());
 	}
 	
 	function openChartEditor()
