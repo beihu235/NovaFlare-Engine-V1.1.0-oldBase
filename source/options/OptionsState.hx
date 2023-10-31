@@ -103,7 +103,7 @@ class OptionCata extends FlxSprite
 	}
 }
 
-class OptionsState extends MusicBeatSubstate
+class OptionsState extends MusicBeatState
 {
 	public static var instance:OptionsState;
 
@@ -116,21 +116,21 @@ class OptionsState extends MusicBeatSubstate
 	public var selectedCatIndex = 0;
 	public var selectedOptionIndex = 0;
 	
-	public var saveSelectedCatIndex = 0;
-	public var saveSelectedOptionIndex = 0;
+	private static var saveSelectedCatIndex = 0;
+	private static var saveSelectedOptionIndex = 0;
 
 	public var isInCat:Bool = false;
 
 	public var options:Array<OptionCata>;
 
-	public static var isInPause = false;	
-	public static var langChange = false;
+	public static var onPlayState = false;	
+	public var isReset = false;
 
 	var restoreSettingsText:FlxText;
 
 	public var shownStuff:FlxTypedGroup<FlxText>;
 
-	public static var visibleRange = [114, 640];
+	public var visibleRange = [114, 640];
 
 	var startSong = true;
 	
@@ -149,13 +149,15 @@ class OptionsState extends MusicBeatSubstate
 	public static var currentColorAgain:Int = 0;    
 
 	public var optionsImage:FlxSprite;
-	public function new(pauseMenu:Bool = false, languageChange:Bool = false)
+	/*
+	public function new(pauseMenu:Bool = false, reOpen:Bool = false)
 	{
 		super();
 
-		isInPause = pauseMenu;
-		langChange = languageChange;
+		onPlayState = pauseMenu;
+		isReset = languageChange;
 	}
+	*/
 
 	public var menu:FlxTypedGroup<FlxSprite>;
 
@@ -163,16 +165,7 @@ class OptionsState extends MusicBeatSubstate
 	public var descBack:FlxSprite;
     
 	override function create()
-	{
-
-		/*if (!isInPause)
-		  if(!ControlsSubState.fromcontrols)
-			if(startSong)
-				FlxG.sound.playMusic(Paths.music('optionsSong'));
-			else
-				startSong = true;
-        */                      
-        
+	{     
 		options = [
 			new OptionCata(50, 40, OptionsName.setGameplay(), [				
 				new DownscrollOption(OptionsName.setDownscrollOption()),
@@ -284,7 +277,7 @@ class OptionsState extends MusicBeatSubstate
 		descBack.scrollFactor.set();
 		menu.add(descBack);
         
-		if (isInPause)
+		if (onPlayState)
 		{
 			var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 			bg.alpha = 0;
@@ -314,9 +307,9 @@ class OptionsState extends MusicBeatSubstate
 		
 		}
 
-		selectedCat = langChange ? options[2] : options[0];
+		selectedCat = isReset ? options[2] : options[0];
 
-		//selectedOption = langChange ? selectedCat.options[2] : selectedCat.options[0];
+		//selectedOption = isReset ? selectedCat.options[2] : selectedCat.options[0];
 
 		add(menu);
 
@@ -343,11 +336,11 @@ class OptionsState extends MusicBeatSubstate
 		add(descBack);
 		add(descText);
 
-		isInCat = langChange ? false : true;
+		isInCat = isReset ? false : true;
 		switchCat(selectedCat);
-		selectedCatIndex = langChange ? 2 : 0;
-		selectedOption = langChange ? selectedCat.options[0] : selectedCat.options[0];
-		selectedOptionIndex = langChange ? 0 : 0;
+		selectedCatIndex = isReset ? 2 : 0;
+		selectedOption = isReset ? selectedCat.options[0] : selectedCat.options[0];
+		selectedOptionIndex = isReset ? 0 : 0;
 		//相同变量值仅仅是为了以后好开发
         
         var resetText = 'Press' +  #if android ' C' #else ' Reset' #end + ' to reset settings';
@@ -588,7 +581,7 @@ class OptionsState extends MusicBeatSubstate
 
 				if(reset)
 				{
-					if (!isInPause)
+					if (!onPlayState)
 					{
 						resetOptions();
 						restoreSettingsText.text = 'Settings restored // Restarting game';
@@ -608,7 +601,7 @@ class OptionsState extends MusicBeatSubstate
 
 				if (back)
 				{
-					if (!isInPause) {
+					if (!onPlayState) {
 					    ClientPrefs.saveSettings();
 					    FlxTransitionableState.skipNextTransIn = true;
 			            FlxTransitionableState.skipNextTransOut = true;
@@ -774,7 +767,7 @@ class OptionsState extends MusicBeatSubstate
 
 					if(reset)
 					{
-						if (!isInPause)
+						if (!onPlayState)
 						{
 							resetOptions();
 							restoreSettingsText.text = 'Settings restored // Restarting game';

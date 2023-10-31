@@ -91,7 +91,7 @@ class Judgement extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -100,7 +100,7 @@ class Judgement extends Option
 
 	public override function press():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		OptionsState.instance.saveSelectedOptionIndex = OptionsState.instance.selectedOptionIndex;
 		OptionsState.instance.saveSelectedCatIndex = OptionsState.instance.selectedCatIndex;
@@ -123,7 +123,7 @@ class OffsetThing extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -131,7 +131,7 @@ class OffsetThing extends Option
 
 	public override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.noteOffset--;
 		display = updateDisplay();
@@ -140,7 +140,7 @@ class OffsetThing extends Option
 
 	public override function right():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.noteOffset++;
 		display = updateDisplay();
@@ -320,7 +320,7 @@ class DownscrollOption extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -328,7 +328,7 @@ class DownscrollOption extends Option
 
 	public override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.downScroll = !ClientPrefs.data.downScroll;
 		display = updateDisplay();
@@ -407,7 +407,7 @@ class HideHud extends Option
 	public function new(desc:String)
 	{
 		super();
-        //if (OptionsState.isInPause)
+        //if (OptionsState.onPlayState)
 		//	description = "This option cannot be toggled in the pause menu.";
 		//else
 			description = desc;
@@ -416,7 +416,7 @@ class HideHud extends Option
 
 	public override function left():Bool
 	{
-        //if (OptionsState.isInPause)
+        //if (OptionsState.onPlayState)
 		//	return false;
 		ClientPrefs.data.hideHud = !ClientPrefs.data.hideHud;
 
@@ -609,7 +609,7 @@ class AntialiasingOption extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -617,7 +617,7 @@ class AntialiasingOption extends Option
 
 	public override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.antialiasing = !ClientPrefs.data.antialiasing;
             onChangeAntiAliasing();
@@ -799,7 +799,7 @@ class QualityLow extends Option
 	public function new(desc:String)
 	{
 		super();
-              if (OptionsState.isInPause)
+              if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -807,7 +807,7 @@ class QualityLow extends Option
 
 	public override function left():Bool
 	{
-             		if (OptionsState.isInPause)
+             		if (OptionsState.onPlayState)
 			return false;
         ClientPrefs.data.lowQuality = !ClientPrefs.data.lowQuality;
 		display = updateDisplay();
@@ -896,7 +896,7 @@ class FPSRainbowOption extends Option
 	public function new(desc:String)
 	{
 		super();
-              if (OptionsState.isInPause)
+              if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -904,7 +904,7 @@ class FPSRainbowOption extends Option
 
 	public override function left():Bool
 	{
-        if (OptionsState.isInPause)
+        if (OptionsState.onPlayState)
 			return false;
         ClientPrefs.data.rainbowFPS = !ClientPrefs.data.rainbowFPS;
 		display = updateDisplay();
@@ -1047,7 +1047,7 @@ class MiddleScrollOption extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -1055,7 +1055,7 @@ class MiddleScrollOption extends Option
 
 	public override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.middleScroll = !ClientPrefs.data.middleScroll;
 		display = updateDisplay();
@@ -1080,7 +1080,7 @@ class NoteskinOption extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -1088,7 +1088,7 @@ class NoteskinOption extends Option
 
 	public override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.noteSkinNum--;
 		if (ClientPrefs.data.noteSkinNum < 0)
@@ -1100,7 +1100,7 @@ class NoteskinOption extends Option
 
 	public override function right():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.noteSkinNum++;
 		if (ClientPrefs.data.noteSkinNum > OptionsHelpers.noteskinArray.length - 1)
@@ -1252,7 +1252,7 @@ class SustainsAlpha extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -1261,7 +1261,7 @@ class SustainsAlpha extends Option
 
 	override function right():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.susTransper += 0.1;
 
@@ -1272,7 +1272,7 @@ class SustainsAlpha extends Option
 
 	override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.susTransper -= 0.1;
 
@@ -1328,7 +1328,7 @@ class ShadersOption extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -1336,7 +1336,7 @@ class ShadersOption extends Option
 
 	public override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.shaders = !ClientPrefs.data.shaders;
 		display = updateDisplay();
@@ -1360,7 +1360,7 @@ class GPUcacheOption extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -1368,7 +1368,7 @@ class GPUcacheOption extends Option
 
 	public override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.cacheOnGPU = !ClientPrefs.data.cacheOnGPU;
 		display = updateDisplay();
@@ -1455,7 +1455,7 @@ class DisableNoteRGB extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -1463,7 +1463,7 @@ class DisableNoteRGB extends Option
 
 	public override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.disableNoteRGB = !ClientPrefs.data.disableNoteRGB;
 		display = updateDisplay();
@@ -1487,7 +1487,7 @@ class DisableSplashRGB extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -1495,7 +1495,7 @@ class DisableSplashRGB extends Option
 
 	public override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.disableSplashRGB = !ClientPrefs.data.disableSplashRGB;
 		display = updateDisplay();
@@ -1662,7 +1662,7 @@ class DiscordRPC extends Option
 
 	public override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.discordRPC = !ClientPrefs.data.discordRPC;
 		display = updateDisplay();
@@ -1687,7 +1687,7 @@ class FilpChart extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -1695,7 +1695,7 @@ class FilpChart extends Option
 
 	public override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.filpChart = !ClientPrefs.data.filpChart;
 		display = updateDisplay();
@@ -1719,7 +1719,7 @@ class PlayOpponent extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -1727,7 +1727,7 @@ class PlayOpponent extends Option
 
 	public override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.playOpponent = !ClientPrefs.data.playOpponent;
 		display = updateDisplay();
@@ -1751,7 +1751,7 @@ class OpponentCodeFix extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -1759,7 +1759,7 @@ class OpponentCodeFix extends Option
 
 	public override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.OpponentCodeFix = !ClientPrefs.data.OpponentCodeFix;
 		display = updateDisplay();
@@ -1816,7 +1816,7 @@ class ResultsScreen extends Option
 	public function new(desc:String)
 	{
 		super();
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
 			description = desc;
@@ -1824,7 +1824,7 @@ class ResultsScreen extends Option
 
 	public override function left():Bool
 	{
-		if (OptionsState.isInPause)
+		if (OptionsState.onPlayState)
 			return false;
 		ClientPrefs.data.ResultsScreen = !ClientPrefs.data.ResultsScreen;
 		display = updateDisplay();
