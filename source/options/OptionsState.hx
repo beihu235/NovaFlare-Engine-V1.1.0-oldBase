@@ -61,7 +61,7 @@ class OptionCata extends FlxSprite
 		titleObject.antialiasing = ClientPrefs.data.antialiasing;
 		titleObject.borderSize = 2;
 		for (i in 0...4)
-        if (titleObject.fieldWidth > 295) {
+        if (titleObject.width > 295) {
             titleObject.size -= 2;
             titleObject.updateHitbox();
         }
@@ -267,12 +267,12 @@ class OptionsState extends MusicBeatState
 
 		shownStuff = new FlxTypedGroup<FlxText>();
         
-		background = new FlxSprite(50, 40).makeGraphic(1180, 640, FlxColor.BLACK);
+		background = new FlxSprite(50, 40).makeGraphic(1180, 670, FlxColor.BLACK);
 		background.alpha = 0.5;
 		background.scrollFactor.set();
 		menu.add(background);
         
-		descBack = new FlxSprite(50, 640).makeGraphic(1180, 40, FlxColor.BLACK);
+		descBack = new FlxSprite(50, 640).makeGraphic(1180, 70, FlxColor.BLACK);
 		descBack.alpha = 0.3;
 		descBack.scrollFactor.set();
 		menu.add(descBack);
@@ -307,7 +307,7 @@ class OptionsState extends MusicBeatState
 		
 		}
 
-		selectedCat = isReset ? options[2] : options[0];
+		
 
 		//selectedOption = isReset ? selectedCat.options[2] : selectedCat.options[0];
 
@@ -329,20 +329,23 @@ class OptionsState extends MusicBeatState
 		langTTF = langTTF + '.ttf'; //fix
 
 		descText = new FlxText(62, 648);
-		descText.setFormat(Paths.font(langTTF), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		descText.setFormat(Paths.font(langTTF), 35, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		descText.antialiasing = ClientPrefs.data.antialiasing;
 		descText.borderSize = 2;
 
 		add(descBack);
 		add(descText);
 
-		isInMain = isReset ? false : true;
+		isInMain = isReset ? false : true;		
+		
+		selectedCat = isReset ? options[saveSelectedCatIndex] : options[0];
 		switchCat(selectedCat);
-		selectedCatIndex = isReset ? 2 : 0;
-		selectedOption = isReset ? selectedCat.options[0] : selectedCat.options[0];
-		selectedOptionIndex = isReset ? 0 : 0;
-		//相同变量值仅仅是为了以后好开发
+		selectedCatIndex = isReset ? saveSelectedCatIndex : 0;
+		
+		selectedOption = isReset ? selectedCat.options[saveSelectedOptionIndex] : selectedCat.options[0];
+		selectedOptionIndex = isReset ? saveSelectedOptionIndex : 0;
         
+        /*
         var resetText = 'Press' +  #if android ' C' #else ' Reset' #end + ' to reset settings';
 		restoreSettingsText = new FlxText (62, 680, FlxG.width, resetText);
 		restoreSettingsText.setFormat(Paths.font(langTTF), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -351,7 +354,8 @@ class OptionsState extends MusicBeatState
 		restoreSettingsText.borderSize = 2;
 		restoreSettingsText.borderQuality = 3;
 		add(restoreSettingsText);
-
+        */
+        
 		#if android
         addVirtualPad(FULL, A_B_C);
         addPadCamera();
