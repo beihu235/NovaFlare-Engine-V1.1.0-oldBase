@@ -21,15 +21,41 @@ class PauseSubState extends MusicBeatSubstate
 	public static var goToOptions:Bool = false; //work for open option 
 	public static var goToGameplayChangers:Bool = false; // work for open GameplayChangers 
 	public static var goBack:Bool = false; //work for close option or GameplayChangers then open pause state
-    public static var reOpen:Bool = false; // change bg alpha fix    
+    public static var reOpen:Bool = false; // change bg alpha fix    //修改，换成(变量)
     
     public static var curOptions:Bool = false; // curSelected fix
 	public static var curGameplayChangers:Bool = false; // curSelected fix
 	
 	var menuItems:Array<String> = [];
 	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Chart Editor', 'Options', 'Gameplay Changers', 'Exit to menu'];
+	var optionChoices:Array<String> = ['Instant Setup', 'Entirety Setup'];
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
+	
+	var bgColor:Array<Int> = [
+	    0xFFFF26C0,
+		0xFFAA0044,
+		0xFFFF2E00,
+		0xFFFF7200,
+		0xFFE9FF00,
+		0xFF00FF8C,
+		0xFF00B2FF,
+		0xFF3C00C9
+	];
+	
+	var bgShadowColor:Array<Int> = [
+	    0xFFCA0083,
+		0xFF77002F,
+		0xFFBF2300,
+		0xFFBF5600,
+		0xFFE0ED55,
+		0xFF00BF69,
+		0xFF0085BF,
+		0xFF25007C
+	];
+	
+	//紫→酒红→红→橙→黄→青→蓝→深蓝→紫
+    //渐变暂停界面
     
 	var pauseMusic:FlxSound;
 	var practiceText:FlxText;
@@ -70,18 +96,19 @@ class PauseSubState extends MusicBeatSubstate
 		}
 		difficultyChoices.push('BACK');
 
+        if (!reOpen){
+    		pauseMusic = new FlxSound();
+    		if(songName != null) {
+    			pauseMusic.loadEmbedded(Paths.music(songName), true, true);
+    		} else if (songName != 'None') {
+    			pauseMusic.loadEmbedded(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), true, true);
+    		}
+    		pauseMusic.volume = 0;
+    		pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
 
-		pauseMusic = new FlxSound();
-		if(songName != null) {
-			pauseMusic.loadEmbedded(Paths.music(songName), true, true);
-		} else if (songName != 'None') {
-			pauseMusic.loadEmbedded(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), true, true);
-		}
-		pauseMusic.volume = 0;
-		pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
-
-		FlxG.sound.list.add(pauseMusic);
-
+    		FlxG.sound.list.add(pauseMusic);
+        }
+        
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.alpha = reOpen ? 0.4 : 0;
 		bg.scrollFactor.set();
@@ -302,6 +329,7 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.notes.clear();
 					PlayState.instance.unspawnNotes = [];
 					PlayState.instance.finishSong(true);
+					/*
 				case 'Toggle Botplay':
 				    if(!ClientPrefs.data.playOpponent){
     					PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
@@ -312,7 +340,7 @@ class PauseSubState extends MusicBeatSubstate
 				    }
 					    PlayState.changedDifficulty = true;
 					PlayState.instance.botplayTxt.alpha = 1;
-					PlayState.instance.botplaySine = 0;										
+					PlayState.instance.botplaySine = 0;			*/							
 				case 'Options':
 				    goToOptions = true;
 				    reOpen = true;
