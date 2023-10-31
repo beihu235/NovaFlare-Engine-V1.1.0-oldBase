@@ -3663,7 +3663,7 @@ class PlayState extends MusicBeatState
 					trace('failed to initialize tea interp!!! ($file)');
 				}
 				else trace('initialized tea interp successfully: $file');
-			
+			}
 		}
 		catch(e:Dynamic)
 		{
