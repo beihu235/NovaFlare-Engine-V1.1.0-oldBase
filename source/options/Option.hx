@@ -102,8 +102,9 @@ class Judgement extends Option
 	{
 		if (OptionsState.onPlayState)
 			return false;
-		OptionsState.instance.saveSelectedOptionIndex = OptionsState.instance.selectedOptionIndex;
-		OptionsState.instance.saveSelectedCatIndex = OptionsState.instance.selectedCatIndex;
+			
+		//OptionsState.instance.saveSelectedOptionIndex = OptionsState.instance.selectedOptionIndex;
+		//OptionsState.instance.saveSelectedCatIndex = OptionsState.instance.selectedCatIndex;
 		
 		var num:Int = 6;	
 		OptionsState.instance.selectedCatIndex = num;
