@@ -269,7 +269,7 @@ class OptionsState extends MusicBeatState
 
 		shownStuff = new FlxTypedGroup<FlxText>();
 		
-		CatTeam = new FlxTypedGroup<FlxText>();
+		CatTeam = new FlxTypedGroup<FlxSprite>();
         
 		background = new FlxSprite(50, 40).makeGraphic(1180, 670, FlxColor.BLACK);
 		background.alpha = 0.5;
