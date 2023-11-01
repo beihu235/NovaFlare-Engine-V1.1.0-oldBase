@@ -505,8 +505,7 @@ class OptionsState extends MusicBeatState
 			}
 		}
 				
-		for (numP in 0...CatTeam.length - 1)
-		{
+		for (numP in 0...CatTeam.length - 1) {
 			if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(CatTeam[numP])){
 			    isInMain = false;		
 		
@@ -517,8 +516,7 @@ class OptionsState extends MusicBeatState
         		selectedOption = selectedCat.options[0];
         		selectedOptionIndex = 0;
 			}
-		}
-		
+		}		
        
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;		
 
@@ -785,14 +783,16 @@ class OptionsState extends MusicBeatState
 						if (!onPlayState)
 						{
 							resetOptions();
-							restoreSettingsText.text = 'Settings restored // Restarting game';
+							//restoreSettingsText.text = 'Settings restored // Restarting game';
 							FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+							/*
 							new FlxTimer().start(1.5, function(tmr:FlxTimer)
 							{
 								
                                 FlxG.sound.music.fadeOut(0.3);
                                 FlxG.camera.fade(FlxColor.BLACK, 0.5, false, FlxG.resetGame, false);
 							});
+							*/
 						}
 						else
 						{
