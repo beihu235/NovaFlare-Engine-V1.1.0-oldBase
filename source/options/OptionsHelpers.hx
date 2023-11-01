@@ -2,9 +2,8 @@ package options;
 
 import sys.FileSystem;
 import sys.io.File;
-import flixel.FlxG;
 
-using StringTools;
+import options.Option;
 
 class OptionsHelpers
 {
@@ -38,7 +37,7 @@ class OptionsHelpers
 				NoteskinOption.chooseNum = 0;
             }else{
                 for (i in 0...noteSkins.length - 1){
-                    if (ClientPrefs.data.noteSkin = noteSkins[i])
+                    if (ClientPrefs.data.noteSkin == noteSkins[i])
                         NoteskinOption.chooseNum = i;
                 }
             }

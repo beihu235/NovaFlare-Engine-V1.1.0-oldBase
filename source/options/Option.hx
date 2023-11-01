@@ -1115,7 +1115,7 @@ class NoteskinOption extends Option
 
 	public override function getValue():String
 	{
-		return "Current Noteskin: < " + OptionsHelpers.getNoteskinByID(ClientPrefs.data.noteSkinNum) + " >";
+		return "Current Noteskin: < " + ClientPrefs.data.noteSkin + " >";
 	}
 }
 
