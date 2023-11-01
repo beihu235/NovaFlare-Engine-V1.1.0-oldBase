@@ -110,6 +110,8 @@ class OptionsState extends MusicBeatState
 	public var background:FlxSprite;
 
 	public var selectedCat:OptionCata;
+	
+	public var CatTeam:FlxTypedGroup<FlxSprite>;
 
 	public var selectedOption:Option;
 
@@ -119,12 +121,12 @@ class OptionsState extends MusicBeatState
 	private static var saveSelectedCatIndex = 0;
 	private static var saveSelectedOptionIndex = 0;
 
-	public var isInMain:Bool = false; //true 是大类，false是小类
+	public var isInMain:Bool; //true 是大类，false是小类
 
 	public var options:Array<OptionCata>;
 
 	public static var onPlayState = false;	
-	public var isReset = false;
+	public static var isReset = false;
 
 	var restoreSettingsText:FlxText;
 
@@ -307,10 +309,6 @@ class OptionsState extends MusicBeatState
 		
 		}
 
-		
-
-		//selectedOption = isReset ? selectedCat.options[2] : selectedCat.options[0];
-
 		add(menu);
 
 		add(shownStuff);
@@ -320,7 +318,7 @@ class OptionsState extends MusicBeatState
 			/*if (i >= 4)
 				continue;*/
 			var cat = options[i];
-			add(cat);
+			CatTeam.add(cat);
 			add(cat.titleObject);
 		}
 		
@@ -329,7 +327,7 @@ class OptionsState extends MusicBeatState
 		langTTF = langTTF + '.ttf'; //fix
 
 		descText = new FlxText(62, 648);
-		descText.setFormat(Paths.font(langTTF), 35, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		descText.setFormat(Paths.font(langTTF), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		descText.antialiasing = ClientPrefs.data.antialiasing;
 		descText.borderSize = 2;
 
@@ -372,6 +370,7 @@ class OptionsState extends MusicBeatState
 			/*变量乱七八糟的我都服了，显示你得加64px去修复到开始第2个格下面
 			  因为text在positionFix那里还加了偏移
 			*/
+			
 			/*if (cat.middle)
 				visibleRange = [Std.int(cat.positionFix), 640];*/
 				
@@ -501,12 +500,20 @@ class OptionsState extends MusicBeatState
 				c.optionObjects.members[o].text = c.options[o].getValue();
 			}
 		}
-        /*
-		if(FlxG.keys.justPressed.F11)
-			{
-			FlxG.fullscreen = !FlxG.fullscreen;
+		
+		CatTeam.forEach(function(spr:FlxSprite){
+			if (FlxG.mouse.pressed && FlxG.mouse.overlaps(spr)){
+			    isInMain = false;		
+		
+        		selectedCat = options[spr.ID];
+        		switchCat(selectedCat);
+        		selectedCatIndex = spr.ID;
+		
+        		selectedOption = selectedCat.options[0];
+        		selectedOptionIndex = 0;
 			}
-        */
+		});
+       
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;		
 
 		accept = controls.ACCEPT;
@@ -631,7 +638,6 @@ class OptionsState extends MusicBeatState
 							selectedOption.waitingType = false;
 							var object = selectedCat.optionObjects.members[selectedOptionIndex];
 							object.text = selectedOption.getValue();
-							//Debug.logTrace("New text: " + object.text);
 							return;
 						}
 						else if (anyKey)
@@ -639,7 +645,6 @@ class OptionsState extends MusicBeatState
 							var object = selectedCat.optionObjects.members[selectedOptionIndex];
 							selectedOption.onType(gamepad == null ? FlxG.keys.getIsDown()[0].ID.toString() : gamepad.firstJustPressedID());
 							object.text = selectedOption.getValue();
-						//	Debug.logTrace("New text: " + object.text);
 						}
 					}
 				if (selectedOption.acceptType || !selectedOption.acceptType) //这啥玩意这
