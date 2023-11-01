@@ -505,7 +505,7 @@ class OptionsState extends MusicBeatState
 			}
 		}
 				
-		for (numP in 0...CatTeam.length - 1) {
+		for (numP in 0...6 - 1) {
 			if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(CatTeam[numP])){
 			    isInMain = false;		
 		
