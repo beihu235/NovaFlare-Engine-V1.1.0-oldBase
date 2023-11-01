@@ -268,6 +268,8 @@ class OptionsState extends MusicBeatState
 		menu = new FlxTypedGroup<FlxSprite>();
 
 		shownStuff = new FlxTypedGroup<FlxText>();
+		
+		CatTeam = new FlxTypedGroup<FlxText>();
         
 		background = new FlxSprite(50, 40).makeGraphic(1180, 670, FlxColor.BLACK);
 		background.alpha = 0.5;
@@ -312,6 +314,8 @@ class OptionsState extends MusicBeatState
 		add(menu);
 
 		add(shownStuff);
+		
+		add(CatTeam);
 
 		for (i in 0...options.length - 1)
 		{
