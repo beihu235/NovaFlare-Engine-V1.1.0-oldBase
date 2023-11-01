@@ -504,19 +504,21 @@ class OptionsState extends MusicBeatState
 				c.optionObjects.members[o].text = c.options[o].getValue();
 			}
 		}
-		
-		CatTeam.forEach(function(spr:FlxSprite){
-			if (FlxG.mouse.pressed && FlxG.mouse.overlaps(spr)){
+				
+		for (numP in 0...CatTeam.length - 1)
+		{
+			if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(CatTeam[numP])){
 			    isInMain = false;		
 		
-        		selectedCat = options[spr.ID];
+        		selectedCat = options[numP];
         		switchCat(selectedCat);
-        		selectedCatIndex = spr.ID;
+        		selectedCatIndex = numP;
 		
         		selectedOption = selectedCat.options[0];
         		selectedOptionIndex = 0;
 			}
-		});
+		}
+		
        
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;		
 
