@@ -1075,12 +1075,16 @@ class MiddleScrollOption extends Option
 	}
 }
 
-/*
+
 class NoteskinOption extends Option
 {
+    public static var chooseNum:Int;
+    
 	public function new(desc:String)
 	{
 		super();
+		chooseNum = 0;
+		OptionsHelpers.SetNoteSkin();
 		if (OptionsState.onPlayState)
 			description = "This option cannot be toggled in the pause menu.";
 		else
@@ -1091,10 +1095,9 @@ class NoteskinOption extends Option
 	{
 		if (OptionsState.onPlayState)
 			return false;
-		ClientPrefs.data.noteSkinNum--;
-		if (ClientPrefs.data.noteSkinNum < 0)
-			ClientPrefs.data.noteSkinNum = OptionsHelpers.noteskinArray.length - 4;
-     	OptionsHelpers.ChangeNoteSkin(ClientPrefs.data.noteSkinNum);
+		chooseNum--;
+		
+     	OptionsHelpers.ChangeNoteSkin();
 		display = updateDisplay();
 		return true;
 	}
@@ -1103,10 +1106,9 @@ class NoteskinOption extends Option
 	{
 		if (OptionsState.onPlayState)
 			return false;
-		ClientPrefs.data.noteSkinNum++;
-		if (ClientPrefs.data.noteSkinNum > OptionsHelpers.noteskinArray.length - 1)
-			ClientPrefs.data.noteSkinNum = OptionsHelpers.noteskinArray.length - 1;
-        OptionsHelpers.ChangeNoteSkin(ClientPrefs.data.noteSkinNum);
+		chooseNum++;
+		
+        OptionsHelpers.ChangeNoteSkin();
 		display = updateDisplay();
 		return true;
 	}
@@ -1116,7 +1118,7 @@ class NoteskinOption extends Option
 		return "Current Noteskin: < " + OptionsHelpers.getNoteskinByID(ClientPrefs.data.noteSkinNum) + " >";
 	}
 }
-*/
+
 /*
 class TimeBarType extends Option
 {

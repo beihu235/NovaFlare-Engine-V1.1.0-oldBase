@@ -122,20 +122,15 @@ class OptionsState extends MusicBeatState
 	private static var saveSelectedOptionIndex = 0;
 
 	public var isInMain:Bool; //true 是大类，false是小类
-
 	public var options:Array<OptionCata>;
 
 	public static var onPlayState = false;	
 	public static var isReset = false;
 
-	var restoreSettingsText:FlxText;
-
 	public var shownStuff:FlxTypedGroup<FlxText>;
 
 	public var visibleRange = [114, 640];
 
-	var startSong = true;
-	
 	var ColorArray:Array<Int> = [
 		0xFF9400D3,
 		0xFF4B0082,
@@ -150,7 +145,6 @@ class OptionsState extends MusicBeatState
 	public static var currentColor:Int = 1;    
 	public static var currentColorAgain:Int = 0;    
 
-	public var optionsImage:FlxSprite;
 	/*
 	public function new(pauseMenu:Bool = false, reOpen:Bool = false)
 	{
@@ -168,6 +162,10 @@ class OptionsState extends MusicBeatState
     
 	override function create()
 	{     
+	    #if desktop
+		DiscordClient.changePresence("Options Menu", null);
+		#end
+		
 		options = [
 			new OptionCata(50, 40, OptionsName.setGameplay(), [				
 				new DownscrollOption(OptionsName.setDownscrollOption()),
@@ -187,7 +185,7 @@ class OptionsState extends MusicBeatState
 				//new Shouldcameramove("Moves camera on opponent/player note hits."),
 			]),
 			new OptionCata(345, 40, OptionsName.setAppearance(), [
-                //new NoteskinOption("Change your current noteskin"),
+                new NoteskinOption("Change your current noteskin"),
 				//new AccTypeOption("Change your current accuracy type you want!"),
 				//new SongNameOption("Shows to you name of song your playing on HUD"),			
 				new HideOppStrumsOption("Shows/Hides opponent strums on screen.(RESTART SONG)"),
@@ -345,18 +343,7 @@ class OptionsState extends MusicBeatState
 		selectedCatIndex = isReset ? saveSelectedCatIndex : 0;
 		
 		selectedOption = isReset ? selectedCat.options[saveSelectedOptionIndex] : selectedCat.options[0];
-		selectedOptionIndex = isReset ? saveSelectedOptionIndex : 0;
-        
-        /*
-        var resetText = 'Press' +  #if android ' C' #else ' Reset' #end + ' to reset settings';
-		restoreSettingsText = new FlxText (62, 680, FlxG.width, resetText);
-		restoreSettingsText.setFormat(Paths.font(langTTF), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		restoreSettingsText.scrollFactor.set();
-		restoreSettingsText.antialiasing = ClientPrefs.data.antialiasing;
-		restoreSettingsText.borderSize = 2;
-		restoreSettingsText.borderQuality = 3;
-		add(restoreSettingsText);
-        */
+		selectedOptionIndex = isReset ? saveSelectedOptionIndex : 0;                
         
 		#if android
         addVirtualPad(FULL, A_B_C);
@@ -364,6 +351,11 @@ class OptionsState extends MusicBeatState
         #end
 		
 		super.create();
+	}
+	
+	override function closeSubState() {
+		super.closeSubState();
+		ClientPrefs.saveSettings();
 	}
 
 	public function switchCat(cat:OptionCata, checkForOutOfBounds:Bool = true)
@@ -599,7 +591,7 @@ class OptionsState extends MusicBeatState
 					if (!onPlayState)
 					{
 						resetOptions();
-						restoreSettingsText.text = 'Settings restored // Restarting game';
+						
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						new FlxTimer().start(1.5, function(tmr:FlxTimer)
 						{
@@ -610,7 +602,7 @@ class OptionsState extends MusicBeatState
 					}
 					else
 					{
-						restoreSettingsText.text = 'Unable in PauseMenu';
+						
 					}
 				}
 
@@ -783,7 +775,7 @@ class OptionsState extends MusicBeatState
 						if (!onPlayState)
 						{
 							resetOptions();
-							//restoreSettingsText.text = 'Settings restored // Restarting game';
+							
 							FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 							/*
 							new FlxTimer().start(1.5, function(tmr:FlxTimer)
@@ -796,7 +788,7 @@ class OptionsState extends MusicBeatState
 						}
 						else
 						{
-							restoreSettingsText.text = 'Unable in PauseMenu';
+							
 						}
 					}
 

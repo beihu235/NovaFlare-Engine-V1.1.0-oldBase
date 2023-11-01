@@ -9,8 +9,8 @@ using StringTools;
 class OptionsHelpers
 {
     public static var languageArray = ["English", "简体中文", "繁體中文"];
-	/*public static var noteskinArray = ["Default", "Chip", "Future", "Grafex"];
-    public static var IconsBopArray = ['Grafex',  'Modern', 'Classic'];
+	//public static var noteskinArray = ["Default"];
+    /*public static var IconsBopArray = ['Grafex',  'Modern', 'Classic'];
     public static var TimeBarArray = ['Time Left', 'Time Elapsed', 'Disabled'];
     public static var ColorBlindArray = ['None', 'Deuteranopia', 'Protanopia', 'Tritanopia'];
     public static var AccuracyTypeArray = ['Grafex', 'Kade', 'Mania', 'Andromeda', 'Forever', 'Psych'];
@@ -19,12 +19,62 @@ class OptionsHelpers
 	{
 		return noteskinArray[id];
 	}
-
-    static public function ChangeNoteSkin(id:Int)
+    */
+    
+    static public function SetNoteSkin()
     {
-        ClientPrefs.noteSkin = getNoteskinByID(id);
+        var noteSkins:Array<String> = [];
+		if(Mods.mergeAllTextsNamed('images/noteSkins/list.txt', 'shared').length > 0)
+			noteSkins = Mods.mergeAllTextsNamed('images/noteSkins/list.txt', 'shared');
+		else
+			noteSkins = CoolUtil.coolTextFile(Paths.getPreloadPath('shared/images/noteSkins/list.txt'));
+			
+		if(noteSkins.length > 0)
+		{
+		    noteSkins.insert(0, ClientPrefs.defaultData.noteSkin);
+		    
+			if(!noteSkins.contains(ClientPrefs.data.noteSkin)){
+				ClientPrefs.data.noteSkin = ClientPrefs.defaultData.noteSkin; //Reset to default if saved noteskin couldnt be found
+				NoteskinOption.chooseNum = 0;
+            }else{
+                for (i in 0...noteSkins.length - 1){
+                    if (ClientPrefs.data.noteSkin = noteSkins[i])
+                        NoteskinOption.chooseNum = i;
+                }
+            }
+		}else{
+		    ClientPrefs.data.noteSkin = ClientPrefs.defaultData.noteSkin;
+		    NoteskinOption.chooseNum = 0;
+		}
     }
-
+    
+    static public function ChangeNoteSkin()
+    {
+        var noteSkins:Array<String> = [];
+		if(Mods.mergeAllTextsNamed('images/noteSkins/list.txt', 'shared').length > 0)
+			noteSkins = Mods.mergeAllTextsNamed('images/noteSkins/list.txt', 'shared');
+		else
+			noteSkins = CoolUtil.coolTextFile(Paths.getPreloadPath('shared/images/noteSkins/list.txt'));
+			
+		if(noteSkins.length > 0)
+		{
+		    noteSkins.insert(0, ClientPrefs.defaultData.noteSkin);
+		
+		    if (NoteskinOption.chooseNum < 0) NoteskinOption.chooseNum = noteSkins.length - 1;
+		    if (NoteskinOption.chooseNum > noteSkins.length - 1) NoteskinOption.chooseNum = 0;
+		    
+			if(!noteSkins.contains(ClientPrefs.data.noteSkin)){
+				ClientPrefs.data.noteSkin = ClientPrefs.defaultData.noteSkin; //Reset to default if saved noteskin couldnt be found
+				NoteskinOption.chooseNum = 0;
+            }else{
+                ClientPrefs.data.noteSkin = noteSkins[NoteskinOption.chooseNum];
+            }
+		}else{
+		    ClientPrefs.data.noteSkin = ClientPrefs.defaultData.noteSkin;
+		    NoteskinOption.chooseNum = 0;
+		}
+    }
+    /*
     public static function getIconBopByID(id:Int)
 	{
 	    return IconsBopArray[id];
