@@ -369,6 +369,8 @@ class OptionsState extends MusicBeatState
 			  因为text在positionFix那里还加了偏移
 			*/
 			
+			startAtUP = true;
+			
 			if (cat.middle) isReset = true;				
 				
 			if (selectedOption != null)
@@ -483,6 +485,8 @@ class OptionsState extends MusicBeatState
 	var down_hold = false;
 	 
 	var anyKey = false;
+	
+	var startAtUP = true;
 	 
 	var holdTime:Float = 0;	
     var checkTime:Float = 0;	
@@ -683,12 +687,12 @@ class OptionsState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
-						if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - 5) DOWNmoveFix = true;
-						
 						selectedOptionIndex++;
 
 						if (selectedOptionIndex > options[selectedCatIndex].options.length - 1)
 						{
+						    startAtUP = true;
+						    
 							for (i in 0...selectedCat.options.length)
 							{
 								var opt = selectedCat.optionObjects.members[i];
@@ -696,12 +700,16 @@ class OptionsState extends MusicBeatState
 							}
 							selectedOptionIndex = 0;
 						}
+						
+						var mumDownFix:Int = startAtUP ? 6 : 5;
+						
+						if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - mumDownFix + 1) DOWNmoveFix = true;
 
 						if (selectedOptionIndex != 0
 							&& selectedOptionIndex != options[selectedCatIndex].options.length - 1
 							&& options[selectedCatIndex].options.length > 10 
 							&& selectedOptionIndex >= 5
-							&& (selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5 || DOWNmoveFix)
+							&& (selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - mumDownFix || DOWNmoveFix)
 							)
 						{
 							for (i in selectedCat.optionObjects.members)
@@ -721,13 +729,14 @@ class OptionsState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
-						if (selectedOptionIndex == 5) UPmoveFix = true;
 						
 						selectedOptionIndex--;
 						
 
 						if (selectedOptionIndex < 0)
 						{
+						    startAtUP = false;
+						    
 							selectedOptionIndex = options[selectedCatIndex].options.length - 1;
 							
                             if (options[selectedCatIndex].options.length > 10)
@@ -737,10 +746,14 @@ class OptionsState extends MusicBeatState
 								opt.y = selectedCat.positionFix + 54 + (46 * (i - (selectedCat.options.length - 10))); 
 							}
 						}
+						
+						var mumUpFix:Int = startAtUP ? 6 : 5;
+						
+						if (selectedOptionIndex == mumUpFix - 1) UPmoveFix = true;
 
 						if (selectedOptionIndex != 0 
     						&& options[selectedCatIndex].options.length > 10
-    						&& (selectedOptionIndex >= 5 || UPmoveFix)
+    						&& (selectedOptionIndex >= mumUpFix || UPmoveFix)
     						&& selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5
     						)						
 						{
