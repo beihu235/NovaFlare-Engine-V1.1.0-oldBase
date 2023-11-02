@@ -550,7 +550,7 @@ class OptionsState extends MusicBeatState
 				    if (updateTime > 1 / ClientPrefs.data.framerate)
 				    updateTime = updateTime - 0.05;
 				    else if (updateTime < 1 / ClientPrefs.data.framerate)
-				    updateTime = 1 / ClientPrefs.data.framerate);
+				    updateTime = 1 / ClientPrefs.data.framerate;
 				    
 				    right_hold = controls.UI_RIGHT;
 				    left_hold = controls.UI_LEFT;
