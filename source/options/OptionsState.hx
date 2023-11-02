@@ -548,7 +548,7 @@ class OptionsState extends MusicBeatState
 				if(holdTime > 0.5 && checkTime >= updateTime){
 				    checkTime = 0;
 				    if (updateTime > 1 / ClientPrefs.data.framerate)
-				    updateTime = updateTime - 0.05;
+				    updateTime = updateTime - 0.01;
 				    else if (updateTime < 1 / ClientPrefs.data.framerate)
 				    updateTime = 1 / ClientPrefs.data.framerate;
 				    
@@ -683,7 +683,7 @@ class OptionsState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
-						if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - 6) DOWNmoveFix = true;
+						if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - 5) DOWNmoveFix = true;
 						
 						selectedOptionIndex++;
 
@@ -701,7 +701,7 @@ class OptionsState extends MusicBeatState
 							&& selectedOptionIndex != options[selectedCatIndex].options.length - 1
 							&& options[selectedCatIndex].options.length > 10 
 							&& selectedOptionIndex >= 5
-							&& (selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5 || DOWNmoveFix)
+							&& (selectedOptionIndex < options[selectedCatIndex].options.length - 1 - 5 || DOWNmoveFix)
 							)
 						{
 							for (i in selectedCat.optionObjects.members)
@@ -740,7 +740,7 @@ class OptionsState extends MusicBeatState
 
 						if (selectedOptionIndex != 0 
     						&& options[selectedCatIndex].options.length > 10
-    						&& (selectedOptionIndex >= 6 || UPmoveFix)
+    						&& (selectedOptionIndex > 5 || UPmoveFix)
     						&& selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5
     						)						
 						{
