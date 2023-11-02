@@ -468,23 +468,25 @@ class OptionsState extends MusicBeatState
 			ClientPrefs.saveSettings();
 		}
     */
-     var accept = false;
-     var back = false;
-	 var reset = false;
+    var accept = false;
+    var back = false;
+	var reset = false;
 	 
-	 var right = false;
-	 var left = false;
-	 var up = false;
-	 var down = false;
+	var right = false;
+	var left = false;
+	var up = false;
+	var down = false;
 	 
-	 var right_hold = false;
-	 var left_hold = false;
-	 var up_hold = false;
-	 var down_hold = false;
+	var right_hold = false;
+	var left_hold = false;
+	var up_hold = false;
+	var down_hold = false;
 	 
-	 var anyKey = false;
+	var anyKey = false;
 	 
-	 
+	var holdTime:Float = 0;	
+    var checkTime:Float = 0;	
+    var updateTime:Float = 0;
 	 
 	override function update(elapsed:Float)
 	{
@@ -524,9 +526,7 @@ class OptionsState extends MusicBeatState
 	    up_hold = false;
 		down_hold = false;
 		
-		var holdTime:Float = 0;	
-    	var checkTime:Float = 0;	
-    	var updateTime:Float = 0;
+		
 	 
 		if (controls.UI_RIGHT_P || controls.UI_LEFT_P || controls.UI_UP_P || controls.UI_DOWN_P){
     		holdTime = 0;		
@@ -701,7 +701,7 @@ class OptionsState extends MusicBeatState
 							&& selectedOptionIndex != options[selectedCatIndex].options.length - 1
 							&& options[selectedCatIndex].options.length > 10 
 							&& selectedOptionIndex >= 5
-							&& (selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 6  || DOWNmoveFix)
+							&& (selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5 || DOWNmoveFix)
 							)
 						{
 							for (i in selectedCat.optionObjects.members)
@@ -721,7 +721,7 @@ class OptionsState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
-						if (selectedOptionIndex == 6) UPmoveFix = true;
+						if (selectedOptionIndex == 5) UPmoveFix = true;
 						
 						selectedOptionIndex--;
 						
@@ -889,6 +889,7 @@ class OptionsState extends MusicBeatState
         isReset = false;
         isInMain = false;  
         
+        selectedCatIndex = saveSelectedCatIndex;
 		switchCat(options[saveSelectedCatIndex]);       
 		
 		selectedOptionIndex = saveSelectedOptionIndex;    					        					
