@@ -729,9 +729,7 @@ class OptionsState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
-						
 						selectedOptionIndex--;
-						
 
 						if (selectedOptionIndex < 0)
 						{
@@ -747,7 +745,7 @@ class OptionsState extends MusicBeatState
 							}
 						}
 						
-						var mumUpFix:Int = startAtUP ? 6 : 5;
+						var mumUpFix:Int = startAtUP ? 5 : 6;
 						
 						if (selectedOptionIndex == mumUpFix - 1) UPmoveFix = true;
 
@@ -763,16 +761,7 @@ class OptionsState extends MusicBeatState
 									i.y += 46;
 								}
 						}
-                        /*
-						if (selectedOptionIndex < (options[selectedCatIndex].options.length - 1) / 2)
-						{
-							for (i in 0...selectedCat.options.length)
-							{
-								var opt = selectedCat.optionObjects.members[i];
-								opt.y = selectedCat.positionFix + 54 + (46 * i);
-							}
-						}
-                        */
+                        
 						selectOption(options[selectedCatIndex].options[selectedOptionIndex]);
 					}
 
