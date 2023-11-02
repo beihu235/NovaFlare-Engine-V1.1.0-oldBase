@@ -868,7 +868,7 @@ class OptionsState extends MusicBeatState
 
 	}
 	
-	public static function resetOptionChoose()
+	public function resetOptionChoose()
 	{
         isInMain = false;
         isReset = false;
