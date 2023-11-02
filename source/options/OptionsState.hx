@@ -62,7 +62,8 @@ class OptionCata extends FlxSprite
 		titleObject.borderSize = 2;
 		for (i in 0...4)
         if (titleObject.width > 295) {
-            titleObject.size -= 2;
+            titleObject.scale.x -= 0.05;
+            titleObject.scale.y -= 0.05;
             titleObject.updateHitbox();
         }
         
@@ -367,8 +368,7 @@ class OptionsState extends MusicBeatState
 			  因为text在positionFix那里还加了偏移
 			*/
 			
-			/*if (cat.middle)
-				visibleRange = [Std.int(cat.positionFix), 640];*/
+			if (cat.middle) isReset = true;				
 				
 			if (selectedOption != null)
 			{
@@ -448,7 +448,7 @@ class OptionsState extends MusicBeatState
 			descText.text = option.getDescription();
 		}
 	}
-
+    /*
 	public static function openControllsState()
 		{
 			MusicBeatState.switchState(new ControlsSubState());
@@ -466,7 +466,7 @@ class OptionsState extends MusicBeatState
 			LoadingState.loadAndSwitchState(new NoteOffsetState());
 			ClientPrefs.saveSettings();
 		}
-    
+    */
      var accept = false;
      var back = false;
 	 var reset = false;
@@ -501,12 +501,13 @@ class OptionsState extends MusicBeatState
 			if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(CatTeam.members[numP])){
 			    isInMain = false;		
 		        
-        		//selectedCat = options[numP];
         		switchCat(options[numP]);
         		selectedCatIndex = numP;
 		
         		selectedOption = selectedCat.options[0];
         		selectedOptionIndex = 0;
+        		
+        		FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 			}
 		}		
        
@@ -546,8 +547,7 @@ class OptionsState extends MusicBeatState
 		back = controls.BACK;
 		reset = controls.RESET #if android || MusicBeatState._virtualpad.buttonC.justPressed #end;
 
-		try
-		{
+		
 			if (isInMain)
 			{
 				descText.text = "Please select a category";
@@ -596,8 +596,8 @@ class OptionsState extends MusicBeatState
 						new FlxTimer().start(1.5, function(tmr:FlxTimer)
 						{
 							
-                            FlxG.sound.music.fadeOut(0.3);
-                            FlxG.camera.fade(FlxColor.BLACK, 0.5, false, FlxG.resetGame, false);
+                         //   FlxG.sound.music.fadeOut(0.3);
+                         //   FlxG.camera.fade(FlxColor.BLACK, 0.5, false, FlxG.resetGame, false);
 						});
 					}
 					else
@@ -610,8 +610,6 @@ class OptionsState extends MusicBeatState
 				{
 					if (!onPlayState) {
 					    ClientPrefs.saveSettings();
-					    FlxTransitionableState.skipNextTransIn = true;
-			            FlxTransitionableState.skipNextTransOut = true;
 						MusicBeatState.switchState(new MainMenuState());
                         //FlxG.sound.music.stop();
 					    }
@@ -687,7 +685,7 @@ class OptionsState extends MusicBeatState
 							&& selectedOptionIndex != options[selectedCatIndex].options.length - 1
 							&& options[selectedCatIndex].options.length > 10 
 							&& selectedOptionIndex >= 5
-							&& (selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 6 || DOWNmoveFix)
+							&& (selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5  || DOWNmoveFix)
 							)
 						{
 							for (i in selectedCat.optionObjects.members)
@@ -720,13 +718,13 @@ class OptionsState extends MusicBeatState
 							for (i in 0...selectedCat.options.length)
 							{
 								var opt = selectedCat.optionObjects.members[i];
-								opt.y = selectedCat.positionFix + 54 + (46 * (i - (selectedCat.options.length - 10))); //idk why need add 1
+								opt.y = selectedCat.positionFix + 54 + (46 * (i - (selectedCat.options.length - 10))); 
 							}
 						}
 
 						if (selectedOptionIndex != 0 
     						&& options[selectedCatIndex].options.length > 10
-    						&& (selectedOptionIndex >= 6 || UPmoveFix)
+    						&& (selectedOptionIndex >= 5 || UPmoveFix)
     						&& selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5
     						)						
 						{
@@ -796,7 +794,7 @@ class OptionsState extends MusicBeatState
 					{
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
                         
-						if (selectedCatIndex >= 9)  //这是干啥用的
+						if (selectedCatIndex >= 9)  //这是干啥用的,但是目前来看没用
 							selectedCatIndex = 0;
 
 						for (i in 0...selectedCat.options.length)
@@ -811,12 +809,6 @@ class OptionsState extends MusicBeatState
 							switchCat(options[saveSelectedCatIndex]);        					        					
         					selectOption(selectedCat.options[saveSelectedOptionIndex]);	
         					selectedOptionIndex = saveSelectedOptionIndex;
-        					
-        					
-								for (i in selectedCat.optionObjects.members)
-								{
-									i.y -= (46 * ((options[selectedCatIndex].options.length - 1) / 2));
-								}
 						    
         					
         					saveSelectedOptionIndex = 0;
@@ -845,7 +837,11 @@ class OptionsState extends MusicBeatState
 					}
 				}
 			}
-		}//毫无意义的try		
+		
+		if (!selectedCat.middle){
+		    saveSelectedOptionIndex = selectedOptionIndex;
+		    saveSelectedCatIndex = selectedCatIndex;
+		}
 		
 		//descText.text = '' + ClientPrefs.data.language;
 		
