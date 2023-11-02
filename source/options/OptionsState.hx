@@ -701,7 +701,7 @@ class OptionsState extends MusicBeatState
 							&& selectedOptionIndex != options[selectedCatIndex].options.length - 1
 							&& options[selectedCatIndex].options.length > 10 
 							&& selectedOptionIndex >= 5
-							&& (selectedOptionIndex < options[selectedCatIndex].options.length - 1 - 5 || DOWNmoveFix)
+							&& (selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5 || DOWNmoveFix)
 							)
 						{
 							for (i in selectedCat.optionObjects.members)
@@ -740,7 +740,7 @@ class OptionsState extends MusicBeatState
 
 						if (selectedOptionIndex != 0 
     						&& options[selectedCatIndex].options.length > 10
-    						&& (selectedOptionIndex > 5 || UPmoveFix)
+    						&& (selectedOptionIndex >= 5 || UPmoveFix)
     						&& selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5
     						)						
 						{
