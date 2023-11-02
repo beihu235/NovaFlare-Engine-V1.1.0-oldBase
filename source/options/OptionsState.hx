@@ -667,7 +667,7 @@ class OptionsState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
-						if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - 6) DOWNmoveFix = true;
+						if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - 5) DOWNmoveFix = true;
 						
 						selectedOptionIndex++;
 
@@ -705,7 +705,7 @@ class OptionsState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
-						if (selectedOptionIndex == 6) UPmoveFix = true;
+						if (selectedOptionIndex == 5) UPmoveFix = true;
 						
 						selectedOptionIndex--;
 						
