@@ -376,10 +376,10 @@ class OptionsState extends MusicBeatState
 				var object = selectedCat.optionObjects.members[selectedOptionIndex];
 				object.text = selectedOption.getValue();
 			}
-
+            /*
 			if (selectedCatIndex > options.length - 2 && checkForOutOfBounds)
 				selectedCatIndex = 0;
-
+            */
 			if (selectedCat.middle)
 				remove(selectedCat.titleObject);
 
@@ -871,13 +871,14 @@ class OptionsState extends MusicBeatState
 	
 	public function resetOptionChoose()
 	{
-        isInMain = false;
         isReset = false;
+        isInMain = false;  
         
-		switchCat(options[saveSelectedCatIndex]);        
-		    					        					
+		switchCat(options[saveSelectedCatIndex]);       
+		
+		selectedOptionIndex = saveSelectedOptionIndex;    					        					
         selectOption(selectedCat.options[saveSelectedOptionIndex]);	
-        selectedOptionIndex = saveSelectedOptionIndex;
+        
         
         if (selectedOptionIndex != 0 
     	&& options[selectedCatIndex].options.length > 10
