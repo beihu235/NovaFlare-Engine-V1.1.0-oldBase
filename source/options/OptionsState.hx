@@ -57,16 +57,17 @@ class OptionCata extends FlxSprite
 		langTTF = langTTF + '.ttf'; //fix
 
 		titleObject = new FlxText((middleType ? 1180 / 2 : x), y + (middleType ? 16 + 64 : 16), 1180, title);
-		titleObject.setFormat(Paths.font(langTTF), 35, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		titleObject.setFormat(Paths.font(langTTF), 30, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		titleObject.antialiasing = ClientPrefs.data.antialiasing;
 		titleObject.borderSize = 2;
+		/*
 		for (i in 0...4)
         if (titleObject.width > 295) {
             titleObject.scale.x -= 0.05;
             titleObject.scale.y -= 0.05;
             titleObject.updateHitbox();
         }
-        
+        */
         
 		if (middleType)
 		{
@@ -667,7 +668,7 @@ class OptionsState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
-						if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - 5) DOWNmoveFix = true;
+						if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - 6) DOWNmoveFix = true;
 						
 						selectedOptionIndex++;
 
@@ -685,7 +686,7 @@ class OptionsState extends MusicBeatState
 							&& selectedOptionIndex != options[selectedCatIndex].options.length - 1
 							&& options[selectedCatIndex].options.length > 10 
 							&& selectedOptionIndex >= 5
-							&& (selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5  || DOWNmoveFix)
+							&& (selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 6  || DOWNmoveFix)
 							)
 						{
 							for (i in selectedCat.optionObjects.members)
@@ -705,7 +706,7 @@ class OptionsState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
-						if (selectedOptionIndex == 5) UPmoveFix = true;
+						if (selectedOptionIndex == 6) UPmoveFix = true;
 						
 						selectedOptionIndex--;
 						
@@ -724,7 +725,7 @@ class OptionsState extends MusicBeatState
 
 						if (selectedOptionIndex != 0 
     						&& options[selectedCatIndex].options.length > 10
-    						&& (selectedOptionIndex >= 5 || UPmoveFix)
+    						&& (selectedOptionIndex >= 6 || UPmoveFix)
     						&& selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5
     						)						
 						{
