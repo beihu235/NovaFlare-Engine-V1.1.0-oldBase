@@ -805,14 +805,7 @@ class OptionsState extends MusicBeatState
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();													
 						
 						if (selectedCat.middle){
-						    isInMain = false;
-							switchCat(options[saveSelectedCatIndex]);        					        					
-        					selectOption(selectedCat.options[saveSelectedOptionIndex]);	
-        					selectedOptionIndex = saveSelectedOptionIndex;
-						    
-        					
-        					saveSelectedOptionIndex = 0;
-        					saveSelectedCatIndex = 0;
+						    resetOptionChoose();						    
 						}
 						else{
 						    isInMain = true;
@@ -873,6 +866,29 @@ class OptionsState extends MusicBeatState
 	public static function resetOptions()
 	{
 
+	}
+	
+	public static function resetOptionChoose()
+	{
+        isInMain = false;
+        isReset = false;
+        
+		switchCat(options[saveSelectedCatIndex]);        
+		    					        					
+        selectOption(selectedCat.options[saveSelectedOptionIndex]);	
+        selectedOptionIndex = saveSelectedOptionIndex;
+        
+        if (selectedOptionIndex != 0 
+    	&& options[selectedCatIndex].options.length > 10
+    	&& selectedOptionIndex >= 5
+    	&& selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5
+    	){
+			for (i in 0...selectedCat.options.length)
+			{
+			    var opt = selectedCat.optionObjects.members[i];
+				opt.y = selectedCat.positionFix + 54 + (46 * (i + (selectedOptionIndex - 5))); 
+			}
+		}
 	}
 }
 
