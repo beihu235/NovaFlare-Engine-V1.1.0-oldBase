@@ -484,8 +484,7 @@ class OptionsState extends MusicBeatState
 	 
 	 var anyKey = false;
 	 
-	 var holdTime:Float = 0;	
-	 var updatePower:Float = 1;
+	 
 	 
 	override function update(elapsed:Float)
 	{
@@ -525,18 +524,32 @@ class OptionsState extends MusicBeatState
 	    up_hold = false;
 		down_hold = false;
 		
-		if (controls.UI_RIGHT_P || controls.UI_LEFT_P || controls.UI_UP_P || controls.UI_DOWN_P)
-		holdTime = 0;
-		updatePower = 1;
+		var holdTime:Float = 0;	
+    	var checkTime:Float = 0;	
+    	var updateTime:Float = 0;
+	 
+		if (controls.UI_RIGHT_P || controls.UI_LEFT_P || controls.UI_UP_P || controls.UI_DOWN_P){
+    		holdTime = 0;		
+    		checkTime = 0;
+	    	updateTime = 0.2;
+		}
 		
 		if(controls.UI_DOWN || controls.UI_UP || controls.UI_LEFT || controls.UI_RIGHT)
 			{
-			    if (Math.floor(holdTime) % 2 == 0) updatePower = updatePower * 1.5; //2秒增加1.5倍选择
-				var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10 * updatePower);
-				holdTime += elapsed;
-				var checkNewHold:Int = Math.floor((holdTime - 0.5) * 10 * updatePower);
-
-				if(holdTime > 0.5 && checkNewHold - checkLastHold > 0){
+			    holdTime += elapsed;
+			    checkTime += elapsed;
+			    /*
+			    if (Math.floor(holdTime) % 2 == 0) updateTime = updateTime * 1.5; //2秒增加1.5倍选择
+				var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10 * updateTime);
+				
+				var checkNewHold:Int = Math.floor((holdTime - 0.5) * 10 * updateTime);
+                */
+                
+				if(holdTime > 0.5 && checkTime > updateTime){
+				    checkTime = 0;
+				    if (updateTime > 1 / ClientPrefs.data.framerate)
+				    updateTime = updateTime - 0.05;
+				    
 				    right_hold = controls.UI_RIGHT;
 				    left_hold = controls.UI_LEFT;
 				    up_hold = controls.UI_UP;
