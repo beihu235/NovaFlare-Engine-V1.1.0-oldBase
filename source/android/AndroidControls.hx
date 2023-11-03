@@ -72,10 +72,14 @@ class Config {
     		}
 		}
 		else{
-		    _pad.buttonG.x = save.data.buttons[0].x;
-			_pad.buttonG.y = save.data.buttons[0].y;
-			_pad.buttonF.x = save.data.buttons[1].x;
-			_pad.buttonF.y = save.data.buttons[1].y;
+		    if (_pad.buttonG != null){
+		        _pad.buttonG.x = save.data.buttons[0].x;
+			    _pad.buttonG.y = save.data.buttons[0].y;
+			}
+			if (_pad.buttonF != null){
+			    _pad.buttonF.x = save.data.buttons[1].x;
+			    _pad.buttonF.y = save.data.buttons[1].y;
+			}
 		}
 		return _pad;
 	}
