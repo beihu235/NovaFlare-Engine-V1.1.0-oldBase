@@ -1857,7 +1857,7 @@ class PlayState extends MusicBeatState
 				if(ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled) {
 					keysCheck();
 				} else
-					ClientPrefs.data.playOpponent ? playerDance() : opponentDance();
+					ClientPrefs.data.playOpponent ? opponentDance() : playerDance();
 
 				if(notes.length > 0)
 				{
@@ -2844,7 +2844,7 @@ class PlayState extends MusicBeatState
 	
 	private function keyPressed(key:Int)
 	{
-		if(ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled || paused || key < 0) return;
+		if(ClientPrefs.data.playOpponent ? cpuControlled_opponent : cpuControlled || paused || key < 0) return;
 		var char:Character = ClientPrefs.data.playOpponent ? dad : boyfriend;
 		if(!generatedMusic || endingSong || char.stunned) return;
 
@@ -3005,7 +3005,7 @@ class PlayState extends MusicBeatState
 			}
 
 			if (!holdArray.contains(true) || endingSong)
-				ClientPrefs.data.playOpponent ? playerDance() : opponentDance();
+				ClientPrefs.data.playOpponent ? opponentDance() : playerDance();
 
 			#if ACHIEVEMENTS_ALLOWED
 			else checkForAchievement(['oversinging']);
@@ -3174,7 +3174,7 @@ class PlayState extends MusicBeatState
 	public function opponentNoteHitForOpponent(note:Note):Void
 	{
 		if(note.wasGoodHit) return;
-		if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
+		if(cpuControlled_opponent && (note.ignoreNote || note.hitCausesMiss)) return;
 
 		note.wasGoodHit = true;
 		if (ClientPrefs.data.hitsoundVolume > 0 && !note.hitsoundDisabled)
@@ -3217,7 +3217,7 @@ class PlayState extends MusicBeatState
 		if(!note.noAnimation) {
 			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))];
 
-			var char:Character = boyfriend;
+			var char:Character = dad;
 			var animCheck:String = 'hey';
 			if(note.gfNote)
 			{
@@ -3242,7 +3242,7 @@ class PlayState extends MusicBeatState
 
 		if(!cpuControlled_opponent)
 		{
-			var spr = playerStrums.members[note.noteData];
+			var spr = opponentStrums.members[note.noteData];
 			if(spr != null) spr.playAnim('confirm', true);
 		}
 		else strumPlayAnim(false, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
@@ -3252,7 +3252,8 @@ class PlayState extends MusicBeatState
 		var leData:Int = Math.round(Math.abs(note.noteData));
 		var leType:String = note.noteType;
 		
-		var result:Dynamic = callOnLuas('goodNoteHit', [notes.members.indexOf(note), leData, leType, isSus]);
+		var functionReturn:String = ClientPrefs.data.playOpponent ? 'goodNoteHit' : 'opponentNoteHit';
+		var result:Dynamic = callOnLuas(functionReturn, [notes.members.indexOf(note), leData, leType, isSus]);
 		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('goodNoteHit', [note]);
 
 		if (!note.isSustainNote)
@@ -3591,60 +3592,11 @@ class PlayState extends MusicBeatState
 	{
 		try
 		{
-		    /*
 			var newScript:HScript = new HScript(file);
 			newScript.doString(File.getContent(file));
 			hscriptArray.push(newScript);
 			if(newScript.exists('onCreate')) newScript.call('onCreate');
 			trace('initialized sscript interp successfully: $file');
-			*//*。
-			var newScript:HScript = new HScript(file);
-			newScript.doString(File.getContent(file));
-			hscriptArray.push(newScript);
-			//if(newScript.exists('onCreate')) newScript.call('onCreate');
-			//trace('initialized sscript interp successfully: $file');
-			
-			if(newScript.exists('onCreate'))
-			{
-				var callValue = newScript.call('onCreate');
-				if(!callValue.succeeded)
-				{
-					for (e in callValue.exceptions)
-						if (e != null)
-							addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, e.message.indexOf('\n') + 1)}', FlxColor.RED);
-
-					newScript.destroy();
-					hscriptArray.remove(newScript);
-					trace('failed to initialize tea interp!!! ($file)');
-				}
-				else trace('initialized tea interp successfully: $file');
-			}
-			*/
-			var newScript:HScript = new HScript(null, file);
-			/*
-			if(newScript.parsingExceptions != null)
-			{
-				addTextToDebug('ERROR ON LOADING: ${newScript.parsingExceptions.message}', FlxColor.RED);
-				newScript.destroy();
-				return;
-			}*/
-
-			hscriptArray.push(newScript);
-			if(newScript.exists('onCreate'))
-			{
-				var callValue = newScript.call('onCreate');
-				if(!callValue.succeeded)
-				{
-					for (e in callValue.exceptions)
-						if (e != null)
-							addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, e.message.indexOf('\n'))}', FlxColor.RED);
-
-					newScript.destroy();
-					hscriptArray.remove(newScript);
-					trace('failed to initialize tea interp!!! ($file)');
-				}
-				else trace('initialized tea interp successfully: $file');
-			}
 		}
 		catch(e:Dynamic)
 		{
