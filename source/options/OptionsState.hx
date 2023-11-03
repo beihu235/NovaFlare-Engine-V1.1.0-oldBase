@@ -611,7 +611,7 @@ class OptionsState extends MusicBeatState
 					if (!onPlayState)
 					{
 						resetOptions();
-						
+						MusicBeatState.switchState(new android.AndroidControlsMenu());
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						new FlxTimer().start(1.5, function(tmr:FlxTimer)
 						{
