@@ -62,7 +62,7 @@ class AndroidControlsMenu extends MusicBeatState
 		newhbox.visible = false;
 		add(newhbox);
 
-		inputvari = new Alphabet(0, 50, controlitems[curSelected], false);
+		inputvari = new PsychAlphabet(0, 50, controlitems[curSelected], false, false, 0.05, 0.8);
 		inputvari.screenCenter(X);
 		add(inputvari);
 
@@ -162,7 +162,7 @@ class AndroidControlsMenu extends MusicBeatState
 		if (curSelected >= controlitems.length)
 			curSelected = 0;
 	
-		inputvari.set_text(controlitems[curSelected]);
+		inputvari.changeText(controlitems[curSelected]);
 		
 		buttonistouched = false;
 
