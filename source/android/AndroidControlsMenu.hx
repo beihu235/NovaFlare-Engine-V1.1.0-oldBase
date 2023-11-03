@@ -162,7 +162,7 @@ class AndroidControlsMenu extends MusicBeatState
 		if (curSelected >= controlitems.length)
 			curSelected = 0;
 	
-		inputvari.changeText(controlitems[curSelected]);
+		inputvari.set_text(controlitems[curSelected]);
 		
 		buttonistouched = false;
 
