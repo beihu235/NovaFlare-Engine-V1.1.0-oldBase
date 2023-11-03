@@ -2895,8 +2895,9 @@ class PlayState extends MusicBeatState
 
 		// Needed for the  "Just the Two of Us" achievement.
 		//									- Shadow Mario
+		#if ACHIEVEMENTS_ALLOWED
 		if(!keysPressed.contains(key)) keysPressed.push(key);
-
+        #end
 		//more accurate hit time for the ratings? part 2 (Now that the calculations are done, go back to the time it was before for not causing a note stutter)
 		Conductor.songPosition = lastTime;
 
