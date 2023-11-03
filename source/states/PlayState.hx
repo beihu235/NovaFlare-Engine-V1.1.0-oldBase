@@ -3211,6 +3211,10 @@ class PlayState extends MusicBeatState
 			combo++;
 			if(combo > 9999) combo = 9999;
 			popUpScore(note);
+			
+			var noteDiff:Float = (Conductor.songPosition - note.strumTime + ClientPrefs.data.ratingOffset) / playbackRate;
+			rsNoteMs.push((noteDiff));
+			rsNoteTime.push(note.strumTime);
 		}
 		var gainHealth:Bool = true; // prevent health gain, as sustains are threated as a singular note
 		if (guitarHeroSustains && note.isSustainNote)
@@ -3300,6 +3304,10 @@ class PlayState extends MusicBeatState
 			combo++;
 			if(combo > 9999) combo = 9999;
 			popUpScore(note);
+			
+			var noteDiff:Float = (Conductor.songPosition - note.strumTime + ClientPrefs.data.ratingOffset) / playbackRate;
+			rsNoteMs.push((noteDiff));
+			rsNoteTime.push(note.strumTime);
 		}
 		var gainHealth:Bool = true; // prevent health gain, as sustains are threated as a singular note
 		if (guitarHeroSustains && note.isSustainNote)
