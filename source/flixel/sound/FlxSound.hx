@@ -13,9 +13,9 @@ import flixel.system.FlxAssets.FlxSoundAsset;
 import flixel.util.FlxStringUtil;
 
 #if (flixel >= "5.3.0")
-import flixel.system.FlxSoundGroup;
-#else
 import flixel.sound.FlxSoundGroup;
+#else
+import flixel.system.FlxSoundGroup;
 #end
 
 import openfl.Assets;
