@@ -3596,7 +3596,7 @@ class PlayState extends MusicBeatState
 	public function startHScriptsNamed(scriptFile:String)
 	{
 		var scriptToLoad:String = Paths.modFolders(scriptFile);
-		if(!FileSystem.exists(scriptFile))
+		if(!FileSystem.exists(scriptToLoad))
 			scriptToLoad = SUtil.getPath() + Paths.getPreloadPath(scriptFile);
 		
 		if(FileSystem.exists(scriptToLoad))
