@@ -1687,12 +1687,12 @@ class PlayState extends MusicBeatState
 		#if desktop
 		if (health > 0 && !paused) DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 		#end
-		
+		/*
 		var ret:Dynamic = callOnScripts('onPause', null, true);
 			if(ret != FunkinLua.Function_Stop) {
 				openPauseMenu();
 			}
-
+        */
 		super.onFocusLost();
 	}
 
@@ -3096,7 +3096,7 @@ class PlayState extends MusicBeatState
 		}
 		combo = 0;
         
-        if (!note.isSustainNote){
+        if (!note.isSustainNote && note != null){
 		    rsNoteMs.push(167);
 		    rsNoteTime.push(note.strumTime);
 		}
@@ -3363,9 +3363,6 @@ class PlayState extends MusicBeatState
 	
 	public function goodNoteHitForOpponent(note:Note):Void
 	{
-	    /*if (Paths.formatToSongPath(SONG.song) != 'tutorial')
-			camZooming = true;
-        */
 		if(note.noteType == 'Hey!' && boyfriend.animOffsets.exists('hey')) {
 			boyfriend.playAnim('hey', true);
 			boyfriend.specialAnim = true;
