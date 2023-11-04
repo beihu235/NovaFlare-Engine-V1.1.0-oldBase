@@ -1858,7 +1858,6 @@ class PlayState extends MusicBeatState
 		{
 			if(!inCutscene)
 			{
-			    var char:Character = ClientPrefs.data.playOpponent ? dad : boyfriend;
 				if(ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled) {
 					keysCheck();
 				} else
@@ -3194,9 +3193,9 @@ class PlayState extends MusicBeatState
 			{
 				switch(note.noteType) {
 					case 'Hurt Note': //Hurt note
-						if(boyfriend.animation.getByName('hurt') != null) {
-							boyfriend.playAnim('hurt', true);
-							boyfriend.specialAnim = true;
+						if(dad.animation.getByName('hurt') != null) {
+							dad.playAnim('hurt', true);
+							dad.specialAnim = true;
 						}
 				}
 			}
@@ -3261,7 +3260,7 @@ class PlayState extends MusicBeatState
 		var leData:Int = Math.round(Math.abs(note.noteData));
 		var leType:String = note.noteType;
 		
-		var functionReturn:String = ClientPrefs.data.playOpponent ? 'goodNoteHit' : 'opponentNoteHit';
+		var functionReturn:String = ClientPrefs.data.OpponentCodeFix ? 'goodNoteHit' : 'opponentNoteHit';
 		var result:Dynamic = callOnLuas(functionReturn, [notes.members.indexOf(note), leData, leType, isSus]);
 		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('goodNoteHit', [note]);
 
@@ -3388,7 +3387,7 @@ class PlayState extends MusicBeatState
 		strumPlayAnim(false, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
 		note.hitByOpponent = true;
         
-        var functionReturn:String = ClientPrefs.data.playOpponent ? 'opponentNoteHit' : 'goodNoteHit';
+        var functionReturn:String = ClientPrefs.data.OpponentCodeFix ? 'opponentNoteHit' : 'goodNoteHit';
 		var result:Dynamic = callOnLuas(functionReturn, [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
 		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript(functionReturn, [note]);
 
@@ -3602,15 +3601,43 @@ class PlayState extends MusicBeatState
 	{
 		try
 		{
-			var newScript:HScript = new HScript(null, file);
-			/*
-			if(newScript.parsingException != null)
+		    /*
+			var newScript:HScript = new HScript(file);
+			newScript.doString(File.getContent(file));
+			hscriptArray.push(newScript);
+			if(newScript.exists('onCreate')) newScript.call('onCreate');
+			trace('initialized sscript interp successfully: $file');
+			*//*。
+			var newScript:HScript = new HScript(file);
+			newScript.doString(File.getContent(file));
+			hscriptArray.push(newScript);
+			//if(newScript.exists('onCreate')) newScript.call('onCreate');
+			//trace('initialized sscript interp successfully: $file');
+			
+			if(newScript.exists('onCreate'))
 			{
-				addTextToDebug('ERROR ON LOADING: ${newScript.parsingException.message}', FlxColor.RED);
-				newScript.kill();
-				return;
+				var callValue = newScript.call('onCreate');
+				if(!callValue.succeeded)
+				{
+					for (e in callValue.exceptions)
+						if (e != null)
+							addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, e.message.indexOf('\n') + 1)}', FlxColor.RED);
+
+					newScript.destroy();
+					hscriptArray.remove(newScript);
+					trace('failed to initialize tea interp!!! ($file)');
+				}
+				else trace('initialized tea interp successfully: $file');
 			}
 			*/
+			var newScript:HScript = new HScript(null, file);
+			/*
+			if(newScript.parsingExceptions != null)
+			{
+				addTextToDebug('ERROR ON LOADING: ${newScript.parsingExceptions.message}', FlxColor.RED);
+				newScript.destroy();
+				return;
+			}*/
 
 			hscriptArray.push(newScript);
 			if(newScript.exists('onCreate'))
@@ -3628,17 +3655,10 @@ class PlayState extends MusicBeatState
 				}
 				else trace('initialized tea interp successfully: $file');
 			}
-			
 		}
-		catch(e)
+		catch(e:Dynamic)
 		{
-			addTextToDebug('ERROR ($file) - ' + e.message.substr(0, e.message.indexOf('\n')), FlxColor.RED);
-			var newScript:HScript = cast (SScript.global.get(file), HScript);
-			if(newScript != null)
-			{
-				newScript.destroy();
-				hscriptArray.remove(newScript);
-			}
+			addTextToDebug('ERROR ($file) - ' + e.toString(), FlxColor.RED);
 		}
 	}
 	#end
