@@ -25,6 +25,10 @@ import sys.io.Process;
 import flixel.FlxSprite;
 import flixel.FlxObject;
 
+#if linux
+import lime.graphics.Image;
+#end
+
 class Main extends Sprite
 {
 	var game = {
@@ -102,21 +106,16 @@ class Main extends Sprite
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}
-		/*
-		fpsBG = new FPSBG(10, 3, 'test');
-		addChild(fpsBG);
-		if(fpsBG != null) {
-			fpsBG.visible = ClientPrefs.data.showFPS;
-		}
-		
-        var myOtherClass = new FPSBG(10, 3, 'test');
-        myOtherClass.addImage(fpsBG);
-        addChild(fpsBG);
-		*/
+	    
+	    
 		
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		
+		#if linux
+		var icon = Image.fromFile("icon.png");
+		Lib.current.stage.window.setIcon(icon);
+		#end
 
 		#if html5
 		FlxG.autoPause = false;
