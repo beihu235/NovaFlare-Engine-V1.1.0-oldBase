@@ -3179,6 +3179,9 @@ class PlayState extends MusicBeatState
 	{
 		if(note.wasGoodHit) return;
 		if(cpuControlled_opponent && (note.ignoreNote || note.hitCausesMiss)) return;
+		
+		if (Paths.formatToSongPath(SONG.song) != 'tutorial')
+			camZooming = true;
 
 		note.wasGoodHit = true;
 		if (ClientPrefs.data.hitsoundVolume > 0 && !note.hitsoundDisabled)
@@ -3223,7 +3226,16 @@ class PlayState extends MusicBeatState
 			health += note.hitHealth * healthGain;
 
 		if(!note.noAnimation) {
-			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))];
+		    var altAnim:String = note.animSuffix;
+
+			if (SONG.notes[curSection] != null)
+			{
+				if (SONG.notes[curSection].altAnim && !SONG.notes[curSection].gfSection) {
+					altAnim = '-alt';
+				}
+			}
+			
+			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))] + altAnim;
 
 			var char:Character = dad;
 			var animCheck:String = 'hey';
