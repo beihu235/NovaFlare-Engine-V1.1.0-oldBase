@@ -54,7 +54,7 @@ jobs:
           haxelib setup ~/haxelib
           haxelib install hxcpp 4.2.1 > /dev/null
           haxelib install lime 7.9.0
-          haxelib install openfl 9.1.0
+          haxelib install openfl 9.2.0
           haxelib --never install flixel 5.2.2
           haxelib run lime setup flixel
           haxelib install flixel-tools 1.5.1
@@ -62,7 +62,7 @@ jobs:
           haxelib install flixel-addons 3.0.2
           haxelib install tjson
           haxelib install hxjsonast
-          haxelib git SScript https://github.com/MaysLastPlay10/SScript-backup
+          haxelib git SScript https://github.com/beihu235/Sscript4.1.0
           haxelib git hxCodec https://github.com/SPLCoding/hxCodec-but-it-works-xd.git
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
@@ -82,7 +82,7 @@ jobs:
           haxelib run lime config ANDROID_NDK_ROOT $ANDROID_NDK_HOME
           haxelib run lime config JAVA_HOME $JAVA_HOME
           haxelib run lime config ANDROID_SETUP true
-          haxelib set openfl 9.1.0
+          haxelib set openfl 9.2.0
           haxelib set lime 7.9.0
           haxelib set flixel 5.2.2
           haxelib set flixel-addons 3.0.2
