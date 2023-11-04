@@ -3587,11 +3587,11 @@ class PlayState extends MusicBeatState
 		if(!FileSystem.exists(scriptFile))
 			scriptToLoad = SUtil.getPath() + Paths.getPreloadPath(scriptFile);
 		
-		if(FileSystem.exists(scriptFile))
+		if(FileSystem.exists(scriptToLoad))
 		{
-			if (SScript.global.exists(scriptFile)) return false;
+			if (SScript.global.exists(scriptToLoad)) return false;
 
-			initHScript(scriptFile);
+			initHScript(scriptToLoad);
 			return true;
 		}
 		return false;
