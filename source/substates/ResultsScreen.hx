@@ -81,7 +81,7 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBG = new FlxSprite(FlxG.width - 550 - 50, 50);
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
-		graphBG.setGraphicSize(graphWidth, graphHeight);
+		//graphBG.setGraphicSize(graphWidth, graphHeight);
 		graphBG.updateHitbox();
 		
 		var noteSpr = FlxSpriteUtil.flashGfx;		
