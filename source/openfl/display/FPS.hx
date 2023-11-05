@@ -149,7 +149,7 @@ class FPS extends TextField
 			
 		if (ClientPrefs.data.showMEM){
 			if (memoryMegas > 1000) memoryMegas = Math.ceil( Math.abs( System.totalMemory ) / 10000000 / 1.024)/100;
-				text += "\nMEM: " + newmemoryMegas + " GB";            
+				text += "\nMEM: " + memoryMegas + " GB";            
 			
 			/*
 			else{
