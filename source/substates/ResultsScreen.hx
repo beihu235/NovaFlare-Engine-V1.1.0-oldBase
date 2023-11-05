@@ -78,10 +78,10 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		var graphWidth = 550;
 		var graphHeight = 300;
-		graphBG = new FlxSprite(FlxG.width - 550 - 50, 50);
+		graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).loadGraphic(Paths.image('mainmenu_sprite/ResultsScreenBG');
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
-		//graphBG.setGraphicSize(graphWidth, graphHeight);
+		graphBG.setGraphicSize(graphWidth, graphHeight);
 		graphBG.updateHitbox();
 		
 		var noteSpr = FlxSpriteUtil.flashGfx;		
@@ -92,7 +92,7 @@ class ResultsScreen extends MusicBeatSubstate
 	    var noteSize = 2.3;
 	    var MoveSize = 0.8;
 		for (i in 0...PlayState.rsNoteTime.length){
-		    if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.sickWindow) color = ColorArray[0];
+		    if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.marvelousWindow) color = ColorArray[0];
 		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.sickWindow) color = ColorArray[1];
 		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.goodWindow) color = ColorArray[2];
 		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.badWindow) color = ColorArray[3];
@@ -315,7 +315,7 @@ class ResultsScreen extends MusicBeatSubstate
 		});
 		
 		new FlxTimer().start(2, function(tmr:FlxTimer){
-			FlxTween.tween(graphBG, {alpha: 0.75}, 0.5);
+			FlxTween.tween(graphBG, {alpha: 1}, 0.5);
 			
 			FlxTween.tween(graphJudgeCenter, {alpha: 0.3}, 0.5);	
 			FlxTween.tween(graphSickUp, {alpha: 0.3}, 0.5);	
