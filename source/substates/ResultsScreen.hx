@@ -27,19 +27,6 @@ import openfl.geom.Rectangle;
 import sys.io.File;
 import sys.FileSystem;
 #end
-import tjson.TJSON as Json;
-
-typedef NoteTypeColorData =
-{
-
-	sick:FlxColor,
-	good:FlxColor,
-    bad:FlxColor,
-    shit:FlxColor,
-    miss:FlxColor
-    
-}
-
 
 class ResultsScreen extends MusicBeatSubstate
 {
@@ -73,27 +60,15 @@ class ResultsScreen extends MusicBeatSubstate
     public var color:FlxColor;
 	public function new(x:Float, y:Float)
 	{
-		super();
-		/*
-		if (FileSystem.exists(SUtil.getPath() + 'assets/images/mainmenu_sprite/rsNoteColor.json'))
-		NoteTypeColor = Json.parse(SUtil.getPath() + 'assets/images/mainmenu_sprite/rsNoteColor.json');
-		else
-		NoteTypeColor = Json.parse(Paths.getPath('images/mainmenu_sprite/rsNoteColor.json', TEXT));
-		
-		ColorArray.push(NoteTypeColor.sick);
-		ColorArray.push(NoteTypeColor.good);
-		ColorArray.push(NoteTypeColor.bad);
-		ColorArray.push(NoteTypeColor.shit);
-		ColorArray.push(NoteTypeColor.miss);
-		*/
-	
+		super();	
 				
 		ColorArray = [
-		0xFF00FFFF,
-	    0xFF00FF00,
-	    0xFFFF7F00,
-	    0xFFFF5858,
-	    0xFFFF0000
+		0xFFFF00FF, //marvelous
+		0xFF00FFFF, //sick
+	    0xFF00FF00, //good
+	    0xFFFF7F00, //bad
+	    0xFFFF5858, //shit
+	    0xFFFF0000 //miss
 		];
 		
 		background = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -114,19 +89,21 @@ class ResultsScreen extends MusicBeatSubstate
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 	    
 	    var noteSize = 2.3;
-	    var MoveSize = 0.6;
+	    var MoveSize = 0.8;
 		for (i in 0...PlayState.rsNoteTime.length){
-		    if (Math.abs(PlayState.rsNoteMs[i]) <= 200) color = ColorArray[4];
-		    if (Math.abs(PlayState.rsNoteMs[i]) <= Conductor.safeZoneOffset) color = ColorArray[3];
-		    if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.badWindow) color = ColorArray[2];
-		    if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.goodWindow) color = ColorArray[1];
 		    if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.sickWindow) color = ColorArray[0];
+		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.sickWindow) color = ColorArray[1];
+		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.goodWindow) color = ColorArray[2];
+		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.badWindow) color = ColorArray[3];
+		    else if (Math.abs(PlayState.rsNoteMs[i]) <= Conductor.safeZoneOffset) color = ColorArray[4];
+		    else color = ColorArray[4];		    		    		    
+		    		    
 		    FlxSpriteUtil.beginDraw(color);
-		    if (Math.abs(PlayState.rsNoteMs[i]) <= 166){
-    		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / Conductor.safeZoneOffset) /*- noteSize / 2*/, noteSize);
+		    if (Math.abs(PlayState.rsNoteMs[i]) <= Conductor.safeZoneOffset){
+    		    noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / Conductor.safeZoneOffset), noteSize);
     		}
     		else{
-    		noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.8 /*- noteSize / 2*/, noteSize);		
+    		    noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.9, noteSize);		
     		}
     		
 		    graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
@@ -220,9 +197,9 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		//-----------------------BG
 		var opponentExtend:String = '';
-		if (ClientPrefs.data.playOpponent) opponentExtend = '(Opponent)';
-		clearText = new FlxText(20, -155, 0, 'Song Cleared!\n' + PlayState.SONG.song + opponentExtend + ' - ' + Difficulty.getString() + '\n');
-		clearText.size = 34;
+		if (ClientPrefs.data.playOpponent) opponentExtend = '(Opponent) - ';
+		clearText = new FlxText(20, -180, 300, 'Song Cleared!\n' + PlayState.SONG.song + '\n' + opponentExtend + Difficulty.getString() + '\n');
+		clearText.size = 30;
 		clearText.font = Paths.font('vcr.ttf');
 		clearText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
 		clearText.scrollFactor.set();
@@ -231,7 +208,9 @@ class ResultsScreen extends MusicBeatSubstate
 	    
 	    var ACC = Math.ceil(PlayState.rsACC * 10000) / 100;
 		judgeText = new FlxText(-400, 200, 0, 
-		'Judgements:\nSicks: ' + PlayState.rsSicks 
+		'Judgements'
+		if (ClientPrefs.data.marvelousRating) + ':\nMarvelous: ' + PlayState.rsMarvelouss
+		+ ':\nSicks: ' + PlayState.rsSicks
 		+ '\nGoods: ' + PlayState.rsGoods 
 		+ '\nBads: ' + PlayState.rsBads 
 		+ '\nShits: ' + PlayState.rsShits 
