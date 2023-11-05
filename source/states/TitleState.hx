@@ -251,13 +251,13 @@ class TitleState extends MusicBeatState
 		}
 		startVideo('menuExtend/titleIntro');
 		
-		versionShit = new FlxText(0, FlxG.height - 26, 0, "Press " + #if andriod "Back on your phone " #else "Enter " #end + "to skip", 18);
-		scoreText.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 18);
-		scoreText.alignment = CENTER;
-        scoreText.screenCenter(X);
-        versionShit.scrollFactor.set();
-		versionShit.antialiasing = ClientPrefs.data.antialiasing;
-		add(versionShit);
+		skipVideo = new FlxText(0, FlxG.height - 26, 0, "Press " + #if andriod "Back on your phone " #else "Enter " #end + "to skip", 18);
+		skipVideo.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 18);
+		skipVideo.alignment = CENTER;
+        skipVideo.screenCenter(X);
+        skipVideo.scrollFactor.set();
+		skipVideo.antialiasing = ClientPrefs.data.antialiasing;
+		add(skipVideo);
 	}
 	
 	function startCutscenesOut()
@@ -842,7 +842,7 @@ class TitleState extends MusicBeatState
 
 	function videoEnd()
 	{
-	    versionShit.visible = false;
+	    skipVideo.visible = false;
 		startCutscenesOut();
 	}
 }
