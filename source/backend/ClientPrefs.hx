@@ -93,7 +93,7 @@ class SaveVariables {
 		'opponentplay' => false
 	];
 	
-	public var marvelousRating:Bool = false;	
+	public var marvelousRating:Bool = true;	
 	public var marvelousSprite:Bool = true;	
     public var marvelousWindow:Int = 15;
     
