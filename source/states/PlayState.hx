@@ -188,6 +188,7 @@ class PlayState extends MusicBeatState
     public static var rsNoteTime:Array<Float> = [];
     public static var rsSongLength:Float = 0;
     
+    public static var reMarvelous:Int = 0;
     public static var rsSicks:Int = 0;
 	public static var rsGoods:Int = 0;
 	public static var rsBads:Int = 0;
@@ -2582,6 +2583,7 @@ class PlayState extends MusicBeatState
 	                rsGoods = ratingsData[1].hits;
 	                rsBads = ratingsData[2].hits;
 	                rsShits = ratingsData[3].hits;
+	                if (ClientPrefs.data.marvelousRating) reMarvelous = ratingsData[4].hits;
 	                
 	                rsACC = ratingPercent;
 	                rsScore = songScore;
