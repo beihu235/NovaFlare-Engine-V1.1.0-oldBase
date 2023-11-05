@@ -705,9 +705,8 @@ class OptionsState extends MusicBeatState
 							selectedOptionIndex = 0;
 						}
 						
-						var mumDownFix:Int = startAtUP ? 6 : 5;
+						var mumDownFix:Int = startAtUP ? 5 : 6;
 						
-						if (selectedOptionIndex == mumDownFix - 1) DOWNmoveFix = true;
 						
 						if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - mumDownFix + 1) DOWNmoveFix = true;
 
