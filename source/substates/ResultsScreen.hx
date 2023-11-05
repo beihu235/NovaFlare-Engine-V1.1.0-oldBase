@@ -54,7 +54,7 @@ class ResultsScreen extends MusicBeatSubstate
 	public var setMsText:FlxText;
 	public var backText:FlxText;
     
-    public var NoteTypeColor:NoteTypeColorData;
+    //public var NoteTypeColor:NoteTypeColorData;
     
     public var ColorArray:Array<FlxColor> = [];
     public var color:FlxColor;
@@ -81,10 +81,11 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBG = new FlxSprite(FlxG.width - 550 - 50, 50);
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
-		
+		graphBG.setGraphicSize(graphWidth, graphHeight);
+		graphBG.updateHitbox();
 		
 		var noteSpr = FlxSpriteUtil.flashGfx;		
-		var _rect = new Rectangle(0, 0, graphWidth, graphHeight);
+		//var _rect = new Rectangle(0, 0, graphWidth, graphHeight);
 		//graphBG.pixels.fillRect(_rect, 0xFF000000);
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 	    
