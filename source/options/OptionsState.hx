@@ -724,7 +724,7 @@ class OptionsState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
-						var mumUpFix:Bool = false;
+						var UPmoveFix:Bool = false;
 						if (selectedOptionIndex == 5) UPmoveFix = true;
 						
 						selectedOptionIndex--;
