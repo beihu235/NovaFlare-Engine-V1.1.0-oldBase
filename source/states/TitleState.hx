@@ -820,6 +820,7 @@ class TitleState extends MusicBeatState
 			#if (hxCodec >= "3.0.0")
 			// Recent versions
 			video.play(filepath);
+			showText();
 			video.onEndReached.add(function()
 			{
 				video.dispose();
@@ -829,9 +830,6 @@ class TitleState extends MusicBeatState
 			#else
 			// Older versions
 			video.playVideo(filepath);
-			add(skipVideo);
-			FlxTween.tween(skipVideo, {alpha: 1}, 1, {ease: FlxEase.quadIn});
-			FlxTween.tween(skipVideo, {alpha: 0}, 1, {ease: FlxEase.quadIn, startDelay: 4});
 			video.finishCallback = function()
 			{
 				videoEnd();
@@ -849,5 +847,12 @@ class TitleState extends MusicBeatState
 	{
 	    skipVideo.visible = false;
 		startCutscenesOut();
+	}
+	
+	function showText(){
+	    add(skipVideo);
+		FlxTween.tween(skipVideo, {alpha: 1}, 1, {ease: FlxEase.quadIn});
+		FlxTween.tween(skipVideo, {alpha: 0}, 1, {ease: FlxEase.quadIn, startDelay: 4});
+	
 	}
 }
