@@ -46,6 +46,7 @@ class Rating
 		rating.ratingMod = 0;
 		rating.score = 50;
 		rating.noteSplash = false;
+		ratingsData.push(rating);
 		
 		if (ClientPrefs.data.marvelousRating){
     		var rating:Rating = new Rating('marvelous');
