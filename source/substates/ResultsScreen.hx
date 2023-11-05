@@ -65,7 +65,7 @@ class ResultsScreen extends MusicBeatSubstate
 		super();	
 				
 		ColorArray = [
-		0xFFFF00FF, //marvelous
+		0xFFFFFF00, //marvelous
 		0xFF00FFFF, //sick
 	    0xFF00FF00, //good
 	    0xFFFF7F00, //bad
@@ -99,7 +99,7 @@ class ResultsScreen extends MusicBeatSubstate
 		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.goodWindow) color = ColorArray[2];
 		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.badWindow) color = ColorArray[3];
 		    else if (Math.abs(PlayState.rsNoteMs[i]) <= Conductor.safeZoneOffset) color = ColorArray[4];
-		    else color = ColorArray[4];		    		    		    
+		    else color = ColorArray[5];		    		    		    
 		    		    
 		    FlxSpriteUtil.beginDraw(color);
 		    if (Math.abs(PlayState.rsNoteMs[i]) <= Conductor.safeZoneOffset){
