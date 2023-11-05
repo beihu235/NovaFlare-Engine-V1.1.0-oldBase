@@ -210,7 +210,7 @@ class ResultsScreen extends MusicBeatSubstate
 		add(clearText);		
 	    
 	    var ACC = Math.ceil(PlayState.rsACC * 10000) / 100;
-	    var marvelousRate = ClientPrefs.data.marvelousRating ? ':\nMarvelous: ' + PlayState.rsMarvelouss : '';
+	    var marvelousRate = ClientPrefs.data.marvelousRating ? ':\nMarvelous: ' + PlayState.reMarvelouss : '';
 		judgeText = new FlxText(-400, 200, 0, 
 		'Judgements'
 		+ marvelousRate
