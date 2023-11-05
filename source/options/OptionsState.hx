@@ -705,8 +705,7 @@ class OptionsState extends MusicBeatState
 							selectedOptionIndex = 0;
 						}
 						
-						var mumDownFix:Int = startAtUP ? 5 : 6;
-						
+						var mumDownFix:Int = startAtUP ? 5 : 4;
 						
 						if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - mumDownFix + 1) DOWNmoveFix = true;
 
@@ -750,7 +749,7 @@ class OptionsState extends MusicBeatState
 							}
 						}
 						
-						var mumUpFix:Int = startAtUP ? 5 : 6;
+						var mumUpFix:Int = startAtUP ? 4 : 5;
 						
 						if (selectedOptionIndex == mumUpFix - 1) UPmoveFix = true;
 
