@@ -209,10 +209,7 @@ class OptionsState extends MusicBeatState
 			    //new TimeBarType("Change the song's current position bar."),
 			]),
 			new OptionCata(640, 40, OptionsName.setMisc(), [
-			    new Language("Change language in some state."),
-				new FlashingLightsOption("Toggle flashing lights that can cause epileptic seizures and strain."),
-				new QualityLow("Turn off some object on stages"),
-				new AntialiasingOption("Toggle antialiasing, improving graphics quality at a slight performance penalty."),
+			    
 				new SplashAlpha('How much transparent should the Note Splashes be.'),
 				new DisableNoteRGB('Easier to disableNoteRGB for Note.'),
 				new DisableSplashRGB('Easier to disableNoteRGB for Splash.'),
@@ -227,13 +224,7 @@ class OptionsState extends MusicBeatState
 				new ResultsScreen('If checked, Open Results Screen at end song'),
 				new RatingOffset('Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.'),
 				//new ColorBlindOption("You can set colorblind filter (makes the game more playable for colorblind people)."),
-				new ShadersOption("Shaders used for some visual effects, and also CPU intensive for weaker PCs."),
-				new GPUcacheOption("If checked, allows the GPU to be used for caching textures, decreasing RAM usage."),
-				new FPSCapOption("Change your FPS Cap."),		
-				new FPSOption("Toggle the FPS Counter."),
-				new FPSRainbowOption("Make the FPS Counter flicker through rainbow colors."),
-                new MEMOption("Toggle the MEM Counter."),
-                new MSOption("Toggle the update time Counter."),
+				
                 
 				//new VintageOption("Adds 'vintage' on game screen."),
                 
@@ -248,10 +239,23 @@ class OptionsState extends MusicBeatState
 				//new AutoSaveInt("Change Chart AutoSave Interval."),               
 			 //   new PauseCountDownOption("Toggle countdown after pressing 'Resume' in Pause Menu."),
 			]),
-			new OptionCata(50, 40 + 64, OptionsName.setMenuExtend(), [
-			    new HideHud("Shows to you hud."),				
+			new OptionCata(640, 40 + 64, "System", [
+			    new Language("Change language in some state."),
+			    new ShadersOption("Shaders used for some visual effects, and also CPU intensive for weaker PCs."),
+				new GPUcacheOption("If checked, allows the GPU to be used for caching textures, decreasing RAM usage."),				
+				new FlashingLightsOption("Toggle flashing lights that can cause epileptic seizures and strain."),
+				new QualityLow("Turn off some object on stages"),
+				new AntialiasingOption("Toggle antialiasing, improving graphics quality at a slight performance penalty."),
+				new FPSCapOption("Change your FPS Cap."),		
+				new FPSOption("Toggle the FPS Counter."),
+				new FPSRainbowOption("Make the FPS Counter flicker through rainbow colors."),
+                new MEMOption("Toggle the MEM Counter."),
+                new MSOption("Toggle the update time Counter."),
 			]),
 			new OptionCata(345, 40 + 64, OptionsName.setControls(), [
+			    new HideHud("Shows to you hud."),				
+			]),
+			new OptionCata(50, 40 + 64, OptionsName.setMenuExtend(), [
 			    new HideHud("Shows to you hud."),				
 			]),
 			new OptionCata(-1, 125, "Editing Judgements", [			
