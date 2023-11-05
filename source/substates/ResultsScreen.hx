@@ -78,7 +78,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		var graphWidth = 550;
 		var graphHeight = 300;
-		graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).makeGraphic(550, 300, FlxColor.BLACK);
+		graphBG = new FlxSprite(FlxG.width - 550 - 50, 50));
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
 		add(graphBG);
@@ -207,9 +207,10 @@ class ResultsScreen extends MusicBeatSubstate
 		add(clearText);		
 	    
 	    var ACC = Math.ceil(PlayState.rsACC * 10000) / 100;
+	    var marvelousRate = ClientPrefs.data.marvelousRating ? ':\nMarvelous: ' + PlayState.rsMarvelouss : '';
 		judgeText = new FlxText(-400, 200, 0, 
 		'Judgements'
-		if (ClientPrefs.data.marvelousRating) + ':\nMarvelous: ' + PlayState.rsMarvelouss
+		+ marvelousRate
 		+ ':\nSicks: ' + PlayState.rsSicks
 		+ '\nGoods: ' + PlayState.rsGoods 
 		+ '\nBads: ' + PlayState.rsBads 
