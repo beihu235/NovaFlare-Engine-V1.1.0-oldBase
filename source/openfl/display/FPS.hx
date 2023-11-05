@@ -143,23 +143,24 @@ class FPS extends TextField
 			text = "FPS: " + DisplayFPS + "/" + ClientPrefs.data.framerate;
 
 			var memoryMegas:Float = 0;
-			var newmemoryMegas:Float = 0;		
+			//var newmemoryMegas:Float = 0;		
 
 			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
 			
 		if (ClientPrefs.data.showMEM){
-			if (memoryMegas > 1000)
-			{
-			    newmemoryMegas = Math.ceil( Math.abs( System.totalMemory ) / 10000000 / 1.024)/100;
+			if (memoryMegas > 1000) memoryMegas = Math.ceil( Math.abs( System.totalMemory ) / 10000000 / 1.024)/100;
 				text += "\nMEM: " + newmemoryMegas + " GB";            
-			}
+			
+			/*
 			else{
     			text += "\nMEM: " + memoryMegas + " MB";
 			}
+			*/
 		}
-            text += "\nNF V1.1.0";
             
-            if (ClientPrefs.data.showMS) text += '\n' + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
+            if (ClientPrefs.data.showMS) text += '\n' + "Delay: " + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + " MS";
+            
+            text += "\nNF V1.1.0";
                      
 			text += "\n";
 	
