@@ -78,7 +78,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		var graphWidth = 550;
 		var graphHeight = 300;
-		graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).loadGraphic(Paths.image('mainmenu_sprite/ResultsScreenBG');
+		graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).loadGraphic(Paths.image('mainmenu_sprite/ResultsScreenBG'));
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
 		graphBG.setGraphicSize(graphWidth, graphHeight);
