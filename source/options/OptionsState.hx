@@ -707,13 +707,13 @@ class OptionsState extends MusicBeatState
 						
 						var mumDownFix:Int = startAtUP ? 5 : 4;
 						
-						if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - mumDownFix + 1) DOWNmoveFix = true;
+						//if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - mumDownFix + 1) DOWNmoveFix = true;
 
 						if (selectedOptionIndex != 0
 							&& selectedOptionIndex != options[selectedCatIndex].options.length - 1
 							&& options[selectedCatIndex].options.length > 10 
 							&& selectedOptionIndex >= 5
-							&& (selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - mumDownFix || DOWNmoveFix)
+							&& (selectedOptionIndex < options[selectedCatIndex].options.length - 1 - mumDownFix || DOWNmoveFix)
 							)
 						{
 							for (i in selectedCat.optionObjects.members)
@@ -749,13 +749,13 @@ class OptionsState extends MusicBeatState
 							}
 						}
 						
-						var mumUpFix:Int = startAtUP ? 4 : 5;
+						var mumUpFix:Int = startAtUP ? 5 : 6;
 						
-						if (selectedOptionIndex == mumUpFix - 1) UPmoveFix = true;
+						//if (selectedOptionIndex == mumUpFix - 1) UPmoveFix = true;
 
 						if (selectedOptionIndex != 0 
     						&& options[selectedCatIndex].options.length > 10
-    						&& (selectedOptionIndex >= mumUpFix || UPmoveFix)
+    						&& (selectedOptionIndex > mumUpFix || UPmoveFix)
     						&& selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5
     						)						
 						{
