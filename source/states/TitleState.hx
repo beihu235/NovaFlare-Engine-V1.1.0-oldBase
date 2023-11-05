@@ -250,14 +250,6 @@ class TitleState extends MusicBeatState
 			return;
 		}
 		startVideo('menuExtend/titleIntro');
-		
-		skipVideo = new FlxText(0, FlxG.height - 26, 0, "Press " + #if andriod "Back on your phone " #else "Enter " #end + "to skip", 18);
-		skipVideo.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 18);
-		skipVideo.alignment = CENTER;
-        skipVideo.screenCenter(X);
-        skipVideo.scrollFactor.set();
-		skipVideo.antialiasing = ClientPrefs.data.antialiasing;
-		add(skipVideo);
 	}
 	
 	function startCutscenesOut()
@@ -800,6 +792,16 @@ class TitleState extends MusicBeatState
 	
 	function startVideo(name:String)
 	{
+	
+	    skipVideo = new FlxText(0, FlxG.height - 26, 0, "Press " + #if andriod "Back on your phone " #else "Enter " #end + "to skip", 18);
+		skipVideo.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 18);
+		skipVideo.alpha = 0;
+		skipVideo.alignment = CENTER;
+        skipVideo.screenCenter(X);
+        skipVideo.scrollFactor.set();
+		skipVideo.antialiasing = ClientPrefs.data.antialiasing;
+		
+		
 		#if VIDEOS_ALLOWED
 
 		var filepath:String = Paths.video(name);
@@ -827,6 +829,9 @@ class TitleState extends MusicBeatState
 			#else
 			// Older versions
 			video.playVideo(filepath);
+			add(skipVideo);
+			FlxTween.tween(skipVideo, {alpha: 1}, 1, {ease: FlxEase.quadIn});
+			FlxTween.tween(skipVideo, {alpha: 0}, 1, {ease: FlxEase.quadIn, startDelay: 4});
 			video.finishCallback = function()
 			{
 				videoEnd();
