@@ -46,7 +46,15 @@ class Rating
 		rating.ratingMod = 0;
 		rating.score = 50;
 		rating.noteSplash = false;
-		ratingsData.push(rating);
+		
+		if (ClientPrefs.data.marvelousRating){
+    		var rating:Rating = new Rating('marvelous');
+    		rating.ratingMod = 1;
+    		rating.score = 350;
+    		rating.image = ClientPrefs.data.marvelousSprite ? 'marvelous' : 'sick';
+    		rating.noteSplash = true;
+		    ratingsData.push(rating);
+		}
 		return ratingsData;
 	}
 }

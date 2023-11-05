@@ -13,31 +13,38 @@ class SaveVariables {
 	public var middleScroll:Bool = false;
 	public var filpChart:Bool = false;
 	public var fixLNL:Int= 0; //fix long note length
+	
 	public var playOpponent:Bool = false;
 	public var OpponentCodeFix:Bool = false;
 	public var botOpponentFix:Bool = true;
+	
 	public var opponentStrums:Bool = true;
 	
 	public var showFPS:Bool = true;
 	public var showMS:Bool = true;
 	public var showMEM:Bool = true;
 	public var rainbowFPS:Bool = false;
+	
 	public var flashing:Bool = true;
 	public var ResultsScreen:Bool = true;
 	public var autoPause:Bool = true;
-	public var antialiasing:Bool = true;	
+	public var antialiasing:Bool = true;
+	
 	public var noteSkin:String = 'Default';
 	public var splashSkin:String = 'Psych';
 	public var disableNoteRGB:Bool = false;
 	public var disableSplashRGB:Bool = false;
 	public var splashAlpha:Float = 0.6;
+	
 	public var lowQuality:Bool = false;
 	public var shaders:Bool = true;
-	public var cacheOnGPU:Bool = #if !switch false #else true #end; //From Stilic
+	public var cacheOnGPU:Bool = #if !switch false #else true #end; //From Stilic	
 	public var framerate:Int = 60;
+	
 	public var CustomFade:String = 'Move';
 	public var CustomFadeSound:Float = 0.5;
 	public var CustomFadeText:Bool = true;
+	
 	public var camZooms:Bool = true;
 	public var hideHud:Bool = false;
 	public var noteOffset:Int = 0;
@@ -85,9 +92,13 @@ class SaveVariables {
 		'botplay' => false,
 		'opponentplay' => false
 	];
-
+	
+	public var marvelousRating:Bool = false;	
+	public var marvelousSprite:Bool = true;	
+    public var marvelousWindow:Int = 15;
+    
 	public var comboOffset:Array<Int> = [0, 0, 0, 0];
-	public var ratingOffset:Int = 0;
+	public var ratingOffset:Int = 0;	
 	public var sickWindow:Int = 45;
 	public var goodWindow:Int = 90;
 	public var badWindow:Int = 135;
