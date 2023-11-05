@@ -373,8 +373,6 @@ class OptionsState extends MusicBeatState
 			  因为text在positionFix那里还加了偏移
 			*/
 			
-			startAtUP = true;
-			
 			if (cat.middle) isReset = true;				
 				
 			if (selectedOption != null)
@@ -489,8 +487,6 @@ class OptionsState extends MusicBeatState
 	var down_hold = false;
 	 
 	var anyKey = false;
-	
-	var startAtUP = true;
 	 
 	var holdTime:Float = 0;	
     var checkTime:Float = 0;	
@@ -683,19 +679,19 @@ class OptionsState extends MusicBeatState
 					}
 
 					if (down || down_hold)
-					{
-					    var DOWNmoveFix = false;
-					    
+					{					    					    
 						if (selectedOption.acceptType)
 							selectedOption.waitingType = false;
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
+						var DOWNmoveFix = false;
+					    if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - 4) DOWNmoveFix = true;
+						
 						selectedOptionIndex++;
 
 						if (selectedOptionIndex > options[selectedCatIndex].options.length - 1)
 						{
-						    startAtUP = true;
 						    
 							for (i in 0...selectedCat.options.length)
 							{
@@ -703,17 +699,13 @@ class OptionsState extends MusicBeatState
 								opt.y = selectedCat.positionFix + 54 + (46 * i);
 							}
 							selectedOptionIndex = 0;
-						}
-						
-						var mumDownFix:Int = startAtUP ? 5 : 4;
-						
-						//if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - mumDownFix + 1) DOWNmoveFix = true;
+						}																		
 
 						if (selectedOptionIndex != 0
 							&& selectedOptionIndex != options[selectedCatIndex].options.length - 1
 							&& options[selectedCatIndex].options.length > 10 
 							&& selectedOptionIndex >= 5
-							&& (selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - mumDownFix || DOWNmoveFix)
+							&& (selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5 || DOWNmoveFix)
 							)
 						{
 							for (i in selectedCat.optionObjects.members)
@@ -726,19 +718,19 @@ class OptionsState extends MusicBeatState
 					}
 					else if (up || up_hold)
 					{
-					    var UPmoveFix = false;
 					    
 						if (selectedOption.acceptType)
 							selectedOption.waitingType = false;
 						FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
+						var mumUpFixBool = false;
+						if (selectedOptionIndex == mumUpFix - 1) UPmoveFix = true;
+						
 						selectedOptionIndex--;
 
 						if (selectedOptionIndex < 0)
-						{
-						    startAtUP = false;
-						    
+						{						    
 							selectedOptionIndex = options[selectedCatIndex].options.length - 1;
 							
                             if (options[selectedCatIndex].options.length > 10)
@@ -747,15 +739,11 @@ class OptionsState extends MusicBeatState
 								var opt = selectedCat.optionObjects.members[i];
 								opt.y = selectedCat.positionFix + 54 + (46 * (i - (selectedCat.options.length - 10))); 
 							}
-						}
-						
-						var mumUpFix:Int = startAtUP ? 5 : 6;
-						
-						//if (selectedOptionIndex == mumUpFix - 1) UPmoveFix = true;
+						}																							
 
 						if (selectedOptionIndex != 0 
     						&& options[selectedCatIndex].options.length > 10
-    						&& (selectedOptionIndex >= mumUpFix || UPmoveFix)
+    						&& (selectedOptionIndex >= 5 || mumUpFixBool)
     						&& selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5
     						)						
 						{
