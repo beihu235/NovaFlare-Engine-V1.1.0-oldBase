@@ -85,7 +85,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		var noteSpr = FlxSpriteUtil.flashGfx;		
 		var _rect = new Rectangle(0, 0, graphWidth, graphHeight);
-		graphBG.pixels.fillRect(_rect, 0xFF000000);
+		//graphBG.pixels.fillRect(_rect, 0xFF000000);
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 	    
 	    var noteSize = 2.3;
