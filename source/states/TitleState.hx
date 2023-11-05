@@ -16,6 +16,7 @@ import openfl.Assets;
 import openfl.Lib;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
+import openfl.utils.Assets;
 
 import shaders.ColorSwap;
 
@@ -63,6 +64,8 @@ class TitleState extends MusicBeatState
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
+	
+	var skipVideo:FlxText;
 	
 	var titleTextColors:Array<FlxColor> = [0xFF33FFFF, 0xFF3333CC];
 	var titleTextAlphas:Array<Float> = [1, .64];
@@ -247,6 +250,14 @@ class TitleState extends MusicBeatState
 			return;
 		}
 		startVideo('menuExtend/titleIntro');
+		
+		versionShit = new FlxText(0, FlxG.height - 26, 0, "Press " + #if andriod "Back on your phone " #else "Enter " #end + "to skip", 18);
+		scoreText.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 18);
+		scoreText.alignment = CENTER;
+        scoreText.screenCenter(X);
+        versionShit.scrollFactor.set();
+		versionShit.antialiasing = ClientPrefs.data.antialiasing;
+		add(versionShit);
 	}
 	
 	function startCutscenesOut()
@@ -831,6 +842,7 @@ class TitleState extends MusicBeatState
 
 	function videoEnd()
 	{
+	    versionShit.visible = false;
 		startCutscenesOut();
 	}
 }
