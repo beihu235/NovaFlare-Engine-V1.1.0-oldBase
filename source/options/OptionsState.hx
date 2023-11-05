@@ -238,6 +238,12 @@ class OptionsState extends MusicBeatState
 				//new AutoSave("Turn AutoSaves your chating in Charting state."),
 				//new AutoSaveInt("Change Chart AutoSave Interval."),               
 			 //   new PauseCountDownOption("Toggle countdown after pressing 'Resume' in Pause Menu."),
+			]),			
+			new OptionCata(50, 40 + 64, OptionsName.setMenuExtend(), [
+			    new HideHud("Shows to you hud."),				
+			]),
+			new OptionCata(345, 40 + 64, OptionsName.setControls(), [
+			    new HideHud("Shows to you hud."),				
 			]),
 			new OptionCata(640, 40 + 64, "System", [
 			    new Language("Change language in some state."),
@@ -251,13 +257,7 @@ class OptionsState extends MusicBeatState
 				new FPSRainbowOption("Make the FPS Counter flicker through rainbow colors."),
                 new MEMOption("Toggle the MEM Counter."),
                 new MSOption("Toggle the update time Counter."),
-			]),
-			new OptionCata(345, 40 + 64, OptionsName.setControls(), [
-			    new HideHud("Shows to you hud."),				
-			]),
-			new OptionCata(50, 40 + 64, OptionsName.setMenuExtend(), [
-			    new HideHud("Shows to you hud."),				
-			]),
+			]),			
 			new OptionCata(-1, 125, "Editing Judgements", [			
 				new FrameOption("Changes how many frames you have for hitting a note earlier or late."),
 				new OffsetThing("Change the note visual offset (how many milliseconds a note looks like it is offset in a chart)"),
