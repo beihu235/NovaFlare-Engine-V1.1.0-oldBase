@@ -743,7 +743,7 @@ class OptionsState extends MusicBeatState
 
 						if (selectedOptionIndex != 0 
     						&& options[selectedCatIndex].options.length > 10
-    						&& (selectedOptionIndex >= 5 || mumUpFix)
+    						&& (selectedOptionIndex >= 5 || UPmoveFix)
     						&& selectedOptionIndex <= options[selectedCatIndex].options.length - 1 - 5
     						)						
 						{
