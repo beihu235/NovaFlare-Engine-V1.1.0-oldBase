@@ -46,6 +46,7 @@ class SaveVariables {
 	public var CustomFadeText:Bool = true;
 	
 	public var camZooms:Bool = true;
+	public var judgementCounter:Bool = true;
 	public var hideHud:Bool = false;
 	public var noteOffset:Int = 0;
 	public var arrowRGB:Array<Array<FlxColor>> = [
