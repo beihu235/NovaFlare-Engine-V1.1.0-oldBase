@@ -562,13 +562,12 @@ class PlayState extends MusicBeatState
 		add(scoreTxt);
 		
 		var marvelousRate:String = ClientPrefs.data.marvelousRating ? 'Marvelous: 0\n' : '';
-		judgementCounter_S = new FlxText(20, 0, 0, "", 18);
-		judgementCounter_S.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		judgementCounter_S = new FlxText(20, 0, 0, "", 20);
+		judgementCounter_S.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		judgementCounter_S.borderSize = 1.5;
 		judgementCounter_S.borderQuality = 2;
 		judgementCounter_S.scrollFactor.set();
 		judgementCounter_S.cameras = [camHUD];
-		judgementCounter_S.screenCenter(X);
 		judgementCounter_S.text = marvelousRate 
 		+ 'Sicks: 0' + '\n'
 		+ 'Goods: 0' + '\n'
