@@ -1226,11 +1226,11 @@ class PlayState extends MusicBeatState
 		+ ' | Rating: ${str}';
 		
 		var marvelousRate:String = ClientPrefs.data.marvelousRating ? 'Marvelous: ${ratingsData[4].hits}\n' : '';
-		judgementCounter_S.text = marvelousRate + 
-		+ 'Sicks: ${ratingsData[0].hits}%\n'
-		+ 'Goods: ${ratingsData[1].hits}%\n'
-		+ 'Bads: ${ratingsData[2].hits}%\n'
-		+ 'Shits: ${ratingsData[3].hits}%\n';
+		judgementCounter_S.text = marvelousRate
+		+ 'Sicks: ${ratingsData[0].hits}\n'
+		+ 'Goods: ${ratingsData[1].hits}\n'
+		+ 'Bads: ${ratingsData[2].hits}\n'
+		+ 'Shits: ${ratingsData[3].hits}\n';
 
 		if (!miss && !cpuControlled)
 			doScoreBop();
