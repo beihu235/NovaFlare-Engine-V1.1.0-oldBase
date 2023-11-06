@@ -562,7 +562,7 @@ class PlayState extends MusicBeatState
 		add(scoreTxt);
 		
 		var marvelousRate:String = ClientPrefs.data.marvelousRating ? 'Marvelous: 0\n' : '';
-		judgementCounter_S = new FlxText(20, 0, 0, "", 20);
+		judgementCounter_S = new FlxText(10, 0, 0, "", 20);
 		judgementCounter_S.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		judgementCounter_S.borderSize = 1.5;
 		judgementCounter_S.borderQuality = 2;
@@ -1222,15 +1222,8 @@ class PlayState extends MusicBeatState
 
 		scoreTxt.text = 'Score: ${songScore}'
 		+ (!instakillOnMiss ? ' | Misses: ${songMisses}' : "")
-		+ ' | Rating: ${str}';
+		+ ' | Rating: ${str}';		
 		
-		var marvelousRate:String = ClientPrefs.data.marvelousRating ? 'Marvelous: ${ratingsData[4].hits}\n' : '';
-		judgementCounter_S.text = marvelousRate
-		+ 'Sicks: ${ratingsData[0].hits}\n'
-		+ 'Goods: ${ratingsData[1].hits}\n'
-		+ 'Bads: ${ratingsData[2].hits}\n'
-		+ 'Shits: ${ratingsData[3].hits}\n';
-
 		if (!miss && !cpuControlled)
 			doScoreBop();
 
@@ -2738,6 +2731,13 @@ class PlayState extends MusicBeatState
 			if (PlayState.isPixelStage) uiSuffix = '-pixel';
 			antialias = !isPixelStage;
 		}
+		
+		var marvelousRate:String = ClientPrefs.data.marvelousRating ? 'Marvelous: ${ratingsData[4].hits}\n' : '';
+		judgementCounter_S.text = marvelousRate
+		+ 'Sicks: ${ratingsData[0].hits}\n'
+		+ 'Goods: ${ratingsData[1].hits}\n'
+		+ 'Bads: ${ratingsData[2].hits}\n'
+		+ 'Shits: ${ratingsData[3].hits}\n';
 
 		rating.loadGraphic(Paths.image(uiPrefix + daRating.image + uiSuffix));
 		rating.cameras = [camHUD];
