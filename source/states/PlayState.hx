@@ -246,6 +246,7 @@ class PlayState extends MusicBeatState
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
+	public var judgementCounter_S:FlxText; //add _S is make sure nobody make a new one broken this
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
 
@@ -559,6 +560,24 @@ class PlayState extends MusicBeatState
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.data.hideHud;
 		add(scoreTxt);
+		
+		var marvelousRate:String = ClientPrefs.data.marvelousRating ？'Marvelous: 0\n' : '';
+		judgementCounter_S = new FlxText(20, 0, 0, "", 18);
+		judgementCounter_S.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		judgementCounter_S.borderSize = 1.5;
+		judgementCounter_S.borderQuality = 2;
+		judgementCounter_S.scrollFactor.set();
+		judgementCounter_S.cameras = [camHUD];
+		judgementCounter_S.screenCenter(X);
+		judgementCounter_S.text = marvelousRate 
+		+ 'Sicks: 0' + '\n'
+		+ 'Goods: 0' + '\n'
+		+ 'Bads: 0' + '\n'
+		+ 'Shits: 0' + '\n';
+		judgementCounter_S.visible = (ClientPrefs.data.judgementCounter && !ClientPrefs.data.hideHud);		
+		judgementCounter_S.cameras = [camHUD];
+		add(judgementCounter_S);
+		judgementCounter_S.y = FlxG.height / 2 - judgementCounter_S.height / 2;
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
@@ -621,6 +640,7 @@ class PlayState extends MusicBeatState
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
+		
 
 		startingSong = true;
 		
@@ -1204,6 +1224,13 @@ class PlayState extends MusicBeatState
 		scoreTxt.text = 'Score: ${songScore}'
 		+ (!instakillOnMiss ? ' | Misses: ${songMisses}' : "")
 		+ ' | Rating: ${str}';
+		
+		var marvelousRate:String = ClientPrefs.data.marvelousRating ？'Marvelous: ${ratingsData[4].hits}\n' : '';
+		judgementCounter_S.text = marvelousRate + 
+		+ 'Sicks: {ratingsData[0].hits}\n'
+		+ 'Goods: {ratingsData[1].hits}\n'
+		+ 'Bads: {ratingsData[2].hits}\n'
+		+ 'Shits: {ratingsData[3].hits}\n';
 
 		if (!miss && !cpuControlled)
 			doScoreBop();
@@ -3854,6 +3881,7 @@ class PlayState extends MusicBeatState
 
 	function fullComboUpdate()
 	{
+	    var marvelouss:Int = ClientPrefs.data.marvelousRating ? ratingsData[4].hits : 0;
 		var sicks:Int = ratingsData[0].hits;
 		var goods:Int = ratingsData[1].hits;
 		var bads:Int = ratingsData[2].hits;
@@ -3864,7 +3892,7 @@ class PlayState extends MusicBeatState
 		{
 			if (bads > 0 || shits > 0) ratingFC = 'FC';
 			else if (goods > 0) ratingFC = 'GFC';
-			else if (sicks > 0) ratingFC = 'SFC';
+			else if (sicks > 0 || marvelouss > 0) ratingFC = 'SFC';
 		}
 		else if (songMisses < 10)
 			ratingFC = 'SDCB';
