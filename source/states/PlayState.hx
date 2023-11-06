@@ -561,7 +561,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.data.hideHud;
 		add(scoreTxt);
 		
-		var marvelousRate:String = ClientPrefs.data.marvelousRating ？'Marvelous: 0\n' : '';
+		var marvelousRate:String = ClientPrefs.data.marvelousRating ? 'Marvelous: 0\n' : '';
 		judgementCounter_S = new FlxText(20, 0, 0, "", 18);
 		judgementCounter_S.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		judgementCounter_S.borderSize = 1.5;
