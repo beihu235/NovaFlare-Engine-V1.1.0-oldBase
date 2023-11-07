@@ -333,9 +333,7 @@ class PlayState extends MusicBeatState
 		camOther = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
-		
-		
-        
+
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
@@ -343,8 +341,6 @@ class PlayState extends MusicBeatState
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		CustomFadeTransition.nextCamera = camOther;
-		
-		
 		
 		#if android
 		addAndroidControls();
@@ -707,8 +703,6 @@ class PlayState extends MusicBeatState
 					Paths.music(key);
 			}
 		}
-		
-         
 
 		super.create();
 		Paths.clearUnusedMemory();
@@ -3161,16 +3155,7 @@ class PlayState extends MusicBeatState
 			health += note.hitHealth * healthGain;
 
 			if(!note.noAnimation) {
-			    var altAnim:String = note.animSuffix;
-
-			    if (SONG.notes[curSection] != null)
-			    {
-				    if (SONG.notes[curSection].altAnim && !SONG.notes[curSection].gfSection) {
-					    altAnim = '-alt';
-				    }
-			    }
-			    
-				var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))] + altAnim;
+				var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))];
 
 				var char:Character = dad;
 				var animCheck:String = 'hey';
@@ -3333,9 +3318,17 @@ class PlayState extends MusicBeatState
 			boyfriend.specialAnim = true;
 			boyfriend.heyTimer = 0.6;
 		} else if(!note.noAnimation) {
-			
+			var altAnim:String = note.animSuffix;
+
+			if (SONG.notes[curSection] != null)
+			{
+				if (SONG.notes[curSection].altAnim && !SONG.notes[curSection].gfSection) {
+					altAnim = '-alt';
+				}
+			}
+
 			var char:Character = boyfriend;
-			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))];
+			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))] + altAnim;
 			if(note.gfNote) {
 				char = gf;
 			}
