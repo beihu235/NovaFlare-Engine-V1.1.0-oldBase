@@ -573,7 +573,7 @@ class PlayState extends MusicBeatState
 		+ 'Goods: 0' + '\n'
 		+ 'Bads: 0' + '\n'
 		+ 'Shits: 0' + '\n';
-		judgementCounter_S.visible = (ClientPrefs.data.judgementCounter && !ClientPrefs.data.hideHud);		
+		judgementCounter_S.visible = (ClientPrefs.data.judgementCounter && !ClientPrefs.data.hideHud && !ClientPrefs.getGameplaySetting('botplay'));		
 		judgementCounter_S.cameras = [camHUD];
 		add(judgementCounter_S);
 		judgementCounter_S.y = FlxG.height / 2 - judgementCounter_S.height / 2;
@@ -1224,6 +1224,13 @@ class PlayState extends MusicBeatState
 		+ (!instakillOnMiss ? ' | Misses: ${songMisses}' : "")
 		+ ' | Rating: ${str}';		
 		
+		var marvelousRate:String = ClientPrefs.data.marvelousRating ? 'Marvelous: ${ratingsData[4].hits}\n' : '';
+		judgementCounter_S.text = marvelousRate
+		+ 'Sicks: ${ratingsData[0].hits}\n'
+		+ 'Goods: ${ratingsData[1].hits}\n'
+		+ 'Bads: ${ratingsData[2].hits}\n'
+		+ 'Shits: ${ratingsData[3].hits}\n';
+		
 		if (!miss && !cpuControlled)
 			doScoreBop();
 
@@ -1751,10 +1758,6 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		/*if (FlxG.keys.justPressed.NINE)
-		{
-			iconP1.swapOldIcon();
-		}*/
 		callOnScripts('onUpdate', [elapsed]);
 
 		FlxG.camera.followLerp = 0;
@@ -1807,10 +1810,10 @@ class PlayState extends MusicBeatState
 		iconP2.x = healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 		iconP1.animation.curAnim.curFrame = ((healthBar.percent <= 20 && !ClientPrefs.data.playOpponent) || (healthBar.percent >= 80 && ClientPrefs.data.playOpponent)) ? 1 : 0;
 		iconP2.animation.curAnim.curFrame = ((healthBar.percent >= 80 && !ClientPrefs.data.playOpponent) || (healthBar.percent <= 20 && ClientPrefs.data.playOpponent)) ? 1 : 0;
-
+        /*
 		if (controls.justPressed('debug_2') && !endingSong && !inCutscene)
 			openCharacterEditor();
-		
+		*/
 		if (startedCountdown && !paused)
 			Conductor.songPosition += FlxG.elapsed * 1000 * playbackRate;
 
@@ -1852,6 +1855,7 @@ class PlayState extends MusicBeatState
 			health = 0;
 			trace("RESET = True");
 		}
+		
 		doDeathCheck();
 
 		if (unspawnNotes[0] != null)
@@ -2648,7 +2652,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 	#end
-
+    /*
 	public function KillNotes() {
 		while(notes.length > 0) {
 			var daNote:Note = notes.members[0];
@@ -2659,6 +2663,7 @@ class PlayState extends MusicBeatState
 		unspawnNotes = [];
 		eventNotes = [];
 	}
+	*/
 
 	public var totalPlayed:Int = 0;
 	public var totalNotesHit:Float = 0.0;
@@ -2693,6 +2698,12 @@ class PlayState extends MusicBeatState
 	private function popUpScore(note:Note = null):Void
 	{
 		var noteDiff:Float = Math.abs(note.strumTime - Conductor.songPosition + ClientPrefs.data.ratingOffset);
+		
+		if ((ClientPrefs.data.playOpponent && cpuControlled_opponent) || (!ClientPrefs.data.playOpponent && cpuControlled)) noteDiff = 0;
+		
+		rsNoteMs.push((noteDiff));
+		rsNoteTime.push(note.strumTime);
+		
 		vocals.volume = 1;
 
 		var placement:Float =  FlxG.width * 0.35;
@@ -2732,12 +2743,7 @@ class PlayState extends MusicBeatState
 			antialias = !isPixelStage;
 		}
 		
-		var marvelousRate:String = ClientPrefs.data.marvelousRating ? 'Marvelous: ${ratingsData[4].hits}\n' : '';
-		judgementCounter_S.text = marvelousRate
-		+ 'Sicks: ${ratingsData[0].hits}\n'
-		+ 'Goods: ${ratingsData[1].hits}\n'
-		+ 'Bads: ${ratingsData[2].hits}\n'
-		+ 'Shits: ${ratingsData[3].hits}\n';
+		
 
 		rating.loadGraphic(Paths.image(uiPrefix + daRating.image + uiSuffix));
 		rating.cameras = [camHUD];
@@ -3241,10 +3247,6 @@ class PlayState extends MusicBeatState
 			combo++;
 			if(combo > 9999) combo = 9999;
 			popUpScore(note);
-			
-			var noteDiff:Float = (Conductor.songPosition - note.strumTime + ClientPrefs.data.ratingOffset) / playbackRate;
-			rsNoteMs.push((noteDiff));
-			rsNoteTime.push(note.strumTime);
 		}
 		var gainHealth:Bool = true; // prevent health gain, as sustains are threated as a singular note
 		if (guitarHeroSustains && note.isSustainNote)
@@ -3343,10 +3345,6 @@ class PlayState extends MusicBeatState
 			combo++;
 			if(combo > 9999) combo = 9999;
 			popUpScore(note);
-			
-			var noteDiff:Float = (Conductor.songPosition - note.strumTime + ClientPrefs.data.ratingOffset) / playbackRate;
-			rsNoteMs.push((noteDiff));
-			rsNoteTime.push(note.strumTime);
 		}
 		var gainHealth:Bool = true; // prevent health gain, as sustains are threated as a singular note
 		if (guitarHeroSustains && note.isSustainNote)
