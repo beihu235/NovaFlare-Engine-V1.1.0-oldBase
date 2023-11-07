@@ -90,17 +90,19 @@ class FPS extends TextField
 	// Event Handlers
 	@:noCompletion
 	private #if !flash override #end function __enterFrame(deltaTime:Float):Void
-	{
-	
-	//var elapsed = FlxG.elapsed;    		    		
-		/*currentTime += deltaTime;
-		times.push(currentTime);
-
-		while (times[0] < currentTime - 1000)
-		{
-			times.shift();
-		}
-		*/
+	{	
+		
+		logicFPStime += deltaTime;
+        logicFPSnum ++;
+        
+        if (logicFPStime >= 200) //update data for 0.2s
+        {
+            currentFPS = Math.ceil(currentFPS * 0.5 + 1 / (logicFPStime / logicFPSnum / 1000) * 0.5) ;
+            logicFPStime = 0;
+                logicFPSnum = 0;
+        }
+        
+        if (currentFPS > ClientPrefs.data.framerate) currentFPS = ClientPrefs.data.framerate;
 		
 		if (ClientPrefs.data.rainbowFPS)
 	    {
@@ -120,53 +122,43 @@ class FPS extends TextField
 		else
 		{
 		textColor = 0xFFFFFFFF;		
-		}
+		}                      
         
-        
-        
-        logicFPStime += deltaTime;
-        logicFPSnum ++;
-        if (logicFPStime >= 200) //update data for 0.2s
-        {
-        currentFPS = Math.ceil(currentFPS * 0.5 + 1 / (logicFPStime / logicFPSnum / 1000) * 0.5) ;
-        logicFPStime = 0;
-        logicFPSnum = 0;
-        }
-
-		
-		if (currentFPS > ClientPrefs.data.framerate) currentFPS = ClientPrefs.data.framerate;
+        if (!ClientPrefs.data.rainbowFPS && currentFPS <= ClientPrefs.data.framerate / 2){
+		    textColor = 0xFFFF0000;
+		}				
 		
 		
         if ( DisplayFPS > currentFPS ){
-            if (Math.abs(DisplayFPS - currentFPS) > 10) DisplayFPS = DisplayFPS - 2;
+            if (Math.abs(DisplayFPS - currentFPS) > 20) DisplayFPS = DisplayFPS - 4;
+            else if (Math.abs(DisplayFPS - currentFPS) > 10) DisplayFPS = DisplayFPS - 2;
             else DisplayFPS = DisplayFPS - 1;
         }
         else if ( DisplayFPS < currentFPS ){
-            if (Math.abs(DisplayFPS - currentFPS) > 10) DisplayFPS = DisplayFPS + 2;
+            if (Math.abs(DisplayFPS - currentFPS) > 20) DisplayFPS = DisplayFPS + 4;
+            else if (Math.abs(DisplayFPS - currentFPS) > 10) DisplayFPS = DisplayFPS + 2;
             else DisplayFPS = DisplayFPS + 1;
-        }
-            
-        
-        
-	
+        }                          	
 		
 			text = "FPS: " + DisplayFPS + "/" + ClientPrefs.data.framerate;
-			var memoryMegas:Float = 0;
-			//memoryMegas = Math.round(actualMem / 1024 / 1024 * 100) / 100;			
-			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
-			text += "\nMEM: " + memoryMegas + " MB";
-						
-            var newmemoryMegas:Float = 0;
 
-			if (memoryMegas > 1000)
-			{
-			newmemoryMegas = Math.ceil( Math.abs( System.totalMemory ) / 10000000 / 1.024)/100;
+			var memoryMegas:Float = 0;
+			//var newmemoryMegas:Float = 0;		
+            var memType:String = ' MB';
+			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
 			
-				text = "FPS: " + DisplayFPS + "/" + ClientPrefs.data.framerate;
-				text += "\nMEM: " + newmemoryMegas + " GB";            
-			}
-						
-            text += "\nNF V1.1.0\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
+		if (ClientPrefs.data.showMEM){
+			if (memoryMegas > 1000){
+			    memoryMegas = Math.ceil( Math.abs( System.totalMemory ) / 10000000 / 1.024)/100;
+			    memType = ' GB';
+			}    
+			
+			text += "\nMEM: " + memoryMegas + memType;            
+		}
+            
+            if (ClientPrefs.data.showMS) text += '\n' + "Delay: " + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + " MS";
+            
+            text += "\nNF V1.1.0";
                      
 			text += "\n";
 	

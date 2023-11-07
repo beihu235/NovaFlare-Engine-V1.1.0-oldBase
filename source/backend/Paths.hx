@@ -51,7 +51,6 @@ class Paths
 		for (key in currentTrackedAssets.keys()) {
 			// if it is not currently contained within the used local assets
 			if (!localTrackedAssets.contains(key) && !dumpExclusions.contains(key)) {
-				// get rid of it
 				var obj = currentTrackedAssets.get(key);
 				@:privateAccess
 				if (obj != null) {
@@ -71,6 +70,7 @@ class Paths
 		// run the garbage collector for good measure lmfao
 		System.gc();
 	}
+
 
 	// define the locally tracked assets
 	public static var localTrackedAssets:Array<String> = [];
@@ -517,6 +517,10 @@ class Paths
 				return fileToCheck;
 
 		}
+		    var fileToCheck:String = SUtil.getPath() + 'mods/' + key;
+			if(FileSystem.exists(fileToCheck)) 
+			return fileToCheck;
+			
 		    var fileToCheck:String = SUtil.getPath() + 'assets/' + key;
 			if(FileSystem.exists(fileToCheck)) 
 			return fileToCheck;
@@ -524,7 +528,7 @@ class Paths
 		    var fileToCheck:String = SUtil.getPath() + 'assets/shared/' + key;
 			if(FileSystem.exists(fileToCheck)) 
 			return fileToCheck;
-		return SUtil.getPath() + 'mods/' + key;	
+		return SUtil.getPath() + 'assets/' + key;	
 	}
 	#end
 }

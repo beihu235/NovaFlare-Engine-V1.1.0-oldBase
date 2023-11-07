@@ -15,7 +15,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 	private var checkboxGroup:FlxTypedGroup<CheckboxThingie>;
 	private var grpTexts:FlxTypedGroup<AttachedText>;
 	
-	public static var onPlayState:Bool = false;
+    public static var isInPause = false;
 
 	function getOptions()
 	{
@@ -87,12 +87,16 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		return null;
 	}
 
-	public function new()
+	public function new(pauseMenu:Bool = false)
 	{
 		super();
 		
+		isInPause = pauseMenu;
+		
+		if (isInPause) cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+		
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		bg.alpha = 0.6;
+		bg.alpha = 0.4;
 		add(bg);
 
 		// avoids lagspikes while scrolling through menus!
@@ -161,15 +165,25 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		}
 
 		if (controls.BACK) {
-			#if android
-			FlxTransitionableState.skipNextTransOut = true;
-			FlxG.resetState();
+		
+		    #if android
+			if (!isInPause) {
+			    FlxTransitionableState.skipNextTransOut = true;
+			    FlxG.resetState();
+			}else{
+			    PauseSubState.goBack = true;
+    			close();    			
+			}
 			#else
-			FlxG.sound.play(Paths.sound('cancelMenu'));
-			close();
-			#end
-			ClientPrefs.saveSettings();
-			
+			if (!isInPause) {
+			    FlxTransitionableState.skipNextTransOut = true;
+			    close();
+			}else{
+			    PauseSubState.goBack = true;
+    			close();    			
+			}
+			#end //我懒得删了
+			ClientPrefs.saveSettings();			
 		}
 
 		if(nextAccept <= 0)

@@ -16,6 +16,7 @@ import openfl.Assets;
 import openfl.Lib;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
+import openfl.utils.Assets;
 
 import shaders.ColorSwap;
 
@@ -26,6 +27,13 @@ import states.MainMenuState;
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
+#end
+
+#if VIDEOS_ALLOWED 
+#if (hxCodec >= "3.0.0") import hxcodec.flixel.FlxVideo as VideoHandler;
+#elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler as VideoHandler;
+#elseif (hxCodec == "2.6.0") import VideoHandler;
+#else import vlc.MP4Handler as VideoHandler; #end
 #end
 
 typedef TitleData =
@@ -57,6 +65,8 @@ class TitleState extends MusicBeatState
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
 	
+	var skipVideo:FlxText;
+	
 	var titleTextColors:Array<FlxColor> = [0xFF33FFFF, 0xFF3333CC];
 	var titleTextAlphas:Array<Float> = [1, .64];
 
@@ -81,7 +91,9 @@ class TitleState extends MusicBeatState
 	public static var updateVersion:String = '';
 	
 	public static var bpm:Float = 0;
-
+    
+    var lang:String = '';
+    
 	override public function create():Void
 	{
 		Paths.clearStoredMemory();
@@ -89,7 +101,7 @@ class TitleState extends MusicBeatState
 		Lib.application.window.title = " NF - Engine - Title";
 		
 		//https://github.com/beihu235/AndroidDialogs
-		var lang:String = '';
+		
 		#if android
 		if (DeviceLanguage.getLang() == 'zh') 
 		lang = 'NF1.1.0测试版\nb站-北狐丶逐梦制作\n禁止上传到任何资源网站';
@@ -102,10 +114,7 @@ class TitleState extends MusicBeatState
 		FlxTransitionableState.skipNextTransOut = true;
 										
 		checkOpenFirst = true;
-
-		#if android
-		AndroidDialogsExtend.OpenToast(lang,2);
-		#end
+		
 		}
 		
 		#if android
@@ -233,7 +242,6 @@ class TitleState extends MusicBeatState
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
 	var swagShader:ColorSwap = null;
-    var introspr:FlxSprite;
 	
 	function startCutscenesIn()
 	{
@@ -241,29 +249,18 @@ class TitleState extends MusicBeatState
 			startIntro();
 			return;
 		}
-		introspr = new FlxSprite(0, 0).loadGraphic(Paths.image('mainmenu_sprite/titleintro'));
-		introspr.antialiasing = ClientPrefs.data.antialiasing;
-		add(introspr);
-		introspr.setGraphicSize(FlxG.width, FlxG.height);
-		introspr.scrollFactor.set();
-		introspr.updateHitbox();
-		introspr.alpha = 0;
-		var imaTween = FlxTween.tween(introspr, {alpha: 1}, 1, {onComplete: function(twn:FlxTween) {
-			new FlxTimer().start(1, function(tmr:FlxTimer)
-			{
-				startCutscenesOut();
-			});
-		}, ease: FlxEase.linear});
+		startVideo('menuExtend/titleIntro');
 	}
 	
 	function startCutscenesOut()
 	{
-		var imaTween = FlxTween.tween(introspr, {alpha: 0}, 1, {onComplete: function(twn:FlxTween) {
-			introfaded = true;
-			inGame = true;
-			startIntro();
-		}, ease: FlxEase.linear});
+	    #if android
+		AndroidDialogsExtend.OpenToast(lang,2);
+		#end
+		inGame = true;
+		startIntro();		
 	}
+	
 	function startIntro()
 	{
 		if (!initialized)
@@ -791,5 +788,71 @@ class TitleState extends MusicBeatState
 			}
 			skippedIntro = true;
 		}
+	}
+	
+	function startVideo(name:String)
+	{
+	
+	    skipVideo = new FlxText(0, FlxG.height - 26, 0, "Press " + #if andriod "Back on your phone " #else "Enter " #end + "to skip", 18);
+		skipVideo.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 18);
+		skipVideo.alpha = 0;
+		skipVideo.alignment = CENTER;
+        skipVideo.screenCenter(X);
+        skipVideo.scrollFactor.set();
+		skipVideo.antialiasing = ClientPrefs.data.antialiasing;
+		
+		
+		#if VIDEOS_ALLOWED
+
+		var filepath:String = Paths.video(name);
+		#if sys
+		if(!FileSystem.exists(filepath))
+		#else
+		if(!OpenFlAssets.exists(filepath))
+		#end
+		{
+			FlxG.log.warn('Couldnt find video file: ' + name);
+			videoEnd();
+			return;
+		}
+
+		var video:VideoHandler = new VideoHandler();
+			#if (hxCodec >= "3.0.0")
+			// Recent versions
+			video.play(filepath);
+			showText();
+			video.onEndReached.add(function()
+			{
+				video.dispose();
+				videoEnd();
+				return;
+			}, true);
+			#else
+			// Older versions
+			video.playVideo(filepath);
+			video.finishCallback = function()
+			{
+				videoEnd();
+				return;
+			}
+			#end
+		#else
+		FlxG.log.warn('Platform not supported!');
+		videoEnd();
+		return;
+		#end
+	}
+
+	function videoEnd()
+	{
+	    skipVideo.visible = false;
+		startCutscenesOut();
+	}
+	
+	function showText(){
+	    add(skipVideo);
+		FlxTween.tween(skipVideo, {alpha: 1}, 1, {ease: FlxEase.quadIn});
+		FlxTween.tween(skipVideo, {alpha: 0}, 1, {ease: FlxEase.quadIn, startDelay: 4});
+	
 	}
 }
