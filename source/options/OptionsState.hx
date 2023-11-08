@@ -684,7 +684,7 @@ class OptionsState extends MusicBeatState
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
 						var DOWNmoveFix = false;
-					    if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - 5 && startFix) DOWNmoveFix = true;
+					    if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - 5/* && startFix*/) DOWNmoveFix = true;
 						
 						selectedOptionIndex++;
 
@@ -724,7 +724,7 @@ class OptionsState extends MusicBeatState
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
 						var UPmoveFix:Bool = false;
-						if (selectedOptionIndex == 5 && !startFix) UPmoveFix = true;
+						if (selectedOptionIndex == 5/* && !startFix*/) UPmoveFix = true;
 						
 						selectedOptionIndex--;
 
