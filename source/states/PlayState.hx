@@ -2700,7 +2700,7 @@ class PlayState extends MusicBeatState
 		var noteDiff:Float = note.strumTime - Conductor.songPosition + ClientPrefs.data.ratingOffset;
 		
 		if ((ClientPrefs.data.playOpponent && cpuControlled_opponent) || (!ClientPrefs.data.playOpponent && cpuControlled)) noteDiff = 0;
-		//best botplay for real
+		//best botplay for real lmao
 		
 		rsNoteMs.push((noteDiff));
 		rsNoteTime.push(note.strumTime);
@@ -2951,6 +2951,9 @@ class PlayState extends MusicBeatState
 
 	public static function sortHitNotes(a:Note, b:Note):Int
 	{
+	    if (ClientPrefs.data.noteDetectionFix && a.hitCausesMiss)
+	    return 1;
+	    
 		if (a.lowPriority && !b.lowPriority)
 			return 1;
 		else if (!a.lowPriority && b.lowPriority)
