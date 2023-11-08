@@ -124,13 +124,13 @@ class ResultsScreen extends MusicBeatSubstate
 		graphMarvelousUp.scrollFactor.set();
 		graphMarvelousUp.alpha = 0;		
 		add(graphMarvelousUp);
-		if (ClientPrefs.data.marvelousRating) graphMarvelousUp.visible = false;
+		if (!ClientPrefs.data.marvelousRating) graphMarvelousUp.visible = false;
 		
 		graphMarvelousDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.marvelousWindow / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[0]);
 		graphMarvelousDown.scrollFactor.set();
 		graphMarvelousDown.alpha = 0;		
 		add(graphMarvelousDown);
-		if (ClientPrefs.data.marvelousRating) graphMarvelousDown.visible = false;
+		if (!ClientPrefs.data.marvelousRating) graphMarvelousDown.visible = false;
 		
 		graphSickUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[1]);
 		graphSickUp.scrollFactor.set();
@@ -277,10 +277,10 @@ class ResultsScreen extends MusicBeatSubstate
 		for (i in 0...PlayState.rsNoteTime.length - 1){
 		    if (Math.abs(PlayState.rsNoteTime[i]) <= Conductor.safeZoneOffset){
     		    Main = Main + Math.abs(PlayState.rsNoteMs[i]);
-    		    allowData = allowData + 1;
+    		    allowData = allowData++;
 		    }
 		}
-		Main = Math.ceil(Main / allowData * 100) / 100;
+		Main = Math.ceil((Main / allowData) * 100) / 100;
         var safeZoneOffset:Float = Math.ceil(Conductor.safeZoneOffset * 10) / 10;
         
         var marvelousRate = '';
