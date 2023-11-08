@@ -276,7 +276,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		var Main:Float = 0;
 		var allowData:Int = 0;
-		for (i in 0...PlayState.rsNoteTime.length - 1){
+		for (i in 0...PlayState.rsNoteTime.length){
 		    if (Math.abs(PlayState.rsNoteTime[i]) <= safeZoneOffset){
     		    Main = Main + Math.abs(PlayState.rsNoteMs[i]);
     		    allowData = allowData++;
