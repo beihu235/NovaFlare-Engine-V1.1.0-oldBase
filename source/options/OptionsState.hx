@@ -122,6 +122,8 @@ class OptionsState extends MusicBeatState
 	
 	private static var saveSelectedCatIndex = 0;
 	private static var saveSelectedOptionIndex = 0;
+	
+	public var startFix:Bool = false;
 
 	public var isInMain:Bool; //true 是大类，false是小类
 	public var options:Array<OptionCata>;
@@ -374,6 +376,8 @@ class OptionsState extends MusicBeatState
 			*/
 			
 			if (cat.middle) isReset = true;				
+			
+			startFix = false;
 				
 			if (selectedOption != null)
 			{
@@ -542,12 +546,6 @@ class OptionsState extends MusicBeatState
 			{
 			    holdTime += elapsed;
 			    checkTime += elapsed;
-			    /*
-			    if (Math.floor(holdTime) % 2 == 0) updateTime = updateTime * 1.5; //2秒增加1.5倍选择
-				var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10 * updateTime);
-				
-				var checkNewHold:Int = Math.floor((holdTime - 0.5) * 10 * updateTime);
-                */
                 
 				if(holdTime > 0.5 && checkTime >= updateTime){
 				    checkTime = 0;
@@ -686,7 +684,7 @@ class OptionsState extends MusicBeatState
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
 						var DOWNmoveFix = false;
-					    if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - 5) DOWNmoveFix = true;
+					    if (selectedOptionIndex == options[selectedCatIndex].options.length - 1 - 5 && startFix) DOWNmoveFix = true;
 						
 						selectedOptionIndex++;
 
@@ -699,6 +697,7 @@ class OptionsState extends MusicBeatState
 								opt.y = selectedCat.positionFix + 54 + (46 * i);
 							}
 							selectedOptionIndex = 0;
+							startFix = false;
 						}																		
 
 						if (selectedOptionIndex != 0
@@ -711,7 +710,7 @@ class OptionsState extends MusicBeatState
 							for (i in selectedCat.optionObjects.members)
 							{
 								i.y -= 46;
-							}
+							}							
 						}
 
 						selectOption(options[selectedCatIndex].options[selectedOptionIndex]);
@@ -725,7 +724,7 @@ class OptionsState extends MusicBeatState
 						selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
 						
 						var UPmoveFix:Bool = false;
-						if (selectedOptionIndex == 5) UPmoveFix = true;
+						if (selectedOptionIndex == 5 && !startFix) UPmoveFix = true;
 						
 						selectedOptionIndex--;
 
@@ -739,6 +738,7 @@ class OptionsState extends MusicBeatState
 								var opt = selectedCat.optionObjects.members[i];
 								opt.y = selectedCat.positionFix + 54 + (46 * (i - (selectedCat.options.length - 10))); 
 							}
+							startFix = true;
 						}																							
 
 						if (selectedOptionIndex != 0 
