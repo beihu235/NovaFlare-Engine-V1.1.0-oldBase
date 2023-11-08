@@ -2702,7 +2702,7 @@ class PlayState extends MusicBeatState
 		if ((ClientPrefs.data.playOpponent && cpuControlled_opponent) || (!ClientPrefs.data.playOpponent && cpuControlled)) noteDiff = 0;
 		//best botplay for real lmao
 		
-		rsNoteMs.push(-noteDiff);
+		rsNoteMs.push(noteDiff / playbackRate);
 		rsNoteTime.push(note.strumTime);
 		
 		vocals.volume = 1;
