@@ -94,7 +94,7 @@ class ResultsScreen extends MusicBeatSubstate
 	    var noteSize = 2.3;
 	    var MoveSize = 0.8;
 		for (i in 0...PlayState.rsNoteTime.length){
-		    if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.marvelousWindow) color = ColorArray[0];
+		    if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.marvelousWindow && ClientPrefs.data.marvelousRating) color = ColorArray[0];
 		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.sickWindow) color = ColorArray[1];
 		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.goodWindow) color = ColorArray[2];
 		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.badWindow) color = ColorArray[3];
@@ -124,13 +124,13 @@ class ResultsScreen extends MusicBeatSubstate
 		graphMarvelousUp.scrollFactor.set();
 		graphMarvelousUp.alpha = 0;		
 		add(graphMarvelousUp);
-		if (ClientPrefs.data.marvelousWindow) graphMarvelousUp.visible = false;
+		if (ClientPrefs.data.marvelousRating) graphMarvelousUp.visible = false;
 		
 		graphMarvelousDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.marvelousWindow / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[0]);
 		graphMarvelousDown.scrollFactor.set();
 		graphMarvelousDown.alpha = 0;		
 		add(graphMarvelousDown);
-		if (ClientPrefs.data.marvelousWindow) graphMarvelousDown.visible = false;
+		if (ClientPrefs.data.marvelousRating) graphMarvelousDown.visible = false;
 		
 		graphSickUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[1]);
 		graphSickUp.scrollFactor.set();
@@ -287,7 +287,7 @@ class ResultsScreen extends MusicBeatSubstate
 		'Main: ' + Main + 'ms'
 		+ '\n'
 		+ '('
-		if (ClientPrefs.data.marvelousWindow) + 'MAR:' + ClientPrefs.data.marvelousWindow + 'ms,'
+		if (ClientPrefs.data.marvelousRating) + 'MAR:' + ClientPrefs.data.marvelousWindow + 'ms,'
 		+ 'SICK:' + ClientPrefs.data.sickWindow + 'ms,'
 		+ 'GOOD:' + ClientPrefs.data.goodWindow + 'ms,'
 		+ 'BAD:' + ClientPrefs.data.badWindow + 'ms,'
