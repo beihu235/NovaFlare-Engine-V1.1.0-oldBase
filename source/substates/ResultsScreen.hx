@@ -95,7 +95,7 @@ class ResultsScreen extends MusicBeatSubstate
 	    
 	    var noteSize = 2.3;
 	    var MoveSize = 0.8;
-		for (i in 0...PlayState.rsNoteTime.length){
+		for (i in 0...PlayState.rsNoteTime.length - 1){
 		    if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.marvelousWindow && ClientPrefs.data.marvelousRating) color = ColorArray[0];
 		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.sickWindow) color = ColorArray[1];
 		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.goodWindow) color = ColorArray[2];
@@ -276,10 +276,10 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		var Main:Float = 0;
 		var allowData:Int = 0;
-		for (i in 0...PlayState.rsNoteTime.length){
+		for (i in 0...PlayState.rsNoteTime.length - 1){
 		    if (Math.abs(PlayState.rsNoteTime[i]) <= safeZoneOffset){
     		    Main = Main + Math.abs(PlayState.rsNoteMs[i]);
-    		    allowData = allowData++;
+    		    allowData = allowData + 1;
 		    }
 		}
 		Main = Math.ceil((Main / allowData) * 100) / 100;
