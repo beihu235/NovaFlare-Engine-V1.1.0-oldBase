@@ -11,6 +11,8 @@ package substates;
     
     Who cares about rudy's hscript so I continue to choose to use my lua logic
     Her hscript weren't worth stole and I didn't stole it
+    
+    by the way dont move this to hscript,I dont allow it
 */
 import flixel.addons.transition.FlxTransitionableState;
 
@@ -282,14 +284,14 @@ class ResultsScreen extends MusicBeatSubstate
     		    allowData = allowData + 1;
 		    }
 		}
-		Main = Math.ceil((Main / allowData) * 100) / 100;
+		var showMain = Math.ceil((Main / allowData) * 100) / 100;
         var safeZoneOffsetFix:Float = Math.ceil(safeZoneOffset * 10) / 10;
         
         var marvelousRate = '';
         if (ClientPrefs.data.marvelousRating) marvelousRate = 'MAR:' + ClientPrefs.data.marvelousWindow + 'ms,';
           
 		setMsText = new FlxText(20, FlxG.height + 150, 0, 
-		'Main: ' + Main + 'ms'
+		'Main: ' + showMain + 'ms'
 		+ '\n'
 		+ '('
 		+ marvelousRate
