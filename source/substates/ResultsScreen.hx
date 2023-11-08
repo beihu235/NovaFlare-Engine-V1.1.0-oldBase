@@ -114,7 +114,7 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBG.updateHitbox();
 		add(graphBG);
 		
-		var judgeHeight = 3;
+		var judgeHeight = 2;
 		graphJudgeCenter = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
 		graphJudgeCenter.scrollFactor.set();
 		graphJudgeCenter.alpha = 0;		
@@ -124,11 +124,13 @@ class ResultsScreen extends MusicBeatSubstate
 		graphMarvelousUp.scrollFactor.set();
 		graphMarvelousUp.alpha = 0;		
 		add(graphMarvelousUp);
+		if (ClientPrefs.data.marvelousWindow) graphMarvelousUp.visible = false;
 		
 		graphMarvelousDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.marvelousWindow / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[0]);
 		graphMarvelousDown.scrollFactor.set();
 		graphMarvelousDown.alpha = 0;		
 		add(graphMarvelousDown);
+		if (ClientPrefs.data.marvelousWindow) graphMarvelousDown.visible = false;
 		
 		graphSickUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[1]);
 		graphSickUp.scrollFactor.set();
@@ -271,15 +273,21 @@ class ResultsScreen extends MusicBeatSubstate
 		add(setGameText);
 		
 		var Main:Float = 0;
-		for (i in 0...PlayState.rsNoteTime.length){
-		Main = Main + Math.abs(PlayState.rsNoteMs[i]);
+		var allowData:Int = 0
+		for (i in 0...PlayState.rsNoteTime.length - 1){
+		    if (PlayState.rsNoteTime[i]] <= Conductor.safeZoneOffset){
+    		    Main = Main + Math.abs(PlayState.rsNoteMs[i]);
+    		    allowData++;
+		    }
 		}
-		Main = Math.ceil(Main / PlayState.rsNoteTime.length * 100) / 100;
+		Main = Math.ceil(Main / allowData * 100) / 100;
         var safeZoneOffset:Float = Math.ceil(Conductor.safeZoneOffset * 10) / 10;
+        
 		setMsText = new FlxText(20, FlxG.height + 150, 0, 
 		'Main: ' + Main + 'ms'
 		+ '\n'
 		+ '('
+		if (ClientPrefs.data.marvelousWindow) 'MAR:' + ClientPrefs.data.marvelousWindow + 'ms,'
 		+ 'SICK:' + ClientPrefs.data.sickWindow + 'ms,'
 		+ 'GOOD:' + ClientPrefs.data.goodWindow + 'ms,'
 		+ 'BAD:' + ClientPrefs.data.badWindow + 'ms,'
