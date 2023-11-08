@@ -35,8 +35,8 @@ class Conductor
 		
 		if (ClientPrefs.data.marvelousRating && diff <= data[4].hitWindow) return data[4]; //is marvelous check
 		
-		var dataFix:Int = ClientPrefs.data.marvelousRating ? 1 : 2;
-		for(i in 0...data.length - dataFix) //skips last window (Shit also and marvelous)
+		var dataFix:Int = ClientPrefs.data.marvelousRating ? 2 : 1;
+		for(i in 0...data.length - dataFix - 1) //skips last window (Shit also and marvelous)
 			if (diff <= data[i].hitWindow)
 				return data[i];
 
