@@ -13,6 +13,7 @@ class SaveVariables {
 	public var middleScroll:Bool = false;
 	public var filpChart:Bool = false;
 	public var fixLNL:Int= 0; //fix long note length
+	public var noteDetectionFix:Bool = true;
 	
 	public var playOpponent:Bool = false;
 	public var OpponentCodeFix:Bool = false;
