@@ -287,7 +287,7 @@ class ResultsScreen extends MusicBeatSubstate
 		'Main: ' + Main + 'ms'
 		+ '\n'
 		+ '('
-		if (ClientPrefs.data.marvelousWindow) 'MAR:' + ClientPrefs.data.marvelousWindow + 'ms,'
+		if (ClientPrefs.data.marvelousWindow) + 'MAR:' + ClientPrefs.data.marvelousWindow + 'ms,'
 		+ 'SICK:' + ClientPrefs.data.sickWindow + 'ms,'
 		+ 'GOOD:' + ClientPrefs.data.goodWindow + 'ms,'
 		+ 'BAD:' + ClientPrefs.data.badWindow + 'ms,'
