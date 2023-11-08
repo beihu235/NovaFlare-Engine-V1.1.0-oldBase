@@ -283,11 +283,14 @@ class ResultsScreen extends MusicBeatSubstate
 		Main = Math.ceil(Main / allowData * 100) / 100;
         var safeZoneOffset:Float = Math.ceil(Conductor.safeZoneOffset * 10) / 10;
         
+        var marvelousRate = '';
+        if (ClientPrefs.data.marvelousRating) marvelousRate = 'MAR:' + ClientPrefs.data.marvelousWindow + 'ms,';
+          
 		setMsText = new FlxText(20, FlxG.height + 150, 0, 
 		'Main: ' + Main + 'ms'
 		+ '\n'
 		+ '('
-		if (ClientPrefs.data.marvelousRating) + 'MAR:' + ClientPrefs.data.marvelousWindow + 'ms,'
+		+ marvelousRate
 		+ 'SICK:' + ClientPrefs.data.sickWindow + 'ms,'
 		+ 'GOOD:' + ClientPrefs.data.goodWindow + 'ms,'
 		+ 'BAD:' + ClientPrefs.data.badWindow + 'ms,'
