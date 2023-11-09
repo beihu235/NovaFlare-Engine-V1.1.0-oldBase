@@ -712,6 +712,8 @@ class OptionsState extends MusicBeatState
 								i.y -= 46;
 							}							
 						}
+						
+						moveCheak();
 
 						selectOption(options[selectedCatIndex].options[selectedOptionIndex]);
 					}
@@ -753,6 +755,8 @@ class OptionsState extends MusicBeatState
 									i.y += 46;
 								}
 						}
+                        
+                        moveCheak();
                         
 						selectOption(options[selectedCatIndex].options[selectedOptionIndex]);
 					}
@@ -901,6 +905,26 @@ class OptionsState extends MusicBeatState
 				opt.y = selectedCat.positionFix + 54 + (46 * (i + (selectedOptionIndex - 5))); 
 			}
 		}
+	}
+	
+	public function moveCheak()
+	{
+        if (options[selectedCatIndex].options.length > 10){
+        
+            if (options[selectedCatIndex].options.[0].y > selectedCat.positionFix + 54 + 46){
+                for (i in selectedCat.optionObjects.members){
+					i.y -= 46;
+				}
+                moveCheak(); //check again until not have problem
+            }
+        
+            if (options[selectedCatIndex].options.[selectedCat.options.length - 1].y < selectedCat.positionFix + 54 + 46 * 10){
+                for (i in selectedCat.optionObjects.members){
+					i.y += 46;
+				}
+                moveCheak(); //check again until not have problem
+            }
+        }
 	}
 }
 
