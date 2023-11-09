@@ -909,15 +909,15 @@ class OptionsState extends MusicBeatState
 	
 	public function moveCheak() //I have no idea to fix kade shit problem so I think this is the best way to fix shit choose problem
 	{
-        if (options[selectedCatIndex].options.length > 10){
-            if (selectedCat.optionObjects.members[0].y > selectedCat.positionFix + 54 + 46){
+        if (options[selectedCatIndex].options.length > 10 && !selectedCat.middle){
+            if (selectedCat.optionObjects.members[0].y > selectedCat.positionFix + 54){
                 for (i in selectedCat.optionObjects.members){
 					i.y -= 46;
 				}
                 moveCheak(); //check again until not have problem
             }
         
-            if (selectedCat.optionObjects.members[selectedCat.options.length - 1].y < selectedCat.positionFix + 54 + 46 * 10){
+            if (selectedCat.optionObjects.members[selectedCat.options.length - 1].y < selectedCat.positionFix + 54 + 46 * 9){
                 for (i in selectedCat.optionObjects.members){
 					i.y += 46;
 				}
