@@ -232,11 +232,11 @@ class ResultsScreen extends MusicBeatSubstate
 		judgeText = new FlxText(-400, 200, 0, 
 		'Judgements:'
 		+ marvelousRate
-		+ '\nSicks: ' + PlayState.rsSicks
-		+ '\nGoods: ' + PlayState.rsGoods 
-		+ '\nBads: ' + PlayState.rsBads 
-		+ '\nShits: ' + PlayState.rsShits 
-		+ '\n\nCombe Breaks: ' + PlayState.rsMisses 
+		+ '\nSick: ' + PlayState.rsSicks
+		+ '\nGood: ' + PlayState.rsGoods 
+		+ '\nBad: ' + PlayState.rsBads 
+		+ '\nShit: ' + PlayState.rsShits 
+		+ '\n\nCombe Break: ' + PlayState.rsMisses 
 		+ '\nHighest Combe: ' + PlayState.highestCombo 
 		+ '\nScore: ' + PlayState.rsScore 
 		+ '\nAccuracy: ' + ACC + '%'
