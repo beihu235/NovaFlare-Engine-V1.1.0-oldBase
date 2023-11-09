@@ -2952,7 +2952,7 @@ class PlayState extends MusicBeatState
 	public static function sortHitNotes(a:Note, b:Note):Int
 	{
 	    if (ClientPrefs.data.noteDetectionFix)
-	    return -1;
+	    return 1;
 	    
 		if (a.lowPriority && !b.lowPriority)
 			return 1;
