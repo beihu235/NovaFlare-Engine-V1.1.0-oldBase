@@ -15,7 +15,7 @@ class ColorblindFilter {
 
 	public static function UpdateColors(?input:Array<BitmapFilter> = null):Void
 	{
-		trace("VALUE: " + ClientPrefs.colorblindMode);
+		trace("VALUE: " + ClientPrefs.data.colorblindMode);
 
 		var a1:Float = 1;
 		var a2:Float = 0;
@@ -29,7 +29,7 @@ class ColorblindFilter {
 		var c2:Float = 0;
 		var c3:Float = 1;
 
-		switch (ClientPrefs.colorblindMode)
+		switch (ClientPrefs.data.colorblindMode)
 		{
 			case 0:
 				trace('No color filter');
