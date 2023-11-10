@@ -29,17 +29,19 @@ class Option
 	private var MS_O:String = '';
 	private var grid_O:String = '';
     
-    public var onChange:Void->Void = null;
+    //public var onChange:Void->Void = null;
     
 	public var acceptType:Bool = false;
 
 	public var waitingType:Bool = false;
 	
-	public function change()
+	public function change():Void
 	{
+	    /*
 		if(onChange != null) {
 			onChange();
 		}
+		*/
 	}
 
 	public final function getDisplay():String
@@ -69,19 +71,19 @@ class Option
 	// Returns whether the label is to be updated.
 	public function press():Bool
 	{
-	    change();
+	    if (change() != null) change();
 		return true;
 	}
 	
 	public function left():Bool
 	{
-	    change();
+	    if (change() != null) change();
 		return false;
 	}
 
 	public function right():Bool
 	{
-	    change();
+	    if (change() != null) change();
 		return false;
 	}
 	
@@ -616,7 +618,7 @@ class ColorblindModeOption extends Option
 		return true;
 	}
 	
-	public override function onChange():Void
+	public override function change()
 	{
 	    ColorblindFilter.applyFiltersOnGame;
 	}
