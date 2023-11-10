@@ -133,8 +133,8 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
-		//Paths.clearStoredMemory();
-		//Paths.clearUnusedMemory();
+		Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
@@ -691,6 +691,18 @@ class FreeplayState extends MusicBeatState
 
 		updateTexts(elapsed);
 		super.update(elapsed);
+	}
+	
+	override function openSubState(SubState:FlxSubState)
+	{
+		stagesFunc(function(stage:BaseStage) stage.openSubState(SubState));
+		super.openSubState(SubState);
+	}
+
+	override function closeSubState()
+	{
+		stagesFunc(function(stage:BaseStage) stage.closeSubState());				
+		super.closeSubState();
 	}
 
 	public static function destroyFreeplayVocals() {
