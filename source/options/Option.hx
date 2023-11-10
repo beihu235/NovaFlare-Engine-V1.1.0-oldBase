@@ -592,9 +592,9 @@ class ColorblindModeOption extends Option
 
 	public override function left():Bool
 	{
-		ClientPrefs.data.colorblindFilter--;
-		if (ClientPrefs.data.colorblindFilter < 0)
-		ClientPrefs.data.colorblindFilter = OptionsHelpers.colorblindFilterArray.length -1;
+		ClientPrefs.data.colorblindMode--;
+		if (ClientPrefs.data.colorblindMode < 0)
+		ClientPrefs.data.colorblindMode = OptionsHelpers.colorblindFilterArray.length -1;
 		
 		FlxTransitionableState.skipNextTransIn = true;
 		MusicBeatState.switchState(new options.OptionsState()); //reset substate for real
@@ -604,9 +604,9 @@ class ColorblindModeOption extends Option
 
 	public override function right():Bool
 	{
-		ClientPrefs.data.colorblindFilter++;
-		if (ClientPrefs.data.colorblindFilter > OptionsHelpers.colorblindFilterArray.length -1)
-		ClientPrefs.data.colorblindFilter = 0;
+		ClientPrefs.data.colorblindMode++;
+		if (ClientPrefs.data.colorblindMode > OptionsHelpers.colorblindFilterArray.length -1)
+		ClientPrefs.data.colorblindMode = 0;
 		
 		FlxTransitionableState.skipNextTransIn = true;
 		MusicBeatState.switchState(new options.OptionsState());	//reset substate for real		
@@ -621,7 +621,7 @@ class ColorblindModeOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "ColorblindFilter: < " + OptionsHelpers.colorblindFilter[ClientPrefs.data.colorblindFilter] + " >";
+		return "ColorblindFilter: < " + OptionsHelpers.colorblindFilter[ClientPrefs.data.colorblindMode] + " >";
 	}
 }
 
