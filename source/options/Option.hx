@@ -37,11 +37,7 @@ class Option
 	
 	public function change():Void
 	{
-	    /*
-		if(onChange != null) {
-			onChange();
-		}
-		*/
+	    //nothing
 	}
 
 	public final function getDisplay():String
@@ -625,7 +621,7 @@ class ColorblindModeOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "ColorblindFilter: < " + OptionsHelpers.colorblindFilter[ClientPrefs.data.colorblindMode] + " >";
+		return "ColorblindFilter: < " + OptionsHelpers.colorblindFilterArray[ClientPrefs.data.colorblindMode] + " >";
 	}
 }
 
