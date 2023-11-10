@@ -592,7 +592,7 @@ class ColorblindModeOption extends Option
 		ClientPrefs.data.colorblindMode--;
 		if (ClientPrefs.data.colorblindMode < 0)
 		ClientPrefs.data.colorblindMode = OptionsHelpers.colorblindFilterArray.length -1;		
-		
+		ColorblindFilter.applyFiltersOnGame;
 		return true;
 	}
 
@@ -601,7 +601,7 @@ class ColorblindModeOption extends Option
 		ClientPrefs.data.colorblindMode++;
 		if (ClientPrefs.data.colorblindMode > OptionsHelpers.colorblindFilterArray.length -1)
 		ClientPrefs.data.colorblindMode = 0;
-		        
+		ColorblindFilter.applyFiltersOnGame;        
 		return true;
 	}
 	
