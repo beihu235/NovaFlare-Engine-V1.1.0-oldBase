@@ -8,7 +8,7 @@ import options.Option;
 class OptionsHelpers
 {
     public static var languageArray = ["English", "简体中文", "繁體中文"];
-	public static var colorblindFilterArray = ['No color filter', 'Protanopia filter', 'Protanomaly filter', 'Deuteranopia filter','Deuteranomaly filter','Tritanopia filter','Tritanomaly filter','Achromatopsia filter','Achromatomaly filter'];
+	public static var colorblindFilterArray = ['None', 'Protanopia', 'Protanomaly', 'Deuteranopia','Deuteranomaly','Tritanopia','Tritanomaly','Achromatopsia','Achromatomaly'];
 
     static public function SetNoteSkin()
     {
