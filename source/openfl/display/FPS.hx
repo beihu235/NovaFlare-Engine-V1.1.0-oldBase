@@ -26,6 +26,19 @@ import openfl.system.System;
 @:fileXml('tags="haxe,release"')
 @:noDebug
 #end
+
+// https://imgur.com/a/LVkQmqe
+#if windows
+@:headerCode("
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#include <psapi.h>
+// are you serious?? 
+// do i have to include this after windows.h to not get outrageous compilation errors??????
+// one side of my brains loves c++ and the other one hates it
+")
+#end
+
 class FPS extends TextField
 {
 	/**
@@ -70,6 +83,23 @@ class FPS extends TextField
 		});
 		#end
 	}
+	
+	#if windows // planning to do the same for linux but im lazy af so rn it'll use the hxcpp gc
+	@:functionCode("
+		// ily windows api <3
+		auto memhandle = GetCurrentProcess();
+		PROCESS_MEMORY_COUNTERS pmc;
+
+		if (GetProcessMemoryInfo(memhandle, &pmc, sizeof(pmc)))
+			return(pmc.WorkingSetSize);
+		else
+			return 0;
+	")
+	function obtainMemory():Dynamic
+	{
+		return 0;
+	}
+	#end
 	
 	public static var currentColor = 0;    
 	 var skippedFrames = 0;
@@ -143,10 +173,8 @@ class FPS extends TextField
 			text = "FPS: " + DisplayFPS + "/" + ClientPrefs.data.framerate;
 
 			var memoryMegas:Float = 0;
-			//var newmemoryMegas:Float = 0;		
             var memType:String = ' MB';
-			
-			
+						
 			#if windows
     		// now be an ACTUAL real man and get the memory from plain & straight c++
     		var actualMem:Float = obtainMemory();
