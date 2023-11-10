@@ -49,8 +49,8 @@ class ColorblindFilter {
     public static function applyFiltersOnGame() {
         filterArray = [];
         FlxG.game.setFilters(filterArray);
-        if (ClientPrefs.data.colorblindMode != "None") { // actually self explanatory, isn't it?
-            if (filterMap.get(ClientPrefs.data.colorblindMode) != null) { // anticrash system
+        if (OptionsHelpers.colorblindFilterArray[ClientPrefs.data.colorblindMode] != "None") { // actually self explanatory, isn't it?
+            if (filterMap.get(OptionsHelpers.colorblindFilterArray[ClientPrefs.data.colorblindMode]) != null) { // anticrash system
                 var colorblindMode = filterMap.get(OptionsHelpers.colorblindFilterArray[ClientPrefs.data.colorblindMode]).filter;
                 if (colorblindMode != null) {
                     filterArray.push(colorblindMode);
