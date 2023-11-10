@@ -455,12 +455,6 @@ class FreeplayState extends MusicBeatState
 		CustomFadeTransition.nextCamera = camBlackFade;
 	}
 
-	override function closeSubState() {
-		changeSelection(0, false);
-		persistentUpdate = true;
-		super.closeSubState();
-	}
-
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
 	{
 		songs.push(new SongMetadata(songName, weekNum, songCharacter, color));
@@ -697,12 +691,19 @@ class FreeplayState extends MusicBeatState
 	override function openSubState(SubState:FlxSubState)
 	{
 		stagesFunc(function(stage:BaseStage) stage.openSubState(SubState));
+		
+		persistentUpdate = true;
+		
 		super.openSubState(SubState);
 	}
 
 	override function closeSubState()
 	{
-		stagesFunc(function(stage:BaseStage) stage.closeSubState());				
+		stagesFunc(function(stage:BaseStage) stage.closeSubState());		
+		
+		changeSelection(0, false);
+		persistentUpdate = true;
+						
 		super.closeSubState();
 	}
 
