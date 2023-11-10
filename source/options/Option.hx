@@ -592,7 +592,7 @@ class ColorblindModeOption extends Option
 		ClientPrefs.data.colorblindMode--;
 		if (ClientPrefs.data.colorblindMode < 0)
 		ClientPrefs.data.colorblindMode = OptionsHelpers.colorblindFilterArray.length -1;		
-		ColorblindFilter.applyFiltersOnGame;
+		ColorblindFilter.UpdateColors();
 		return true;
 	}
 
@@ -601,13 +601,13 @@ class ColorblindModeOption extends Option
 		ClientPrefs.data.colorblindMode++;
 		if (ClientPrefs.data.colorblindMode > OptionsHelpers.colorblindFilterArray.length -1)
 		ClientPrefs.data.colorblindMode = 0;
-		ColorblindFilter.applyFiltersOnGame;        
+	    ColorblindFilter.UpdateColors();
 		return true;
 	}
 	
 	public override function change()
 	{
-	    ColorblindFilter.applyFiltersOnGame;
+	    ColorblindFilter.UpdateColors();
 	}
 
 	private override function updateDisplay():String
