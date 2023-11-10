@@ -578,6 +578,50 @@ class Language extends Option
 	}
 }
 
+class ColorblindModeOption extends Option
+{
+    
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}		
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.colorblindFilter--;
+		if (ClientPrefs.data.colorblindFilter < 0)
+		ClientPrefs.data.colorblindFilter = OptionsHelpers.colorblindFilterArray.length -1;
+		
+		FlxTransitionableState.skipNextTransIn = true;
+		MusicBeatState.switchState(new options.OptionsState()); //reset substate for real
+		
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		ClientPrefs.data.colorblindFilter++;
+		if (ClientPrefs.data.colorblindFilter > OptionsHelpers.colorblindFilterArray.length -1)
+		ClientPrefs.data.colorblindFilter = 0;
+		
+		FlxTransitionableState.skipNextTransIn = true;
+		MusicBeatState.switchState(new options.OptionsState());	//reset substate for real		
+		        
+		return true;
+	}
+	
+	public override function onChange():Void
+	{
+	    ColorblindFilter.applyFiltersOnGame;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "ColorblindFilter: < " + OptionsHelpers.colorblindFilter[ClientPrefs.data.colorblindFilter] + " >";
+	}
+}
+
 class FlashingLightsOption extends Option
 {
 	public function new(desc:String)

@@ -8,17 +8,7 @@ import options.Option;
 class OptionsHelpers
 {
     public static var languageArray = ["English", "简体中文", "繁體中文"];
-	//public static var noteskinArray = ["Default"];
-    /*public static var IconsBopArray = ['Grafex',  'Modern', 'Classic'];
-    public static var TimeBarArray = ['Time Left', 'Time Elapsed', 'Disabled'];
-    public static var ColorBlindArray = ['None', 'Deuteranopia', 'Protanopia', 'Tritanopia'];
-    public static var AccuracyTypeArray = ['Grafex', 'Kade', 'Mania', 'Andromeda', 'Forever', 'Psych'];
-    
-	public static function getNoteskinByID(id:Int)
-	{
-		return noteskinArray[id];
-	}
-    */
+	public static var colorblindFilter = ['None', 'Deuteranopia', 'Protanopia', 'Tritanopia'];
     
     static public function SetNoteSkin()
     {

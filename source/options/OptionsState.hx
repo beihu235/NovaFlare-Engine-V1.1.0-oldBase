@@ -249,6 +249,7 @@ class OptionsState extends MusicBeatState
 			]),
 			new OptionCata(640, 40 + 64, "System", [
 			    new Language("Change language in some state."),
+			    new ColorblindModeOption("You can set colorblind filter (makes the game more playable for colorblind people)\nCredits: notweuz (Creator of OS Engine)'"),
 			    new ShadersOption("Shaders used for some visual effects, and also CPU intensive for weaker PCs."),
 				new GPUcacheOption("If checked, allows the GPU to be used for caching textures, decreasing RAM usage."),				
 				new FlashingLightsOption("Toggle flashing lights that can cause epileptic seizures and strain."),
