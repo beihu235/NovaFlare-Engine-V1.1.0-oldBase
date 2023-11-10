@@ -6,6 +6,8 @@ import backend.MusicBeatState;
 import flixel.addons.transition.FlxTransitionableState;
 import options.OptionsHelpers;
 
+import shaders.ColorblindFilter;
+
 class Option
 {
 	public function new()
