@@ -16,6 +16,7 @@ import substates.ResetScoreSubState;
 import substates.OSTSubstate;
 import substates.OSTtoNew;
 
+import flixel.FlxSubState;
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.ui.FlxButton;
