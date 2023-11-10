@@ -67,19 +67,16 @@ class Option
 	// Returns whether the label is to be updated.
 	public function press():Bool
 	{
-	    change();
 		return true;
 	}
 	
 	public function left():Bool
 	{
-	    change();
 		return false;
 	}
 
 	public function right():Bool
 	{
-	    change();
 		return false;
 	}
 	
@@ -594,10 +591,7 @@ class ColorblindModeOption extends Option
 	{
 		ClientPrefs.data.colorblindMode--;
 		if (ClientPrefs.data.colorblindMode < 0)
-		ClientPrefs.data.colorblindMode = OptionsHelpers.colorblindFilterArray.length -1;
-		
-		FlxTransitionableState.skipNextTransIn = true;
-		MusicBeatState.switchState(new options.OptionsState()); //reset substate for real
+		ClientPrefs.data.colorblindMode = OptionsHelpers.colorblindFilterArray.length -1;		
 		
 		return true;
 	}
@@ -607,9 +601,6 @@ class ColorblindModeOption extends Option
 		ClientPrefs.data.colorblindMode++;
 		if (ClientPrefs.data.colorblindMode > OptionsHelpers.colorblindFilterArray.length -1)
 		ClientPrefs.data.colorblindMode = 0;
-		
-		FlxTransitionableState.skipNextTransIn = true;
-		MusicBeatState.switchState(new options.OptionsState());	//reset substate for real		
 		        
 		return true;
 	}
