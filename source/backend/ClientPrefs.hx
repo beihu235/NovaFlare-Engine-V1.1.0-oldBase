@@ -39,6 +39,7 @@ class SaveVariables {
 	
 	public var lowQuality:Bool = false;
 	public var shaders:Bool = true;
+	public var colorblindMode:Int = 0;
 	public var cacheOnGPU:Bool = #if !switch false #else true #end; //From Stilic	
 	public var framerate:Int = 60;
 	
