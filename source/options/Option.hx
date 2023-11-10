@@ -73,13 +73,13 @@ class Option
 	
 	public function left():Bool
 	{
-	    if (change() != null) change();
+	    change();
 		return false;
 	}
 
 	public function right():Bool
 	{
-	    if (change() != null) change();
+	    change();
 		return false;
 	}
 	
