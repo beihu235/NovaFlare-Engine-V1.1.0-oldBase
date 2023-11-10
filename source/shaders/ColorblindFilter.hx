@@ -1,62 +1,154 @@
 package shaders;
 
-import flixel.FlxG;
-import openfl.filters.BitmapFilter;
-import openfl.filters.ColorMatrixFilter;
 import options.OptionsHelpers;
 
+import openfl.filters.ColorMatrixFilter;
+import openfl.filters.BitmapFilter;
+import flixel.FlxG;
+import flixel.graphics.tile.FlxGraphicsShader;
+import openfl.filters.ShaderFilter;
+import flixel.system.FlxAssets.FlxShader;
+
 class ColorblindFilter {
-    // i honesly have no ideas how to make it, so i hope that works
-    public static var filterArray:Array<BitmapFilter> = [];
-	public static var filterMap:Map<String, {filter:BitmapFilter, ?onUpdate:Void->Void}> = [
+	public static var matrix:Array<Float>;
+	public static var colorM:Array<Float>;
 
-        /*
-            I found these values in official haxe guides :D
-        */
+	public static function UpdateColors(?input:Array<BitmapFilter> = null):Void
+	{
+		trace("VALUE: " + ClientPrefs.colorblindMode);
 
-        "Deuteranopia" => {
-				var matrix:Array<Float> = [
-					0.43, 0.72, -.15, 0, 0,
-					0.34, 0.57, 0.09, 0, 0,
-					-.02, 0.03,    1, 0, 0,
-					   0,    0,    0, 1, 0,
-				];
+		var a1:Float = 1;
+		var a2:Float = 0;
+		var a3:Float = 0;
 
-				{filter: new ColorMatrixFilter(matrix)}
-			},
-			"Protanopia" => {
-				var matrix:Array<Float> = [
-					0.20, 0.99, -.19, 0, 0,
-					0.16, 0.79, 0.04, 0, 0,
-					0.01, -.01,    1, 0, 0,
-					   0,    0,    0, 1, 0,
-				];
+		var b1:Float = 0;
+		var b2:Float = 1;
+		var b3:Float = 0;
 
-				{filter: new ColorMatrixFilter(matrix)}
-			},
-			"Tritanopia" => {
-				var matrix:Array<Float> = [
-					0.97, 0.11, -.08, 0, 0,
-					0.02, 0.82, 0.16, 0, 0,
-					0.06, 0.88, 0.18, 0, 0,
-					   0,    0,    0, 1, 0,
-				];
+		var c1:Float = 0;
+		var c2:Float = 0;
+		var c3:Float = 1;
 
-				{filter: new ColorMatrixFilter(matrix)}
-			}
-    ];
+		switch (ClientPrefs.colorblindMode)
+		{
+			case 0:
+				trace('No color filter');
+				a1 = 1;
+				b1 = 0;
+				c1 = 0;
+				a2 = 0;
+				b2 = 1;
+				c2 = 0;
+				a3 = 0;
+				b3 = 0;
+				c3 = 1;
+			case 1:
+				trace('Protanopia filter');
+				a1 = 0.567;
+				b1 = 0.433;
+				c1 = 0;
+				a2 = 0.558;
+				b2 = 0.442;
+				c2 = 0;
+				a3 = 0;
+				b3 = 0.242;
+				c3 = 0.758;
+			case 2:
+				trace('Protanomaly filter');
+				a1 = 0.817;
+				b1 = 0.183;
+				c1 = 0;
+				a2 = 0.333;
+				b2 = 0.667;
+				c2 = 0;
+				a3 = 0;
+				b3 = 0.125;
+				c3 = 0.875;
+			case 3:
+				trace('Deuteranopia filter');
+				a1 = 0.625;
+				b1 = 0.375;
+				c1 = 0;
+				a2 = 0.7;
+				b2 = 0.3;
+				c2 = 0;
+				a3 = 0;
+				b3 = 0;
+				c3 = 1.0;
+			case 4:
+				trace('Deuteranomaly filter');
+				a1 = 0.8;
+				b1 = 0.2;
+				c1 = 0;
+				a2 = 0.258;
+				b2 = 0.742;
+				c2 = 0;
+				a3 = 0;
+				b3 = 0.142;
+				c3 = 0.858;
+			case 5:
+				trace('Tritanopia filter');
+				a1 = 0.95;
+				b1 = 0.05;
+				c1 = 0;
+				a2 = 0;
+				b2 = 0.433;
+				c2 = 0.567;
+				a3 = 0;
+				b3 = 0.475;
+				c3 = 0.525;
+			case 6:
+				trace('Tritanomaly filter');
+				a1 = 0.967;
+				b1 = 0.033;
+				c1 = 0;
+				a2 = 0;
+				b2 = 0.733;
+				c2 = 0.267;
+				a3 = 0;
+				b3 = 0.183;
+				c3 = 0.817;
+			case 7:
+				trace('Achromatopsia filter');
+				a1 = 0.299;
+				b1 = 0.587;
+				c1 = 0.114;
+				a2 = 0.299;
+				b2 = 0.587;
+				c2 = 0.114;
+				a3 = 0.299;
+				b3 = 0.587;
+				c3 = 0.114;
+			case 8:
+				trace('Achromatomaly filter');
+				a1 = 0.618;
+				b1 = 0.320;
+				c1 = 0.062;
+				a2 = 0.163;
+				b2 = 0.775;
+				c2 = 0.062;
+				a3 = 0.163;
+				b3 = 0.320;
+				c3 = 0.516;
+		}
 
-    public static function applyFiltersOnGame() {
-        filterArray = [];
-        FlxG.game.setFilters(filterArray);
-        if (OptionsHelpers.colorblindFilterArray[ClientPrefs.data.colorblindMode] != "None") { // actually self explanatory, isn't it?
-            if (filterMap.get(OptionsHelpers.colorblindFilterArray[ClientPrefs.data.colorblindMode]) != null) { // anticrash system
-                var colorblindMode = filterMap.get(OptionsHelpers.colorblindFilterArray[ClientPrefs.data.colorblindMode]).filter;
-                if (colorblindMode != null) {
-                    filterArray.push(colorblindMode);
-                }
-            }
-        }
-        FlxG.game.setFilters(filterArray);
-    }
+		matrix = [
+			a1 * 1, b1 * 1, c1 * 1, 0, 1,
+			a2 * 1, b2 * 1, c2 * 1, 0, 1,
+			a3 * 1, b3 * 1, c3 * 1, 0, 1,
+			                        0,                         0,                         0, 1,                         0,
+		];
+
+		if (input != null)
+		{
+			input.push(new ColorMatrixFilter(matrix));
+		}
+		else
+		{
+			var filters:Array<BitmapFilter> = [];
+			filters.push(new ColorMatrixFilter(matrix));
+			FlxG.game.filtersEnabled = true;
+			FlxG.game.setFilters(filters);
+		}
+	}
 }
