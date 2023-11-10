@@ -19,6 +19,7 @@ import openfl.display.BitmapData;
 import openfl.utils.Assets;
 
 import shaders.ColorSwap;
+import shaders.ColorblindFilter;
 
 import states.StoryMenuState;
 import states.OutdatedState;
@@ -205,6 +206,8 @@ class TitleState extends MusicBeatState
 			persistentUpdate = true;
 			persistentDraw = true;
 		}
+		
+		ColorblindFilter.UpdateColors();
 
 		if (FlxG.save.data.weekCompleted != null)
 		{
@@ -820,6 +823,7 @@ class TitleState extends MusicBeatState
 			#if (hxCodec >= "3.0.0")
 			// Recent versions
 			video.play(filepath);
+			
 			showText();
 			video.onEndReached.add(function()
 			{
