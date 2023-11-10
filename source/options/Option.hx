@@ -67,22 +67,25 @@ class Option
 	// Returns whether the label is to be updated.
 	public function press():Bool
 	{
+	    change();
 		return true;
 	}
-
-	private function updateDisplay():String
-	{
-		return "";
-	}
-
+	
 	public function left():Bool
 	{
+	    change();
 		return false;
 	}
 
 	public function right():Bool
 	{
+	    change();
 		return false;
+	}
+	
+	private function updateDisplay():String
+	{
+		return "";
 	}
 }
 

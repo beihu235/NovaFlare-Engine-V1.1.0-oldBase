@@ -668,7 +668,7 @@ class OptionsState extends MusicBeatState
 						var object = selectedCat.optionObjects.members[selectedOptionIndex];																		
            				
 						selectedOption.press();
-                        selectedOption.change();
+                        
 						if (selectedOptionIndex == prev)
 						{
 							ClientPrefs.saveSettings();
@@ -767,7 +767,7 @@ class OptionsState extends MusicBeatState
 						if (!right_hold) FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						var object = selectedCat.optionObjects.members[selectedOptionIndex];
 						selectedOption.right();
-                        selectedOption.change();
+                        
 						ClientPrefs.saveSettings();
 
 						object.text = selectedOption.getValue();
@@ -777,7 +777,7 @@ class OptionsState extends MusicBeatState
 						if (!left_hold) FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 						var object = selectedCat.optionObjects.members[selectedOptionIndex];
 						selectedOption.left();
-                        selectedOption.change();
+                        
 						ClientPrefs.saveSettings();
 
 						object.text = selectedOption.getValue();
