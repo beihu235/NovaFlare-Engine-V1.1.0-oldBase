@@ -1,5 +1,5 @@
 package openfl.display;
-
+import cpp.vm.Gc;
 import haxe.Timer;
 import openfl.events.Event;
 import openfl.text.TextField;
@@ -145,11 +145,21 @@ class FPS extends TextField
 			var memoryMegas:Float = 0;
 			//var newmemoryMegas:Float = 0;		
             var memType:String = ' MB';
-			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
 			
+			
+			#if windows
+    		// now be an ACTUAL real man and get the memory from plain & straight c++
+    		var actualMem:Float = obtainMemory();
+    		#else
+    		// be a real man and calculate memory from hxcpp
+    		var actualMem:Float = Gc.memInfo64(3); // update: this sucks
+    		#end
+    		
+    		memoryMegas = Math.abs(FlxMath.roundDecimal(actualMem / 1000000, 1));
+		
 		if (ClientPrefs.data.showMEM){
 			if (memoryMegas > 1000){
-			    memoryMegas = Math.ceil( Math.abs( System.totalMemory ) / 10000000 / 1.024)/100;
+			    memoryMegas = Math.ceil( Math.abs( actualMem ) / 10000000 / 1.024)/100;
 			    memType = ' GB';
 			}    
 			
