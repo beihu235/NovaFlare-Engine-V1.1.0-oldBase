@@ -51,7 +51,7 @@ class ColorblindFilter {
         FlxG.game.setFilters(filterArray);
         if (ClientPrefs.colorblindMode != "None") { // actually self explanatory, isn't it?
             if (filterMap.get(ClientPrefs.colorblindMode) != null) { // anticrash system
-                var colorblindMode = filterMap.get(OptionsHelpers.colorblindFilter[ClientPrefs.colorblindMode]).filter;
+                var colorblindMode = filterMap.get(OptionsHelpers.colorblindFilterArray[ClientPrefs.colorblindMode]).filter;
                 if (colorblindMode != null) {
                     filterArray.push(colorblindMode);
                 }
