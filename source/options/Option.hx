@@ -67,7 +67,7 @@ class Option
 	// Returns whether the label is to be updated.
 	public function press():Bool
 	{
-	    if (change() != null) change();
+	    change();
 		return true;
 	}
 	
