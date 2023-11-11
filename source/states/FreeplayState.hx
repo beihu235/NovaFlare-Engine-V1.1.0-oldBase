@@ -144,12 +144,17 @@ class FreeplayState extends MusicBeatState
 		
 		camGame = new FlxCamera();
 		camSearch = new FlxCamera();
-		
+		camBlackFade = new FlxCamera();
 		camSearch.bgColor.alpha = 0;
-
+        camBlackFade.bgColor.alpha = 0;
 		FlxG.cameras.reset(camGame);		
 		FlxG.cameras.add(camSearch, false);
+		FlxG.cameras.add(camBlackFade, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
+		
+		
+		
+		
 		
 		
 		camSearch.y = -300 - showOffset;
@@ -451,9 +456,7 @@ class FreeplayState extends MusicBeatState
         //addPadCamera();
         #end
         
-        camBlackFade = new FlxCamera();
-		camBlackFade.bgColor.alpha = 0;
-		FlxG.cameras.add(camBlackFade, false);
+        
                 
 		super.create();
 		
