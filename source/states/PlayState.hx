@@ -1889,9 +1889,9 @@ class PlayState extends MusicBeatState
 					ClientPrefs.data.playOpponent ? opponentDance() : playerDance();
 
 				if(notes.length > 0)
-				{/*
+				{
 					if(startedCountdown)
-					{*/
+					{
 						var fakeCrochet:Float = (60 / SONG.bpm) * 1000;
 						notes.forEachAlive(function(daNote:Note)
 						{
@@ -1939,7 +1939,7 @@ class PlayState extends MusicBeatState
 								invalidateNote(daNote);
 							}
 						});
-					/*}
+					}
 					else
 					{
 						notes.forEachAlive(function(daNote:Note)
@@ -1947,7 +1947,7 @@ class PlayState extends MusicBeatState
 							daNote.canBeHit = false;
 							daNote.wasGoodHit = false;
 						});
-					}*/
+					}
 				}
 			}
 			checkEventNote();
