@@ -717,7 +717,7 @@ class FreeplayState extends MusicBeatState
 		#end
 		
 		
-		super.openSubState();
+		super.openSubState(SubState);
 	}
 	
 	override function closeSubState() {
