@@ -16,6 +16,7 @@ import substates.ResetScoreSubState;
 import substates.OSTSubstate;
 import substates.OSTtoNew;
 
+import flixel.FlxSubState;
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.ui.FlxButton;
@@ -603,10 +604,6 @@ class FreeplayState extends MusicBeatState
 		{
 			persistentUpdate = false;
 			
-			#if android
-			removeVirtualPad();
-			#end
-			
 			openSubState(new GameplayChangersSubstate());
 		}
 		else if(FlxG.keys.justPressed.SPACE #if android || MusicBeatState._virtualpad.buttonX.justPressed #end)
@@ -701,9 +698,6 @@ class FreeplayState extends MusicBeatState
 		}
 		else if(controls.RESET #if android || MusicBeatState._virtualpad.buttonY.justPressed #end)
 		{
-		    #if android
-			removeVirtualPad();
-			#end
 			persistentUpdate = false;
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
 			FlxG.sound.play(Paths.sound('scrollMenu'));
@@ -713,7 +707,7 @@ class FreeplayState extends MusicBeatState
 		super.update(elapsed);
 	}
 	
-	override function openSubState() {
+	override function openSubState(SubState:FlxSubState) {
 	    openSubstate = true;
 	
 		persistentUpdate = true;
