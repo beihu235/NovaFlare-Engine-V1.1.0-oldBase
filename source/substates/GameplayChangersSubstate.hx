@@ -168,14 +168,20 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		
 		    #if android
 			if (!isInPause) {
-			    close();
+			    new FlxTimer().start(0.05, function(tmr:FlxTimer)
+				{
+					close();
+				});			    
 			}else{
 			    PauseSubState.goBack = true;
     			close();    			
 			}
 			#else
 			if (!isInPause) {
-			    close();
+			    new FlxTimer().start(0.05, function(tmr:FlxTimer)
+				{
+					close();
+				});
 			}else{
 			    PauseSubState.goBack = true;
     			close();    			
