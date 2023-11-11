@@ -571,8 +571,21 @@ class FreeplayState extends MusicBeatState
 			changeDiff(1);
 			_updateSongLastDifficulty();
 		}
-
-		if (FlxG.keys.justPressed.ESCAPE #if android || MusicBeatState._virtualpad.buttonB.justPressed #end)
+		
+        
+        #if mobile
+        var realPressed = false;
+        
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed)
+			{
+				realPressed = true;
+			}
+		}
+		#end
+		
+		if (FlxG.keys.justPressed.ESCAPE #if android || MusicBeatState._virtualpad.buttonB.justPressed && realPressed #end)
 		{
 			persistentUpdate = false;
 			if(colorTween != null) {
