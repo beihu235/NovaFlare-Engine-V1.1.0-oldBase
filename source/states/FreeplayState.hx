@@ -138,20 +138,19 @@ class FreeplayState extends MusicBeatState
 		Paths.clearUnusedMemory();
 		
 		persistentUpdate = true;
+		persistentDraw = true;
 		PlayState.isStoryMode = false;
 		WeekData.reloadWeekFiles(false);
 		
 		camGame = new FlxCamera();
 		camSearch = new FlxCamera();
-		camBlackFade = new FlxCamera();
-		camBlackFade.bgColor.alpha = 0;
+		
 		camSearch.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);		
 		FlxG.cameras.add(camSearch, false);
-		FlxG.cameras.add(camBlackFade, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
-		CustomFadeTransition.nextCamera = camBlackFade;
+		
 		
 		camSearch.y = -300 - showOffset;
 		
@@ -451,8 +450,13 @@ class FreeplayState extends MusicBeatState
         addVirtualPad(FULL, A_B_C_X_Y_Z);
         //addPadCamera();
         #end
+        
+        camBlackFade = new FlxCamera();
+		camBlackFade.bgColor.alpha = 0;
+		FlxG.cameras.add(camBlackFade, false);
                 
 		super.create();
+		
 		CustomFadeTransition.nextCamera = camBlackFade;
 	}
 
@@ -706,9 +710,6 @@ class FreeplayState extends MusicBeatState
 		changeSelection(0, false);
 		persistentUpdate = true;
 		persistentDraw = true;
-		
-		removeVirtualPad();
-		addVirtualPad(FULL, A_B_C_X_Y_Z);
 										
 		super.closeSubState();
 		
