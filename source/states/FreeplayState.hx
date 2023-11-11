@@ -707,12 +707,12 @@ class FreeplayState extends MusicBeatState
 		persistentUpdate = true;
 		persistentDraw = true;
 		
-		removeVirtualPad()
+		removeVirtualPad();
 		addVirtualPad(FULL, A_B_C_X_Y_Z);
 										
 		super.closeSubState();
 		
-		removeVirtualPad()
+		removeVirtualPad();
 		addVirtualPad(FULL, A_B_C_X_Y_Z);
 	}
 
