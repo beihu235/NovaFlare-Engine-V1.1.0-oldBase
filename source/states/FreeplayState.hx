@@ -449,7 +449,7 @@ class FreeplayState extends MusicBeatState
 		
 		#if android
         addVirtualPad(FULL, A_B_C_X_Y_Z);
-        addPadCamera();
+        //addPadCamera();
         #end
                 
 		super.create();
@@ -706,8 +706,14 @@ class FreeplayState extends MusicBeatState
 		changeSelection(0, false);
 		persistentUpdate = true;
 		persistentDraw = true;
-						
+		
+		removeVirtualPad()
+		addVirtualPad(FULL, A_B_C_X_Y_Z);
+										
 		super.closeSubState();
+		
+		removeVirtualPad()
+		addVirtualPad(FULL, A_B_C_X_Y_Z);
 	}
 
 	public static function destroyFreeplayVocals() {
