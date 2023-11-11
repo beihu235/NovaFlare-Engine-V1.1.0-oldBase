@@ -2951,10 +2951,14 @@ class PlayState extends MusicBeatState
 
 	public static function sortHitNotes(a:Note, b:Note):Int
 	{
-	    /*
-	    if (ClientPrefs.data.noteDetectionFix)
-	    return -1;
-	    */
+	    
+	    if (ClientPrefs.data.noteDetectionFix){
+	        if (a.hitCausesMiss && !b.hitCausesMiss)
+			    return 1;
+		    else if (!a.hitCausesMiss && b.hitCausesMiss)
+			    return -1;
+	    } //it work for play mods better check notes
+	    
 	    
 		if (a.lowPriority && !b.lowPriority)
 			return 1;
