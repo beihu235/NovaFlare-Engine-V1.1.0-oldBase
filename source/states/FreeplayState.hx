@@ -697,7 +697,7 @@ class FreeplayState extends MusicBeatState
 		stagesFunc(function(stage:BaseStage) stage.openSubState(SubState));
 		
 		persistentUpdate = false;
-		persistentDraw = true;
+		//persistentDraw = true;
 		
 		super.openSubState(SubState);
 	}
@@ -708,7 +708,7 @@ class FreeplayState extends MusicBeatState
 		
 		changeSelection(0, false);
 		persistentUpdate = true;
-		persistentDraw = true;
+		//persistentDraw = true;
 										
 		super.closeSubState();
 		
