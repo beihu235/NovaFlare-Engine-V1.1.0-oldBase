@@ -22,8 +22,8 @@ import states.FreeplayState;
 import backend.Conductor;
 
 import flixel.util.FlxSpriteUtil;
-import openfl.display.Sprite;
-import openfl.geom.Rectangle;
+import Enablefl.display.Sprite;
+import Enablefl.geom.Rectangle;
 
 #if sys
 import sys.io.File;
@@ -249,11 +249,11 @@ class ResultsScreen extends MusicBeatSubstate
 		judgeText.antialiasing = ClientPrefs.data.antialiasing;
 		add(judgeText);
 		
-		var botplay:String = 'Close';
-		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Open';
-		var practice:String = 'Close';
+		var botplay:String = 'Disable';
+		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Enable';
+		var practice:String = 'Disable';
 
-		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Open';
+		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Enable';
 
 		setGameText = new FlxText(FlxG.width + 400, 420, 0, 
 		'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
@@ -279,7 +279,7 @@ class ResultsScreen extends MusicBeatSubstate
 		var Main:Float = 0;
 		var allowData:Int = 0;
 		for (i in 0...PlayState.rsNoteTime.length - 1){
-		    if (Math.abs(PlayState.rsNoteTime[i]) <= safeZoneOffset){
+		    if (Math.abs(PlayState.rsNoteMs[i]) <= safeZoneOffset){
     		    Main = Main + Math.abs(PlayState.rsNoteMs[i]);
     		    allowData = allowData + 1;
 		    }
@@ -377,10 +377,10 @@ class ResultsScreen extends MusicBeatSubstate
     
 	override function update(elapsed:Float)
 	{   
-	    var botplay:String = 'Close';
-		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Open';
-		var practice:String = 'Close';
-		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Open';
+	    var botplay:String = 'Disable';
+		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Enable';
+		var practice:String = 'Disable';
+		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Enable';
 
 		setGameText.text = 'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
 		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
