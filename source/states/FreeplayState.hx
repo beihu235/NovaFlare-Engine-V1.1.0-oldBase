@@ -137,8 +137,6 @@ class FreeplayState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		
-		persistentUpdate = true;
-		//persistentDraw = true;
 		PlayState.isStoryMode = false;
 		WeekData.reloadWeekFiles(false);
 		
@@ -151,11 +149,9 @@ class FreeplayState extends MusicBeatState
 		FlxG.cameras.add(camSearch, false);
 		FlxG.cameras.add(camBlackFade, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
+		CustomFadeTransition.nextCamera = camBlackFade;
 		
-		
-		
-		
-		
+		persistentUpdate = persistentDraw = true;
 		
 		camSearch.y = -300 - showOffset;
 		
