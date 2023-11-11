@@ -22,8 +22,8 @@ import states.FreeplayState;
 import backend.Conductor;
 
 import flixel.util.FlxSpriteUtil;
-import Enablefl.display.Sprite;
-import Enablefl.geom.Rectangle;
+import openfl.display.Sprite;
+import openfl.geom.Rectangle;
 
 #if sys
 import sys.io.File;
