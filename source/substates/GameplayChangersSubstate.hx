@@ -168,8 +168,6 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		
 		    #if android
 			if (!isInPause) {
-			    FlxTransitionableState.skipNextTransIn = true;
-			    FlxTransitionableState.skipNextTransOut = true;
 			    close();
 			}else{
 			    PauseSubState.goBack = true;
@@ -177,7 +175,6 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 			}
 			#else
 			if (!isInPause) {
-			    FlxTransitionableState.skipNextTransOut = true;
 			    close();
 			}else{
 			    PauseSubState.goBack = true;
