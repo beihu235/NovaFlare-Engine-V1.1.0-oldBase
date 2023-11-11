@@ -109,7 +109,7 @@ class ResetScoreSubState extends MusicBeatSubstate
 				}
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'), 1);
-			new FlxTimer().start(0.05, function(tmr:FlxTimer)
+			new FlxTimer().start(0.1, function(tmr:FlxTimer)
 				{
 					close();
 				});

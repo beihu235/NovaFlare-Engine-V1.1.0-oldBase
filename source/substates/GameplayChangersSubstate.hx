@@ -165,20 +165,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		}
 
 		if (controls.BACK) {
-		
-		    #if android
 			if (!isInPause) {
-			    new FlxTimer().start(0.05, function(tmr:FlxTimer)
-				{
-					close();
-				});			    
-			}else{
-			    PauseSubState.goBack = true;
-    			close();    			
-			}
-			#else
-			if (!isInPause) {
-			    new FlxTimer().start(0.05, function(tmr:FlxTimer)
+			    new FlxTimer().start(0.1, function(tmr:FlxTimer)
 				{
 					close();
 				});
@@ -186,7 +174,6 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 			    PauseSubState.goBack = true;
     			close();    			
 			}
-			#end //我懒得删了
 			ClientPrefs.saveSettings();			
 		}
 
