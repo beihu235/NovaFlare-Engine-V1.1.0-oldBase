@@ -585,6 +585,11 @@ class FreeplayState extends MusicBeatState
 		if(FlxG.keys.justPressed.CONTROL #if android || MusicBeatState._virtualpad.buttonC.justPressed #end)
 		{
 			persistentUpdate = false;
+			
+			#if android
+			removeVirtualPad();
+			#end
+			
 			openSubState(new GameplayChangersSubstate());
 		}
 		else if(FlxG.keys.justPressed.SPACE #if android || MusicBeatState._virtualpad.buttonX.justPressed #end)
@@ -695,8 +700,10 @@ class FreeplayState extends MusicBeatState
 		changeSelection(0, false);
 		persistentUpdate = true;
 		
+		#if android
 		removeVirtualPad();
-		addVirtualPad(FULL, A_B_C_X_Y_Z);
+		addVirtualPad(FULL, A_B_C_X_Y_Z);	
+		#end
 		
 		super.closeSubState();
 	}
