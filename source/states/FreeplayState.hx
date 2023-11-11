@@ -16,7 +16,6 @@ import substates.ResetScoreSubState;
 import substates.OSTSubstate;
 import substates.OSTtoNew;
 
-import flixel.FlxSubState;
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.ui.FlxButton;
@@ -692,28 +691,14 @@ class FreeplayState extends MusicBeatState
 		super.update(elapsed);
 	}
 	
-	override function openSubState(SubState:FlxSubState)
-	{
-		stagesFunc(function(stage:BaseStage) stage.openSubState(SubState));
-		
-		persistentUpdate = false;
-		//persistentDraw = true;
-		
-		super.openSubState(SubState);
-	}
-
-	override function closeSubState()
-	{
-		stagesFunc(function(stage:BaseStage) stage.closeSubState());		
-		
+	override function closeSubState() {
 		changeSelection(0, false);
 		persistentUpdate = true;
-		//persistentDraw = true;
-										
-		super.closeSubState();
 		
 		removeVirtualPad();
 		addVirtualPad(FULL, A_B_C_X_Y_Z);
+		
+		super.closeSubState();
 	}
 
 	public static function destroyFreeplayVocals() {
