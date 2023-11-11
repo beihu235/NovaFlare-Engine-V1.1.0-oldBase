@@ -1939,7 +1939,7 @@ class PlayState extends MusicBeatState
 								invalidateNote(daNote);
 							}
 						});
-					}/*
+					/*}
 					else
 					{
 						notes.forEachAlive(function(daNote:Note)
