@@ -158,7 +158,7 @@ class OSTSubstate extends MusicBeatSubstate
 		    
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			close();
-			#end
+		
 		}
 		
 		var volue:Float = Math.exp(-1 * 2 * Math.PI * 200 * FlxG.sound.music.time);
