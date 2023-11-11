@@ -138,7 +138,7 @@ class FreeplayState extends MusicBeatState
 		Paths.clearUnusedMemory();
 		
 		persistentUpdate = true;
-		persistentDraw = true;
+		//persistentDraw = true;
 		PlayState.isStoryMode = false;
 		WeekData.reloadWeekFiles(false);
 		

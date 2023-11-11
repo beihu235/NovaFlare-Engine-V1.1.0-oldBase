@@ -3098,11 +3098,11 @@ class PlayState extends MusicBeatState
 		if (note != null && guitarHeroSustains && note.parent == null) {
 			if(note.tail.length > 0) {
 				for(childNote in note.tail) {
-					childNote.alpha = 0.3;
 					childNote.missed = true;
 					childNote.canBeHit = false;
 					childNote.ignoreNote = true;
 					childNote.tooLate = true;
+					childNote.alpha = 0.3;
 				}
 				note.missed = true;
 				note.canBeHit = false;
@@ -3123,11 +3123,11 @@ class PlayState extends MusicBeatState
 			var parentNote:Note = note.parent;
 			if (parentNote.wasGoodHit && parentNote.tail.length > 0) {
 				for (child in parentNote.tail) if (child != note) {
-				    child.alpha = 0.3;
 					child.missed = true;
 					child.canBeHit = false;
 					child.ignoreNote = true;
 					child.tooLate = true;
+					child.alpha = 0.3;
 				}
 			}
 		}
