@@ -699,14 +699,15 @@ class FreeplayState extends MusicBeatState
 	
 	override function closeSubState() {
 		changeSelection(0, false);
+		
+		super.closeSubState();
+		
 		persistentUpdate = true;
 		
 		#if android
 		removeVirtualPad();
 		addVirtualPad(FULL, A_B_C_X_Y_Z);	
 		#end
-		
-		super.closeSubState();
 	}
 
 	public static function destroyFreeplayVocals() {
