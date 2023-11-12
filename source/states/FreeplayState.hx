@@ -518,7 +518,7 @@ class FreeplayState extends MusicBeatState
 		scoreText.text = 'PERSONAL BEST: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
 		positionHighscore();
 		
-		if (!controlCheck) return;
+		//if (!controlCheck) return;
 
 		var shiftMult:Int = 1;
 		if(FlxG.keys.pressed.SHIFT  #if android || MusicBeatState._virtualpad.buttonZ.pressed #end) shiftMult = 3;
@@ -576,7 +576,7 @@ class FreeplayState extends MusicBeatState
 			_updateSongLastDifficulty();
 		}
 
-		if (FlxG.keys.justPressed.ESCAPE #if android || (MusicBeatState._virtualpad.buttonB.justPressed && FlxG.mouse.justPressed) #end)
+		if (controls.ACCEPT #if android && FlxG.mouse.justPressed #end)
 		{
 			persistentUpdate = false;
 			if(colorTween != null) {
