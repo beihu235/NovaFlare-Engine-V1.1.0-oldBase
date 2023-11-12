@@ -195,7 +195,7 @@ class FreeplayState extends MusicBeatState
 		add(bg);
 		bg.screenCenter();
 		
-		bgMove = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), XY, 0, 0);
+		bgMove = new FlxBackdrop(Paths.image('menuExtend/backdrop'), XY, 0, 0);
 		bgMove.alpha = 0.1;
 		bgMove.color = ColorArray[currentColor];
 		bgMove.screenCenter();

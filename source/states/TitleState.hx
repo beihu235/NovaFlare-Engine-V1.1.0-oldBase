@@ -134,7 +134,7 @@ class TitleState extends MusicBeatState
 		FlxG.keys.preventDefaultKeys = [TAB];
 		
 		FlxG.mouse.visible = true;
-		FlxG.mouse.load(Paths.image('memuExtend/cursor').bitmap,1,0,0);
+		FlxG.mouse.load(Paths.image('menuExtend/cursor').bitmap,1,0,0);
         FlxG.mouse.visible = false;
         
 		curWacky = FlxG.random.getObject(getIntroTextShit());
