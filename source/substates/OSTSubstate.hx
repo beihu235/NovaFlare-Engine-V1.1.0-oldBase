@@ -33,11 +33,6 @@ import sys.io.File;
 import sys.FileSystem;
 #end
 
-#if android
-import android.flixel.FlxButton;
-#else
-import flixel.ui.FlxButton;
-#end
 
 @:access(flixel.sound.FlxSound._sound)
 @:access(openfl.media.Sound.__buffer)
