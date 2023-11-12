@@ -703,7 +703,7 @@ class FreeplayState extends MusicBeatState
 		persistentUpdate = true;
 		
 		#if android
-		if(MusicBeatState._virtualpad != null)
+		if(MusicBeatState._virtualpad == null)
 		addVirtualPad(FULL, A_B_C_X_Y_Z);	
 		#end
 		
