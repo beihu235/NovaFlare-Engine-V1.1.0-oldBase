@@ -573,7 +573,7 @@ class FreeplayState extends MusicBeatState
 			_updateSongLastDifficulty();
 		}
 
-		if (controls.BACK #if android && FlxG.mouse.justPressed #end)
+		if (controls.BACK /*#if android && FlxG.mouse.justPressed #end*/)
 		{
 			if(colorTween != null) {
 				colorTween.cancel();
@@ -602,7 +602,6 @@ class FreeplayState extends MusicBeatState
 				Mods.currentModDirectory = songs[curSelected].folder;
 				var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
 				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
-				
 				
                 /*
 				FlxG.sound.list.add(vocals);
@@ -703,7 +702,7 @@ class FreeplayState extends MusicBeatState
 		persistentUpdate = true;
 		
 		#if android
-		if(MusicBeatState._virtualpad == null)
+		removeVirtualPad();
 		addVirtualPad(FULL, A_B_C_X_Y_Z);	
 		#end
 		
