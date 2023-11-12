@@ -215,7 +215,10 @@ class TitleState extends MusicBeatState
 		}
 
 		FlxG.mouse.visible = true;
-		FlxG.mouse.load(Paths.image('menuExtend/cursor').bitmap,1,0,0);
+		//FlxG.mouse.load(Paths.image('menuExtend/cursor').bitmap,1,0,0);
+		
+        FlxG.mouse.registerNativeCursor("custom", FlxG.mouse.setSimpleNativeCursorData("custom", Paths.image('menuExtend/cursor').pixels));
+        FlxG.mouse.setNativeCursor("custom");
         FlxG.mouse.visible = false;
         
 		#if FREEPLAY
