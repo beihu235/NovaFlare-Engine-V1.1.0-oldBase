@@ -107,8 +107,6 @@ class FreeplayState extends MusicBeatState
     var isStart:Bool = false;
     var isEnd:Bool = false;
     
-    var controlCheck:Bool = true;
-    
     var ColorArray:Array<Int> = [
 		0xFF9400D3,
 		0xFF4B0082,
@@ -518,7 +516,6 @@ class FreeplayState extends MusicBeatState
 		scoreText.text = 'PERSONAL BEST: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
 		positionHighscore();
 		
-		//if (!controlCheck) return;
 
 		var shiftMult:Int = 1;
 		if(FlxG.keys.pressed.SHIFT  #if android || MusicBeatState._virtualpad.buttonZ.pressed #end) shiftMult = 3;
@@ -576,9 +573,8 @@ class FreeplayState extends MusicBeatState
 			_updateSongLastDifficulty();
 		}
 
-		if (controls.BACK #if android && FlxG.mouse.justPressed #end)
+		if (controls.BACK)
 		{
-			persistentUpdate = false;
 			if(colorTween != null) {
 				colorTween.cancel();
 			}
@@ -588,7 +584,6 @@ class FreeplayState extends MusicBeatState
 
 		if(FlxG.keys.justPressed.CONTROL #if android || MusicBeatState._virtualpad.buttonC.justPressed #end)
 		{
-			controlCheck = false;
 			
 			#if android
 			removeVirtualPad();
@@ -708,11 +703,8 @@ class FreeplayState extends MusicBeatState
 		persistentUpdate = true;
 		
 		#if android
-		removeVirtualPad();
 		addVirtualPad(FULL, A_B_C_X_Y_Z);	
 		#end
-		
-		controlCheck = true;
 		
 		super.closeSubState();
 	}
