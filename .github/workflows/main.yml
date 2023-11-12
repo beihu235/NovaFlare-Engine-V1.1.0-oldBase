@@ -47,15 +47,17 @@ jobs:
             ~/.gradle
             export/release/android/haxe
             export/release/android/obj
-          key: cache-android-build
+          key: cache-android-buil
+
+          
 
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
           haxelib install hxcpp 4.2.1 > /dev/null
           haxelib install lime 7.9.0
-          haxelib git openfl https://github.com/beihu235/openfl
-          haxelib install flixel
+          haxelib git openfl https://github.com/beihu235/flixel
+          haxelib --never install flixel 5.2.2
           haxelib run lime setup flixel
           haxelib install flixel-tools 1.5.1
           haxelib install flixel-ui
