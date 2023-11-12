@@ -180,9 +180,7 @@ class FPS extends TextField
     		var actualMem:Float = obtainMemory();
     		#else
     		// be a real man and calculate memory from hxcpp
-    		var actualMem:Float = Gc.memInfo64(3);
-    		if (ClientPrefs.data.memoryType == 0 || ClientPrefs.data.memoryType == 1 || ClientPrefs.data.memoryType ==  2) //fix shit bug for first open
-    		actualMem = Gc.memInfo64(ClientPrefs.data.memoryType); // update: this sucks
+    		var actualMem:Float = Gc.memInfo64(ClientPrefs.data.memoryType); // update: this sucks
     		#end
     		
     		memoryMegas = Math.abs(FlxMath.roundDecimal(actualMem / 1000000, 1));
