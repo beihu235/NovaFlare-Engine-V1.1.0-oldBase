@@ -619,7 +619,11 @@ class FreeplayState extends MusicBeatState
 				instPlaying = curSelected;
 				*/
 				var needsVoices:Bool = false;
-				if (PlayState.SONG.needsVoices)needsVoices = true;				
+				if (PlayState.SONG.needsVoices)needsVoices = true;	
+				
+				#if android
+			    removeVirtualPad();
+			    #end						
 					
 				persistentUpdate = false;
 				openSubState(new OSTSubstate(needsVoices,PlayState.SONG.bpm));
