@@ -308,7 +308,7 @@ class OptionsState extends MusicBeatState
     		bg.antialiasing = ClientPrefs.data.antialiasing;
     		add(bg);
     		
-        	var bgMove:FlxBackdrop = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), XY, 0, 0);
+        	var bgMove:FlxBackdrop = new FlxBackdrop(Paths.image('menuExtend/backdrop'), XY, 0, 0);
     		bgMove.alpha = 0.1;
     		bgMove.color = ColorArray[currentColor];
     		bgMove.screenCenter();
