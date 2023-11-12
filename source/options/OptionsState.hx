@@ -259,7 +259,9 @@ class OptionsState extends MusicBeatState
 				new FPSOption("Toggle the FPS Counter."),
 				new FPSRainbowOption("Make the FPS Counter flicker through rainbow colors."),
                 new MEMOption("Toggle the MEM Counter."),
+                new MEMType("Choose memory showcase data.")
                 new MSOption("Toggle the update time Counter."),
+                
 			]),			
 			new OptionCata(-1, 125, "Editing Judgements", [			
 				new FrameOption("Changes how many frames you have for hitting a note earlier or late."),

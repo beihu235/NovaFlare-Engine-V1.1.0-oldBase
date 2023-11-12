@@ -9,7 +9,8 @@ class OptionsHelpers
 {
     public static var languageArray = ["English", "简体中文", "繁體中文"];
 	public static var colorblindFilterArray = ['None', 'Protanopia', 'Protanomaly', 'Deuteranopia','Deuteranomaly','Tritanopia','Tritanomaly','Achromatopsia','Achromatomaly'];
-
+    public static var memoryTypeArray = ["Usage", "Reserved", "Current", "Large"];
+    
     static public function SetNoteSkin()
     {
         var noteSkins:Array<String> = [];

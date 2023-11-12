@@ -752,6 +752,36 @@ class MEMOption extends Option
 	} 
 }
 
+class MEMType extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function left():Bool
+	{
+	    ClientPrefs.data.memoryType--;
+	    if (ClientPrefs.data.memoryType < 0) ClientPrefs.data.memoryType = OptionsHelpers.memoryTypeArray.length - 1;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		ClientPrefs.data.memoryType++;
+		if (ClientPrefs.data.memoryType > OptionsHelpers.memoryTypeArray.length - 1) ClientPrefs.data.memoryType = 0;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Memory Data: < " + OptionsHelpers.memoryTypeArray[ClientPrefs.data.memoryType] + " >";
+	} 
+}
+
 class MSOption extends Option
 {
 	public function new(desc:String)
