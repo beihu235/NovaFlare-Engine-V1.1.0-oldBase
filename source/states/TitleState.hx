@@ -132,10 +132,6 @@ class TitleState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 		FlxG.game.focusLostFramerate = 60;
 		FlxG.keys.preventDefaultKeys = [TAB];
-		
-		FlxG.mouse.visible = true;
-		FlxG.mouse.load(Paths.image('menuExtend/cursor').bitmap,1,0,0);
-        FlxG.mouse.visible = false;
         
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
@@ -218,7 +214,10 @@ class TitleState extends MusicBeatState
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
 
-		FlxG.mouse.visible = false;
+		FlxG.mouse.visible = true;
+		FlxG.mouse.load(Paths.image('menuExtend/cursor').bitmap,1,0,0);
+        FlxG.mouse.visible = false;
+        
 		#if FREEPLAY
 		MusicBeatState.switchState(new FreeplayState());
 		#elseif CHARTING
@@ -240,6 +239,8 @@ class TitleState extends MusicBeatState
 			}
 		}
 		#end
+		
+		
 		
 		bpm = titleJSON.bpm;
 	}
