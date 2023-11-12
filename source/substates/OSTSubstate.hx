@@ -157,7 +157,10 @@ class OSTSubstate extends MusicBeatSubstate
 			FlxG.sound.music.fadeIn(4, 0, 0.7);		
 		    
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			close();
+			new FlxTimer().start(0.05, function(tmr:FlxTimer)
+				{
+					close();
+				});
 		
 		}
 		
