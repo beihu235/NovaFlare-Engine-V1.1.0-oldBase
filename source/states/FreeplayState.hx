@@ -16,7 +16,6 @@ import substates.ResetScoreSubState;
 import substates.OSTSubstate;
 //import substates.OSTtoNew;
 
-import flixel.FlxSubState;
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.ui.FlxButton;
@@ -107,8 +106,6 @@ class FreeplayState extends MusicBeatState
     var chooseShow:Int = 0;
     var isStart:Bool = false;
     var isEnd:Bool = false;
-    
-    var controlCheck:Bool = true;
     
     var ColorArray:Array<Int> = [
 		0xFF9400D3,
@@ -518,8 +515,6 @@ class FreeplayState extends MusicBeatState
 
 		scoreText.text = 'PERSONAL BEST: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
 		positionHighscore();
-		
-		if (!controlCheck) return;
 
 		var shiftMult:Int = 1;
 		if(FlxG.keys.pressed.SHIFT  #if android || MusicBeatState._virtualpad.buttonZ.pressed #end) shiftMult = 3;
@@ -589,8 +584,7 @@ class FreeplayState extends MusicBeatState
 
 		if(FlxG.keys.justPressed.CONTROL #if android || MusicBeatState._virtualpad.buttonC.justPressed #end)
 		{
-			controlCheck = false;
-			
+			persistentUpdate = false;
 			openSubState(new GameplayChangersSubstate());
 		}
 		else if(FlxG.keys.justPressed.SPACE #if android || MusicBeatState._virtualpad.buttonX.justPressed #end)
@@ -617,8 +611,7 @@ class FreeplayState extends MusicBeatState
 				*/
 				var needsVoices:Bool = false;
 				if (PlayState.SONG.needsVoices)needsVoices = true;				
-					
-				controlCheck = false;
+				persistentUpdate = false;	
 				openSubState(new OSTSubstate(needsVoices,PlayState.SONG.bpm));
 			}
 			
@@ -684,24 +677,13 @@ class FreeplayState extends MusicBeatState
 		}
 		else if(controls.RESET #if android || MusicBeatState._virtualpad.buttonY.justPressed #end)
 		{
-			controlCheck = false;
+		    persistentUpdate = false;
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
 			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
 
 		updateTexts(elapsed);
 		super.update(elapsed);
-	}
-	
-	override function openSubState(SubState:FlxSubState) {
-	
-		persistentUpdate = true;
-		
-		#if android
-		removeVirtualPad();
-		#end
-
-		super.openSubState(SubState);
 	}
 	
 	override function closeSubState() {
@@ -712,8 +694,6 @@ class FreeplayState extends MusicBeatState
 		removeVirtualPad();
 		addVirtualPad(FULL, A_B_C_X_Y_Z);	
 		#end
-		
-		controlCheck = true;
 		
 		super.closeSubState();
 	}
