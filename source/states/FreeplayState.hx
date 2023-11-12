@@ -576,7 +576,7 @@ class FreeplayState extends MusicBeatState
 			_updateSongLastDifficulty();
 		}
 
-		if (FlxG.keys.justPressed.ESCAPE #if android || MusicBeatState._virtualpad.buttonB.justPressed && FlxG.mouse.justPressed #end)
+		if (FlxG.keys.justPressed.ESCAPE #if android || (MusicBeatState._virtualpad.buttonB.justPressed && FlxG.mouse.justPressed) #end)
 		{
 			persistentUpdate = false;
 			if(colorTween != null) {
