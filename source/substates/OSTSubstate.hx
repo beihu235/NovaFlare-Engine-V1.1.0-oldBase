@@ -56,16 +56,18 @@ class OSTSubstate extends MusicBeatSubstate
 	{
 		super();		
 		
-		camGame = new FlxCamera();
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+		
+		//camGame = new FlxCamera();
 		camHUD = new FlxCamera();
 		camLogo = new FlxCamera();
 		camLogo.bgColor.alpha = 0;
 		camHUD.bgColor.alpha = 0;
 
-		FlxG.cameras.reset(camGame);
+		//FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camLogo, false);
 		FlxG.cameras.add(camHUD, false);
-		FlxG.cameras.setDefaultDrawTarget(camGame, true);
+		//FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		
 		camLogo.x = -320;
 		
