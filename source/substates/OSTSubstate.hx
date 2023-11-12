@@ -134,6 +134,20 @@ class OSTSubstate extends MusicBeatSubstate
 	{
 
 	//	FlxSpriteUtil.cameraBound(logoBl, camGame, ANY);
+	
+	    if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
+		{
+		    FlxG.sound.music.volume = 0;
+		    destroyVocals();
+		
+		    FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+			FlxG.sound.music.fadeIn(4, 0, 0.7);		
+		    
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+		    
+		    close();
+		
+		}
 		
 		updateVoiceWaveform();		
 		
@@ -148,21 +162,7 @@ class OSTSubstate extends MusicBeatSubstate
 		
 		if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true;   
 		
-		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
-		{
-		    FlxG.sound.music.volume = 0;
-		    destroyVocals();
 		
-		    FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
-			FlxG.sound.music.fadeIn(4, 0, 0.7);		
-		    
-			FlxG.sound.play(Paths.sound('cancelMenu'));
-			new FlxTimer().start(0.05, function(tmr:FlxTimer)
-				{
-					close();
-				});
-		
-		}
 		
 		//var volue:Float = Math.exp(-1 * 2 * Math.PI * 200 * FlxG.sound.music.time);
 		//var volue2:Float = Math.exp(-1 * 2 * Math.PI * 44100 * FlxG.sound.music.time);
