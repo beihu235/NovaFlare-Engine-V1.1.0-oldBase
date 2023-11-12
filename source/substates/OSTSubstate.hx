@@ -113,11 +113,6 @@ class OSTSubstate extends MusicBeatSubstate
 		waveformVoiceSprite = new FlxSprite(1280 - 640, 50).makeGraphic(640 - 50, 100, 0xFF000000);
 		waveformVoiceSprite.alpha = 0.5;
 		add(waveformVoiceSprite);
-		
-		scoreText = new FlxText(FlxG.width * 0.5, FlxG.height * 0.5, 0, '', 32);
-		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-        scoreText.scrollFactor.set();
-        add(scoreText);
 	    
 	}
     
@@ -151,7 +146,7 @@ class OSTSubstate extends MusicBeatSubstate
         
         if ( Math.floor(SoundTime/BeatTime) % 4  == 0 && canBeat){       
             canBeat = false;            
-            camBeat();
+            //camBeat();
             logoBl.animation.play('bump');
         }
 		
@@ -265,11 +260,7 @@ class OSTSubstate extends MusicBeatSubstate
 		flashGFX.endFill(); 
 		waveformVoiceSprite.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		waveformVoiceSprite.pixels.unlock(); 
-		
-		scoreText.text = 'byte:' + byte + '\nindex:' + index +  '\nchannels:' + channels + '\nkhz:' + khz + '\n';
-		
-		return;
-	}	
+	}
 	
 	function camBeat() {
 	    //camGame.zoom = 1 + 0.03;
