@@ -708,10 +708,10 @@ class FreeplayState extends MusicBeatState
 	
 	override function closeSubState() {
 		changeSelection(0, false);
-		persistentUpdate = true;
-		
 		
 		super.closeSubState();
+		
+		persistentUpdate = true;
 		
 		checkSubstate = false;
 		
