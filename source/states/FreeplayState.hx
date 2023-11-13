@@ -580,8 +580,8 @@ class FreeplayState extends MusicBeatState
 			_updateSongLastDifficulty();
 		}
 		
-        #if android if (FlxG.mouse.justPressed) #end //idk
-		if (controls.BACK)
+         //idk
+		if (FlxG.keys.justPressed.BACK #if android || (FlxG.mouse.justPressed && MusicBeatState._virtualpad.buttonB.justPressed) #end)
 		{
 		    persistentUpdate = false;
 			if(colorTween != null) {
@@ -712,7 +712,7 @@ class FreeplayState extends MusicBeatState
 		checkSubstate = false;
 		
 		#if android
-		if (MusicBeatState._virtualpad != null)
+		if (MusicBeatState._virtualpad == null)
 		addVirtualPad(FULL, A_B_C_X_Y_Z);
 		#end
 		
