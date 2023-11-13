@@ -581,7 +581,7 @@ class FreeplayState extends MusicBeatState
 		}
 		
          //idk
-		if (FlxG.keys.justPressed.ENTER #if android || (FlxG.mouse.justPressed && MusicBeatState._virtualpad.buttonB.justPressed) #end)
+		if (FlxG.keys.justPressed.ENTER #if android || (FlxG.mouse.justPressed && FlxG.mouse.overlaps(MusicBeatState._virtualpad.buttonB)) #end)
 		{
 		    persistentUpdate = false;
 			if(colorTween != null) {
