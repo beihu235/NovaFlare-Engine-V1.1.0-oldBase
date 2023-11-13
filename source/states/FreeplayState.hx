@@ -107,6 +107,8 @@ class FreeplayState extends MusicBeatState
     var isStart:Bool = false;
     var isEnd:Bool = false;
     
+    var checkSubstate:Bool = false;
+    
     var ColorArray:Array<Int> = [
 		0xFF9400D3,
 		0xFF4B0082,
@@ -516,6 +518,11 @@ class FreeplayState extends MusicBeatState
 		scoreText.text = 'PERSONAL BEST: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
 		positionHighscore();
 		
+		if (checkSubstate) { //close control check
+		    updateTexts(elapsed);
+			super.update(elapsed);
+			return;
+		}
 
 		var shiftMult:Int = 1;
 		if(FlxG.keys.pressed.SHIFT  #if android || MusicBeatState._virtualpad.buttonZ.pressed #end) shiftMult = 3;
@@ -573,7 +580,7 @@ class FreeplayState extends MusicBeatState
 			_updateSongLastDifficulty();
 		}
 
-		if (controls.BACK #if android && FlxG.mouse.justPressed #end)
+		if (controls.BACK)
 		{
 		    persistentUpdate = false;
 			if(colorTween != null) {
@@ -587,9 +594,9 @@ class FreeplayState extends MusicBeatState
 		{
 			
 			#if android
-			removeVirtualPad();
+			MusicBeatState._virtualpad.visible = true;
 			#end
-			persistentUpdate = false;
+			checkSubstate = true;
 			openSubState(new GameplayChangersSubstate());
 		}
 		else if(FlxG.keys.justPressed.SPACE #if android || MusicBeatState._virtualpad.buttonX.justPressed #end)
@@ -617,10 +624,10 @@ class FreeplayState extends MusicBeatState
 				if (PlayState.SONG.needsVoices)needsVoices = true;	
 				
 				#if android
-			    removeVirtualPad();
+			    MusicBeatState._virtualpad.visible = true;
 			    #end						
 					
-				persistentUpdate = false;
+				checkSubstate = true;
 				openSubState(new OSTSubstate(needsVoices,PlayState.SONG.bpm));
 			}
 			
@@ -687,9 +694,9 @@ class FreeplayState extends MusicBeatState
 		else if(controls.RESET #if android || MusicBeatState._virtualpad.buttonY.justPressed #end)
 		{
 		    #if android
-			removeVirtualPad();
+			MusicBeatState._virtualpad.visible = true;
 			#end
-			persistentUpdate = false;
+			checkSubstate = true;
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
 			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
@@ -703,11 +710,10 @@ class FreeplayState extends MusicBeatState
 		
 		super.closeSubState();
 		
-		persistentUpdate = true;
+		checkSubstate = false;
 		
 		#if android
-		removeVirtualPad();
-		addVirtualPad(FULL, A_B_C_X_Y_Z);	
+		MusicBeatState._virtualpad.visible = true;
 		#end
 	}
 
