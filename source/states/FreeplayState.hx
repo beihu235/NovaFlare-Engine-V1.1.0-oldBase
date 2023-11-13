@@ -594,7 +594,7 @@ class FreeplayState extends MusicBeatState
 		{
 			
 			#if android
-			MusicBeatState._virtualpad.visible = true;
+			MusicBeatState._virtualpad.visible = false;
 			#end
 			checkSubstate = true;
 			openSubState(new GameplayChangersSubstate());
@@ -624,7 +624,7 @@ class FreeplayState extends MusicBeatState
 				if (PlayState.SONG.needsVoices)needsVoices = true;	
 				
 				#if android
-			    MusicBeatState._virtualpad.visible = true;
+			    MusicBeatState._virtualpad.visible = false;
 			    #end						
 					
 				checkSubstate = true;
@@ -694,7 +694,7 @@ class FreeplayState extends MusicBeatState
 		else if(controls.RESET #if android || MusicBeatState._virtualpad.buttonY.justPressed #end)
 		{
 		    #if android
-			MusicBeatState._virtualpad.visible = true;
+			MusicBeatState._virtualpad.visible = false;
 			#end
 			checkSubstate = true;
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
