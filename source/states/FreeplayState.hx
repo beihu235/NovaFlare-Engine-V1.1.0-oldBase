@@ -579,7 +579,8 @@ class FreeplayState extends MusicBeatState
 			changeDiff(1);
 			_updateSongLastDifficulty();
 		}
-
+		
+        #if android if (FlxG.mouse.justPressed) #end //idk
 		if (controls.BACK)
 		{
 		    persistentUpdate = false;
@@ -594,7 +595,7 @@ class FreeplayState extends MusicBeatState
 		{
 			
 			#if android
-			MusicBeatState._virtualpad.visible = false;
+			removeVirtualPad();
 			#end
 			checkSubstate = true;
 			openSubState(new GameplayChangersSubstate());
@@ -624,7 +625,7 @@ class FreeplayState extends MusicBeatState
 				if (PlayState.SONG.needsVoices)needsVoices = true;	
 				
 				#if android
-			    MusicBeatState._virtualpad.visible = false;
+			    removeVirtualPad();
 			    #end						
 					
 				checkSubstate = true;
@@ -694,7 +695,7 @@ class FreeplayState extends MusicBeatState
 		else if(controls.RESET #if android || MusicBeatState._virtualpad.buttonY.justPressed #end)
 		{
 		    #if android
-			MusicBeatState._virtualpad.visible = false;
+			removeVirtualPad();
 			#end
 			checkSubstate = true;
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
@@ -707,14 +708,15 @@ class FreeplayState extends MusicBeatState
 	
 	override function closeSubState() {
 		changeSelection(0, false);
-		
-		super.closeSubState();
-		
+		persistentUpdate = true;
 		checkSubstate = false;
 		
 		#if android
-		MusicBeatState._virtualpad.visible = true;
+		if (MusicBeatState._virtualpad != null)
+		addVirtualPad(FULL, A_B_C_X_Y_Z);
 		#end
+		
+		super.closeSubState();
 	}
 
 	public static function destroyFreeplayVocals() {
