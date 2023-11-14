@@ -3128,7 +3128,7 @@ class PlayState extends MusicBeatState
 					child.canBeHit = false;
 					child.ignoreNote = true;
 					child.tooLate = true;
-					childNote.multAlpha = 0.3;
+					child.multAlpha = 0.3;
 					child.alpha = 0.3;
 				}
 			}
