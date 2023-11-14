@@ -605,7 +605,8 @@ class FreeplayState extends MusicBeatState
 		    
 			if(instPlaying != curSelected)
 			{
-				
+				try
+			    {
 				destroyFreeplayVocals();
 				FlxG.sound.music.volume = 0;
 				Mods.currentModDirectory = songs[curSelected].folder;
@@ -630,6 +631,23 @@ class FreeplayState extends MusicBeatState
 					
 				checkSubstate = true;
 				openSubState(new OSTSubstate(needsVoices,PlayState.SONG.bpm));
+				}
+				catch(e:Dynamic)
+			    {
+				trace('ERROR! $e');
+                var errorStr:String = Mods.currentModDirectory + '/data/' + songLowercase + '/' + poop + '.json';
+				//var errorStr:String = e.toString();
+				/*if(errorStr.startsWith('[file_contents,assets/data/')) errorStr = 'Missing file: ' + errorStr.substring(27, errorStr.length-1); //Missing chart*/
+				missingText.text = 'ERROR WHILE LOADING CHART:\n$errorStr';
+				missingText.screenCenter(Y);
+				missingText.visible = true;
+				missingTextBG.visible = true;
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+
+				updateTexts(elapsed);
+				super.update(elapsed);
+				return;
+			    }
 			}
 			
 			
@@ -677,6 +695,8 @@ class FreeplayState extends MusicBeatState
 				super.update(elapsed);
 				return;
 			}
+			
+			persistentUpdate = false;
 			
 			if (FlxG.keys.pressed.SHIFT #if android || MusicBeatState._virtualpad.buttonZ.pressed #end){
 				LoadingState.loadAndSwitchState(new ChartingState());

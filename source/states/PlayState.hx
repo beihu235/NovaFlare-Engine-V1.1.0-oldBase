@@ -3102,6 +3102,7 @@ class PlayState extends MusicBeatState
 					childNote.canBeHit = false;
 					childNote.ignoreNote = true;
 					childNote.tooLate = true;
+					childNote.multAlpha = 0.3;
 					childNote.alpha = 0.3;
 				}
 				note.missed = true;
@@ -3127,6 +3128,7 @@ class PlayState extends MusicBeatState
 					child.canBeHit = false;
 					child.ignoreNote = true;
 					child.tooLate = true;
+					childNote.multAlpha = 0.3;
 					child.alpha = 0.3;
 				}
 			}
