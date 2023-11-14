@@ -712,13 +712,13 @@ class FreeplayState extends MusicBeatState
 		super.closeSubState();
 		
 		persistentUpdate = true;
-		
-		checkSubstate = false;
-		
+				
 		#if android
-		if (MusicBeatState._virtualpad == null)
+		removeVirtualPad();
 		addVirtualPad(FULL, A_B_C_X_Y_Z);
 		#end
+		
+		checkSubstate = false;
 	}
 
 	public static function destroyFreeplayVocals() {
