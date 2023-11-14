@@ -635,6 +635,8 @@ class FreeplayState extends MusicBeatState
 				catch(e:Dynamic)
 			    {
 				trace('ERROR! $e');
+				var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
+				var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
                 var errorStr:String = Mods.currentModDirectory + '/data/' + songLowercase + '/' + poop + '.json';
 				//var errorStr:String = e.toString();
 				/*if(errorStr.startsWith('[file_contents,assets/data/')) errorStr = 'Missing file: ' + errorStr.substring(27, errorStr.length-1); //Missing chart*/
