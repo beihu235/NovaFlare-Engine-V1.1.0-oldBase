@@ -750,7 +750,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 		songSpeed = value;
-		noteKillOffset = Math.max(Conductor.stepCrochet, 350 / songSpeed * playbackRate);
+		noteKillOffset = Math.max(Conductor.stepCrochet * 1.25, 350 / songSpeed * playbackRate * 1.25);
 		return value;
 	}
 
