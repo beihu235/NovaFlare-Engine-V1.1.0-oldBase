@@ -750,7 +750,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 		songSpeed = value;
-		noteKillOffset = Math.max(Conductor.stepCrochet * 1.35, 350 / songSpeed * playbackRate * 1.35);
+		noteKillOffset = Math.max(Conductor.stepCrochet * 1.5, 350 / songSpeed * playbackRate * 1.5);
 		return value;
 	}
 
@@ -2692,7 +2692,7 @@ class PlayState extends MusicBeatState
 		for (rating in ratingsData){
 			Paths.image(uiPrefix + rating.image + uiSuffix);
 			var Spr:FlxSprite = new FlxSprite().loadGraphic(uiPrefix + rating.image + uiSuffix);
-		    rating.color = FlxColor.fromInt(CoolUtil.dominantColor(Spr));
+		    ratingsData[rating].color = FlxColor.fromInt(CoolUtil.dominantColor(Spr));
 		    Spr.destroy();
 		}
 		
