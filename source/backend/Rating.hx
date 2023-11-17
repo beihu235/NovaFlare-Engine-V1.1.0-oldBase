@@ -11,6 +11,7 @@ class Rating
 	public var score:Int = 350;
 	public var noteSplash:Bool = true;
 	public var hits:Int = 0;
+	public var color:Int = 0xFFFFFFFF;
 
 	public function new(name:String)
 	{
