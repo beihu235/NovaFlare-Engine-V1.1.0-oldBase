@@ -2679,7 +2679,7 @@ class PlayState extends MusicBeatState
 	// stores the last combo score objects in an array
 	var lastScore:Array<FlxSprite> = [];
 
-	private function cachePopUpScore()
+	function cachePopUpScore()
 	{
 		var uiPrefix:String = '';
 		var uiSuffix:String = '';
@@ -2692,7 +2692,7 @@ class PlayState extends MusicBeatState
 		for (rating in ratingsData){
 			Paths.image(uiPrefix + rating.image + uiSuffix);
 			var Spr:FlxSprite = new FlxSprite().loadGraphic(uiPrefix + rating.image + uiSuffix);
-		    rating.color = getComboColor(Spr); //reset color
+		    rating.color = FlxColor.to24Bit(CoolUtil.dominantColor(Spr)); //reset color
 		    Spr.destroy();
 		}
 		
@@ -3511,10 +3511,6 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.fadeTween.cancel();
 		}
 		FlxG.sound.music.fadeTween = null;
-	}
-	
-	function getComboColor(image):Int{
-	    return FlxColor.to24Bit(CoolUtil.dominantColor(image)); 
 	}
 
 	var lastStepHit:Int = -1;
