@@ -2689,8 +2689,13 @@ class PlayState extends MusicBeatState
 			if (PlayState.isPixelStage) uiSuffix = '-pixel';
 		}
 
-		for (rating in ratingsData)
+		for (rating in ratingsData){
 			Paths.image(uiPrefix + rating.image + uiSuffix);
+			var Spr:FlxSprite = new FlxSprite().loadGraphic(uiPrefix + rating.image + uiSuffix);
+		    rating.color = FlxColor.toHexString(CoolUtil.dominantColor(Spr));
+		    Spr.destroy();
+		}
+		
 		for (i in 0...10)
 			Paths.image(uiPrefix + 'num' + i + uiSuffix);
 	}
@@ -2829,6 +2834,7 @@ class PlayState extends MusicBeatState
 			numScore.screenCenter();
 			numScore.x = placement + (43 * daLoop) - 90 + ClientPrefs.data.comboOffset[2];
 			numScore.y += 80 - ClientPrefs.data.comboOffset[3];
+			numScore.color = daRating.color;
 			
 			if (!ClientPrefs.data.comboStacking)
 				lastScore.push(numScore);
