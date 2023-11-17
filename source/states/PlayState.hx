@@ -2692,8 +2692,15 @@ class PlayState extends MusicBeatState
 		for (rating in ratingsData){
 			Paths.image(uiPrefix + rating.image + uiSuffix);
 			var Spr:FlxSprite = new FlxSprite().loadGraphic(uiPrefix + rating.image + uiSuffix);
-		    ratingsData[rating].color = FlxColor.fromInt(CoolUtil.dominantColor(Spr));
-		    Spr.destroy();
+			add(Spr);
+            
+            for (i in 0...ratingsData.length){
+                if (ratingsData[i].name == rating.name){
+    		        ratingsData[i].color = FlxColor.fromInt(CoolUtil.dominantColor(Spr));
+    		        Spr.destroy();
+    		        continue;
+    		    }
+		    }
 		}
 		
 		for (i in 0...10)
