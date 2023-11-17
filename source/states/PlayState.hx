@@ -2691,7 +2691,7 @@ class PlayState extends MusicBeatState
 
 		for (rating in ratingsData){
 			Paths.image(uiPrefix + rating.image + uiSuffix);
-			var Spr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + daRating.image + uiSuffix));
+			var Spr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + rating.image + uiSuffix));
 			add(Spr);
             
             for (i in 0...ratingsData.length){
