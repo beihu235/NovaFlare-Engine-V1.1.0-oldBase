@@ -2679,7 +2679,7 @@ class PlayState extends MusicBeatState
 	// stores the last combo score objects in an array
 	var lastScore:Array<FlxSprite> = [];
 
-	function cachePopUpScore()
+	private function cachePopUpScore()
 	{
 		var uiPrefix:String = '';
 		var uiSuffix:String = '';
@@ -2692,7 +2692,7 @@ class PlayState extends MusicBeatState
 		for (rating in ratingsData){
 			Paths.image(uiPrefix + rating.image + uiSuffix);
 			var Spr:FlxSprite = new FlxSprite().loadGraphic(uiPrefix + rating.image + uiSuffix);
-		    rating.color = FlxColor.to24Bit(CoolUtil.dominantColor(Spr)); //reset color
+		    rating.color = getComboColor(Spr);
 		    Spr.destroy();
 		}
 		
@@ -3511,6 +3511,34 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.fadeTween.cancel();
 		}
 		FlxG.sound.music.fadeTween = null;
+	}
+	
+	private function getComboColor(sprite:flixel.FlxSprite):Int{
+	
+	var countByColor:Map<Int, Int> = [];
+		for(col in 0...sprite.frameWidth) {
+			for(row in 0...sprite.frameHeight) {
+				var colorOfThisPixel:Int = sprite.pixels.getPixel32(col, row);
+				if(colorOfThisPixel != 0) {
+					if(countByColor.exists(colorOfThisPixel))
+						countByColor[colorOfThisPixel] = countByColor[colorOfThisPixel] + 1;
+					else if(countByColor[colorOfThisPixel] != 13520687 - (2*13520687))
+						countByColor[colorOfThisPixel] = 1;
+				}
+			}
+		}
+
+		var maxCount = 0;
+		var maxKey:Int = 0; //after the loop this will store the max color
+		countByColor[FlxColor.BLACK] = 0;
+		for(key in countByColor.keys()) {
+			if(countByColor[key] >= maxCount) {
+				maxCount = countByColor[key];
+				maxKey = key;
+			}
+		}
+		countByColor = [];
+	    return FlxColor.to24Bit(maxKey); //idk
 	}
 
 	var lastStepHit:Int = -1;
