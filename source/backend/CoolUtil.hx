@@ -104,6 +104,67 @@ class CoolUtil
 		return maxKey;
 	}
 	
+	inline public static function getComboColor(sprite:flixel.FlxSprite):Int {
+    var pixels = sprite.pixels;
+    var color:FlxColor = FlxColor.fromRGB(pixels.getColor(0), pixels.getColor(1), pixels.getColor(2));
+    var hsv:FlxColor = rgbToHsv(color.red, color.green, color.blue)
+
+    // 计算新的hue
+    var hue:Float = Math.atan2(hsv.b, hsv.g) / Math.PI * 180 + 180;
+    if (hue < 0) hue += 360;
+
+    return FlxColor.floatToInt(hue);
+    }
+    
+    static public function rgbToHsv(red:Float, green:Float, blue:Float):FlxColor {
+    var r:Float = red / 255;
+    var g:Float = green / 255;
+    var b:Float = blue / 255;
+
+    var max:Float = Math.max(r, g, b);
+    var min:Float = Math.min(r, g, b);
+    var diff:Float = max - min;
+
+    var hue:Float;
+    if (max == min) {
+        hue = 0;
+    } else if (max == r) {
+        hue = 60 * (((g - b) / diff) + 6);
+    } else if (max == g) {
+        hue = 60 * (((b - r) / diff) + 2);
+    } else if (max == b) {
+        hue = 60 * (((r - g) / diff) + 4);
+    }
+
+    if (hue < 0) hue += 360;
+
+    var saturation:Float = max == 0 ? 0 : (1 - min / max);
+    var value:Float = max;
+
+    return hsvToRgb(hue, saturation, value);
+}
+static public function hsvToRgb(hue:Float, saturation:Float, value:Float):FlxColor {
+    var c:Float = value * saturation;
+    var x:Float = c * (1 - Math.abs((hue / 60) % 2 - 1));
+    var m:Float = value - c;
+
+    if (hue < 60)
+ {        return FlxColor.fromRGB(c, x, 0);
+    } else if (hue < 120) {
+        return FlxColor.fromRGB(x, c, 0);
+    } else if (hue < 180) {
+        return FlxColor.fromRGB(0, c, x);
+    } else if (hue < 240) {
+        return FlxColor.fromRGB(0, x, c);
+    } else if (hue < 300) {
+        return FlxColor.fromRGB(x, 0, c);
+    } else {
+        return FlxColor.fromRGB(c, 0, x);
+    }
+}
+
+	
+	
 	/*
 	inline public static function dominantColor(sprite:flixel.FlxSprite):Int
 	{
