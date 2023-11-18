@@ -2696,7 +2696,7 @@ class PlayState extends MusicBeatState
             
             for (i in 0...ratingsData.length){
                 if (ratingsData[i].name == rating.name){
-    		        ratingsData[i].color = FlxColor.fromInt(CoolUtil.getComboColor(Spr));
+    		        ratingsData[i].color = FlxColor.fromInt(CoolUtil.dominantColor(Spr));
     		        Spr.destroy();
     		        continue;
     		    }
@@ -2763,9 +2763,11 @@ class PlayState extends MusicBeatState
 		rating.screenCenter();
 		rating.x = placement - 40;
 		rating.y -= 60;
+		/*
 		rating.acceleration.y = 550 * playbackRate * playbackRate;
 		rating.velocity.y -= FlxG.random.int(140, 175) * playbackRate;
 		rating.velocity.x -= FlxG.random.int(0, 10) * playbackRate;
+		*/
 		rating.visible = (!ClientPrefs.data.hideHud && showRating && ClientPrefs.data.showRating);
 		rating.x += ClientPrefs.data.comboOffset[0];
 		rating.y -= ClientPrefs.data.comboOffset[1];
@@ -2849,10 +2851,10 @@ class PlayState extends MusicBeatState
 			if (!PlayState.isPixelStage) numScore.setGraphicSize(Std.int(numScore.width * 0.5));
 			else numScore.setGraphicSize(Std.int(numScore.width * daPixelZoom));
 			numScore.updateHitbox();
-
+            /*
 			numScore.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
 			numScore.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
-			numScore.velocity.x = FlxG.random.float(-5, 5) * playbackRate;
+			numScore.velocity.x = FlxG.random.float(-5, 5) * playbackRate;*/
 			numScore.visible = !ClientPrefs.data.hideHud;
 			numScore.antialiasing = antialias;
 
