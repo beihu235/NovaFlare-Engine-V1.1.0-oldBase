@@ -76,6 +76,7 @@ class SaveVariables {
 	public var comboStacking:Bool = true;
 	public var showComboNum:Bool = true;
 	public var showRating:Bool = true;
+	public var comboColor:Bool = true;
 	public var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
