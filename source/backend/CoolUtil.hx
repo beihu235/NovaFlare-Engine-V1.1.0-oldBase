@@ -112,7 +112,7 @@ class CoolUtil
                 if(colorOfThisPixel != 0 && colorOfThisPixel != 0xFFFFFFFF && colorOfThisPixel != 0x00000000) {
                 if(countByColor.exists(colorOfThisPixel))
                 countByColor[colorOfThisPixel] = countByColor[colorOfThisPixel] + 1;
-                else if(countByColor[colorOfThisPixel] != *** - (2***))
+                else if(countByColor[colorOfThisPixel] != 13520687 - (2*13520687))
                 countByColor[colorOfThisPixel] = 1;
             }
         }
