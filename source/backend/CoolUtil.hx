@@ -105,7 +105,7 @@ class CoolUtil
 	}
 	
 	inline public static function getComboColor(sprite:flixel.FlxSprite):Int {
-	    var visualColor:FlxColor = FlxColor.fromRGB(sprite.colorTransform.redMultiplier, sprite.colorTransform.greenMultiplier, sprite.colorTransform.blueMultiplier, sprite.colorTransform.alphaMultiplier);	    
+	    var visualColor:FlxColor = FlxColor.fromRGB(Math.floor(sprite.colorTransform.redMultiplier), Math.floor(sprite.colorTransform.greenMultiplier), Math.floor(sprite.colorTransform.blueMultiplier), Math.floor(sprite.colorTransform.alphaMultiplier));	    
         return FlxColor.fromHSB(visualColor.hue, visualColor.saturation, visualColor.brightness, visualColor.alpha);
     }
 	
