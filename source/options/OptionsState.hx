@@ -209,6 +209,7 @@ class OptionsState extends MusicBeatState
 				new ComboStacking("Ratings and Combo won't stack, saving on System Memory and making them easier to read."),
                 new ScoreZoom("Zoom score on 2'nd beat."),
                 new HealthBarAlpha("Healthbar Transparceny."),
+                new ComboColor("Allow Combe Sprite to get and use rating color.")
                 //new BlurNotes("(CONTAINS FPS ISSUES)/Make notes a bit 'blurred'."), // TODO: rework later - Snake
 			    //new TimeBarType("Change the song's current position bar."),
 			]),
