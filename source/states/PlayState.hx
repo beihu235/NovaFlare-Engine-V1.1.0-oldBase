@@ -2696,7 +2696,7 @@ class PlayState extends MusicBeatState
             
             for (i in 0...ratingsData.length){
                 if (ratingsData[i].name == rating.name){
-    		        ratingsData[i].color = FlxColor.fromInt(CoolUtil.getComboColor(Spr));
+    		        ratingsData[i].color = FlxColor.fromInt(CoolUtil.dominantColor(Spr));
     		        Spr.destroy();
     		        continue;
     		    }
