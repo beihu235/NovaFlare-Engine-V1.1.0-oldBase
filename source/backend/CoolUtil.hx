@@ -107,7 +107,7 @@ class CoolUtil
 	inline public static function getComboColor(sprite:flixel.FlxSprite):Int {
     var pixels = sprite.pixels;
     var color:FlxColor = FlxColor.fromRGB(pixels.getColor(0), pixels.getColor(1), pixels.getColor(2));
-    var hsv:FlxColor = rgbToHsv(color.red, color.green, color.blue)
+    var hsv:FlxColor = rgbToHsv(color.red, color.green, color.blue);
 
     // 计算新的hue
     var hue:Float = Math.atan2(hsv.b, hsv.g) / Math.PI * 180 + 180;
