@@ -74,7 +74,7 @@ class CoolUtil
 		var newValue:Float = Math.floor(value * tempMult);
 		return newValue / tempMult;
 	}
-	/*
+	
 	inline public static function dominantColor(sprite:flixel.FlxSprite):Int
 	{
 		var countByColor:Map<Int, Int> = [];
@@ -103,8 +103,8 @@ class CoolUtil
 		countByColor = [];
 		return maxKey;
 	}
-	*/
 	
+	/*
 	inline public static function dominantColor(sprite:flixel.FlxSprite):Int
 	{
 		var countByColor:Map<Int, Int> = [];
@@ -140,7 +140,7 @@ class CoolUtil
 		countByColor = [];
 		return maxKey;
 	}
-
+    */
 	inline public static function numberArray(max:Int, ?min = 0):Array<Int>
 	{
 		var dumbArray:Array<Int> = [];

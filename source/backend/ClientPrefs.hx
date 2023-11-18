@@ -48,6 +48,7 @@ class SaveVariables {
 	public var CustomFadeSound:Float = 0.5;
 	public var CustomFadeText:Bool = true;
 	
+	public var discordRPC:Bool = true;
 	public var camZooms:Bool = true;
 	public var judgementCounter:Bool = true;
 	public var hideHud:Bool = false;
@@ -109,7 +110,6 @@ class SaveVariables {
 	public var goodWindow:Int = 90;
 	public var badWindow:Int = 135;
 	public var safeFrames:Float = 10;
-	public var discordRPC:Bool = true;	
 	
 	public var spaceExtend:Bool = true;
 	public var shiftExtend:Bool = true;
