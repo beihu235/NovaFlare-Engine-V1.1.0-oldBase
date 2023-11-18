@@ -174,10 +174,11 @@ class OptionsState extends MusicBeatState
 			new OptionCata(50, 40, OptionsName.setGameplay(), [				
 				new DownscrollOption(OptionsName.setDownscrollOption()),
 				new MiddleScrollOption("Put your lane in the center or on the right."), 
+				new FilpChart('If checked, filp chart for playing.'),
 				new HitSoundOption("Adds 'hitsound' on note hits."),
 				new GhostTapOption("Toggle counting pressing a directional input when no arrow is there as a miss."),				
 				//new InstantRespawn("Toggle if you instantly respawn after dying."),
-				new AutoPause("Stops game, when its unfocused"),
+				
 				new NoReset("Toggle pressing R to gameover."),
 				
 				
@@ -221,14 +222,11 @@ class OptionsState extends MusicBeatState
 				new PauseMusic('What song do you prefer for the Pause Screen?'),
 				#if CHECK_FOR_UPDATES new CheckForUpdates('On Release builds, turn this on to check for updates when you start the game.'), #end
 				#if desktop new DiscordRPC('Uncheck this to prevent accidental leaks, it will hide the Application from your \"Playing\" box on Discord'), #end
-				new FilpChart('If checked, filp chart for playing.'),				
+								
 				new FixLNL('reduce Long Note length\nFix for some mod engines have been reduced'),
 				new ResultsScreen('If checked, Open Results Screen at end song'),
 				new RatingOffset('Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.'),
-				//new ColorBlindOption("You can set colorblind filter (makes the game more playable for colorblind people)."),
-				new ShowMS(''),
-				
-				
+				//new ColorBlindOption("You can set colorblind filter (makes the game more playable for colorblind people)."),								
                 
 				//new VintageOption("Adds 'vintage' on game screen."),
                 
@@ -245,7 +243,8 @@ class OptionsState extends MusicBeatState
 			]),			
 			new OptionCata(50, 40 + 64, OptionsName.setMenuExtend(), [
 			    new CustomFadeType('Change Custom Fade Type'),
-				new CustomFadeSound('Change Custom Fade Sound Volume.'),				
+				new CustomFadeSound('Change Custom Fade Sound Volume.'),	
+				new CustomFadeText('Check for showcase engine version and loading condition.'),				
 			]),
 			new OptionCata(345, 40 + 64, OptionsName.setControls(), [
 			    new HideHud("Shows to you hud."),				
@@ -257,6 +256,7 @@ class OptionsState extends MusicBeatState
 				new GPUcacheOption("If checked, allows the GPU to be used for caching textures, decreasing RAM usage."),				
 				new FlashingLightsOption("Toggle flashing lights that can cause epileptic seizures and strain."),
 				new QualityLow("Turn off some object on stages"),
+				new AutoPause("Stops game, when its unfocused"),
 				new AntialiasingOption("Toggle antialiasing, improving graphics quality at a slight performance penalty."),
 				new FPSCapOption("Change your FPS Cap."),		
 				new FPSOption("Toggle the FPS Counter."),
