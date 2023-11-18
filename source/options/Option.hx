@@ -1710,7 +1710,7 @@ class CustomFadeText extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Custom Fade Text: < " + ClientPrefs.data.CustomText + " >";
+		return "Custom Fade Text: < " + ClientPrefs.data.CustomFadeText + " >";
 	}
 }
 
