@@ -216,8 +216,7 @@ class OptionsState extends MusicBeatState
 				new SplashAlpha('How much transparent should the Note Splashes be.'),
 				new DisableNoteRGB('Easier to disableNoteRGB for Note.'),
 				new DisableSplashRGB('Easier to disableNoteRGB for Splash.'),
-				new CustomFadeType('Change Custom Fade Type'),
-				new CustomFadeSound('Change Custom Fade Sound Volume.'),
+				
 				new TimeBarType('What should the Time Bar display?'),
 				new PauseMusic('What song do you prefer for the Pause Screen?'),
 				#if CHECK_FOR_UPDATES new CheckForUpdates('On Release builds, turn this on to check for updates when you start the game.'), #end
@@ -245,7 +244,8 @@ class OptionsState extends MusicBeatState
 			 //   new PauseCountDownOption("Toggle countdown after pressing 'Resume' in Pause Menu."),
 			]),			
 			new OptionCata(50, 40 + 64, OptionsName.setMenuExtend(), [
-			    new HideHud("Shows to you hud."),				
+			    new CustomFadeType('Change Custom Fade Type'),
+				new CustomFadeSound('Change Custom Fade Sound Volume.'),				
 			]),
 			new OptionCata(345, 40 + 64, OptionsName.setControls(), [
 			    new HideHud("Shows to you hud."),				

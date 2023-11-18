@@ -1125,14 +1125,14 @@ class JudgementCounter extends Option
 	public override function left():Bool
 	{
 		ClientPrefs.data.judgementCounter = !ClientPrefs.data.judgementCounter;
-
+        /*
 		if (Type.getClass(FlxG.state) == PlayState){
 		if(ClientPrefs.data.showJudgement) 
 			//PlayState.instance.judgementCounter.visible = (!ClientPrefs.data.hideHud && !PlayState.instance.cpuControlled);
 		else
 			//PlayState.instance.judgementCounter.visible = false;
 	    }
-
+        */
 		display = updateDisplay();
 		return true;
 	}
@@ -1633,11 +1633,14 @@ class CustomFadeType extends Option
 
 	public override function left():Bool
 	{
+	    ClientPrefs.data.CustomFade = !ClientPrefs.data.CustomFade;
+		display = updateDisplay();
 		return true;
 	}
 
 	public override function right():Bool
 	{
+	    left();
 		return true;
 	}
 
@@ -1684,21 +1687,51 @@ class CustomFadeSound extends Option
 	
 }
 
-class TimeBarType extends Option
+class CustomFadeText extends Option
 {
 	public function new(desc:String)
 	{
 		super();
-		description = 'What should the Time Bar display?';
+		description = desc;
 	}
 
 	public override function left():Bool
 	{
+	    ClientPrefs.data.CustomText = !ClientPrefs.data.CustomText;
+		display = updateDisplay();
 		return true;
 	}
 
 	public override function right():Bool
 	{
+	    left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Custom Fade Text: < " + ClientPrefs.data.CustomText + " >";
+	}
+}
+
+class TimeBarType extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function left():Bool
+	{
+	    ClientPrefs.data.timeBarType = !ClientPrefs.data.timeBarType;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+	    left();
 		return true;
 	}
 
@@ -1713,7 +1746,7 @@ class PauseMusic extends Option
 	public function new(desc:String)
 	{
 		super();
-		description = 'What song do you prefer for the Pause Screen?';
+		description = desc;
 	}
 
 	public override function left():Bool
