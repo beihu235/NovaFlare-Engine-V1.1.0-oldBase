@@ -2841,7 +2841,7 @@ class PlayState extends MusicBeatState
 			numScore.screenCenter();
 			numScore.x = placement + (43 * daLoop) - 90 + ClientPrefs.data.comboOffset[2];
 			numScore.y += 80 - ClientPrefs.data.comboOffset[3];
-			numScore.color = daRating.color;
+			if (ClientPrefs.data.comboColor) numScore.color = daRating.color;
 			
 			if (!ClientPrefs.data.comboStacking)
 				lastScore.push(numScore);
