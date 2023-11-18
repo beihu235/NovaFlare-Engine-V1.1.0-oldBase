@@ -270,7 +270,7 @@ class OptionsState extends MusicBeatState
 			new OptionCata(-1, 125, "Editing Judgements", [			
 				new FrameOption("Changes how many frames you have for hitting a note earlier or late."),
 				new OffsetThing("Change the note visual offset\nhow many milliseconds a note looks like it is offset in a chart"),
-				new MarvelousMSOption("How many milliseconds are in the MARVELOUS hit window."),
+				new MarvelousMsOption("How many milliseconds are in the MARVELOUS hit window."),
 				new SickMsOption("How many milliseconds are in the SICK hit window."),
 				new GoodMsOption("How many milliseconds are in the GOOD hit window."),
 				new BadMsOption("How many milliseconds are in the BAD hit window."),

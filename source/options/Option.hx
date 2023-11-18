@@ -198,7 +198,7 @@ class FrameOption extends Option
 	}
 }
 
-class MarvelousMSOption extends Option
+class MarvelousMsOption extends Option
 {
 	public function new(desc:String)
 	{
@@ -237,7 +237,7 @@ class MarvelousMSOption extends Option
 	}
 }
 
-class SickMSOption extends Option
+class SickMsOption extends Option
 {
 	public function new(desc:String)
 	{
