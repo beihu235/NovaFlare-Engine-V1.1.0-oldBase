@@ -1697,7 +1697,7 @@ class CustomFadeText extends Option
 
 	public override function left():Bool
 	{
-	    ClientPrefs.data.CustomText = !ClientPrefs.data.CustomText;
+	    ClientPrefs.data.CustomFadeText = !ClientPrefs.data.CustomFadeText;
 		display = updateDisplay();
 		return true;
 	}
