@@ -189,7 +189,8 @@ class OptionsState extends MusicBeatState
 				//new Shouldcameramove("Moves camera on opponent/player note hits."),
 			]),
 			new OptionCata(345, 40, OptionsName.setAppearance(), [
-                new NoteskinOption("Change your current noteskin"),
+                new NoteskinOption("Change your current noteSkin"),
+                new SplashSkin('Change your current splashSkin'),
 				//new AccTypeOption("Change your current accuracy type you want!"),
 				//new SongNameOption("Shows to you name of song your playing on HUD"),			
 				new HideOppStrumsOption("Shows/Hides opponent strums on screen.(RESTART SONG)"),
@@ -198,7 +199,7 @@ class OptionsState extends MusicBeatState
                 //new ShowSplashes("Show particles on SICK hit."),
                // new SustainsAlpha("Change Sustain Notes Alpha."),
 				//new HealthBarOption("Toggles health bar visibility"),
-				//new JudgementCounter("Show your judgements that you've gotten in the song"),
+				new JudgementCounter("Show your judgements that you've gotten in the song"),
 				//new LaneUnderlayOption("How transparent your lane is, higher = more visible."),
 				new CamZoomOption("Toggle the camera zoom in-game."),
                 new HideHud("Shows to you hud."),
@@ -226,6 +227,8 @@ class OptionsState extends MusicBeatState
 				new ResultsScreen('If checked, Open Results Screen at end song'),
 				new RatingOffset('Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.'),
 				//new ColorBlindOption("You can set colorblind filter (makes the game more playable for colorblind people)."),
+				new ShowMS(''),
+				
 				
                 
 				//new VintageOption("Adds 'vintage' on game screen."),
@@ -248,7 +251,7 @@ class OptionsState extends MusicBeatState
 			    new HideHud("Shows to you hud."),				
 			]),
 			new OptionCata(640, 40 + 64, "System", [
-			    new Language("Change language in some state."),
+			    //new Language("Change language in some state."),
 			    new ColorblindModeOption("You can set colorblind filter (makes the game more playable for colorblind people)\nCredits: notweuz (Creator of OS Engine)'"),
 			    new ShadersOption("Shaders used for some visual effects, and also CPU intensive for weaker PCs."),
 				new GPUcacheOption("If checked, allows the GPU to be used for caching textures, decreasing RAM usage."),				
@@ -265,10 +268,13 @@ class OptionsState extends MusicBeatState
 			]),			
 			new OptionCata(-1, 125, "Editing Judgements", [			
 				new FrameOption("Changes how many frames you have for hitting a note earlier or late."),
-				new OffsetThing("Change the note visual offset (how many milliseconds a note looks like it is offset in a chart)"),
-				new SickMSOption("How many milliseconds are in the SICK hit window"),
-				new GoodMsOption("How many milliseconds are in the GOOD hit window"),
-				new BadMsOption("How many milliseconds are in the BAD hit window"),
+				new OffsetThing("Change the note visual offset\nhow many milliseconds a note looks like it is offset in a chart"),
+				new MarvelousMSOption("How many milliseconds are in the MARVELOUS hit window."),
+				new SickMsOption("How many milliseconds are in the SICK hit window."),
+				new GoodMsOption("How many milliseconds are in the GOOD hit window."),
+				new BadMsOption("How many milliseconds are in the BAD hit window."),
+				new MarvelousRating('Extend marvelous rate for playing.'),
+				new MarvelousSprite('If unchecked,Marvelous rate will also use sick sprite.'),
 			], true)
 		];
 

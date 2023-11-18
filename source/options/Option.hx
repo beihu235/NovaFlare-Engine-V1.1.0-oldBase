@@ -198,6 +198,45 @@ class FrameOption extends Option
 	}
 }
 
+class MarvelousMSOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc + " (Press R to reset)";
+		acceptType = true;
+	}
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.marvelousWindow--;
+		if (ClientPrefs.data.marvelousWindow < 0)
+			ClientPrefs.data.marvelousWindow = 0;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		ClientPrefs.data.marvelousWindow++;
+		if (ClientPrefs.data.marvelousWindow > 166)
+			ClientPrefs.data.marvelousWindow = 166;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function onType(char:String)
+	{
+		if (char.toLowerCase() == "r")
+			ClientPrefs.data.marvelousWindow = 45;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Marvelous Hit Window: < " + ClientPrefs.data.marvelousWindow + MS_O + " >";
+	}
+}
+
 class SickMSOption extends Option
 {
 	public function new(desc:String)
@@ -210,8 +249,8 @@ class SickMSOption extends Option
 	public override function left():Bool
 	{
 		ClientPrefs.data.sickWindow--;
-		if (ClientPrefs.data.sickWindow < 0)
-			ClientPrefs.data.sickWindow = 0;
+		if (ClientPrefs.data.sickWindow < 166)
+			ClientPrefs.data.sickWindow = 166;
 		display = updateDisplay();
 		return true;
 	}
@@ -219,8 +258,8 @@ class SickMSOption extends Option
 	public override function right():Bool
 	{
 		ClientPrefs.data.sickWindow++;
-		if (ClientPrefs.data.sickWindow > 45)
-			ClientPrefs.data.sickWindow = 45;
+		if (ClientPrefs.data.sickWindow > 166)
+			ClientPrefs.data.sickWindow = 166;
 		display = updateDisplay();
 		return true;
 	}
@@ -258,8 +297,8 @@ class GoodMsOption extends Option
 	public override function right():Bool
 	{
 		ClientPrefs.data.goodWindow++;
-		if (ClientPrefs.data.goodWindow > 90)
-			ClientPrefs.data.goodWindow = 90;
+		if (ClientPrefs.data.goodWindow > 166)
+			ClientPrefs.data.goodWindow = 166;
 		display = updateDisplay();
 		return true;
 	}
@@ -297,8 +336,8 @@ class BadMsOption extends Option
 	public override function right():Bool
 	{
 		ClientPrefs.data.badWindow++;
-		if (ClientPrefs.data.badWindow > 135)
-			ClientPrefs.data.badWindow = 135;
+		if (ClientPrefs.data.badWindow > 166)
+			ClientPrefs.data.badWindow = 166;
 		display = updateDisplay();
 		return true;
 	}
@@ -1074,7 +1113,7 @@ class CamZoomOption extends Option
 		return "Camera Zooming: < " + (ClientPrefs.data.camZooms ? enable_O : disable_O) + " >";
 	}
 }
-/*
+
 class JudgementCounter extends Option
 {
 	public function new(desc:String)
@@ -1085,13 +1124,13 @@ class JudgementCounter extends Option
 
 	public override function left():Bool
 	{
-		ClientPrefs.data.showJudgement = !ClientPrefs.data.showJudgement;
+		ClientPrefs.data.judgementCounter = !ClientPrefs.data.judgementCounter;
 
 		if (Type.getClass(FlxG.state) == PlayState){
 		if(ClientPrefs.data.showJudgement) 
-			PlayState.instance.judgementCounter.visible = (!ClientPrefs.data.hideHud && !PlayState.instance.cpuControlled);
+			//PlayState.instance.judgementCounter.visible = (!ClientPrefs.data.hideHud && !PlayState.instance.cpuControlled);
 		else
-			PlayState.instance.judgementCounter.visible = false;
+			//PlayState.instance.judgementCounter.visible = false;
 	    }
 
 		display = updateDisplay();
@@ -1106,10 +1145,9 @@ class JudgementCounter extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Judgement Counter: < " + (ClientPrefs.data.showJudgement ? enable_O : disable_O) + " >";
+		return "Judgement Counter: < " + (ClientPrefs.data.judgementCounter ? enable_O : disable_O) + " >";
 	}
 }
-*/ //修改
 
 class MiddleScrollOption extends Option
 {
@@ -1944,5 +1982,100 @@ class RatingOffset extends Option
 	private override function updateDisplay():String
 	{
 		return "Rating Offset: < " + ClientPrefs.data.ratingOffset + " >";
+	}
+}
+
+class SplashSkin extends Option
+{
+    public static var chooseNum:Int;
+    
+	public function new(desc:String)
+	{
+		super();
+		chooseNum = 0;
+		OptionsHelpers.SetNoteSkin();
+		if (OptionsState.onPlayState)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+		if (OptionsState.onPlayState)
+			return false;
+		chooseNum--;
+		
+     	OptionsHelpers.ChangeNoteSkin();
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		if (OptionsState.onPlayState)
+			return false;
+		chooseNum++;
+		
+        OptionsHelpers.ChangeNoteSkin();
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function getValue():String
+	{
+		return "Current SplashSkin: < " + ClientPrefs.data.splashSkin + " >";
+	}
+}
+
+class MarvelousRating extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+	}
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.marvelousRating = !ClientPrefs.data.marvelousRating;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Marvelous Rating: < " + (ClientPrefs.data.marvelousRating ? enable_O : disable_O) + " >";
+	}
+}
+
+class MarvelousSprite extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+	}
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.marvelousSprite = !ClientPrefs.data.marvelousSprite;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Marvelous Sprite: < " + (ClientPrefs.data.marvelousSprite ? enable_O : disable_O) + " >";
 	}
 }
