@@ -1355,6 +1355,35 @@ class HealthBarAlpha extends Option
 		}
 	
 }
+
+class ComboColor extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+		acceptValues = true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Combe Color: < " + ClientPrefs.data.comboColor + " >";
+	}
+
+	override function right():Bool
+	{
+		ClientPrefs.data.comboColor = !ClientPrefs.data.comboColor;
+		display = updateDisplay();
+		return true;
+
+	}
+
+	override function left():Bool
+	{
+		right();
+		return true;
+	}
+}
 /*
 class SustainsAlpha extends Option
 {
