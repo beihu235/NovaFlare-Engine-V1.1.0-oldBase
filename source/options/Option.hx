@@ -1633,7 +1633,7 @@ class CustomFadeType extends Option
 
 	public override function left():Bool
 	{
-	    ClientPrefs.data.CustomFade = !ClientPrefs.data.CustomFade;
+	   // ClientPrefs.data.CustomFade = !ClientPrefs.data.CustomFade;
 		display = updateDisplay();
 		return true;
 	}
@@ -1724,7 +1724,7 @@ class TimeBarType extends Option
 
 	public override function left():Bool
 	{
-	    ClientPrefs.data.timeBarType = !ClientPrefs.data.timeBarType;
+	   // ClientPrefs.data.timeBarType = !ClientPrefs.data.timeBarType;
 		display = updateDisplay();
 		return true;
 	}
