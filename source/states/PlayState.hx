@@ -594,11 +594,8 @@ class PlayState extends MusicBeatState
 		add(judgementCounter_S);
 		judgementCounter_S.y = FlxG.height / 2 - judgementCounter_S.height / 2;
 		
-		numItems = new FlxTypedGroup<FlxSprite>();
-		add(numItems);
-		
 		cachePopUpScore();
-
+		
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
 		add(grpNoteSplashes);
@@ -646,8 +643,6 @@ class PlayState extends MusicBeatState
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 		moveCameraSection();
-        
-        numItems.cameras = [camHUD];
 		
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
@@ -2778,6 +2773,10 @@ class PlayState extends MusicBeatState
 		
 		var daLoop:Int = 0;
 		var xThing:Float = 0;
+		
+		numItems = new FlxTypedGroup<FlxSprite>();
+		add(numItems);
+		numItems.cameras = [camHUD];
 		
 		for (i in 0...3) //9999
 		{
