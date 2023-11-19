@@ -2896,7 +2896,7 @@ class PlayState extends MusicBeatState
 
 		for (i in 0...seperatedScore.length - 1)
 		{
-		    var numScore:FlxSprite = numItems.members[i + 1];
+		    var numScore:FlxSprite = numItems.members[i];
 			numScore.loadGraphic(Paths.image(uiPrefix + 'num' + seperatedScore[i] + uiSuffix));
 			if (ClientPrefs.data.comboColor) numScore.color = daRating.color;
 			
