@@ -593,6 +593,11 @@ class PlayState extends MusicBeatState
 		judgementCounter_S.cameras = [camHUD];
 		add(judgementCounter_S);
 		judgementCounter_S.y = FlxG.height / 2 - judgementCounter_S.height / 2;
+		
+		numItems = new FlxTypedGroup<FlxSprite>();
+		add(numItems);
+		
+		cachePopUpScore();
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
@@ -614,11 +619,6 @@ class PlayState extends MusicBeatState
 			timeTxt.y += 3;
 		}
 		
-		numItems = new FlxTypedGroup<FlxSprite>();
-		add(numItems);
-		
-		cachePopUpScore();
-
 		var splash:NoteSplash = new NoteSplash(100, 100);
 		splash.setupNoteSplash(100, 100);
 		grpNoteSplashes.add(splash);
