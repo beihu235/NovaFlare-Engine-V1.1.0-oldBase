@@ -613,6 +613,11 @@ class PlayState extends MusicBeatState
 			timeTxt.size = 24;
 			timeTxt.y += 3;
 		}
+		
+		numItems = new FlxTypedGroup<FlxSprite>();
+		add(numItems);
+		
+		cachePopUpScore();
 
 		var splash:NoteSplash = new NoteSplash(100, 100);
 		splash.setupNoteSplash(100, 100);
@@ -641,7 +646,8 @@ class PlayState extends MusicBeatState
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 		moveCameraSection();
-
+        
+        numItems.cameras = [camHUD];
 		
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
@@ -730,7 +736,6 @@ class PlayState extends MusicBeatState
         }
 
 		cacheCountdown();
-		cachePopUpScore();
 		
 		for (key => type in precacheList)
 		{
@@ -2750,14 +2755,14 @@ class PlayState extends MusicBeatState
 		rating.screenCenter();
 		rating.x = placement - 40;
 		rating.y -= 60;
-		
-		insert(members.indexOf(strumLineNotes), rating);
-		
 		rating.x += ClientPrefs.data.comboOffset[0];
 		rating.y -= ClientPrefs.data.comboOffset[1];
 		rating.antialiasing = antialias;
 		rating.alpha = 0.000001;
 		
+		add(rating);
+		rating.cameras = [camHUD];
+				
 		comboSpr = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'combo' + uiSuffix));
 		comboSpr.cameras = [camHUD];
 		comboSpr.screenCenter();
@@ -2768,15 +2773,11 @@ class PlayState extends MusicBeatState
 		comboSpr.y += 60;
 		comboSpr.alpha = 0.000001;
 		
+		add(comboSpr);
+		comboSpr.cameras = [camHUD];
+		
 		var daLoop:Int = 0;
 		var xThing:Float = 0;
-		if (showCombo)
-		{
-			insert(members.indexOf(strumLineNotes), comboSpr);
-		}
-		
-		numItems = new FlxTypedGroup<FlxSprite>();
-		add(numItems);
 		
 		for (i in 0...3) //9999
 		{
@@ -2793,8 +2794,6 @@ class PlayState extends MusicBeatState
             numScore.alpha = 0.000001;
             
             numScore.ID = i;
-            
-            insert(members.indexOf(strumLineNotes), numScore);
 
             numItems.add(numScore);            
 
