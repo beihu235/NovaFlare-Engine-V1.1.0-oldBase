@@ -2885,8 +2885,8 @@ class PlayState extends MusicBeatState
 		    var numScore:FlxSprite = numItems.members[i];
 			numScore.loadGraphic(Paths.image(uiPrefix + 'num' + seperatedScore[i] + uiSuffix));
 			if (ClientPrefs.data.comboColor) numScore.color = daRating.color;
-			numScore.offset.x = combeOffsetFix[seperatedScore[i]][0];
-			numScore.offset.y = combeOffsetFix[seperatedScore[i]][1];
+			numScore.offset.x = -combeOffsetFix[seperatedScore[i]][0];
+			numScore.offset.y = -combeOffsetFix[seperatedScore[i]][1];
 			if (!PlayState.isPixelStage) numScore.setGraphicSize(Std.int(numScore.width * 0.5));
 			else numScore.setGraphicSize(Std.int(numScore.width * daPixelZoom));
 			numScore.updateHitbox();			
@@ -2894,21 +2894,21 @@ class PlayState extends MusicBeatState
 			
 			if (combeNumTween[i] != null) combeNumTween[i].cancel();
             numScore.alpha = 1;                        
-            combeNumTween[i] = FlxTween.tween(numScore, {alpha: 0}, 0.2 / playbackRate, {
-			startDelay: Conductor.crochet * 0.002 / playbackRate
+            combeNumTween[i] = FlxTween.tween(numScore, {alpha: 0}, 0.5 / playbackRate, {
+			startDelay: Conductor.crochet * 0.0015 / playbackRate
 		    });
 		}
 		
 		if (rateTween != null) rateTween.cancel();
 		rating.alpha = 1;
-		rateTween = FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {
-			startDelay: Conductor.crochet * 0.001 / playbackRate
+		rateTween = FlxTween.tween(rating, {alpha: 0}, 0.5 / playbackRate, {
+			startDelay: Conductor.crochet * 0.0015 / playbackRate
 		});
         
         if (combeTween != null) combeTween.cancel();
         comboSpr.alpha = 1;
-		combeTween = FlxTween.tween(comboSpr, {alpha: 0}, 0.2 / playbackRate, {
-			startDelay: Conductor.crochet * 0.002 / playbackRate
+		combeTween = FlxTween.tween(comboSpr, {alpha: 0}, 0.5 / playbackRate, {
+			startDelay: Conductor.crochet * 0.0015 / playbackRate
 		});
 	}
 
