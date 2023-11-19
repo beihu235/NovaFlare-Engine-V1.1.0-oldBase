@@ -2740,7 +2740,7 @@ class PlayState extends MusicBeatState
 		
 		var placement:Float = FlxG.width * 0.35;
 		
-		rating.loadGraphic(Paths.image(uiPrefix + 'sick' + uiSuffix));
+		rating = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'sick' + uiSuffix));
 		rating.cameras = [camHUD];
 		rating.screenCenter();
 		rating.x = placement - 40;
@@ -2753,7 +2753,7 @@ class PlayState extends MusicBeatState
 		rating.antialiasing = antialias;
 		rating.alpha = 0.000001;
 		
-		comboSpr.loadGraphic(Paths.image(uiPrefix + 'combo' + uiSuffix));
+		comboSpr = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'combo' + uiSuffix));
 		comboSpr.cameras = [camHUD];
 		comboSpr.screenCenter();
 		comboSpr.x = placement;
