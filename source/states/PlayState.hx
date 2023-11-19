@@ -2916,10 +2916,10 @@ class PlayState extends MusicBeatState
 		    if (combeNumTweenScaleY[i] != null) combeNumTweenScaleY[i].cancel();
             numScore.scale.y = 0.5 + 0.07;                        
             combeNumTweenScaleY[i] = FlxTween.tween(numScore.scale, {y: 0.5}, 0.1 / playbackRate);
-            /*
-            numScore.offset.x = -combeOffsetFix[seperatedScore[i]][0];
-			numScore.offset.y = -combeOffsetFix[seperatedScore[i]][1];
-			*/
+            
+            numScore.offset.x -= combeOffsetFix[seperatedScore[i]][0];
+			numScore.offset.y -= combeOffsetFix[seperatedScore[i]][1];
+			
 		}
 		
 		if (rateTween != null) rateTween.cancel();
@@ -2949,6 +2949,9 @@ class PlayState extends MusicBeatState
         if (combeTweenScaleY != null) combeTweenScaleY.cancel();
         comboSpr.scale.y = scale + 0.07;
 		combeTweenScaleY = FlxTween.tween(comboSpr.scale, {y: scale}, 0.1 / playbackRate);
+		
+		rating.offset.x -= rating.width / 2;
+        rating.offset.y -= rating.height / 2
 	}
 
 	public var strumsBlocked:Array<Bool> = [];
