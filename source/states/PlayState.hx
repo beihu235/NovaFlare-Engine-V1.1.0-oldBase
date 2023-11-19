@@ -2770,7 +2770,7 @@ class PlayState extends MusicBeatState
 			insert(members.indexOf(strumLineNotes), comboSpr);
 		}
 		
-		for (i in 3...0) //9999
+		for (i in 0...3) //9999
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'num' + '0' + uiSuffix));
 			numScore.cameras = [camHUD];
