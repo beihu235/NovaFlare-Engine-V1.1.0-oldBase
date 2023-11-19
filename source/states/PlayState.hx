@@ -2760,6 +2760,8 @@ class PlayState extends MusicBeatState
 		rating.y -= 60;
 		rating.x += ClientPrefs.data.comboOffset[0];
 		rating.y -= ClientPrefs.data.comboOffset[1];
+		rating.x += rating.width / 2 * 0.75;
+		rating.y += rating.width / 2 * 0.75;
 		rating.antialiasing = antialias;
 		rating.alpha = 0.000001;
 		
