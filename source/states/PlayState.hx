@@ -2880,10 +2880,10 @@ class PlayState extends MusicBeatState
 		seperatedScore.push(Math.floor(combo / 10) % 10);
 		seperatedScore.push(combo % 10);
 
-		for (i in seperatedScore) //9999
+		for (i in 0...seperatedScore.length) //9999
 		{
 		    var numScore:FlxSprite = numItems.members[i];
-			numScore.loadGraphic(Paths.image(uiPrefix + 'num' + Std.int(i) + uiSuffix));
+			numScore.loadGraphic(Paths.image(uiPrefix + 'num' + seperatedScore[i] + uiSuffix));
 			if (ClientPrefs.data.comboColor) numScore.color = daRating.color;
 			numScore.offset.x = combeOffsetFix[Std.int(i)][0];
 			numScore.offset.y = combeOffsetFix[Std.int(i)][1];
