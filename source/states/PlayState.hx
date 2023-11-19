@@ -209,14 +209,14 @@ class PlayState extends MusicBeatState
     var combeOffsetFix:Array<Array<Int>> = [
         [0, 0], //num0
         [0, 2], //num1
-        [1, 1], //num2
+        [-1, -1], //num2
         [0, 2], //num3
-        [0, 3], //num4
-        [4, 4], //num5
-        [4, 0],  //num6
-        [1, 2], //num7
+        [0, -3], //num4
+        [-4, -4], //num5
+        [-4, 0],  //num6
+        [-1, 2], //num7
         [0, 0], //num8
-        [4, 4] //num9
+        [-4, -4] //num9
     ];
     
     var notesHitArray:Array<Date> = [];
@@ -2730,7 +2730,7 @@ class PlayState extends MusicBeatState
             
             for (i in 0...ratingsData.length){
                 if (ratingsData[i].name == rating.name){
-    		        ratingsData[i].color = FlxColor.fromInt(CoolUtil.getComboColor(Spr));
+    		        ratingsData[i].color = FlxColor.fromInt(CoolUtil.dominantColor(Spr));
     		        Spr.destroy();
     		        continue;
     		    }
@@ -2865,15 +2865,19 @@ class PlayState extends MusicBeatState
         comboSpr.loadGraphic(Paths.image(uiPrefix + 'combo' + uiSuffix));
 		comboSpr.antialiasing = antialias;		
 		
+		var scale:Float = 0;
+		
 		if (!PlayState.isPixelStage)
 		{
 			rating.setGraphicSize(Std.int(rating.width * 0.7));
 			comboSpr.setGraphicSize(Std.int(comboSpr.width * 0.7));
+			scale = 0.7;
 		}
 		else
 		{
 			rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.85));
 			comboSpr.setGraphicSize(Std.int(comboSpr.width * daPixelZoom * 0.85));
+			scale = 0.85;
 		}
 
 		comboSpr.updateHitbox();
@@ -2893,8 +2897,7 @@ class PlayState extends MusicBeatState
 		    var numScore:FlxSprite = numItems.members[i];
 			numScore.loadGraphic(Paths.image(uiPrefix + 'num' + seperatedScore[i] + uiSuffix));
 			if (ClientPrefs.data.comboColor) numScore.color = daRating.color;
-			numScore.offset.x = -combeOffsetFix[seperatedScore[i]][0];
-			numScore.offset.y = -combeOffsetFix[seperatedScore[i]][1];
+			
 			if (!PlayState.isPixelStage) numScore.setGraphicSize(Std.int(numScore.width * 0.5));
 			else numScore.setGraphicSize(Std.int(numScore.width * daPixelZoom));
 			numScore.updateHitbox();			
@@ -2905,15 +2908,17 @@ class PlayState extends MusicBeatState
             combeNumTween[i] = FlxTween.tween(numScore, {alpha: 0}, 0.3 / playbackRate, {
 			startDelay: Conductor.crochet * 0.0015 / playbackRate
 		    });
-		    /*
+		    
 		    if (combeNumTweenScaleX[i] != null) combeNumTweenScaleX[i].cancel();
-            numScore.scale.x = 1.1;                        
-            combeNumTweenScaleX[i] = FlxTween.tween(numScore.scale, {x: 1}, 0.1 / playbackRate);
+            numScore.scale.x = 0.5 + 0.07;                        
+            combeNumTweenScaleX[i] = FlxTween.tween(numScore.scale, {x: 0.5}, 0.1 / playbackRate);
 		    
 		    if (combeNumTweenScaleY[i] != null) combeNumTweenScaleY[i].cancel();
-            numScore.scale.y = 1.1;                        
-            combeNumTweenScaleY[i] = FlxTween.tween(numScore.scale, {y: 1}, 0.1 / playbackRate);
-            */
+            numScore.scale.y = 0.5 + 0.07;                        
+            combeNumTweenScaleY[i] = FlxTween.tween(numScore.scale, {y: 0.5}, 0.1 / playbackRate);
+            
+            numScore.offset.x = -combeOffsetFix[seperatedScore[i]][0];
+			numScore.offset.y = -combeOffsetFix[seperatedScore[i]][1];
 		}
 		
 		if (rateTween != null) rateTween.cancel();
@@ -2929,20 +2934,20 @@ class PlayState extends MusicBeatState
 		});
 		
 		if (rateTweenScaleX != null) rateTweenScaleX.cancel();
-		rating.scale.x = 1.1;
-		rateTweenScaleX = FlxTween.tween(rating.scale, {x: 1}, 0.1 / playbackRate);
+		rating.scale.x = scale + 0.07;
+		rateTweenScaleX = FlxTween.tween(rating.scale, {x: scale}, 0.1 / playbackRate);
         
         if (combeTweenScaleX != null) combeTweenScaleX.cancel();
-        comboSpr.scale.x = 1.1;
-		combeTweenScaleX = FlxTween.tween(comboSpr.scale, {x: 1}, 0.1 / playbackRate);
+        comboSpr.scale.x = scale + 0.07;
+		combeTweenScaleX = FlxTween.tween(comboSpr.scale, {x: scale}, 0.1 / playbackRate);
 		
 		if (rateTweenScaleY != null) rateTweenScaleY.cancel();
-		rating.scale.y = 1.1;
-		rateTweenScaleY = FlxTween.tween(rating.scale, {y: 1}, 0.1 / playbackRate);
+		rating.scale.y = scale + 0.07;
+		rateTweenScaleY = FlxTween.tween(rating.scale, {y: scale}, 0.1 / playbackRate);
         
         if (combeTweenScaleY != null) combeTweenScaleY.cancel();
-        comboSpr.scale.y = 1.1;
-		combeTweenScaleY = FlxTween.tween(comboSpr.scale, {y: 1}, 0.1 / playbackRate);
+        comboSpr.scale.y = scale + 0.07;
+		combeTweenScaleY = FlxTween.tween(comboSpr.scale, {y: scale}, 0.1 / playbackRate);
 	}
 
 	public var strumsBlocked:Array<Bool> = [];
