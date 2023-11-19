@@ -2783,7 +2783,7 @@ class PlayState extends MusicBeatState
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'num' + '0' + uiSuffix));
 			numScore.cameras = [camHUD];
 			numScore.screenCenter();
-			numScore.x = placement + (43 * daLoop) - 90 + ClientPrefs.data.comboOffset[2];
+			numScore.x = placement + (50 * daLoop) - 90 + ClientPrefs.data.comboOffset[2];
 			numScore.y += 80 - ClientPrefs.data.comboOffset[3];
 			
 			if (!PlayState.isPixelStage) numScore.setGraphicSize(Std.int(numScore.width * 0.5));
@@ -2894,20 +2894,20 @@ class PlayState extends MusicBeatState
 			
 			if (combeNumTween[i] != null) combeNumTween[i].cancel();
             numScore.alpha = 1;                        
-            combeNumTween[i] = FlxTween.tween(numScore, {alpha: 0}, 0.5 / playbackRate, {
+            combeNumTween[i] = FlxTween.tween(numScore, {alpha: 0}, 0.3 / playbackRate, {
 			startDelay: Conductor.crochet * 0.0015 / playbackRate
 		    });
 		}
 		
 		if (rateTween != null) rateTween.cancel();
 		rating.alpha = 1;
-		rateTween = FlxTween.tween(rating, {alpha: 0}, 0.5 / playbackRate, {
+		rateTween = FlxTween.tween(rating, {alpha: 0}, 0.3 / playbackRate, {
 			startDelay: Conductor.crochet * 0.0015 / playbackRate
 		});
         
         if (combeTween != null) combeTween.cancel();
         comboSpr.alpha = 1;
-		combeTween = FlxTween.tween(comboSpr, {alpha: 0}, 0.5 / playbackRate, {
+		combeTween = FlxTween.tween(comboSpr, {alpha: 0}, 0.3 / playbackRate, {
 			startDelay: Conductor.crochet * 0.0015 / playbackRate
 		});
 	}
