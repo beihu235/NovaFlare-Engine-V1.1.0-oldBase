@@ -2850,12 +2850,10 @@ class PlayState extends MusicBeatState
 		}
 		
 		rating.loadGraphic(Paths.image(uiPrefix + daRating.image + uiSuffix));
-		rating.antialiasing = antialias;
-		rating.alpha = 1;
+		rating.antialiasing = antialias;		
         
         comboSpr.loadGraphic(Paths.image(uiPrefix + 'combo' + uiSuffix));
-		comboSpr.antialiasing = antialias;
-		comboSpr.alpha = 1;
+		comboSpr.antialiasing = antialias;		
 		
 		if (!PlayState.isPixelStage)
 		{
@@ -2900,11 +2898,13 @@ class PlayState extends MusicBeatState
 		}
 		
 		if (rateTween != null) rateTween.cancel();
+		rating.alpha = 1;
 		rateTween = FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {
 			startDelay: Conductor.crochet * 0.001 / playbackRate
 		});
         
         if (combeTween != null) combeTween.cancel();
+        comboSpr.alpha = 1;
 		combeTween = FlxTween.tween(comboSpr, {alpha: 0}, 0.2 / playbackRate, {
 			startDelay: Conductor.crochet * 0.002 / playbackRate
 		});
