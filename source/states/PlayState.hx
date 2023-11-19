@@ -2885,8 +2885,8 @@ class PlayState extends MusicBeatState
 		    var numScore:FlxSprite = numItems.members[i];
 			numScore.loadGraphic(Paths.image(uiPrefix + 'num' + seperatedScore[i] + uiSuffix));
 			if (ClientPrefs.data.comboColor) numScore.color = daRating.color;
-			numScore.offset.x = combeOffsetFix[Std.int(i)][0];
-			numScore.offset.y = combeOffsetFix[Std.int(i)][1];
+			numScore.offset.x = combeOffsetFix[seperatedScore[i]][0];
+			numScore.offset.y = combeOffsetFix[seperatedScore[i]][1];
 			if (!PlayState.isPixelStage) numScore.setGraphicSize(Std.int(numScore.width * 0.5));
 			else numScore.setGraphicSize(Std.int(numScore.width * daPixelZoom));
 			numScore.updateHitbox();			
