@@ -122,7 +122,7 @@ class CoolUtil
         }
 		var maxCount = 0;
 		var maxKey:Int = 0xFFFFFFFF; //after the loop this will store the max color
-		//countByColor[FlxColor.BLACK] = 0;
+		countByColor[FlxColor.BLACK] = 0;
 		//countByColor[FlxColor.WHITE] = 0;
 		for(key in countByColor.keys()) {
 			if(countByColor[key] > maxCount) {
@@ -130,10 +130,10 @@ class CoolUtil
 				maxKey = key;
 			}
 		}
-		/*
-		if (countByColor[FlxColor.WHITE] >= colorCount * 0.5)
-		maxKey = 0xFFFFFFFF;  //50%+ is white, so main color is white
-		*/
+		
+		if (countByColor[FlxColor.Black] >= maxCount && countByColor[FlxColor.Black] >= countByColor[FlxColor.WHITE] * 2)
+		maxKey = 0xFF000000;  //50%+ is black, so main color is black, it use for fix something
+		
 		countByColor = [];
 		return maxKey;
 	}
