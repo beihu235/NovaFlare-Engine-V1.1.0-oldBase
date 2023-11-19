@@ -2740,7 +2740,7 @@ class PlayState extends MusicBeatState
 		
 		var placement:Float = FlxG.width * 0.35;
 		
-		rating.loadGraphic(Paths.image(uiPrefix + daRating.image + uiSuffix));
+		rating.loadGraphic(Paths.image(uiPrefix + 'sick' + uiSuffix));
 		rating.cameras = [camHUD];
 		rating.screenCenter();
 		rating.x = placement - 40;
@@ -2777,7 +2777,6 @@ class PlayState extends MusicBeatState
 			numScore.screenCenter();
 			numScore.x = placement - (43 * daLoop) - 90 + ClientPrefs.data.comboOffset[2];
 			numScore.y += 80 - ClientPrefs.data.comboOffset[3];
-			if (ClientPrefs.data.comboColor) numScore.color = daRating.color;
 			
 			if (!PlayState.isPixelStage) numScore.setGraphicSize(Std.int(numScore.width * 0.5));
 			else numScore.setGraphicSize(Std.int(numScore.width * daPixelZoom));
