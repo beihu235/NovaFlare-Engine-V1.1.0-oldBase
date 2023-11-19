@@ -2760,6 +2760,8 @@ class PlayState extends MusicBeatState
 		rating.y -= 60;
 		rating.x += ClientPrefs.data.comboOffset[0];
 		rating.y -= ClientPrefs.data.comboOffset[1];
+		rating.x += rating.width * 0.7 * 0.5;
+		rating.y += rating.height * 0.7 * 0.5;
 		rating.antialiasing = antialias;
 		rating.alpha = 0.000001;
 		
@@ -2920,8 +2922,8 @@ class PlayState extends MusicBeatState
             numScore.scale.y = 0.5 + 0.07;                        
             combeNumTweenScaleY[i] = FlxTween.tween(numScore.scale, {y: 0.5}, 0.1 / playbackRate);
             
-            numScore.offset.x -= combeOffsetFix[seperatedScore[i]][0] * 0.5;
-			numScore.offset.y -= combeOffsetFix[seperatedScore[i]][1] * 0.5;
+            numScore.offset.x -= combeOffsetFix[seperatedScore[i]][0];
+			numScore.offset.y -= combeOffsetFix[seperatedScore[i]][1];
 			
 		}
 		
@@ -2953,8 +2955,8 @@ class PlayState extends MusicBeatState
         comboSpr.scale.y = scale + 0.07;
 		combeTweenScaleY = FlxTween.tween(comboSpr.scale, {y: scale}, 0.1 / playbackRate);
 		
-		rating.offset.x += rating.width / 2 * scale;
-        rating.offset.y += rating.height / 2 * scale;
+		rating.offset.x += rating.width / 2;
+        rating.offset.y += rating.height / 2;
 	}
 
 	public var strumsBlocked:Array<Bool> = [];
