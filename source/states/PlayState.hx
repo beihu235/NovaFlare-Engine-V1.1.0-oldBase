@@ -204,6 +204,8 @@ class PlayState extends MusicBeatState
     public static var rsRatingName:String = '';
     var rsCheck:Bool = false;
     
+    var numItems:FlxTypedGroup<FlxSprite>;
+    
     var combeOffsetFix:Array<Array<Int>> = [
         [0, 0], //num0
         [0, 2], //num1
@@ -2696,8 +2698,7 @@ class PlayState extends MusicBeatState
 	//it not use because new way
 		
 	var rating:FlxSprite;
-    var comboSpr:FlxSprite;
-    var numItems:FlxTypedGroup<FlxSprite>;
+    var comboSpr:FlxSprite; 
     
     var rateTween:FlxTween;
     var combeTween:FlxTween;
@@ -2729,9 +2730,7 @@ class PlayState extends MusicBeatState
 		}
 		
 		for (i in 0...10)
-		Paths.image(uiPrefix + 'num' + i + uiSuffix);
-		
-		add(numItems);
+		Paths.image(uiPrefix + 'num' + i + uiSuffix);		
 		
 		var uiPrefix:String = "";
 		var uiSuffix:String = '';
@@ -2776,6 +2775,9 @@ class PlayState extends MusicBeatState
 			insert(members.indexOf(strumLineNotes), comboSpr);
 		}
 		
+		numItems = new FlxTypedGroup<FlxSprite>();
+		add(numItems);
+		
 		for (i in 0...3) //9999
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'num' + '0' + uiSuffix));
@@ -2790,8 +2792,10 @@ class PlayState extends MusicBeatState
 			numScore.antialiasing = antialias;
             numScore.alpha = 0.000001;
             
-            insert(members.indexOf(strumLineNotes), numScore);
+            numScore.ID = i;
             
+            insert(members.indexOf(strumLineNotes), numScore);
+
             numItems.add(numScore);            
 
 			daLoop++;
