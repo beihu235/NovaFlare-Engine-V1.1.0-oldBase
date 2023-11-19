@@ -2905,7 +2905,7 @@ class PlayState extends MusicBeatState
             combeNumTween[i] = FlxTween.tween(numScore, {alpha: 0}, 0.3 / playbackRate, {
 			startDelay: Conductor.crochet * 0.0015 / playbackRate
 		    });
-		    
+		    /*
 		    if (combeNumTweenScaleX[i] != null) combeNumTweenScaleX[i].cancel();
             numScore.scale.x = 1.1;                        
             combeNumTweenScaleX[i] = FlxTween.tween(numScore.scale, {x: 1}, 0.1 / playbackRate);
@@ -2913,6 +2913,7 @@ class PlayState extends MusicBeatState
 		    if (combeNumTweenScaleY[i] != null) combeNumTweenScaleY[i].cancel();
             numScore.scale.y = 1.1;                        
             combeNumTweenScaleY[i] = FlxTween.tween(numScore.scale, {y: 1}, 0.1 / playbackRate);
+            */
 		}
 		
 		if (rateTween != null) rateTween.cancel();
@@ -2927,21 +2928,21 @@ class PlayState extends MusicBeatState
 			startDelay: Conductor.crochet * 0.0015 / playbackRate
 		});
 		
-		if (rateTween != null) rateTween.cancel();
+		if (rateTweenScaleX != null) rateTweenScaleX.cancel();
 		rating.scale.x = 1.1;
-		rateTween = FlxTween.tween(rating.scale, {x: 1}, 0.1 / playbackRate);
+		rateTweenScaleX = FlxTween.tween(rating.scale, {x: 1}, 0.1 / playbackRate);
         
-        if (combeTweenScaleX[i] != null) combeTweenScaleX[i].cancel();
+        if (combeTweenScaleX != null) combeTweenScaleX.cancel();
         comboSpr.scale.x = 1.1;
-		combeTweenScaleX[i] = FlxTween.tween(comboSpr.scale, {x: 1}, 0.1 / playbackRate);
+		combeTweenScaleX = FlxTween.tween(comboSpr.scale, {x: 1}, 0.1 / playbackRate);
 		
-		if (rateTween != null) rateTween.cancel();
+		if (rateTweenScaleY != null) rateTweenScaleY.cancel();
 		rating.scale.y = 1.1;
-		rateTween = FlxTween.tween(rating.scale, {y: 1}, 0.1 / playbackRate);
+		rateTweenScaleY = FlxTween.tween(rating.scale, {y: 1}, 0.1 / playbackRate);
         
-        if (combeTweenScaleY[i] != null) combeTweenScaleY[i].cancel();
+        if (combeTweenScaleY != null) combeTweenScaleY.cancel();
         comboSpr.scale.y = 1.1;
-		combeTweenScaleY[i] = FlxTween.tween(comboSpr.scale, {y: 1}, 0.1 / playbackRate);
+		combeTweenScaleY = FlxTween.tween(comboSpr.scale, {y: 1}, 0.1 / playbackRate);
 	}
 
 	public var strumsBlocked:Array<Bool> = [];
