@@ -209,11 +209,11 @@ class PlayState extends MusicBeatState
     var combeOffsetFix:Array<Array<Int>> = [
         [0, 0], //num0
         [0, 2], //num1
-        [-1, -1], //num2
-        [0, 2], //num3
+        [-1, -2], //num2
+        [0, 1], //num3
         [0, -3], //num4
         [-4, -4], //num5
-        [-4, 0],  //num6
+        [-4, -1],  //num6
         [-1, 2], //num7
         [0, 0], //num8
         [-4, -4] //num9
