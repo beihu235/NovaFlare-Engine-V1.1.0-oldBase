@@ -2760,8 +2760,6 @@ class PlayState extends MusicBeatState
 		rating.y -= 60;
 		rating.x += ClientPrefs.data.comboOffset[0];
 		rating.y -= ClientPrefs.data.comboOffset[1];
-		rating.x += rating.width / 2 * 0.75;
-		rating.y += rating.width / 2 * 0.75;
 		rating.antialiasing = antialias;
 		rating.alpha = 0.000001;
 		
@@ -2884,17 +2882,20 @@ class PlayState extends MusicBeatState
 
 		comboSpr.updateHitbox();
 		rating.updateHitbox();
+		
+		var numShow = 3;
 
 		var seperatedScore:Array<Int> = [];
 
 		if(combo >= 1000) {
 			seperatedScore.push(Math.floor(combo / 1000) % 10);
+			numShow = 4;
 		}
 		seperatedScore.push(Math.floor(combo / 100) % 10);
 		seperatedScore.push(Math.floor(combo / 10) % 10);
 		seperatedScore.push(combo % 10);
 
-		for (i in 0...seperatedScore.length - 1)
+		for (i in 0...numShow)
 		{
 		    var numScore:FlxSprite = numItems.members[i];
 			numScore.loadGraphic(Paths.image(uiPrefix + 'num' + seperatedScore[i] + uiSuffix));
@@ -2919,8 +2920,8 @@ class PlayState extends MusicBeatState
             numScore.scale.y = 0.5 + 0.07;                        
             combeNumTweenScaleY[i] = FlxTween.tween(numScore.scale, {y: 0.5}, 0.1 / playbackRate);
             
-            numScore.offset.x += combeOffsetFix[seperatedScore[i]][0] * 0.5;
-			numScore.offset.y += combeOffsetFix[seperatedScore[i]][1] * 0.5;
+            numScore.offset.x -= combeOffsetFix[seperatedScore[i]][0] * 0.5;
+			numScore.offset.y -= combeOffsetFix[seperatedScore[i]][1] * 0.5;
 			
 		}
 		
