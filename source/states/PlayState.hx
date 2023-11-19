@@ -2802,13 +2802,15 @@ class PlayState extends MusicBeatState
 			numScore.antialiasing = antialias;
             numScore.alpha = 0.000001;
             
+            numScore.ID = i;
+
             numItems.add(numScore);            
 
 			daLoop++;
 			if(numScore.x > xThing) xThing = numScore.x;
 		}
 		
-		comboSpr.x = xThing + 50;
+		comboSpr.x = xThing + 50 * 2;
 		
 	}
 
@@ -2882,20 +2884,17 @@ class PlayState extends MusicBeatState
 
 		comboSpr.updateHitbox();
 		rating.updateHitbox();
-		
-		var numShow = 2;
 
 		var seperatedScore:Array<Int> = [];
 
 		if(combo >= 1000) {
 			seperatedScore.push(Math.floor(combo / 1000) % 10);
-			numShow = 3;
 		}
 		seperatedScore.push(Math.floor(combo / 100) % 10);
 		seperatedScore.push(Math.floor(combo / 10) % 10);
 		seperatedScore.push(combo % 10);
 
-		for (i in 0...numShow)
+		for (i in 0...seperatedScore.length - 1)
 		{
 		    var numScore:FlxSprite = numItems.members[i + 1];
 			numScore.loadGraphic(Paths.image(uiPrefix + 'num' + seperatedScore[i] + uiSuffix));
