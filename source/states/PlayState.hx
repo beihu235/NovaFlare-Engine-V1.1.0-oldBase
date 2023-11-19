@@ -2698,6 +2698,12 @@ class PlayState extends MusicBeatState
 	var rating:FlxSprite;
     var comboSpr:FlxSprite;
     var numItems:FlxTypedGroup<FlxSprite>;
+    
+    var rateTween:FlxTween;
+    var combeTween:FlxTween;
+    var combeNumTween:Array<FlxTween> = [];
+    
+    var seperatedScore:Array<Int> = [];
 	private function cachePopUpScore()
 	{
 		var uiPrefix:String = '';
@@ -2885,19 +2891,21 @@ class PlayState extends MusicBeatState
 			else numScore.setGraphicSize(Std.int(numScore.width * daPixelZoom));
 			numScore.updateHitbox();			
 			numScore.antialiasing = antialias;
-            numScore.alpha = 1;
-            
-            FlxTween.tween(numScore, {alpha: 0}, 0.2 / playbackRate, {
+			
+			if (combeNumTween[i] != null) combeNumTween[i].cancel();
+            numScore.alpha = 1;                        
+            combeNumTween[i] = FlxTween.tween(numScore, {alpha: 0}, 0.2 / playbackRate, {
 			startDelay: Conductor.crochet * 0.002 / playbackRate
 		    });
 		}
 		
-		
-		FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {
+		if (rateTween != null) rateTween.cancel();
+		rateTween = FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {
 			startDelay: Conductor.crochet * 0.001 / playbackRate
 		});
-
-		FlxTween.tween(comboSpr, {alpha: 0}, 0.2 / playbackRate, {
+        
+        if (combeTween != null) combeTween.cancel();
+		combeTween = FlxTween.tween(comboSpr, {alpha: 0}, 0.2 / playbackRate, {
 			startDelay: Conductor.crochet * 0.002 / playbackRate
 		});
 	}
