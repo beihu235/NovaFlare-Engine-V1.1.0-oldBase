@@ -2916,9 +2916,10 @@ class PlayState extends MusicBeatState
 		    if (combeNumTweenScaleY[i] != null) combeNumTweenScaleY[i].cancel();
             numScore.scale.y = 0.5 + 0.07;                        
             combeNumTweenScaleY[i] = FlxTween.tween(numScore.scale, {y: 0.5}, 0.1 / playbackRate);
-            
+            /*
             numScore.offset.x = -combeOffsetFix[seperatedScore[i]][0];
 			numScore.offset.y = -combeOffsetFix[seperatedScore[i]][1];
+			*/
 		}
 		
 		if (rateTween != null) rateTween.cancel();
