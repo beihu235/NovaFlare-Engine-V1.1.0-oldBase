@@ -14,14 +14,14 @@ import sys.io.File;
 import sys.FileSystem;
 #end
 
+import backend.SUtil;
+
 using StringTools;
 
 #if !lime_debug
 @:fileXml('tags="haxe,release"')
 @:noDebug
 #end
-
-import backend.SUtil;
 
 class Log
 {
