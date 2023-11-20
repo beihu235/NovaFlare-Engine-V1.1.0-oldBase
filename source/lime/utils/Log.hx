@@ -20,6 +20,9 @@ using StringTools;
 @:fileXml('tags="haxe,release"')
 @:noDebug
 #end
+
+import backend.SUtil;
+
 class Log
 {
 	public static var level:LogLevel;
