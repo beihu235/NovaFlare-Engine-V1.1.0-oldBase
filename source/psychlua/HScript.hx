@@ -76,7 +76,9 @@ class HScript extends SScript
 		set('Paths', Paths);
 		set('Conductor', Conductor);
 		set('ClientPrefs', ClientPrefs);
+		#if ACHIEVEMENTS_ALLOWED
 		set('Achievements', Achievements);
+		#end
 		set('Character', Character);
 		set('Alphabet', Alphabet);
 		set('Note', objects.Note);
@@ -86,10 +88,7 @@ class HScript extends SScript
 		#end
 		set('ShaderFilter', openfl.filters.ShaderFilter);
 		set('StringTools', StringTools);
-		#if VIDEOS_ALLOWED
-		set('VideoSpriteManager', backend.VideoSpriteManager);
-		set('VideoManager', backend.VideoManager);
-		#end
+	
 
 		// Functions & Variables
 		set('setVar', function(name:String, value:Dynamic)
