@@ -2730,7 +2730,7 @@ class PlayState extends MusicBeatState
             
             for (i in 0...ratingsData.length){
                 if (ratingsData[i].name == rating.name){
-    		        ratingsData[i].color = FlxColor.fromInt(CoolUtil.dominantColor(Spr));
+    		        ratingsData[i].color = FlxColor.fromInt(CoolUtil.getComboColor(Spr));
     		        Spr.destroy();
     		        continue;
     		    }
@@ -2790,8 +2790,8 @@ class PlayState extends MusicBeatState
 		
 		for (i in 0...3) //9999
 		{
-			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'num' + '0' + uiSuffix));
-			numScore.cameras = [camHUD];
+			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'num' + i + uiSuffix));
+			//numScore.cameras = [camHUD];
 			numScore.screenCenter();
 			numScore.x = placement + (50 * daLoop) - 90 + ClientPrefs.data.comboOffset[2];
 			numScore.y += 80 - ClientPrefs.data.comboOffset[3];
@@ -2800,9 +2800,7 @@ class PlayState extends MusicBeatState
 			else numScore.setGraphicSize(Std.int(numScore.width * daPixelZoom));
 			numScore.updateHitbox();			
 			numScore.antialiasing = antialias;
-            numScore.alpha = 0.000001;
-            
-            numScore.ID = i;
+            //numScore.alpha = 0.000001;
 
             numItems.add(numScore);            
 
@@ -2894,7 +2892,7 @@ class PlayState extends MusicBeatState
 		seperatedScore.push(Math.floor(combo / 10) % 10);
 		seperatedScore.push(combo % 10);
 
-		for (i in 0...3)
+		for (i in 0...seperatedScore.length - 1)
 		{
 		    var numScore:FlxSprite = numItems.members[i];
 			numScore.loadGraphic(Paths.image(uiPrefix + 'num' + seperatedScore[i] + uiSuffix));
