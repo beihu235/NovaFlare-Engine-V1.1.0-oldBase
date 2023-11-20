@@ -64,7 +64,7 @@ jobs:
           haxelib install flixel-addons 3.0.2
           haxelib install tjson
           haxelib install hxjsonast
-          haxelib install SScript 7.0.0
+          haxelib install SScript 5.2.0
           haxelib git hxCodec https://github.com/SPLCoding/hxCodec-but-it-works-xd.git
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib git linc_luajit https://github.com/mcagabe19-stuff/linc_luajit
@@ -90,7 +90,7 @@ jobs:
           haxelib set flixel 5.2.2
           haxelib set flixel-addons 3.0.2
           haxelib set hxcpp 4.2.1
-          haxelib set SScript 7.0.0
+          haxelib set SScript 5.2.0
   
           haxelib list
         env:
