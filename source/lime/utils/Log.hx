@@ -9,10 +9,10 @@ import android.widget.Toast;
 import haxe.PosInfos;
 import lime.app.Application;
 import lime.system.System;
-#if sys
+//#if sys
 import sys.io.File;
 import sys.FileSystem;
-#end
+//#end
 
 using StringTools;
 
@@ -60,7 +60,7 @@ class Log
 			if (throwErrors)
 			{
 			*/
-				#if sys
+				//#if sys
 				try
 				{
 					if (!FileSystem.exists(SUtil.getPath() + 'logs'))
@@ -83,7 +83,7 @@ class Log
 					println("Error!\nClouldn't save the crash log because:\n" + e);
 					#end
 				}
-				#end
+				//#end
 
 			//	println(message);
 				Application.current.window.alert(message + '\n\nFind Problem!!! Press OK to continue', 'Error!');
