@@ -60,7 +60,8 @@ class Log
 			if (throwErrors)
 			{
 			*/
-				//#if sys
+			/*
+				#if sys
 				try
 				{
 					if (!FileSystem.exists(SUtil.getPath() + 'logs'))
@@ -83,8 +84,8 @@ class Log
 					println("Error!\nClouldn't save the crash log because:\n" + e);
 					#end
 				}
-				//#end
-
+				#end
+            */
 			//	println(message);
 				Application.current.window.alert(message + '\n\nFind Problem!!! Press OK to continue', 'Error!');
 				//System.exit(1);
