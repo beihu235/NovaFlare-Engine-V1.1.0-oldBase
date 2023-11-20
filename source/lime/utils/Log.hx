@@ -14,8 +14,6 @@ import sys.io.File;
 import sys.FileSystem;
 #end
 
-import backend.SUtil;
-
 using StringTools;
 
 #if !lime_debug
