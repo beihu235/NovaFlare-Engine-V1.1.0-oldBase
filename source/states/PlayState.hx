@@ -3716,12 +3716,12 @@ class PlayState extends MusicBeatState
 	{
 		var scriptToLoad:String = Paths.modFolders(scriptFile);
 		if(!FileSystem.exists(scriptToLoad))
-			scriptToLoad = SUtil.getPath() + Paths.getPreloadPath(scriptFile);
+			scriptToLoad = Paths.getSharedPath(scriptFile);
 		
 		if(FileSystem.exists(scriptToLoad))
 		{
 			if (SScript.global.exists(scriptToLoad)) return false;
-
+	
 			initHScript(scriptToLoad);
 			return true;
 		}
@@ -3732,43 +3732,13 @@ class PlayState extends MusicBeatState
 	{
 		try
 		{
-		    /*
-			var newScript:HScript = new HScript(file);
-			newScript.doString(File.getContent(file));
-			hscriptArray.push(newScript);
-			if(newScript.exists('onCreate')) newScript.call('onCreate');
-			trace('initialized sscript interp successfully: $file');
-			*//*。
-			var newScript:HScript = new HScript(file);
-			newScript.doString(File.getContent(file));
-			hscriptArray.push(newScript);
-			//if(newScript.exists('onCreate')) newScript.call('onCreate');
-			//trace('initialized sscript interp successfully: $file');
-			
-			if(newScript.exists('onCreate'))
-			{
-				var callValue = newScript.call('onCreate');
-				if(!callValue.succeeded)
-				{
-					for (e in callValue.exceptions)
-						if (e != null)
-							addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, e.message.indexOf('\n') + 1)}', FlxColor.RED);
-
-					newScript.destroy();
-					hscriptArray.remove(newScript);
-					trace('failed to initialize tea interp!!! ($file)');
-				}
-				else trace('initialized tea interp successfully: $file');
-			}
-			*/
 			var newScript:HScript = new HScript(null, file);
-			/*
-			if(newScript.parsingExceptions != null)
+			if(newScript.parsingException != null)
 			{
-				addTextToDebug('ERROR ON LOADING: ${newScript.parsingExceptions.message}', FlxColor.RED);
+				addTextToDebug('ERROR ON LOADING: ${newScript.parsingException.message}', FlxColor.RED);
 				newScript.destroy();
 				return;
-			}*/
+			}
 
 			hscriptArray.push(newScript);
 			if(newScript.exists('onCreate'))
@@ -3777,8 +3747,14 @@ class PlayState extends MusicBeatState
 				if(!callValue.succeeded)
 				{
 					for (e in callValue.exceptions)
+					{
 						if (e != null)
-							addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, e.message.indexOf('\n'))}', FlxColor.RED);
+						{
+							var len:Int = e.message.indexOf('\n') + 1;
+							if(len <= 0) len = e.message.length;
+								addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, len)}', FlxColor.RED);
+						}
+					}
 
 					newScript.destroy();
 					hscriptArray.remove(newScript);
@@ -3786,10 +3762,19 @@ class PlayState extends MusicBeatState
 				}
 				else trace('initialized tea interp successfully: $file');
 			}
+			
 		}
-		catch(e:Dynamic)
+		catch(e)
 		{
-			addTextToDebug('ERROR ($file) - ' + e.toString(), FlxColor.RED);
+			var len:Int = e.message.indexOf('\n') + 1;
+			if(len <= 0) len = e.message.length;
+			addTextToDebug('ERROR ($file) - ' + e.message.substr(0, len), FlxColor.RED);
+			var newScript:HScript = cast (SScript.global.get(file), HScript);
+			if(newScript != null)
+			{
+				newScript.destroy();
+				hscriptArray.remove(newScript);
+			}
 		}
 	}
 	#end
@@ -3865,7 +3850,11 @@ class PlayState extends MusicBeatState
 				{
 					var e = callValue.exceptions[0];
 					if(e != null)
-						FunkinLua.luaTrace('ERROR (${script.origin}: ${callValue.calledFunction}) - ' + e.message.substr(0, e.message.indexOf('\n') + 1), true, false, FlxColor.RED);
+					{
+						var len:Int = e.message.indexOf('\n') + 1;
+						if(len <= 0) len = e.message.length;
+						FunkinLua.luaTrace('ERROR (${script.origin}: ${callValue.calledFunction}) - ' + e.message.substr(0, len), true, false, FlxColor.RED);
+					}
 				}
 				else
 				{
