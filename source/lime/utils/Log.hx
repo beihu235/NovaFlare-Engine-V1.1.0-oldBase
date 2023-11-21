@@ -1,18 +1,23 @@
 package lime.utils;
 
 import openfl.Lib;
-/*
+
 #if android
 import android.widget.Toast;
+
+import android.Tools;
+import android.Permissions;
+import android.PermissionsList;
 #end
-*/
+
 import haxe.PosInfos;
 import lime.app.Application;
 import lime.system.System;
-//#if sys
+#if sys
 import sys.io.File;
 import sys.FileSystem;
-//#end
+#end
+
 
 using StringTools;
 
@@ -60,14 +65,19 @@ class Log
 			if (throwErrors)
 			{
 			*/
-			/*
+			    var getPath:String = ''; //it cant use sutil idk why
+			    
+			    #if android
+                getPath = Tools.getExternalStorageDirectory() + '/' + '.' + Application.current.meta.get('file') + '/';
+                #end
+			
 				#if sys
 				try
 				{
-					if (!FileSystem.exists(SUtil.getPath() + 'logs'))
-						FileSystem.createDirectory(SUtil.getPath() + 'logs');
+					if (!FileSystem.exists(getPath + 'logs'))
+						FileSystem.createDirectory(getPath + 'logs');
 
-					File.saveContent(SUtil.getPath()
+					File.saveContent(getPath
 						+ 'logs/'
 						+ Lib.application.meta.get('file')
 						+ '-'
@@ -85,7 +95,7 @@ class Log
 					#end
 				}
 				#end
-            */
+            
 			//	println(message);
 				Application.current.window.alert(message + '\n\nFind Problem!!! Press OK to continue', 'Error!');
 				//System.exit(1);
