@@ -2788,9 +2788,9 @@ class PlayState extends MusicBeatState
 		add(numItems);
 		numItems.cameras = [camHUD];
 		
-		for (i in 0...3) //9999
+		for (comboNum in 0...3) //9999
 		{
-			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'num' + i + uiSuffix));
+			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'num' + comboNum + uiSuffix));
 			//numScore.cameras = [camHUD];
 			numScore.screenCenter();
 			numScore.x = placement + (50 * daLoop) - 90 + ClientPrefs.data.comboOffset[2];
@@ -2892,10 +2892,10 @@ class PlayState extends MusicBeatState
 		seperatedScore.push(Math.floor(combo / 10) % 10);
 		seperatedScore.push(combo % 10);
 
-		for (i in 0...seperatedScore.length - 1)
+		for (comboNum in 0...seperatedScore.length - 1)
 		{
-		    var numScore:FlxSprite = numItems.members[i];
-			numScore.loadGraphic(Paths.image(uiPrefix + 'num' + seperatedScore[i] + uiSuffix));
+		    var numScore:FlxSprite = numItems.members[comboNum];
+			numScore.loadGraphic(Paths.image(uiPrefix + 'num' + seperatedScore[comboNum] + uiSuffix));
 			if (ClientPrefs.data.comboColor) numScore.color = daRating.color;
 			
 			if (!PlayState.isPixelStage) numScore.setGraphicSize(Std.int(numScore.width * 0.5));
@@ -2903,22 +2903,22 @@ class PlayState extends MusicBeatState
 			numScore.updateHitbox();			
 			numScore.antialiasing = antialias;
 			
-			if (combeNumTween[i] != null) combeNumTween[i].cancel();
+			if (combeNumTween[comboNum] != null) combeNumTween[comboNum].cancel();
             numScore.alpha = 1;                        
-            combeNumTween[i] = FlxTween.tween(numScore, {alpha: 0}, 0.3 / playbackRate, {
+            combeNumTween[comboNum] = FlxTween.tween(numScore, {alpha: 0}, 0.3 / playbackRate, {
 			startDelay: Conductor.crochet * 0.0015 / playbackRate
 		    });
 		    
-		    if (combeNumTweenScaleX[i] != null) combeNumTweenScaleX[i].cancel();
+		    if (combeNumTweenScaleX[comboNum] != null) combeNumTweenScaleX[comboNum].cancel();
             numScore.scale.x = 0.5 + 0.07;                        
-            combeNumTweenScaleX[i] = FlxTween.tween(numScore.scale, {x: 0.5}, 0.1 / playbackRate);
+            combeNumTweenScaleX[comboNum] = FlxTween.tween(numScore.scale, {x: 0.5}, 0.1 / playbackRate);
 		    
-		    if (combeNumTweenScaleY[i] != null) combeNumTweenScaleY[i].cancel();
+		    if (combeNumTweenScaleY[comboNum] != null) combeNumTweenScaleY[comboNum].cancel();
             numScore.scale.y = 0.5 + 0.07;                        
-            combeNumTweenScaleY[i] = FlxTween.tween(numScore.scale, {y: 0.5}, 0.1 / playbackRate);
+            combeNumTweenScaleY[comboNum] = FlxTween.tween(numScore.scale, {y: 0.5}, 0.1 / playbackRate);
             
-            numScore.offset.x -= combeOffsetFix[seperatedScore[i]][0];
-			numScore.offset.y -= combeOffsetFix[seperatedScore[i]][1];
+            numScore.offset.x -= combeOffsetFix[seperatedScore[comboNum]][0];
+			numScore.offset.y -= combeOffsetFix[seperatedScore[comboNum]][1];
 			
 		}
 		
