@@ -2903,7 +2903,7 @@ class PlayState extends MusicBeatState
 			if (combeNumTween[comboNum] != null) combeNumTween[comboNum].cancel();
             numScore.alpha = 1;                        
             combeNumTween[comboNum] = FlxTween.tween(numScore, {alpha: 0}, 0.4 / playbackRate, {
-			startDelay: 0.3 / playbackRate
+			startDelay: 0.6 / playbackRate
 		    });
 		    
 		    if (combeNumTweenScaleX[comboNum] != null) combeNumTweenScaleX[comboNum].cancel();
@@ -2922,13 +2922,13 @@ class PlayState extends MusicBeatState
 		if (rateTween != null) rateTween.cancel();
 		rating.alpha = 1;
 		rateTween = FlxTween.tween(rating, {alpha: 0}, 0.4 / playbackRate, {
-			startDelay: 0.3 / playbackRate
+			startDelay: 0.6 / playbackRate
 		});
         
         if (combeTween != null) combeTween.cancel();
         comboSpr.alpha = 1;
 		combeTween = FlxTween.tween(comboSpr, {alpha: 0}, 0.4 / playbackRate, {
-			startDelay: 0.3 / playbackRate
+			startDelay: 0.6 / playbackRate
 		});
 		
 		if (rateTweenScaleX != null) rateTweenScaleX.cancel();
