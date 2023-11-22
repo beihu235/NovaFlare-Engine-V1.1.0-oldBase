@@ -2740,8 +2740,6 @@ class PlayState extends MusicBeatState
 		for (i in 0...10)
 		Paths.image(uiPrefix + 'num' + i + uiSuffix);		
 		
-		var uiPrefix:String = "";
-		var uiSuffix:String = '';
 		var antialias:Bool = ClientPrefs.data.antialiasing;
 
 		if (stageUI != "normal")
@@ -2788,7 +2786,7 @@ class PlayState extends MusicBeatState
 		add(numItems);
 		numItems.cameras = [camHUD];
 		
-		for (comboNum in 0...3) //9999
+		for (comboNum in 0...9) //9999
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'num' + comboNum + uiSuffix));
 			//numScore.cameras = [camHUD];
