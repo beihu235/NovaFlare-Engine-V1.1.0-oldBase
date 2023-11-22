@@ -2912,7 +2912,7 @@ class PlayState extends MusicBeatState
 		    
 		    if (combeNumTweenScaleY[comboNum] != null) combeNumTweenScaleY[comboNum].cancel();
             numScore.scale.y = 0.5 + 0.07;                        
-            combeNumTweenScaleY[comboNum] = FlxTween.tween(numScore.scale, {y: 0.5}, 0.2 / playbackRate;
+            combeNumTweenScaleY[comboNum] = FlxTween.tween(numScore.scale, {y: 0.5}, 0.2 / playbackRate);
             
             numScore.offset.x -= combeOffsetFix[seperatedScore[comboNum]][0] * 0.5;
 			numScore.offset.y += combeOffsetFix[seperatedScore[comboNum]][1] * 0.5;
@@ -2933,19 +2933,19 @@ class PlayState extends MusicBeatState
 		
 		if (rateTweenScaleX != null) rateTweenScaleX.cancel();
 		rating.scale.x = scale + 0.07;
-		rateTweenScaleX = FlxTween.tween(rating.scale, {x: scale}, 0.2 / playbackRate;
+		rateTweenScaleX = FlxTween.tween(rating.scale, {x: scale}, 0.2 / playbackRate);
         
         if (combeTweenScaleX != null) combeTweenScaleX.cancel();
         comboSpr.scale.x = scale + 0.07;
-		combeTweenScaleX = FlxTween.tween(comboSpr.scale, {x: scale}, 0.2 / playbackRate;
+		combeTweenScaleX = FlxTween.tween(comboSpr.scale, {x: scale}, 0.2 / playbackRate);
 		
 		if (rateTweenScaleY != null) rateTweenScaleY.cancel();
 		rating.scale.y = scale + 0.07;
-		rateTweenScaleY = FlxTween.tween(rating.scale, {y: scale}, 0.2 / playbackRate;
+		rateTweenScaleY = FlxTween.tween(rating.scale, {y: scale}, 0.2 / playbackRate);
         
         if (combeTweenScaleY != null) combeTweenScaleY.cancel();
         comboSpr.scale.y = scale + 0.07;
-		combeTweenScaleY = FlxTween.tween(comboSpr.scale, {y: scale}, 0.2 / playbackRate;
+		combeTweenScaleY = FlxTween.tween(comboSpr.scale, {y: scale}, 0.2 / playbackRate);
 		
 		rating.offset.x += rating.width / 2;
         rating.offset.y += rating.height / 2;
