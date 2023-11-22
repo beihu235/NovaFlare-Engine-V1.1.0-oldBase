@@ -2785,7 +2785,7 @@ class PlayState extends MusicBeatState
 		add(numItems);
 		numItems.cameras = [camHUD];
 		
-		for (comboNum in 0...9) //9999
+		for (comboNum in 0...4) //9999 //why last get null?
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'num' + comboNum + uiSuffix));
 			//numScore.cameras = [camHUD];
@@ -2888,7 +2888,7 @@ class PlayState extends MusicBeatState
 		seperatedScore.push(Math.floor(combo / 10) % 10);
 		seperatedScore.push(combo % 10);
 
-		for (comboNum in 0...seperatedScore.length - 1)
+		for (comboNum in 0...seperatedScore.length)
 		{
 		    var numScore:FlxSprite = numItems.members[comboNum];
 			numScore.loadGraphic(Paths.image(uiPrefix + 'num' + seperatedScore[comboNum] + uiSuffix));
