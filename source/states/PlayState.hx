@@ -2797,7 +2797,7 @@ class PlayState extends MusicBeatState
 			else numScore.setGraphicSize(Std.int(numScore.width * daPixelZoom));
 			numScore.updateHitbox();			
 			numScore.antialiasing = antialias;
-            //numScore.alpha = 0.000001;
+            numScore.alpha = 0.000001;
 
             numItems.add(numScore);            
 
@@ -2880,9 +2880,10 @@ class PlayState extends MusicBeatState
 		rating.updateHitbox();
 
 		var seperatedScore:Array<Int> = [];
-
+        var startShow = 1; //use for combe 1000+
 		if(combo >= 1000) {
 			seperatedScore.push(Math.floor(combo / 1000) % 10);
+			startShow = 0;
 		}
 		seperatedScore.push(Math.floor(combo / 100) % 10);
 		seperatedScore.push(Math.floor(combo / 10) % 10);
@@ -2890,7 +2891,7 @@ class PlayState extends MusicBeatState
 
 		for (comboNum in 0...seperatedScore.length)
 		{
-		    var numScore:FlxSprite = numItems.members[comboNum];
+		    var numScore:FlxSprite = numItems.members[comboNum + startShow];
 			numScore.loadGraphic(Paths.image(uiPrefix + 'num' + seperatedScore[comboNum] + uiSuffix));
 			if (ClientPrefs.data.comboColor) numScore.color = daRating.color;
 			
