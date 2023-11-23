@@ -2788,6 +2788,7 @@ class PlayState extends MusicBeatState
 		for (comboNum in 0...4) //9999 //why last get null?
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'num' + 0 + uiSuffix));
+			numScore.screenCenter();
 			numScore.x = placement + (50 * comboNum) - 90 + ClientPrefs.data.comboOffset[2];
 			numScore.y += 80 - ClientPrefs.data.comboOffset[3];
 			
