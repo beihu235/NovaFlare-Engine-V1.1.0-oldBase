@@ -22,7 +22,6 @@ class HScript extends SScript
 
 	public static function initHaxeModuleCode(parent:FunkinLua, code:String, ?varsToBring:Any = null)
 	{
-	    /*
 		var hs:HScript = try parent.hscript catch (e) null;
 		if(hs == null)
 		{
@@ -37,21 +36,6 @@ class HScript extends SScript
 			{
 				PlayState.instance.addTextToDebug('ERROR ON LOADING (${hs.origin}): ${hs.parsingException.message}', FlxColor.RED);
 			}
-		}
-		*/
-		
-	    @:privateAccess
-		parser.line = 1;
-		parser.allowTypes = true;
-		var expr:Expr = parser.parseString(codeToRun);
-		try {
-			var value:Dynamic = interp.execute(parser.parseString(codeToRun));
-			return (funcToRun != null) ? executeFunction(funcToRun, funcArgs) : value;
-		}
-		catch(e:Exception)
-		{
-			PlayState.instance.addTextToDebug(parentLua.scriptName + ":" + parentLua.lastCalledFunction + " - " + e, FlxColor.RED);
-			return null;
 		}
 	}
 
