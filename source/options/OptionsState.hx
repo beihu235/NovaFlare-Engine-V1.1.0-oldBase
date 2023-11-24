@@ -201,12 +201,11 @@ class OptionsState extends MusicBeatState
                // new SustainsAlpha("Change Sustain Notes Alpha."),
 				//new HealthBarOption("Toggles health bar visibility"),
 				new JudgementCounter("Show your judgements that you've gotten in the song"),
-				//new LaneUnderlayOption("How transparent your lane is, higher = more visible."),
 				new CamZoomOption("Toggle the camera zoom in-game."),
                 new HideHud("Shows to you hud."),
                 new ShowComboNum("Combo sprite appearance."),
                 new ShowRating("Rating sprite appearance."),
-				new ComboStacking("Ratings and Combo won't stack, saving on System Memory and making them easier to read."),
+				//new ComboStacking("Ratings and Combo won't stack, saving on System Memory and making them easier to read."),
                 new ScoreZoom("Zoom score on 2'nd beat."),
                 new HealthBarAlpha("Healthbar Transparceny."),
                 new ComboColor("Allow Combe Sprite to get and use rating color.")
@@ -226,8 +225,7 @@ class OptionsState extends MusicBeatState
 								
 				new FixLNL('reduce Long Note length\nFix for some mod engines have been reduced'),
 				new ResultsScreen('If checked, Open Results Screen at end song'),
-				new RatingOffset('Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.'),
-				//new ColorBlindOption("You can set colorblind filter (makes the game more playable for colorblind people)."),								
+				new RatingOffset('Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.'),			
                 
 				//new VintageOption("Adds 'vintage' on game screen."),
                 
@@ -237,9 +235,6 @@ class OptionsState extends MusicBeatState
 			new OptionCata(935, 40, OptionsName.setOpponentMode(), [
 			    new PlayOpponent('If checked, playing as opponent\nmay have bug in some mods\n(your score will not be recorded.'),
 				new OpponentCodeFix('If checked, goodNoteHit and opponentNoteHit not follow playOpponent setting to change (if you playing it will return goodNoteHit function.'),
-				//new ResetSettings("Reset some your settings. This is irreversible!")
-				//new AutoSave("Turn AutoSaves your chating in Charting state."),
-				//new AutoSaveInt("Change Chart AutoSave Interval."),               
 			 //   new PauseCountDownOption("Toggle countdown after pressing 'Resume' in Pause Menu."),
 			]),			
 			new OptionCata(50, 40 + 64, OptionsName.setMenuExtend(), [
@@ -251,7 +246,7 @@ class OptionsState extends MusicBeatState
 			    new HideHud("Shows to you hud."),				
 			]),
 			new OptionCata(640, 40 + 64, "System", [
-			    //new Language("Change language in some state."),
+			    //new Language("Change language in some state."), //will use fot NF1.2.0
 			    new ColorblindModeOption("You can set colorblind filter (makes the game more playable for colorblind people)\nCredits: notweuz (Creator of OS Engine)'"),
 			    new ShadersOption("Shaders used for some visual effects, and also CPU intensive for weaker PCs."),
 				new GPUcacheOption("If checked, allows the GPU to be used for caching textures, decreasing RAM usage."),				
@@ -527,6 +522,8 @@ class OptionsState extends MusicBeatState
         		selectedOption = selectedCat.options[0];
         		selectedOptionIndex = 0;
         		
+        		selectedOption.change();
+        		
         		FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 			}
 		}		
@@ -612,6 +609,7 @@ class OptionsState extends MusicBeatState
 					selectedOptionIndex = 0;
 					isInMain = false;
 					selectOption(selectedCat.options[0]);
+					selectedOption.change();
 				}
 
 				if(reset)
