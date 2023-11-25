@@ -230,6 +230,10 @@ class Note extends FlxSprite
 				animation.play(animToPlay + 'Scroll');
 			}
 		}
+		
+		var swagRect:FlxRect = clipRect;
+	    if(swagRect == null) swagRect = new FlxRect(0, 0, frameWidth, frameHeight);
+		var ogX = frameWidth;
 
 		// trace(prevNote);
 
@@ -245,7 +249,7 @@ class Note extends FlxSprite
 			
 			earlyHitMult = 0.5;
 
-			offsetX += width / 2;
+			//offsetX += width / 2;
 			copyAngle = false;
 
 			animation.play(colArray[noteData % colArray.length] + 'holdend');
@@ -270,7 +274,16 @@ class Note extends FlxSprite
 				prevNote.updateHitbox();
 			}
 			
-			offsetX -= width / 2;
+			//offsetX -= width / 2;
+			
+			
+		    swagRect.x = -ogX / 2 + frameWidth / 2;
+		    swagRect.y = 0;
+		    //swagRect.width = frameWidth;
+		    //swagRect.height = frameHeight;
+            
+		    clipRect = swagRect;
+			
 
 			if(PlayState.isPixelStage)
 			{
@@ -278,11 +291,11 @@ class Note extends FlxSprite
 				updateHitbox();
 			}
 		}
-			if(!isSustainNote)
-			{
+		/*	if(!isSustainNote)
+			{*/
 				centerOffsets();
 				centerOrigin();
-			}
+			//}
 		
 		x += offsetX;
 	}
@@ -495,11 +508,11 @@ class Note extends FlxSprite
 		else{
 		    angle = strumDirection - 90 + offsetAngle;
 		    if (ClientPrefs.data.downScroll){
-    		    x -= frameWidth * Math.cos(angleDir);
-    		    y += frameHeight * Math.cos(angleDir);
+    		   // x -= frameWidth * Math.cos(angleDir);
+    		   //  y += frameHeight * Math.cos(angleDir);
 		    }else{
-		        x -= frameWidth * Math.cos(angleDir);
-		        y += frameHeight * Math.cos(angleDir);
+		       // x -= frameWidth * Math.cos(angleDir);
+		       // y += frameHeight * Math.cos(angleDir);
 		    }
 		}
 	}
