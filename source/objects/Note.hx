@@ -509,7 +509,7 @@ class Note extends FlxSprite
             
             if (myStrum.direction > 0 && myStrum.direction <= 180)
 			{
-				if(y - offset.y * scale.y + height >= center &&)
+				if(y - offset.y * scale.y + height >= center)
 				{
 					swagRect.width = frameWidth;
 					swagRect.height = (center - y) / scale.y;
