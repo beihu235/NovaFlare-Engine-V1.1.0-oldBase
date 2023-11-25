@@ -244,14 +244,14 @@ class Note extends FlxSprite
 			
 			earlyHitMult = 0.5;
 
-			//offsetX += width / 2;
+			offsetX += width / 2;
 			copyAngle = false;
 
 			animation.play(colArray[noteData % colArray.length] + 'holdend');
 
 			updateHitbox();
 
-			//offsetX -= width / 2;
+			offsetX -= width / 2;
 
 			if (PlayState.isPixelStage)
 				offsetX += 30;
@@ -512,7 +512,7 @@ class Note extends FlxSprite
 				if (y - offset.y * scale.y + height >= center)
 				{
 					swagRect.width = frameWidth;
-					swagRect.height = (y - center) / scale.y;
+					swagRect.height = (center - y) / scale.y;
 					swagRect.y = frameHeight - swagRect.height;
 				}
 			}
