@@ -460,6 +460,8 @@ class Note extends FlxSprite
 		var strumAngle:Float = myStrum.angle;
 		var strumAlpha:Float = myStrum.alpha;
 		var strumDirection:Float = myStrum.direction;
+		
+		var angleDir = strumDirection * Math.PI / 180;
 
 		distance = (0.45 * (Conductor.songPosition - strumTime) * songSpeed * multSpeed);
 		if (!myStrum.downScroll) distance *= -1;
@@ -483,14 +485,13 @@ class Note extends FlxSprite
 			}
 		}
 		
-		var angleDir = strumDirection * Math.PI / 180;
 		if (copyAngle)
 			angle = strumDirection - 90 + strumAngle + offsetAngle;
 		else{
 		    angle = strumDirection - 90 + offsetAngle;
 		    x -= offsetX * Math.cos(angleDir);
 		    y -= offsetY * Math.cos(angleDir);
-		    }
+		}
 	}
 
 	public function clipToStrumNote(myStrum:StrumNote)
