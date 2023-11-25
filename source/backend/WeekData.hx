@@ -141,8 +141,8 @@ class WeekData {
 
 	private static function addWeek(weekToCheck:String, path:String, directory:String, i:Int, originalLength:Int)
 	{
-		if(!weeksLoaded.exists(weekToCheck))
-		{
+		/*if(!weeksLoaded.exists(weekToCheck)) //fuck that I hate this
+		{*/
 			var week:WeekFile = getWeekFile(path);
 			if(week != null)
 			{
@@ -159,7 +159,7 @@ class WeekData {
 					weeksList.push(weekToCheck);
 				}
 			}
-		}
+		//}
 	}
 
 	private static function getWeekFile(path:String):WeekFile {
