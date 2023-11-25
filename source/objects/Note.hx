@@ -244,14 +244,14 @@ class Note extends FlxSprite
 			
 			earlyHitMult = 0.5;
 
-			offsetX += width / 2;
+			//offsetX += width / 2;
 			copyAngle = false;
 
 			animation.play(colArray[noteData % colArray.length] + 'holdend');
 
 			updateHitbox();
 
-			offsetX -= width / 2;
+			//offsetX -= width / 2;
 
 			if (PlayState.isPixelStage)
 				offsetX += 30;
@@ -277,14 +277,14 @@ class Note extends FlxSprite
 				updateHitbox();
 			}
 			
-			centerOrigin();
+			//centerOrigin();
+			//centerOffsets();
 			
 		}
-		else if(!isSustainNote)
-		{
+		
 			centerOffsets();
 			centerOrigin();
-		}
+		
 		x += offsetX;
 	}
 
@@ -509,18 +509,20 @@ class Note extends FlxSprite
             
             if (myStrum.direction > 0 && myStrum.direction <= 180)
 			{
-				if(y - offset.y * scale.y + height >= center)
+				if (y - offset.y * scale.y + height >= center)
 				{
 					swagRect.width = frameWidth;
-					swagRect.height = (center - y) / scale.y;
+					swagRect.height = (y - center) / scale.y;
 					swagRect.y = frameHeight - swagRect.height;
 				}
 			}
-			else if (y + offset.y * scale.y <= center)
-			{
-				swagRect.y = (center - y) / scale.y;
-				swagRect.width = width / scale.x;
-				swagRect.height = (height / scale.y) - swagRect.y;
+			else{
+			    if (y + offset.y * scale.y <= center)
+			    {
+    				swagRect.y = (center - y) / scale.y;
+    				swagRect.width = width / scale.x;
+    				swagRect.height = (height / scale.y) - swagRect.y;
+				}
 			}         
             
             /*
