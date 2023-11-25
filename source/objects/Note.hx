@@ -249,7 +249,7 @@ class Note extends FlxSprite
 			
 			earlyHitMult = 0.5;
 
-			//offsetX += width / 2;
+			offsetX += width / 2;
 			copyAngle = false;
 
 			animation.play(colArray[noteData % colArray.length] + 'holdend');
@@ -274,7 +274,7 @@ class Note extends FlxSprite
 				prevNote.updateHitbox();
 			}
 			
-			//offsetX -= width / 2;
+			offsetX -= width / 2;
 			
 			
 		    swagRect.x = -ogX / 2 + frameWidth / 2;
