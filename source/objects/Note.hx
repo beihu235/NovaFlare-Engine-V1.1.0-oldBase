@@ -508,40 +508,15 @@ class Note extends FlxSprite
 			var swagRect:FlxRect = clipRect;
 			if(swagRect == null) swagRect = new FlxRect(0, 0, frameWidth, frameHeight);
             
-            if (myStrum.direction > 0 && myStrum.direction <= 180)
-			{
-				if (y - offset.y * scale.y + height >= center)
-				{
-					swagRect.width = frameWidth;
-					swagRect.height = (center - y) / scale.y;
-					swagRect.y = frameHeight - swagRect.height;
-				}
-			}
-			else{
-			    if (y + offset.y * scale.y <= center)
-			    {
-    				swagRect.y = (center - y) / scale.y;
-    				swagRect.width = width / scale.x;
-    				swagRect.height = (height / scale.y) - swagRect.y;
-				}
-			}         
-            
-            /*
-			if (myStrum.downScroll)
-			{
-				if(y - offset.y * scale.y + height >= center)
-				{
-					swagRect.width = frameWidth;
-					swagRect.height = (center - y) / scale.y;
-					swagRect.y = frameHeight - swagRect.height;
-				}
-			}
-			else if (y + offset.y * scale.y <= center)
-			{
-				swagRect.y = (center - y) / scale.y;
-				swagRect.width = width / scale.x;
-				swagRect.height = (height / scale.y) - swagRect.y;
-			}*/
+		    var time = FlxMath.bound((Conductor.songPosition - strumTime) / (height / (0.45 * FlxMath.roundDecimal(scrollSpeed, 2))), 0, 1);
+		    
+		    swagRect.x = 0;
+		    swagRect.y = time * frameHeight;
+		    swagRect.width = frameWidth;
+		    swagRect.height = frameHeight;
+
+		    setClipRect(swagRect);
+		    
 			clipRect = swagRect;
 		}
 	}
