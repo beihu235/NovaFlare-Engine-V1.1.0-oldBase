@@ -276,14 +276,12 @@ class Note extends FlxSprite
 				scale.y *= PlayState.daPixelZoom;
 				updateHitbox();
 			}
-			
-			//centerOrigin();
-			//centerOffsets();
-			
 		}
-		
-			centerOffsets();
-			centerOrigin();
+			if(!isSustainNote)
+			{
+				centerOffsets();
+				centerOrigin();
+			}
 		
 		x += offsetX;
 	}
@@ -368,7 +366,6 @@ class Note extends FlxSprite
 				centerOffsets();
 				centerOrigin();
 			}
-			else centerOrigin();
 		}
 
 		if(isSustainNote) {
