@@ -490,8 +490,8 @@ class Note extends FlxSprite
 			angle = strumDirection - 90 + strumAngle + offsetAngle;
 		else{
 		    angle = strumDirection - 90 + offsetAngle;
-		    x += offsetX * Math.cos(angleDir);
-		    y += offsetY * Math.cos(angleDir);
+		    //x += offsetX * Math.cos(angleDir);
+		    //y += offsetY * Math.cos(angleDir);
 		}
 	}
 
