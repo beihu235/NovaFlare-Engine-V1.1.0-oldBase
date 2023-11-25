@@ -509,7 +509,7 @@ class Note extends FlxSprite
 			var swagRect:FlxRect = clipRect;
 			if(swagRect == null) swagRect = new FlxRect(0, 0, frameWidth, frameHeight);
             
-		    var time = FlxMath.bound((Conductor.songPosition - strumTime) / (height / (0.45 * FlxMath.roundDecimal(PlayState.instance.scrollSpeed, 2))), 0, 1);
+		    var time = FlxMath.bound((Conductor.songPosition - strumTime) / (height / (0.45 * FlxMath.roundDecimal(PlayState.instance.songSpeed, 2))), 0, 1);
 		    
 		    swagRect.x = 0;
 		    swagRect.y = time * frameHeight;
