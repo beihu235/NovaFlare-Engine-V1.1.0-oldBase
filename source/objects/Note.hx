@@ -244,14 +244,14 @@ class Note extends FlxSprite
 			
 			earlyHitMult = 0.5;
 
-			offsetX += width / 2;
+			//offsetX += width / 2;
 			copyAngle = false;
 
 			animation.play(colArray[noteData % colArray.length] + 'holdend');
 
 			updateHitbox();
 
-			offsetX -= width / 2;
+			//offsetX -= width / 2;
 
 			if (PlayState.isPixelStage)
 				offsetX += 30;
@@ -277,12 +277,12 @@ class Note extends FlxSprite
 				updateHitbox();
 			}
 			
-		}
+		}/*
 		else if(!isSustainNote)
-		{
+		{*/
 			centerOffsets();
 			centerOrigin();
-		}
+		//}
 		x += offsetX;
 	}
 
@@ -360,12 +360,12 @@ class Note extends FlxSprite
 			}
 		} else {
 			frames = Paths.getSparrowAtlas(skin);
-			loadNoteAnims();
+			loadNoteAnims();/*
 			if(!isSustainNote)
-			{
+			{*/
 				centerOffsets();
 				centerOrigin();
-			}
+			//}
 		}
 
 		if(isSustainNote) {
