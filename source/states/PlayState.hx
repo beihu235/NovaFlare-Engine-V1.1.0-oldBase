@@ -2751,7 +2751,7 @@ class PlayState extends MusicBeatState
 		
 		var placement:Float = FlxG.width * 0.35;
 		
-		rating = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'sick' + uiSuffix));
+		rating = new FlxSprite().loadGraphic(Paths.image(uiPrefix + ratingsData[ClientPrefs.data.marvelousRating ? 4 : 0].image + uiSuffix));
 		rating.cameras = [camHUD];
 		rating.screenCenter();
 		rating.x = placement - 40;
