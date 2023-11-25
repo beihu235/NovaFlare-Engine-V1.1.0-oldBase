@@ -7,6 +7,7 @@ import backend.NoteTypesConfig;
 import shaders.RGBPalette;
 import shaders.RGBPalette.RGBShaderReference;
 import objects.StrumNote;
+import states.PlayState;
 
 import flixel.math.FlxRect;
 
@@ -277,11 +278,11 @@ class Note extends FlxSprite
 				updateHitbox();
 			}
 		}
-			if(!isSustainNote)
-			{
+			/*if(!isSustainNote)
+			{*/
 				centerOffsets();
 				centerOrigin();
-			}
+			//}
 		
 		x += offsetX;
 	}
@@ -508,16 +509,14 @@ class Note extends FlxSprite
 			var swagRect:FlxRect = clipRect;
 			if(swagRect == null) swagRect = new FlxRect(0, 0, frameWidth, frameHeight);
             
-		    var time = FlxMath.bound((Conductor.songPosition - strumTime) / (height / (0.45 * FlxMath.roundDecimal(scrollSpeed, 2))), 0, 1);
+		    var time = FlxMath.bound((Conductor.songPosition - strumTime) / (height / (0.45 * FlxMath.roundDecimal(PlayState.instance.scrollSpeed, 2))), 0, 1);
 		    
 		    swagRect.x = 0;
 		    swagRect.y = time * frameHeight;
 		    swagRect.width = frameWidth;
 		    swagRect.height = frameHeight;
 
-		    setClipRect(swagRect);
-		    
-			clipRect = swagRect;
+		    clipRect = swagRect;
 		}
 	}
 }
