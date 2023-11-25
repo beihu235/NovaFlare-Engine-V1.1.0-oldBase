@@ -252,8 +252,6 @@ class Note extends FlxSprite
 
 			updateHitbox();
 
-			offsetX -= width / 2;
-
 			if (PlayState.isPixelStage)
 				offsetX += 30;
 
@@ -271,6 +269,8 @@ class Note extends FlxSprite
 				}
 				prevNote.updateHitbox();
 			}
+			
+			offsetX -= width / 2;
 
 			if(PlayState.isPixelStage)
 			{
@@ -278,11 +278,11 @@ class Note extends FlxSprite
 				updateHitbox();
 			}
 		}
-			/*if(!isSustainNote)
-			{*/
+			if(!isSustainNote)
+			{
 				centerOffsets();
 				centerOrigin();
-			//}
+			}
 		
 		x += offsetX;
 	}
