@@ -641,15 +641,15 @@ class TitleState extends MusicBeatState
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
 					#if PSYCH_WATERMARKS
-					createCoolText(['Psych Engine by'], 40);
+					createCoolText(['NF Engine by'], 40);
 					#else
 					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
 					#end
 				// credTextShit.visible = true;
 				case 4:
 					#if PSYCH_WATERMARKS
-					addMoreText('Shadow Mario', 40);
-					addMoreText('Riveren', 40);
+					addMoreText('beihu', 40);
+					addMoreText('TieGuo', 40);
 					#else
 					addMoreText('present');
 					#end
@@ -660,56 +660,56 @@ class TitleState extends MusicBeatState
 				// credTextShit.visible = false;
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
-				case 6:
-					createCoolText(['NF Engine by'], 40);
+				/*case 6:
+					
 				// credTextShit.visible = true;
 				case 7:
-					addMoreText('beihu', 40);
+					
 				// credTextShit.text += '\npresent...';
-				// credTextShit.addText();
-				case 8:
+				// credTextShit.addText();*/
+				case 6:
 					deleteCoolText();
 				// credTextShit.visible = false;
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
-				case 9:
+				case 7:
 					#if PSYCH_WATERMARKS
 					createCoolText(['Not associated', 'with'], -40);
 					#else
 					createCoolText(['In association', 'with'], -40);
 					#end
-				case 10:
+				case 8:
 					addMoreText('newgrounds', -40);
 					ngSpr.visible = true;
 				// credTextShit.text += '\nNewgrounds';
-				case 11:
+				case 9:
 					deleteCoolText();
 					ngSpr.visible = false;
 				// credTextShit.visible = false;
 
 				// credTextShit.text = 'Shoutouts Tom Fulp';
 				// credTextShit.screenCenter();
-				case 12:
+				case 10:
 					createCoolText([curWacky[0]]);
 				// credTextShit.visible = true;
-				case 13:
+				case 11:
 					addMoreText(curWacky[1]);
 				// credTextShit.text += '\nlmao';
-				case 14:
+				case 12:
 					deleteCoolText();
 				// credTextShit.visible = false;
 				// credTextShit.text = "Friday";
 				// credTextShit.screenCenter();
-				case 15:
+				case 13:
 					addMoreText('Friday');
 				// credTextShit.visible = true;
-				case 16:
+				case 14:
 					addMoreText('Night');
 				// credTextShit.text += '\nNight';
-				case 17:
+				case 15:
 					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
 
-				case 18:
+				case 16:
 					skipIntro();
 			}
 		}
