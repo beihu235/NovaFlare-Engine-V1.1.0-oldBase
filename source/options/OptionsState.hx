@@ -262,6 +262,9 @@ class OptionsState extends MusicBeatState
                 new MSOption("Toggle the delay time Counter."),
                 
 			]),			
+			new OptionCata(640, 40 + 64, "wait", [
+                new MSOption("Toggle the delay time Counter."),
+			]),			
 			new OptionCata(-1, 125, "Editing Judgements", [			
 				new FrameOption("Changes how many frames you have for hitting a note earlier or late."),
 				new OffsetThing("Change the note visual offset\nhow many milliseconds a note looks like it is offset in a chart"),
@@ -580,12 +583,11 @@ class OptionsState extends MusicBeatState
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 					selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
-					selectedCatIndex++;
 
-					if (selectedCatIndex > options.length - 2)
-						selectedCatIndex = 0;
-					if (selectedCatIndex < 0)
-						selectedCatIndex = options.length - 2;
+					if ((selectedCatIndex + 1) % 4 == 0)
+						selectedCatIndex -= 3;
+					else
+						selectedCatIndex += 1;
 
 					switchCat(options[selectedCatIndex]);
 				}
@@ -593,13 +595,23 @@ class OptionsState extends MusicBeatState
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
 					selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();
-					selectedCatIndex--;
+					
+					if (selectedCatIndex % 4 == 0)
+						selectedCatIndex += 3;
+					else
+						selectedCatIndex -= 1;
 
-					if (selectedCatIndex > options.length - 2)
-						selectedCatIndex = 0;
-					if (selectedCatIndex < 0)
-						selectedCatIndex = options.length - 2;
+					switchCat(options[selectedCatIndex]);
+				}				
+				else if (up || down)
+				{
+					FlxG.sound.play(Paths.sound('scrollMenu'), 0.6);
+					selectedCat.optionObjects.members[selectedOptionIndex].text = selectedOption.getValue();				
 
+					if (selectedCatIndex >= 4)
+						selectedCatIndex -= 4;
+					else
+                        selectedCatIndex += 4;
 					switchCat(options[selectedCatIndex]);
 				}
 
