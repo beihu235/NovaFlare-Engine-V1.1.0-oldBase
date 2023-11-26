@@ -372,6 +372,7 @@ class OptionsState extends MusicBeatState
 	override function closeSubState() {
 		super.closeSubState();
 		ClientPrefs.saveSettings();
+		resetOptionChoose();
 	}
 
 	public function switchCat(cat:OptionCata, checkForOutOfBounds:Bool = true)
@@ -870,8 +871,6 @@ class OptionsState extends MusicBeatState
 		    saveSelectedCatIndex = selectedCatIndex;
 		}
 		
-		//descText.text = '' + ClientPrefs.data.language;
-		
 		if (selectedCat != null && !isInMain)
 		{
 			for (i in selectedCat.optionObjects.members)
@@ -944,12 +943,6 @@ class OptionsState extends MusicBeatState
                 moveCheak(); //check again until not have problem
             }
         }
-	}
-	
-	override function closeSubState()
-	{
-	    resetOptionChoose();
-	    super.closeSubState();
 	}
 }
 
