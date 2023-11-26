@@ -62,15 +62,17 @@ class AndroidControlsMenu extends MusicBeatState
 		newhbox.visible = false;
 		add(newhbox);
 		
-		inputvari = new FlxText(0, 150, 0,'', 16);
+		inputvari = new FlxText(0, 150, 0,'', 30);
 		inputvari.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		inputvari.borderSize = 1;
+		inputvari.borderSize = 0;
 		inputvari.screenCenter(X);
 		add(inputvari);
+		
+		inputvari.text = controlitems[config.getcontrolmode()];
 
 		var ui_tex = Paths.getSparrowAtlas('androidcontrols-source/menu/arrows');
 
-		leftArrow = new FlxSprite(inputvari.x - 60, inputvari.y + 50);
+		leftArrow = new FlxSprite(inputvari.x - 60, inputvari.y);
 		leftArrow.frames = ui_tex;
 		leftArrow.animation.addByPrefix('idle', "arrow left");
 		leftArrow.animation.addByPrefix('press', "arrow push left");
@@ -124,7 +126,7 @@ class AndroidControlsMenu extends MusicBeatState
 		tipText.scrollFactor.set();
 		add(tipText);
 
-		changeSelection(0);
+		changeSelection(config.getcontrolmode());
 	}
 
 	override function update(elapsed:Float)
