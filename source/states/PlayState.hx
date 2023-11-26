@@ -794,6 +794,9 @@ class PlayState extends MusicBeatState
 		#if LUA_ALLOWED
 		var newText:DebugLuaText = luaDebugGroup.recycle(DebugLuaText);
 		newText.text = text;
+		#if android 
+        test = StringTools(test, "/storage/emulated/0/.NF Engine/", ""); //delete stupid path
+		#end
 		newText.color = color;
 		newText.disableTime = 6;
 		newText.alpha = 1;
