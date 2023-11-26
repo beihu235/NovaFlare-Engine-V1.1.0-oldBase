@@ -1830,8 +1830,32 @@ class PlayState extends MusicBeatState
 		if (health < 0) health = 0;
 		iconP1.x = healthBar.barCenter + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 		iconP2.x = healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
-		iconP1.animation.curAnim.curFrame = ((healthBar.percent <= 20 && !ClientPrefs.data.playOpponent) || (healthBar.percent >= 80 && ClientPrefs.data.playOpponent)) ? 1 : 0;
-		iconP2.animation.curAnim.curFrame = ((healthBar.percent >= 80 && !ClientPrefs.data.playOpponent) || (healthBar.percent <= 20 && ClientPrefs.data.playOpponent)) ? 1 : 0;
+		
+		if (healthBar.percent < 20) // losing
+        {
+            if(ClientPrefs.data.playOpponent){
+                iconP1.animation.curAnim.curFrame = iconP1.numFrames > 2 ? 2 : 0;
+                iconP2.animation.curAnim.curFrame = 1;
+            }else{
+                iconP1.animation.curAnim.curFrame = 1;
+                iconP2.animation.curAnim.curFrame = iconP2.numFrames > 2 ? 2 : 0;
+            }
+        }
+        else if (healthBar.percent > 80) // winning
+        {
+            if(!ClientPrefs.data.playOpponent){
+                iconP1.animation.curAnim.curFrame = iconP1.numFrames > 2 ? 2 : 0;
+                iconP2.animation.curAnim.curFrame = 1;
+            }else{
+                iconP1.animation.curAnim.curFrame = 1;
+                iconP2.animation.curAnim.curFrame = iconP2.numFrames > 2 ? 2 : 0;
+            }
+        }
+        else // neutral
+        {
+            iconP1.animation.curAnim.curFrame = 0;
+            iconP2.animation.curAnim.curFrame = 0;
+        }
         /*
 		if (controls.justPressed('debug_2') && !endingSong && !inCutscene)
 			openCharacterEditor();
@@ -2005,10 +2029,6 @@ class PlayState extends MusicBeatState
 			if (nps > maxNPS)
 				maxNPS = nps;
 		}
-		
-		if (health > 2) health = 2;
-		if (health < 0) health = 0; 
-        // work for script
         
 		setOnScripts('cameraX', camFollow.x);
 		setOnScripts('cameraY', camFollow.y);
@@ -3219,6 +3239,9 @@ class PlayState extends MusicBeatState
 					child.alpha = 0.3;
 				}
 			}
+			
+			rsNoteMs.push(167);
+		    rsNoteTime.push(note.strumTime); //it will work better
 		}
 
 		if(instakillOnMiss)
