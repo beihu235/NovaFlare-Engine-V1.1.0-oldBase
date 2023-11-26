@@ -62,8 +62,8 @@ class AndroidControlsMenu extends MusicBeatState
 		newhbox.visible = false;
 		add(newhbox);
 		
-		inputvari = new FlxText(0, 50, 0,'', 16);
-		inputvari.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		inputvari = new FlxText(0, 150, 0,'', 16);
+		inputvari.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		inputvari.borderSize = 1;
 		inputvari.screenCenter(X);
 		add(inputvari);
@@ -83,6 +83,10 @@ class AndroidControlsMenu extends MusicBeatState
 		rightArrow.animation.addByPrefix('press', "arrow push right", 24, false);
 		rightArrow.animation.play('idle');
 		add(rightArrow);
+		
+		leftArrow.x = inputvari.x - 60;
+		rightArrow.x = inputvari.x + inputvari.width + 10;
+		inputvari.screenCenter(X);
 
 		upPozition = new FlxText(10, FlxG.height - 164, 0,"Button Up X:" + vpad.buttonUp.x +" Y:" + vpad.buttonUp.y, 16);
 		upPozition.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
