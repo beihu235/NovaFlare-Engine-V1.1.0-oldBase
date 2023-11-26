@@ -23,7 +23,7 @@ class AndroidControlsMenu extends MusicBeatState
 	var rightPozition:FlxText;
 	var shiftPozition:FlxText;
 	var spacePozition:FlxText;
-	var inputvari:PsychAlphabet;
+	var inputvari:Flxtext;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 	var controlitems:Array<String> = ['Pad-Right','Pad-Left','Pad-Custom','Duo','Hitbox','Keyboard'];
@@ -61,8 +61,10 @@ class AndroidControlsMenu extends MusicBeatState
 		newhbox = new FlxNewHitbox();
 		newhbox.visible = false;
 		add(newhbox);
-
-		inputvari = new PsychAlphabet(0, 50, controlitems[curSelected], false, false, 0.05, 0.8);
+		
+		inputvari = new FlxText(0, 50, 0,'', 16);
+		inputvari.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		inputvari.borderSize = 1;
 		inputvari.screenCenter(X);
 		add(inputvari);
 
@@ -162,7 +164,7 @@ class AndroidControlsMenu extends MusicBeatState
 		if (curSelected >= controlitems.length)
 			curSelected = 0;
 	
-		inputvari.changeText(controlitems[curSelected]);
+		inputvari.text = controlitems[curSelected];
 		
 		buttonistouched = false;
 
