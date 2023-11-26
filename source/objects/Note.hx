@@ -71,6 +71,9 @@ class Note extends FlxSprite
 	public var earlyHitMult:Float = 1;
 	public var lateHitMult:Float = 1;
 	public var lowPriority:Bool = false;
+	
+	var ogY = 0;
+	var ogX = 0;
 
 	public static var SUSTAIN_SIZE:Int = 44;
 	public static var swagWidth:Float = 160 * 0.7;
@@ -233,8 +236,8 @@ class Note extends FlxSprite
 		
 		var swagRect:FlxRect = clipRect;
 	    if(swagRect == null) swagRect = new FlxRect(0, 0, frameWidth, frameHeight);
-		var ogX = frameWidth;
-
+		ogX = frameWidth;
+        ogY = frameHeight;
 		// trace(prevNote);
 
 		if(prevNote != null)
@@ -274,11 +277,11 @@ class Note extends FlxSprite
 				prevNote.updateHitbox();
 			}
 			
-			offsetX -= width / 2;
+			//offsetX -= width / 2;
 			
 			
-		    swagRect.x = -ogX / 2 + frameWidth / 2;
-		    swagRect.y = 0;
+		    //swagRect.x = -ogX / 2 + frameWidth / 2;
+		    //swagRect.y = -ogY / 2 + frameHeight / 2;
 		    //swagRect.width = frameWidth;
 		    //swagRect.height = frameHeight;
             
@@ -534,9 +537,9 @@ class Note extends FlxSprite
 		    var time = FlxMath.bound((Conductor.songPosition - strumTime) / (height / (0.45 * FlxMath.roundDecimal(PlayState.instance.songSpeed, 2))), 0, 1);
 		    
 		    swagRect.x = 0;
-		    swagRect.y = time * frameHeight;
-		    swagRect.width = frameWidth;
-		    swagRect.height = frameHeight;
+		    swagRect.y = time * ogY;
+		    swagRect.width = ogX;
+		    swagRect.height = ogY;
 
 		    clipRect = swagRect;
 		}
