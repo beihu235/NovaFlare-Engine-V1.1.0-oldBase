@@ -144,6 +144,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		changeSelection();
 		reloadCheckboxes();
 		
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+		
 		#if android
 		addVirtualPad(FULL, A_B_C);
 		addPadCamera();
@@ -165,24 +167,15 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		}
 
 		if (controls.BACK) {
-		
-		    #if android
 			if (!isInPause) {
-			    FlxTransitionableState.skipNextTransOut = true;
-			    FlxG.resetState();
+			    new FlxTimer().start(0.05, function(tmr:FlxTimer)
+				{
+					close();
+				});
 			}else{
 			    PauseSubState.goBack = true;
     			close();    			
 			}
-			#else
-			if (!isInPause) {
-			    FlxTransitionableState.skipNextTransOut = true;
-			    close();
-			}else{
-			    PauseSubState.goBack = true;
-    			close();    			
-			}
-			#end //我懒得删了
 			ClientPrefs.saveSettings();			
 		}
 

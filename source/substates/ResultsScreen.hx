@@ -11,6 +11,8 @@ package substates;
     
     Who cares about rudy's hscript so I continue to choose to use my lua logic
     Her hscript weren't worth stole and I didn't stole it
+    
+    by the way dont move this to hscript,I dont allow it
 */
 import flixel.addons.transition.FlxTransitionableState;
 
@@ -73,6 +75,8 @@ class ResultsScreen extends MusicBeatSubstate
 	    0xFFFF0000 //miss
 		];
 		
+		var safeZoneOffset:Float = (ClientPrefs.data.safeFrames / 60) * 1000; //fix playBackRate shit
+		
 		background = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		background.scrollFactor.set();
 		background.alpha = 0;
@@ -93,20 +97,20 @@ class ResultsScreen extends MusicBeatSubstate
 	    
 	    var noteSize = 2.3;
 	    var MoveSize = 0.8;
-		for (i in 0...PlayState.rsNoteTime.length){
-		    if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.marvelousWindow) color = ColorArray[0];
+		for (i in 0...PlayState.rsNoteTime.length - 1){
+		    if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.marvelousWindow && ClientPrefs.data.marvelousRating) color = ColorArray[0];
 		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.sickWindow) color = ColorArray[1];
 		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.goodWindow) color = ColorArray[2];
 		    else if (Math.abs(PlayState.rsNoteMs[i]) <= ClientPrefs.data.badWindow) color = ColorArray[3];
-		    else if (Math.abs(PlayState.rsNoteMs[i]) <= Conductor.safeZoneOffset) color = ColorArray[4];
+		    else if (Math.abs(PlayState.rsNoteMs[i]) <= safeZoneOffset) color = ColorArray[4];
 		    else color = ColorArray[5];		    		    		    
 		    		    
 		    FlxSpriteUtil.beginDraw(color);
-		    if (Math.abs(PlayState.rsNoteMs[i]) <= Conductor.safeZoneOffset){
-    		    noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / Conductor.safeZoneOffset), noteSize);
+		    if (Math.abs(PlayState.rsNoteMs[i]) <= safeZoneOffset){
+    		    noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength), graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (PlayState.rsNoteMs[i] / safeZoneOffset), noteSize);
     		}
     		else{
-    		    noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength) - noteSize / 2 , graphHeight * 0.5 + graphHeight * 0.5 * 0.9, noteSize);		
+    		    noteSpr.drawCircle(graphWidth * (PlayState.rsNoteTime[i] / PlayState.rsSongLength), graphHeight * 0.5 + graphHeight * 0.5 * 0.9, noteSize);		
     		}
     		
 		    graphBG.pixels.draw(FlxSpriteUtil.flashGfxSprite);
@@ -114,58 +118,60 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBG.updateHitbox();
 		add(graphBG);
 		
-		var judgeHeight = 3;
+		var judgeHeight = 2;
 		graphJudgeCenter = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
 		graphJudgeCenter.scrollFactor.set();
 		graphJudgeCenter.alpha = 0;		
 		add(graphJudgeCenter);
 		
-		graphMarvelousUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.marvelousWindow / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[0]);
+		graphMarvelousUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.marvelousWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[0]);
 		graphMarvelousUp.scrollFactor.set();
 		graphMarvelousUp.alpha = 0;		
 		add(graphMarvelousUp);
+		if (!ClientPrefs.data.marvelousRating) graphMarvelousUp.visible = false;
 		
-		graphMarvelousDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.marvelousWindow / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[0]);
+		graphMarvelousDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.marvelousWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[0]);
 		graphMarvelousDown.scrollFactor.set();
 		graphMarvelousDown.alpha = 0;		
 		add(graphMarvelousDown);
+		if (!ClientPrefs.data.marvelousRating) graphMarvelousDown.visible = false;
 		
-		graphSickUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[1]);
+		graphSickUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[1]);
 		graphSickUp.scrollFactor.set();
 		graphSickUp.alpha = 0;		
 		add(graphSickUp);
 		
-		graphSickDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[1]);
+		graphSickDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[1]);
 		graphSickDown.scrollFactor.set();
 		graphSickDown.alpha = 0;		
 		add(graphSickDown);
 		
-		graphGoodUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[2]);
+		graphGoodUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[2]);
 		graphGoodUp.scrollFactor.set();
 		graphGoodUp.alpha = 0;		
 		add(graphGoodUp);
 		
-		graphGoodDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[2]);
+		graphGoodDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[2]);
 		graphGoodDown.scrollFactor.set();
 		graphGoodDown.alpha = 0;		
 		add(graphGoodDown);
 		
-		graphBadUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[3]);
+		graphBadUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[3]);
 		graphBadUp.scrollFactor.set();
 		graphBadUp.alpha = 0;		
 		add(graphBadUp);
 		
-		graphBadDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[3]);
+		graphBadDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[3]);
 		graphBadDown.scrollFactor.set();
 		graphBadDown.alpha = 0;		
 		add(graphBadDown);
 		
-		graphShitUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (Conductor.safeZoneOffset / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[4]);
+		graphShitUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (safeZoneOffset / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[4]);
 		graphShitUp.scrollFactor.set();
 		graphShitUp.alpha = 0;		
 		add(graphShitUp);
 		
-		graphShitDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (Conductor.safeZoneOffset / Conductor.safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[4]);
+		graphShitDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (safeZoneOffset / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[4]);
 		graphShitDown.scrollFactor.set();
 		graphShitDown.alpha = 0;		
 		add(graphShitDown);
@@ -226,11 +232,11 @@ class ResultsScreen extends MusicBeatSubstate
 		judgeText = new FlxText(-400, 200, 0, 
 		'Judgements:'
 		+ marvelousRate
-		+ '\nSicks: ' + PlayState.rsSicks
-		+ '\nGoods: ' + PlayState.rsGoods 
-		+ '\nBads: ' + PlayState.rsBads 
-		+ '\nShits: ' + PlayState.rsShits 
-		+ '\n\nCombe Breaks: ' + PlayState.rsMisses 
+		+ '\nSick: ' + PlayState.rsSicks
+		+ '\nGood: ' + PlayState.rsGoods 
+		+ '\nBad: ' + PlayState.rsBads 
+		+ '\nShit: ' + PlayState.rsShits 
+		+ '\n\nCombe Break: ' + PlayState.rsMisses 
 		+ '\nHighest Combe: ' + PlayState.highestCombo 
 		+ '\nScore: ' + PlayState.rsScore 
 		+ '\nAccuracy: ' + ACC + '%'
@@ -243,11 +249,11 @@ class ResultsScreen extends MusicBeatSubstate
 		judgeText.antialiasing = ClientPrefs.data.antialiasing;
 		add(judgeText);
 		
-		var botplay:String = 'Close';
-		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Open';
-		var practice:String = 'Close';
+		var botplay:String = 'Disable';
+		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Enable';
+		var practice:String = 'Disable';
 
-		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Open';
+		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Enable';
 
 		setGameText = new FlxText(FlxG.width + 400, 420, 0, 
 		'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
@@ -271,19 +277,28 @@ class ResultsScreen extends MusicBeatSubstate
 		add(setGameText);
 		
 		var Main:Float = 0;
-		for (i in 0...PlayState.rsNoteTime.length){
-		Main = Main + Math.abs(PlayState.rsNoteMs[i]);
+		var allowData:Int = 0;
+		for (i in 0...PlayState.rsNoteTime.length - 1){
+		    if (Math.abs(PlayState.rsNoteMs[i]) <= safeZoneOffset){
+    		    Main = Main + Math.abs(PlayState.rsNoteMs[i]);
+    		    allowData = allowData + 1;
+		    }
 		}
-		Main = Math.ceil(Main / PlayState.rsNoteTime.length * 100) / 100;
-        var safeZoneOffset:Float = Math.ceil(Conductor.safeZoneOffset * 10) / 10;
+		var showMain = Math.ceil((Main / allowData) * 100) / 100;
+        var safeZoneOffsetFix:Float = Math.ceil(safeZoneOffset * 10) / 10;
+        
+        var marvelousRate = '';
+        if (ClientPrefs.data.marvelousRating) marvelousRate = 'MAR:' + ClientPrefs.data.marvelousWindow + 'ms,';
+          
 		setMsText = new FlxText(20, FlxG.height + 150, 0, 
-		'Main: ' + Main + 'ms'
+		'Main: ' + showMain + 'ms'
 		+ '\n'
 		+ '('
+		+ marvelousRate
 		+ 'SICK:' + ClientPrefs.data.sickWindow + 'ms,'
 		+ 'GOOD:' + ClientPrefs.data.goodWindow + 'ms,'
 		+ 'BAD:' + ClientPrefs.data.badWindow + 'ms,'
-		+ 'SHIT:' + safeZoneOffset + 'ms'
+		+ 'SHIT:' + safeZoneOffsetFix + 'ms'
 		+ ')'		
 		+ '\n'
 		);
@@ -362,10 +377,10 @@ class ResultsScreen extends MusicBeatSubstate
     
 	override function update(elapsed:Float)
 	{   
-	    var botplay:String = 'Close';
-		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Open';
-		var practice:String = 'Close';
-		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Open';
+	    var botplay:String = 'Disable';
+		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Enable';
+		var practice:String = 'Disable';
+		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Enable';
 
 		setGameText.text = 'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
 		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')

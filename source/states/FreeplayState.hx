@@ -14,7 +14,7 @@ import states.editors.ChartingState;
 import substates.GameplayChangersSubstate;
 import substates.ResetScoreSubState;
 import substates.OSTSubstate;
-import substates.OSTtoNew;
+//import substates.OSTtoNew;
 
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.transition.FlxTransitionableState;
@@ -107,6 +107,8 @@ class FreeplayState extends MusicBeatState
     var isStart:Bool = false;
     var isEnd:Bool = false;
     
+    var checkSubstate:Bool = false;
+    
     var ColorArray:Array<Int> = [
 		0xFF9400D3,
 		0xFF4B0082,
@@ -133,24 +135,24 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
-		//Paths.clearStoredMemory();
-		//Paths.clearUnusedMemory();
+		Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
 		
-		persistentUpdate = true;
 		PlayState.isStoryMode = false;
 		WeekData.reloadWeekFiles(false);
 		
 		camGame = new FlxCamera();
 		camSearch = new FlxCamera();
 		camBlackFade = new FlxCamera();
-		camBlackFade.bgColor.alpha = 0;
 		camSearch.bgColor.alpha = 0;
-
+        camBlackFade.bgColor.alpha = 0;
 		FlxG.cameras.reset(camGame);		
 		FlxG.cameras.add(camSearch, false);
 		FlxG.cameras.add(camBlackFade, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		CustomFadeTransition.nextCamera = camBlackFade;
+		
+		persistentUpdate = persistentDraw = true;
 		
 		camSearch.y = -300 - showOffset;
 		
@@ -192,7 +194,7 @@ class FreeplayState extends MusicBeatState
 		add(bg);
 		bg.screenCenter();
 		
-		bgMove = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), XY, 0, 0);
+		bgMove = new FlxBackdrop(Paths.image('menuExtend/backdrop'), XY, 0, 0);
 		bgMove.alpha = 0.1;
 		bgMove.color = ColorArray[currentColor];
 		bgMove.screenCenter();
@@ -448,16 +450,14 @@ class FreeplayState extends MusicBeatState
 		
 		#if android
         addVirtualPad(FULL, A_B_C_X_Y_Z);
+        //addPadCamera();
         #end
+        
+        
                 
 		super.create();
+		
 		CustomFadeTransition.nextCamera = camBlackFade;
-	}
-
-	override function closeSubState() {
-		changeSelection(0, false);
-		persistentUpdate = true;
-		super.closeSubState();
 	}
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
@@ -517,6 +517,12 @@ class FreeplayState extends MusicBeatState
 
 		scoreText.text = 'PERSONAL BEST: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
 		positionHighscore();
+		
+		if (checkSubstate) { //close control check
+		    updateTexts(elapsed);
+			super.update(elapsed);
+			return;
+		}
 
 		var shiftMult:Int = 1;
 		if(FlxG.keys.pressed.SHIFT  #if android || MusicBeatState._virtualpad.buttonZ.pressed #end) shiftMult = 3;
@@ -573,10 +579,11 @@ class FreeplayState extends MusicBeatState
 			changeDiff(1);
 			_updateSongLastDifficulty();
 		}
-
-		if (FlxG.keys.justPressed.ESCAPE #if android || MusicBeatState._virtualpad.buttonB.justPressed #end)
+		
+         //idk
+		if (FlxG.keys.justPressed.ESCAPE #if android || (FlxG.mouse.justPressed && FlxG.mouse.overlaps(MusicBeatState._virtualpad.buttonB)) #end)
 		{
-			persistentUpdate = false;
+		    persistentUpdate = false;
 			if(colorTween != null) {
 				colorTween.cancel();
 			}
@@ -586,7 +593,11 @@ class FreeplayState extends MusicBeatState
 
 		if(FlxG.keys.justPressed.CONTROL #if android || MusicBeatState._virtualpad.buttonC.justPressed #end)
 		{
-			persistentUpdate = false;
+			
+			#if android
+			removeVirtualPad();
+			#end
+			checkSubstate = true;
 			openSubState(new GameplayChangersSubstate());
 		}
 		else if(FlxG.keys.justPressed.SPACE #if android || MusicBeatState._virtualpad.buttonX.justPressed #end)
@@ -594,13 +605,13 @@ class FreeplayState extends MusicBeatState
 		    
 			if(instPlaying != curSelected)
 			{
-				
+				try
+			    {
 				destroyFreeplayVocals();
 				FlxG.sound.music.volume = 0;
 				Mods.currentModDirectory = songs[curSelected].folder;
 				var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
 				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
-				
 				
                 /*
 				FlxG.sound.list.add(vocals);
@@ -612,10 +623,33 @@ class FreeplayState extends MusicBeatState
 				instPlaying = curSelected;
 				*/
 				var needsVoices:Bool = false;
-				if (PlayState.SONG.needsVoices)needsVoices = true;				
+				if (PlayState.SONG.needsVoices)needsVoices = true;	
+				
+				#if android
+			    removeVirtualPad();
+			    #end						
 					
-				persistentUpdate = false;
-				openSubState(new OSTtoNew(needsVoices,PlayState.SONG.bpm));
+				checkSubstate = true;
+				openSubState(new OSTSubstate(needsVoices,PlayState.SONG.bpm));
+				}
+				catch(e:Dynamic)
+			    {
+				trace('ERROR! $e');
+				var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
+				var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
+                var errorStr:String = Mods.currentModDirectory + '/data/' + songLowercase + '/' + poop + '.json';
+				//var errorStr:String = e.toString();
+				/*if(errorStr.startsWith('[file_contents,assets/data/')) errorStr = 'Missing file: ' + errorStr.substring(27, errorStr.length-1); //Missing chart*/
+				missingText.text = 'ERROR WHILE LOADING CHART:\n$errorStr';
+				missingText.screenCenter(Y);
+				missingText.visible = true;
+				missingTextBG.visible = true;
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+
+				updateTexts(elapsed);
+				super.update(elapsed);
+				return;
+			    }
 			}
 			
 			
@@ -623,7 +657,6 @@ class FreeplayState extends MusicBeatState
 
 		else if (controls.ACCEPT)
 		{
-			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
 			var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
 			/*#if MODS_ALLOWED
@@ -665,6 +698,8 @@ class FreeplayState extends MusicBeatState
 				return;
 			}
 			
+			persistentUpdate = false;
+			
 			if (FlxG.keys.pressed.SHIFT #if android || MusicBeatState._virtualpad.buttonZ.pressed #end){
 				LoadingState.loadAndSwitchState(new ChartingState());
 			}else{
@@ -684,13 +719,28 @@ class FreeplayState extends MusicBeatState
 		    #if android
 			removeVirtualPad();
 			#end
-			persistentUpdate = false;
+			checkSubstate = true;
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
 			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
 
 		updateTexts(elapsed);
 		super.update(elapsed);
+	}
+	
+	override function closeSubState() {
+		changeSelection(0, false);
+		
+		super.closeSubState();
+		
+		persistentUpdate = true;
+				
+		#if android
+		removeVirtualPad();
+		addVirtualPad(FULL, A_B_C_X_Y_Z);
+		#end
+		
+		checkSubstate = false;
 	}
 
 	public static function destroyFreeplayVocals() {

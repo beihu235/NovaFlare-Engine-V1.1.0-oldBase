@@ -7,6 +7,7 @@ import backend.NoteTypesConfig;
 import shaders.RGBPalette;
 import shaders.RGBPalette.RGBShaderReference;
 import objects.StrumNote;
+import states.PlayState;
 
 import flixel.math.FlxRect;
 
@@ -229,7 +230,11 @@ class Note extends FlxSprite
 				animation.play(animToPlay + 'Scroll');
 			}
 		}
-
+		
+		var swagRect:FlxRect = clipRect;
+	    if(swagRect == null) swagRect = new FlxRect(0, 0, frameWidth, frameHeight);
+		var ogX = frameWidth;
+        var ogY = frameHeight;
 		// trace(prevNote);
 
 		if(prevNote != null)
@@ -244,14 +249,12 @@ class Note extends FlxSprite
 			
 			earlyHitMult = 0.5;
 
-			offsetX += width / 2;
+			//offsetX += width / 2;
 			copyAngle = false;
 
 			animation.play(colArray[noteData % colArray.length] + 'holdend');
 
 			updateHitbox();
-
-			offsetX -= width / 2;
 
 			if (PlayState.isPixelStage)
 				offsetX += 30;
@@ -270,19 +273,30 @@ class Note extends FlxSprite
 				}
 				prevNote.updateHitbox();
 			}
+			
+			//offsetX -= width / 2;
+			
+			
+		    //swagRect.x = -ogX / 2 + frameWidth / 2;
+		    //swagRect.y = -ogY / 2 + frameHeight / 2;
+		    //swagRect.width = frameWidth;
+		    //swagRect.height = frameHeight;
+            
+		    clipRect = swagRect;
+			
 
 			if(PlayState.isPixelStage)
 			{
 				scale.y *= PlayState.daPixelZoom;
 				updateHitbox();
 			}
-			
 		}
-		else if(!isSustainNote)
-		{
-			centerOffsets();
-			centerOrigin();
-		}
+		/*	if(!isSustainNote)
+			{*/
+				centerOffsets();
+				centerOrigin();
+			//}
+		
 		x += offsetX;
 	}
 
@@ -460,13 +474,13 @@ class Note extends FlxSprite
 		var strumAngle:Float = myStrum.angle;
 		var strumAlpha:Float = myStrum.alpha;
 		var strumDirection:Float = myStrum.direction;
+		
+		var angleDir = strumDirection * Math.PI / 180;
+		
+		if(ClientPrefs.data.downScroll) flipY = true;
 
 		distance = (0.45 * (Conductor.songPosition - strumTime) * songSpeed * multSpeed);
 		if (!myStrum.downScroll) distance *= -1;
-
-		var angleDir = strumDirection * Math.PI / 180;
-		if (copyAngle)
-			angle = strumDirection - 90 + strumAngle + offsetAngle;
 
 		if(copyAlpha)
 			alpha = strumAlpha * multAlpha;
@@ -485,6 +499,21 @@ class Note extends FlxSprite
 				}
 				y -= (frameHeight * scale.y) - (Note.swagWidth / 2);
 			}
+		}
+		
+		var newAngleDir = strumDirection * Math.PI / 180;
+		    if (!ClientPrefs.data.downScroll) newAngleDir = (strumDirection - 180)* Math.PI / 180;
+		if (copyAngle)
+			angle = strumDirection - 90 + strumAngle + offsetAngle;
+		else{
+		    angle = strumDirection - 90 + offsetAngle;
+		    if (ClientPrefs.data.downScroll){
+    		   // x -= frameWidth * Math.cos(angleDir);
+    		   //  y += frameHeight * Math.cos(angleDir);
+		    }else{
+		       // x -= frameWidth * Math.cos(angleDir);
+		       // y += frameHeight * Math.cos(angleDir);
+		    }
 		}
 	}
 

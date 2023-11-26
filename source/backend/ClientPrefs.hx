@@ -13,6 +13,7 @@ class SaveVariables {
 	public var middleScroll:Bool = false;
 	public var filpChart:Bool = false;
 	public var fixLNL:Int= 0; //fix long note length
+	public var noteDetectionFix:Bool = true;
 	
 	public var playOpponent:Bool = false;
 	public var OpponentCodeFix:Bool = false;
@@ -24,6 +25,7 @@ class SaveVariables {
 	public var showMS:Bool = true;
 	public var showMEM:Bool = true;
 	public var rainbowFPS:Bool = false;
+	public var memoryType:Int = 3;
 	
 	public var flashing:Bool = true;
 	public var ResultsScreen:Bool = true;
@@ -38,6 +40,7 @@ class SaveVariables {
 	
 	public var lowQuality:Bool = false;
 	public var shaders:Bool = true;
+	public var colorblindMode:Int = 0;
 	public var cacheOnGPU:Bool = #if !switch false #else true #end; //From Stilic	
 	public var framerate:Int = 60;
 	
@@ -45,10 +48,12 @@ class SaveVariables {
 	public var CustomFadeSound:Float = 0.5;
 	public var CustomFadeText:Bool = true;
 	
+	public var discordRPC:Bool = true;
 	public var camZooms:Bool = true;
 	public var judgementCounter:Bool = true;
 	public var hideHud:Bool = false;
 	public var noteOffset:Int = 0;
+	public var combeColor:Bool = true;
 	public var arrowRGB:Array<Array<FlxColor>> = [
 		[0xFFC24B99, 0xFFFFFFFF, 0xFF3C1F56],
 		[0xFF00FFFF, 0xFFFFFFFF, 0xFF1542B7],
@@ -72,6 +77,7 @@ class SaveVariables {
 	public var comboStacking:Bool = true;
 	public var showComboNum:Bool = true;
 	public var showRating:Bool = true;
+	public var comboColor:Bool = true;
 	public var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -104,7 +110,6 @@ class SaveVariables {
 	public var goodWindow:Int = 90;
 	public var badWindow:Int = 135;
 	public var safeFrames:Float = 10;
-	public var discordRPC:Bool = true;	
 	
 	public var spaceExtend:Bool = true;
 	public var shiftExtend:Bool = true;

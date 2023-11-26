@@ -102,7 +102,40 @@ class CoolUtil
 		countByColor = [];
 		return maxKey;
 	}
-
+	
+	inline public static function getComboColor(sprite:flixel.FlxSprite):Int
+	{
+		var countByColor:Map<Int, Int> = [];
+		var colorCount:Int= 0;
+		for(col in 0...sprite.frameWidth) {
+            for(row in 0...sprite.frameHeight) {
+                var colorOfThisPixel:Int = sprite.pixels.getPixel32(col, row);
+                if(colorOfThisPixel != 0) {
+                    if(countByColor.exists(colorOfThisPixel))
+                        countByColor[colorOfThisPixel] = countByColor[colorOfThisPixel] + 1;
+                    else if(countByColor[colorOfThisPixel] != 13520687 - (2*13520687))
+                        countByColor[colorOfThisPixel] = 1;
+                        
+                    colorCount++;
+                }
+            }
+        }
+		var maxCount = 0;
+		var maxKey:Int = 0xFFFFFFFF; //after the loop this will store the max color
+		for(key in countByColor.keys()) {
+			if(countByColor[key] > maxCount && key != FlxColor.BLACK) {
+				maxCount = countByColor[key];
+				maxKey = key;
+			}
+		}
+		
+		if (countByColor[FlxColor.BLACK] >= sprite.frameHeight * sprite.frameWidth * 0.5)
+		maxKey = 0xFF000000;  //50%+ is black, so main color is black, it use for fix something
+		
+		countByColor = [];
+		return maxKey;
+	}
+	
 	inline public static function numberArray(max:Int, ?min = 0):Array<Int>
 	{
 		var dumbArray:Array<Int> = [];

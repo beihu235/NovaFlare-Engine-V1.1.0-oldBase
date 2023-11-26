@@ -64,7 +64,7 @@ jobs:
           haxelib install flixel-addons 3.0.2
           haxelib install tjson
           haxelib install hxjsonast
-          haxelib git SScript https://github.com/beihu235/Sscript4.1.0
+          haxelib install SScript 7.0.0
           haxelib git hxCodec https://github.com/SPLCoding/hxCodec-but-it-works-xd.git
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
@@ -72,6 +72,7 @@ jobs:
           haxelib install hxcpp-debug-server
           haxelib git androiddialogs https://github.com/beihu235/AndroidDialogs
           haxelib git devicelanguage https://github.com/beihu235/devicelanguage
+          haxelib install samcodes-notifications
           haxelib list         
 
       - name: Create Version Tag
@@ -89,6 +90,8 @@ jobs:
           haxelib set flixel 5.2.2
           haxelib set flixel-addons 3.0.2
           haxelib set hxcpp 4.2.1
+          haxelib set SScript 7.0.0
+  
           haxelib list
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}

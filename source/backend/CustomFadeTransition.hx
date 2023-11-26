@@ -8,7 +8,8 @@ import flixel.FlxSubState;
 import flixel.FlxSprite;
 import openfl.utils.Assets;
 import flixel.FlxObject;
-//import backend.ThreadManager_new;
+
+
  
 class CustomFadeTransition extends MusicBeatSubstate {
 	public static var finishCallback:Void->Void;
@@ -33,17 +34,16 @@ class CustomFadeTransition extends MusicBeatSubstate {
 
 		this.isTransIn = isTransIn;
 		
-		//ThreadManager_new.startThread();
 		
 		if(ClientPrefs.data.CustomFade == 'Move'){
-		loadRight = new FlxSprite(isTransIn ? 0 : 1280, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingR'));
+		loadRight = new FlxSprite(isTransIn ? 0 : 1280, 0).loadGraphic(Paths.image('menuExtend/CustomFadeTransition/loadingR'));
 		loadRight.scrollFactor.set();
 		loadRight.antialiasing = ClientPrefs.data.antialiasing;		
 		add(loadRight);
 		loadRight.setGraphicSize(FlxG.width, FlxG.height);
 		loadRight.updateHitbox();
 		
-		loadLeft = new FlxSprite(isTransIn ? 0 : -1280, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingL'));
+		loadLeft = new FlxSprite(isTransIn ? 0 : -1280, 0).loadGraphic(Paths.image('menuExtend/CustomFadeTransition/loadingL'));
 		loadLeft.scrollFactor.set();
 		loadLeft.antialiasing = ClientPrefs.data.antialiasing;
 		add(loadLeft);
@@ -135,7 +135,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		}
 		}
 		else{
-		loadAlpha = new FlxSprite( 0, 0).loadGraphic(Paths.image('mainmenu_sprite/loadingAlpha'));
+		loadAlpha = new FlxSprite( 0, 0).loadGraphic(Paths.image('menuExtend/CustomFadeTransition/loadingAlpha'));
 		loadAlpha.scrollFactor.set();
 		loadAlpha.antialiasing = ClientPrefs.data.antialiasing;		
 		add(loadAlpha);

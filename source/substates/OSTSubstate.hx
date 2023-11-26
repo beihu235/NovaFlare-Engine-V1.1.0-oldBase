@@ -33,11 +33,6 @@ import sys.io.File;
 import sys.FileSystem;
 #end
 
-#if android
-import android.flixel.FlxButton;
-#else
-import flixel.ui.FlxButton;
-#end
 
 @:access(flixel.sound.FlxSound._sound)
 @:access(openfl.media.Sound.__buffer)
@@ -61,16 +56,18 @@ class OSTSubstate extends MusicBeatSubstate
 	{
 		super();		
 		
-		camGame = new FlxCamera();
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+		
+		//camGame = new FlxCamera();
 		camHUD = new FlxCamera();
 		camLogo = new FlxCamera();
 		camLogo.bgColor.alpha = 0;
 		camHUD.bgColor.alpha = 0;
 
-		FlxG.cameras.reset(camGame);
+		//FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camLogo, false);
 		FlxG.cameras.add(camHUD, false);
-		FlxG.cameras.setDefaultDrawTarget(camGame, true);
+		//FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		
 		camLogo.x = -320;
 		
@@ -118,11 +115,6 @@ class OSTSubstate extends MusicBeatSubstate
 		waveformVoiceSprite = new FlxSprite(1280 - 640, 50).makeGraphic(640 - 50, 100, 0xFF000000);
 		waveformVoiceSprite.alpha = 0.5;
 		add(waveformVoiceSprite);
-		
-		scoreText = new FlxText(FlxG.width * 0.5, FlxG.height * 0.5, 0, '', 32);
-		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-        scoreText.scrollFactor.set();
-        add(scoreText);
 	    
 	}
     
@@ -134,6 +126,20 @@ class OSTSubstate extends MusicBeatSubstate
 	{
 
 	//	FlxSpriteUtil.cameraBound(logoBl, camGame, ANY);
+	
+	    if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
+		{
+		    FlxG.sound.music.volume = 0;
+		    destroyVocals();
+		
+		    FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+			FlxG.sound.music.fadeIn(4, 0, 0.7);		
+		    
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+		    
+		    close();
+		
+		}
 		
 		updateVoiceWaveform();		
 		
@@ -142,37 +148,23 @@ class OSTSubstate extends MusicBeatSubstate
         
         if ( Math.floor(SoundTime/BeatTime) % 4  == 0 && canBeat){       
             canBeat = false;            
-            camBeat();
+            //camBeat();
             logoBl.animation.play('bump');
         }
 		
 		if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true;   
 		
-		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
-		{
-		    FlxG.sound.music.volume = 0;
-		    destroyVocals();
 		
-		    FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
-			FlxG.sound.music.fadeIn(4, 0, 0.7);		
-		    
-			#if android
-			FlxTransitionableState.skipNextTransOut = true;
-			FlxG.resetState();
-			#else
-			FlxG.sound.play(Paths.sound('cancelMenu'));
-			close();
-			#end
-		}
 		
-		var volue:Float = Math.exp(-1 * 2 * Math.PI * 200 * FlxG.sound.music.time);
-		var volue2:Float = Math.exp(-1 * 2 * Math.PI * 44100 * FlxG.sound.music.time);
+		//var volue:Float = Math.exp(-1 * 2 * Math.PI * 200 * FlxG.sound.music.time);
+		//var volue2:Float = Math.exp(-1 * 2 * Math.PI * 44100 * FlxG.sound.music.time);
 		/*
 		var data:Float = FlxG.sound.music.amplitude;
 		var data2:Float = FlxG.sound.music.amplitude;
 		scoreText.text = 'data1:' + data + '\ndata2:' + data2 + '\n';
-		super.update(elapsed);
+		
 		*/
+		super.update(elapsed);
 	}
 	
 
@@ -270,11 +262,7 @@ class OSTSubstate extends MusicBeatSubstate
 		flashGFX.endFill(); 
 		waveformVoiceSprite.pixels.draw(FlxSpriteUtil.flashGfxSprite);
 		waveformVoiceSprite.pixels.unlock(); 
-		
-		scoreText.text = 'byte:' + byte + '\nindex:' + index +  '\nchannels:' + channels + '\nkhz:' + khz + '\n';
-		
-		return;
-	}	
+	}
 	
 	function camBeat() {
 	    //camGame.zoom = 1 + 0.03;

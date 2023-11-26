@@ -72,6 +72,8 @@ class ResetScoreSubState extends MusicBeatSubstate
 		add(noText);
 		updateOptions();
 		
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+		
 		#if android
         addVirtualPad(LEFT_RIGHT, A_B);
         addPadCamera();
@@ -96,12 +98,10 @@ class ResetScoreSubState extends MusicBeatSubstate
 		}
 		if(controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'), 1);
-			#if android
-                FlxTransitionableState.skipNextTransOut = true;
-			    FlxG.resetState();
-            #else
-                close();
-            #end
+			new FlxTimer().start(0.05, function(tmr:FlxTimer)
+				{
+					close();
+				});
 		} else if(controls.ACCEPT) {
 			if(onYes) {
 				if(week == -1) {
@@ -111,12 +111,10 @@ class ResetScoreSubState extends MusicBeatSubstate
 				}
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'), 1);
-			#if android
-                FlxTransitionableState.skipNextTransOut = true;
-			    FlxG.resetState();
-            #else
-                close();
-            #end
+			new FlxTimer().start(0.05, function(tmr:FlxTimer)
+				{
+					close();
+				});
 		}
 		super.update(elapsed);
 	}

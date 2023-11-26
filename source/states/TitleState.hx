@@ -19,6 +19,7 @@ import openfl.display.BitmapData;
 import openfl.utils.Assets;
 
 import shaders.ColorSwap;
+import shaders.ColorblindFilter;
 
 import states.StoryMenuState;
 import states.OutdatedState;
@@ -131,7 +132,7 @@ class TitleState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 		FlxG.game.focusLostFramerate = 60;
 		FlxG.keys.preventDefaultKeys = [TAB];
-
+        
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
 		super.create();
@@ -205,13 +206,19 @@ class TitleState extends MusicBeatState
 			persistentUpdate = true;
 			persistentDraw = true;
 		}
+		
+		ColorblindFilter.UpdateColors();
 
 		if (FlxG.save.data.weekCompleted != null)
 		{
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
 
-		FlxG.mouse.visible = false;
+		//FlxG.mouse.visible = true;
+		//FlxG.mouse.load(Paths.image('menuExtend/cursor').bitmap,1,0,0);
+		
+        
+        
 		#if FREEPLAY
 		MusicBeatState.switchState(new FreeplayState());
 		#elseif CHARTING
@@ -233,6 +240,8 @@ class TitleState extends MusicBeatState
 			}
 		}
 		#end
+		
+		
 		
 		bpm = titleJSON.bpm;
 	}
@@ -820,6 +829,7 @@ class TitleState extends MusicBeatState
 			#if (hxCodec >= "3.0.0")
 			// Recent versions
 			video.play(filepath);
+			
 			showText();
 			video.onEndReached.add(function()
 			{
