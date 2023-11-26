@@ -1732,13 +1732,15 @@ class PlayState extends MusicBeatState
 	{
 		#if desktop
 		if (health > 0 && !paused) DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
-		#end
-		/*
-		var ret:Dynamic = callOnScripts('onPause', null, true);
+		#else		
+		if (FlxG.autoPause && !paused){
+		    var ret:Dynamic = callOnScripts('onPause', null, true);
 			if(ret != FunkinLua.Function_Stop) {
 				openPauseMenu();
 			}
-        */
+	    }  //at android it auto work well for psych0.63h but now it broken, so use code add again
+        #end
+        
 		super.onFocusLost();
 	}
 
