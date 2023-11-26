@@ -262,7 +262,7 @@ class OptionsState extends MusicBeatState
                 new MSOption("Toggle the delay time Counter."),
                 
 			]),			
-			new OptionCata(640, 40 + 64, "wait", [
+			new OptionCata(935, 40 + 64, "wait", [
                 new MSOption("Toggle the delay time Counter."),
 			]),			
 			new OptionCata(-1, 125, "Editing Judgements", [			
