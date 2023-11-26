@@ -1822,6 +1822,7 @@ class PlayState extends MusicBeatState
 
 		var iconOffset:Int = 26;
 		if (health > 2) health = 2;
+		if (health < 0) health = 0;
 		iconP1.x = healthBar.barCenter + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 		iconP2.x = healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 		iconP1.animation.curAnim.curFrame = ((healthBar.percent <= 20 && !ClientPrefs.data.playOpponent) || (healthBar.percent >= 80 && ClientPrefs.data.playOpponent)) ? 1 : 0;
@@ -1999,7 +2000,11 @@ class PlayState extends MusicBeatState
 			if (nps > maxNPS)
 				maxNPS = nps;
 		}
-
+		
+		if (health > 2) health = 2;
+		if (health < 0) health = 0; 
+        // work for script
+        
 		setOnScripts('cameraX', camFollow.x);
 		setOnScripts('cameraY', camFollow.y);
 		setOnScripts('botPlay', cpuControlled);
