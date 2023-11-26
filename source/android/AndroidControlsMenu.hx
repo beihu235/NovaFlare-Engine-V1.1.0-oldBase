@@ -62,13 +62,11 @@ class AndroidControlsMenu extends MusicBeatState
 		newhbox.visible = false;
 		add(newhbox);
 		
-		inputvari = new FlxText(0, 150, 0,'', 30);
+		inputvari = new FlxText(0, 150, 0,controlitems[config.getcontrolmode(), 30);
 		inputvari.setFormat("VCR OSD Mono", 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		inputvari.borderSize = 0;
 		inputvari.screenCenter(X);
 		add(inputvari);
-		
-		inputvari.text = controlitems[config.getcontrolmode()];
 
 		var ui_tex = Paths.getSparrowAtlas('androidcontrols-source/menu/arrows');
 
