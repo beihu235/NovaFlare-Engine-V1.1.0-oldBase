@@ -945,5 +945,11 @@ class OptionsState extends MusicBeatState
             }
         }
 	}
+	
+	override function closeSubState()
+	{
+	    resetOptionChoose();
+	    super.closeSubState();
+	}
 }
 
