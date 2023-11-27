@@ -32,8 +32,8 @@ import sys.io.File;
 
 #if VIDEOS_ALLOWED 
 #if (hxCodec >= "3.0.0") import hxcodec.flixel.FlxVideo as VideoHandler;
-#elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler as VideoHandler;
-#elseif (hxCodec == "2.6.0") import VideoHandler;
+#elseif (hxCodec >= "2.6.1") import hxcodec.VideoSprite as VideoHandler;
+#elseif (hxCodec == "2.6.0") import VideoSprite;
 #else import vlc.MP4Handler as VideoHandler; #end
 #end
 
@@ -798,7 +798,7 @@ class TitleState extends MusicBeatState
 			skippedIntro = true;
 		}
 	}
-	
+	var video:VideoHandler;
 	function startVideo(name:String)
 	{
 	
@@ -825,27 +825,14 @@ class TitleState extends MusicBeatState
 			return;
 		}
 
-		var video:VideoHandler = new VideoHandler();
-			#if (hxCodec >= "3.0.0")
-			// Recent versions
-			video.play(filepath);
-			
-			showText();
-			video.onEndReached.add(function()
-			{
-				video.dispose();
-				videoEnd();
-				return;
-			}, true);
-			#else
-			// Older versions
+		var video:VideoHandler = new VideoHandler(0,0);
 			video.playVideo(filepath);
+			add(video);
 			video.finishCallback = function()
 			{
 				videoEnd();
 				return;
 			}
-			#end
 		#else
 		FlxG.log.warn('Platform not supported!');
 		videoEnd();
@@ -856,13 +843,14 @@ class TitleState extends MusicBeatState
 	function videoEnd()
 	{
 	    skipVideo.visible = false;
+	    video.visible = false;
 		startCutscenesOut();
 	}
 	
 	function showText(){
 	    add(skipVideo);
 		FlxTween.tween(skipVideo, {alpha: 1}, 1, {ease: FlxEase.quadIn});
-		FlxTween.tween(skipVideo, {alpha: 0}, 1, {ease: FlxEase.quadIn, startDelay: 4});
+		FlxTween.tween(skipVideo, {alpha: 0}, 1, {ease: FlxEase.quadIn, startDelay: 2});
 	
 	}
 }
