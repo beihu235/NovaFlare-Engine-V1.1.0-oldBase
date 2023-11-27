@@ -22,14 +22,78 @@ class ExtraFunctions
 		// Keyboard & Gamepads
 		Lua_helper.add_callback(lua, "keyboardJustPressed", function(name:String)
 		{
+		   name = name.toUpperCase;
+		   
+		   #if android // Extend for check control for android
+           if (MusicBeatState.androidc.newhbox != null){ //check for android control and dont check for keyboard
+			    if (name == 'SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justPressed){
+    			    return true;
+                }
+                if (name == 'SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.justPressed){
+    			    return true;
+                }
+           }
+            
+           if (MusicBeatState.androidc.vpad != null){ //check for android control and dont check for keyboard
+			    if (name == 'SPACE' && MusicBeatState.androidc.vpad.buttonG.justPressed){
+    			    return true;
+                }                                
+                if (name == 'SHIFT' && MusicBeatState.androidc.vpad.buttonF.justPressed){
+    			    return true;
+                }
+           }
+           #end
+           
 			return Reflect.getProperty(FlxG.keys.justPressed, name);
 		});
 		Lua_helper.add_callback(lua, "keyboardPressed", function(name:String)
 		{
+		   name = name.toUpperCase;
+		   
+		   #if android // Extend for check control for android
+           if (MusicBeatState.androidc.newhbox != null){ //check for android control and dont check for keyboard
+			    if (name == 'SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.pressed){
+    			    return true;
+                }
+                if (name == 'SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.pressed){
+    			    return true;
+                }
+           }
+            
+           if (MusicBeatState.androidc.vpad != null){ //check for android control and dont check for keyboard
+			    if (name == 'SPACE' && MusicBeatState.androidc.vpad.buttonG.pressed){
+    			    return true;
+                }                                
+                if (name == 'SHIFT' && MusicBeatState.androidc.vpad.buttonF.pressed){
+    			    return true;
+                }
+           }
+           #end
 			return Reflect.getProperty(FlxG.keys.pressed, name);
 		});
 		Lua_helper.add_callback(lua, "keyboardReleased", function(name:String)
 		{
+		   name = name.toUpperCase;
+		   
+		   #if android // Extend for check control for android
+           if (MusicBeatState.androidc.newhbox != null){ //check for android control and dont check for keyboard
+			    if (name == 'SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justReleased){
+    			    return true;
+                }
+                if (name == 'SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.justReleased){
+    			    return true;
+                }
+           }
+            
+           if (MusicBeatState.androidc.vpad != null){ //check for android control and dont check for keyboard
+			    if (name == 'SPACE' && MusicBeatState.androidc.vpad.buttonG.justReleased){
+    			    return true;
+                }                                
+                if (name == 'SHIFT' && MusicBeatState.androidc.vpad.buttonF.justReleased){
+    			    return true;
+                }
+           }
+           #end
 			return Reflect.getProperty(FlxG.keys.justReleased, name);
 		});
 
