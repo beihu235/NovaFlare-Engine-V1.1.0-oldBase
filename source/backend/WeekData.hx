@@ -92,7 +92,7 @@ class WeekData {
 		for (i in 0...sexList.length) {
 			for (j in 0...directories.length) {
 				var fileToCheck:String = directories[j] + 'weeks/' + sexList[i] + '.json';
-				//if(!weeksLoaded.exists(sexList[i])) {    //fuck that I hate this
+				if(!weeksLoaded.exists(sexList[i])) {    //fuck that I hate this
 					var week:WeekFile = getWeekFile(fileToCheck);
 					if(week != null) {
 						var weekFile:WeekData = new WeekData(week, sexList[i]);
@@ -108,7 +108,7 @@ class WeekData {
 							weeksList.push(sexList[i]);
 						}
 					}
-				//}
+				}
 			}
 		}
 
