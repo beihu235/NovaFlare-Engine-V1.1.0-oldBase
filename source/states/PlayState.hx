@@ -2728,8 +2728,8 @@ class PlayState extends MusicBeatState
 	
 	//it not use because new way
 		
-	var rating:FlxSprite;
-    var comboSpr:FlxSprite; 
+	var rateSpr_S:FlxSprite;
+    var comboSpr_S:FlxSprite; 
     
     var rateTween:FlxTween;
     var combeTween:FlxTween;
@@ -2782,37 +2782,38 @@ class PlayState extends MusicBeatState
 		
 		var placement:Float = FlxG.width * 0.35;
 		
-		rating = new FlxSprite().loadGraphic(Paths.image(uiPrefix + ratingsData[ClientPrefs.data.marvelousRating ? 4 : 0].image + uiSuffix));
-		rating.cameras = [camHUD];
-		rating.screenCenter();
-		rating.x = placement - 40;
-		rating.y -= 60;
-		rating.x += ClientPrefs.data.comboOffset[0];
-		rating.y -= ClientPrefs.data.comboOffset[1];
-		rating.x += rating.width * 0.7 * 0.5;
-		rating.y += rating.height * 0.7 * 0.5;
-		rating.antialiasing = antialias;
-		rating.alpha = 0.000001;
-		
-		add(rating);
-		rating.cameras = [camHUD];
+		rateSpr_S = new FlxSprite().loadGraphic(Paths.image(uiPrefix + ratingsData[ClientPrefs.data.marvelousRating ? 4 : 0].image + uiSuffix));
+		rateSpr_S.cameras = [camHUD];
+		rateSpr_S.screenCenter();
+		rateSpr_S.x = placement - 40;
+		rateSpr_S.y -= 60;
+		rateSpr_S.x += ClientPrefs.data.comboOffset[0];
+		rateSpr_S.y -= ClientPrefs.data.comboOffset[1];
+		rateSpr_S.x += rateSpr_S.width * 0.7 * 0.5;
+		rateSpr_S.y += rateSpr_S.height * 0.7 * 0.5;
+		rateSpr_S.antialiasing = antialias;
+		rateSpr_S.alpha = 0.000001;
+		rateSpr_S.visible = showRating;
+		add(rateSpr_S);
+		rateSpr_S.cameras = [camHUD];
 				
-		comboSpr = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'combo' + uiSuffix));
-		comboSpr.cameras = [camHUD];
-		comboSpr.screenCenter();
-		comboSpr.x = placement;
-		comboSpr.x += ClientPrefs.data.comboOffset[0];
-		comboSpr.y -= ClientPrefs.data.comboOffset[1];
-		comboSpr.antialiasing = antialias;
-		comboSpr.y += 60;
-		comboSpr.alpha = 0.000001;
-		
-		add(comboSpr);
-		comboSpr.cameras = [camHUD];
+		comboSpr_S = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'combo' + uiSuffix));
+		comboSpr_S.cameras = [camHUD];
+		comboSpr_S.screenCenter();
+		comboSpr_S.x = placement;
+		comboSpr_S.x += ClientPrefs.data.comboOffset[0];
+		comboSpr_S.y -= ClientPrefs.data.comboOffset[1];
+		comboSpr_S.antialiasing = antialias;
+		comboSpr_S.y += 60;
+		comboSpr_S.alpha = 0.000001;
+		comboSpr_S.visible = showCombo;
+		add(comboSpr_S);
+		comboSpr_S.cameras = [camHUD];
 		
 		var xThing:Float = 0;
 		
 		numItems = new FlxTypedGroup<FlxSprite>();
+		numItems.visible = showComboNum;
 		add(numItems);
 		numItems.cameras = [camHUD];
 		
@@ -2834,7 +2835,7 @@ class PlayState extends MusicBeatState
 			if(numScore.x > xThing) xThing = numScore.x;
 		}
 		
-		comboSpr.x = xThing + 50 * 2;
+		comboSpr_S.x = xThing + 50 * 2;
 		
 	}
 
@@ -2885,29 +2886,29 @@ class PlayState extends MusicBeatState
 			antialias = !isPixelStage;
 		}
 		
-		rating.loadGraphic(Paths.image(uiPrefix + daRating.image + uiSuffix));
-		rating.antialiasing = antialias;		
+		rateSpr_S.loadGraphic(Paths.image(uiPrefix + daRating.image + uiSuffix));
+		rateSpr_S.antialiasing = antialias;		
         
-        comboSpr.loadGraphic(Paths.image(uiPrefix + 'combo' + uiSuffix));
-		comboSpr.antialiasing = antialias;		
+        //comboSpr_S.loadGraphic(Paths.image(uiPrefix + 'combo' + uiSuffix));
+		comboSpr_S.antialiasing = antialias;		
 		
 		var scale:Float = 0;
 		
 		if (!PlayState.isPixelStage)
 		{
-			rating.setGraphicSize(Std.int(rating.width * 0.7));
-			comboSpr.setGraphicSize(Std.int(comboSpr.width * 0.7));
+			rateSpr_S.setGraphicSize(Std.int(rateSpr_S.width * 0.7));
+			comboSpr_S.setGraphicSize(Std.int(comboSpr_S.width * 0.6));
 			scale = 0.7;
 		}
 		else
 		{
-			rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.85));
-			comboSpr.setGraphicSize(Std.int(comboSpr.width * daPixelZoom * 0.85));
+			rateSpr_S.setGraphicSize(Std.int(rateSpr_S.width * daPixelZoom * 0.85));
+			comboSpr_S.setGraphicSize(Std.int(comboSpr_S.width * daPixelZoom * 0.85));
 			scale = 0.85;
 		}
 
-		comboSpr.updateHitbox();
-		rating.updateHitbox();
+		comboSpr_S.updateHitbox();
+		rateSpr_S.updateHitbox();
 
 		var seperatedScore:Array<Int> = [];
         var startShow = 1; //use for combe 1000+
@@ -2950,35 +2951,35 @@ class PlayState extends MusicBeatState
 		}
 		
 		if (rateTween != null) rateTween.cancel();
-		rating.alpha = 1;
-		rateTween = FlxTween.tween(rating, {alpha: 0}, 0.4 / playbackRate, {
+		rateSpr_S.alpha = 1;
+		rateTween = FlxTween.tween(rateSpr_S, {alpha: 0}, 0.4 / playbackRate, {
 			startDelay: 0.6 / playbackRate
 		});
         
         if (combeTween != null) combeTween.cancel();
-        comboSpr.alpha = 1;
-		combeTween = FlxTween.tween(comboSpr, {alpha: 0}, 0.4 / playbackRate, {
+        comboSpr_S.alpha = 1;
+		combeTween = FlxTween.tween(comboSpr_S, {alpha: 0}, 0.4 / playbackRate, {
 			startDelay: 0.6 / playbackRate
 		});
 		
 		if (rateTweenScaleX != null) rateTweenScaleX.cancel();
-		rating.scale.x = scale + 0.07;
-		rateTweenScaleX = FlxTween.tween(rating.scale, {x: scale}, 0.2 / playbackRate);
+		rateSpr_S.scale.x = scale + 0.07;
+		rateTweenScaleX = FlxTween.tween(rateSpr_S.scale, {x: scale}, 0.2 / playbackRate);
         
         if (combeTweenScaleX != null) combeTweenScaleX.cancel();
-        comboSpr.scale.x = scale + 0.07;
-		combeTweenScaleX = FlxTween.tween(comboSpr.scale, {x: scale}, 0.2 / playbackRate);
+        comboSpr_S.scale.x = scale + 0.07;
+		combeTweenScaleX = FlxTween.tween(comboSpr_S.scale, {x: scale}, 0.2 / playbackRate);
 		
 		if (rateTweenScaleY != null) rateTweenScaleY.cancel();
-		rating.scale.y = scale + 0.07;
-		rateTweenScaleY = FlxTween.tween(rating.scale, {y: scale}, 0.2 / playbackRate);
+		rateSpr_S.scale.y = scale + 0.07;
+		rateTweenScaleY = FlxTween.tween(rateSpr_S.scale, {y: scale}, 0.2 / playbackRate);
         
         if (combeTweenScaleY != null) combeTweenScaleY.cancel();
-        comboSpr.scale.y = scale + 0.07;
-		combeTweenScaleY = FlxTween.tween(comboSpr.scale, {y: scale}, 0.2 / playbackRate);
+        comboSpr_S.scale.y = scale + 0.07;
+		combeTweenScaleY = FlxTween.tween(comboSpr_S.scale, {y: scale}, 0.2 / playbackRate);
 		
-		rating.offset.x += rating.width / 2;
-        rating.offset.y += rating.height / 2;
+		rateSpr_S.offset.x += rateSpr_S.width / 2;
+        rateSpr_S.offset.y += rateSpr_S.height / 2;
 	}
 
 	public var strumsBlocked:Array<Bool> = [];
