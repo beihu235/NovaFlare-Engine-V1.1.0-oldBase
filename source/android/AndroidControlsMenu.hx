@@ -75,6 +75,7 @@ class AndroidControlsMenu extends MusicBeatState
 		leftArrow.animation.addByPrefix('idle', "arrow left");
 		leftArrow.animation.addByPrefix('press', "arrow push left");
 		leftArrow.animation.play('idle');
+		leftArrow.y -= leftArrow.height / 2;
 		add(leftArrow);
 
 		rightArrow = new FlxSprite(inputvari.x + inputvari.width + 10, leftArrow.y);
@@ -84,9 +85,9 @@ class AndroidControlsMenu extends MusicBeatState
 		rightArrow.animation.play('idle');
 		add(rightArrow);
 		
-		leftArrow.x = inputvari.x - 60;
-		rightArrow.x = inputvari.x + inputvari.width + 10;
 		inputvari.screenCenter(X);
+		leftArrow.x = inputvari.x - 60;
+		rightArrow.x = inputvari.x + inputvari.width + 10;		
 
 		upPozition = new FlxText(10, FlxG.height - 164, 0,"Button Up X:" + vpad.buttonUp.x +" Y:" + vpad.buttonUp.y, 16);
 		upPozition.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -130,10 +131,6 @@ class AndroidControlsMenu extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-
-		leftArrow.x = inputvari.x - 60;
-		rightArrow.x = inputvari.x + inputvari.width + 10;
-		inputvari.screenCenter(X);
 		
 		for (touch in FlxG.touches.list){		
 			if(touch.overlaps(leftArrow) && touch.justPressed)
@@ -168,7 +165,11 @@ class AndroidControlsMenu extends MusicBeatState
 		if (curSelected >= controlitems.length)
 			curSelected = 0;
 	
-		inputvari.text = controlitems[curSelected];
+		inputvari.text = controlitems[curSelected];		
+		
+		inputvari.screenCenter(X);
+		leftArrow.x = inputvari.x - 60;
+		rightArrow.x = inputvari.x + inputvari.width + 10;
 		
 		buttonistouched = false;
 
