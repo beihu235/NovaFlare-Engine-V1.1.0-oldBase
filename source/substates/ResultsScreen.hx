@@ -259,7 +259,7 @@ class ResultsScreen extends MusicBeatSubstate
 		'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
 		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
 		+ '\n'
-		+ 'SongSpeed: X' + ClientPrefs.getGameplaySetting('scrollspeed')
+		+ 'SongSpeed: ' + PlayState.instance.songSpeed
 		+ '  PlaybackRate: X' + ClientPrefs.getGameplaySetting('songspeed')
 		+ '\n'
 		+ 'BotPlay: ' + botplay
