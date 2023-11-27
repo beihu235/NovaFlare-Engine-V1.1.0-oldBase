@@ -31,10 +31,7 @@ import sys.io.File;
 #end
 
 #if VIDEOS_ALLOWED 
-#if (hxCodec >= "3.0.0") import hxcodec.flixel.FlxVideo as VideoHandler;
-#elseif (hxCodec >= "2.6.1") import hxcodec.VideoSprite as VideoHandler;
-#elseif (hxCodec == "2.6.0") import VideoSprite;
-#else import vlc.MP4Handler as VideoHandler; #end
+import hxcodec.VideoSprite as VideoHandler;
 #end
 
 typedef TitleData =
