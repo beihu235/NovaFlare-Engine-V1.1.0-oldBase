@@ -31,7 +31,7 @@ import sys.io.File;
 #end
 
 #if VIDEOS_ALLOWED 
-import hxcodec.VideoSprite as VideoHandler;
+import VideoSprite;
 #end
 
 typedef TitleData =
@@ -795,7 +795,7 @@ class TitleState extends MusicBeatState
 			skippedIntro = true;
 		}
 	}
-	var video:VideoHandler;
+	var video:VideoSprite;
 	function startVideo(name:String)
 	{
 	
@@ -822,7 +822,7 @@ class TitleState extends MusicBeatState
 			return;
 		}
 
-		var video:VideoHandler = new VideoHandler(0,0);
+		var video:VideoSprite = new VideoSprite(0,0);
 			video.playVideo(filepath);
 			add(video);
 			video.finishCallback = function()
