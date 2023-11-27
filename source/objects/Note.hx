@@ -259,7 +259,6 @@ class Note extends FlxSprite
 			if (prevNote.isSustainNote)
 			{
 				prevNote.animation.play(colArray[prevNote.noteData % colArray.length] + 'hold');
-				earlyHitMult = 0;
 
 				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.05;
 				if(createdFrom != null && createdFrom.songSpeed != null) prevNote.scale.y *= createdFrom.songSpeed;
@@ -468,8 +467,10 @@ class Note extends FlxSprite
 		if (copyAngle)
 			angle = strumDirection - 90 + strumAngle + offsetAngle;
 
-		if(copyAlpha)
-			alpha = strumAlpha * multAlpha;
+		if (copyAngle)
+			angle = strumDirection - 90 + strumAngle + offsetAngle;
+		else{
+		    angle = strumDirection - 90 + offsetAngle;
 
 		if(copyX)
 			x = strumX + offsetX + Math.cos(angleDir) * distance;
