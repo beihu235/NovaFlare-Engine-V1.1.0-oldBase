@@ -464,14 +464,12 @@ class Note extends FlxSprite
 		if (!myStrum.downScroll) distance *= -1;
 
 		var angleDir = strumDirection * Math.PI / 180;
-		if (copyAngle)
-			angle = strumDirection - 90 + strumAngle + offsetAngle;
 
 		if (copyAngle)
 			angle = strumDirection - 90 + strumAngle + offsetAngle;
 		else{
 		    angle = strumDirection - 90 + offsetAngle;
-
+            }
 		if(copyX)
 			x = strumX + offsetX + Math.cos(angleDir) * distance;
 
