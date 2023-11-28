@@ -276,6 +276,8 @@ class OptionsState extends MusicBeatState
 				new MarvelousSprite('If unchecked,Marvelous rate will also use sick sprite.'),
 			], true)
 		];
+		
+		persistentUpdate = persistentDraw = true;
 
 		instance = this;
 
@@ -363,13 +365,19 @@ class OptionsState extends MusicBeatState
         
 		#if android
         addVirtualPad(FULL, A_B_C);
-        addPadCamera();
+        //addPadCamera();
         #end
 		
 		super.create();
 	}
 	
+	var firstClose:Bool = false;
 	override function closeSubState() {
+	    if (!firstClose) {
+	    super.closeSubState();
+	    firstClose = true;
+	    }
+	    else
 		super.closeSubState();
 		ClientPrefs.saveSettings();
 		resetOptionChoose();
