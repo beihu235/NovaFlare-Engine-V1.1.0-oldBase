@@ -120,8 +120,9 @@ class OptionsState extends MusicBeatState
 	public var selectedCatIndex = 0;
 	public var selectedOptionIndex = 0;
 	
-	private static var saveSelectedCatIndex = 0;
-	private static var saveSelectedOptionIndex = 0;
+	private static var savePosition:Int = 0;
+	private static var saveSelectedCatIndex:Int = 0;
+	private static var saveSelectedOptionIndex:Int = 0;
 	
 	public var startFix:Bool = false;
 
@@ -177,7 +178,6 @@ class OptionsState extends MusicBeatState
 				new FilpChart('If checked, filp chart for playing.'),
 				new HitSoundOption("Adds 'hitsound' on note hits."),
 				new GhostTapOption("Toggle counting pressing a directional input when no arrow is there as a miss."),				
-				//new InstantRespawn("Toggle if you instantly respawn after dying."),
 				
 				new NoReset("Toggle pressing R to gameover."),
 				
@@ -869,6 +869,7 @@ class OptionsState extends MusicBeatState
 		if (!selectedCat.middle){
 		    saveSelectedOptionIndex = selectedOptionIndex;
 		    saveSelectedCatIndex = selectedCatIndex;
+		    savePosition = Std.int((selectedCat.optionObjects.members[i] - (selectedCat.positionFix + 54)) / 46)
 		}
 		
 		if (selectedCat != null && !isInMain)
