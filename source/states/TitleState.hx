@@ -825,8 +825,8 @@ class TitleState extends MusicBeatState
 		var video:VideoSprite = new VideoSprite(0,0);
 			video.playVideo(filepath);
 			add(video);
-			video.framePixels.width = FlxG.width;		
-			video.framePixels.height = FlxG.height;
+			video.scale.x = FlxG.width / video.framePixels.width;		
+			video.scale.y = FlxG.height / video.framePixels.height;
 			video.finishCallback = function()
 			{
 				videoEnd();
