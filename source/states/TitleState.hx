@@ -798,8 +798,7 @@ class TitleState extends MusicBeatState
 	var video:VideoSprite;
 	function startVideo(name:String)
 	{
-	
-	    skipVideo = new FlxText(0, FlxG.height - 26, 0, "Press " + #if andriod "Back on your phone " #else "Enter " #end + "to skip", 18);
+	    skipVideo = new FlxText(0, FlxG.height - 26, 0, "Press " + #if android "Back on your phone " #else "Enter " #end + "to skip", 18);
 		skipVideo.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 18);
 		skipVideo.alpha = 0;
 		skipVideo.alignment = CENTER;
@@ -826,8 +825,8 @@ class TitleState extends MusicBeatState
 		var video:VideoSprite = new VideoSprite(0,0);
 			video.playVideo(filepath);
 			add(video);
-			video.scale.x = video.width / FlxG.width;		
-			video.scale.y = video.height / FlxG.height;
+			video.width = FlxG.width;		
+			video.height = FlxG.height;
 			video.finishCallback = function()
 			{
 				videoEnd();
