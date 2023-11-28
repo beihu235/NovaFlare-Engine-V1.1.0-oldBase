@@ -850,7 +850,7 @@ class TitleState extends MusicBeatState
 	function showText(){
 	    add(skipVideo);
 		FlxTween.tween(skipVideo, {alpha: 1}, 1, {ease: FlxEase.quadIn});
-		FlxTween.tween(skipVideo, {alpha: 0}, 1, {ease: FlxEase.quadIn, startDelay: 2});
+		FlxTween.tween(skipVideo, {alpha: 0}, 1, {ease: FlxEase.quadIn, startDelay: 4});
 	
 	}
 }
