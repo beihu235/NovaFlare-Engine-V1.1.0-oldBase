@@ -373,7 +373,7 @@ class OptionsState extends MusicBeatState
 	
 	var firstClose:Bool = false;
 	override function closeSubState() {
-	    if (!firstClose) {
+	    if (firstClose == false) {
 	    super.closeSubState();
 	    firstClose = true;
 	    }
