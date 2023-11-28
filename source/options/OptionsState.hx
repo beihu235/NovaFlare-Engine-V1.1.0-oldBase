@@ -869,7 +869,7 @@ class OptionsState extends MusicBeatState
 		if (!selectedCat.middle){
 		    saveSelectedOptionIndex = selectedOptionIndex;
 		    saveSelectedCatIndex = selectedCatIndex;
-		    savePosition = Std.int((selectedCat.optionObjects.members[i] - (selectedCat.positionFix + 54)) / 46)
+		    savePosition = Std.int((selectedCat.optionObjects.members[i] - (selectedCat.positionFix + 54)) / 46);
 		}
 		
 		if (selectedCat != null && !isInMain)
