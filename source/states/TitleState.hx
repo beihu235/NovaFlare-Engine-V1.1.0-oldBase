@@ -821,9 +821,11 @@ class TitleState extends MusicBeatState
 			videoEnd();
 			return;
 		}
-
+        
+        showText();
 		var video:VideoSprite = new VideoSprite(0,0);
 			video.playVideo(filepath);
+			video.setGraphicSize(FlxG.width, FlxG.height);
 			add(video);
 			video.finishCallback = function()
 			{
@@ -840,7 +842,7 @@ class TitleState extends MusicBeatState
 	function videoEnd()
 	{
 	    skipVideo.visible = false;
-	    video.visible = false;
+	    //video.visible = false;
 		startCutscenesOut();
 	}
 	
