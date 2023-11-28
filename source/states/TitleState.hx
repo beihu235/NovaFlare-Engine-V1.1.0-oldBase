@@ -822,16 +822,18 @@ class TitleState extends MusicBeatState
 			return;
 		}
         
-        showText();
+        
 		var video:VideoSprite = new VideoSprite(0,0);
 			video.playVideo(filepath);
-			video.setGraphicSize(FlxG.width, FlxG.height);
 			add(video);
+			video.scale.x = video.width / FlxG.width;		
+			video.scale.y = video.height / FlxG.height;
 			video.finishCallback = function()
 			{
 				videoEnd();
 				return;
 			}
+		showText();	
 		#else
 		FlxG.log.warn('Platform not supported!');
 		videoEnd();
