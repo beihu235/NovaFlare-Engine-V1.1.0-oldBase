@@ -56,9 +56,8 @@ class VideoSprite extends FlxSprite
 	{
 		super.update(elapsed);
         
-		if (bitmap.isPlaying && bitmap.isDisplaying && bitmap.bitmapData != null/* && !oneTime*/)
+		if (bitmap.isPlaying && bitmap.isDisplaying && bitmap.bitmapData != null && !oneTime)
 		{
-			
 			
 			if (graphic.imageFrame.frame == null)
 			{
@@ -68,8 +67,8 @@ class VideoSprite extends FlxSprite
 			
             if (canvasWidth != 0 && canvasHeight != 0)
 			{
-			bitmap.width = canvasWidth;
-			bitmap.height = canvasHeight;
+			bitmap.set_width(canvasWidth);
+			bitmap.set_height(canvasHeight);
 				
 			}            
             graphic.bitmap = bitmap.bitmapData;
