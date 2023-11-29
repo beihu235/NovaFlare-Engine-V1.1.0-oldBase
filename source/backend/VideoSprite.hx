@@ -24,9 +24,6 @@ class VideoSprite extends FlxSprite
 	public function new(X:Float = 0, Y:Float = 0)
 	{
 		super(X, Y);
-		
-		canvasWidth = Width;
-	    canvasHeight = Height;
 
 		makeGraphic(1, 1, FlxColor.TRANSPARENT);
 
@@ -61,12 +58,13 @@ class VideoSprite extends FlxSprite
 				trace('the frame of the image is null?');
 				return;
 			}
-			
+			/*
             if (canvasWidth != 0 && canvasHeight != 0)
 			{
 			
 				
 			}            
+			*/
             graphic.bitmap = bitmap.bitmapData;
 			loadGraphic(graphic);
 			
