@@ -34,7 +34,7 @@ class VideoSprite extends FlxSprite
 		makeGraphic(1, 1, FlxColor.TRANSPARENT);
 
 		bitmap = new VideoHandler();
-		bitmap.canUseAutoResize = false;
+		bitmap.canUseAutoResize = true;
 		bitmap.alpha = 0;
 		bitmap.openingCallback = function()
 		{
@@ -55,8 +55,8 @@ class VideoSprite extends FlxSprite
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-
-		if (bitmap.isPlaying && bitmap.isDisplaying && bitmap.bitmapData != null/* && !oneTime*/)
+        /*
+		if (bitmap.isPlaying && bitmap.isDisplaying && bitmap.bitmapData != null && !oneTime)
 		{
 			
 			
@@ -70,14 +70,14 @@ class VideoSprite extends FlxSprite
 			loadGraphic(graphic);
 			if (canvasWidth != 0 && canvasHeight != 0)
 			{
-				setGraphicSize(canvasWidth, canvasHeight);
-				updateHitbox();
+				//setGraphicSize(canvasWidth, canvasHeight);
+				//updateHitbox();
 
-				//var size:Float = (fillScreen ? Math.max : Math.min)(scale.x, scale.y);
-				//scale.set(size, size); // lol
+				
 			}
-			//oneTime = true;
+			oneTime = true;
 		}
+		*/
 	}
 
 	/**
