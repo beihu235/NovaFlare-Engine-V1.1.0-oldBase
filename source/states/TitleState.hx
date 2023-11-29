@@ -31,7 +31,7 @@ import sys.io.File;
 #end
 
 #if VIDEOS_ALLOWED 
-import VideoSprite;
+import backend.VideoSprite;
 #end
 
 typedef TitleData =
@@ -822,11 +822,9 @@ class TitleState extends MusicBeatState
 		}
         
         
-		var video:VideoSprite = new VideoSprite(0,0);
+		var video:VideoSprite = new VideoSprite(0, 0, 1280, 720);
 			video.playVideo(filepath);
 			add(video);
-			video.scale.x = FlxG.width / video.framePixels.width;		
-			video.scale.y = FlxG.height / video.framePixels.height;
 			video.finishCallback = function()
 			{
 				videoEnd();
