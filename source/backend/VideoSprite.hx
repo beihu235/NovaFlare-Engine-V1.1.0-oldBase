@@ -67,8 +67,8 @@ class VideoSprite extends FlxSprite
 			
             if (canvasWidth != 0 && canvasHeight != 0)
 			{
-			bitmap.set_width(canvasWidth);
-			bitmap.set_height(canvasHeight);
+			bitmap.videoWidth = canvasWidth;
+			bitmap.videoHeight = canvasHeight;
 				
 			}            
             graphic.bitmap = bitmap.bitmapData;
