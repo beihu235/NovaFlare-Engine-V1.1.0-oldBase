@@ -34,7 +34,7 @@ class VideoSprite extends FlxSprite
 		makeGraphic(1, 1, FlxColor.TRANSPARENT);
 
 		bitmap = new VideoHandler();
-		bitmap.canUseAutoResize = true;
+		bitmap.canUseAutoResize = false;
 		bitmap.alpha = 0;
 		bitmap.openingCallback = function()
 		{
@@ -55,8 +55,8 @@ class VideoSprite extends FlxSprite
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-        /*
-		if (bitmap.isPlaying && bitmap.isDisplaying && bitmap.bitmapData != null && !oneTime)
+        
+		if (bitmap.isPlaying && bitmap.isDisplaying && bitmap.bitmapData != null/* && !oneTime*/)
 		{
 			
 			
@@ -65,19 +65,19 @@ class VideoSprite extends FlxSprite
 				trace('the frame of the image is null?');
 				return;
 			}
-                        
+			
+            if (canvasWidth != 0 && canvasHeight != 0)
+			{
+			bitmap.width = canvasWidth;
+			bitmap.height = canvasHeight;
+				
+			}            
             graphic.bitmap = bitmap.bitmapData;
 			loadGraphic(graphic);
-			if (canvasWidth != 0 && canvasHeight != 0)
-			{
-				//setGraphicSize(canvasWidth, canvasHeight);
-				//updateHitbox();
-
-				
-			}
+			
 			oneTime = true;
 		}
-		*/
+		
 	}
 
 	/**
