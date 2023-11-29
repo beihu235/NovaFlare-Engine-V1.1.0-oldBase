@@ -21,7 +21,7 @@ class VideoSprite extends FlxSprite
 	public var openingCallback:Void->Void = null;
 	public var finishCallback:Void->Void = null;
 
-	public function new(X:Float = 0, Y:Float = 0, Width:Int = 0, Height:Int = 0)
+	public function new(X:Float = 0, Y:Float = 0)
 	{
 		super(X, Y);
 		
@@ -81,7 +81,7 @@ class VideoSprite extends FlxSprite
 	 * @param Loop Loop the video.
 	 * @param PauseMusic Pause music until the video ends.
 	 */
-	public function playVideo(Path:String, Loop:Bool = false, PauseMusic:Bool = false):Void
-		bitmap.playVideo(Path, Loop, PauseMusic);
+	public function playVideo(Path:String, Loop:Bool = false, PauseMusic:Bool = false, Width:Int = 0, Height:Int = 0):Void
+		bitmap.playVideo(Path, Loop, PauseMusic, Width, Height);
 }
 #end
