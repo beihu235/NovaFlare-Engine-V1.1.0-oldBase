@@ -275,7 +275,7 @@ class Note extends FlxSprite
 				scale.y *= PlayState.daPixelZoom;
 				updateHitbox();
 			}
-			
+			centerOrigin();
 		}
 		else if(!isSustainNote)
 		{
