@@ -17,8 +17,8 @@ import flixel.util.FlxColor;
 class VideoSprite extends FlxSprite
 {
 	public var bitmap:VideoHandler;
-	public var canvasWidth:Null<Int>;
-	public var canvasHeight:Null<Int>;
+	public var canvasWidth:Int;
+	public var canvasHeight:Int;
 	public var fillScreen:Bool = false;
 
 	public var openingCallback:Void->Void = null;
@@ -56,7 +56,7 @@ class VideoSprite extends FlxSprite
 	{
 		super.update(elapsed);
 
-		if (bitmap.isPlaying && bitmap.isDisplaying && bitmap.bitmapData != null && !oneTime)
+		if (bitmap.isPlaying && bitmap.isDisplaying && bitmap.bitmapData != null/* && !oneTime*/)
 		{
 			
 			
@@ -76,7 +76,7 @@ class VideoSprite extends FlxSprite
 				//var size:Float = (fillScreen ? Math.max : Math.min)(scale.x, scale.y);
 				//scale.set(size, size); // lol
 			}
-			oneTime = true;
+			//oneTime = true;
 		}
 	}
 
