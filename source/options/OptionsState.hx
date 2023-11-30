@@ -373,14 +373,8 @@ class OptionsState extends MusicBeatState
 	
 	var firstClose:Bool = false;
 	override function closeSubState() {
-	    if (!firstClose) {
-    	    super.closeSubState();
-    	    firstClose = true;
-	    }else{
-    		super.closeSubState();
-    		ClientPrefs.saveSettings();
-    		resetOptionChoose();
-		}
+    	super.closeSubState();
+        ClientPrefs.saveSettings();
 	}
 
 	public function switchCat(cat:OptionCata, checkForOutOfBounds:Bool = true)
