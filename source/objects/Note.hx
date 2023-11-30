@@ -275,7 +275,6 @@ class Note extends FlxSprite
 				scale.y *= PlayState.daPixelZoom;
 				updateHitbox();
 			}
-			centerOrigin();
 		}
 		else if(!isSustainNote)
 		{
@@ -476,14 +475,18 @@ class Note extends FlxSprite
 		if(copyY)
 		{
 			y = strumY + offsetY + correctionOffset + Math.sin(angleDir) * distance;
-			if(myStrum.downScroll && isSustainNote)
-			{
+			if(isSustainNote){
+			    if (myStrum.downScroll){
 				if(PlayState.isPixelStage)
 				{
 					y -= PlayState.daPixelZoom * 9.5;
 				}
-				y -= (frameHeight * scale.y) - (Note.swagWidth / 2);
-			}
+				y -= ((frameHeight * scale.y) - (Note.swagWidth / 2)) * Math.abs((Math.sin(strumDirection / Math.PI) - 1) / 2);
+			    }else{
+			    y -= ((frameHeight * scale.y) - (Note.swagWidth / 2)) * Math.abs((Math.sin((strumDirection + Math.PI / 2) / Math.PI) - 1) / 2);
+			    }			    
+			}	
+			//(sin(90x/360) - 1) / 2
 		}
 	}
 
