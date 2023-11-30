@@ -125,7 +125,7 @@ class AndroidControlsMenu extends MusicBeatState
 		tipText.scrollFactor.set();
 		add(tipText);
 
-		changeSelection(config.getcontrolmode());
+		changeSelection(0);
 	}
 
 	override function update(elapsed:Float)
