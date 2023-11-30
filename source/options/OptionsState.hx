@@ -373,14 +373,14 @@ class OptionsState extends MusicBeatState
 	
 	var firstClose:Bool = false;
 	override function closeSubState() {
-	    if (firstClose == false) {
-	    super.closeSubState();
-	    firstClose = true;
-	    }
-	    else
-		super.closeSubState();
-		ClientPrefs.saveSettings();
-		resetOptionChoose();
+	    if (!firstClose) {
+    	    super.closeSubState();
+    	    firstClose = true;
+	    }else{
+    		super.closeSubState();
+    		ClientPrefs.saveSettings();
+    		resetOptionChoose();
+		}
 	}
 
 	public function switchCat(cat:OptionCata, checkForOutOfBounds:Bool = true)
@@ -658,6 +658,7 @@ class OptionsState extends MusicBeatState
 					if (!onPlayState) {
 					    ClientPrefs.saveSettings();
 						MusicBeatState.switchState(new MainMenuState());
+						persistentUpdate = false;
                         //FlxG.sound.music.stop();
 					    }
 					else
