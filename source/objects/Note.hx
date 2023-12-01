@@ -481,9 +481,9 @@ class Note extends FlxSprite
 				{
 					y -= PlayState.daPixelZoom * 9.5;
 				}
-				y -= ((frameHeight * scale.y) - (Note.swagWidth / 2)) * Math.abs((Math.sin((strumDirection + 0) / (Math.PI * 4)) - 1) / 2);
+				y -= ((frameHeight * scale.y) - (Note.swagWidth / 2)) * ((Math.sin(((strumDirection + 0) / 360) * Math.PI) + 1) / 2);
 			    }else{
-			    y -= ((frameHeight * scale.y) - (Note.swagWidth / 2)) * Math.abs((Math.sin((strumDirection + Math.PI / 2) / (Math.PI * 4)) - 1) / 2);
+			    y -= ((frameHeight * scale.y) - (Note.swagWidth / 2)) * ((Math.sin(((strumDirection + Math.PI / 2) / 360) * Math.PI) - 1) / 2);
 			    }			    
 			}	
 			//(sin(90x/360) - 1) / 2
