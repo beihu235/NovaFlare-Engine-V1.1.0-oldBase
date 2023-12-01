@@ -42,6 +42,23 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
+	
+	var SoundTime:Float = 0;
+	var BeatTime:Float = 0;
+	var canBeat:Bool = true;
+	
+	var ColorArray:Array<Int> = [
+		0xFF9400D3,
+		0xFF4B0082,
+		0xFF0000FF,
+		0xFF00FF00,
+		0xFFFFFF00,
+		0xFFFF7F00,
+		0xFFFF0000
+	                                
+	    ];
+	public static var currentColor:Int = 1;    
+	public static var currentColorAgain:Int = 0;
 			
 	var bgMove:FlxBackdrop;
 	public static var Mainbpm:Float = 0;
@@ -200,7 +217,7 @@ class MainMenuState extends MusicBeatState
         versionShit.cameras = [camHUD];
 		// NG.core.calls.event.logEvent('swag').send();
 
-		changeItem();
+		
         
 		#if ACHIEVEMENTS_ALLOWED
 		Achievements.loadAchievements();
