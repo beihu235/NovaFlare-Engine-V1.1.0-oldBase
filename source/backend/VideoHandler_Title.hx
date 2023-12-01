@@ -1,19 +1,15 @@
-package backend;
+package;
 
 import flixel.FlxG;
 import openfl.Lib;
 import openfl.events.Event;
 import sys.FileSystem;
-
+import vlc.VLCBitmap;
 
 /**
  * Handles video playback.
  * Use bitmap to connect to a graphic or use `VideoSprite`.
  */
- 
- #if VIDEOS_ALLOWED 
-import vlc.VLCBitmap;
-
 class VideoHandler_Title extends VLCBitmap
 {
 	public var canSkip:Bool = true;
@@ -81,7 +77,7 @@ class VideoHandler_Title extends VLCBitmap
 	 * @param Loop Loop the video.
 	 * @param PauseMusic Pause music until the video ends.
 	 */
-	public function playVideo(Path:String, Loop:Bool = false, PauseMusic:Bool = false, Width:Int = 0, Height:Int = 0):Void
+	public function playVideo(Path:String, Loop:Bool = false, PauseMusic:Bool = false, Width:Int, Height:Int):Void
 	{
 		pauseMusic = PauseMusic;
 
@@ -95,17 +91,13 @@ class VideoHandler_Title extends VLCBitmap
 			FlxG.signals.focusGained.add(resume);
 			FlxG.signals.focusLost.add(pause);
 		}
-		
-       // set_width(Width);
-		//set_height(Height);
+
 		// in case if you want to use another dir then the application one.
 		// android can already do this, it can't use application's storage.
 		if (FileSystem.exists(Sys.getCwd() + Path))
 			play(Sys.getCwd() + Path, Loop);
 		else
 			play(Path, Loop);
-		
-		
 	}
 
 	private function update(?E:Event):Void
@@ -149,4 +141,3 @@ class VideoHandler_Title extends VLCBitmap
 		return 0;
 	}
 }
-#end
