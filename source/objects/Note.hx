@@ -275,12 +275,12 @@ class Note extends FlxSprite
 				scale.y *= PlayState.daPixelZoom;
 				updateHitbox();
 			}
-		}
+		}/*
 		else if(!isSustainNote)
-		{
+		{*/
 			centerOffsets();
 			centerOrigin();
-		}
+		//}
 		x += offsetX;
 	}
 
@@ -518,7 +518,7 @@ class Note extends FlxSprite
     function angleReturn(angle:Float):Float{ //let's go!!!
         var result:Float = resetAngle(angle);
         if (result <= 90) result = Math.cos(result / 180 * Math.PI) * 0.5; //cos(x)
-        else result = Math.sin( ((result - 90) / 27 * 15) / 180 * Math.PI); 
+        else result = Math.sin( ((result - 90) / 27 * 15) / 180 * Math.PI); //uhhhh idk how to write
         return result;
     }
     
