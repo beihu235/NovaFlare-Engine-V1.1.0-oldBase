@@ -769,6 +769,8 @@ class FreeplayState extends MusicBeatState
             */
         }
         if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true;        
+        
+        bgMove.alpha = 0.1;
 
 		updateTexts(elapsed);
 		super.update(elapsed);
