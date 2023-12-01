@@ -91,6 +91,9 @@ class VideoHandler_Title extends VLCBitmap
 			FlxG.signals.focusGained.add(resume);
 			FlxG.signals.focusLost.add(pause);
 		}
+		
+		set_width(Width);
+		set_height(Height);
 
 		// in case if you want to use another dir then the application one.
 		// android can already do this, it can't use application's storage.
