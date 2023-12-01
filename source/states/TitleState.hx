@@ -31,10 +31,7 @@ import sys.io.File;
 #end
 
 #if VIDEOS_ALLOWED 
-#if (hxCodec >= "3.0.0") import hxcodec.flixel.FlxVideo as VideoHandler;
-#elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler as VideoHandler;
-#elseif (hxCodec == "2.6.0") import VideoHandler;
-#else import vlc.MP4Handler as VideoHandler; #end
+import backend.VideoSprite;
 #end
 
 typedef TitleData =
@@ -641,15 +638,15 @@ class TitleState extends MusicBeatState
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
 					#if PSYCH_WATERMARKS
-					createCoolText(['Psych Engine by'], 40);
+					createCoolText(['NF Engine by'], 40);
 					#else
 					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
 					#end
 				// credTextShit.visible = true;
 				case 4:
 					#if PSYCH_WATERMARKS
-					addMoreText('Shadow Mario', 40);
-					addMoreText('Riveren', 40);
+					addMoreText('beihu', 40);
+					addMoreText('TieGuo', 40);
 					#else
 					addMoreText('present');
 					#end
@@ -660,56 +657,56 @@ class TitleState extends MusicBeatState
 				// credTextShit.visible = false;
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
-				case 6:
-					createCoolText(['NF Engine by'], 40);
+				/*case 6:
+					
 				// credTextShit.visible = true;
 				case 7:
-					addMoreText('beihu', 40);
+					
 				// credTextShit.text += '\npresent...';
-				// credTextShit.addText();
-				case 8:
+				// credTextShit.addText();*/
+				case 6:
 					deleteCoolText();
 				// credTextShit.visible = false;
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
-				case 9:
+				case 7:
 					#if PSYCH_WATERMARKS
 					createCoolText(['Not associated', 'with'], -40);
 					#else
 					createCoolText(['In association', 'with'], -40);
 					#end
-				case 10:
+				case 8:
 					addMoreText('newgrounds', -40);
 					ngSpr.visible = true;
 				// credTextShit.text += '\nNewgrounds';
-				case 11:
+				case 9:
 					deleteCoolText();
 					ngSpr.visible = false;
 				// credTextShit.visible = false;
 
 				// credTextShit.text = 'Shoutouts Tom Fulp';
 				// credTextShit.screenCenter();
-				case 12:
+				case 10:
 					createCoolText([curWacky[0]]);
 				// credTextShit.visible = true;
-				case 13:
+				case 11:
 					addMoreText(curWacky[1]);
 				// credTextShit.text += '\nlmao';
-				case 14:
+				case 12:
 					deleteCoolText();
 				// credTextShit.visible = false;
 				// credTextShit.text = "Friday";
 				// credTextShit.screenCenter();
-				case 15:
+				case 13:
 					addMoreText('Friday');
 				// credTextShit.visible = true;
-				case 16:
+				case 14:
 					addMoreText('Night');
 				// credTextShit.text += '\nNight';
-				case 17:
+				case 15:
 					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
 
-				case 18:
+				case 16:
 					skipIntro();
 			}
 		}
@@ -798,11 +795,10 @@ class TitleState extends MusicBeatState
 			skippedIntro = true;
 		}
 	}
-	
+	var video:VideoSprite;
 	function startVideo(name:String)
 	{
-	
-	    skipVideo = new FlxText(0, FlxG.height - 26, 0, "Press " + #if andriod "Back on your phone " #else "Enter " #end + "to skip", 18);
+	    skipVideo = new FlxText(0, FlxG.height - 26, 0, "Press " + #if android "Back on your phone " #else "Enter " #end + "to skip", 18);
 		skipVideo.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 18);
 		skipVideo.alpha = 0;
 		skipVideo.alignment = CENTER;
@@ -824,28 +820,17 @@ class TitleState extends MusicBeatState
 			videoEnd();
 			return;
 		}
-
-		var video:VideoHandler = new VideoHandler();
-			#if (hxCodec >= "3.0.0")
-			// Recent versions
-			video.play(filepath);
-			
-			showText();
-			video.onEndReached.add(function()
-			{
-				video.dispose();
-				videoEnd();
-				return;
-			}, true);
-			#else
-			// Older versions
+        
+        
+		var video:VideoSprite = new VideoSprite(0, 0, 1280, 720);
 			video.playVideo(filepath);
+			add(video);
 			video.finishCallback = function()
 			{
 				videoEnd();
 				return;
 			}
-			#end
+		showText();	
 		#else
 		FlxG.log.warn('Platform not supported!');
 		videoEnd();
@@ -856,6 +841,7 @@ class TitleState extends MusicBeatState
 	function videoEnd()
 	{
 	    skipVideo.visible = false;
+	    //video.visible = false;
 		startCutscenesOut();
 	}
 	

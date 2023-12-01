@@ -33,7 +33,7 @@ class MainMenuState extends MusicBeatState
 		'story_mode',
 		'freeplay',
 		#if MODS_ALLOWED 'mods', #end
-		//#if ACHIEVEMENTS_ALLOWED 'awards', #end
+		#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
 		//#if !switch 'donate', #end
 		'options'
@@ -43,11 +43,6 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	
-	
-	
-	var bgMove:FlxBackdrop;
-	public static var Mainbpm:Float = 0;
-	public static var bpm:Float = 0;
 	var SoundTime:Float = 0;
 	var BeatTime:Float = 0;
 	
@@ -62,7 +57,11 @@ class MainMenuState extends MusicBeatState
 	                                
 	    ];
 	public static var currentColor:Int = 1;    
-	public static var currentColorAgain:Int = 0;    
+	public static var currentColorAgain:Int = 0;
+			
+	var bgMove:FlxBackdrop;
+	public static var Mainbpm:Float = 0;
+	public static var bpm:Float = 0;
 	
 
 	override function create()
@@ -83,8 +82,7 @@ class MainMenuState extends MusicBeatState
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
-		#end
-		
+		#end		
 
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
@@ -217,8 +215,8 @@ class MainMenuState extends MusicBeatState
         versionShit.cameras = [camHUD];
 		// NG.core.calls.event.logEvent('swag').send();
 
-		//changeItem();
-        /*
+		
+        
 		#if ACHIEVEMENTS_ALLOWED
 		Achievements.loadAchievements();
 		var leDate = Date.now();
@@ -230,7 +228,7 @@ class MainMenuState extends MusicBeatState
 				ClientPrefs.saveSettings();
 			}
 		}
-		#end*/
+		#end
 		
 		#if !android
 		FlxG.mouse.visible = true;
@@ -247,7 +245,7 @@ class MainMenuState extends MusicBeatState
 		CustomFadeTransition.nextCamera = camHUD;
 	}
 
-    /*
+    
 	#if ACHIEVEMENTS_ALLOWED
 	// Unlocks "Freaky on a Friday Night" achievement
 	function giveAchievement() {
@@ -256,7 +254,7 @@ class MainMenuState extends MusicBeatState
 		trace('Giving achievement "friday_night_play"');
 	}
 	#end
-    */
+    
     
 	
 	var canClick:Bool = true;
@@ -405,17 +403,13 @@ class MainMenuState extends MusicBeatState
 		
 		
 		super.update(elapsed);
-	}
-    
-	
+	}    	
     
     function selectSomething()
 	{
 		endCheck = true;
 		FlxG.sound.play(Paths.sound('confirmMenu'));
-		canClick = false;
-		
-		
+		canClick = false;				
 		
 		for (i in 0...optionShit.length)
 		{

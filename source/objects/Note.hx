@@ -259,7 +259,6 @@ class Note extends FlxSprite
 			if (prevNote.isSustainNote)
 			{
 				prevNote.animation.play(colArray[prevNote.noteData % colArray.length] + 'hold');
-				earlyHitMult = 0;
 
 				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.05;
 				if(createdFrom != null && createdFrom.songSpeed != null) prevNote.scale.y *= createdFrom.songSpeed;
@@ -276,13 +275,12 @@ class Note extends FlxSprite
 				scale.y *= PlayState.daPixelZoom;
 				updateHitbox();
 			}
-			
-		}
+		}/*
 		else if(!isSustainNote)
-		{
+		{*/
 			centerOffsets();
 			centerOrigin();
-		}
+		//}
 		x += offsetX;
 	}
 
@@ -465,25 +463,29 @@ class Note extends FlxSprite
 		if (!myStrum.downScroll) distance *= -1;
 
 		var angleDir = strumDirection * Math.PI / 180;
+
 		if (copyAngle)
 			angle = strumDirection - 90 + strumAngle + offsetAngle;
-
-		if(copyAlpha)
-			alpha = strumAlpha * multAlpha;
-
+		else{
+		    angle = strumDirection - 90 + offsetAngle;
+            }
 		if(copyX)
 			x = strumX + offsetX + Math.cos(angleDir) * distance;
 
 		if(copyY)
 		{
 			y = strumY + offsetY + correctionOffset + Math.sin(angleDir) * distance;
-			if(myStrum.downScroll && isSustainNote)
-			{
-				if(PlayState.isPixelStage)
-				{
-					y -= PlayState.daPixelZoom * 9.5;
-				}
-				y -= (frameHeight * scale.y) - (Note.swagWidth / 2);
+			if(isSustainNote){
+			    if (myStrum.downScroll){
+				    if(PlayState.isPixelStage)
+				    {
+					    y -= PlayState.daPixelZoom * 9.5;
+				    }
+				    y -= (frameHeight * scale.y) - (Note.swagWidth / 2);
+				    y += ((frameHeight * scale.y)/* - (Note.swagWidth / 2)*/) * angleReturn(strumDirection);
+			    }else{
+			        y -= ((frameHeight * scale.y) /*- (Note.swagWidth / 2)*/) * angleReturn(strumDirection);
+			    }
 			}
 		}
 	}
@@ -502,7 +504,7 @@ class Note extends FlxSprite
 			var swagRect:FlxRect = clipRect;
 			if(swagRect == null) swagRect = new FlxRect(0, 0, frameWidth, frameHeight);
             
-		    var time = FlxMath.bound((Conductor.songPosition - strumTime) / (height / (0.45 * FlxMath.roundDecimal(PlayState.instance.songSpeed, 2))), 0, 1);
+		    var time:Float = FlxMath.bound((Conductor.songPosition - strumTime) / (height / (0.45 * FlxMath.roundDecimal(PlayState.instance.songSpeed, 2))), 0, 1);
 		    
 		    swagRect.x = 0;
 		    swagRect.y = time * frameHeight;
@@ -512,4 +514,18 @@ class Note extends FlxSprite
 		    clipRect = swagRect;
 		}
 	}
+	
+    function angleReturn(angle:Float):Float{ //let's go!!!
+        var result:Float = resetAngle(angle);
+        if (result <= 90) result = Math.cos(result / 180 * Math.PI); //cos(x)
+        else result = Math.sin( ((result - 90) / 27 * 15) / 180 * Math.PI); //uhhhh idk how to write
+        return result;
+    }
+    
+    function resetAngle(angle:Float):Float{
+        if (angle >= 0)
+        return angle - 360 * Math.floor(angle / 360);
+        
+        return angle + 360 * (Math.floor(angle / 360) + 1);
+    }
 }

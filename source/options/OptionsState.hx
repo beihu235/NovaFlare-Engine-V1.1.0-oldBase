@@ -120,8 +120,9 @@ class OptionsState extends MusicBeatState
 	public var selectedCatIndex = 0;
 	public var selectedOptionIndex = 0;
 	
-	private static var saveSelectedCatIndex = 0;
-	private static var saveSelectedOptionIndex = 0;
+	private static var savePosition:Int = 0;
+	private static var saveSelectedCatIndex:Int = 0;
+	private static var saveSelectedOptionIndex:Int = 0;
 	
 	public var startFix:Bool = false;
 
@@ -177,7 +178,6 @@ class OptionsState extends MusicBeatState
 				new FilpChart('If checked, filp chart for playing.'),
 				new HitSoundOption("Adds 'hitsound' on note hits."),
 				new GhostTapOption("Toggle counting pressing a directional input when no arrow is there as a miss."),				
-				//new InstantRespawn("Toggle if you instantly respawn after dying."),
 				
 				new NoReset("Toggle pressing R to gameover."),
 				
@@ -276,6 +276,8 @@ class OptionsState extends MusicBeatState
 				new MarvelousSprite('If unchecked,Marvelous rate will also use sick sprite.'),
 			], true)
 		];
+		
+		persistentUpdate = persistentDraw = true;
 
 		instance = this;
 
@@ -363,16 +365,16 @@ class OptionsState extends MusicBeatState
         
 		#if android
         addVirtualPad(FULL, A_B_C);
-        addPadCamera();
+        //addPadCamera();
         #end
 		
 		super.create();
 	}
 	
+	var firstClose:Bool = false;
 	override function closeSubState() {
-		super.closeSubState();
-		ClientPrefs.saveSettings();
-		resetOptionChoose();
+    	super.closeSubState();
+        ClientPrefs.saveSettings();
 	}
 
 	public function switchCat(cat:OptionCata, checkForOutOfBounds:Bool = true)
@@ -650,6 +652,7 @@ class OptionsState extends MusicBeatState
 					if (!onPlayState) {
 					    ClientPrefs.saveSettings();
 						MusicBeatState.switchState(new MainMenuState());
+						persistentUpdate = false;
                         //FlxG.sound.music.stop();
 					    }
 					else
@@ -869,6 +872,7 @@ class OptionsState extends MusicBeatState
 		if (!selectedCat.middle){
 		    saveSelectedOptionIndex = selectedOptionIndex;
 		    saveSelectedCatIndex = selectedCatIndex;
+		    savePosition = Std.int((selectedCat.optionObjects.members[0].y - (selectedCat.positionFix + 54)) / 46);
 		}
 		
 		if (selectedCat != null && !isInMain)

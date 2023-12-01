@@ -64,13 +64,13 @@ class AndroidControlsMenu extends MusicBeatState
 		
 		inputvari = new FlxText(0, 150, 0, '', 30);
 		inputvari.setFormat("VCR OSD Mono", 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		inputvari.borderSize = 1;
+		inputvari.borderSize = 0;
 		inputvari.screenCenter(X);
 		add(inputvari);
 
 		var ui_tex = Paths.getSparrowAtlas('androidcontrols-source/menu/arrows');
 
-		leftArrow = new FlxSprite(inputvari.x - 60, inputvari.y + inputvari.height / 2);
+		leftArrow = new FlxSprite(inputvari.x - 60, inputvari.y - inputvari.height / 2);
 		leftArrow.frames = ui_tex;
 		leftArrow.animation.addByPrefix('idle', "arrow left");
 		leftArrow.animation.addByPrefix('press', "arrow push left");
