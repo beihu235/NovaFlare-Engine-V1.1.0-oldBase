@@ -526,6 +526,6 @@ class Note extends FlxSprite
         if (angle >= 0)
         return angle - 360 * (angle % 360);
         
-        return angle + 360 * (Math.abs(angle % 360) + 1);
+        return angle + 360 * ((Math.abs(angle) % 360) + 1);
     }
 }
