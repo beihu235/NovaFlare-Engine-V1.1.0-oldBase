@@ -822,8 +822,8 @@ class TitleState extends MusicBeatState
 		}
         
         
-		var video:VideoSprite = new VideoSprite(0, 0);
-			video.playVideo(filepath, false, false, 1280, 720);
+		var video:VideoSprite = new VideoSprite(0, 0, 1280, 720);
+			video.playVideo(filepath);
 			add(video);
 			video.finishCallback = function()
 			{
