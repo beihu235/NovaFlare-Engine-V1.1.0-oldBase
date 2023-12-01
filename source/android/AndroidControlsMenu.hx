@@ -70,12 +70,12 @@ class AndroidControlsMenu extends MusicBeatState
 
 		var ui_tex = Paths.getSparrowAtlas('androidcontrols-source/menu/arrows');
 
-		leftArrow = new FlxSprite(inputvari.x - 60, inputvari.y - inputvari.height / 2);
+		leftArrow = new FlxSprite(inputvari.x - 60, inputvari.y + inputvari.height / 2);
 		leftArrow.frames = ui_tex;
 		leftArrow.animation.addByPrefix('idle', "arrow left");
 		leftArrow.animation.addByPrefix('press', "arrow push left");
 		leftArrow.animation.play('idle');
-		leftArrow.y += leftArrow.height / 2;
+		leftArrow.y -= leftArrow.height / 2;
 		add(leftArrow);
 
 		rightArrow = new FlxSprite(inputvari.x + inputvari.width + 10, leftArrow.y);
