@@ -1,4 +1,4 @@
-package;
+package backend;
 
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
