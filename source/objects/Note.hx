@@ -517,8 +517,8 @@ class Note extends FlxSprite
 	
     function angleReturn(angle:Float):Float{ //let's go!!!
         var result:Float = Math.sin(angle); 
-        result = (result + 1) / 2
-        result = result * 0.5 + 0.5
-        return result
+        result = (result + 1) / 2;
+        result = result * 0.5 + 0.5;
+        return result;
     }
 }
