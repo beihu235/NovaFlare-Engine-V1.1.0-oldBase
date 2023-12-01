@@ -516,6 +516,7 @@ class FreeplayState extends MusicBeatState
 		
 		checkSearch(elapsed);
 		
+		BGupdate();		
 		
 		var ratingSplit:Array<String> = Std.string(CoolUtil.floorDecimal(lerpRating * 100, 2)).split('.');
 		if(ratingSplit.length < 2) { //No decimals, add an empty space
@@ -735,7 +736,40 @@ class FreeplayState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
 		
-		SoundTime = FlxG.sound.music.time / 1000;
+		updateTexts(elapsed);
+		super.update(elapsed);
+		
+		
+	}
+	
+	override function closeSubState() {
+		changeSelection(0, false);
+		
+		super.closeSubState();
+		
+		persistentUpdate = true;
+				
+		#if android
+		removeVirtualPad();
+		addVirtualPad(FULL, A_B_C_X_Y_Z);
+		#end
+		
+		checkSubstate = false;
+	}
+
+	public static function destroyFreeplayVocals() {
+		if(vocals != null) {
+			vocals.stop();
+			vocals.destroy();
+		}
+		vocals = null;
+	}
+	
+	function BGupdate(){
+	
+	    bgMove.alpha = 0.1;
+	    
+	    SoundTime = FlxG.sound.music.time / 1000;
         BeatTime = 60 / bpm;
         
         if ( Math.floor(SoundTime/BeatTime) % 4  == 0  && canBeat) {
@@ -770,34 +804,8 @@ class FreeplayState extends MusicBeatState
             */
         }
         if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true;        
-
-		updateTexts(elapsed);
-		super.update(elapsed);
-		
-		bgMove.alpha = 0.1;
-	}
-	
-	override function closeSubState() {
-		changeSelection(0, false);
-		
-		super.closeSubState();
-		
-		persistentUpdate = true;
-				
-		#if android
-		removeVirtualPad();
-		addVirtualPad(FULL, A_B_C_X_Y_Z);
-		#end
-		
-		checkSubstate = false;
-	}
-
-	public static function destroyFreeplayVocals() {
-		if(vocals != null) {
-			vocals.stop();
-			vocals.destroy();
-		}
-		vocals = null;
+        
+        bgMove.alpha = 0.1;		
 	}
 	
 	function checkSearch(elapsed:Float)
