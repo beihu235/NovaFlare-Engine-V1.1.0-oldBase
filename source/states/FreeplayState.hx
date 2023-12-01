@@ -109,17 +109,24 @@ class FreeplayState extends MusicBeatState
     
     var checkSubstate:Bool = false;
     
-    var ColorArray:Array<Int> = [
+    public static var Mainbpm:Float = 0;
+	public static var bpm:Float = 0;
+	var SoundTime:Float = 0;
+	var BeatTime:Float = 0;
+	var canBeat:Bool = true;
+	
+	var ColorArray:Array<Int> = [
 		0xFF9400D3,
 		0xFF4B0082,
 		0xFF0000FF,
 		0xFF00FF00,
 		0xFFFFFF00,
 		0xFFFF7F00,
-		0xFFFF0000	                                
+		0xFFFF0000
+	                                
 	    ];
-	private static var currentColor:Int = 1;    
-	private static var currentColorAgain:Int = 0;       
+	public static var currentColor:Int = 1;    
+	public static var currentColorAgain:Int = 0;
         
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -151,6 +158,9 @@ class FreeplayState extends MusicBeatState
 		FlxG.cameras.add(camBlackFade, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		CustomFadeTransition.nextCamera = camBlackFade;
+		
+		bpm = MainMenuState.bpm;
+		Mainbpm = MainMenuState.Mainbpm;
 		
 		persistentUpdate = persistentDraw = true;
 		
@@ -724,6 +734,41 @@ class FreeplayState extends MusicBeatState
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
 			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
+		
+		SoundTime = FlxG.sound.music.time / 1000;
+        BeatTime = 60 / bpm;
+        
+        if ( Math.floor(SoundTime/BeatTime) % 4  == 0  && canBeat) {
+        
+            canBeat = false;
+            
+            currentColor++;            
+            if (currentColor > 6) currentColor = 1;
+            currentColorAgain = currentColor - 1;
+            if (currentColorAgain <= 0) currentColorAgain = 6;
+            
+            FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});
+       
+		    for (i in 0...iconArray.length)
+		    {
+			iconArray[i].scale.x = 1 + 0.1;
+			iconArray[i].scale.y = 1 + 0.1;
+			FlxTween.tween(iconArray[i].scale, {x: 1}, 0.6, {ease: FlxEase.cubeOut});
+		    FlxTween.tween(iconArray[i].scale, {y: 1}, 0.6, {ease: FlxEase.cubeOut});
+		    }
+            /*
+            grpSongs.forEach(function(spr:Alphabet)	{
+            if (spr.scale.x >= 0.99){
+            
+                spr.scale.x = 1.1;
+				spr.scale.y = 1.1;
+				    FlxTween.tween(spr.scale, {x: 1}, 0.6, {ease: FlxEase.cubeOut});
+				    FlxTween.tween(spr.scale, {y: 1}, 0.6, {ease: FlxEase.cubeOut});
+            }
+            });
+            */
+        }
+        if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true;        
 
 		updateTexts(elapsed);
 		super.update(elapsed);
