@@ -482,9 +482,9 @@ class Note extends FlxSprite
 					    y -= PlayState.daPixelZoom * 9.5;
 				    }
 				    y -= (frameHeight * scale.y) - (Note.swagWidth / 2);
-				    y += ((frameHeight * scale.y) - (Note.swagWidth / 2)) * (Math.cos(strumDirection / 360 * Math.PI) + 1) / 2;
+				    y += ((frameHeight * scale.y) - (Note.swagWidth / 2)) * angleReturn(strumDirection / 360 * Math.PI);
 			    }else{
-			        y -= ((frameHeight * scale.y) - (Note.swagWidth / 2)) * (Math.cos(strumDirection / 360 * Math.PI) + 1) / 2;
+			        y -= ((frameHeight * scale.y) - (Note.swagWidth / 2)) * angleReturn(strumDirection / 360 * Math.PI);
 			    }
 			}
 		}
@@ -514,4 +514,11 @@ class Note extends FlxSprite
 		    clipRect = swagRect;
 		}
 	}
+	
+    function angleReturn(angle:Float):Float{ //let's go!!!
+        var result:Float = Math.sin(angle); 
+        result = (result + 1) / 2
+        result = result * 0.5 + 0.5
+        return result
+    }
 }
