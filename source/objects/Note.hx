@@ -518,14 +518,14 @@ class Note extends FlxSprite
     function angleReturn(angle:Float):Float{ //let's go!!!
         var result:Float = resetAngle(angle);
         if (result <= 90) result = Math.cos(result / 180 * Math.PI) * 0.5; //cos(x)
-        else result = Math.sin( ((result - 60) * 12 / 30) / 180 * Math.PI); 
+        else result = Math.sin( ((result - 90) / 27 * 15) / 180 * Math.PI); 
         return result;
     }
     
     function resetAngle(angle:Float):Float{
         if (angle >= 0)
-        return angle - 360 * (angle % 360);
+        return angle - 360 * Math.floor(angle / 360);
         
-        return angle + 360 * ((Math.abs(angle) % 360) + 1);
+        return angle + 360 * (Math.floor(angle / 360) + 1);
     }
 }
