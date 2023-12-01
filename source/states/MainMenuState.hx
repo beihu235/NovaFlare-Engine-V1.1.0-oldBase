@@ -45,7 +45,6 @@ class MainMenuState extends MusicBeatState
 	
 	var SoundTime:Float = 0;
 	var BeatTime:Float = 0;
-	var canBeat:Bool = true;
 	
 	var ColorArray:Array<Int> = [
 		0xFF9400D3,
@@ -63,8 +62,7 @@ class MainMenuState extends MusicBeatState
 	var bgMove:FlxBackdrop;
 	public static var Mainbpm:Float = 0;
 	public static var bpm:Float = 0;
-	var SoundTime:Float = 0;
-	var BeatTime:Float = 0;
+	
 
 	override function create()
 	{
