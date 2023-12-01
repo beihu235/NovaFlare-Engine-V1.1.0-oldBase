@@ -748,6 +748,7 @@ class FreeplayState extends MusicBeatState
             if (currentColorAgain <= 0) currentColorAgain = 6;
             
             FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});
+            
        
 		    for (i in 0...iconArray.length)
 		    {
@@ -769,11 +770,11 @@ class FreeplayState extends MusicBeatState
             */
         }
         if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true;        
-        
-        bgMove.alpha = 0.1;
 
 		updateTexts(elapsed);
 		super.update(elapsed);
+		
+		bgMove.alpha = 0.1;
 	}
 	
 	override function closeSubState() {
