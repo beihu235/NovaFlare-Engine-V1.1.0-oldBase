@@ -65,7 +65,6 @@ jobs:
           haxelib run lime setup -alias -y
           haxelib set hxcpp 4.2.1
           haxelib set openfl 9.2.0
-          haxelib set lime 7.9.0
           haxelib set hxcpp 4.2.1
           haxelib set SScript 7.0.0
           haxelib list
