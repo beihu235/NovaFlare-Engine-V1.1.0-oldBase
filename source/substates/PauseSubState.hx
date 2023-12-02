@@ -308,7 +308,7 @@ class PauseSubState extends MusicBeatSubstate
     	add(skipTimeText);
     	updateSkipTimeText();
     	
-    	new FlxTimer().start(0.5, function(tmr:FlxTimer) {
+    	new FlxTimer().start(0.2, function(tmr:FlxTimer) {
     		stayinMenu = 'base';
     		changeOptions(0);
     	});
@@ -735,7 +735,7 @@ class PauseSubState extends MusicBeatSubstate
     	if (curColorAgain < 0) curColorAgain = menuShadowColor.length -1;
     }
     
-    function pressedBackButton()Bool{
+    function pressedBackButton():Bool{
         if (controls.ACCEPT)
             switch(stayinMenu){
                 case 'difficulty'
