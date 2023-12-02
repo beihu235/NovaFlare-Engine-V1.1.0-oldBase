@@ -17,6 +17,12 @@ import options.OptionsState;
 import flixel.util.FlxStringUtil;
 import flixel.addons.transition.FlxTransitionableState;
 
+/*
+
+    PauseSubState made by TieGuo, code optimized by Beihu.
+    it used at NF Engine
+
+*/
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -35,7 +41,7 @@ class PauseSubState extends MusicBeatSubstate
     var boolText:FlxText;
     var camPause:FlxCamera;
     var pauseMusic:FlxSound;
-    var songName:String = '';
+    public static var songName:String = '';
     var holdTime:Float = 0;
     var skipTimeText:FlxText;
     var curTime:Float = Math.max(0, Conductor.songPosition);
