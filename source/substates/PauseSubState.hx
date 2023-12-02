@@ -328,7 +328,7 @@ class PauseSubState extends MusicBeatSubstate
 		var downP = controls.UI_DOWN_P;
 		var leftP = controls.UI_LEFT_P;
 		var rightP = controls.UI_RIGHT_P;
-		var accepted = controls.ACCEPT;
+		var accept = controls.ACCEPT;
 		
     	if (stayinMenu == 'base') {
     		if (upP)
@@ -347,7 +347,7 @@ class PauseSubState extends MusicBeatSubstate
     			optionsBars[i*2+1].y = optionsAlphabet[i].y - 30;
     		}
     		
-    		if (accepted)
+    		if (accept)
     			doEvent();
     	} else if (stayinMenu == 'debug') {
     		if (upP)
@@ -388,7 +388,7 @@ class PauseSubState extends MusicBeatSubstate
     		} else
     			boolText.y = 1000;
 		
-    		if (MusicBeatState.androidc.newhbox.buttonSpace.justPressed)
+    		if (accept)
     			doEvent();
 			
     		if (text.text == 'Skip Time' && stayinMenu == 'debug') {
