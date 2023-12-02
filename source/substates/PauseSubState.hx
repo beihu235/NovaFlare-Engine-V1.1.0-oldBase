@@ -386,6 +386,7 @@ class PauseSubState extends MusicBeatSubstate
     			setBackButton(true);
     			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
     				stayinMenu = 'base';
+    				debugCurSelected = 0;
     			});
     		}
 		
@@ -437,9 +438,9 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
     			
     		for (i in 0...difficultyAlphabet.length) {
-    			difficultyAlphabet[i].x = FlxMath.lerp(-i*75 + 250, difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));   			
+    			difficultyAlphabet[i].x = FlxMath.lerp((curSelected - i) * 75 + 250, difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));   			
 			    difficultyAlphabet[i].y = FlxMath.lerp((i - difficultyCurSelected) * 180 + 325, difficultyAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
-
+                
     			difficultyBars[i*2].x = difficultyAlphabet[i].x - 300;
     			difficultyBars[i*2].y = difficultyAlphabet[i].y - 30;
 			
@@ -458,6 +459,7 @@ class PauseSubState extends MusicBeatSubstate
     			setBackButton(true);
     			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
     				stayinMenu = 'base';
+    				difficultyCurSelected = 0;
     			});
     		}
     		
@@ -471,7 +473,7 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
     			
     		for (i in 0...optionsOptionsAlphabet.length) {
-    			optionsOptionsAlphabet[i].x = FlxMath.lerp(-i*75 + 100, optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			optionsOptionsAlphabet[i].x = FlxMath.lerp((curSelected - i)*75 + 100, optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			optionsOptionsAlphabet[i].y = FlxMath.lerp((180 * (i - (optionsType.length / 2))) + 400, optionsOptionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
     			optionsOptionsBars[i*2].x = optionsOptionsAlphabet[i].x - 525;
@@ -492,6 +494,7 @@ class PauseSubState extends MusicBeatSubstate
     			setBackButton(true);
     			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
 				stayinMenu = 'base';
+				optionsOptionsBars = 0;
     			});
     		}
 		    if (accept){
@@ -520,7 +523,7 @@ class PauseSubState extends MusicBeatSubstate
     		if (curSelected > options.length - 1) curSelected = 0;
     		if (curSelected < 0) curSelected = options.length - 1;
     		
-    		for (i in 0...options.length) optionsAlphabet[i].alpha = 0.5;
+    		for (i in 0...options.length - 1) optionsAlphabet[i].alpha = 0.5;
     		
     		optionsAlphabet[curSelected].alpha = 1;
     	} else if (stayinMenu == 'debug') {
@@ -528,7 +531,7 @@ class PauseSubState extends MusicBeatSubstate
     		if (debugCurSelected > debugType.length - 1) debugCurSelected = 0;
     		if (debugCurSelected < 0) debugCurSelected = debugType.length - 1;
     		
-    		for (i in 0...debugType.length) debugAlphabet[i].alpha = 0.5;
+    		for (i in 0...debugType.length - 1) debugAlphabet[i].alpha = 0.5;
     		
     		debugAlphabet[debugCurSelected].alpha = 1;
     		
@@ -539,7 +542,7 @@ class PauseSubState extends MusicBeatSubstate
     		}
     	} else if (stayinMenu == 'difficulty') {
     		difficultyCurSelected += num;
-    		if (difficultyCurSelected > options.length - 1) difficultyCurSelected = 0;
+    		if (difficultyCurSelected > difficultyChoices.length - 1) difficultyCurSelected = 0;
     		if (difficultyCurSelected < 0) difficultyCurSelected = difficultyChoices.length - 1;
     		
     		for (i in 0...difficultyChoices.length) difficultyAlphabet[i].alpha = 0.5;
@@ -550,7 +553,7 @@ class PauseSubState extends MusicBeatSubstate
     		if (optionsCurSelected > options.length - 1) optionsCurSelected = 0;
     		if (optionsCurSelected < 0) optionsCurSelected = optionsType.length - 1;
     		
-    		for (i in 0...options.length) optionsOptionsAlphabet[i].alpha = 0.5;
+    		for (i in 0...options.length - 1) optionsOptionsAlphabet[i].alpha = 0.5;
     		
     		optionsOptionsAlphabet[optionsCurSelected].alpha = 1;
     	}
