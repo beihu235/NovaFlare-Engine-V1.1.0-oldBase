@@ -67,7 +67,7 @@ class PauseSubState extends MusicBeatSubstate
     var difficultyAlphabet:Array<FlxText> = [];
     var difficultyBars:Array<FlxSprite> = [];
 
-    var debugType:Array<String> = ['Skip Time', 'Practice', 'Botplay', 'Back'];
+    var debugType:Array<String> = ['Practice', 'Botplay', 'Back'];
     var debugCurSelected:Int = 0;
     var debugAlphabet:Array<FlxText> = [];
     var debugBars:Array<FlxSprite> = [];
@@ -308,7 +308,7 @@ class PauseSubState extends MusicBeatSubstate
     	add(skipTimeText);
     	updateSkipTimeText();
     	
-    	new FlxTimer().start(0.2, function(tmr:FlxTimer) {
+    	new FlxTimer().start(0.4, function(tmr:FlxTimer) {
     		stayinMenu = 'base';
     		changeOptions(0);
     	});
@@ -437,9 +437,9 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
     			
     		for (i in 0...difficultyAlphabet.length) {
-    			difficultyAlphabet[i].x = FlxMath.lerp(-i*75 + 250, difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
-    			difficultyAlphabet[i].y = FlxMath.lerp((180 * (i - (difficultyAlphabet.length / 2))) + 400, difficultyAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
-			
+    			difficultyAlphabet[i].x = FlxMath.lerp(-i*75 + 250, difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));   			
+			    difficultyAlphabet[i].y = FlxMath.lerp((i - difficultyCurSelected) * 180 + 325, difficultyAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+
     			difficultyBars[i*2].x = difficultyAlphabet[i].x - 300;
     			difficultyBars[i*2].y = difficultyAlphabet[i].y - 30;
 			
@@ -494,21 +494,22 @@ class PauseSubState extends MusicBeatSubstate
 				stayinMenu = 'base';
     			});
     		}
-		
-    		if (optionsType[optionsCurSelected] == 'Instant Setup')
-    		{
-    			PlayState.instance.paused = true; // For lua
-    			PlayState.instance.vocals.volume = 0;
-    			OptionsState.onPlayState = true;
-    			if(ClientPrefs.data.pauseMusic != 'None'){
-    				FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), pauseMusic.volume);
-    				FlxTween.tween(FlxG.sound.music, {volume: 1}, 0.8);
-    			    FlxG.sound.music.time = pauseMusic.time;
-    			}
-    			MusicBeatState.switchState(new OptionsState());
-    		} else if (optionsType[optionsCurSelected] == 'Entirety Setup') {
-    			close();
-    			//openSubState(new optionsMenu());
+		    if (accept){
+        		if (optionsType[optionsCurSelected] == 'Instant Setup')
+          		{
+        			PlayState.instance.paused = true; // For lua
+        			PlayState.instance.vocals.volume = 0;
+        			OptionsState.onPlayState = true;
+        			if(ClientPrefs.data.pauseMusic != 'None'){
+        				FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), pauseMusic.volume);
+        				FlxTween.tween(FlxG.sound.music, {volume: 1}, 0.8);
+        			    FlxG.sound.music.time = pauseMusic.time;
+        			}
+        			MusicBeatState.switchState(new OptionsState());
+        		} else if (optionsType[optionsCurSelected] == 'Entirety Setup') {
+        			close();
+        			//openSubState(new optionsMenu());
+        		}
     		}
     	}
     }
@@ -539,9 +540,9 @@ class PauseSubState extends MusicBeatSubstate
     	} else if (stayinMenu == 'difficulty') {
     		difficultyCurSelected += num;
     		if (difficultyCurSelected > options.length - 1) difficultyCurSelected = 0;
-    		if (difficultyCurSelected < 0) difficultyCurSelected = options.length - 1;
+    		if (difficultyCurSelected < 0) difficultyCurSelected = difficultyChoices.length - 1;
     		
-    		for (i in 0...options.length) difficultyAlphabet[i].alpha = 0.5;
+    		for (i in 0...difficultyChoices.length) difficultyAlphabet[i].alpha = 0.5;
     		
     		difficultyAlphabet[difficultyCurSelected].alpha = 1;
     	} else if (stayinMenu == 'options') {
