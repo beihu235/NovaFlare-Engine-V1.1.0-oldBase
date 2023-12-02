@@ -41,24 +41,21 @@ jobs:
         run: |
           haxelib setup ~/haxelib
           haxelib install hxcpp 4.2.1 > /dev/null
-          haxelib install lime 7.9.0
-          haxelib install openfl 9.2.0
-          haxelib --never install flixel 5.2.2
+          haxelib install lime
+          haxelib install openfl
+          haxelib install flixel
           haxelib run lime setup flixel
-          haxelib install flixel-tools 1.5.1
+          haxelib run lime setup
+          haxelib install flixel-tools
           haxelib install flixel-ui
-          haxelib install flixel-addons 3.0.2
+          haxelib install flixel-addons
           haxelib install tjson
           haxelib install hxjsonast
-          haxelib install SScript
-          haxelib git hxCodec https://github.com/beihu235/hxCodec
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
-          haxelib git extension-androidtools https://github.com/MaysLastPlay77/extension-androidtools
+          haxelib install SScript
+          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib install hxcpp-debug-server
-          haxelib git androiddialogs https://github.com/beihu235/AndroidDialogs
-          haxelib git devicelanguage https://github.com/beihu235/devicelanguage
-          haxelib install samcodes-notifications
           haxelib list         
         shell: cmd
       - name: Create Version Tag
@@ -110,24 +107,21 @@ jobs:
           sudo apt-get install libvlccore-dev
           haxelib install hxcpp > /dev/null --quiet
           haxelib setup ~/haxelib
-          haxelib install lime 7.9.0
-          haxelib install openfl 9.2.0
-          haxelib --never install flixel 5.2.2
+          haxelib install lime
+          haxelib install openfl
+          haxelib install flixel
           haxelib run lime setup flixel
-          haxelib install flixel-tools 1.5.1
+          haxelib run lime setup
+          haxelib install flixel-tools
           haxelib install flixel-ui
-          haxelib install flixel-addons 3.0.2
+          haxelib install flixel-addons
           haxelib install tjson
           haxelib install hxjsonast
-          haxelib install SScript
-          haxelib git hxCodec https://github.com/beihu235/hxCodec
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
-          haxelib git extension-androidtools https://github.com/MaysLastPlay77/extension-androidtools
+          haxelib install SScript
+          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib install hxcpp-debug-server
-          haxelib git androiddialogs https://github.com/beihu235/AndroidDialogs
-          haxelib git devicelanguage https://github.com/beihu235/devicelanguage
-          haxelib install samcodes-notifications
           haxelib list         
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
@@ -164,24 +158,21 @@ jobs:
         run: |
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null --quiet
-          haxelib install lime 7.9.0
-          haxelib install openfl 9.2.0
-          haxelib --never install flixel 5.2.2
+          haxelib install lime
+          haxelib install openfl
+          haxelib install flixel
           haxelib run lime setup flixel
-          haxelib install flixel-tools 1.5.1
+          haxelib run lime setup
+          haxelib install flixel-tools
           haxelib install flixel-ui
-          haxelib install flixel-addons 3.0.2
+          haxelib install flixel-addons
           haxelib install tjson
           haxelib install hxjsonast
-          haxelib install SScript
-          haxelib git hxCodec https://github.com/beihu235/hxCodec
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
-          haxelib git extension-androidtools https://github.com/MaysLastPlay77/extension-androidtools
+          haxelib install SScript
+          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib install hxcpp-debug-server
-          haxelib git androiddialogs https://github.com/beihu235/AndroidDialogs
-          haxelib git devicelanguage https://github.com/beihu235/devicelanguage
-          haxelib install samcodes-notifications
           haxelib list         
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
