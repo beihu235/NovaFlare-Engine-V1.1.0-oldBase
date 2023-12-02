@@ -494,7 +494,7 @@ class PauseSubState extends MusicBeatSubstate
     			setBackButton(true);
     			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
 				stayinMenu = 'base';
-				optionsOptionsBars = 0;
+				optionsCurSelected = 0;
     			});
     		}
 		    if (accept){
