@@ -52,7 +52,7 @@ class PauseSubState extends MusicBeatSubstate
     var stayinMenu:String = 'isChanging'; // base, difficulty, debug, isChanging or options
     // isChanging = in transition animation
 
-    var options:Array<String> = ['Continue', 'Restart', 'Difficulty', 'Debug', 'Editor', 'Options', 'Exit' 'back'];
+    var options:Array<String> = ['Continue', 'Restart', 'Difficulty', 'Debug', 'Editor', 'Options', 'Exit', 'back'];
     var optionsAlphabet:Array<FlxText> = [];
     var optionsBars:Array<FlxSprite> = [];
     var curSelected:Int = 0;
