@@ -346,7 +346,7 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
     		
     		for (i in 0...options.length) {
-    			optionsAlphabet[i].x = FlxMath.lerp((curSelected - i)*75 + 75 + (i == curSelected ? 75 : 0), optionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			optionsAlphabet[i].x = FlxMath.lerp((curSelected - i) * 15 + 75 + (i == curSelected ? 75 : 0), optionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			optionsAlphabet[i].y = FlxMath.lerp((i - curSelected) * 180 + 325, optionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
     			optionsBars[i*2].x = optionsAlphabet[i].x - 300;
@@ -365,7 +365,7 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
 		
     		for (i in 0...debugType.length) {
-    			debugAlphabet[i].x = FlxMath.lerp((debugCurSelected - i)*75 + 75 + (i == debugCurSelected ? 75 : 0), debugAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			debugAlphabet[i].x = FlxMath.lerp((debugCurSelected - i) * 15 + 75 + (i == debugCurSelected ? 75 : 0), debugAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			debugAlphabet[i].y = FlxMath.lerp((i - debugCurSelected) * 180 + 325, debugAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
 			
     			debugBars[i*2].x = debugAlphabet[i].x - 300;
@@ -438,9 +438,9 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
     			
     		for (i in 0...difficultyAlphabet.length) {
-    			difficultyAlphabet[i].x = FlxMath.lerp((curSelected - i) * 75 + 250, difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));   			
-			    difficultyAlphabet[i].y = FlxMath.lerp((i - difficultyCurSelected) * 180 + 325, difficultyAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
-                
+                difficultyAlphabet[i].x = FlxMath.lerp((difficultyCurSelected - i) * 15 + 75 + (i == difficultyCurSelected ? 75 : 0), difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			difficultyAlphabet[i].y = FlxMath.lerp((i - difficultyCurSelected) * 180 + 325, difficultyAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			
     			difficultyBars[i*2].x = difficultyAlphabet[i].x - 300;
     			difficultyBars[i*2].y = difficultyAlphabet[i].y - 30;
 			
@@ -473,7 +473,7 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
     			
     		for (i in 0...optionsOptionsAlphabet.length) {
-    			optionsOptionsAlphabet[i].x = FlxMath.lerp((curSelected - i)*75 + 100, optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			optionsOptionsAlphabet[i].x = FlxMath.lerp((curSelected - i) * 15 + 75, optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			optionsOptionsAlphabet[i].y = FlxMath.lerp((180 * (i - (optionsType.length / 2))) + 400, optionsOptionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
     			optionsOptionsBars[i*2].x = optionsOptionsAlphabet[i].x - 525;
@@ -553,7 +553,7 @@ class PauseSubState extends MusicBeatSubstate
     		if (optionsCurSelected > options.length - 1) optionsCurSelected = 0;
     		if (optionsCurSelected < 0) optionsCurSelected = optionsType.length - 1;
     		
-    		for (i in 0...options.length - 1) optionsOptionsAlphabet[i].alpha = 0.5;
+    		for (i in 0...optionsType.length - 1) optionsOptionsAlphabet[i].alpha = 0.5;
     		
     		optionsOptionsAlphabet[optionsCurSelected].alpha = 1;
     	}
