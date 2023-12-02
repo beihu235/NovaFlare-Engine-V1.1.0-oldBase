@@ -30,9 +30,8 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 
-#if VIDEOS_ALLOWED 
 import backend.VideoSprite;
-#end
+
 
 typedef TitleData =
 {
@@ -825,6 +824,7 @@ class TitleState extends MusicBeatState
 		var video:VideoSprite = new VideoSprite(0, 0, 1280, 720);
 			video.playVideo(filepath);
 			add(video);
+			video.updateHitbox();
 			video.finishCallback = function()
 			{
 				videoEnd();
