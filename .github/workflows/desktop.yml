@@ -106,7 +106,6 @@ jobs:
             export/release/windows/haxe
             export/release/windows/obj
           key: cache-windows-build
-
       - name: Publish Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
@@ -114,7 +113,7 @@ jobs:
           path: export/release/windows/bin          
   buildLinux:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: linux-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -196,7 +195,6 @@ jobs:
             export/release/linux/haxe
             export/release/linux/obj
           key: cache-linux-build  
-          
       - name: Publish Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
