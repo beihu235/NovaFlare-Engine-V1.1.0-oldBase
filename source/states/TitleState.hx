@@ -101,7 +101,7 @@ class TitleState extends MusicBeatState
 		
 		#if android
 		if (DeviceLanguage.getLang() == 'zh') 
-		lang = '欢迎使用NF引擎\版本: 1.1.0';
+		lang = '欢迎使用NF引擎\n版本: 1.1.0';
 		else
 		lang = 'Wellcome to NF Engine\nVersion: 1.1.0';
 		#end
