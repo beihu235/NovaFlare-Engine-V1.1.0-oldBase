@@ -3,13 +3,13 @@ package substates;
 
 import backend.Difficulty;
 import backend.MusicBeatState;
+import backend.WeekData;
 import backend.Highscore;
 import backend.Song;
 
-
-
 import states.editors.ChartingState;
 import states.FreeplayState;
+import states.StoryMenuState;
 
 //import options.OptionsMenu;
 import options.OptionsState;
@@ -100,6 +100,7 @@ class PauseSubState extends MusicBeatSubstate
 
     public function new(x:Float, y:Float)
 	{
+	    super();
     	camPause = new FlxCamera();
     	camPause.bgColor = 0x00;
     	FlxG.cameras.add(camPause, false);
