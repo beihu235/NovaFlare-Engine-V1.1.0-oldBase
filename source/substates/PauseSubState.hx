@@ -708,17 +708,19 @@ class PauseSubState extends MusicBeatSubstate
     function pressedBackButton()
 	    return (FlxG.mouse.overlaps(backButton) && FlxG.mouse.justPressed);
     	
-    function restartSong(noTrans:Bool)
-    {
-    	PlayState.instance.paused = true; // For lua
-    	FlxG.sound.music.volume = 0;
-    	PlayState.instance.vocals.volume = 0;
-    if(noTrans){
-    	FlxTransitionableState.skipNextTransIn = true;
-		FlxTransitionableState.skipNextTransOut = true;
+    public static function restartSong(noTrans:Bool = false)
+	{
+		PlayState.instance.paused = true; // For lua
+		FlxG.sound.music.volume = 0;
+		PlayState.instance.vocals.volume = 0;
+
+		if(noTrans)
+		{
+			FlxTransitionableState.skipNextTransIn = true;
+			FlxTransitionableState.skipNextTransOut = true;
+		}
+		MusicBeatState.resetState();
 	}
-    	MusicBeatState.resetState();
-    }
 
     function updateSkipTimeText()
     {
