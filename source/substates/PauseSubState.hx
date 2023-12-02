@@ -57,21 +57,23 @@ class PauseSubState extends MusicBeatSubstate
     var stayinMenu:String = 'isChanging'; // base, difficulty, debug, isChanging or options
     // isChanging = in transition animation
 
-    var options:Array<String> = ['Continue', 'Restart', 'Difficulty', 'Debug', 'Editor', 'Options', 'Exit', 'back'];
+    var options:Array<String> = ['Continue', 'Restart', 'Difficulty', 'Debug', 'Editor', 'Options', 'Exit'];
     var optionsAlphabet:Array<FlxText> = [];
     var optionsBars:Array<FlxSprite> = [];
     var curSelected:Int = 0;
         
-    var difficultyChoices = [];
+    var difficultyChoices:Array = [];
+    var difficultyCurSelected:Int = 0;
     var difficultyAlphabet:Array<FlxText> = [];
     var difficultyBars:Array<FlxSprite> = [];
 
-    var optionsDebug:Array<String> = ['Skip Time', 'End Song', 'Practice', 'Botplay', 'back'];
+    var debugType:Array<String> = ['Skip Time', 'Practice', 'Botplay', 'Back'];
     var debugCurSelected:Int = 0;
     var debugAlphabet:Array<FlxText> = [];
     var debugBars:Array<FlxSprite> = [];
 
-    var optionsType:Array<String> = ['Instant Setup', 'Entirety Setup', 'back'];
+    var optionsType:Array<String> = ['Instant Setup', 'Entirety Setup', 'Back'];
+    var optionsCurSelected:Int = 0;
     var optionsOptionsAlphabet:Array<FlxText> = [];
     var optionsOptionsBars:Array<FlxSprite> = [];
 
@@ -160,6 +162,7 @@ class PauseSubState extends MusicBeatSubstate
     		var diff:String = Difficulty.getString(i);
     		difficultyChoices.push(diff);
     	}
+    	difficultyChoices.push('back');
     	
     	for (i in 0...difficultyChoices.length) {
     		var optionText:FlxText = new FlxText(0, 0, 0, difficultyChoices[i], 50);
@@ -196,11 +199,11 @@ class PauseSubState extends MusicBeatSubstate
     	
     	if(!PlayState.instance.startingSong)
 		{
-			optionsDebug.insert(0, 'Skip Time');
+			debugType.insert(0, 'Skip Time');
 		}
 	
-    	for (i in 0...optionsDebug.length) {
-    		var optionText:FlxText = new FlxText(0, 0, 0, optionsDebug[i], 50);
+    	for (i in 0...debugType.length) {
+    		var optionText:FlxText = new FlxText(0, 0, 0, debugType[i], 50);
     		optionText.camera = camPause;
 		
     		optionText.x = -1000;
@@ -361,7 +364,7 @@ class PauseSubState extends MusicBeatSubstate
     		else if (downP)
     			changeOptions(1);
 		
-    		for (i in 0...optionsDebug.length) {
+    		for (i in 0...debugType.length) {
     			debugAlphabet[i].x = FlxMath.lerp((debugCurSelected - i)*75 + 75 + (i == debugCurSelected ? 75 : 0), debugAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			debugAlphabet[i].y = FlxMath.lerp((i - debugCurSelected) * 180 + 325, debugAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
 			
@@ -428,6 +431,11 @@ class PauseSubState extends MusicBeatSubstate
     		} else
     			skipTimeText.y = 1000;
     	} else if (stayinMenu == 'difficulty') {
+    	    if (upP)
+    			changeOptions(-1);
+    		else if (downP)
+    			changeOptions(1);
+    			
     		for (i in 0...difficultyAlphabet.length) {
     			difficultyAlphabet[i].x = FlxMath.lerp(-i*75 + 250, difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			difficultyAlphabet[i].y = FlxMath.lerp((180 * (i - (difficultyAlphabet.length / 2))) + 400, difficultyAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
@@ -452,39 +460,10 @@ class PauseSubState extends MusicBeatSubstate
     				stayinMenu = 'base';
     			});
     		}
+    		
+    		if (accept)
+    			doEvent();
 		
-    		for (i in 0...difficultyAlphabet.length)
-    		{
-    			if (FlxG.mouse.overlaps(difficultyBars[i*2]) && FlxG.mouse.justPressed)
-    			{
-    				try {
-            			var name:String = PlayState.SONG.song;
-            			var poop = Highscore.formatSong(name, i);
-            			PlayState.SONG = Song.loadFromJson(poop, name);
-               			PlayState.storyDifficulty = i;
-            			MusicBeatState.resetState();
-            			FlxG.sound.music.volume = 0;
-            			PlayState.changedDifficulty = true;
-            			PlayState.chartingMode = false;
-            			return;
-            		} catch(e:Dynamic) {
-            			missingText.text = 'ERROR WHILE LOADING CHART: ' + PlayState.SONG.song + '-' + difficultyChoices[i];
-            			missingText.screenCenter(XY);
-            			FlxG.sound.play(Paths.sound('cancelMenu'));
-            			
-            			if (missingTextTimer == null)
-            			{
-            				missingTextTween = FlxTween.tween(missingText, {y: 680}, 0.5, {ease: FlxEase.quartOut});
-            			
-            				missingTextTimer = new FlxTimer().start(2, function(tmr:FlxTimer) {
-        					missingTextTween = FlxTween.tween(missingText, {y: 720}, 0.5, {ease: FlxEase.quartIn});
-        					missingTextTimer = null;
-            				}, 1);
-            			}
-            			return;
-            		}
-    			}
-    		}
     	} else if (stayinMenu == 'options') {
     		for (i in 0...optionsOptionsAlphabet.length) {
     			optionsOptionsAlphabet[i].x = FlxMath.lerp(-i*75 + 100, optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
@@ -549,10 +528,10 @@ class PauseSubState extends MusicBeatSubstate
     		optionsAlphabet[curSelected].alpha = 1;
     	} else if (stayinMenu == 'debug') {
     		debugCurSelected += num;
-    		if (debugCurSelected > optionsDebug.length - 1) debugCurSelected = 0;
-    		if (debugCurSelected < 0) debugCurSelected = optionsDebug.length - 1;
+    		if (debugCurSelected > debugType.length - 1) debugCurSelected = 0;
+    		if (debugCurSelected < 0) debugCurSelected = debugType.length - 1;
     		
-    		for (i in 0...optionsDebug.length) debugAlphabet[i].alpha = 0.5;
+    		for (i in 0...debugType.length) debugAlphabet[i].alpha = 0.5;
     		
     		debugAlphabet[debugCurSelected].alpha = 1;
     		
@@ -561,6 +540,14 @@ class PauseSubState extends MusicBeatSubstate
     		{
     			boolText.text = (text.text == 'Botplay' ? (PlayState.instance.cpuControlled ? 'ON' : 'OFF') : (PlayState.instance.practiceMode ? 'ON' : 'OFF'));
     		}
+    	} else if (stayinMenu == 'difficulty') {
+    		difficultyCurSelected += num;
+    		if (difficultyCurSelected > options.length - 1) difficultyCurSelected = 0;
+    		if (difficultyCurSelected < 0) difficultyCurSelected = options.length - 1;
+    		
+    		for (i in 0...options.length) difficultyAlphabet[i].alpha = 0.5;
+    		
+    		difficultyAlphabet[difficultyCurSelected].alpha = 1;
     	}
     }
 
@@ -619,6 +606,9 @@ class PauseSubState extends MusicBeatSubstate
     			FlxTween.tween(back, {x: -800}, 1, {ease: FlxEase.quartIn});
     			FlxTween.tween(front, {x: -800}, 0.75, {ease: FlxEase.quartIn});
     			FlxTween.tween(blackback, {alpha: 0}, 0.75, {ease: FlxEase.quartOut});
+    			new FlxTimer().start(3, function(tmr:FlxTimer) {
+    				close();
+    			});
     		} else if (daChoice == 'Restart') {
     			restartSong();
     		} else if  (daChoice == 'Exit') {
@@ -641,7 +631,7 @@ class PauseSubState extends MusicBeatSubstate
     			PlayState.chartingMode = true;
     		}
     	} else if (stayinMenu == 'debug') {
-    		var daChoice:String = optionsDebug[debugCurSelected];
+    		var daChoice:String = debugType[debugCurSelected];
     		if (daChoice == 'Botplay') {
     			PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
     			PlayState.changedDifficulty = true;
@@ -653,7 +643,7 @@ class PauseSubState extends MusicBeatSubstate
     			PlayState.instance.practiceMode = !PlayState.instance.practiceMode;
     			PlayState.changedDifficulty = true;
     			boolText.text = (PlayState.instance.practiceMode ? 'ON' : 'OFF');
-        		} else if (daChoice == 'Skip Time') {
+        	} else if (daChoice == 'Skip Time') {
     			if(curTime < Conductor.songPosition)
     			{
     	    			PlayState.startOnTime = curTime;
@@ -669,7 +659,31 @@ class PauseSubState extends MusicBeatSubstate
     				close();
     			}
     		}
-    	}
+    	} else if (stayinMenu == 'difficulty') {
+    	    if (difficultyCurSelected != difficultyChoices.length - 1){
+    	        try{
+            		var name:String = PlayState.SONG.song;
+            		var poop = Highscore.formatSong(name, difficultyCurSelected);
+            		PlayState.SONG = Song.loadFromJson(poop, name);
+               		PlayState.storyDifficulty = difficultyCurSelected;
+            		MusicBeatState.resetState();
+            		FlxG.sound.music.volume = 0;
+            		PlayState.changedDifficulty = true;
+            		PlayState.chartingMode = false;
+            	} catch(e:Dynamic) {
+            		missingText.text = 'ERROR WHILE LOADING CHART: ' + PlayState.SONG.song + '-' + difficultyChoices[difficultyCurSelected];
+            		missingText.screenCenter(XY);
+            		FlxG.sound.play(Paths.sound('cancelMenu'));
+
+            	    missingTextTween = FlxTween.tween(missingText, {y: 680}, 0.5, {ease: FlxEase.quartOut});
+            			
+            	    missingTextTimer = new FlxTimer().start(2, function(tmr:FlxTimer) {
+        		    missingTextTween = FlxTween.tween(missingText, {y: 720}, 0.5, {ease: FlxEase.quartIn});
+        	        missingTextTimer = null;
+                    }, 1);
+                }
+    	    }
+        }
     }
     
     function setBackButton(hide:Bool) {
@@ -717,9 +731,19 @@ class PauseSubState extends MusicBeatSubstate
     	if (curColorAgain < 0) curColorAgain = menuShadowColor.length -1;
     }
     
-    function pressedBackButton()
-	    return (FlxG.mouse.overlaps(backButton) && FlxG.mouse.justPressed);
-    	
+    function pressedBackButton()Bool{
+        if (controls.ACCEPT)
+            switch(stayinMenu){
+                case 'difficulty'
+                    if (difficultyCurSelected == difficultyChoices.length - 1) return true;
+                case 'debug'
+                    if (debugCurSelected == debugType.length - 1) return true;
+                case 'option'
+                    if (optionsCurSelected == optionsType.length - 1) return true;
+            }
+        return false;
+    }
+	    
     public static function restartSong(noTrans:Bool = false)
 	{
 		PlayState.instance.paused = true; // For lua
