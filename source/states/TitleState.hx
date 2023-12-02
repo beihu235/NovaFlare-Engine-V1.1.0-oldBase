@@ -101,9 +101,9 @@ class TitleState extends MusicBeatState
 		
 		#if android
 		if (DeviceLanguage.getLang() == 'zh') 
-		lang = 'NF1.1.0测试版\nb站-北狐丶逐梦制作\n禁止上传到任何资源网站';
+		lang = '欢迎使用NF引擎\版本: 1.1.0';
 		else
-		lang = 'NF1.1.0 android port test\nmade by NF|beihu';
+		lang = 'Wellcome to NF Engine\nVersion: 1.1.0';
 		#end
 			
 		if(!checkOpenFirst){
