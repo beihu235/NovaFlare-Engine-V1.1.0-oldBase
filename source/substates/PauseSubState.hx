@@ -39,7 +39,6 @@ class PauseSubState extends MusicBeatSubstate
     var holdTime:Float = 0;
     var skipTimeText:FlxText;
     var curTime:Float = Math.max(0, Conductor.songPosition);
-    var skipTimeText:FlxText;
     
     public static var goToOptions:Bool = false; //work for open option 
 	public static var goToGameplayChangers:Bool = false; // work for open GameplayChangers 
@@ -316,7 +315,7 @@ class PauseSubState extends MusicBeatSubstate
 		#end
     }
 
-    override function onUpdate(elapsed:Float) {
+    override function update(elapsed:Float) {
     
         var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
@@ -457,7 +456,7 @@ class PauseSubState extends MusicBeatSubstate
             			return;
             		} catch(e:Dynamic) {
             			missingText.text = 'ERROR WHILE LOADING CHART: ' + PlayState.SONG.song + '-' + difficultyChoices[i];
-            			missingText.screenCenter(0x00);
+            			missingText.screenCenter(XY);
             			FlxG.sound.play(Paths.sound('cancelMenu'));
             			
             			if (missingTextTimer == null)
@@ -687,13 +686,13 @@ class PauseSubState extends MusicBeatSubstate
 		    colorTweenShadow.cancel();
 	    }
 	
-	    for (i in 0...(optionsBars.length/2))
+	    for (i in 0...Std.int(optionsBars.length/2))
 		    colorTweenShadow = FlxTween.color(optionsBars[i*2], 2, optionsBars[i*2].color, menuShadowColor[curColor]);
-	    for (i in 0...(debugBars.length/2))
+	    for (i in 0...Std.int(debugBars.length/2))
 		    colorTweenShadow = FlxTween.color(debugBars[i*2], 2, debugBars[i*2].color, menuShadowColor[curColor]);
-	    for (i in 0...(difficultyBars.length/2))
+	    for (i in 0...Std.int(difficultyBars.length/2))
     		colorTweenShadow = FlxTween.color(difficultyBars[i*2], 2, difficultyBars[i*2].color, menuShadowColor[curColor]);
-    	for (i in 0...(optionsOptionsBars.length/2))
+    	for (i in 0...Std.int(optionsOptionsBars.length/2))
         	colorTweenShadow = FlxTween.color(optionsOptionsBars[i*2], 2, optionsOptionsBars[i*2].color, menuShadowColor[curColor]);
     	
     	colorTween = FlxTween.color(back, 2, menuColor[curColorAgain], menuColor[curColor]);
