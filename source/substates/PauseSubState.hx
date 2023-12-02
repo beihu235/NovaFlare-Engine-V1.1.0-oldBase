@@ -62,7 +62,7 @@ class PauseSubState extends MusicBeatSubstate
     var optionsBars:Array<FlxSprite> = [];
     var curSelected:Int = 0;
         
-    var difficultyChoices:Array = [];
+    var difficultyChoices = [];
     var difficultyCurSelected:Int = 0;
     var difficultyAlphabet:Array<FlxText> = [];
     var difficultyBars:Array<FlxSprite> = [];
