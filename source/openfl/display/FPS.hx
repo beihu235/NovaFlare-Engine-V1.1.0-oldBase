@@ -84,6 +84,23 @@ class FPS extends TextField
 		#end
 	}
 	
+	#if windows // planning to do the same for linux but im lazy af so rn it'll use the hxcpp gc
+	@:functionCode("
+		// ily windows api <3
+		auto memhandle = GetCurrentProcess();
+		PROCESS_MEMORY_COUNTERS pmc;
+
+		if (GetProcessMemoryInfo(memhandle, &pmc, sizeof(pmc)))
+			return(pmc.WorkingSetSize);
+		else
+			return 0;
+	")
+	function obtainMemory():Dynamic
+	{
+		return 0;
+	}
+	#end
+	
 	public static var currentColor = 0;    
 	 var skippedFrames = 0;
 	 
@@ -158,7 +175,13 @@ class FPS extends TextField
 			var memoryMegas:Float = 0;
             var memType:String = ' MB';
 						
-    		var actualMem:Float = Gc.memInfo64(ClientPrefs.data.memoryType);	
+			#if windows
+    		// now be an ACTUAL real man and get the memory from plain & straight c++
+    		var actualMem:Float = obtainMemory();
+    		#else
+    		// be a real man and calculate memory from hxcpp
+    		var actualMem:Float = Gc.memInfo64(ClientPrefs.data.memoryType); // update: this sucks
+    		#end
     		
     		memoryMegas = Math.abs(FlxMath.roundDecimal(actualMem / 1000000, 1));
 		
@@ -173,7 +196,7 @@ class FPS extends TextField
             
             if (ClientPrefs.data.showMS) text += '\n' + "Delay: " + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + " MS";
             
-            text += "\nNF V1.1.0(beta-3)";
+            text += "\nNF V1.1.0(Beta-3)";
                      
 			text += "\n";
 	
