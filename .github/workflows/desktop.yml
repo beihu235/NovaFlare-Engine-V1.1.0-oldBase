@@ -16,7 +16,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   BuildWindows:
-    runs-on: windows-latest
+    runs-on: windows-2019
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -63,6 +63,10 @@ jobs:
       - name: Setup Lime
         run: |
           haxelib run lime setup -alias -y
+          haxelib set openfl 9.2.0
+          haxelib set lime 7.9.0
+          haxelib set flixel 5.2.2
+          haxelib set flixel-addons 3.0.2
           haxelib set hxcpp 4.2.1
           haxelib set SScript 7.0.0
           haxelib list
@@ -123,6 +127,10 @@ jobs:
       - name: Setup Lime
         run: |
           haxelib run lime setup -alias -y
+          haxelib set openfl 9.2.0
+          haxelib set lime 7.9.0
+          haxelib set flixel 5.2.2
+          haxelib set flixel-addons 3.0.2
           haxelib set hxcpp 4.2.1
           haxelib set SScript 7.0.0
           haxelib list  
