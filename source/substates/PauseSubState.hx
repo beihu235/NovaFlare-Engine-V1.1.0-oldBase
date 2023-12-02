@@ -21,7 +21,7 @@ import flixel.addons.transition.FlxTransitionableState;
 
     PauseSubState made by TieGuo, code optimized by Beihu.
     it used at NF Engine
-
+    有一说一我感觉就是在屎山上加屎山，很无语 --beihu
 */
 
 class PauseSubState extends MusicBeatSubstate
@@ -162,7 +162,7 @@ class PauseSubState extends MusicBeatSubstate
     		var diff:String = Difficulty.getString(i);
     		difficultyChoices.push(diff);
     	}
-    	difficultyChoices.push('back');
+    	difficultyChoices.push('Back');
     	
     	for (i in 0...difficultyChoices.length) {
     		var optionText:FlxText = new FlxText(0, 0, 0, difficultyChoices[i], 50);
@@ -465,6 +465,11 @@ class PauseSubState extends MusicBeatSubstate
     			doEvent();
 		
     	} else if (stayinMenu == 'options') {
+    	    if (upP)
+    			changeOptions(-1);
+    		else if (downP)
+    			changeOptions(1);
+    			
     		for (i in 0...optionsOptionsAlphabet.length) {
     			optionsOptionsAlphabet[i].x = FlxMath.lerp(-i*75 + 100, optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			optionsOptionsAlphabet[i].y = FlxMath.lerp((180 * (i - (optionsType.length / 2))) + 400, optionsOptionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
@@ -490,29 +495,20 @@ class PauseSubState extends MusicBeatSubstate
     			});
     		}
 		
-    		for (i in 0...optionsOptionsAlphabet.length)
+    		if (optionsType[optionsCurSelected] == 'Instant Setup')
     		{
-    			if (FlxG.mouse.overlaps(optionsOptionsBars[i*2]) && FlxG.mouse.justPressed)
-    			{
-    				if (optionsType[i] == 'Instant Setup')
-    				{
-    					PlayState.instance.paused = true; // For lua
-    					PlayState.instance.vocals.volume = 0;
-    					OptionsState.onPlayState = true;
-    					if(ClientPrefs.data.pauseMusic != 'None')
-    					{
-    						FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), pauseMusic.volume);
-    						FlxTween.tween(FlxG.sound.music, {volume: 1}, 0.8);
-    						FlxG.sound.music.time = pauseMusic.time;
-    					}
-    					MusicBeatState.switchState(new OptionsState());
-    				}
-    				else if (optionsType[i] == 'Entirety Setup')
-    				{
-    					close();
-    					//openSubState(new optionsMenu());
-    				}
+    			PlayState.instance.paused = true; // For lua
+    			PlayState.instance.vocals.volume = 0;
+    			OptionsState.onPlayState = true;
+    			if(ClientPrefs.data.pauseMusic != 'None'){
+    				FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), pauseMusic.volume);
+    				FlxTween.tween(FlxG.sound.music, {volume: 1}, 0.8);
+    			    FlxG.sound.music.time = pauseMusic.time;
     			}
+    			MusicBeatState.switchState(new OptionsState());
+    		} else if (optionsType[optionsCurSelected] == 'Entirety Setup') {
+    			close();
+    			//openSubState(new optionsMenu());
     		}
     	}
     }
@@ -548,6 +544,14 @@ class PauseSubState extends MusicBeatSubstate
     		for (i in 0...options.length) difficultyAlphabet[i].alpha = 0.5;
     		
     		difficultyAlphabet[difficultyCurSelected].alpha = 1;
+    	} else if (stayinMenu == 'options') {
+    		optionsCurSelected += num;
+    		if (optionsCurSelected > options.length - 1) optionsCurSelected = 0;
+    		if (optionsCurSelected < 0) optionsCurSelected = optionsType.length - 1;
+    		
+    		for (i in 0...options.length) optionsOptionsAlphabet[i].alpha = 0.5;
+    		
+    		optionsOptionsAlphabet[optionsCurSelected].alpha = 1;
     	}
     }
 
