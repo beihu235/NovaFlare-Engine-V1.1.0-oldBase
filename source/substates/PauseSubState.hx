@@ -519,7 +519,7 @@ class PauseSubState extends MusicBeatSubstate
     				else if (optionsType[i] == 'Entirety Setup')
     				{
     					close();
-    					openSubState(new optionsMenu());
+    					//openSubState(new optionsMenu());
     				}
     			}
     		}
