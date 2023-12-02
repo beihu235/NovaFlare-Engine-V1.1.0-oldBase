@@ -736,15 +736,11 @@ class PauseSubState extends MusicBeatSubstate
     }
     
     function pressedBackButton():Bool{
-        if (controls.ACCEPT)
-            switch(stayinMenu){
-                case 'difficulty'
-                    if (difficultyCurSelected == difficultyChoices.length - 1) return true;
-                case 'debug'
-                    if (debugCurSelected == debugType.length - 1) return true;
-                case 'option'
-                    if (optionsCurSelected == optionsType.length - 1) return true;
-            }
+        if (controls.ACCEPT){            
+            if (stayinMenu == 'difficulty' && difficultyCurSelected == difficultyChoices.length - 1) return true;             
+            else if (stayinMenu == 'debug' && debugCurSelected == debugType.length - 1) return true;
+            else if (stayinMenu == 'options' && optionsCurSelected == optionsType.length - 1) return true;
+        }
         return false;
     }
 	    
