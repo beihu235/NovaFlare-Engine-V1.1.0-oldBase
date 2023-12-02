@@ -51,7 +51,7 @@ jobs:
           haxelib install flixel-addons
           haxelib install tjson
           haxelib install hxjsonast
-          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
+          haxelib git hxCodec https://github.com/beihu235/hxCodec
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
           haxelib install SScript
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
@@ -117,7 +117,7 @@ jobs:
           haxelib install flixel-addons
           haxelib install tjson
           haxelib install hxjsonast
-          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
+          haxelib git hxCodec https://github.com/beihu235/hxCodec
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
           haxelib install SScript
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
@@ -168,7 +168,7 @@ jobs:
           haxelib install flixel-addons
           haxelib install tjson
           haxelib install hxjsonast
-          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
+          haxelib git hxCodec https://github.com/beihu235/hxCodec
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
           haxelib install SScript
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
