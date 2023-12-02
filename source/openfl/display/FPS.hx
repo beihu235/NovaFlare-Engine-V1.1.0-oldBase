@@ -84,12 +84,6 @@ class FPS extends TextField
 		#end
 	}
 	
-	function obtainMemory():Dynamic
-	{
-		return 0;
-	}
-	#end
-	
 	public static var currentColor = 0;    
 	 var skippedFrames = 0;
 	 
@@ -164,7 +158,7 @@ class FPS extends TextField
 			var memoryMegas:Float = 0;
             var memType:String = ' MB';
 						
-    		var actualMem:Float = obtainMemory();    		
+    		var actualMem:Float = Gc.memInfo64(ClientPrefs.data.memoryType);	
     		
     		memoryMegas = Math.abs(FlxMath.roundDecimal(actualMem / 1000000, 1));
 		
