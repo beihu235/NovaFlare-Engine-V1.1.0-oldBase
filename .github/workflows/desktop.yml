@@ -35,7 +35,6 @@ jobs:
             export/release/windows/haxe/
             export/release/windows/obj/
           key: cache-windows-build
-
       # Runs a set of commands using the runners shell
       - name: Install Haxelib
         run: |
@@ -71,7 +70,6 @@ jobs:
           haxelib set hxcpp 4.2.1
           haxelib set SScript 7.0.0
           haxelib list
-          
       - name: Compile
         run: haxelib run lime build windows --app-version="4.0.0-${{ github.run_id}}"
       - name: Clear Previous Cache
@@ -99,14 +97,12 @@ jobs:
             } catch (error) {
             	console.log(error.message);
             }
-
       - name: Save Current Cache
         id: cache-build-windows-save
         uses: actions/cache/save@main
         with:
           path: |
             ~/haxelib
-            ~/.gradle
             export/release/windows/haxe
             export/release/windows/obj
           key: cache-windows-build
@@ -115,8 +111,7 @@ jobs:
         uses: actions/upload-artifact@v2.2.4
         with:
           name: Windows
-          path: export/release/windows/bin
-          
+          path: export/release/windows/bin          
   buildLinux:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -192,14 +187,12 @@ jobs:
             } catch (error) {
             	console.log(error.message);
             }
-
       - name: Save Current Cache
         id: cache-build-linux-save
         uses: actions/cache/save@main
         with:
           path: |
             ~/haxelib
-            ~/.gradle
             export/release/linux/haxe
             export/release/linux/obj
           key: cache-linux-build  
@@ -209,7 +202,6 @@ jobs:
         with:
           name: Linux
           path: 'export/release/linux/bin'
-          
   buildMac:
     runs-on: macos-latest
 
@@ -281,14 +273,12 @@ jobs:
             } catch (error) {
             	console.log(error.message);
             }
-
       - name: Save Current Cache
         id: cache-build-macos-save
         uses: actions/cache/save@main
         with:
           path: |
             ~/haxelib
-            ~/.gradle
             export/release/macos/haxe
             export/release/macos/obj
           key: cache-macos-build
