@@ -110,7 +110,7 @@ class PauseSubState extends MusicBeatSubstate
     public function new(x:Float, y:Float)
 	{
 	    super();
-    	camPause =  [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+    	cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	
     	pauseMusic = new FlxSound();
     	if(songName != null) {
