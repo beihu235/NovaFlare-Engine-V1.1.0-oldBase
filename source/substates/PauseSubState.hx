@@ -301,32 +301,32 @@ class PauseSubState extends MusicBeatSubstate
     	(PlayState.instance.cpuControlled ? 'Botplay: ON\n' : '') +
     	(PlayState.chartingMode ? 'Cheating: ON');*/
     	
-    	dataText:FlxText = new FlxText(0, 15, 0, Date.now().toString(), 32);
+    	dataText = new FlxText(0, 15, 0, Date.now().toString(), 32);
 		dataText.setFormat(font, 32);
 		dataText.updateHitbox();
 		add(dataText);
 		
-		songText:FlxText = new FlxText(0, 15, 0, PlayState.SONG.song + ' - ' + Difficulty.getString().toUpperCase(), 32);
+		songText = new FlxText(0, 15, 0, PlayState.SONG.song + ' - ' + Difficulty.getString().toUpperCase(), 32);
 		songText.setFormat(font, 32);
 		songText.updateHitbox();
 		add(songText);
 		
-		ballText:FlxText = new FlxText(0, 15, 0, 'Blueballed' + PlayState.deathCounter, 32);
+		ballText = new FlxText(0, 15, 0, 'Blueballed' + PlayState.deathCounter, 32);
 		ballText.setFormat(font, 32);
 		ballText.updateHitbox();
 		add(ballText);
 		
-		practiceText:FlxText = new FlxText(0, 15, 0, 'Practice Mode ' + (PlayState.instance.practiceMode ? 'ON' : 'OFF'), 32);
+		practiceText = new FlxText(0, 15, 0, 'Practice Mode ' + (PlayState.instance.practiceMode ? 'ON' : 'OFF'), 32);
 		practiceText.setFormat(font, 32);
 		practiceText.updateHitbox();
 		add(practiceText);
 		
-		botText:FlxText = new FlxText(0, 15, 0, 'Botplay ' + (PlayState.instance.cpuControlled ? 'ON' : 'OFF'), 32);
+		botText = new FlxText(0, 15, 0, 'Botplay ' + (PlayState.instance.cpuControlled ? 'ON' : 'OFF'), 32);
 		botText.setFormat(font, 32);
 		botText.updateHitbox();
 		add(botText);
 		
-		cheatingText:FlxText = new FlxText(0, 15, 0, 'Cheating ' + (PlayState.chartingMode ? 'ON' : 'OFF'), 32);
+		cheatingText = new FlxText(0, 15, 0, 'Cheating ' + (PlayState.chartingMode ? 'ON' : 'OFF'), 32);
 		cheatingText.setFormat(font, 32);
 		cheatingText.updateHitbox();
 		add(cheatingText);
