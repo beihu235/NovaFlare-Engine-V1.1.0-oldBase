@@ -379,13 +379,13 @@ class PauseSubState extends MusicBeatSubstate
 		
 		songText.text = PlayState.SONG.song + ' - ' + Difficulty.getString().toUpperCase();
 		
-		ballText.text = 'Blueballed ' + PlayState.deathCounter;
+		ballText.text = 'Blueballed: ' + PlayState.deathCounter;
 		
-		practiceText.text = 'Practice Mode ' + (PlayState.instance.practiceMode ? 'ON' : 'OFF');
+		practiceText.text = 'Practice Mode: ' + (PlayState.instance.practiceMode ? 'ON' : 'OFF');
 		
-		botText.text = 'Botplay ' + (PlayState.instance.cpuControlled ? 'ON' : 'OFF');
+		botText.text = 'Botplay: ' + (PlayState.instance.cpuControlled ? 'ON' : 'OFF');
 
-		cheatingText.text = 'Cheating ' + (PlayState.chartingMode ? 'ON' : 'OFF');
+		cheatingText.text = 'Cheating: ' + (PlayState.chartingMode ? 'ON' : 'OFF');
 		
 		for (i in menuText)
 		{
