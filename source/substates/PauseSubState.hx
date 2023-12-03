@@ -82,7 +82,7 @@ class PauseSubState extends MusicBeatSubstate
     var debugAlphabet:Array<FlxText> = [];
     var debugBars:Array<FlxSprite> = [];
 
-    var optionsType:Array<String> = ['Instant Setup', 'Entirety Setup', 'Back'];
+    var optionsType:Array<String> = ['Instant', 'Entirety', 'Back'];
     var optionsCurSelected:Int = 0;
     var optionsOptionsAlphabet:Array<FlxText> = [];
     var optionsOptionsBars:Array<FlxSprite> = [];
@@ -337,12 +337,13 @@ class PauseSubState extends MusicBeatSubstate
 		for (i in menuText)
 		{
 			i.alpha = 0;
-			i.x = 1280 + 60;
+			i.x = 1280 + 200;
 		}
 		
 		new FlxTimer().start(0.1, function(tmr:FlxTimer) {
     		FlxTween.tween(menuText[curText], {x: 1280 - 7.5 - menuText[curText].width}, 0.2, {ease: FlxEase.quartIn});
     		FlxTween.tween(menuText[curText], {alpha: 1}, 0.2, {ease: FlxEase.quartIn});
+    		FlxTween.tween(menuText[curText], {y: 7.5 + (menuText[curText].height)*curText}, 0.2, {ease: FlxEase.quartIn});
     		curText++;
     	}, menuText.length);
     	
@@ -399,7 +400,7 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
     		
     		for (i in 0...options.length) {
-    			optionsAlphabet[i].x = FlxMath.lerp((curSelected - i)*75 + 75 + (i == curSelected ? 75 : 0), optionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			optionsAlphabet[i].x = FlxMath.lerp((curSelected - i)*60 + 100 + (i == curSelected ? 75 : 0), optionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			optionsAlphabet[i].y = FlxMath.lerp((i - curSelected) * 180 + 325, optionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
     			optionsBars[i*2].x = optionsAlphabet[i].x - 300;
@@ -418,7 +419,7 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
 		
     		for (i in 0...debugType.length) {
-    			debugAlphabet[i].x = FlxMath.lerp((debugCurSelected - i) * 75 + 75 + (i == debugCurSelected ? 75 : 0), debugAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			debugAlphabet[i].x = FlxMath.lerp((debugCurSelected - i) * 60 + 100 + (i == debugCurSelected ? 75 : 0), debugAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			debugAlphabet[i].y = FlxMath.lerp((i - debugCurSelected) * 180 + 325, debugAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
 			
     			debugBars[i*2].x = debugAlphabet[i].x - 300;
@@ -476,7 +477,7 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
     			
     		for (i in 0...difficultyAlphabet.length) {
-                difficultyAlphabet[i].x = FlxMath.lerp((difficultyCurSelected - i) * 75 + 75 + (i == difficultyCurSelected ? 75 : 0), difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+                difficultyAlphabet[i].x = FlxMath.lerp((difficultyCurSelected - i) * 60 + 100 + (i == difficultyCurSelected ? 75 : 0), difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			difficultyAlphabet[i].y = FlxMath.lerp((i - difficultyCurSelected) * 180 + 325, difficultyAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
     			difficultyBars[i*2].x = difficultyAlphabet[i].x - 300;
@@ -496,17 +497,14 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
     			
     		for (i in 0...optionsOptionsAlphabet.length) {
-    			optionsOptionsAlphabet[i].x = FlxMath.lerp((optionsCurSelected - 1) *75 + 75 + (i == difficultyCurSelected ? 75 : 0), optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    				
+    			optionsOptionsAlphabet[i].x = FlxMath.lerp((optionsCurSelected - 1) *60 + 100 + (i == optionsCurSelected ? 75 : 0), optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			optionsOptionsAlphabet[i].y = FlxMath.lerp((180 * (i - (optionsOptionsAlphabet.length / 2))) + 400, optionsOptionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
-    			var xxx:Float = 300;
-    			if (optionsOptionsAlphabet[i].width <= 300)
-    				xxx = optionsOptionsAlphabet[i].width + 15;
-    			
-    			optionsOptionsBars[i*2].x = optionsOptionsAlphabet[i].x - xxx;
+    			optionsOptionsBars[i*2].x = optionsOptionsAlphabet[i].x - 300;
     			optionsOptionsBars[i*2].y = optionsOptionsAlphabet[i].y - 30;
     			
-    			optionsOptionsBars[i*2+1].x = optionsOptionsAlphabet[i].x - xxx;
+    			optionsOptionsBars[i*2+1].x = optionsOptionsAlphabet[i].x - 300;
     			optionsOptionsBars[i*2+1].y = optionsOptionsAlphabet[i].y - 30;
     		}
 
