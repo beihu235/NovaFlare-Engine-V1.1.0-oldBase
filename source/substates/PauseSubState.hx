@@ -321,17 +321,17 @@ class PauseSubState extends MusicBeatSubstate
 		ballText.updateHitbox();
 		add(ballText);
 		
-		practiceText = new FlxText(0, 15, 0, 'Practice Mode ' + (PlayState.instance.practiceMode ? 'ON' : 'OFF'), 32);
+		practiceText = new FlxText(0, 15, 0, 'Practice Mode: ' + (PlayState.instance.practiceMode ? 'ON' : 'OFF'), 32);
 		practiceText.setFormat(font, 25);
 		practiceText.updateHitbox();
 		add(practiceText);
 		
-		botText = new FlxText(0, 15, 0, 'Botplay ' + (PlayState.instance.cpuControlled ? 'ON' : 'OFF'), 32);
+		botText = new FlxText(0, 15, 0, 'Botplay: ' + (PlayState.instance.cpuControlled ? 'ON' : 'OFF'), 32);
 		botText.setFormat(font, 25);
 		botText.updateHitbox();
 		add(botText);
 		
-		cheatingText = new FlxText(0, 15, 0, 'Cheating ' + (PlayState.chartingMode ? 'ON' : 'OFF'), 32);
+		cheatingText = new FlxText(0, 15, 0, 'Cheating: ' + (PlayState.chartingMode ? 'ON' : 'OFF'), 32);
 		cheatingText.setFormat(font, 25);
 		cheatingText.updateHitbox();
 		add(cheatingText);
