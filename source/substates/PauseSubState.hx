@@ -303,37 +303,31 @@ class PauseSubState extends MusicBeatSubstate
     	
     	dataText:FlxText = new FlxText(0, 15, 0, Date.now().toString(), 32);
 		dataText.setFormat(font, 32);
-		dataText.camera = camPause;
 		dataText.updateHitbox();
 		add(dataText);
 		
 		songText:FlxText = new FlxText(0, 15, 0, PlayState.SONG.song + ' - ' + Difficulty.getString().toUpperCase(), 32);
 		songText.setFormat(font, 32);
-		songText.camera = camPause;
 		songText.updateHitbox();
 		add(songText);
 		
 		ballText:FlxText = new FlxText(0, 15, 0, 'Blueballed' + PlayState.deathCounter, 32);
 		ballText.setFormat(font, 32);
-		ballText.camera = camPause;
 		ballText.updateHitbox();
 		add(ballText);
 		
 		practiceText:FlxText = new FlxText(0, 15, 0, 'Practice Mode ' + (PlayState.instance.practiceMode ? 'ON' : 'OFF'), 32);
 		practiceText.setFormat(font, 32);
-		practiceText.camera = camPause;
 		practiceText.updateHitbox();
 		add(practiceText);
 		
 		botText:FlxText = new FlxText(0, 15, 0, 'Botplay ' + (PlayState.instance.cpuControlled ? 'ON' : 'OFF'), 32);
 		botText.setFormat(font, 32);
-		botText.camera = camPause;
 		botText.updateHitbox();
 		add(botText);
 		
 		cheatingText:FlxText = new FlxText(0, 15, 0, 'Cheating ' + (PlayState.chartingMode ? 'ON' : 'OFF'), 32);
 		cheatingText.setFormat(font, 32);
-		cheatingTextcamera = camPause;
 		cheatingText.updateHitbox();
 		add(cheatingText);
 		
