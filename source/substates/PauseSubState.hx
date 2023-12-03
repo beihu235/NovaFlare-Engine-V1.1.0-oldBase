@@ -68,7 +68,7 @@ class PauseSubState extends MusicBeatSubstate
     var difficultyAlphabet:Array<FlxText> = [];
     var difficultyBars:Array<FlxSprite> = [];
 
-    var debugType:Array<String> = ['Leave', 'Practice', 'Botplay', 'Back'];
+    var debugType:Array<String> = ['Leave', 'Skip Time', 'Practice', 'Botplay', 'Back'];
     var debugCurSelected:Int = 0;
     var debugAlphabet:Array<FlxText> = [];
     var debugBars:Array<FlxSprite> = [];
@@ -110,9 +110,7 @@ class PauseSubState extends MusicBeatSubstate
     public function new(x:Float, y:Float)
 	{
 	    super();
-    	camPause = new FlxCamera();
-    	camPause.bgColor = 0x00;
-    	FlxG.cameras.add(camPause, false);
+    	camPause =  [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	
     	pauseMusic = new FlxSound();
     	if(songName != null) {
@@ -197,12 +195,6 @@ class PauseSubState extends MusicBeatSubstate
 		
     		add(optionText);
     	}
-    	
-    	if(!PlayState.instance.startingSong)
-			debugType.insert(1, 'Skip Time');
-		
-		if (!PlayState.chartingMode)
-			options.remove('Debug');
 	
     	for (i in 0...debugType.length) {
     		var optionText:FlxText = new FlxText(0, 0, 0, debugType[i], 50);
@@ -263,6 +255,9 @@ class PauseSubState extends MusicBeatSubstate
 		
     		add(optionText);
     	}
+    	
+    	if (!PlayState.chartingMode)
+			options.remove('Debug');
 	
     	for (i in 0...options.length) {
     		var optionText:FlxText = new FlxText(0, 0, 0, options[i], 50);
@@ -334,8 +329,6 @@ class PauseSubState extends MusicBeatSubstate
     	new FlxTimer().start(2, function(tmr:FlxTimer) {
     		changeMenuColor();
     	}, 0);
-    	
-    	cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
     	
     	#if android
 		    addVirtualPad(FULL, A_B);
@@ -671,7 +664,7 @@ class PauseSubState extends MusicBeatSubstate
     			});
     		}
     	} else if (stayinMenu == 'difficulty') {
-    		if (difficultyChoices[i] == 'Back') {
+    		if (difficultyChoices[difficultyCurSelected] == 'Back') {
     			for (i in difficultyBars)
     				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
 				
