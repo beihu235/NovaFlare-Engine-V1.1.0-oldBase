@@ -310,14 +310,14 @@ class PauseSubState extends MusicBeatSubstate
     	add(skipTimeText);
     	updateSkipTimeText();
     	
-    	var textString:String = Date.now().toString() + '\n' +
+    	/*var textString:String = Date.now().toString() + '\n' +
     	'Song: ' + PlayState.SONG.song + ' - ' + Difficulty.getString().toUpperCase() + '\n' +
     	'Blueballed' + PlayState.deathCounter + '\n' + 
     	(PlayState.instance.practiceMode ? 'Practice: ON\n' : '') +
     	(PlayState.instance.cpuControlled ? 'Botplay: ON\n' : '') +
     	(PlayState.chartingMode ? 'Cheating: ON');
     	
-    	/*var infoText:FlxText = new FlxText(0, 15, FlxG.width, textString, 32);
+    	var infoText:FlxText = new FlxText(0, 15, FlxG.width, textString, 32);
 		infoText.setFormat(font, 32);
 		infoText.camera = camPause;
 		infoText.screenCenter(X);
