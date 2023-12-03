@@ -68,12 +68,12 @@ class PauseSubState extends MusicBeatSubstate
     var difficultyAlphabet:Array<FlxText> = [];
     var difficultyBars:Array<FlxSprite> = [];
 
-    var debugType:Array<String> = ['Leave', 'Practice', 'Botplay'];
+    var debugType:Array<String> = ['Leave', 'Practice', 'Botplay', 'Back'];
     var debugCurSelected:Int = 0;
     var debugAlphabet:Array<FlxText> = [];
     var debugBars:Array<FlxSprite> = [];
 
-    var optionsType:Array<String> = ['Instant Setup', 'Entirety Setup'];
+    var optionsType:Array<String> = ['Instant Setup', 'Entirety Setup', 'Back'];
     var optionsCurSelected:Int = 0;
     var optionsOptionsAlphabet:Array<FlxText> = [];
     var optionsOptionsBars:Array<FlxSprite> = [];
@@ -313,16 +313,16 @@ class PauseSubState extends MusicBeatSubstate
     	var textString:String = Date.now().toString() + '\n' +
     	'Song: ' + PlayState.SONG.song + ' - ' + Difficulty.getString().toUpperCase() + '\n' +
     	'Blueballed' + PlayState.deathCounter + '\n' + 
-    	(PlayState.instance.practiceMode ? 'Practice: ON') + '\n' +
-    	(PlayState.instance.cpuControlled ? 'Botplay: ON') + '\n' +
+    	(PlayState.instance.practiceMode ? 'Practice: ON\n' : '') +
+    	(PlayState.instance.cpuControlled ? 'Botplay: ON\n' : '') +
     	(PlayState.chartingMode ? 'Cheating: ON');
     	
-    	var infoText:FlxText = new FlxText(0, 15, FlxG.width, textString, 32);
+    	/*var infoText:FlxText = new FlxText(0, 15, FlxG.width, textString, 32);
 		infoText.setFormat(font, 32);
 		infoText.camera = camPause;
 		infoText.screenCenter(X);
 		infoText.updateHitbox();
-		add(infoText);
+		add(infoText);*/
     	
     	new FlxTimer().start(0.4, function(tmr:FlxTimer) {
     		stayinMenu = 'base';
@@ -348,17 +348,6 @@ class PauseSubState extends MusicBeatSubstate
         if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
         super.update(elapsed);
-        
-        var textString:String = Date.now().toString() + '\n' +
-    	'Song: ' + PlayState.SONG.song + ' - ' + Difficulty.getString().toUpperCase() + '\n' +
-    	'Blueballed' + PlayState.deathCounter + '\n' + 
-    	(PlayState.instance.practiceMode ? 'Practice: ON') + '\n' +
-    	(PlayState.instance.cpuControlled ? 'Botplay: ON') + '\n' +
-    	(PlayState.chartingMode ? 'Cheating: ON');
-    	
-    	infoText.text = textString;
-    	infoText.screenCenter(X);
-		infoText.updateHitbox();
         
         var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
@@ -400,21 +389,6 @@ class PauseSubState extends MusicBeatSubstate
 			
     			debugBars[i*2+1].x = debugAlphabet[i].x - 300;
     			debugBars[i*2+1].y = debugAlphabet[i].y - 30;
-    		}
-    		
-    		if (pressedBackButton()) {
-    			for (i in debugBars)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-				
-    			for (i in debugAlphabet)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-    			
-    			stayinMenu = 'isChanging';
-    			setBackButton(true);
-    			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
-    				stayinMenu = 'base';
-    				debugCurSelected = 0;
-    			});
     		}
 		
     		var text = debugAlphabet[debugCurSelected];
@@ -474,21 +448,6 @@ class PauseSubState extends MusicBeatSubstate
     			difficultyBars[i*2+1].x = difficultyAlphabet[i].x - 300;
     			difficultyBars[i*2+1].y = difficultyAlphabet[i].y - 30;
     		}
-		
-    		if (pressedBackButton()) {
-    			for (i in difficultyBars)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-				
-    			for (i in difficultyAlphabet)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-			
-    			stayinMenu = 'isChanging';
-    			setBackButton(true);
-    			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
-    				stayinMenu = 'base';
-    				difficultyCurSelected = 0;
-    			});
-    		}
     		
     		if (accept)
     			doEvent();
@@ -501,7 +460,7 @@ class PauseSubState extends MusicBeatSubstate
     			
     		for (i in 0...optionsOptionsAlphabet.length) {
     			optionsOptionsAlphabet[i].x = FlxMath.lerp((curSelected - i) * 15 + 75, optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
-    			optionsOptionsAlphabet[i].y = FlxMath.lerp((180 * (i - (optionsType.length / 2))) + 400, optionsOptionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			optionsOptionsAlphabet[i].y = FlxMath.lerp((i - optionsCurSelected) * 180 + 325, optionsOptionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
     			optionsOptionsBars[i*2].x = optionsOptionsAlphabet[i].x - 525;
     			optionsOptionsBars[i*2].y = optionsOptionsAlphabet[i].y - 30;
@@ -509,37 +468,9 @@ class PauseSubState extends MusicBeatSubstate
     			optionsOptionsBars[i*2+1].x = optionsOptionsAlphabet[i].x - 550;
     			optionsOptionsBars[i*2+1].y = optionsOptionsAlphabet[i].y - 30;
     		}
-    		
-    		if (pressedBackButton()) {
-    			for (i in optionsOptionsBars)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-    				
-    			for (i in optionsOptionsAlphabet)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-    			
-    			stayinMenu = 'isChanging';
-    			setBackButton(true);
-    			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
-				stayinMenu = 'base';
-				optionsCurSelected = 0;
-    			});
-    		}
+
 		    if (accept){
-        		if (optionsType[optionsCurSelected] == 'Instant Setup')
-          		{
-        			PlayState.instance.paused = true; // For lua
-        			PlayState.instance.vocals.volume = 0;
-        			OptionsState.onPlayState = true;
-        			if(ClientPrefs.data.pauseMusic != 'None'){
-        				FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), pauseMusic.volume);
-        				FlxTween.tween(FlxG.sound.music, {volume: 1}, 0.8);
-        			    FlxG.sound.music.time = pauseMusic.time;
-        			}
-        			MusicBeatState.switchState(new OptionsState());
-        		} else if (optionsType[optionsCurSelected] == 'Entirety Setup') {
-        			close();
-        			//openSubState(new optionsMenu());
-        		}
+        		doEvent();
     		}
     	}
     }
@@ -696,8 +627,65 @@ class PauseSubState extends MusicBeatSubstate
     		} else if (daChoice == 'Leave') {
     			restartSong();
 				PlayState.chartingMode = false;
+    		} else if (daChoice == 'Back') {
+    			for (i in debugBars)
+    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+				
+    			for (i in debugAlphabet)
+    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+    			
+    			stayinMenu = 'isChanging';
+    			setBackButton(true);
+    			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
+    				stayinMenu = 'base';
+    				debugCurSelected = 0;
+    			});
+    		}
+    	} else if (stayinMenu == 'options') {
+			if (optionsType[optionsCurSelected] == 'Instant Setup')
+      		{
+    			PlayState.instance.paused = true; // For lua
+    			PlayState.instance.vocals.volume = 0;
+    			OptionsState.onPlayState = true;
+    			if(ClientPrefs.data.pauseMusic != 'None'){
+    				FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), pauseMusic.volume);
+    				FlxTween.tween(FlxG.sound.music, {volume: 1}, 0.8);
+    			    FlxG.sound.music.time = pauseMusic.time;
+    			}
+    			MusicBeatState.switchState(new OptionsState());
+    		} else if (optionsType[optionsCurSelected] == 'Entirety Setup') {
+    			close();
+    			//openSubState(new optionsMenu());
+    		} else if (optionsType[optionsCurSelected] == 'Back') {
+    			for (i in optionsOptionsBars)
+    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+    				
+    			for (i in optionsOptionsAlphabet)
+    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+    			
+    			stayinMenu = 'isChanging';
+    			setBackButton(true);
+    			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
+				stayinMenu = 'base';
+				optionsCurSelected = 0;
+    			});
     		}
     	} else if (stayinMenu == 'difficulty') {
+    		if (difficultyChoices[i] == 'Back') {
+    			for (i in difficultyBars)
+    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+				
+    			for (i in difficultyAlphabet)
+    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+			
+    			stayinMenu = 'isChanging';
+    			setBackButton(true);
+    			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
+    				stayinMenu = 'base';
+    				difficultyCurSelected = 0;
+    			});
+    			return;
+    		}
 	        try{
         		var name:String = PlayState.SONG.song;
         		var poop = Highscore.formatSong(name, difficultyCurSelected);
@@ -768,9 +756,6 @@ class PauseSubState extends MusicBeatSubstate
     	if (curColor > menuShadowColor.length -1) curColor = 0;
     	if (curColorAgain < 0) curColorAgain = menuShadowColor.length -1;
     }
-    
-    function pressedBackButton():Bool
-        return controls.BACK
 	    
     public static function restartSong(noTrans:Bool = false)
 	{
