@@ -1728,15 +1728,15 @@ class PlayState extends MusicBeatState
 		super.onFocus();
 	}
     
-    var pauseTime:Float = 0; //use fot fix bug
+    var pauseTime:Float = 0; //use for fix bug
 	override public function onFocusLost():Void
 	{
 		#if desktop
 		if (health > 0 && !paused) DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 		#else		
-		if (FlxG.autoPause && (!paused && !isFinish && Conductor.songPosition > 0) || (paused && !isFinish && Conductor.songPosition != pauseTime)){
+		if (FlxG.autoPause && (!paused && !isFinish && Conductor.songPosition > 0) || (paused && !isFinish && FlxG.sound.music.time != pauseTime)){
 		    var ret:Dynamic = callOnScripts('onPause', null, true);
-		    pauseTime = Conductor.songPosition;
+		    pauseTime = FlxG.sound.music.time;
 			if(ret != FunkinLua.Function_Stop) {
 				openPauseMenu();
 			}
