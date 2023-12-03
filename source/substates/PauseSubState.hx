@@ -374,7 +374,7 @@ class PauseSubState extends MusicBeatSubstate
 		
 		songText.text = PlayState.SONG.song + ' - ' + Difficulty.getString().toUpperCase();
 		
-		ballText.text = 'Blueballed' + PlayState.deathCounter;
+		ballText.text = 'Blueballed ' + PlayState.deathCounter;
 		
 		practiceText.text = 'Practice Mode ' + (PlayState.instance.practiceMode ? 'ON' : 'OFF');
 		
@@ -400,7 +400,7 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
     		
     		for (i in 0...options.length) {
-    			optionsAlphabet[i].x = FlxMath.lerp((curSelected - i)*40 + 100 + (i == curSelected ? 75 : 0), optionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			optionsAlphabet[i].x = FlxMath.lerp((curSelected - i)*45.5 + 100 + (i == curSelected ? 75 : 0), optionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			optionsAlphabet[i].y = FlxMath.lerp((i - curSelected) * 180 + 325, optionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
     			optionsBars[i*2].x = optionsAlphabet[i].x - 300;
@@ -419,7 +419,7 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
 		
     		for (i in 0...debugType.length) {
-    			debugAlphabet[i].x = FlxMath.lerp((debugCurSelected - i) * 40 + 100 + (i == debugCurSelected ? 75 : 0), debugAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			debugAlphabet[i].x = FlxMath.lerp((debugCurSelected - i) * 45.5 + 100 + (i == debugCurSelected ? 75 : 0), debugAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			debugAlphabet[i].y = FlxMath.lerp((i - debugCurSelected) * 180 + 325, debugAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
 			
     			debugBars[i*2].x = debugAlphabet[i].x - 300;
@@ -477,7 +477,7 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
     			
     		for (i in 0...difficultyAlphabet.length) {
-                difficultyAlphabet[i].x = FlxMath.lerp((difficultyCurSelected - i) * 40 + 100 + (i == difficultyCurSelected ? 75 : 0), difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+                difficultyAlphabet[i].x = FlxMath.lerp((difficultyCurSelected - i) * 45.5 + 100 + (i == difficultyCurSelected ? 75 : 0), difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			difficultyAlphabet[i].y = FlxMath.lerp((i - difficultyCurSelected) * 180 + 325, difficultyAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
     			difficultyBars[i*2].x = difficultyAlphabet[i].x - 300;
@@ -498,7 +498,7 @@ class PauseSubState extends MusicBeatSubstate
     			
     		for (i in 0...optionsOptionsAlphabet.length) {
     				
-    			optionsOptionsAlphabet[i].x = FlxMath.lerp(-i *40 + 100 + (i == optionsCurSelected ? 75 : 0), optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			optionsOptionsAlphabet[i].x = FlxMath.lerp(-i *45.5 + 100 + (i == optionsCurSelected ? 75 : 0), optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			optionsOptionsAlphabet[i].y = FlxMath.lerp((180 * (i - (optionsOptionsAlphabet.length / 2))) + 400, optionsOptionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
     			optionsOptionsBars[i*2].x = optionsOptionsAlphabet[i].x - 300;
@@ -520,7 +520,7 @@ class PauseSubState extends MusicBeatSubstate
     		if (curSelected > options.length - 1) curSelected = 0;
     		if (curSelected < 0) curSelected = options.length - 1;
     		
-    		for (i in 0...options.length - 1) optionsAlphabet[i].alpha = 0.5;
+    		for (i in optionsAlphabet) i.alpha = 0.5;
     		
     		optionsAlphabet[curSelected].alpha = 1;
     	} else if (stayinMenu == 'debug') {
@@ -528,7 +528,7 @@ class PauseSubState extends MusicBeatSubstate
     		if (debugCurSelected > debugType.length - 1) debugCurSelected = 0;
     		if (debugCurSelected < 0) debugCurSelected = debugType.length - 1;
     		
-    		for (i in 0...debugType.length - 1) debugAlphabet[i].alpha = 0.5;
+    		for (i in debugAlphabet) i.alpha = 0.5;
     		
     		debugAlphabet[debugCurSelected].alpha = 1;
     		
@@ -542,7 +542,7 @@ class PauseSubState extends MusicBeatSubstate
     		if (difficultyCurSelected > difficultyChoices.length - 1) difficultyCurSelected = 0;
     		if (difficultyCurSelected < 0) difficultyCurSelected = difficultyChoices.length - 1;
     		
-    		for (i in 0...difficultyChoices.length) difficultyAlphabet[i].alpha = 0.5;
+    		for (i in difficultyAlphabet) i.alpha = 0.5;
     		
     		difficultyAlphabet[difficultyCurSelected].alpha = 1;
     	} else if (stayinMenu == 'options') {
@@ -550,7 +550,7 @@ class PauseSubState extends MusicBeatSubstate
     		if (optionsCurSelected > optionsType.length - 1) optionsCurSelected = 0;
     		if (optionsCurSelected < 0) optionsCurSelected = optionsType.length - 1;
     		
-    		for (i in 0...optionsType.length - 1) optionsOptionsAlphabet[i].alpha = 0.5;
+    		for (i in optionsOptionsAlphabet) i.alpha = 0.5;
     		
     		optionsOptionsAlphabet[optionsCurSelected].alpha = 1;
     	}
