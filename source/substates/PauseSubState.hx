@@ -500,8 +500,8 @@ class PauseSubState extends MusicBeatSubstate
     			optionsOptionsAlphabet[i].y = FlxMath.lerp((180 * (i - (optionsOptionsAlphabet.length / 2))) + 400, optionsOptionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
     			var xxx = 300;
-    			if (optionsOptionsAlphabet[i].length <= 300)
-    				xxx = optionsOptionsAlphabet[i].length + 15;
+    			if (optionsOptionsAlphabet[i].width <= 300)
+    				xxx = optionsOptionsAlphabet[i].width + 15;
     			
     			optionsOptionsBars[i*2].x = optionsOptionsAlphabet[i].x - xxx;
     			optionsOptionsBars[i*2].y = optionsOptionsAlphabet[i].y - 30;
