@@ -125,31 +125,26 @@ class PauseSubState extends MusicBeatSubstate
     	FlxG.sound.list.add(pauseMusic);
 	
     	blackback = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-    	blackback.camera = camPause;
     	add(blackback);
     	blackback.alpha = 0;
     	FlxTween.tween(blackback, {alpha: 0.5}, 0.75, {ease: FlxEase.quartOut});
 	
     	backShadow = new FlxSprite(-800).loadGraphic(Paths.image(filePath + 'backShadow'));
-    	backShadow.camera = camPause;
     	add(backShadow);
     	backShadow.updateHitbox();
     	FlxTween.tween(backShadow, {x: 0}, 1, {ease: FlxEase.quartOut});
 	
     	back = new FlxSprite(-800).loadGraphic(Paths.image(filePath + 'back'));
-    	back.camera = camPause;
     	add(back);
     	back.updateHitbox();
     	FlxTween.tween(back, {x: 0}, 1, {ease: FlxEase.quartOut});
 	
     	front = new FlxSprite(-800).loadGraphic(Paths.image(filePath + 'front'));
-    	front.camera = camPause;
     	add(front);
     	front.updateHitbox();
     	FlxTween.tween(front, {x: 0}, 1.3, {ease: FlxEase.quartOut});
 	
     	backButton = new FlxSprite(1080, 600).loadGraphic(Paths.image(filePath + 'backButton'));
-    	backButton.camera = camPause;
     	add(backButton);
     	backButton.scale.set(0.45, 0.45);
     	backButton.updateHitbox();
@@ -165,7 +160,6 @@ class PauseSubState extends MusicBeatSubstate
     	
     	for (i in 0...difficultyChoices.length) {
     		var optionText:FlxText = new FlxText(0, 0, 0, difficultyChoices[i], 50);
-    		optionText.camera = camPause;
 		
     		optionText.x = -1000;
     		optionText.y = (180 * (i - (difficultyChoices.length / 2))) + 400;
@@ -178,7 +172,6 @@ class PauseSubState extends MusicBeatSubstate
     		var barShadow:FlxSprite = new FlxSprite().loadGraphic(Paths.image(filePath + 'barShadow'));
     		add(barShadow);
     		barShadow.scale.set(0.5, 0.5);
-    		barShadow.camera = camPause;
     		barShadow.x = -1000;
     		barShadow.y = optionText.y - 30;
     		barShadow.updateHitbox();
@@ -187,7 +180,6 @@ class PauseSubState extends MusicBeatSubstate
     		var bar:FlxSprite = new FlxSprite().loadGraphic(Paths.image(filePath + 'bar'));
     		add(bar);
     		bar.scale.set(0.5, 0.5);
-    		bar.camera = camPause;
     		bar.x = -1000;
     		bar.y = optionText.y - 30;
     		bar.updateHitbox();
@@ -198,7 +190,6 @@ class PauseSubState extends MusicBeatSubstate
 	
     	for (i in 0...debugType.length) {
     		var optionText:FlxText = new FlxText(0, 0, 0, debugType[i], 50);
-    		optionText.camera = camPause;
 		
     		optionText.x = -1000;
     		optionText.y = (i - debugCurSelected) * 180 + 325;
@@ -208,7 +199,6 @@ class PauseSubState extends MusicBeatSubstate
     		var barShadow:FlxSprite = new FlxSprite().loadGraphic(Paths.image(filePath + 'barShadow'));
     		add(barShadow);
     		barShadow.scale.set(0.5, 0.5);
-    		barShadow.camera = camPause;
     		barShadow.x = -1000;
     		barShadow.y = optionText.y - 30;
     		barShadow.updateHitbox();
@@ -217,7 +207,6 @@ class PauseSubState extends MusicBeatSubstate
     		var bar:FlxSprite = new FlxSprite().loadGraphic(Paths.image(filePath + 'bar'));
     		add(bar);
     		bar.scale.set(0.5, 0.5);
-    		bar.camera = camPause;
     		bar.x = -1000;
     		bar.y = optionText.y - 30;
     		bar.updateHitbox();
@@ -228,7 +217,6 @@ class PauseSubState extends MusicBeatSubstate
 	
     	for (i in 0...optionsType.length) {
     		var optionText:FlxText = new FlxText(0, 0, 0, optionsType[i], 50);
-    		optionText.camera = camPause;
 		
     		optionText.x = -1000;
     		optionText.y = (180 * (i - (optionsType.length / 2))) + 400;
@@ -238,7 +226,6 @@ class PauseSubState extends MusicBeatSubstate
     		var barShadow:FlxSprite = new FlxSprite().loadGraphic(Paths.image(filePath + 'barShadow'));
     		add(barShadow);
     		barShadow.scale.set(0.5, 0.5);
-        	barShadow.camera = camPause;
     		barShadow.x = -1000;
     		barShadow.y = optionText.y - 30;
     		barShadow.updateHitbox();
@@ -247,7 +234,6 @@ class PauseSubState extends MusicBeatSubstate
     		var bar:FlxSprite = new FlxSprite().loadGraphic(Paths.image(filePath + 'bar'));
     		add(bar);
     		bar.scale.set(0.5, 0.5);
-    		bar.camera = camPause;
     		bar.x = -1000;
     		bar.y = optionText.y - 30;
     		bar.updateHitbox();
@@ -261,7 +247,6 @@ class PauseSubState extends MusicBeatSubstate
 	
     	for (i in 0...options.length) {
     		var optionText:FlxText = new FlxText(0, 0, 0, options[i], 50);
-    		optionText.camera = camPause;
 		
     		optionText.x = -1000;
     		optionText.y = (i - curSelected) * 180 + 325;
@@ -271,7 +256,6 @@ class PauseSubState extends MusicBeatSubstate
     		var barShadow:FlxSprite = new FlxSprite().loadGraphic(Paths.image(filePath + 'barShadow'));
     		add(barShadow);
     		barShadow.scale.set(0.5, 0.5);
-    		barShadow.camera = camPause;
     		barShadow.x = -1000;
     		barShadow.y = optionText.y - 30;
     		barShadow.updateHitbox();
@@ -280,7 +264,6 @@ class PauseSubState extends MusicBeatSubstate
     		var bar:FlxSprite = new FlxSprite().loadGraphic(Paths.image(filePath + 'bar'));
     		add(bar);
     		bar.scale.set(0.5, 0.5);
-    		bar.camera = camPause;
     		bar.x = -1000;
     		bar.y = optionText.y - 30;
     		bar.updateHitbox();
@@ -290,17 +273,14 @@ class PauseSubState extends MusicBeatSubstate
     	}
 	
     	missingText = new FlxText(0, 720, 0, '', 35);
-    	missingText.camera = camPause;
     	missingText.setFormat(font, 24, FlxColor.WHITE, 'CENTER', null, FlxColor.BLACK);
     	add(missingText);
 	
     	boolText = new FlxText(0, 720, 0, 'OFF', 24);
-    	boolText.camera = camPause;
     	boolText.setFormat(font, 24, FlxColor.BLACK);
     	add(boolText);
 	
     	skipTimeText = new FlxText(0, 720, 0, '', 24);
-    	skipTimeText.camera = camPause;
     	skipTimeText.setFormat(font, 40, FlxColor.WHITE);
     	add(skipTimeText);
     	updateSkipTimeText();
