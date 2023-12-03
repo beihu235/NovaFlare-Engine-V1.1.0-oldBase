@@ -77,7 +77,7 @@ class PauseSubState extends MusicBeatSubstate
     var difficultyAlphabet:Array<FlxText> = [];
     var difficultyBars:Array<FlxSprite> = [];
 
-    var debugType:Array<String> = ['Leave', 'Skip Time', 'Practice', 'Botplay', 'Back'];
+    var debugType:Array<String> = ['Leave', 'Practice', 'Botplay', 'Back'];
     var debugCurSelected:Int = 0;
     var debugAlphabet:Array<FlxText> = [];
     var debugBars:Array<FlxSprite> = [];
@@ -196,6 +196,9 @@ class PauseSubState extends MusicBeatSubstate
 		
     		add(optionText);
     	}
+    	
+    	if(!PlayState.instance.startingSong)
+		    debugType.insert(1, 'Skip Time');
 	
     	for (i in 0...debugType.length) {
     		var optionText:FlxText = new FlxText(0, 0, 0, debugType[i], 50);
@@ -311,7 +314,7 @@ class PauseSubState extends MusicBeatSubstate
 		songText.updateHitbox();
 		add(songText);
 		
-		ballText = new FlxText(0, 15, 0, 'Blueballed' + PlayState.deathCounter, 32);
+		ballText = new FlxText(0, 15, 0, 'Blueballed: ' + PlayState.deathCounter, 32);
 		ballText.setFormat(font, 25);
 		ballText.updateHitbox();
 		add(ballText);
@@ -498,7 +501,7 @@ class PauseSubState extends MusicBeatSubstate
     			
     		for (i in 0...optionsOptionsAlphabet.length) {
     				
-    			optionsOptionsAlphabet[i].x = FlxMath.lerp(-i *45.5 + 100 + (i == optionsCurSelected ? 75 : 0), optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			optionsOptionsAlphabet[i].x = FlxMath.lerp(-i *45.5 + 45.5 + 100 + (i == optionsCurSelected ? 75 : 0), optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			optionsOptionsAlphabet[i].y = FlxMath.lerp((180 * (i - (optionsOptionsAlphabet.length / 2))) + 400, optionsOptionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
     			optionsOptionsBars[i*2].x = optionsOptionsAlphabet[i].x - 300;
@@ -690,6 +693,8 @@ class PauseSubState extends MusicBeatSubstate
     			setBackButton(true);
     			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
     				stayinMenu = 'base';
+    				for (i in debugAlphabet)
+    				i.y += (debugAlphabet.length - 1) * 180;
     				debugCurSelected = 0;
     				changeOptions(0);
     			});
@@ -739,6 +744,8 @@ class PauseSubState extends MusicBeatSubstate
     			setBackButton(true);
     			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
     				stayinMenu = 'base';
+    				for (i in difficultyAlphabet)
+    				i.y += (difficultyAlphabet.length - 1) * 180;
     				difficultyCurSelected = 0;
     				changeOptions(0);
     			});
