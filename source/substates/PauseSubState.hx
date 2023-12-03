@@ -162,10 +162,10 @@ class PauseSubState extends MusicBeatSubstate
     		var optionText:FlxText = new FlxText(0, 0, 0, difficultyChoices[i], 50);
 		
     		optionText.x = -1000;
-    		optionText.y = (i - difficultyCurSelected) * 180 + 325
+    		optionText.y = (i - difficultyCurSelected) * 180 + 325;
     		optionText.setFormat(font, 50, FlxColor.BLACK);
     		if (optionText.width > 300)
-    		optionText.scale.set(300 / optionText.width, 300 / optionText.width);
+    			optionText.scale.set(300 / optionText.width, 300 / optionText.width);
     		optionText.updateHitbox();
     		difficultyAlphabet.push(optionText);
 		
@@ -504,6 +504,7 @@ class PauseSubState extends MusicBeatSubstate
     			setBackButton(false);
     			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
     				stayinMenu = 'difficulty';
+    				changeOptions(0);
     			});
     		} else if (daChoice == 'Debug') {
     			for (i in optionsBars)
@@ -516,6 +517,7 @@ class PauseSubState extends MusicBeatSubstate
     			setBackButton(false);
     			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
     				stayinMenu = 'debug';
+    				changeOptions(0);
     				changeOptions(0);
     			});
 			
@@ -531,6 +533,7 @@ class PauseSubState extends MusicBeatSubstate
     			setBackButton(false);
     			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
     				stayinMenu = 'options';
+    				changeOptions(0);
     			});
     		} else if (daChoice == 'Continue') {
     			for (i in optionsBars)
@@ -612,6 +615,7 @@ class PauseSubState extends MusicBeatSubstate
     			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
     				stayinMenu = 'base';
     				debugCurSelected = 0;
+    				changeOptions(0);
     			});
     		}
     	} else if (stayinMenu == 'options') {
@@ -639,8 +643,9 @@ class PauseSubState extends MusicBeatSubstate
     			stayinMenu = 'isChanging';
     			setBackButton(true);
     			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
-				stayinMenu = 'base';
-				optionsCurSelected = 0;
+					stayinMenu = 'base';
+					optionsCurSelected = 0;
+					changeOptions(0);
     			});
     		}
     	} else if (stayinMenu == 'difficulty') {
@@ -656,6 +661,7 @@ class PauseSubState extends MusicBeatSubstate
     			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
     				stayinMenu = 'base';
     				difficultyCurSelected = 0;
+    				changeOptions(0);
     			});
     			return;
     		}
