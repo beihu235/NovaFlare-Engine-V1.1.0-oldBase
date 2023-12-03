@@ -47,7 +47,7 @@ class PauseSubState extends MusicBeatSubstate
     var practiceText:FlxText;
     var botText:FlxText;
     var ballText:FlxText;
-    var menuText:Array<FlxText> = [dataText, songText, ballText, practiceText, botText, cheatingText];
+    var menuText:Array<FlxText> = [];
     
     var pauseMusic:FlxSound;
     public static var songName:String = '';
@@ -330,6 +330,8 @@ class PauseSubState extends MusicBeatSubstate
 		cheatingText.setFormat(font, 32);
 		cheatingText.updateHitbox();
 		add(cheatingText);
+		
+		menuText = [dataText, songText, ballText, practiceText, botText, cheatingText];
 		
 		var curText = 0;
 		for (i in menuText)
