@@ -22,6 +22,7 @@ import flixel.addons.transition.FlxTransitionableState;
     PauseSubState made by TieGuo, code optimized by Beihu.
     it used at NF Engine
     有一说一我感觉就是在屎山上加屎山，很无语 --beihu
+    别骂了 -- TieGuo
 */
 
 class PauseSubState extends MusicBeatSubstate
@@ -67,12 +68,12 @@ class PauseSubState extends MusicBeatSubstate
     var difficultyAlphabet:Array<FlxText> = [];
     var difficultyBars:Array<FlxSprite> = [];
 
-    var debugType:Array<String> = ['Practice', 'Botplay', 'Back'];
+    var debugType:Array<String> = ['Leave', 'Practice', 'Botplay'];
     var debugCurSelected:Int = 0;
     var debugAlphabet:Array<FlxText> = [];
     var debugBars:Array<FlxSprite> = [];
 
-    var optionsType:Array<String> = ['Instant Setup', 'Entirety Setup', 'Back'];
+    var optionsType:Array<String> = ['Instant Setup', 'Entirety Setup'];
     var optionsCurSelected:Int = 0;
     var optionsOptionsAlphabet:Array<FlxText> = [];
     var optionsOptionsBars:Array<FlxSprite> = [];
@@ -198,9 +199,10 @@ class PauseSubState extends MusicBeatSubstate
     	}
     	
     	if(!PlayState.instance.startingSong)
-		{
-			debugType.insert(0, 'Skip Time');
-		}
+			debugType.insert(1, 'Skip Time');
+		
+		if (!PlayState.chartingMode)
+			options.remove('Debug');
 	
     	for (i in 0...debugType.length) {
     		var optionText:FlxText = new FlxText(0, 0, 0, debugType[i], 50);
@@ -308,6 +310,20 @@ class PauseSubState extends MusicBeatSubstate
     	add(skipTimeText);
     	updateSkipTimeText();
     	
+    	var textString:String = Date.now().toString() + '\n' +
+    	'Song: ' + PlayState.SONG.song + ' - ' + Difficulty.getString().toUpperCase() + '\n' +
+    	'Blueballed' + PlayState.deathCounter + '\n' + 
+    	(PlayState.instance.practiceMode ? 'Practice: ON') + '\n' +
+    	(PlayState.instance.cpuControlled ? 'Botplay: ON') + '\n' +
+    	(PlayState.chartingMode ? 'Cheating: ON');
+    	
+    	var infoText:FlxText = new FlxText(0, 15, FlxG.width, textString, 32);
+		infoText.setFormat(font, 32);
+		infoText.camera = camPause;
+		infoText.screenCenter(X);
+		infoText.updateHitbox();
+		add(infoText);
+    	
     	new FlxTimer().start(0.4, function(tmr:FlxTimer) {
     		stayinMenu = 'base';
     		changeOptions(0);
@@ -332,6 +348,17 @@ class PauseSubState extends MusicBeatSubstate
         if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
         super.update(elapsed);
+        
+        var textString:String = Date.now().toString() + '\n' +
+    	'Song: ' + PlayState.SONG.song + ' - ' + Difficulty.getString().toUpperCase() + '\n' +
+    	'Blueballed' + PlayState.deathCounter + '\n' + 
+    	(PlayState.instance.practiceMode ? 'Practice: ON') + '\n' +
+    	(PlayState.instance.cpuControlled ? 'Botplay: ON') + '\n' +
+    	(PlayState.chartingMode ? 'Cheating: ON');
+    	
+    	infoText.text = textString;
+    	infoText.screenCenter(X);
+		infoText.updateHitbox();
         
         var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
@@ -655,7 +682,7 @@ class PauseSubState extends MusicBeatSubstate
     			if(curTime < Conductor.songPosition)
     			{
     	    			PlayState.startOnTime = curTime;
-    				restartSong(true);
+    					restartSong(true);
     			}
     			else
     			{
@@ -666,29 +693,32 @@ class PauseSubState extends MusicBeatSubstate
     				}
     				close();
     			}
+    		} else if (daChoice == 'Leave') {
+    			restartSong();
+				PlayState.chartingMode = false;
     		}
     	} else if (stayinMenu == 'difficulty') {
-    	    if (difficultyCurSelected != difficultyChoices.length - 1){
-    	        try{
-            		var name:String = PlayState.SONG.song;
-            		var poop = Highscore.formatSong(name, difficultyCurSelected);
-            		PlayState.SONG = Song.loadFromJson(poop, name);
-               		PlayState.storyDifficulty = difficultyCurSelected;
-            		MusicBeatState.resetState();
-            		FlxG.sound.music.volume = 0;
-            		PlayState.changedDifficulty = true;
-            		PlayState.chartingMode = false;
-            	} catch(e:Dynamic) {
-            		missingText.text = 'ERROR WHILE LOADING CHART: ' + PlayState.SONG.song + '-' + difficultyChoices[difficultyCurSelected];
-            		missingText.screenCenter(XY);
-            		FlxG.sound.play(Paths.sound('cancelMenu'));
+	        try{
+        		var name:String = PlayState.SONG.song;
+        		var poop = Highscore.formatSong(name, difficultyCurSelected);
+        		PlayState.SONG = Song.loadFromJson(poop, name);
+           		PlayState.storyDifficulty = difficultyCurSelected;
+        		MusicBeatState.resetState();
+        		FlxG.sound.music.volume = 0;
+        		PlayState.changedDifficulty = true;
+        		PlayState.chartingMode = false;
+        	} catch(e:Dynamic) {
+        		missingText.text = 'ERROR WHILE LOADING CHART: ' + PlayState.SONG.song + '-' + difficultyChoices[difficultyCurSelected];
+        		missingText.screenCenter(XY);
+        		FlxG.sound.play(Paths.sound('cancelMenu'));
 
-            	    missingTextTween = FlxTween.tween(missingText, {y: 680}, 0.5, {ease: FlxEase.quartOut});
-            			
-            	    missingTextTimer = new FlxTimer().start(2, function(tmr:FlxTimer) {
-        		    missingTextTween = FlxTween.tween(missingText, {y: 720}, 0.5, {ease: FlxEase.quartIn});
-        	        missingTextTimer = null;
-                    }, 1);
+        	    missingTextTween = FlxTween.tween(missingText, {y: 680}, 0.5, {ease: FlxEase.quartOut});
+        		
+        		if (missingTextTimer == null) {
+        	    	missingTextTimer = new FlxTimer().start(2, function(tmr:FlxTimer) {
+    		    	missingTextTween = FlxTween.tween(missingText, {y: 720}, 0.5, {ease: FlxEase.quartIn});
+    	        		missingTextTimer = null;
+                	}, 1);
                 }
     	    }
         }
@@ -739,14 +769,8 @@ class PauseSubState extends MusicBeatSubstate
     	if (curColorAgain < 0) curColorAgain = menuShadowColor.length -1;
     }
     
-    function pressedBackButton():Bool{
-        if (controls.ACCEPT){            
-            if (stayinMenu == 'difficulty' && difficultyCurSelected == difficultyChoices.length - 1) return true;             
-            else if (stayinMenu == 'debug' && debugCurSelected == debugType.length - 1) return true;
-            else if (stayinMenu == 'options' && optionsCurSelected == optionsType.length - 1) return true;
-        }
-        return false;
-    }
+    function pressedBackButton():Bool
+        return controls.BACK
 	    
     public static function restartSong(noTrans:Bool = false)
 	{
