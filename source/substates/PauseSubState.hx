@@ -121,7 +121,8 @@ class PauseSubState extends MusicBeatSubstate
 	{
 	    super();
     	cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
-	
+	    
+	    FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
     	pauseMusic = new FlxSound();
     	if(songName != null) {
     		pauseMusic.loadEmbedded(Paths.music(songName), true, true);
@@ -621,14 +622,15 @@ class PauseSubState extends MusicBeatSubstate
     				FlxTween.tween(menuText[menuText.length-curText-1], {alpha: 0}, 0.2, {ease: FlxEase.quartIn});
     				curText++;
     			}, menuText.length);
-			
+			    
     			stayinMenu = 'isChanging';
-			
+			    
+			    FlxG.sound.play(Paths.sound('confirmMenu'), 0.4);
     			FlxTween.tween(backShadow, {x: -800}, 1, {ease: FlxEase.quartIn});
     			FlxTween.tween(back, {x: -800}, 1, {ease: FlxEase.quartIn});
     			FlxTween.tween(front, {x: -800}, 0.75, {ease: FlxEase.quartIn});
     			FlxTween.tween(blackback, {alpha: 0}, 0.75, {ease: FlxEase.quartOut});
-    			new FlxTimer().start(0.9, function(tmr:FlxTimer) {
+    			new FlxTimer().start(1, function(tmr:FlxTimer) {
     				close();
     			});
     		} else if (daChoice == 'Restart') {
