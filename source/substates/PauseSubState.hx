@@ -18,7 +18,6 @@ import flixel.util.FlxStringUtil;
 import flixel.addons.transition.FlxTransitionableState;
 
 /*
-
     PauseSubState made by TieGuo, code optimized by Beihu.
     it used at NF Engine
     有一说一我感觉就是在屎山上加屎山，很无语 --beihu
@@ -36,13 +35,23 @@ class PauseSubState extends MusicBeatSubstate
     var front:FlxSprite;
     var backButton:FlxSprite;
     var blackback:FlxSprite;
+    
     var missingText:FlxText;
     var missingTextTimer:FlxTimer;
     var missingTextTween:FlxTween;
     var boolText:FlxText;
-    var camPause:FlxCamera;
+    
+    var cheatingText:FlxText;
+    var songText:FlxText;
+    var dataText:FlxText;
+    var practiceText:FlxText;
+    var botText:FlxText;
+    var ballText:FlxText;
+    var menuText:Array<FlxText> = [dataText, songText, ballText, practiceText, botText, cheatingText];
+    
     var pauseMusic:FlxSound;
     public static var songName:String = '';
+    
     var holdTime:Float = 0;
     var skipTimeText:FlxText;
     var curTime:Float = Math.max(0, Conductor.songPosition);
@@ -290,14 +299,56 @@ class PauseSubState extends MusicBeatSubstate
     	'Blueballed' + PlayState.deathCounter + '\n' + 
     	(PlayState.instance.practiceMode ? 'Practice: ON\n' : '') +
     	(PlayState.instance.cpuControlled ? 'Botplay: ON\n' : '') +
-    	(PlayState.chartingMode ? 'Cheating: ON');
+    	(PlayState.chartingMode ? 'Cheating: ON');*/
     	
-    	var infoText:FlxText = new FlxText(0, 15, FlxG.width, textString, 32);
-		infoText.setFormat(font, 32);
-		infoText.camera = camPause;
-		infoText.screenCenter(X);
-		infoText.updateHitbox();
-		add(infoText);*/
+    	dataText:FlxText = new FlxText(0, 15, 0, Date.now().toString(), 32);
+		dataText.setFormat(font, 32);
+		dataText.camera = camPause;
+		dataText.updateHitbox();
+		add(dataText);
+		
+		songText:FlxText = new FlxText(0, 15, 0, PlayState.SONG.song + ' - ' + Difficulty.getString().toUpperCase(), 32);
+		songText.setFormat(font, 32);
+		songText.camera = camPause;
+		songText.updateHitbox();
+		add(songText);
+		
+		ballText:FlxText = new FlxText(0, 15, 0, 'Blueballed' + PlayState.deathCounter, 32);
+		ballText.setFormat(font, 32);
+		ballText.camera = camPause;
+		ballText.updateHitbox();
+		add(ballText);
+		
+		practiceText:FlxText = new FlxText(0, 15, 0, 'Practice Mode ' + (PlayState.instance.practiceMode ? 'ON' : 'OFF'), 32);
+		practiceText.setFormat(font, 32);
+		practiceText.camera = camPause;
+		practiceText.updateHitbox();
+		add(practiceText);
+		
+		botText:FlxText = new FlxText(0, 15, 0, 'Botplay ' + (PlayState.instance.cpuControlled ? 'ON' : 'OFF'), 32);
+		botText.setFormat(font, 32);
+		botText.camera = camPause;
+		botText.updateHitbox();
+		add(botText);
+		
+		cheatingText:FlxText = new FlxText(0, 15, 0, 'Cheating ' + (PlayState.chartingMode ? 'ON' : 'OFF'), 32);
+		cheatingText.setFormat(font, 32);
+		cheatingTextcamera = camPause;
+		cheatingText.updateHitbox();
+		add(cheatingText);
+		
+		var curText = 0;
+		for (i in menuText)
+		{
+			i.alpha = 0;
+			i.x = 1280 + 60;
+		}
+		
+		new FlxTimer().start(0.1, function(tmr:FlxTimer) {
+    		FlxTween.tween(menuText[curText], {x: 1280 - 7.5 - menuText[curText].width}, 0.2, {ease: FlxEase.quartIn});
+    		FlxTween.tween(menuText[curText], {alpha: 1}, 0.2, {ease: FlxEase.quartIn});
+    		curText++;
+    	}, menuText.length);
     	
     	new FlxTimer().start(0.4, function(tmr:FlxTimer) {
     		stayinMenu = 'base';
@@ -311,7 +362,7 @@ class PauseSubState extends MusicBeatSubstate
     	}, 0);
     	
     	#if android
-		    addVirtualPad(FULL, A_B);
+		    addVirtualPad(FULL, A);
 		    addPadCamera();
 		#end
     }
@@ -321,6 +372,23 @@ class PauseSubState extends MusicBeatSubstate
         if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
         super.update(elapsed);
+        
+        dataText.text = Date.now().toString();
+		
+		songText.text = PlayState.SONG.song + ' - ' + Difficulty.getString().toUpperCase();
+		
+		ballText.text = 'Blueballed' + PlayState.deathCounter;
+		
+		practiceText.text = 'Practice Mode ' + (PlayState.instance.practiceMode ? 'ON' : 'OFF');
+		
+		botText.text = 'Botplay ' + (PlayState.instance.cpuControlled ? 'ON' : 'OFF');
+
+		cheatingText.text = 'Cheating ' + (PlayState.chartingMode ? 'ON' : 'OFF');
+		
+		for (i in menuText)
+		{
+			i.x = 1280 -15 -i.width;
+		}
         
         var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
@@ -432,13 +500,17 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
     			
     		for (i in 0...optionsOptionsAlphabet.length) {
-    			optionsOptionsAlphabet[i].x = FlxMath.lerp((optionsCurSelected - i) *75 + 75 + (i == difficultyCurSelected ? 75 : 0), optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			optionsOptionsAlphabet[i].x = FlxMath.lerp((optionsCurSelected - 1) *75 + 75 + (i == difficultyCurSelected ? 75 : 0), optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			optionsOptionsAlphabet[i].y = FlxMath.lerp((180 * (i - (optionsOptionsAlphabet.length / 2))) + 400, optionsOptionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
-    			optionsOptionsBars[i*2].x = optionsOptionsAlphabet[i].x - 300;
+    			var xxx = 300;
+    			if (optionsOptionsAlphabet[i].length <= 300)
+    				xxx = optionsOptionsAlphabet[i].length + 15;
+    			
+    			optionsOptionsBars[i*2].x = optionsOptionsAlphabet[i].x - xxx;
     			optionsOptionsBars[i*2].y = optionsOptionsAlphabet[i].y - 30;
     			
-    			optionsOptionsBars[i*2+1].x = optionsOptionsAlphabet[i].x - 300;
+    			optionsOptionsBars[i*2+1].x = optionsOptionsAlphabet[i].x - xxx;
     			optionsOptionsBars[i*2+1].y = optionsOptionsAlphabet[i].y - 30;
     		}
 
@@ -481,13 +553,16 @@ class PauseSubState extends MusicBeatSubstate
     		difficultyAlphabet[difficultyCurSelected].alpha = 1;
     	} else if (stayinMenu == 'options') {
     		optionsCurSelected += num;
-    		if (optionsCurSelected > options.length - 1) optionsCurSelected = 0;
+    		if (optionsCurSelected > optionsType.length - 1) optionsCurSelected = 0;
     		if (optionsCurSelected < 0) optionsCurSelected = optionsType.length - 1;
     		
     		for (i in 0...optionsType.length - 1) optionsOptionsAlphabet[i].alpha = 0.5;
     		
     		optionsOptionsAlphabet[optionsCurSelected].alpha = 1;
     	}
+    	
+    	if (num != 0)
+    		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
     }
 
     function doEvent() {
@@ -541,6 +616,13 @@ class PauseSubState extends MusicBeatSubstate
 				
     			for (i in optionsAlphabet)
     				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+    				
+    			var curText = 0;
+				new FlxTimer().start(0.1, function(tmr:FlxTimer) {
+    				FlxTween.tween(menuText[menuText.length-curText-1], {x: 1280 + 60}, 0.2, {ease: FlxEase.quartIn});
+    				FlxTween.tween(menuText[menuText.length-curText-1], {alpha: 0}, 0.2, {ease: FlxEase.quartIn});
+    				curText++;
+    			}, menuText.length);
 			
     			stayinMenu = 'isChanging';
 			
@@ -617,6 +699,7 @@ class PauseSubState extends MusicBeatSubstate
     				debugCurSelected = 0;
     				changeOptions(0);
     			});
+    			FlxG.sound.play(Paths.sound('cancelMenu'), 0.4);
     		}
     	} else if (stayinMenu == 'options') {
 			if (optionsType[optionsCurSelected] == 'Instant Setup')
@@ -647,6 +730,8 @@ class PauseSubState extends MusicBeatSubstate
 					optionsCurSelected = 0;
 					changeOptions(0);
     			});
+    			
+    			FlxG.sound.play(Paths.sound('cancelMenu'), 0.4);
     		}
     	} else if (stayinMenu == 'difficulty') {
     		if (difficultyChoices[difficultyCurSelected] == 'Back') {
@@ -663,6 +748,7 @@ class PauseSubState extends MusicBeatSubstate
     				difficultyCurSelected = 0;
     				changeOptions(0);
     			});
+    			FlxG.sound.play(Paths.sound('cancelMenu'), 0.4);
     			return;
     		}
 	        try{
