@@ -1727,14 +1727,16 @@ class PlayState extends MusicBeatState
 		if (health > 0 && !paused) resetRPC(Conductor.songPosition > 0.0);
 		super.onFocus();
 	}
-
+    
+    var pauseTime:Float = 0; //use fot fix bug
 	override public function onFocusLost():Void
 	{
 		#if desktop
 		if (health > 0 && !paused) DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 		#else		
-		if (FlxG.autoPause && !paused && !isFinish && Conductor.songPosition > 0){
+		if (FlxG.autoPause && (!paused && !isFinish && Conductor.songPosition > 0) || (paused && !isFinish && Conductor.songPosition != pauseTime)){
 		    var ret:Dynamic = callOnScripts('onPause', null, true);
+		    pauseTime = Conductor.songPosition;
 			if(ret != FunkinLua.Function_Stop) {
 				openPauseMenu();
 			}
@@ -1974,7 +1976,7 @@ class PlayState extends MusicBeatState
 							// Kill extremely late notes and cause misses
 							if (Conductor.songPosition - daNote.strumTime > noteKillOffset)
 							{
-								if (((!daNote.mustPress && !cpuControlled_opponent && ClientPrefs.data.playOpponent) || (daNote.mustPress || !cpuControlled && !ClientPrefs.data.playOpponent))
+								if (((!daNote.mustPress && !cpuControlled_opponent && ClientPrefs.data.playOpponent) || (daNote.mustPress && !cpuControlled && !ClientPrefs.data.playOpponent))
 								 && !daNote.ignoreNote && !endingSong
 								 && (daNote.tooLate == true || daNote.wasGoodHit == false)
 								 ){
