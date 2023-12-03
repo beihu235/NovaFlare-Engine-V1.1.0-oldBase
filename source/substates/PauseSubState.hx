@@ -302,32 +302,32 @@ class PauseSubState extends MusicBeatSubstate
     	(PlayState.chartingMode ? 'Cheating: ON');*/
     	
     	dataText = new FlxText(0, 15, 0, Date.now().toString(), 32);
-		dataText.setFormat(font, 32);
+		dataText.setFormat(font, 25);
 		dataText.updateHitbox();
 		add(dataText);
 		
 		songText = new FlxText(0, 15, 0, PlayState.SONG.song + ' - ' + Difficulty.getString().toUpperCase(), 32);
-		songText.setFormat(font, 32);
+		songText.setFormat(font, 25);
 		songText.updateHitbox();
 		add(songText);
 		
 		ballText = new FlxText(0, 15, 0, 'Blueballed' + PlayState.deathCounter, 32);
-		ballText.setFormat(font, 32);
+		ballText.setFormat(font, 25);
 		ballText.updateHitbox();
 		add(ballText);
 		
 		practiceText = new FlxText(0, 15, 0, 'Practice Mode ' + (PlayState.instance.practiceMode ? 'ON' : 'OFF'), 32);
-		practiceText.setFormat(font, 32);
+		practiceText.setFormat(font, 25);
 		practiceText.updateHitbox();
 		add(practiceText);
 		
 		botText = new FlxText(0, 15, 0, 'Botplay ' + (PlayState.instance.cpuControlled ? 'ON' : 'OFF'), 32);
-		botText.setFormat(font, 32);
+		botText.setFormat(font, 25);
 		botText.updateHitbox();
 		add(botText);
 		
 		cheatingText = new FlxText(0, 15, 0, 'Cheating ' + (PlayState.chartingMode ? 'ON' : 'OFF'), 32);
-		cheatingText.setFormat(font, 32);
+		cheatingText.setFormat(font, 25);
 		cheatingText.updateHitbox();
 		add(cheatingText);
 		
@@ -343,7 +343,7 @@ class PauseSubState extends MusicBeatSubstate
 		new FlxTimer().start(0.1, function(tmr:FlxTimer) {
     		FlxTween.tween(menuText[curText], {x: 1280 - 7.5 - menuText[curText].width}, 0.2, {ease: FlxEase.quartIn});
     		FlxTween.tween(menuText[curText], {alpha: 1}, 0.2, {ease: FlxEase.quartIn});
-    		FlxTween.tween(menuText[curText], {y: 7.5 + (menuText[curText].height)*curText}, 0.2, {ease: FlxEase.quartIn});
+    		menuText[curText].y =  7.5 + (menuText[curText].height)*curText;
     		curText++;
     	}, menuText.length);
     	
@@ -400,7 +400,7 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
     		
     		for (i in 0...options.length) {
-    			optionsAlphabet[i].x = FlxMath.lerp((curSelected - i)*60 + 100 + (i == curSelected ? 75 : 0), optionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			optionsAlphabet[i].x = FlxMath.lerp((curSelected - i)*40 + 100 + (i == curSelected ? 75 : 0), optionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			optionsAlphabet[i].y = FlxMath.lerp((i - curSelected) * 180 + 325, optionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
     			optionsBars[i*2].x = optionsAlphabet[i].x - 300;
@@ -419,7 +419,7 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
 		
     		for (i in 0...debugType.length) {
-    			debugAlphabet[i].x = FlxMath.lerp((debugCurSelected - i) * 60 + 100 + (i == debugCurSelected ? 75 : 0), debugAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			debugAlphabet[i].x = FlxMath.lerp((debugCurSelected - i) * 40 + 100 + (i == debugCurSelected ? 75 : 0), debugAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			debugAlphabet[i].y = FlxMath.lerp((i - debugCurSelected) * 180 + 325, debugAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
 			
     			debugBars[i*2].x = debugAlphabet[i].x - 300;
@@ -477,7 +477,7 @@ class PauseSubState extends MusicBeatSubstate
     			changeOptions(1);
     			
     		for (i in 0...difficultyAlphabet.length) {
-                difficultyAlphabet[i].x = FlxMath.lerp((difficultyCurSelected - i) * 60 + 100 + (i == difficultyCurSelected ? 75 : 0), difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+                difficultyAlphabet[i].x = FlxMath.lerp((difficultyCurSelected - i) * 40 + 100 + (i == difficultyCurSelected ? 75 : 0), difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			difficultyAlphabet[i].y = FlxMath.lerp((i - difficultyCurSelected) * 180 + 325, difficultyAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
     			difficultyBars[i*2].x = difficultyAlphabet[i].x - 300;
@@ -498,7 +498,7 @@ class PauseSubState extends MusicBeatSubstate
     			
     		for (i in 0...optionsOptionsAlphabet.length) {
     				
-    			optionsOptionsAlphabet[i].x = FlxMath.lerp((optionsCurSelected - 1) *60 + 100 + (i == optionsCurSelected ? 75 : 0), optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			optionsOptionsAlphabet[i].x = FlxMath.lerp(-i *40 + 100 + (i == optionsCurSelected ? 75 : 0), optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			optionsOptionsAlphabet[i].y = FlxMath.lerp((180 * (i - (optionsOptionsAlphabet.length / 2))) + 400, optionsOptionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
     			
     			optionsOptionsBars[i*2].x = optionsOptionsAlphabet[i].x - 300;
