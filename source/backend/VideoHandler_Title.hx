@@ -198,6 +198,8 @@ class VideoSprite extends FlxSprite
 	 */
 	public function playVideo(Path:String, Loop:Bool = false, PauseMusic:Bool = false):Void{
 		bitmap.playVideo(Path, Loop, PauseMusic, newWidth, newHeight);
-	    bitmap.canUseAutoResize = true;
+		
+		var size:Float = (Math.min(newWidth / bitmap.__bitmapData.width, newHeight / bitmap.__bitmapData.height);
+		scale.set(size, size); // lol	
 	}
 }
