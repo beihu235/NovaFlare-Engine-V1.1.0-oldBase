@@ -1745,12 +1745,7 @@ class PlayState extends MusicBeatState
 	}
     
 	override public function onFocusLost():Void
-	{
-	    if (FlxG.autoPause && FlxG.sound.music != null) {
-			FlxG.sound.music.pause();
-			vocals.pause();
-		} //fix shit bug
-		
+	{			
 		#if desktop
 		if (health > 0 && !paused) DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 		#else		
@@ -2088,15 +2083,16 @@ class PlayState extends MusicBeatState
 
 	function openPauseMenu()
 	{
+	    if (FlxG.sound.music != null) {
+			FlxG.sound.music.pause();
+			vocals.pause();
+		}
+		
 		FlxG.camera.followLerp = 0;
 		persistentUpdate = false;
 		persistentDraw = true;
 		paused = true;
 		
-		if(FlxG.sound.music != null) {
-			FlxG.sound.music.pause();
-			vocals.pause();
-		}
 		#if android
 			MusicBeatState.androidc.y = 720;
 		#end
