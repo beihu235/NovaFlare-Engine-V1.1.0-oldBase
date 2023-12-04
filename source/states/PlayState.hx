@@ -2078,6 +2078,7 @@ class PlayState extends MusicBeatState
 		            scoreTxt.text += '(' + ratingFC + ') ' + ratingName;
 		        }
 			}
+		}
         
 		setOnScripts('cameraX', camFollow.x);
 		setOnScripts('cameraY', camFollow.y);
@@ -2091,7 +2092,6 @@ class PlayState extends MusicBeatState
 		persistentUpdate = false;
 		persistentDraw = true;
 		paused = true;
-
 		
 		if(FlxG.sound.music != null) {
 			FlxG.sound.music.pause();
