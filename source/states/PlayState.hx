@@ -2077,9 +2077,6 @@ class PlayState extends MusicBeatState
 		        else {
 		            scoreTxt.text += '(' + ratingFC + ') ' + ratingName;
 		        }
-		       
-		        if (!miss && !cpuControlled)
-			    doScoreBop();
 			}
         
 		setOnScripts('cameraX', camFollow.x);
