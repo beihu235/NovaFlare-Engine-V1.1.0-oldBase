@@ -222,6 +222,7 @@ class PlayState extends MusicBeatState
     var notesHitArray:Array<Date> = [];
     var nps:Int = 0;
 	var maxNPS:Int = 0;
+	var npsCheck:Int = 0;
 	
 	public var healthBar:HealthBar;
 	public var timeBar:HealthBar;
@@ -1239,9 +1240,24 @@ class PlayState extends MusicBeatState
 			str += ' (${percent}%) - ${ratingFC}';
 		}
 
-		scoreTxt.text = 'Score: ${songScore}'
-		+ (!instakillOnMiss ? ' | Misses: ${songMisses}' : "")
-		+ ' | Rating: ${str}';		
+		scoreTxt.text = 
+                "NPS: "
+		        + nps
+		        + " (Max: "
+		        + maxNPS
+		        + ")"
+		        + " | " // 	NPS
+		        + "Score: " + songScore
+		        + " | Misses: " + songMisses
+		        + " | Accuracy: " + Math.ceil(ratingPercent * 10000) / 100 + '%'
+		        + " | ";
+		        
+		        if (ratingName == 'N/A'){
+		            scoreTxt.text += 'N/A';
+		        }
+		        else {
+		            scoreTxt.text += '(' + ratingFC + ') ' + ratingName;
+		        }
 		
 		var marvelousRate:String = ClientPrefs.data.marvelousRating ? 'Marvelous: ${ratingsData[4].hits}\n' : '';
 		judgementCounter_S.text = marvelousRate
@@ -2035,7 +2051,36 @@ class PlayState extends MusicBeatState
 			nps = notesHitArray.length;
 			if (nps > maxNPS)
 				maxNPS = nps;
-		}
+				
+			setOnLuas('nps', nps);
+			setOnLuas('maxFPS', maxNPS);	
+				
+			if (npsCheck != nps) {
+			
+			    npsCheck = nps;
+			
+			    scoreTxt.text = 
+                "NPS: "
+		        + nps
+		        + " (Max: "
+		        + maxNPS
+		        + ")"
+		        + " | " // 	NPS
+		        + "Score: " + songScore
+		        + " | Misses: " + songMisses
+		        + " | Accuracy: " + Math.ceil(ratingPercent * 10000) / 100 + '%'
+		        + " | ";
+		        
+		        if (ratingName == 'N/A'){
+		            scoreTxt.text += 'N/A';
+		        }
+		        else {
+		            scoreTxt.text += '(' + ratingFC + ') ' + ratingName;
+		        }
+		       
+		        if (!miss && !cpuControlled)
+			    doScoreBop();
+			}
         
 		setOnScripts('cameraX', camFollow.x);
 		setOnScripts('cameraY', camFollow.y);
