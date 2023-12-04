@@ -237,7 +237,7 @@ class PauseSubState extends MusicBeatSubstate
     		var optionText:FlxText = new FlxText(0, 0, 0, optionsType[i], 50);
 		
     		optionText.x = -1000;
-    		optionText.y = (180 * (i - (optionsOptionsAlphabet.length / 2))) + 400;
+    		optionText.y = (180 * (i - (optionsType.length / 2))) + 400;
     		optionText.setFormat(font, 50, FlxColor.BLACK);
     		optionsOptionsAlphabet.push(optionText);
 		
