@@ -37,6 +37,10 @@ class PauseSubState extends MusicBeatSubstate
     var backButton:FlxSprite;
     var blackback:FlxSprite;
     
+    var backTween:FlxTween;
+    var backShadowTween:FlxTween;
+    var frontTween:FlxTween;
+    
     var missingText:FlxText;
     var missingTextTimer:FlxTimer;
     var missingTextTween:FlxTween;
@@ -143,17 +147,17 @@ class PauseSubState extends MusicBeatSubstate
     	backShadow = new FlxSprite(-800).loadGraphic(Paths.image(filePath + 'backShadow'));
     	add(backShadow);
     	backShadow.updateHitbox();
-    	FlxTween.tween(backShadow, {x: 0}, 1, {ease: FlxEase.quartOut});
+    	backShadowTween = FlxTween.tween(backShadow, {x: 0}, 1, {ease: FlxEase.quartOut});
 	
     	back = new FlxSprite(-800).loadGraphic(Paths.image(filePath + 'back'));
     	add(back);
     	back.updateHitbox();
-    	FlxTween.tween(back, {x: 0}, 1, {ease: FlxEase.quartOut});
+    	backTween = FlxTween.tween(back, {x: 0}, 1, {ease: FlxEase.quartOut});
 	
     	front = new FlxSprite(-800).loadGraphic(Paths.image(filePath + 'front'));
     	add(front);
     	front.updateHitbox();
-    	FlxTween.tween(front, {x: 0}, 1.3, {ease: FlxEase.quartOut});
+    	frontTween = FlxTween.tween(front, {x: 0}, 1.3, {ease: FlxEase.quartOut});
 	
     	backButton = new FlxSprite(1080, 600).loadGraphic(Paths.image(filePath + 'backButton'));
     	add(backButton);
@@ -625,10 +629,17 @@ class PauseSubState extends MusicBeatSubstate
 			    
     			stayinMenu = 'isChanging';
 			    
-			    FlxG.sound.play(Paths.sound('confirmMenu'), 0.4);
-    			FlxTween.tween(backShadow, {x: -800}, 1, {ease: FlxEase.quartIn});
-    			FlxTween.tween(back, {x: -800}, 1, {ease: FlxEase.quartIn});
-    			FlxTween.tween(front, {x: -800}, 0.75, {ease: FlxEase.quartIn});
+			    FlxG.sound.play(Paths.sound('confirmMenu'), 0.4);			   
+			    
+			    if (backShadowTween != null && backTween != null && frontTween != null){
+			        backShadowTween.cancel();
+                    backTween.cancel();
+			        frontTween.cancel();
+			        
+    			    backShadowTween = FlxTween.tween(backShadow, {x: -800}, 1, {ease: FlxEase.quartIn});
+    			    backTween = FlxTween.tween(back, {x: -800}, 1, {ease: FlxEase.quartIn});
+    			    frontTween = FlxTween.tween(front, {x: -800}, 0.75, {ease: FlxEase.quartIn});    			    
+    			}
     			FlxTween.tween(blackback, {alpha: 0}, 0.75, {ease: FlxEase.quartOut});
     			new FlxTimer().start(1, function(tmr:FlxTimer) {
     				close();
