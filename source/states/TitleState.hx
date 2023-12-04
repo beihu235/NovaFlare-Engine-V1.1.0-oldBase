@@ -30,7 +30,7 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 
-import backend.VideoSprite;
+import backend.VideoHandler_Title;
 
 
 typedef TitleData =
