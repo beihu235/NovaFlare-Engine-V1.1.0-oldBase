@@ -186,8 +186,12 @@ class VideoSprite extends FlxSprite
 	{
 		super.update(elapsed);
 
-		if (bitmap.isPlaying && bitmap.isDisplaying && bitmap.bitmapData != null)
+		if (bitmap.isPlaying && bitmap.isDisplaying && bitmap.bitmapData != null){
 			pixels = bitmap.bitmapData;
+		
+		var size:Float = Math.min(newWidth / bitmap.bitmapData.width, newHeight / bitmap.bitmapData.height);
+		scale.set(size, size); // lol	
+		}	
 	}
 
 	/**
@@ -199,7 +203,6 @@ class VideoSprite extends FlxSprite
 	public function playVideo(Path:String, Loop:Bool = false, PauseMusic:Bool = false):Void{
 		bitmap.playVideo(Path, Loop, PauseMusic, newWidth, newHeight);
 		
-		var size:Float = Math.min(newWidth / bitmap.bitmapData.width, newHeight / bitmap.bitmapData.height);
-		scale.set(size, size); // lol	
+		
 	}
 }
