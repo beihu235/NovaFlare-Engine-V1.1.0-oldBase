@@ -6,6 +6,9 @@ import openfl.events.Event;
 import sys.FileSystem;
 import vlc.VLCBitmap;
 
+import flixel.FlxSprite;
+import flixel.util.FlxColor;
+
 /**
  * Handles video playback.
  * Use bitmap to connect to a graphic or use `VideoSprite`.
@@ -98,9 +101,6 @@ class VideoHandler_Title extends VLCBitmap
 			play(Sys.getCwd() + Path, Loop);
 		else
 			play(Path, Loop);
-			
-		set_width(Width);
-		set_height(Height);	
 	}
 
 	private function update(?E:Event):Void
@@ -142,5 +142,62 @@ class VideoHandler_Title extends VLCBitmap
 		}
 
 		return 0;
+	}
+}
+
+/**
+ * This class allows you to play videos using sprites (FlxSprite).
+ */
+class VideoSprite extends FlxSprite
+{
+	public var bitmap:VideoHandler_Title;
+	public var openingCallback:Void->Void = null;
+	public var finishCallback:Void->Void = null;
+	
+	public var newWidth = 0;
+    public var newHeight = 0;
+    
+	public function new(X:Float = 0, Y:Float = 0, Width:Int = 1280, Height:Int = 720)
+	{
+		super(X, Y);
+		
+		newWidth = Width;
+        newHeight = Height;
+        
+		makeGraphic(1, 1, FlxColor.TRANSPARENT);
+
+		bitmap = new VideoHandler_Title();		
+		bitmap.alpha = 0;
+		bitmap.openingCallback = function()
+		{
+			if (openingCallback != null)
+				openingCallback();
+		}
+		bitmap.finishCallback = function()
+		{
+			if (finishCallback != null)
+				finishCallback();
+
+			kill();
+		}
+	}
+
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+		if (bitmap.isPlaying && bitmap.isDisplaying && bitmap.bitmapData != null)
+			pixels = bitmap.bitmapData;
+	}
+
+	/**
+	 * Native video support for Flixel & OpenFL
+	 * @param Path Example: `your/video/here.mp4`
+	 * @param Loop Loop the video.
+	 * @param PauseMusic Pause music until the video ends.
+	 */
+	public function playVideo(Path:String, Loop:Bool = false, PauseMusic:Bool = false):Void{
+		bitmap.playVideo(Path, Loop, PauseMusic, newWidth, newHeight);
+	    bitmap.canUseAutoResize = true;
 	}
 }
