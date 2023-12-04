@@ -24,7 +24,7 @@ jobs:
 
       - uses: krdlab/setup-haxe@master
         with:
-          haxe-version: 4.3.2
+          haxe-version: latest
       
       - name: Restore Previous Cache
         id: cache-build-windows-restore
@@ -40,22 +40,20 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup C:/haxelib
-          haxelib install hxcpp 4.3.2 > /dev/null
-          haxelib install lime
-          haxelib install openfl
-          haxelib install flixel
-          haxelib run lime setup flixel
-          haxelib run lime setup
-          haxelib install flixel-tools
-          haxelib install flixel-ui
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
+          haxelib install lime 8.1.1
+          haxelib install openfl 9.2.1
+          haxelib install flixel 5.2.2
+          haxelib install flixel-tools 1.5.1
+          haxelib install flixel-ui 2.5.0
           haxelib install flixel-addons
-          haxelib install tjson
-          haxelib install hxjsonast
+          haxelib install tjson 1.4.0
+          # haxelib install hxjsonast
           haxelib install hxCodec 2.6.0
-          haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
-          haxelib install SScript 7.0.0
+          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
+          haxelib install SScript 8.1.3
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib install hxcpp-debug-server
+          # haxelib install hxcpp-debug-server
           haxelib list
         shell: cmd
       - name: Create Version Tag
@@ -101,21 +99,20 @@ jobs:
           sudo apt-get install libvlccore-dev
           haxelib install hxcpp > /dev/null --quiet
           haxelib setup ~/haxelib
-          haxelib install lime
-          haxelib install openfl
-          haxelib install flixel
-          haxelib run lime setup flixel
-          haxelib run lime setup
-          haxelib install flixel-tools
-          haxelib install flixel-ui
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
+          haxelib install lime 8.1.1
+          haxelib install openfl 9.2.1
+          haxelib install flixel 5.2.2
+          haxelib install flixel-tools 1.5.1
+          haxelib install flixel-ui 2.5.0
           haxelib install flixel-addons
-          haxelib install tjson
-          haxelib install hxjsonast
+          haxelib install tjson 1.4.0
+          # haxelib install hxjsonast
           haxelib install hxCodec 2.6.0
-          haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
-          haxelib install SScript 7.0.0
+          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
+          haxelib install SScript 8.1.3
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib install hxcpp-debug-server
+          # haxelib install hxcpp-debug-server
           haxelib list
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
@@ -140,22 +137,20 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
-          haxelib install hxcpp > /dev/null --quiet
-          haxelib install lime
-          haxelib install openfl
-          haxelib install flixel
-          haxelib run lime setup flixel
-          haxelib run lime setup
-          haxelib install flixel-tools
-          haxelib install flixel-ui
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
+          haxelib install lime 8.1.1
+          haxelib install openfl 9.2.1
+          haxelib install flixel 5.2.2
+          haxelib install flixel-tools 1.5.1
+          haxelib install flixel-ui 2.5.0
           haxelib install flixel-addons
-          haxelib install tjson
-          haxelib install hxjsonast
+          haxelib install tjson 1.4.0
+          # haxelib install hxjsonast
           haxelib install hxCodec 2.6.0
-          haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
-          haxelib install SScript 7.0.0
+          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
+          haxelib install SScript 8.1.3
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib install hxcpp-debug-server
+          # haxelib install hxcpp-debug-server
           haxelib list
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
