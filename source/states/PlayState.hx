@@ -3418,6 +3418,7 @@ class PlayState extends MusicBeatState
 		{
 			combo++;
 			if(combo > 9999) combo = 9999;
+			notesHitArray.unshift(Date.now());
 			popUpScore(note);
 		}
 		var gainHealth:Bool = true; // prevent health gain, as sustains are threated as a singular note
@@ -3516,6 +3517,7 @@ class PlayState extends MusicBeatState
 		{
 			combo++;
 			if(combo > 9999) combo = 9999;
+			notesHitArray.unshift(Date.now());
 			popUpScore(note);
 		}
 		var gainHealth:Bool = true; // prevent health gain, as sustains are threated as a singular note
