@@ -1749,7 +1749,7 @@ class PlayState extends MusicBeatState
 		#if desktop
 		if (health > 0 && !paused) DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 		#else		
-		if (FlxG.autoPause && !paused && !isFinish && Conductor.songPosition > 0){
+		if (FlxG.autoPause && && startedCountdown && canPause){
 		    var ret:Dynamic = callOnScripts('onPause', null, true);
 		
 			if(ret != FunkinLua.Function_Stop) {
@@ -1790,7 +1790,6 @@ class PlayState extends MusicBeatState
 	}
 
 	public var paused:Bool = false;
-	public var isFinish:Bool = false;
 	public var canReset:Bool = true;
 	var startedCountdown:Bool = false;
 	var canPause:Bool = true;
@@ -1826,7 +1825,7 @@ class PlayState extends MusicBeatState
 
 		if (controls.PAUSE #if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
 		{
-		    var ret:Dynamic = callOnScripts('onStartCountdown', null, true);
+		    var ret:Dynamic = callOnScripts('onPause', null, true);
 			if(ret != FunkinLua.Function_Stop) {
 				openPauseMenu();
 			}
@@ -2615,8 +2614,6 @@ class PlayState extends MusicBeatState
 				openChartEditor();
 				return false;
 			}
-			
-			isFinish = true;
 
 			if (isStoryMode)
 			{
