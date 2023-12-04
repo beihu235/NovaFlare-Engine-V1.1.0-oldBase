@@ -48,22 +48,15 @@ jobs:
           haxelib install flixel-ui 2.5.0
           haxelib install flixel-addons
           haxelib install tjson 1.4.0
-          # haxelib install hxjsonast
           haxelib install hxCodec 2.6.0
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
-          haxelib install SScript 8.1.3
+          haxelib install SScript 8.1.6
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          # haxelib install hxcpp-debug-server
           haxelib run lime rebuild hxcpp
           haxelib list
         shell: cmd
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
-      - name: Setup Lime
-        run: |
-          haxelib run lime setup -alias -y
-          haxelib set hxcpp 4.3.2
-          haxelib set hxCodec 2.5.1
       - name: Compile
         run: haxelib run lime build windows --app-version="4.0.0-${{ github.run_id}}"
       - name: Save Current Cache
@@ -108,12 +101,10 @@ jobs:
           haxelib install flixel-ui 2.5.0
           haxelib install flixel-addons
           haxelib install tjson 1.4.0
-          # haxelib install hxjsonast
           haxelib install hxCodec 2.6.0
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
-          haxelib install SScript 8.1.3
+          haxelib install SScript 8.1.6
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          # haxelib install hxcpp-debug-server
           haxelib run lime rebuild hxcpp
           haxelib list
       - name: Create Version Tag
@@ -147,12 +138,11 @@ jobs:
           haxelib install flixel-ui 2.5.0
           haxelib install flixel-addons
           haxelib install tjson 1.4.0
-          # haxelib install hxjsonast
           haxelib install hxCodec 2.6.0
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
-          haxelib install SScript 8.1.3
+          haxelib install SScript 8.1.6
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          # haxelib install hxcpp-debug-server
+          haxelib install SScript 8.1.6
           haxelib run lime rebuild hxcpp
           haxelib list
       - name: Create Version Tag
