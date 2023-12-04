@@ -1749,7 +1749,7 @@ class PlayState extends MusicBeatState
 		#if desktop
 		if (health > 0 && !paused) DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 		#else		
-		if (FlxG.autoPause && && startedCountdown && canPause){
+		if (FlxG.autoPause && startedCountdown && canPause){
 		    var ret:Dynamic = callOnScripts('onPause', null, true);
 		
 			if(ret != FunkinLua.Function_Stop) {
