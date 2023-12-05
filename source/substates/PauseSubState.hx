@@ -353,7 +353,7 @@ class PauseSubState extends MusicBeatSubstate
 		
 		new FlxTimer().start(0.1, function(tmr:FlxTimer) {
     		//menuTextTween[curText * 2] = FlxTween.tween(menuText[curText], {x: 1280 - 15 - menuText[curText].width}, 0.2, {ease: FlxEase.quartIn});
-    		menuTextTween[curText * 2 + 1] = FlxTween.tween(menuText[curText], {alpha: 1}, 0.2, {ease: FlxEase.quartIn});
+    		menuTextTween[curText] = FlxTween.tween(menuText[curText], {alpha: 1}, 0.2, {ease: FlxEase.quartIn});
     		menuText[curText].y =  7.5 + (menuText[curText].height)*curText;
     		curText++;
     	}, menuText.length);
@@ -626,11 +626,11 @@ class PauseSubState extends MusicBeatSubstate
     				
     			var curText = 0;
 				new FlxTimer().start(0.1, function(tmr:FlxTimer) {
-				    if (menuTextTween[curText * 2] != null) menuTextTween[curText * 2].cancel();
-				    if (menuTextTween[curText * 2 + 1] != null) menuTextTween[curText * 2 + 1].cancel();				        				        	    
+				    if (menuTextTween[curText] != null) menuTextTween[curText].cancel();
+				    //if (menuTextTween[curText * 2 + 1] != null) menuTextTween[curText * 2 + 1].cancel();				        				        	    
 				    
     				//menuTextTween[curText * 2] = FlxTween.tween(menuText[menuText.length-curText-1], {x: 1280 + menuText[curText].width}, 0.2, {ease: FlxEase.quartIn});
-    				menuTextTween[curText * 2 + 1] = FlxTween.tween(menuText[menuText.length-curText-1], {alpha: 0}, 0.2, {ease: FlxEase.quartIn});
+    				menuTextTween[curText] = FlxTween.tween(menuText[menuText.length-curText-1], {alpha: 0}, 0.2, {ease: FlxEase.quartIn});
     				curText++;
     			}, menuText.length);
 			    
