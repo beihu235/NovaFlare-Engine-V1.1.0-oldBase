@@ -6,7 +6,7 @@ import backend.MusicBeatState;
 import flixel.addons.transition.FlxTransitionableState;
 import options.OptionsHelpers;
 
-//import shaders.ColorblindFilter;
+import shaders.ColorblindFilter;
 
 class Option
 {
@@ -625,7 +625,7 @@ class ColorblindModeOption extends Option
 		super();
 		description = desc;
 	}		
-    /*
+
 	public override function left():Bool
 	{
 		ClientPrefs.data.colorblindMode--;
@@ -653,7 +653,6 @@ class ColorblindModeOption extends Option
 	{
 		return "ColorblindFilter: < " + OptionsHelpers.colorblindFilterArray[ClientPrefs.data.colorblindMode] + " >";
 	}
-	*/
 }
 
 class FlashingLightsOption extends Option
