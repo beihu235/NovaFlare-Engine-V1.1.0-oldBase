@@ -50,7 +50,7 @@ jobs:
           haxelib install tjson 1.4.0
           haxelib install hxCodec 2.6.0
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
-          haxelib install SScript 8.1.6
+          haxelib install SScript 7.0.0
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib run lime rebuild hxcpp
           haxelib list
