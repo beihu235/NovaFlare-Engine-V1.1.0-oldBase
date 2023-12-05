@@ -191,6 +191,7 @@ class VideoSprite extends FlxSprite
 		
 		var size:Float = Math.min(newWidth / bitmap.bitmapData.width, newHeight / bitmap.bitmapData.height);
 		scale.set(size, size); // lol	
+		updateHitbox();
 		}	
 	}
 
