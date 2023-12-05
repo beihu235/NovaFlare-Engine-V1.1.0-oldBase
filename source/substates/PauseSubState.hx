@@ -352,7 +352,7 @@ class PauseSubState extends MusicBeatSubstate
 		}
 		
 		new FlxTimer().start(0.1, function(tmr:FlxTimer) {
-    		menuTextTween[curText * 2] = FlxTween.tween(menuText[curText], {x: 1280 - 7.5 - menuText[curText].width}, 0.2, {ease: FlxEase.quartIn});
+    		//menuTextTween[curText * 2] = FlxTween.tween(menuText[curText], {x: 1280 - 15 - menuText[curText].width}, 0.2, {ease: FlxEase.quartIn});
     		menuTextTween[curText * 2 + 1] = FlxTween.tween(menuText[curText], {alpha: 1}, 0.2, {ease: FlxEase.quartIn});
     		menuText[curText].y =  7.5 + (menuText[curText].height)*curText;
     		curText++;
@@ -393,10 +393,12 @@ class PauseSubState extends MusicBeatSubstate
 
 		cheatingText.text = 'Cheating: ' + (PlayState.chartingMode ? 'ON' : 'OFF');
 		
+		
 		for (i in menuText)
 		{
 			i.x = 1280 -15 -i.width;
 		}
+		
         
         var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
@@ -627,7 +629,7 @@ class PauseSubState extends MusicBeatSubstate
 				    if (menuTextTween[curText * 2] != null) menuTextTween[curText * 2].cancel();
 				    if (menuTextTween[curText * 2 + 1] != null) menuTextTween[curText * 2 + 1].cancel();				        				        	    
 				    
-    				menuTextTween[curText * 2] = FlxTween.tween(menuText[menuText.length-curText-1], {x: 1280 + 60}, 0.2, {ease: FlxEase.quartIn});
+    				//menuTextTween[curText * 2] = FlxTween.tween(menuText[menuText.length-curText-1], {x: 1280 + menuText[curText].width}, 0.2, {ease: FlxEase.quartIn});
     				menuTextTween[curText * 2 + 1] = FlxTween.tween(menuText[menuText.length-curText-1], {alpha: 0}, 0.2, {ease: FlxEase.quartIn});
     				curText++;
     			}, menuText.length);
