@@ -101,7 +101,7 @@ jobs:
           haxelib install flixel-ui 2.5.0
           haxelib install flixel-addons 3.0.2
           haxelib install tjson 1.4.0
-          haxelib install hxCodec 2.6.0
+          haxelib install hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
           haxelib install SScript 8.1.6
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
