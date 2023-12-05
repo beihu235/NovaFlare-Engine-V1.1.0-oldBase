@@ -37,7 +37,7 @@ class PauseSubState extends MusicBeatSubstate
     var backButton:FlxSprite;
     var blackback:FlxSprite;
     
-    var blackbackTween:FlxTween
+    var blackbackTween:FlxTween;
     var backTween:FlxTween;
     var backShadowTween:FlxTween;
     var frontTween:FlxTween;
