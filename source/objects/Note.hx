@@ -488,6 +488,9 @@ class Note extends FlxSprite
 			    }
 			}
 		}
+		
+		if(copyAlpha)
+			alpha = strumAlpha * multAlpha;
 	}
 
 	public function clipToStrumNote(myStrum:StrumNote)
