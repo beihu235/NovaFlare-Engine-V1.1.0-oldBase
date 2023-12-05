@@ -112,8 +112,6 @@
 	<haxelib name="flixel-addons" />
 	<!--haxelib name="hscript" if="HSCRIPT_ALLOWED"/-->
 	<haxelib name="SScript" if="HSCRIPT_ALLOWED"/>
-	<define name="hscriptPos" if="HSCRIPT_ALLOWED"/>
-	<haxedef name="openflPos" if="desktop"/>
 	<haxelib name="androiddialogs" if="android" />
 	<haxelib name="devicelanguage" if="android" />
     <haxelib name="samcodes-notifications" if="android"/>
@@ -175,8 +173,6 @@
 	<!--Used for Izzy Engine's crash handler-->
 	<haxedef name="HXCPP_CHECK_POINTER" if="CRASH_HANDLER" />
 	<haxedef name="HXCPP_STACK_LINE" if="CRASH_HANDLER" />
-
-	<haxedef name='no-deprecation-warnings' />
 
 	<!-- _________________________________ Android Stuff _______________________________ -->
 	<config:android permission="android.permission.READ_EXTERNAL_STORAGE" if="android"/>
