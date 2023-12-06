@@ -128,7 +128,7 @@ class PauseSubState extends MusicBeatSubstate
 	    super();
     	cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	    
-	    FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+	    FlxG.sound.play(Paths.sound('scrollMenu'), 0.75);
     	pauseMusic = new FlxSound();
     	if(songName != null) {
     		pauseMusic.loadEmbedded(Paths.music(songName), true, true);
@@ -406,355 +406,333 @@ class PauseSubState extends MusicBeatSubstate
 		var rightP = controls.UI_RIGHT_P;
 		var accept = controls.ACCEPT;
 		
-    	if (stayinMenu == 'base') {
-    		if (upP)
-    			changeOptions(-1);
-    		else if (downP)
-    			changeOptions(1);
+    	switch (stayinMenu) {
+        	case 'base':
+        		for (i in 0...options.length) {
+        			optionsAlphabet[i].x = FlxMath.lerp((curSelected - i)*45.5 + 100 + (i == curSelected ? 75 : 0), optionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+        			optionsAlphabet[i].y = FlxMath.lerp((i - curSelected) * 180 + 325, optionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+        			
+        			optionsBars[i*2].x = optionsAlphabet[i].x - 300;
+        			optionsBars[i*2].y = optionsAlphabet[i].y - 30;
+        			
+        			optionsBars[i*2+1].x = optionsAlphabet[i].x - 300;
+        			optionsBars[i*2+1].y = optionsAlphabet[i].y - 30;
+        		}
+        	case 'debug':
+        		for (i in 0...debugType.length) {
+        			debugAlphabet[i].x = FlxMath.lerp((debugCurSelected - i) * 45.5 + 100 + (i == debugCurSelected ? 75 : 0), debugAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+        			debugAlphabet[i].y = FlxMath.lerp((i - debugCurSelected) * 180 + 325, debugAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+    			
+        			debugBars[i*2].x = debugAlphabet[i].x - 300;
+        			debugBars[i*2].y = debugAlphabet[i].y - 30;
+    			
+        			debugBars[i*2+1].x = debugAlphabet[i].x - 300;
+        			debugBars[i*2+1].y = debugAlphabet[i].y - 30;
+        		}
     		
-    		for (i in 0...options.length) {
-    			optionsAlphabet[i].x = FlxMath.lerp((curSelected - i)*45.5 + 100 + (i == curSelected ? 75 : 0), optionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
-    			optionsAlphabet[i].y = FlxMath.lerp((i - curSelected) * 180 + 325, optionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+        		var text = debugAlphabet[debugCurSelected];
+        		if ((text.text == 'Botplay' || text.text == 'Practice') && stayinMenu == 'debug')
+        		{
+        			boolText.x = text.x + text.width + 5;
+        			boolText.y = text.y;
+        		} else
+        			boolText.y = 1000;
     			
-    			optionsBars[i*2].x = optionsAlphabet[i].x - 300;
-    			optionsBars[i*2].y = optionsAlphabet[i].y - 30;
+        		if (text.text == 'Skip Time' && stayinMenu == 'debug') {
+        			skipTimeText.x = text.x + text.width + 125;
+        			skipTimeText.y = text.y + 7.5;
+        			if (leftP)
+        			{
+        				FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+        				curTime -= 1000;
+        				holdTime = 0;
+        			}
+        			if (rightP)
+        			{
+        				FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+        				curTime += 1000;
+        				holdTime = 0;
+        			}
+    
+        			if(controls.UI_LEFT || controls.UI_RIGHT)
+        			{
+        				holdTime += elapsed;
+        				if(holdTime > 0.5)
+        				{
+        					curTime += 45000 * elapsed * (controls.UI_LEFT ? -1 : 1);
+        				}
+    
+        				if(curTime >= FlxG.sound.music.length) curTime -= FlxG.sound.music.length;
+        				else if(curTime < 0) curTime += FlxG.sound.music.length;
+        				updateSkipTimeText();
+        			}
+        		} else
+        			skipTimeText.y = 1000;
+        	case 'difficulty':
+        		for (i in 0...difficultyAlphabet.length) {
+                    difficultyAlphabet[i].x = FlxMath.lerp((difficultyCurSelected - i) * 45.5 + 100 + (i == difficultyCurSelected ? 75 : 0), difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+        			difficultyAlphabet[i].y = FlxMath.lerp((i - difficultyCurSelected) * 180 + 325, difficultyAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+        			
+        			difficultyBars[i*2].x = difficultyAlphabet[i].x - 300;
+        			difficultyBars[i*2].y = difficultyAlphabet[i].y - 30;
     			
-    			optionsBars[i*2+1].x = optionsAlphabet[i].x - 300;
-    			optionsBars[i*2+1].y = optionsAlphabet[i].y - 30;
-    		}
-    		
-    		if (accept)
-    			doEvent();
-    	} else if (stayinMenu == 'debug') {
-    		if (upP)
-    			changeOptions(-1);
-    		else if (downP)
-    			changeOptions(1);
-		
-    		for (i in 0...debugType.length) {
-    			debugAlphabet[i].x = FlxMath.lerp((debugCurSelected - i) * 45.5 + 100 + (i == debugCurSelected ? 75 : 0), debugAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
-    			debugAlphabet[i].y = FlxMath.lerp((i - debugCurSelected) * 180 + 325, debugAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
-			
-    			debugBars[i*2].x = debugAlphabet[i].x - 300;
-    			debugBars[i*2].y = debugAlphabet[i].y - 30;
-			
-    			debugBars[i*2+1].x = debugAlphabet[i].x - 300;
-    			debugBars[i*2+1].y = debugAlphabet[i].y - 30;
-    		}
-		
-    		var text = debugAlphabet[debugCurSelected];
-    		if ((text.text == 'Botplay' || text.text == 'Practice') && stayinMenu == 'debug')
-    		{
-    			boolText.x = text.x + text.width + 5;
-    			boolText.y = text.y;
-    		} else
-    			boolText.y = 1000;
-		
-    		if (accept)
-    			doEvent();
-			
-    		if (text.text == 'Skip Time' && stayinMenu == 'debug') {
-    			skipTimeText.x = text.x + text.width + 125;
-    			skipTimeText.y = text.y + 7.5;
-    			if (leftP)
-    			{
-    				FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-    				curTime -= 1000;
-    				holdTime = 0;
-    			}
-    			if (rightP)
-    			{
-    				FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-    				curTime += 1000;
-    				holdTime = 0;
-    			}
-
-    			if(controls.UI_LEFT || controls.UI_RIGHT)
-    			{
-    				holdTime += elapsed;
-    				if(holdTime > 0.5)
-    				{
-    					curTime += 45000 * elapsed * (controls.UI_LEFT ? -1 : 1);
-    				}
-
-    				if(curTime >= FlxG.sound.music.length) curTime -= FlxG.sound.music.length;
-    				else if(curTime < 0) curTime += FlxG.sound.music.length;
-    				updateSkipTimeText();
-    			}
-    		} else
-    			skipTimeText.y = 1000;
-    	} else if (stayinMenu == 'difficulty') {
-    	    if (upP)
-    			changeOptions(-1);
-    		else if (downP)
-    			changeOptions(1);
-    			
-    		for (i in 0...difficultyAlphabet.length) {
-                difficultyAlphabet[i].x = FlxMath.lerp((difficultyCurSelected - i) * 45.5 + 100 + (i == difficultyCurSelected ? 75 : 0), difficultyAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
-    			difficultyAlphabet[i].y = FlxMath.lerp((i - difficultyCurSelected) * 180 + 325, difficultyAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
-    			
-    			difficultyBars[i*2].x = difficultyAlphabet[i].x - 300;
-    			difficultyBars[i*2].y = difficultyAlphabet[i].y - 30;
-			
-    			difficultyBars[i*2+1].x = difficultyAlphabet[i].x - 300;
-    			difficultyBars[i*2+1].y = difficultyAlphabet[i].y - 30;
-    		}
-    		
-    		if (accept)
-    			doEvent();
-		
-    	} else if (stayinMenu == 'options') {
-    	    if (upP)
-    			changeOptions(-1);
-    		else if (downP)
-    			changeOptions(1);
-    			
-    		for (i in 0...optionsOptionsAlphabet.length) {
-    				
-    			optionsOptionsAlphabet[i].x = FlxMath.lerp(-i *45.5 + 45.5 + 100 + (i == optionsCurSelected ? 75 : 0), optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
-    			optionsOptionsAlphabet[i].y = FlxMath.lerp((180 * (i - (optionsOptionsAlphabet.length / 2))) + 400, optionsOptionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
-    			
-    			optionsOptionsBars[i*2].x = optionsOptionsAlphabet[i].x - 300;
-    			optionsOptionsBars[i*2].y = optionsOptionsAlphabet[i].y - 30;
-    			
-    			optionsOptionsBars[i*2+1].x = optionsOptionsAlphabet[i].x - 300;
-    			optionsOptionsBars[i*2+1].y = optionsOptionsAlphabet[i].y - 30;
-    		}
-
-		    if (accept){
-        		doEvent();
-    		}
+        			difficultyBars[i*2+1].x = difficultyAlphabet[i].x - 300;
+        			difficultyBars[i*2+1].y = difficultyAlphabet[i].y - 30;
+        		}
+        	case 'options':
+        		for (i in 0...optionsOptionsAlphabet.length) {
+        				
+        			optionsOptionsAlphabet[i].x = FlxMath.lerp(-i *45.5 + 45.5 + 100 + (i == optionsCurSelected ? 75 : 0), optionsOptionsAlphabet[i].x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+        			optionsOptionsAlphabet[i].y = FlxMath.lerp((180 * (i - (optionsOptionsAlphabet.length / 2))) + 400, optionsOptionsAlphabet[i].y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+        			
+        			optionsOptionsBars[i*2].x = optionsOptionsAlphabet[i].x - 300;
+        			optionsOptionsBars[i*2].y = optionsOptionsAlphabet[i].y - 30;
+        			
+        			optionsOptionsBars[i*2+1].x = optionsOptionsAlphabet[i].x - 300;
+        			optionsOptionsBars[i*2+1].y = optionsOptionsAlphabet[i].y - 30;
+        		}
     	}
+    		
+		if (upP)
+			changeOptions(-1);
+		else if (downP)
+			changeOptions(1);
+		
+	    if (accept)
+    		doEvent();
     }
 
     function changeOptions(num:Int) {
-    	if (stayinMenu == 'base') {
-    		curSelected += num;
-    		if (curSelected > options.length - 1) curSelected = 0;
-    		if (curSelected < 0) curSelected = options.length - 1;
-    		
-    		for (i in optionsAlphabet) i.alpha = 0.5;
-    		
-    		optionsAlphabet[curSelected].alpha = 1;
-    	} else if (stayinMenu == 'debug') {
-    		debugCurSelected += num;
-    		if (debugCurSelected > debugType.length - 1) debugCurSelected = 0;
-    		if (debugCurSelected < 0) debugCurSelected = debugType.length - 1;
-    		
-    		for (i in debugAlphabet) i.alpha = 0.5;
-    		
-    		debugAlphabet[debugCurSelected].alpha = 1;
-    		
-    		var text = debugAlphabet[debugCurSelected];
-    		if (text.text == 'Botplay' || text.text == 'Practice')
-    		{
-    			boolText.text = (text.text == 'Botplay' ? (PlayState.instance.cpuControlled ? 'ON' : 'OFF') : (PlayState.instance.practiceMode ? 'ON' : 'OFF'));
-    		}
-    	} else if (stayinMenu == 'difficulty') {
-    		difficultyCurSelected += num;
-    		if (difficultyCurSelected > difficultyChoices.length - 1) difficultyCurSelected = 0;
-    		if (difficultyCurSelected < 0) difficultyCurSelected = difficultyChoices.length - 1;
-    		
-    		for (i in difficultyAlphabet) i.alpha = 0.5;
-    		
-    		difficultyAlphabet[difficultyCurSelected].alpha = 1;
-    	} else if (stayinMenu == 'options') {
-    		optionsCurSelected += num;
-    		if (optionsCurSelected > optionsType.length - 1) optionsCurSelected = 0;
-    		if (optionsCurSelected < 0) optionsCurSelected = optionsType.length - 1;
-    		
-    		for (i in optionsOptionsAlphabet) i.alpha = 0.5;
-    		
-    		optionsOptionsAlphabet[optionsCurSelected].alpha = 1;
+    	switch (stayinMenu) {
+        	case 'base':
+        		curSelected += num;
+        		if (curSelected > options.length - 1) curSelected = 0;
+        		if (curSelected < 0) curSelected = options.length - 1;
+        		
+        		for (i in optionsAlphabet) i.alpha = 0.5;
+        		
+        		optionsAlphabet[curSelected].alpha = 1;
+        	case 'debug':
+        		debugCurSelected += num;
+        		if (debugCurSelected > debugType.length - 1) debugCurSelected = 0;
+        		if (debugCurSelected < 0) debugCurSelected = debugType.length - 1;
+        		
+        		for (i in debugAlphabet) i.alpha = 0.5;
+        		
+        		debugAlphabet[debugCurSelected].alpha = 1;
+        		
+        		var text = debugAlphabet[debugCurSelected];
+        		if (text.text == 'Botplay' || text.text == 'Practice')
+        		{
+        			boolText.text = (text.text == 'Botplay' ? (PlayState.instance.cpuControlled ? 'ON' : 'OFF') : (PlayState.instance.practiceMode ? 'ON' : 'OFF'));
+        		}
+        	case 'difficulty':
+        		difficultyCurSelected += num;
+        		if (difficultyCurSelected > difficultyChoices.length - 1) difficultyCurSelected = 0;
+        		if (difficultyCurSelected < 0) difficultyCurSelected = difficultyChoices.length - 1;
+        		
+        		for (i in difficultyAlphabet) i.alpha = 0.5;
+        		
+        		difficultyAlphabet[difficultyCurSelected].alpha = 1;
+        	case 'options':
+        		optionsCurSelected += num;
+        		if (optionsCurSelected > optionsType.length - 1) optionsCurSelected = 0;
+        		if (optionsCurSelected < 0) optionsCurSelected = optionsType.length - 1;
+        		
+        		for (i in optionsOptionsAlphabet) i.alpha = 0.5;
+        		
+        		optionsOptionsAlphabet[optionsCurSelected].alpha = 1;
     	}
     	
     	if (num != 0)
-    		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+    		FlxG.sound.play(Paths.sound('scrollMenu'), 0.75);
     }
 
     function doEvent() {
     	if (stayinMenu == 'base') {
     		var daChoice:String = options[curSelected];
-    		if (daChoice == 'Difficulty') {
-    			for (i in optionsBars)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+    		switch (daChoice) {
+        		case 'Difficulty':
+        			for (i in optionsBars)
+        				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+        				
+        			for (i in optionsAlphabet)
+        				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+        				
+        			stayinMenu = 'isChanging';
+        			setBackButton(false);
+        			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
+        				stayinMenu = 'difficulty';
+        				changeOptions(0);
+        			});
+        		case 'Debug':
+        			for (i in optionsBars)
+        				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
     				
-    			for (i in optionsAlphabet)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-    				
-    			stayinMenu = 'isChanging';
-    			setBackButton(false);
-    			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
-    				stayinMenu = 'difficulty';
-    				changeOptions(0);
-    			});
-    		} else if (daChoice == 'Debug') {
-    			for (i in optionsBars)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-				
-    			for (i in optionsAlphabet)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-			
-    			stayinMenu = 'isChanging';
-    			setBackButton(false);
-    			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
-    				stayinMenu = 'debug';
-    				changeOptions(0);
-    				changeOptions(0);
-    			});
-			
-    			PlayState.chartingMode = true;
-    		} else if (daChoice == 'Options') {
-    			for (i in optionsBars)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-				
-    			for (i in optionsAlphabet)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-			
-    			stayinMenu = 'isChanging';
-    			setBackButton(false);
-    			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
-    				stayinMenu = 'options';
-    				changeOptions(0);
-    			});
-    		} else if (daChoice == 'Continue') {
-    			for (i in optionsBars)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-				
-    			for (i in optionsAlphabet)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-    				
-    			var curText = 0;
-				new FlxTimer().start(0.1, function(tmr:FlxTimer) {
-				    if (menuTextTween[curText] != null) menuTextTween[curText].cancel();
-				    //if (menuTextTween[curText * 2 + 1] != null) menuTextTween[curText * 2 + 1].cancel();				        				        	    
-				    
-    				//menuTextTween[curText * 2] = FlxTween.tween(menuText[menuText.length-curText-1], {x: 1280 + menuText[curText].width}, 0.2, {ease: FlxEase.quartIn});
-    				menuTextTween[curText] = FlxTween.tween(menuText[menuText.length-curText-1], {alpha: 0}, 0.2, {ease: FlxEase.quartIn});
-    				curText++;
-    			}, menuText.length);
-			    
-    			stayinMenu = 'isChanging';
-			    
-			    FlxG.sound.play(Paths.sound('confirmMenu'), 0.4);			   
-			    
-			    if (blackbackTween != null && backShadowTween != null && backTween != null && frontTween != null){
-                    blackbackTween.cancel();
-			        backShadowTween.cancel();
-                    backTween.cancel();
-			        frontTween.cancel();
-			    }
-			    
-			    blackbackTween = FlxTween.tween(blackback, {alpha: 0}, 0.75, {ease: FlxEase.quartOut});
-    			backShadowTween = FlxTween.tween(backShadow, {x: -800}, 1, {ease: FlxEase.quartIn});
-    			backTween = FlxTween.tween(back, {x: -800}, 1, {ease: FlxEase.quartIn});
-    			frontTween = FlxTween.tween(front, {x: -800}, 0.75, {ease: FlxEase.quartIn});    			    
+        			for (i in optionsAlphabet)
+        				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
     			
+        			stayinMenu = 'isChanging';
+        			setBackButton(false);
+        			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
+        				stayinMenu = 'debug';
+        				changeOptions(0);
+        				changeOptions(0);
+        			});
     			
-    			new FlxTimer().start(1, function(tmr:FlxTimer) {
-    				close();
-    			});
-    		} else if (daChoice == 'Restart') {
-    			restartSong();
-    		} else if  (daChoice == 'Exit') {
-    			PlayState.deathCounter = 0;
-    			PlayState.seenCutscene = false;
-
-    			Mods.loadTopMod();
-    			if(PlayState.isStoryMode) {
-    				MusicBeatState.switchState(new StoryMenuState());
-    			} else {
-    				MusicBeatState.switchState(new FreeplayState());
-    			}
-    			PlayState.cancelMusicFadeTween();
-    			FlxG.sound.playMusic(Paths.music('freakyMenu'));
-    			PlayState.changedDifficulty = false;
-    			PlayState.chartingMode = false;
-    			FlxG.camera.followLerp = 0;
-    		} else if  (daChoice == 'Editor') {
-    			MusicBeatState.switchState(new ChartingState());
-    			PlayState.chartingMode = true;
+        			PlayState.chartingMode = true;
+        		case 'Options':
+        			for (i in optionsBars)
+        				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+    				
+        			for (i in optionsAlphabet)
+        				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+    			
+        			stayinMenu = 'isChanging';
+        			setBackButton(false);
+        			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
+        				stayinMenu = 'options';
+        				changeOptions(0);
+        			});
+        		case 'Continue':
+        			for (i in optionsBars)
+        				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+    				
+        			for (i in optionsAlphabet)
+        				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+        				
+        			var curText = 0;
+    				new FlxTimer().start(0.1, function(tmr:FlxTimer) {
+    				    if (menuTextTween[curText] != null) menuTextTween[curText].cancel();
+    				    //if (menuTextTween[curText * 2 + 1] != null) menuTextTween[curText * 2 + 1].cancel();				        				        	    
+    				    
+        				//menuTextTween[curText * 2] = FlxTween.tween(menuText[menuText.length-curText-1], {x: 1280 + menuText[curText].width}, 0.2, {ease: FlxEase.quartIn});
+        				menuTextTween[curText] = FlxTween.tween(menuText[menuText.length-curText-1], {alpha: 0}, 0.2, {ease: FlxEase.quartIn});
+        				curText++;
+        			}, menuText.length);
+    			    
+        			stayinMenu = 'isChanging';
+    			    
+    			    FlxG.sound.play(Paths.sound('confirmMenu'), 0.75);			   
+    			    
+    			    if (blackbackTween != null && backShadowTween != null && backTween != null && frontTween != null){
+                        blackbackTween.cancel();
+    			        backShadowTween.cancel();
+                        backTween.cancel();
+    			        frontTween.cancel();
+    			    }
+    			    
+    			    blackbackTween = FlxTween.tween(blackback, {alpha: 0}, 0.75, {ease: FlxEase.quartOut});
+        			backShadowTween = FlxTween.tween(backShadow, {x: -800}, 1, {ease: FlxEase.quartIn});
+        			backTween = FlxTween.tween(back, {x: -800}, 1, {ease: FlxEase.quartIn});
+        			frontTween = FlxTween.tween(front, {x: -800}, 0.75, {ease: FlxEase.quartIn});    			    
+        			
+        			
+        			new FlxTimer().start(1, function(tmr:FlxTimer) {
+        				close();
+        			});
+        		case 'Restart':
+        			restartSong();
+        		case 'Exit':
+        			PlayState.deathCounter = 0;
+        			PlayState.seenCutscene = false;
+    
+        			Mods.loadTopMod();
+        			if(PlayState.isStoryMode) {
+        				MusicBeatState.switchState(new StoryMenuState());
+        			} else {
+        				MusicBeatState.switchState(new FreeplayState());
+        			}
+        			PlayState.cancelMusicFadeTween();
+        			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+        			PlayState.changedDifficulty = false;
+        			PlayState.chartingMode = false;
+        			FlxG.camera.followLerp = 0;
+        		case 'Editor':
+        			MusicBeatState.switchState(new ChartingState());
+        			PlayState.chartingMode = true;
     		}
     	} else if (stayinMenu == 'debug') {
     		var daChoice:String = debugType[debugCurSelected];
-    		if (daChoice == 'Botplay') {
-    			PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
-    			PlayState.changedDifficulty = true;
-    			PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
-    			PlayState.instance.botplayTxt.alpha = 1;
-    			PlayState.instance.botplaySine = 0;
-    			boolText.text = (PlayState.instance.cpuControlled ? 'ON' : 'OFF');
-    		} else if (daChoice == 'Practice') {
-    			PlayState.instance.practiceMode = !PlayState.instance.practiceMode;
-    			PlayState.changedDifficulty = true;
-    			boolText.text = (PlayState.instance.practiceMode ? 'ON' : 'OFF');
-        	} else if (daChoice == 'Skip Time') {
-    			if(curTime < Conductor.songPosition)
-    			{
-    	    			PlayState.startOnTime = curTime;
-    					restartSong(true);
-    			}
-    			else
-    			{
-    				if (curTime != Conductor.songPosition)
-    				{
-    					PlayState.instance.clearNotesBefore(curTime);			
-    					PlayState.instance.setSongTime(curTime);
-    				}
-    				close();
-    			}
-    		} else if (daChoice == 'Leave') {
-    			restartSong();
-				PlayState.chartingMode = false;
-    		} else if (daChoice == 'Back') {
-    			for (i in debugBars)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-				
-    			for (i in debugAlphabet)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-    			
-    			stayinMenu = 'isChanging';
-    			setBackButton(true);
-    			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
-    				stayinMenu = 'base';
-    				for (i in debugAlphabet)
-    				i.y += (debugAlphabet.length - 1) * 180;
-    				debugCurSelected = 0;
-    				changeOptions(0);
-    			});
-    			FlxG.sound.play(Paths.sound('cancelMenu'), 0.4);
+    		switch (daChoice) {
+        		case 'Botplay':
+        			PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
+        			PlayState.changedDifficulty = true;
+        			PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
+        			PlayState.instance.botplayTxt.alpha = 1;
+        			PlayState.instance.botplaySine = 0;
+        			boolText.text = (PlayState.instance.cpuControlled ? 'ON' : 'OFF');
+        		case 'Practice':
+        			PlayState.instance.practiceMode = !PlayState.instance.practiceMode;
+        			PlayState.changedDifficulty = true;
+        			boolText.text = (PlayState.instance.practiceMode ? 'ON' : 'OFF');
+            	case 'Skip Time':
+        			if(curTime < Conductor.songPosition)
+        			{
+        	    			PlayState.startOnTime = curTime;
+        					restartSong(true);
+        			}
+        			else
+        			{
+        				if (curTime != Conductor.songPosition)
+        				{
+        					PlayState.instance.clearNotesBefore(curTime);			
+        					PlayState.instance.setSongTime(curTime);
+        				}
+        				close();
+        			}
+        		case 'Leave':
+        			restartSong();
+    				PlayState.chartingMode = false;
+        		case 'Back':
+        			for (i in debugBars)
+        				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+    				
+        			for (i in debugAlphabet)
+        				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+        			
+        			stayinMenu = 'isChanging';
+        			setBackButton(true);
+        			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
+        				stayinMenu = 'base';
+        				for (i in debugAlphabet)
+        				i.y += (debugAlphabet.length - 1) * 180;
+        				debugCurSelected = 0;
+        				changeOptions(0);
+        			});
+        			FlxG.sound.play(Paths.sound('cancelMenu'), 0.75);
     		}
     	} else if (stayinMenu == 'options') {
-			if (optionsType[optionsCurSelected] == 'Instant')
-      		{
-    			PlayState.instance.paused = true; // For lua
-    			PlayState.instance.vocals.volume = 0;
-    			OptionsState.onPlayState = true;
-    			if(ClientPrefs.data.pauseMusic != 'None'){
-    				FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), pauseMusic.volume);
-    				FlxTween.tween(FlxG.sound.music, {volume: 1}, 0.8);
-    			    FlxG.sound.music.time = pauseMusic.time;
-    			}
-    			MusicBeatState.switchState(new OptionsState());
-    		} else if (optionsType[optionsCurSelected] == 'Entirety') {
-    			close();
-    			//openSubState(new optionsMenu());
-    		} else if (optionsType[optionsCurSelected] == 'Back') {
-    			for (i in optionsOptionsBars)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-    				
-    			for (i in optionsOptionsAlphabet)
-    				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
-    			
-    			stayinMenu = 'isChanging';
-    			setBackButton(true);
-    			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
-					stayinMenu = 'base';
-					optionsCurSelected = 0;
-					changeOptions(0);
-    			});
-    			
-    			FlxG.sound.play(Paths.sound('cancelMenu'), 0.4);
+			switch (optionsType[optionsCurSelected]) {
+    			case 'Instant':
+        			PlayState.instance.paused = true; // For lua
+        			PlayState.instance.vocals.volume = 0;
+        			OptionsState.onPlayState = true;
+        			if(ClientPrefs.data.pauseMusic != 'None'){
+        				FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), pauseMusic.volume);
+        				FlxTween.tween(FlxG.sound.music, {volume: 1}, 0.8);
+        			    FlxG.sound.music.time = pauseMusic.time;
+        			}
+        			MusicBeatState.switchState(new OptionsState());
+        		case 'Entirety':
+        			close();
+        			//openSubState(new optionsMenu());
+        		case 'Back':
+        			for (i in optionsOptionsBars)
+        				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+        				
+        			for (i in optionsOptionsAlphabet)
+        				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
+        			
+        			stayinMenu = 'isChanging';
+        			setBackButton(true);
+        			new FlxTimer().start(0.5, function(tmr:FlxTimer) {
+    					stayinMenu = 'base';
+    					optionsCurSelected = 0;
+    					changeOptions(0);
+        			});
+        			
+        			FlxG.sound.play(Paths.sound('cancelMenu'), 0.75);
     		}
     	} else if (stayinMenu == 'difficulty') {
     		if (difficultyChoices[difficultyCurSelected] == 'Back') {
@@ -773,7 +751,7 @@ class PauseSubState extends MusicBeatSubstate
     				difficultyCurSelected = 0;
     				changeOptions(0);
     			});
-    			FlxG.sound.play(Paths.sound('cancelMenu'), 0.4);
+    			FlxG.sound.play(Paths.sound('cancelMenu'), 0.75);
     			return;
     		}
 	        try{
