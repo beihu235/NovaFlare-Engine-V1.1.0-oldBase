@@ -40,7 +40,7 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup C:/haxelib
-          haxelib install hxcpp 4.2.1 > /dev/null
+          haxelib install hxcpp 4.2.1
           haxelib install lime
           haxelib install openfl
           haxelib install flixel
@@ -146,7 +146,7 @@ jobs:
           haxelib install flixel-addons
           haxelib install tjson
           haxelib install hxjsonast
-          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
+          haxelib install hxCodec 2.6.0
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
           haxelib install hscript
           haxelib install SScript
