@@ -3,12 +3,12 @@
     {
       "name": "lime",
       "type": "haxelib",
-      "version": null
+      "version": 8.0.1
     },
     {
       "name": "openfl",
       "type": "haxelib",
-      "version": null
+      "version": 9.2.0
     },
     {
       "name": "flixel",
@@ -41,19 +41,14 @@
       "version": null
     },
     {
-      "name": "hxjsonast",
-      "type": "haxelib",
-      "version": null
-    },
-    {
       "name": "hxCodec",
       "type": "haxelib",
-      "version": null
+      "version": 2.6.0
     },
     {
-      "name": "hscript",
+      "name": "SScript",
       "type": "haxelib",
-      "version": null
+      "version": 7.0.0
     },
     {
       "name": "hxcpp-debug-server",
@@ -66,6 +61,13 @@
       "dir": null,
       "ref": "master",
       "url": "https://github.com/Aidan63/linc_discord-rpc"
+    },
+    {
+      "name": "flxanimate",
+      "type": "git",
+      "dir": null,
+      "ref": "dev",
+      "url": "https://github.com/ShadowMario/flxanimate"
     },
     {
       "name": "linc_luajit",
