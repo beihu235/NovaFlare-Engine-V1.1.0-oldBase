@@ -3,12 +3,12 @@
     {
       "name": "lime",
       "type": "haxelib",
-      "version": 8.0.1
+      "version": "8.1.1"
     },
     {
       "name": "openfl",
       "type": "haxelib",
-      "version": 9.2.0
+      "version": "9.2.0"
     },
     {
       "name": "flixel",
@@ -43,12 +43,12 @@
     {
       "name": "hxCodec",
       "type": "haxelib",
-      "version": 2.6.0
+      "version": "2.6.0"
     },
     {
       "name": "SScript",
       "type": "haxelib",
-      "version": 7.0.0
+      "version": "7.0.0"
     },
     {
       "name": "hxcpp-debug-server",
