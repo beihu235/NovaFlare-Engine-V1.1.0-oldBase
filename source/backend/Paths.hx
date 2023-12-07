@@ -528,7 +528,7 @@ class Paths
 		    var fileToCheck:String = SUtil.getPath() + 'assets/shared/' + key;
 			if(FileSystem.exists(fileToCheck)) 
 			return fileToCheck;
-		return SUtil.getPath() + 'assets/' + key;	
+		return SUtil.getPath() + 'mods/' + key;	
 	}
 	#end
 }
