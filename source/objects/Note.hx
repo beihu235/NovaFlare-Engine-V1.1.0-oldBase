@@ -275,12 +275,12 @@ class Note extends FlxSprite
 				scale.y *= PlayState.daPixelZoom;
 				updateHitbox();
 			}
-		}/*
+		}
 		else if(!isSustainNote)
-		{*/
+		{
 			centerOffsets();
 			centerOrigin();
-		//}
+		}
 		x += offsetX;
 	}
 
@@ -482,9 +482,9 @@ class Note extends FlxSprite
 					    y -= PlayState.daPixelZoom * 9.5;
 				    }
 				    y -= (frameHeight * scale.y) - (Note.swagWidth / 2);
-				    y += ((frameHeight * scale.y)/* - (Note.swagWidth / 2)*/) * angleReturn(strumDirection);
+				   // y += ((frameHeight * scale.y)/* - (Note.swagWidth / 2)*/) * angleReturn(strumDirection);
 			    }else{
-			        y -= ((frameHeight * scale.y) /*- (Note.swagWidth / 2)*/) * angleReturn(strumDirection);
+			      //  y -= ((frameHeight * scale.y) /*- (Note.swagWidth / 2)*/) * angleReturn(strumDirection);
 			    }
 			}
 		}
@@ -498,10 +498,10 @@ class Note extends FlxSprite
 		var center:Float = myStrum.y + offsetY + Note.swagWidth / 2;
 		if((isSustainNote && (mustPress || !ignoreNote) &&
 			(!mustPress || (wasGoodHit || (prevNote.wasGoodHit && !canBeHit)))
-			 && !ClientPrefs.data.playOpponent) || 
+			&& !ClientPrefs.data.playOpponent) || 
 		    (isSustainNote && (!mustPress || !ignoreNote) &&
 			(mustPress || (wasGoodHit || (prevNote.wasGoodHit && !canBeHit)))
-			 && ClientPrefs.data.playOpponent)
+			&& ClientPrefs.data.playOpponent)
 	        )
 		{
 			var swagRect:FlxRect = clipRect;
