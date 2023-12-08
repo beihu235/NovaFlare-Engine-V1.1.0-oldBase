@@ -1396,11 +1396,12 @@ class ChartingState extends MusicBeatState
 
 		var file:Dynamic = Paths.voices(_song.song);
 		vocals = new FlxSound();
-		if (Std.isOfType(file, Sound) || OpenFlAssets.exists(file)) {
+		if (_song.needsVoices)) {
 			vocals.loadEmbedded(file);
 			vocals.autoDestroy = false;
 			FlxG.sound.list.add(vocals);
 		}
+		
 		generateSong();
 		FlxG.sound.music.pause();
 		Conductor.songPosition = sectionStartTime();
