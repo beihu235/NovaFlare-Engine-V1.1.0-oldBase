@@ -4046,7 +4046,7 @@ class PlayState extends MusicBeatState
 			if (bads > 0 || shits > 0) ratingFC = 'FC';
 			else if (goods > 0) ratingFC = 'GFC';
 			else if (sicks > 0) ratingFC = 'SFC';
-			else if (marvelouss > 0) ratingFC = 'MFC'
+			else if (marvelouss > 0) ratingFC = 'MFC';
 		}
 		else if (songMisses < 10)
 			ratingFC = 'SDCB';
