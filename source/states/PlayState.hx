@@ -1266,7 +1266,7 @@ class PlayState extends MusicBeatState
 		+ 'Bads: ${ratingsData[2].hits}\n'
 		+ 'Shits: ${ratingsData[3].hits}\n';
 		
-		if (!miss && !cpuControlled)
+		if (!miss && ClientPrefs.data.playOpponent ? !cpuControlled_opponent : !cpuControlled)
 			doScoreBop();
 
 		callOnScripts('onUpdateScore', [miss]);
@@ -1279,8 +1279,8 @@ class PlayState extends MusicBeatState
 		if(scoreTxtTween != null)
 			scoreTxtTween.cancel();
 
-		scoreTxt.scale.x = 1.05;
-		scoreTxt.scale.y = 1.05;
+		scoreTxt.scale.x = 1.040;
+		scoreTxt.scale.y = 1.040;
 		scoreTxtTween = FlxTween.tween(scoreTxt.scale, {x: 1, y: 1}, 0.2, {
 			onComplete: function(twn:FlxTween) {
 				scoreTxtTween = null;
@@ -4045,7 +4045,8 @@ class PlayState extends MusicBeatState
 		{
 			if (bads > 0 || shits > 0) ratingFC = 'FC';
 			else if (goods > 0) ratingFC = 'GFC';
-			else if (sicks > 0 || marvelouss > 0) ratingFC = 'SFC';
+			else if (sicks > 0) ratingFC = 'SFC';
+			else if (marvelouss > 0) ratingFC = 'MFC'
 		}
 		else if (songMisses < 10)
 			ratingFC = 'SDCB';

@@ -713,7 +713,7 @@ class FreeplayState extends MusicBeatState
 			
 			if(BackdropColorTween != null) {
 				BackdropColorTween.cancel();
-			
+			}
 			persistentUpdate = false;			
 			
 			if (FlxG.keys.pressed.SHIFT #if android || MusicBeatState._virtualpad.buttonZ.pressed #end){
@@ -787,6 +787,7 @@ class FreeplayState extends MusicBeatState
             
             if(BackdropColorTween != null) {
 				BackdropColorTween.cancel();
+			}
             BackdropColorTween = FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});
             
        
