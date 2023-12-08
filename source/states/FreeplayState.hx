@@ -114,6 +114,7 @@ class FreeplayState extends MusicBeatState
 	var SoundTime:Float = 0;
 	var BeatTime:Float = 0;
 	var canBeat:Bool = true;
+	var BackdropColorTween:FlxTween;
 	
 	var ColorArray:Array<Int> = [
 		0xFF9400D3,
@@ -710,7 +711,10 @@ class FreeplayState extends MusicBeatState
 				return;
 			}
 			
-			persistentUpdate = false;
+			if(BackdropColorTween != null) {
+				BackdropColorTween.cancel();
+			
+			persistentUpdate = false;			
 			
 			if (FlxG.keys.pressed.SHIFT #if android || MusicBeatState._virtualpad.buttonZ.pressed #end){
 				LoadingState.loadAndSwitchState(new ChartingState());
@@ -781,7 +785,9 @@ class FreeplayState extends MusicBeatState
             currentColorAgain = currentColor - 1;
             if (currentColorAgain <= 0) currentColorAgain = 6;
             
-            FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});
+            if(BackdropColorTween != null) {
+				BackdropColorTween.cancel();
+            BackdropColorTween = FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});
             
        
 		    for (i in 0...iconArray.length)
