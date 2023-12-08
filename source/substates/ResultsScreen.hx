@@ -34,6 +34,7 @@ class ResultsScreen extends MusicBeatSubstate
 {
 	public var background:FlxSprite;	
     public var graphBG:FlxSprite;
+    public var lostPNGText:FlxText;
     public var graphSizeUp:FlxSprite;
 	public var graphSizeDown:FlxSprite;
 	public var graphSizeLeft:FlxSprite;
@@ -84,7 +85,14 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		var graphWidth = 550;
 		var graphHeight = 300;
-		graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).loadGraphic(Paths.image('mainmenu_sprite/ResultsScreenBG'));
+		var imageCheck:Bool;
+		if (sys.FileSystem.exists(Paths.image('mainmenu_sprite/ResultsScreenBG'))){
+		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).loadGraphic(Paths.image('mainmenu_sprite/ResultsScreenBG'));
+		    imageCheck = true;
+		}else{
+		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).makeGraphic(graphWidth, graphHeight, FlxColor.BLACK);
+		    imageCheck = false;
+		}
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
 		graphBG.setGraphicSize(graphWidth, graphHeight);
@@ -117,6 +125,19 @@ class ResultsScreen extends MusicBeatSubstate
 		}
 		graphBG.updateHitbox();
 		add(graphBG);
+		
+		lostPNGText = new FlxText(graphBG.x + graphBG.width / 2, graphBG.y + graphBG.height + 5, 0, "Lost image/mainmenu_sprite/ResultsScreenBG.png");
+		lostPNGText.size = 20;
+		lostPNGText.alignment = CENTER;
+		lostPNGText.font = Paths.font('vcr.ttf');
+		lostPNGText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
+		lostPNGText.scrollFactor.set();
+	    lostPNGText.alpha = 0;	
+		lostPNGText.antialiasing = ClientPrefs.data.antialiasing;
+		lostPNGText.color = FlxColor.RED;
+		lostPNGText.x -= lostPNGText.width / 2;
+		lostPNGText.visible = !imageCheck;
+		add(lostPNGText);
 		
 		var judgeHeight = 2;
 		graphJudgeCenter = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, FlxColor.WHITE);
@@ -343,6 +364,8 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		new FlxTimer().start(2, function(tmr:FlxTimer){
 			FlxTween.tween(graphBG, {alpha: 1}, 0.5);
+			
+			FlxTween.tween(lostPNGText, {alpha: 1}, 0.5);
 			
 			FlxTween.tween(graphJudgeCenter, {alpha: 0.3}, 0.5);	
 			FlxTween.tween(graphMarvelousUp, {alpha: 0.3}, 0.5);	
