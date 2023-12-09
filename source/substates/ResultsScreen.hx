@@ -88,7 +88,7 @@ class ResultsScreen extends MusicBeatSubstate
 		var imageCheck:Bool;
 		var image:String = Paths.modFolders('images/menuExtend/ResultsScreen/ResultsScreenBG.png');
 		if (FileSystem.exists(image)){
-		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).loadGraphic(Paths.image('mainmenu_sprite/ResultsScreenBG'));
+		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).loadGraphic(Paths.image('menuExtend/ResultsScreen/ResultsScreenBG'));
 		    imageCheck = true;
 		}else{
 		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).makeGraphic(graphWidth, graphHeight, FlxColor.BLACK);
