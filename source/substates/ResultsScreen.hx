@@ -86,7 +86,7 @@ class ResultsScreen extends MusicBeatSubstate
 		var graphWidth = 550;
 		var graphHeight = 300;
 		var imageCheck:Bool;
-		var image:String = Paths.modFolders('images/menuExtend/ResultsScreenBG.png');
+		var image:String = Paths.modFolders('images/menuExtend/ResultsScreen/ResultsScreenBG.png');
 		if (FileSystem.exists(image)){
 		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).loadGraphic(Paths.image('mainmenu_sprite/ResultsScreenBG'));
 		    imageCheck = true;
@@ -127,7 +127,7 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBG.updateHitbox();
 		add(graphBG);
 		
-		lostPNGText = new FlxText(graphBG.x + graphBG.width / 2, graphBG.y + graphBG.height + 5, 0, "Lost image/mainmenu_sprite/ResultsScreenBG.png");
+		lostPNGText = new FlxText(graphBG.x + graphBG.width / 2, graphBG.y + graphBG.height + 5, 0, "Loss load image/ResultsScreen/ResultsScreenBG.png");
 		lostPNGText.size = 20;
 		lostPNGText.alignment = CENTER;
 		lostPNGText.font = Paths.font('vcr.ttf');
