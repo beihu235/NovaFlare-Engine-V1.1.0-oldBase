@@ -597,7 +597,7 @@ class FlxSound extends FlxBasic
 		{
 			_channel.soundTransform = _transform;
 
-			set_pitch();
+			set_pitch(_pitch);
 		}
 	}
 
@@ -752,7 +752,7 @@ class FlxSound extends FlxBasic
 		if (_channel != null)
 			#if openfl_legacy
 			_channel.pitch = v;
-			#elseif (openfl < "9.3.2")
+			#else if (openfl < "9.3.2")
 			@:privateAccess
 			if (_channel.__source != null)
 				_channel.__source.pitch = v;
