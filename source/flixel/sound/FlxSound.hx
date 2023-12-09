@@ -598,6 +598,7 @@ class FlxSound extends FlxBasic
 			_channel.soundTransform = _transform;
 
 			set_pitch(_pitch);
+			pitch = _pitch;
 		}
 	}
 
