@@ -2972,9 +2972,9 @@ class PlayState extends MusicBeatState
 			numScore.updateHitbox();			
 			numScore.antialiasing = antialias;
 			
-			if (combeNumTween[comboNum] != null) combeNumTween[comboNum].cancel();
+			if (combeNumTween[comboNum + startShow] != null) combeNumTween[comboNum + startShow].cancel();
             numScore.alpha = 1;                        
-            combeNumTween[comboNum] = FlxTween.tween(numScore, {alpha: 0}, 0.4 / playbackRate, {
+            combeNumTween[comboNum + startShow] = FlxTween.tween(numScore, {alpha: 0}, 0.4 / playbackRate, {
 			startDelay: 0.6 / playbackRate
 		    });
 		    
