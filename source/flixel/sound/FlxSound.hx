@@ -597,15 +597,7 @@ class FlxSound extends FlxBasic
 		{
 			_channel.soundTransform = _transform;
 
-			@:privateAccess
-			if(_channel.__source != null)
-			{
-				#if cpp
-				@:privateAccess
-				this._channel.__source.__backend.setPitch(_pitch);
-				// trace('changing $name pitch new $_pitch');
-				#end
-			}
+			set_pitch(_pitch);
 		}
 	}
 
