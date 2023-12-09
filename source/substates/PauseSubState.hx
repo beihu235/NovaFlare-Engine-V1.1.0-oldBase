@@ -28,7 +28,7 @@ import openfl.utils.Assets;
 class PauseSubState extends MusicBeatSubstate
 {
 
-    var filePath:String = 'pauseState/';
+    var filePath:String = 'menuExtend/pauseState/';
     var font:String = Assets.getFont("assets/fonts/montserrat.ttf").fontName;
 
     var back:FlxSprite;
