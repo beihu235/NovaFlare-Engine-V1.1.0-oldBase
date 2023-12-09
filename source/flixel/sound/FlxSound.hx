@@ -597,7 +597,15 @@ class FlxSound extends FlxBasic
 		{
 			_channel.soundTransform = _transform;
 
-			set_pitch(_pitch);
+			@:privateAccess
+			if(_channel.__source != null)
+			{
+				#if cpp
+				@:privateAccess
+				this._channel.__source.__backend.setPitch(_pitch);
+				// trace('changing $name pitch new $_pitch');
+				#end
+			}
 		}
 	}
 
@@ -749,13 +757,6 @@ class FlxSound extends FlxBasic
 
 	function set_pitch(v:Float):Float
 	{
-		if (_channel != null)
-			
-			@:privateAccess
-			if (_channel.__source != null)
-				_channel.__source.pitch = v;
-			
-			
 		return _pitch = v;
 	}
 
