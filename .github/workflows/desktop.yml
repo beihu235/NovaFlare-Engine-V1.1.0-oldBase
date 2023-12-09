@@ -91,7 +91,6 @@ jobs:
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
           haxelib install SScript 8.1.6
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib install SScript 8.1.6
           haxelib run lime rebuild hxcpp
           haxelib list
       - name: Create Version Tag
