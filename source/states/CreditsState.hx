@@ -49,11 +49,13 @@ class CreditsState extends MusicBeatState
 		var beihuLink:String = 'https://b23.tv/LVj0JVk';
 		var yanqiangLink:String = 'https://b23.tv/FBxHIwT';
 		var Xx_angelkawaii_XLink:String = 'https://space.bilibili.com/1991407094';
+		var TieGuoLink:String = 'https://b23.tv/JV6FNWK';
 
 		#if android
 		if (DeviceLanguage.getLang() != 'zh') {
 		beihuLink = 'https://youtube.com/@beihu235';
 		Xx_angelkawaii_XLink = 'https://www.youtube.com/@angelkawaii9826';
+		TieGuoLink = 'https://www.youtube.com/@tieguo233';
 		}
 		#end
 								
@@ -61,6 +63,7 @@ class CreditsState extends MusicBeatState
 		
 		    ['NF Engine Team'],
 		    ['beihu',		'beihu',		'Main Programmer\nAndroid Porter',							beihuLink,	'FFC0CB'],
+		    ['TieGuo',		'TieGuo',		'Programmer',							TieGuoLink,	'FFD700'],
 		    ['qwq',		'qwq',		'Windows build helper',				'https://b23.tv/VIWVK0s',	'FF6600'],
 		    [''],
 		    #if android
