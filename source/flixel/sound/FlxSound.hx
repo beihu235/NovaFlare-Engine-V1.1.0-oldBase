@@ -758,8 +758,8 @@ class FlxSound extends FlxBasic
 			_channel.pitch = v;
 			#else
 			@:privateAccess
-			if (_channel.__audioSource != null)
-				_channel.__audioSource = v;
+			if (_channel.__source != null)
+				_channel.__source.pitch = v;
 			#end
 
 		return _pitch = v;
