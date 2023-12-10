@@ -25,6 +25,7 @@ import flash.utils.ByteArray;
 #if (openfl >= "8.0.0")
 import openfl.utils.AssetType;
 #end
+
 /**
  * This is the universal flixel sound object, used for streaming, music, and sound effects.
  */
@@ -68,7 +69,7 @@ class FlxSound extends FlxBasic
 	public var amplitudeLeft(default, null):Float;
 
 	/**
-	 * Just the amplitude of the right stereo channel
+	 * Just the amplitude of the left stereo channel
 	 */
 	public var amplitudeRight(default, null):Float;
 
@@ -97,12 +98,12 @@ class FlxSound extends FlxBasic
 	 * Set volume to a value between 0 and 1 to change how this sound is.
 	 */
 	public var volume(get, set):Float;
-	
+
 	/**
 	 * Set pitch, which also alters the playback speed. Default is 1.
 	 */
 	public var pitch(get, set):Float;
-	
+
 	/**
 	 * The position in runtime of the music playback in milliseconds.
 	 * If set while paused, changes only come into effect after a `resume()` call.
@@ -179,7 +180,7 @@ class FlxSound extends FlxBasic
 	 * Internal tracker for sound length, so that length can still be obtained while a sound is paused, because _sound becomes null.
 	 */
 	var _length:Float = 0;
-	
+
 	/**
 	 * Internal tracker for pitch.
 	 */
@@ -232,6 +233,7 @@ class FlxSound extends FlxBasic
 		_time = 0;
 		_paused = false;
 		_volume = 1.0;
+		_pitch = 1.0;
 		_volumeAdjust = 1.0;
 		looped = false;
 		loopTime = 0.0;
@@ -432,9 +434,6 @@ class FlxSound extends FlxBasic
 		updateTransform();
 		exists = true;
 		onComplete = OnComplete;
-		
-		pitch = 1;
-		
 		_length = (_sound == null) ? 0 : _sound.length;
 		endTime = _length;
 		return this;
@@ -589,19 +588,18 @@ class FlxSound extends FlxBasic
 	/**
 	 * Call after adjusting the volume to update the sound channel's settings.
 	 */
-	
-	#if (flixel >= "5.3.0")
-    @:allow(flixel.sound.FlxSoundGroup)
-    #else
-    @:allow(flixel.system.FlxSoundGroup)
-    #end
-	function updateTransform():Void
+	public function updateTransform():Void
 	{
 		_transform.volume = #if FLX_SOUND_SYSTEM (FlxG.sound.muted ? 0 : 1) * FlxG.sound.volume * #end
 			(group != null ? group.volume : 1) * _volume * _volumeAdjust;
 
 		if (_channel != null)
+		{
 			_channel.soundTransform = _transform;
+
+			set_pitch(_pitch);
+			pitch = _pitch;
+		}
 	}
 
 	/**
@@ -618,9 +616,9 @@ class FlxSound extends FlxBasic
 		_channel = _sound.play(_time, 0, _transform);
 		if (_channel != null)
 		{
-			
+			#if (sys && openfl_legacy)
 			pitch = _pitch;
-			
+			#end
 			_channel.addEventListener(Event.SOUND_COMPLETE, stopped);
 			active = true;
 		}
@@ -744,27 +742,16 @@ class FlxSound extends FlxBasic
 		updateTransform();
 		return Volume;
 	}
-	
+
 	inline function get_pitch():Float
 	{
 		return _pitch;
 	}
-	
 
 	function set_pitch(v:Float):Float
 	{
-		if (_channel != null)
-			#if openfl_legacy
-			_channel.pitch = v;
-			#else
-			@:privateAccess
-			if (_channel.__source != null)
-				_channel.__source.pitch = v;
-			#end
-
 		return _pitch = v;
 	}
-	
 
 	inline function get_pan():Float
 	{
@@ -802,7 +789,8 @@ class FlxSound extends FlxBasic
 			LabelValuePair.weak("playing", playing),
 			LabelValuePair.weak("time", time),
 			LabelValuePair.weak("length", length),
-			LabelValuePair.weak("volume", volume)
+			LabelValuePair.weak("volume", volume),
+			LabelValuePair.weak("pitch", pitch)
 		]);
 	}
 }
