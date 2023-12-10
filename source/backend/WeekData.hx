@@ -78,7 +78,7 @@ class WeekData {
 		weeksList = [];
 		weeksLoaded.clear();
 		#if MODS_ALLOWED
-		var directories:Array<String> = [SUtil.getPath() + Paths.getPreloadPath(), Paths.mods()];
+		var directories:Array<String> = [Paths.mods()];
 		var originalLength:Int = directories.length;
 
 		for (mod in Mods.parseList().enabled)
@@ -141,9 +141,9 @@ class WeekData {
 	}
 
 	private static function addWeek(weekToCheck:String, path:String, directory:String, i:Int, originalLength:Int)
-	{/*
+	{
 		if(!weeksLoaded.exists(weekToCheck))
-		{*/
+		{
 			var week:WeekFile = getWeekFile(path);
 			if(week != null)
 			{
@@ -160,7 +160,7 @@ class WeekData {
 					weeksList.push(weekToCheck);
 				}
 			}
-		//}
+		}
 	}
 
 	private static function getWeekFile(path:String):WeekFile {
