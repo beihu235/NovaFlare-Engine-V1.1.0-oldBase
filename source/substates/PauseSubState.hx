@@ -353,6 +353,7 @@ class PauseSubState extends MusicBeatSubstate
 		
 		new FlxTimer().start(0.1, function(tmr:FlxTimer) {
     		//menuTextTween[curText * 2] = FlxTween.tween(menuText[curText], {x: 1280 - 15 - menuText[curText].width}, 0.2, {ease: FlxEase.quartIn});
+    		menuText[curText].alpha = 0;
     		menuTextTween[curText] = FlxTween.tween(menuText[curText], {alpha: 1}, 0.2, {ease: FlxEase.quartIn});
     		menuText[curText].y =  7.5 + (menuText[curText].height)*curText;
     		curText++;
@@ -765,15 +766,17 @@ class PauseSubState extends MusicBeatSubstate
         		PlayState.chartingMode = false;
         	} catch(e:Dynamic) {
         		missingText.text = 'ERROR WHILE LOADING CHART: ' + PlayState.SONG.song + '-' + difficultyChoices[difficultyCurSelected];
-        		missingText.screenCenter(XY);
+        		missingText.screenCenter(X);
         		FlxG.sound.play(Paths.sound('cancelMenu'));
 
-        	    missingTextTween = FlxTween.tween(missingText, {y: 680}, 0.5, {ease: FlxEase.quartOut});
+        	    
         		
-        		if (missingTextTimer == null) {
+        		if (missingTextTimer == null && missingTextTween != null) {
+        			missingTextTween = FlxTween.tween(missingText, {y: 680}, 0.5, {ease: FlxEase.quartOut});
         	    	missingTextTimer = new FlxTimer().start(2, function(tmr:FlxTimer) {
     		    	missingTextTween = FlxTween.tween(missingText, {y: 720}, 0.5, {ease: FlxEase.quartIn});
     	        		missingTextTimer = null;
+    	        		missingTextTween = null;
                 	}, 1);
                 }
     	    }
@@ -798,6 +801,12 @@ class PauseSubState extends MusicBeatSubstate
     		colorTween.cancel();
     		colorTweenShadow.cancel();
     	}
+    	
+    	for (i in menuText)
+		{
+			i.alpha = 0;
+			i.x = 1280 + 200;
+		}
     }
 
     function changeMenuColor() {
