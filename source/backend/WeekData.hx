@@ -78,13 +78,11 @@ class WeekData {
 		weeksList = [];
 		weeksLoaded.clear();
 		#if MODS_ALLOWED
-		var directories:Array<String> = [Paths.mods()];
+		var directories:Array<String> = [SUtil.getPath() + Paths.getPreloadPath(), Paths.mods()];
 		var originalLength:Int = directories.length;
 
 		for (mod in Mods.parseList().enabled)
 			directories.push(Paths.mods(mod + '/'));
-			
-		if (directories.length == 0) directories.push(SUtil.getPath() + Paths.getPreloadPath());
 		
 		#else
 		var directories:Array<String> = [SUtil.getPath() + Paths.getPreloadPath()];
@@ -95,7 +93,7 @@ class WeekData {
 		for (i in 0...sexList.length) {
 			for (j in 0...directories.length) {
 				var fileToCheck:String = directories[j] + 'weeks/' + sexList[i] + '.json';
-				if(!weeksLoaded.exists(sexList[i])) {  //fuck that I hate this
+				if(!weeksLoaded.exists(sexList[i])) { 
 					var week:WeekFile = getWeekFile(fileToCheck);
 					if(week != null) {
 						var weekFile:WeekData = new WeekData(week, sexList[i]);
@@ -143,9 +141,9 @@ class WeekData {
 	}
 
 	private static function addWeek(weekToCheck:String, path:String, directory:String, i:Int, originalLength:Int)
-	{
-		if(!weeksLoaded.exists(weekToCheck)) //fuck that I hate this
-		{
+	{/*
+		if(!weeksLoaded.exists(weekToCheck))
+		{*/
 			var week:WeekFile = getWeekFile(path);
 			if(week != null)
 			{
@@ -162,7 +160,7 @@ class WeekData {
 					weeksList.push(weekToCheck);
 				}
 			}
-		}
+		//}
 	}
 
 	private static function getWeekFile(path:String):WeekFile {
