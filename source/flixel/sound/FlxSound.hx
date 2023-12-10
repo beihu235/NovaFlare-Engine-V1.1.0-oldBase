@@ -1,18 +1,23 @@
 package flixel.sound;
 
-import flash.events.IEventDispatcher;
 import flash.events.Event;
+import flash.events.IEventDispatcher;
 import flash.media.Sound;
 import flash.media.SoundChannel;
 import flash.media.SoundTransform;
 import flash.net.URLRequest;
 import flixel.FlxBasic;
-import flixel.FlxG;
-import flixel.math.FlxMath;
+
 import flixel.math.FlxPoint;
 import flixel.system.FlxAssets.FlxSoundAsset;
-import flixel.tweens.FlxTween;
 import flixel.util.FlxStringUtil;
+
+#if (flixel >= "5.3.0")
+import flixel.sound.FlxSoundGroup;
+#else
+import flixel.system.FlxSoundGroup;
+#end
+
 import openfl.Assets;
 #if flash11
 import flash.utils.ByteArray;
@@ -20,7 +25,6 @@ import flash.utils.ByteArray;
 #if (openfl >= "8.0.0")
 import openfl.utils.AssetType;
 #end
-
 /**
  * This is the universal flixel sound object, used for streaming, music, and sound effects.
  */
@@ -93,12 +97,12 @@ class FlxSound extends FlxBasic
 	 * Set volume to a value between 0 and 1 to change how this sound is.
 	 */
 	public var volume(get, set):Float;
-	#if FLX_PITCH
+	
 	/**
 	 * Set pitch, which also alters the playback speed. Default is 1.
 	 */
 	public var pitch(get, set):Float;
-	#end
+	
 	/**
 	 * The position in runtime of the music playback in milliseconds.
 	 * If set while paused, changes only come into effect after a `resume()` call.
@@ -175,12 +179,12 @@ class FlxSound extends FlxBasic
 	 * Internal tracker for sound length, so that length can still be obtained while a sound is paused, because _sound becomes null.
 	 */
 	var _length:Float = 0;
-	#if FLX_PITCH
+	
 	/**
 	 * Internal tracker for pitch.
 	 */
 	var _pitch:Float = 1.0;
-	#end
+
 	/**
 	 * Internal tracker for total volume adjustment.
 	 */
@@ -428,9 +432,9 @@ class FlxSound extends FlxBasic
 		updateTransform();
 		exists = true;
 		onComplete = OnComplete;
-		#if FLX_PITCH
+		
 		pitch = 1;
-		#end
+		
 		_length = (_sound == null) ? 0 : _sound.length;
 		endTime = _length;
 		return this;
@@ -609,9 +613,9 @@ class FlxSound extends FlxBasic
 		_channel = _sound.play(_time, 0, _transform);
 		if (_channel != null)
 		{
-			#if FLX_PITCH
+			
 			pitch = _pitch;
-			#end
+			
 			_channel.addEventListener(Event.SOUND_COMPLETE, stopped);
 			active = true;
 		}
@@ -735,7 +739,7 @@ class FlxSound extends FlxBasic
 		updateTransform();
 		return Volume;
 	}
-	#if FLX_PITCH
+	
 	inline function get_pitch():Float
 	{
 		return _pitch;
@@ -755,7 +759,7 @@ class FlxSound extends FlxBasic
 
 		return _pitch = v;
 	}
-	#end
+	
 
 	inline function get_pan():Float
 	{
