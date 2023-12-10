@@ -55,15 +55,15 @@ jobs:
         run: |
           haxelib setup ~/haxelib
           haxelib install hxcpp 4.2.1 > /dev/null
-          haxelib install lime 7.9.0
+          haxelib install lime 8.1.1
           haxelib install openfl 9.2.1
           haxelib install flixel 5.2.2
           haxelib install flixel-tools 1.5.1
           haxelib install flixel-ui 2.5.0
-          haxelib install flixel-addons 3.2.1
+          haxelib install flixel-addons 3.0.2
           haxelib install tjson 1.4.0
           haxelib install hxCodec 2.6.0
-          haxelib install SScript
+          haxelib install SScript 8.1.6
           haxelib install hxCodec 2.6.0
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
