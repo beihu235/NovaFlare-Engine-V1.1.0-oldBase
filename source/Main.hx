@@ -108,8 +108,8 @@ class Main extends Sprite
 		}
 	    
 	    watermark = new Watermark(
-	    Lib.application.window.width - 5 - watermark.width,
-	    Lib.application.window.height - 5 - watermark.height,
+	    Lib.current.stage.stageWidth - 5 - watermark.width,
+	    Lib.current.stage.stageWidth - 5 - watermark.height,
 	    0.4);
 		addChild(watermark);
 		/*
