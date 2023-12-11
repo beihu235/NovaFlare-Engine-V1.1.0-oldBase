@@ -108,10 +108,12 @@ class Main extends Sprite
 		}
 	    
 	    watermark = new Watermark(
-	    Lib.current.stage.stageWidth - 5 - watermark.width,
-	    Lib.current.stage.stageWidth - 5 - watermark.height,
-	    0.4);
+	    Lib.application.window.width - 5,
+	    Lib.application.window.height - 5,
+	    0.4);	    
 		addChild(watermark);
+		watermark.x -= watermark.bitmapData.width;
+		watermark.y -= watermark.bitmapData.height;
 		/*
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.data.showFPS;
