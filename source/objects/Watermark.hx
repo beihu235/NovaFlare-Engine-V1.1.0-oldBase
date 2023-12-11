@@ -11,7 +11,7 @@ class Watermark extends Sprite
 		this.x = x;
 		this.y = y;
         this.alpha = Alpha;
-        loadBitmapDataFromTexturePaths.image('menuExtend/Watermark'));
+        loadBitmapDataFromTexture(Paths.image('menuExtend/Watermark'));
     }
 
 } 
