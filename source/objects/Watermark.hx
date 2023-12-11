@@ -1,8 +1,9 @@
 package objects;
 
-import openfl.display.Sprite;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
 
-class Watermark extends FlxSprite
+class Watermark extends Bitmap
 {
     public function new(x:Float = 10, y:Float = 10, Alpha:Float = 0.5){
 
@@ -11,8 +12,8 @@ class Watermark extends FlxSprite
 		this.x = x;
 		this.y = y;
         this.alpha = Alpha;
-
-        loadGraphic(Paths.image('menuExtend/Watermark'));
+        
+        bitmapData = BitmapData.fromFile(Paths.image('menuExtend/Watermark'));
     }
 
 } 
