@@ -11,8 +11,8 @@ import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import lime.app.Application;
 import states.TitleState;
-//import objects.FPSBG;
 //crash handler stuff
+import objects.Watermark;
 #if CRASH_HANDLER
 import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
@@ -42,7 +42,7 @@ class Main extends Sprite
 	};
 
 	public static var fpsVar:FPS;
-	public static var fpsBG:Sprite;
+	public static var watermark:Watermark;
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
 	public static function main():Void
@@ -107,7 +107,12 @@ class Main extends Sprite
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}
 	    
-	    
+	    watermark = new Watermark(5, 5, 0.5);
+		addChild(watermark);
+		/*
+		if(fpsVar != null) {
+			fpsVar.visible = ClientPrefs.data.showFPS;
+		}*/
 		
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
