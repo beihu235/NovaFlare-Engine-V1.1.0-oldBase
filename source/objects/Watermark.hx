@@ -2,7 +2,7 @@ package objects;
 
 import openfl.display.Sprite;
 
-class Watermark extends Sprite
+class Watermark extends FlxSprite
 {
     public function new(x:Float = 10, y:Float = 10, Alpha:Float = 0.5){
 
@@ -11,7 +11,9 @@ class Watermark extends Sprite
 		this.x = x;
 		this.y = y;
         this.alpha = Alpha;
-        loadBitmapDataFromTexture(Paths.image('menuExtend/Watermark'));
+
+        loadGraphic(Paths.image('menuExtend/Watermark'));
     }
 
 } 
+
