@@ -242,7 +242,7 @@ class ReflectionFunctions
 	    var classType:Array<String> = ['android', 'backend', 'cutscenes', 'objects', 'options', 'psychlua', 'states', 'substates'];
 	    
 	    for (i in 0...classType.length - 1){
-	        var newClass:Dynamic = Type.resolveClass(className + '.' + classType[i]);
+	        var newClass:Dynamic = Type.resolveClass(classType[i] + '.' + className);
 	    
 	        if(newClass != null)
 			{				
