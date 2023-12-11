@@ -230,7 +230,7 @@ class ReflectionFunctions
 		});
 	}
 	
-	function varCheck(className:Dynamic, variable::String):String{
+	function varCheck(className:Dynamic, variable:String):String{
 	    if (className == 'backend.ClientPrefs' && variable.indexOf('data.') == -1)
 	    return 'data.' + variable;
 	    
