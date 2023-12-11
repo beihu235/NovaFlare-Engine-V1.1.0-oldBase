@@ -30,9 +30,9 @@ class ReflectionFunctions
 			LuaUtils.setVarInArray(LuaUtils.getTargetInstance(), variable, value, allowMaps);
 			return true;
 		});
-		Lua_helper.add_callback(lua, "getPropertyFromClass", function(classVar:String, variable:String, ?allowMaps:Bool = false) {
-		   // if (classVar == 'ClientPrefs') classVar = 
-			var myClass:Dynamic = Type.resolveClass(classVar);
+		Lua_helper.add_callback(lua, "getPropertyFromClass", function(classVar:String, variable:String, ?allowMaps:Bool = false) {		    
+			var myClass:Dynamic = classCheck(classVar);
+			variable = varCheck(myClass, variable);
 			if(myClass == null)
 			{
 				FunkinLua.luaTrace('getPropertyFromClass: Class $classVar not found', false, false, FlxColor.RED);
@@ -97,7 +97,8 @@ class ReflectionFunctions
 			return LuaUtils.getVarInArray(myClass, variable, allowMaps);
 		});
 		Lua_helper.add_callback(lua, "setPropertyFromClass", function(classVar:String, variable:String, value:Dynamic, ?allowMaps:Bool = false) {
-			var myClass:Dynamic = Type.resolveClass(classVar);
+		   // variable = varCheck(classVar, variable);
+			var myClass:Dynamic = classCheck(classVar);
 			if(myClass == null)
 			{
 				FunkinLua.luaTrace('getPropertyFromClass: Class $classVar not found', false, false, FlxColor.RED);
@@ -227,6 +228,29 @@ class ReflectionFunctions
 			}
 			else FunkinLua.luaTrace('addInstance: Can\'t add what doesn\'t exist~ ($objectName)', false, false, FlxColor.RED);
 		});
+	}
+	
+	function varCheck(className:Dynamic, variable::String):String{
+	    if (className == 'backend.ClientPrefs' && variable.indexOf('data.') == -1)
+	    return 'data.' + variable;
+	    
+	    return variable;
+	}
+	
+	function classCheck(className:String):Dynamic
+	{
+	    var classType:Array<String> = ['android', 'backend', 'cutscenes', 'objects', 'options', 'psychlua', 'states', 'substates'];
+	    
+	    for (i in 0...classType.length - 1){
+	        var newClass:Dynamic = Type.resolveClass(className + '.' + classType[i]);
+	    
+	        if(newClass != null)
+			{				
+				return newClass;
+			}
+	    }
+	    
+	    return Type.resolveClass(className);
 	}
 
 	static function callMethodFromObject(classObj:Dynamic, funcStr:String, args:Array<Dynamic> = null)
