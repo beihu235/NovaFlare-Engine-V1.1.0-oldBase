@@ -107,7 +107,10 @@ class Main extends Sprite
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}
 	    
-	    watermark = new Watermark(5, 5, 0.5);
+	    watermark = new Watermark(
+	    Lib.application.window.width - 5 - watermark.width,
+	    Lib.application.window.height - 5 - watermark.height,
+	    0.4);
 		addChild(watermark);
 		/*
 		if(fpsVar != null) {
