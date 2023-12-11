@@ -230,14 +230,14 @@ class ReflectionFunctions
 		});
 	}
 	
-	public function varCheck(className:Dynamic, variable:String):String{
+	public static function varCheck(className:Dynamic, variable:String):String{
 	    if (className == 'backend.ClientPrefs' && variable.indexOf('data.') == -1)
 	    return 'data.' + variable;
 	    
 	    return variable;
 	}
 	
-	public function classCheck(className:String):Dynamic
+	public static function classCheck(className:String):Dynamic
 	{
 	    var classType:Array<String> = ['android', 'backend', 'cutscenes', 'objects', 'options', 'psychlua', 'states', 'substates'];
 	    
