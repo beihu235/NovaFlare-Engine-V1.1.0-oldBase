@@ -13,7 +13,9 @@ class Watermark extends Bitmap
 		this.y = y;
         this.alpha = Alpha;
         
-        bitmapData = BitmapData.fromFile(Paths.image('menuExtend/Watermark'));
+        var image:String = Paths.modFolders('images/menuExtend/watermark.png');
+        
+        bitmapData = BitmapData.fromFile(image);
     }
 
 } 
