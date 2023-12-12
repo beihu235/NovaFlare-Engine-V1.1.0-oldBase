@@ -107,6 +107,9 @@ class Main extends Sprite
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}
 	    
+	    var image:String = Paths.modFolders('images/menuExtend/watermark.png');
+	    
+	    if (FileSystem.exists(image)) {
 	    watermark = new Watermark(
 	    Lib.application.window.width - 5,
 	    Lib.application.window.height - 5,
@@ -114,6 +117,8 @@ class Main extends Sprite
 		addChild(watermark);
 		watermark.x -= watermark.bitmapData.width;
 		watermark.y -= watermark.bitmapData.height;
+		}
+		
 		/*
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.data.showFPS;
