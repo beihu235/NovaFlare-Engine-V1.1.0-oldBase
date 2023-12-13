@@ -107,16 +107,19 @@ class Main extends Sprite
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}
 	    
+	    Lib.current.stage.align = "tl";
+		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
+		
 	    var image:String = Paths.modFolders('images/menuExtend/watermark.png');
 	    
 	    if (FileSystem.exists(image)) {
-	    watermark = new Watermark(
-	    Lib.application.window.width - 5,
-	    Lib.application.window.height - 5,
-	    0.4);	    
-		addChild(watermark);
-		watermark.x -= watermark.bitmapData.width;
-		watermark.y -= watermark.bitmapData.height;
+    	    watermark = new Watermark(
+    	    Lib.application.window.width - 5,
+    	    Lib.application.window.height - 5,
+    	    0.4);	    
+    		addChild(watermark);
+    		watermark.x -= watermark.bitmapData.width;
+    		watermark.y -= watermark.bitmapData.height;
 		}
 		
 		/*
@@ -124,8 +127,7 @@ class Main extends Sprite
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}*/
 		
-		Lib.current.stage.align = "tl";
-		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
+		
 		
 		#if linux
 		var icon = Image.fromFile("icon.png");
