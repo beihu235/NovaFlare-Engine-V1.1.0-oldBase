@@ -114,12 +114,12 @@ class Main extends Sprite
 	    
 	    if (FileSystem.exists(image)) {
     	    watermark = new Watermark(
-    	    Lib.application.window.width - 5,
-    	    Lib.application.window.height - 5,
+    	    5,
+    	    5 + 5,
     	    0.4);	    
     		addChild(watermark);
-    		watermark.x -= watermark.bitmapData.width;
-    		watermark.y -= watermark.bitmapData.height;
+    		//watermark.x -= watermark.bitmapData.width;
+    		watermark.y += fpsVar.height;
 		}
 		
 		/*
