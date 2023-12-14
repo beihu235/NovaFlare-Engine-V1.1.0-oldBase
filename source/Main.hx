@@ -110,7 +110,7 @@ class Main extends Sprite
 	    Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		
-	    var image:String = Paths.modFolders('images/menuExtend/watermark.png');
+	    var image:String = Paths.modFolders('images/menuExtend/Others/watermark.png');
 	    
 	    if (FileSystem.exists(image)) {
     	    watermark = new Watermark(
@@ -118,8 +118,8 @@ class Main extends Sprite
     	    Lib.application.window.height - 5,
     	    0.4);	    
     		addChild(watermark);
-    		watermark.x -= watermark.bitmapData.width;
-    		watermark.y -= watermark.bitmapData.height;
+    		watermark.x -= stageWidth;
+    		watermark.y -= stageHeight;
 		}
 		
 		/*
