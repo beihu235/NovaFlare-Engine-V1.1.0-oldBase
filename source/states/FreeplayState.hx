@@ -23,8 +23,8 @@ import sys.FileSystem;
 
 class FreeplayState extends MusicBeatState
 {
-	var filePath:String = 'menuExtend/';
-    var font:String = Paths.font('menuExtend/freeplay.ttf');
+	var filePath:String = 'menuExtend/Freeplay/';
+    var font:String = Paths.font('menuExtend/freeplay');
     
 	var bg:FlxSprite;
 	var bars:FlxSprite;
