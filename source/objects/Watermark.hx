@@ -9,7 +9,7 @@ class Watermark extends Bitmap
 
         super();
         
-        var image:String = Paths.modFolders('images/menuExtend/watermark.png');
+        var image:String = Paths.modFolders('images/menuExtend/Others/watermark.png');
         
         bitmapData = BitmapData.fromFile(image);
 
