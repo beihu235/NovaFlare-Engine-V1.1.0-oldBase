@@ -774,7 +774,7 @@ class FreeplayState extends MusicBeatState
 	}
 }
 
-/*
+
 class SongMetadata
 {
 	public var songName:String = "";
@@ -793,4 +793,4 @@ class SongMetadata
 		this.folder = Mods.currentModDirectory;
 		if(this.folder == null) this.folder = '';
 	}
-}*/
+}
