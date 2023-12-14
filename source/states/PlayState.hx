@@ -206,7 +206,7 @@ class PlayState extends MusicBeatState
     
     var numItems:FlxTypedGroup<FlxSprite>;
     
-    var combeOffsetFix:Array<Array<Int>> = [
+    var comboOffsetFix:Array<Array<Int>> = [
         [0, 0], //num0
         [-2, -1], //num1
         [-6, 6], //num2
@@ -2773,16 +2773,16 @@ class PlayState extends MusicBeatState
     var comboSpr_S:FlxSprite; 
     
     var rateTween:FlxTween;
-    var combeTween:FlxTween;
-    var combeNumTween:Array<FlxTween> = [];
+    var comboTween:FlxTween;
+    var comboNumTween:Array<FlxTween> = [];
     
     var rateTweenScaleX:FlxTween;
-    var combeTweenScaleX:FlxTween;
-    var combeNumTweenScaleX:Array<FlxTween> = [];
+    var comboTweenScaleX:FlxTween;
+    var comboNumTweenScaleX:Array<FlxTween> = [];
     
     var rateTweenScaleY:FlxTween;
-    var combeTweenScaleY:FlxTween;
-    var combeNumTweenScaleY:Array<FlxTween> = [];
+    var comboTweenScaleY:FlxTween;
+    var comboNumTweenScaleY:Array<FlxTween> = [];
     
     var seperatedScore:Array<Int> = [];
 	private function cachePopUpScore()
@@ -2952,7 +2952,7 @@ class PlayState extends MusicBeatState
 		rateSpr_S.updateHitbox();
 
 		var seperatedScore:Array<Int> = [];
-        var startShow = 1; //use for combe 1000+
+        var startShow = 1; //use for combo 1000+
 		if(combo >= 1000) {
 			seperatedScore.push(Math.floor(combo / 1000) % 10);
 			startShow = 0;
@@ -2972,22 +2972,22 @@ class PlayState extends MusicBeatState
 			numScore.updateHitbox();			
 			numScore.antialiasing = antialias;
 			
-			if (combeNumTween[comboNum + startShow] != null) combeNumTween[comboNum + startShow].cancel();
+			if (comboNumTween[comboNum + startShow] != null) comboNumTween[comboNum + startShow].cancel();
             numScore.alpha = 1;                        
-            combeNumTween[comboNum + startShow] = FlxTween.tween(numScore, {alpha: 0}, 0.4 / playbackRate, {
+            comboNumTween[comboNum + startShow] = FlxTween.tween(numScore, {alpha: 0}, 0.4 / playbackRate, {
 			startDelay: 0.6 / playbackRate
 		    });
 		    
-		    if (combeNumTweenScaleX[comboNum] != null) combeNumTweenScaleX[comboNum].cancel();
+		    if (comboNumTweenScaleX[comboNum] != null) comboNumTweenScaleX[comboNum].cancel();
             numScore.scale.x = 0.5 + 0.07;                        
-            combeNumTweenScaleX[comboNum] = FlxTween.tween(numScore.scale, {x: 0.5}, 0.2 / playbackRate);
+            comboNumTweenScaleX[comboNum] = FlxTween.tween(numScore.scale, {x: 0.5}, 0.2 / playbackRate);
 		    
-		    if (combeNumTweenScaleY[comboNum] != null) combeNumTweenScaleY[comboNum].cancel();
+		    if (comboNumTweenScaleY[comboNum] != null) comboNumTweenScaleY[comboNum].cancel();
             numScore.scale.y = 0.5 + 0.07;                        
-            combeNumTweenScaleY[comboNum] = FlxTween.tween(numScore.scale, {y: 0.5}, 0.2 / playbackRate);
+            comboNumTweenScaleY[comboNum] = FlxTween.tween(numScore.scale, {y: 0.5}, 0.2 / playbackRate);
             
-            numScore.offset.x -= combeOffsetFix[seperatedScore[comboNum]][0] * 0.5;
-			numScore.offset.y += combeOffsetFix[seperatedScore[comboNum]][1] * 0.5;
+            numScore.offset.x -= comboOffsetFix[seperatedScore[comboNum]][0] * 0.5;
+			numScore.offset.y += comboOffsetFix[seperatedScore[comboNum]][1] * 0.5;
 			
 		}
 		
@@ -2997,9 +2997,9 @@ class PlayState extends MusicBeatState
 			startDelay: 0.6 / playbackRate
 		});
         
-        if (combeTween != null) combeTween.cancel();
+        if (comboTween != null) comboTween.cancel();
         comboSpr_S.alpha = 1;
-		combeTween = FlxTween.tween(comboSpr_S, {alpha: 0}, 0.4 / playbackRate, {
+		comboTween = FlxTween.tween(comboSpr_S, {alpha: 0}, 0.4 / playbackRate, {
 			startDelay: 0.6 / playbackRate
 		});
 		
@@ -3007,17 +3007,17 @@ class PlayState extends MusicBeatState
 		rateSpr_S.scale.x = scale + 0.07;
 		rateTweenScaleX = FlxTween.tween(rateSpr_S.scale, {x: scale}, 0.2 / playbackRate);
         
-        if (combeTweenScaleX != null) combeTweenScaleX.cancel();
+        if (comboTweenScaleX != null) comboTweenScaleX.cancel();
         comboSpr_S.scale.x = scale + 0.07;
-		combeTweenScaleX = FlxTween.tween(comboSpr_S.scale, {x: scale}, 0.2 / playbackRate);
+		comboTweenScaleX = FlxTween.tween(comboSpr_S.scale, {x: scale}, 0.2 / playbackRate);
 		
 		if (rateTweenScaleY != null) rateTweenScaleY.cancel();
 		rateSpr_S.scale.y = scale + 0.07;
 		rateTweenScaleY = FlxTween.tween(rateSpr_S.scale, {y: scale}, 0.2 / playbackRate);
         
-        if (combeTweenScaleY != null) combeTweenScaleY.cancel();
+        if (comboTweenScaleY != null) comboTweenScaleY.cancel();
         comboSpr_S.scale.y = scale + 0.07;
-		combeTweenScaleY = FlxTween.tween(comboSpr_S.scale, {y: scale}, 0.2 / playbackRate);
+		comboTweenScaleY = FlxTween.tween(comboSpr_S.scale, {y: scale}, 0.2 / playbackRate);
 		
 		rateSpr_S.offset.x += rateSpr_S.width / 2;
         rateSpr_S.offset.y += rateSpr_S.height / 2;
@@ -3411,6 +3411,7 @@ class PlayState extends MusicBeatState
 		{
 			combo++;
 			if(combo > 9999) combo = 9999;
+			if (combo > highestCombo) highestCombo = combo;
 			notesHitArray.unshift(Date.now());
 			popUpScore(note);
 		}
@@ -3510,6 +3511,7 @@ class PlayState extends MusicBeatState
 		{
 			combo++;
 			if(combo > 9999) combo = 9999;
+			if (combo > highestCombo) highestCombo = combo;
 			notesHitArray.unshift(Date.now());
 			popUpScore(note);
 		}
