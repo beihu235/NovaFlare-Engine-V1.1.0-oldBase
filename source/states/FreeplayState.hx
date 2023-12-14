@@ -561,7 +561,7 @@ class FreeplayState extends MusicBeatState
 			illustrationBG.scale.y = FlxMath.lerp(1, illustrationBG.scale.y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
 		}*/
 		
-		if ((controls.ACCEPT || (FlxG.mouse.justReleased && FlxG.mouse.overlaps(illustration)) ) && playSongTime < 2)
+		if ((controls.ACCEPT || (FlxG.mouse.justReleased/* && FlxG.mouse.overlaps(illustration)*/) ) && playSongTime < 2)
     	{
     		var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
     		var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
