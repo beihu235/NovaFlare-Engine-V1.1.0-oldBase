@@ -54,6 +54,7 @@ class PauseSubState extends MusicBeatSubstate
     var botText:FlxText;
     var ballText:FlxText;
     var menuText:Array<FlxText> = [];
+    var menuTextStart:FlxTimer;
     var menuTextTween:Array<FlxTween> = [];
     
     var pauseMusic:FlxSound;
@@ -167,7 +168,7 @@ class PauseSubState extends MusicBeatSubstate
     	backButton.updateHitbox();
     	backButton.alpha = 0;
 	
-    	if (Difficulty.list.length < 2) options.remove('Change Difficulty');
+    	if (Difficulty.list.length < 2) options.remove('Difficulty');
 	
     	for (i in 0...Difficulty.list.length) {
     		var diff:String = Difficulty.getString(i);
@@ -351,7 +352,7 @@ class PauseSubState extends MusicBeatSubstate
 			i.x = 1280 + 200;
 		}
 		
-		new FlxTimer().start(0.1, function(tmr:FlxTimer) {
+		menuTextStart = new FlxTimer().start(0.1, function(tmr:FlxTimer) {//改
     		//menuTextTween[curText * 2] = FlxTween.tween(menuText[curText], {x: 1280 - 15 - menuText[curText].width}, 0.2, {ease: FlxEase.quartIn});
     		menuText[curText].alpha = 0;
     		menuTextTween[curText] = FlxTween.tween(menuText[curText], {alpha: 1}, 0.2, {ease: FlxEase.quartIn});
@@ -603,6 +604,8 @@ class PauseSubState extends MusicBeatSubstate
         				FlxTween.tween(i, {x: -1000}, 0.5, {ease: FlxEase.quartIn});
         				
         			var curText = 0;
+        			
+        			if (menuTextStart != null) menuTextStart.cancel();
     				new FlxTimer().start(0.1, function(tmr:FlxTimer) {
     				    if (menuTextTween[curText] != null) menuTextTween[curText].cancel();
     				    //if (menuTextTween[curText * 2 + 1] != null) menuTextTween[curText * 2 + 1].cancel();				        				        	    
