@@ -83,7 +83,7 @@ class FreeplayState extends MusicBeatState
 		//Paths.clearUnusedMemory();
 		
 		if (font == null)
-			font = Paths.font('montserrat.ttf');
+			font = Paths.font('montserrat');
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
@@ -106,6 +106,8 @@ class FreeplayState extends MusicBeatState
 		
 		FlxG.cameras.add(camGame, false);
 		FlxG.cameras.add(camUI, false);
+		
+		CustomFadeTransition.nextCamera = camUI;
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
     	bg.antialiasing = ClientPrefs.data.antialiasing;
@@ -219,6 +221,8 @@ class FreeplayState extends MusicBeatState
 		#end
 	
 		super.create();
+		
+		CustomFadeTransition.nextCamera = camUI;
 	}
 
 	override function closeSubState() {
