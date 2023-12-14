@@ -28,7 +28,7 @@ import openfl.utils.Assets;
 class PauseSubState extends MusicBeatSubstate
 {
 
-    var filePath:String = 'menuExtend/pauseState/';
+    var filePath:String = 'menuExtend/PauseState/';
     var font:String = Assets.getFont("assets/fonts/montserrat.ttf").fontName;
 
     var back:FlxSprite;
@@ -129,7 +129,7 @@ class PauseSubState extends MusicBeatSubstate
 	    super();
     	cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	    
-	    FlxG.sound.play(Paths.sound('scrollMenu'), 0.75);
+	    FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
     	pauseMusic = new FlxSound();
     	if(songName != null) {
     		pauseMusic.loadEmbedded(Paths.music(songName), true, true);
@@ -547,7 +547,7 @@ class PauseSubState extends MusicBeatSubstate
     	}
     	
     	if (num != 0)
-    		FlxG.sound.play(Paths.sound('scrollMenu'), 0.75);
+    		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
     }
 
     function doEvent() {
@@ -617,7 +617,7 @@ class PauseSubState extends MusicBeatSubstate
     			    
         			stayinMenu = 'isChanging';
     			    
-    			    FlxG.sound.play(Paths.sound('confirmMenu'), 0.75);			   
+    			    FlxG.sound.play(Paths.sound('confirmMenu'), 0.4);			   
     			    
     			    if (blackbackTween != null && backShadowTween != null && backTween != null && frontTween != null){
                         blackbackTween.cancel();
@@ -704,7 +704,7 @@ class PauseSubState extends MusicBeatSubstate
         				debugCurSelected = 0;
         				changeOptions(0);
         			});
-        			FlxG.sound.play(Paths.sound('cancelMenu'), 0.75);
+        			FlxG.sound.play(Paths.sound('cancelMenu'), 0.4);
     		}
     	} else if (stayinMenu == 'options') {
 			switch (optionsType[optionsCurSelected]) {
@@ -736,7 +736,7 @@ class PauseSubState extends MusicBeatSubstate
     					changeOptions(0);
         			});
         			
-        			FlxG.sound.play(Paths.sound('cancelMenu'), 0.75);
+        			FlxG.sound.play(Paths.sound('cancelMenu'), 0.4);
     		}
     	} else if (stayinMenu == 'difficulty') {
     		if (difficultyChoices[difficultyCurSelected] == 'Back') {
@@ -755,7 +755,7 @@ class PauseSubState extends MusicBeatSubstate
     				difficultyCurSelected = 0;
     				changeOptions(0);
     			});
-    			FlxG.sound.play(Paths.sound('cancelMenu'), 0.75);
+    			FlxG.sound.play(Paths.sound('cancelMenu'), 0.4);
     			return;
     		}
 	        try{
