@@ -497,7 +497,7 @@ class FreeplayState extends MusicBeatState
 			iconsArray[i].x = songtextsGroup[i].x - 150;
 			iconsArray[i].y = songtextsGroup[i].y - 25;
 		}
-		
+		/*
 		if ((FlxG.mouse.pressed && FlxG.mouse.overlaps(illustration)) || FlxG.keys.pressed.SPACE)
 		{
 			playSongTime += elapsed;
@@ -552,13 +552,14 @@ class FreeplayState extends MusicBeatState
 			
 			illustrationBG.scale.x = FlxMath.lerp(0.95, illustrationBG.scale.x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
 			illustrationBG.scale.y = FlxMath.lerp(0.95, illustrationBG.scale.y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
+			
 		} else {
 			illustration.scale.x = FlxMath.lerp(illustrationSize[0], illustration.scale.x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
 			illustration.scale.y = FlxMath.lerp(illustrationSize[1], illustration.scale.y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
 			
 			illustrationBG.scale.x = FlxMath.lerp(1, illustrationBG.scale.x, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
 			illustrationBG.scale.y = FlxMath.lerp(1, illustrationBG.scale.y, FlxMath.bound(1 - (elapsed * 8.5), 0, 1));
-		}
+		}*/
 		
 		if ((controls.ACCEPT || (FlxG.mouse.justReleased && FlxG.mouse.overlaps(illustration)) ) && playSongTime < 2)
     	{
