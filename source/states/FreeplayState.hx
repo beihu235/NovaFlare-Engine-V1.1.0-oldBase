@@ -3,7 +3,6 @@ package states;
 import backend.WeekData;
 import backend.Highscore;
 import backend.Song;
-import backend.SongMetadata;
 
 import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
@@ -25,7 +24,7 @@ import sys.FileSystem;
 class FreeplayState extends MusicBeatState
 {
 	var filePath:String = 'menuExtend/';
-    var font:String = Paths.font('montserrat.ttf');
+    var font:String = Paths.font('menuExtend/freeplay.ttf');
     
 	var bg:FlxSprite;
 	var bars:FlxSprite;
@@ -82,6 +81,9 @@ class FreeplayState extends MusicBeatState
 	{
 		//Paths.clearStoredMemory();
 		//Paths.clearUnusedMemory();
+		
+		if (font == null)
+			font = Paths.font('montserrat.ttf');
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
@@ -144,7 +146,7 @@ class FreeplayState extends MusicBeatState
     	add(bars);
     	
     	scoreText = new FlxText(FlxG.width * 0.7, 2.5, 0, "", 32);
-		scoreText.setFormat(Language.font(), 32, FlxColor.WHITE, 'right');
+		scoreText.setFormat(font, 32, FlxColor.WHITE, 'right');
 		scoreText.camera = camUI;
 		add(scoreText);
     	
@@ -183,12 +185,12 @@ class FreeplayState extends MusicBeatState
     	searchInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
     	searchInput.backgroundColor = FlxColor.TRANSPARENT;
     	searchInput.fieldBorderColor = FlxColor.TRANSPARENT;
-    	searchInput.font = Language.font();
+    	searchInput.font = font;
     	searchInput.camera = camUI;
     	add(searchInput);
     	
     	tipSearchText = new FlxText(50, 50, 0, 'Name...', 20);
-    	tipSearchText.setFormat(Paths.font("syht.ttf"), 20, FlxColor.WHITE, 'left', FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+    	tipSearchText.setFormat(font, 20, FlxColor.WHITE, 'left', FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
     	tipSearchText.alpha = 0.5;
     	tipSearchText.camera = camUI;
     	add(tipSearchText);
@@ -199,7 +201,7 @@ class FreeplayState extends MusicBeatState
     	add(underline);
     	
     	searchText = new FlxText(465, 50, 0, 'Search', 20);
-    	searchText.setFormat(Paths.font("syht.ttf"), 20, FlxColor.WHITE, 'left', FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+    	searchText.setFormat(font, 20, FlxColor.WHITE, 'left', FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
     	searchText.alpha = 0.75;
     	searchText.camera = camUI;
     	add(searchText);
@@ -275,7 +277,7 @@ class FreeplayState extends MusicBeatState
 		for (i in 0...songs.length)
     	{
     		var songText = new FlxText((i <= curSelected) ? baseX - (curSelected-i)*25 : baseX - (i-curSelected)*25, 320+(i-curSelected)*115, 0, songs[i].songName, 60);
-    		songText.setFormat(Paths.font("syht.ttf"), 60, FlxColor.WHITE, 'left', FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+    		songText.setFormat(font, 60, FlxColor.WHITE, 'left', FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
     		songText.camera = camGame;
     		if (songs[i].songName.length >= 17) {
     			songText.scale.x = 10 / songs[i].songName.length;
@@ -526,7 +528,7 @@ class FreeplayState extends MusicBeatState
     				
         			var errorStr:String = Mods.currentModDirectory + '/data/' + songLowercase + '/' + poop + '.json';
         			var missingText:FlxText = new FlxText(0, 680, 0, 'ERROR WHILE LOADING CHART: $errorStr', 20);
-        			missingText.setFormat(Paths.font("syht.ttf"), 20, FlxColor.WHITE, LEFT);
+        			missingText.setFormat(font, 20, FlxColor.WHITE, LEFT);
         			missingText.camera = camUI;
         			if (!haveMissText) add(missingText);
         			
@@ -576,7 +578,7 @@ class FreeplayState extends MusicBeatState
     		{
     			var errorStr:String = Mods.currentModDirectory + '/data/' + songLowercase + '/' + poop + '.json';
     			var missingText:FlxText = new FlxText(0, 680, 0, 'ERROR WHILE LOADING CHART: $errorStr', 20);
-    			missingText.setFormat(Paths.font("syht.ttf"), 20, FlxColor.WHITE, LEFT);
+    			missingText.setFormat(font, 20, FlxColor.WHITE, LEFT);
     			missingText.camera = camUI;
     			if (!haveMissText) add(missingText);
     			
@@ -654,7 +656,7 @@ class FreeplayState extends MusicBeatState
     	} else {
     		if (difficultieText != null) {
     			difficultieText.text = newDiffName;
-    			difficultieText.setFormat(Paths.font("syht.ttf"), 60);
+    			difficultieText.setFormat(font, 60);
     			difficultieText.updateHitbox();
     		}
     		
@@ -718,9 +720,9 @@ class FreeplayState extends MusicBeatState
 		changeDiff(0);
 	}
 	
-    /*function resetIllustration()
+    function resetIllustration()
     {
-    	Mods.currentModDirectory = songs[curSelected].folder;
+    	/*Mods.currentModDirectory = songs[curSelected].folder;
     	
     	var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
     	if (Paths.image('illustrations/' + songLowercase) != null) {
@@ -751,8 +753,8 @@ class FreeplayState extends MusicBeatState
     	angleTweenOverlap = FlxTween.tween(illustrationOverlap, {angle: -5}, 0.25, {ease: FlxEase.quadOut});
     	
     	illustrationOverlap.alpha = 0.75;
-    	FlxTween.tween(illustrationOverlap, {alpha: 0}, 0.25, {ease: FlxEase.quadOut});
-    }*/
+    	FlxTween.tween(illustrationOverlap, {alpha: 0}, 0.25, {ease: FlxEase.quadOut});*/
+    }
     
 	
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
