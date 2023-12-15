@@ -49,7 +49,6 @@
 	<define name="MODS_ALLOWED" if="desktop || android" />
 	<define name="LUA_ALLOWED" if="desktop || android"/>
 	<!--define name="ACHIEVEMENTS_ALLOWED" /-->
-	
 	<define name="VIDEOS_ALLOWED" />
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="TITLE_SCREEN_EASTER_EGG" if="officialBuild"/> <!-- DELETE THE if="officialBuild" for enabling this on an unofficial build -->
@@ -108,13 +107,16 @@
 
 	<haxelib name="flixel" />
 	<haxedev set='webgl' />
-        
+
 	<!--In case you want to use the addons package-->
 	<haxelib name="flixel-addons" />
 	<!--haxelib name="hscript" if="HSCRIPT_ALLOWED"/-->
+	<define name="hscriptPos" if="HSCRIPT_ALLOWED"/>
+	<haxedef name="openflPos" if="desktop"/>
 	<haxelib name="SScript" if="HSCRIPT_ALLOWED"/>
 	<haxelib name="androiddialogs" if="android" />
 	<haxelib name="devicelanguage" if="android" />
+    <haxelib name="samcodes-notifications" if="android"/>
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
