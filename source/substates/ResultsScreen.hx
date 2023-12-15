@@ -296,7 +296,7 @@ class ResultsScreen extends MusicBeatSubstate
 		+ '  PracticeMode: ' + practice
 		+ '\n'
 		+ 'Finished time: ' + Date.now().toString()
-		+ '\n';
+		+ '\n'
 		);
 		setGameText.size = 25;
 		setGameText.alignment = RIGHT;
