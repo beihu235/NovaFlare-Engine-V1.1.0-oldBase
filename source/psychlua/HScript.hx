@@ -5,11 +5,18 @@ import objects.Character;
 import psychlua.FunkinLua;
 import psychlua.CustomSubstate;
 
+import hscriptBase.Parser;
+import hscriptBase.Interp;
+import hscriptBase.Expr;
+
+import haxe.Exception;
+
 #if HSCRIPT_ALLOWED
 import tea.SScript;
 class HScript extends SScript
 {
 	public var parentLua:FunkinLua;
+	public static var parser:Parser = new Parser();
 	
 	public static function initHaxeModule(parent:FunkinLua)
 	{
