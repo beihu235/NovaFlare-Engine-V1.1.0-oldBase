@@ -192,7 +192,7 @@ class HScript extends SScript
 		}
 	}
 
-	public function executeCode(?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):TeaCall
+	public function executeCode(?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):SCall
 	{
 		if (funcToRun == null) return null;
 
@@ -218,7 +218,7 @@ class HScript extends SScript
 		return callValue;
 	}
 
-	public function executeFunction(funcToRun:String = null, funcArgs:Array<Dynamic>):TeaCall
+	public function executeFunction(funcToRun:String = null, funcArgs:Array<Dynamic>):SCall
 	{
 		if (funcToRun == null)
 			return null;
@@ -233,7 +233,7 @@ class HScript extends SScript
 			#if SScript
 			initHaxeModuleCode(funk, codeToRun, varsToBring);
 			try {
-			var retVal:TeaCall = funk.hscript.executeCode(funcToRun, funcArgs);
+			var retVal:SCall = funk.hscript.executeCode(funcToRun, funcArgs);
 			if (retVal != null)
 			{
 				if(retVal.succeeded)
