@@ -16,7 +16,7 @@ import tea.SScript;
 class HScript extends SScript
 {
 	public var parentLua:FunkinLua;
-	public static var parser:Parser;
+	public var parser:Parser;
 	
 	public static function initHaxeModule(parent:FunkinLua)
 	{
@@ -199,14 +199,14 @@ class HScript extends SScript
 		}
 	}
 
-	public function executeCode(?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):Dynamic
+	public function executeCode(codeToRun, ?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):Dynamic
 	{
 	    @:privateAccess
-		HScript.parser.line = 1;
-		HScript.parser.allowTypes = true;
-		var expr:Expr = HScript.parser.parseString(codeToRun);
+		parser.line = 1;
+		parser.allowTypes = true;
+		var expr:Expr = parser.parseString(codeToRun);
 		try {
-			var value:Dynamic = interp.execute(HScript.parser.parseString(codeToRun));
+			var value:Dynamic = interp.execute(parser.parseString(codeToRun));
 			return (funcToRun != null) ? executeFunction(funcToRun, funcArgs) : value;
 		}
 		catch(e:Exception)
@@ -247,7 +247,7 @@ class HScript extends SScript
 				funk.luaTrace(funk.scriptName + ":" + funk.lastCalledFunction + " - " + e, false, false, FlxColor.RED);
 			}
 			#else
-			funk.luaTrace("runHaxeCode: HScript isn't supported on this platform!", false, false, FlxColor.RED);
+			FunkinLua.luaTrace("runHaxeCode: HScript isn't supported on this platform!", false, false, FlxColor.RED);
 			#end
 
 			if(retVal != null && !LuaUtils.isOfTypes(retVal, [Bool, Int, Float, String, Array])) retVal = null;
