@@ -23,8 +23,8 @@ import sys.FileSystem;
 
 class FreeplayState extends MusicBeatState
 {
-	var filePath:String = 'menuExtend/Freeplay/';
-    var font:String = Paths.font('fontExtend/freeplay');
+	var filePath:String = 'menuExtend/FreeplayState/';
+    var font:String = Paths.font('fontExtend/freeplay.ttf');
     
 	var bg:FlxSprite;
 	var bars:FlxSprite;
@@ -83,7 +83,7 @@ class FreeplayState extends MusicBeatState
 		//Paths.clearUnusedMemory();
 		
 		if (font == null)
-			font = Paths.font('montserrat');
+			font = Paths.font('montserrat.ttf');
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
