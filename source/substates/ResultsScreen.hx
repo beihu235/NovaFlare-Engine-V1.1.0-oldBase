@@ -285,7 +285,8 @@ class ResultsScreen extends MusicBeatSubstate
 		if (ClientPrefs.getGameplaySetting('scrolltype') == 'multiplicative')
         speed = 'X' + speed;
         
-		setGameText.text = 'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
+		setGameText = new FlxText(FlxG.width + 400, 420, 0,
+		'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
 		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
 		+ '\n'
 		+ 'SongSpeed: X' + ClientPrefs.getGameplaySetting('scrollspeed')
@@ -296,6 +297,7 @@ class ResultsScreen extends MusicBeatSubstate
 		+ '\n'
 		+ 'Finished time: ' + Date.now().toString()
 		+ '\n';
+		);
 		setGameText.size = 25;
 		setGameText.alignment = RIGHT;
 		setGameText.font = Paths.font('vcr.ttf');
