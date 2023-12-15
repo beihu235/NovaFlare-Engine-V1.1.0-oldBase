@@ -24,7 +24,7 @@ import sys.FileSystem;
 class FreeplayState extends MusicBeatState
 {
 	var filePath:String = 'menuExtend/Freeplay/';
-    var font:String = Paths.font('menuExtend/freeplay');
+    var font:String = Paths.font('fontExtend/freeplay');
     
 	var bg:FlxSprite;
 	var bars:FlxSprite;
@@ -140,7 +140,7 @@ class FreeplayState extends MusicBeatState
     	add(illustrationOverlap);
     	illustrationOverlap.alpha = 0;*/
     	
-    	bars = new FlxSprite().loadGraphic(Paths.image('menus/freeplaybars'));
+    	bars = new FlxSprite().loadGraphic(Paths.image(filePath + 'freeplaybars'));
     	bars.antialiasing = ClientPrefs.data.antialiasing;
     	bars.screenCenter();
     	bars.camera = camUI;
