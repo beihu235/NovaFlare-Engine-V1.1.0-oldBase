@@ -110,16 +110,20 @@ class Main extends Sprite
 	    Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		
+		#if mobile
+		FlxG.fullscreen = true;
+		#end
+		
 	    var image:String = Paths.modFolders('images/menuExtend/Others/watermark.png');
 	    
 	    if (FileSystem.exists(image)) {
     	    watermark = new Watermark(
     	    5,
-    	    25,
+    	    Lib.current.stage.stageHeight - 5,
     	    0.4);	    
     		addChild(watermark);
     		//watermark.x -= watermark.bitmapData.width;
-    		//watermark.y -= watermark.bitmapData.height;
+    		watermark.y -= watermark.bitmapData.height;
 		}
 		
 		/*
