@@ -5,18 +5,11 @@ import objects.Character;
 import psychlua.FunkinLua;
 import psychlua.CustomSubstate;
 
-import hscriptBase.Parser;
-import hscriptBase.Interp;
-import hscriptBase.Expr;
-
-import haxe.Exception;
-
 #if HSCRIPT_ALLOWED
 import tea.SScript;
 class HScript extends SScript
 {
 	public var parentLua:FunkinLua;
-	//public var parser:Parser;
 	
 	public static function initHaxeModule(parent:FunkinLua)
 	{
@@ -41,7 +34,7 @@ class HScript extends SScript
 			@:privateAccess
 			if(hs.parsingException != null)
 			{
-				PlayState.instance.addTextToDebug('ERROR ON LOADING (${hs.origin}): ${hs.parsingException.message}', FlxColor.RED);
+				//PlayState.instance.addTextToDebug('ERROR ON LOADING (${hs.origin}): ${hs.parsingException.message}', FlxColor.RED);
 			}
 		}
 	}
@@ -199,21 +192,30 @@ class HScript extends SScript
 		}
 	}
 
-	public function executeCode(codeToRun, ?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):Dynamic
+	public function executeCode(?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):TeaCall
 	{
-	    @:privateAccess
-		parser.line = 1;
-		parser.allowTypes = true;
-		var expr:Expr = parser.parseString(codeToRun);
-		try {
-			var value:Dynamic = interp.execute(parser.parseString(codeToRun));
-			return (funcToRun != null) ? executeFunction(funcToRun, funcArgs) : value;
-		}
-		catch(e:Exception)
+		if (funcToRun == null) return null;
+
+		if(!exists(funcToRun))
 		{
-			trace(e);
+			FunkinLua.luaTrace(origin + ' - No HScript function named: $funcToRun', false, false, FlxColor.RED);
 			return null;
 		}
+
+		var callValue = call(funcToRun, funcArgs);
+		if (!callValue.succeeded)
+		{
+			var e = callValue.exceptions[0];
+			if (e != null)
+			{
+				var msg:String = e.toString();
+				if(parentLua != null) msg = origin + ":" + parentLua.lastCalledFunction + " - " + msg;
+				else msg = '$origin - $msg';
+				FunkinLua.luaTrace(msg, parentLua == null, false, FlxColor.RED);
+			}
+			return null;
+		}
+		return callValue;
 	}
 
 	public function executeFunction(funcToRun:String = null, funcArgs:Array<Dynamic>):TeaCall
@@ -228,30 +230,33 @@ class HScript extends SScript
 	{
 		#if LUA_ALLOWED
 		funk.addLocalCallback("runHaxeCode", function(codeToRun:String, ?varsToBring:Any = null, ?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):Dynamic {
-			var retVal:Dynamic = null;
-
-			#if Sscript
-			HScript.initHaxeModule(funk);
+			#if SScript
+			initHaxeModuleCode(funk, codeToRun, varsToBring);
 			try {
-				if(varsToBring != null)
-				{
-					for (key in Reflect.fields(varsToBring))
-					{
-						//trace('Key $key: ' + Reflect.field(varsToBring, key));
-						FunkinLua.hscript.interp.variables.set(key, Reflect.field(varsToBring, key));
-					}
-				}
-				retVal = FunkinLua.hscript.execute(codeToRun, funcToRun, funcArgs);
+			var retVal:TeaCall = funk.hscript.executeCode(funcToRun, funcArgs);
+			if (retVal != null)
+			{
+				if(retVal.succeeded)
+					return (retVal.returnValue == null || LuaUtils.isOfTypes(retVal.returnValue, [Bool, Int, Float, String, Array])) ? retVal.returnValue : null;
+
+				var e = retVal.exceptions[0];
+				var calledFunc:String = if(funk.hscript.origin == funk.lastCalledFunction) funcToRun else funk.lastCalledFunction;
+				if (e != null)
+					FunkinLua.luaTrace(funk.hscript.origin + ":" + calledFunc + " - " + e, false, false, FlxColor.RED);
+				return null;
 			}
+			else if (funk.hscript.returnValue != null)
+			{
+				return funk.hscript.returnValue;
+			}
+		    }
 			catch (e:Dynamic) {
-				funk.luaTrace(funk.scriptName + ":" + funk.lastCalledFunction + " - " + e, false, false, FlxColor.RED);
+				FunkinLua.luaTrace(funk.scriptName + ":" + funk.lastCalledFunction + " - " + e, false, false, FlxColor.RED);
 			}
 			#else
 			FunkinLua.luaTrace("runHaxeCode: HScript isn't supported on this platform!", false, false, FlxColor.RED);
 			#end
-
-			if(retVal != null && !LuaUtils.isOfTypes(retVal, [Bool, Int, Float, String, Array])) retVal = null;
-			return retVal;
+			return null;
 		});
 		
 		funk.addLocalCallback("runHaxeFunction", function(funcToRun:String, ?funcArgs:Array<Dynamic> = null) {
