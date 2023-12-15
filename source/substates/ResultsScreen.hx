@@ -58,6 +58,7 @@ class ResultsScreen extends MusicBeatSubstate
 	public var setGameText:FlxText;
 	public var setMsText:FlxText;
 	public var backText:FlxText;
+	public var backBG:FlxText;
     
     //public var NoteTypeColor:NoteTypeColorData;
     
@@ -160,31 +161,37 @@ class ResultsScreen extends MusicBeatSubstate
 		graphSickUp.scrollFactor.set();
 		graphSickUp.alpha = 0;		
 		add(graphSickUp);
+		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.sickWindow) graphSickUp.visible = false;
 		
 		graphSickDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[1]);
 		graphSickDown.scrollFactor.set();
 		graphSickDown.alpha = 0;		
 		add(graphSickDown);
+		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.sickWindow) graphSickDown.visible = false;
 		
 		graphGoodUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[2]);
 		graphGoodUp.scrollFactor.set();
 		graphGoodUp.alpha = 0;		
 		add(graphGoodUp);
+		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.goodWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.goodWindow) graphGoodUp.visible = false;
 		
 		graphGoodDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[2]);
 		graphGoodDown.scrollFactor.set();
 		graphGoodDown.alpha = 0;		
 		add(graphGoodDown);
+		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.goodWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.goodWindow) graphGoodDown.visible = false;
 		
 		graphBadUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[3]);
 		graphBadUp.scrollFactor.set();
 		graphBadUp.alpha = 0;		
 		add(graphBadUp);
+		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.goodWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.goodWindow || ClientPrefs.data.goodWindow > ClientPrefs.data.badWindow) graphBadUp.visible = false;
 		
 		graphBadDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[3]);
 		graphBadDown.scrollFactor.set();
 		graphBadDown.alpha = 0;		
 		add(graphBadDown);
+		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.goodWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.goodWindow || ClientPrefs.data.goodWindow > ClientPrefs.data.badWindow) graphBadDown.visible = false;
 		
 		graphShitUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (safeZoneOffset / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[4]);
 		graphShitUp.scrollFactor.set();
@@ -289,7 +296,6 @@ class ResultsScreen extends MusicBeatSubstate
 		+ '\n'
 		+ 'Finished time: ' + Date.now().toString()
 		+ '\n';
-		);
 		setGameText.size = 25;
 		setGameText.alignment = RIGHT;
 		setGameText.font = Paths.font('vcr.ttf');
@@ -331,8 +337,8 @@ class ResultsScreen extends MusicBeatSubstate
 		setMsText.antialiasing = ClientPrefs.data.antialiasing;
 		add(setMsText);		
 		
-		var backTextShow:String = 'Press Space to continue';
-		#if android backTextShow = 'Press Back to continue'; #end
+		var backTextShow:String = 'Press Enter to continue';
+		#if android backTextShow = 'Press Text to continue'; #end
 		backText = new FlxText(0, FlxG.height - 45, 0, backTextShow);
 		backText.size = 28;
 		backText.font = Paths.font('vcr.ttf');
