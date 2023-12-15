@@ -249,7 +249,7 @@ class SickMsOption extends Option
 	public override function left():Bool
 	{
 		ClientPrefs.data.sickWindow--;
-		if (ClientPrefs.data.sickWindow < 166)
+		if (ClientPrefs.data.sickWindow < 0)
 			ClientPrefs.data.sickWindow = 166;
 		display = updateDisplay();
 		return true;

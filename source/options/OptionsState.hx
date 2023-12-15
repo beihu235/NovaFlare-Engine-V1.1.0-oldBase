@@ -547,7 +547,7 @@ class OptionsState extends MusicBeatState
 	    up_hold = false;
 		down_hold = false;
 		
-		if (FlxG.keys.justPressed.Z) openSubState(new options.ControlsSubState());
+		if (FlxG.keys.justPressed.U) openSubState(new options.ControlsSubState());
 		
 	 
 		if (controls.UI_RIGHT_P || controls.UI_LEFT_P || controls.UI_UP_P || controls.UI_DOWN_P){
