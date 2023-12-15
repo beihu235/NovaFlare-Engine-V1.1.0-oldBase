@@ -16,7 +16,7 @@ import tea.SScript;
 class HScript extends SScript
 {
 	public var parentLua:FunkinLua;
-	public var parser:Parser;
+	//public var parser:Parser;
 	
 	public static function initHaxeModule(parent:FunkinLua)
 	{
