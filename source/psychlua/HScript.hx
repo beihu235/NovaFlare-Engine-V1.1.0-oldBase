@@ -192,7 +192,7 @@ class HScript extends SScript
 		}
 	}
 
-	public function executeCode(?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):SCall
+	public function executeCode(?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):#if (SScript <= "7.0.0") SCall #else TeaCall #end
 	{
 		if (funcToRun == null) return null;
 
@@ -218,7 +218,7 @@ class HScript extends SScript
 		return callValue;
 	}
 
-	public function executeFunction(funcToRun:String = null, funcArgs:Array<Dynamic>):SCall
+	public function executeFunction(funcToRun:String = null, funcArgs:Array<Dynamic>):#if (SScript <= "7.0.0") SCall #else TeaCall #end
 	{
 		if (funcToRun == null)
 			return null;
@@ -233,7 +233,7 @@ class HScript extends SScript
 			#if SScript
 			initHaxeModuleCode(funk, codeToRun, varsToBring);
 			try {
-			var retVal:SCall = funk.hscript.executeCode(funcToRun, funcArgs);
+			var retVal:#if (SScript <= "7.0.0") SCall #else TeaCall #end = funk.hscript.executeCode(funcToRun, funcArgs);
 			if (retVal != null)
 			{
 				if(retVal.succeeded)
