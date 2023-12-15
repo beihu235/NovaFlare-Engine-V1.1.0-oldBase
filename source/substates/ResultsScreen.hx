@@ -185,13 +185,13 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBadUp.scrollFactor.set();
 		graphBadUp.alpha = 0;		
 		add(graphBadUp);
-		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.goodWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.goodWindow || ClientPrefs.data.goodWindow > ClientPrefs.data.badWindow) graphBadUp.visible = false;
+		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.badWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.badWindow || ClientPrefs.data.goodWindow > ClientPrefs.data.badWindow) graphBadUp.visible = false;
 		
 		graphBadDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[3]);
 		graphBadDown.scrollFactor.set();
 		graphBadDown.alpha = 0;		
 		add(graphBadDown);
-		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.goodWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.goodWindow || ClientPrefs.data.goodWindow > ClientPrefs.data.badWindow) graphBadDown.visible = false;
+		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.badWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.badWindow || ClientPrefs.data.goodWindow > ClientPrefs.data.badWindow) graphBadDown.visible = false;
 		
 		graphShitUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (safeZoneOffset / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[4]);
 		graphShitUp.scrollFactor.set();
