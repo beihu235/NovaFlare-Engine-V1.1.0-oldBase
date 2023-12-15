@@ -100,8 +100,6 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBG.updateHitbox();
 		
 		var noteSpr = FlxSpriteUtil.flashGfx;		
-		//var _rect = new Rectangle(0, 0, graphWidth, graphHeight);
-		//graphBG.pixels.fillRect(_rect, 0xFF000000);
 		FlxSpriteUtil.beginDraw(0xFFFFFFFF);
 	    
 	    var noteSize = 2.3;
@@ -274,21 +272,23 @@ class ResultsScreen extends MusicBeatSubstate
 		var botplay:String = 'Disable';
 		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Enable';
 		var practice:String = 'Disable';
-
 		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Enable';
-
-		setGameText = new FlxText(FlxG.width + 400, 420, 0, 
-		'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
+		
+		var speed:String = ClientPrefs.getGameplaySetting('scrollspeed');
+		if (ClientPrefs.getGameplaySetting('scrolltype') == 'multiplicative')
+        speed = 'X' + speed;
+        
+		setGameText.text = 'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
 		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
 		+ '\n'
-		+ 'SongSpeed: ' + PlayState.instance.songSpeed
-		+ '  PlaybackRate: X' + ClientPrefs.getGameplaySetting('songspeed')
+		+ 'SongSpeed: X' + ClientPrefs.getGameplaySetting('scrollspeed')
+		+ '  PlaybackRate: ' + speed
 		+ '\n'
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
 		+ '\n'
 		+ 'Finished time: ' + Date.now().toString()
-		+ '\n'
+		+ '\n';
 		);
 		setGameText.size = 25;
 		setGameText.alignment = RIGHT;
@@ -405,12 +405,16 @@ class ResultsScreen extends MusicBeatSubstate
 		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Enable';
 		var practice:String = 'Disable';
 		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Enable';
-
+		
+		var speed:String = ClientPrefs.getGameplaySetting('scrollspeed');
+		if (ClientPrefs.getGameplaySetting('scrolltype') == 'multiplicative')
+        speed = 'X' + speed;
+        
 		setGameText.text = 'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
 		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
 		+ '\n'
 		+ 'SongSpeed: X' + ClientPrefs.getGameplaySetting('scrollspeed')
-		+ '  PlaybackRate: X' + ClientPrefs.getGameplaySetting('songspeed')
+		+ '  PlaybackRate: ' + speed
 		+ '\n'
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
