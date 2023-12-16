@@ -2170,7 +2170,7 @@ class GuitarHeroSustains extends Option
 }
 
 
-class skipTitleVideo extends Option
+class SkipTitleVideo extends Option
 {
 	public function new(desc:String)
 	{

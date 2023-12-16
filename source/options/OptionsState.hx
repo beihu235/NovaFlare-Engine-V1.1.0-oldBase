@@ -176,6 +176,7 @@ class OptionsState extends MusicBeatState
 				new DownscrollOption(OptionsName.setDownscrollOption()),
 				new MiddleScrollOption("Put your lane in the center or on the right."), 
 				new FilpChart('If checked, filp chart for playing.'),
+				new GuitarHeroSustains('Guitar Hero like Sustains Note System'),
 				new HitSoundOption("Adds 'hitsound' on note hits."),
 				new GhostTapOption("Toggle counting pressing a directional input when no arrow is there as a miss."),				
 				
@@ -187,7 +188,7 @@ class OptionsState extends MusicBeatState
                 //new NotesOption(),
                 //new Customizeption(),
 				new Judgement("Create a custom judgement preset"),
-				new GuitarHeroSustains('Guitar Hero like Sustains Note System'),
+				
 				//new Shouldcameramove("Moves camera on opponent/player note hits."),
 			]),
 			new OptionCata(345, 40, OptionsName.setAppearance(), [
@@ -245,7 +246,7 @@ class OptionsState extends MusicBeatState
 			    new CustomFadeType('Change Custom Fade Type'),
 				new CustomFadeSound('Change Custom Fade Sound Volume.'),	
 				new CustomFadeText('Check for showcase engine version and loading condition.'),				
-				new skipTitleVideo('Check for skip intro video'),
+				new SkipTitleVideo('Check for skip intro video'),
 			]),
 			new OptionCata(345, 40 + 64, OptionsName.setControls(), [
 			    new HideHud("Shows to you hud."),				
