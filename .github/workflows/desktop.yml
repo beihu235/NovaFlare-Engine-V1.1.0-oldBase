@@ -41,16 +41,16 @@ jobs:
         run: |
           haxelib setup C:/haxelib
           haxelib install hxcpp > /dev/null --quiet
-          haxelib install lime 8.1.1
+          haxelib install lime 7.9.0
           haxelib install openfl 9.2.1
-          haxelib install flixel 5.5.0
+          haxelib install flixel 5.2.2
           haxelib install flixel-tools 1.5.1
           haxelib install flixel-ui 2.5.0
           haxelib install flixel-addons 3.0.2
           haxelib install tjson 1.4.0
           haxelib install hxCodec 2.6.0
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
-          haxelib git SScript https://github.com/beihu235/SScript-5.0.0
+          haxelib install SScript 8.1.6
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib run lime rebuild hxcpp
           haxelib list
@@ -80,16 +80,16 @@ jobs:
         run: |
           haxelib setup ~/haxelib
           haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
-          haxelib install lime 8.1.1
+          haxelib install lime 7.9.0
           haxelib install openfl 9.2.1
-          haxelib install flixel 5.5.0
+          haxelib install flixel 5.2.2
           haxelib install flixel-tools 1.5.1
           haxelib install flixel-ui 2.5.0
           haxelib install flixel-addons 3.0.2
           haxelib install tjson 1.4.0
           haxelib install hxCodec 2.6.0
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
-          haxelib git SScript https://github.com/beihu235/SScript-5.0.0
+          haxelib install SScript 8.1.6
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib run lime rebuild hxcpp
           haxelib list
