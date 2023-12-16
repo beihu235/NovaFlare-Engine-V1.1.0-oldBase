@@ -239,7 +239,7 @@ class ClientPrefs {
 		}
 		
 		if(Main.fpsVar != null) {
-			Main.fpsVar.visible = ClientPrefs.data.showFPS;
+			Main.fpsVar.visible = data.showFPS;
 		}
 
 		#if (!html5 && !switch)
