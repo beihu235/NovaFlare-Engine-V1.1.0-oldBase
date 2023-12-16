@@ -2198,7 +2198,7 @@ class skipTitleVideo extends Option
 }
 
 
-class botOpponentFix extends Option
+class BotOpponentFix extends Option
 {
 	public function new(desc:String)
 	{

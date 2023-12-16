@@ -236,7 +236,7 @@ class OptionsState extends MusicBeatState
 			new OptionCata(935, 40, OptionsName.setOpponentMode(), [
 			    new PlayOpponent('If checked, playing as opponent\nmay have bug in some mods\n(your score will not be recorded.'),
 				new OpponentCodeFix('If checked, goodNoteHit and opponentNoteHit not follow playOpponent setting to change (if you playing it will return goodNoteHit function.'),
-				new botOpponentFix('Bot Opponent Fix'),
+				new BotOpponentFix('Bot Opponent Fix'),
 				new HealthDrainOPPO('Health Drain on opponent mode'),
 				new HealthDrainOPPOMult('Health Drain multiplier on opponent mode'),
 			 //   new PauseCountDownOption("Toggle countdown after pressing 'Resume' in Pause Menu."),
