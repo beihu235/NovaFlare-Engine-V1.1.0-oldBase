@@ -254,7 +254,10 @@ class TitleState extends MusicBeatState
 			startIntro();
 			return;
 		}
-		startVideo('menuExtend/titleIntro');
+		if (!ClientPrefs.data.skipTitleVideo)
+			startVideo('menuExtend/titleIntro');
+		else
+			startCutscenesOut();
 	}
 	
 	function startCutscenesOut()
@@ -263,7 +266,7 @@ class TitleState extends MusicBeatState
 		AndroidDialogsExtend.OpenToast(lang,2);
 		#end
 		inGame = true;
-		startIntro();		
+		startIntro();
 	}
 	
 	function startIntro()
