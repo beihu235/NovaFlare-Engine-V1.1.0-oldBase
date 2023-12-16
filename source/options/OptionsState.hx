@@ -187,7 +187,7 @@ class OptionsState extends MusicBeatState
                 //new NotesOption(),
                 //new Customizeption(),
 				new Judgement("Create a custom judgement preset"),
-				new GuitarHeroSustains('Guitar Hero like Sustains Note System');
+				new GuitarHeroSustains('Guitar Hero like Sustains Note System'),
 				//new Shouldcameramove("Moves camera on opponent/player note hits."),
 			]),
 			new OptionCata(345, 40, OptionsName.setAppearance(), [
