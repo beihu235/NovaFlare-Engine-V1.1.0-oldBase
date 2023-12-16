@@ -350,6 +350,7 @@ class PlayState extends MusicBeatState
 		practiceMode = ClientPrefs.getGameplaySetting('practice');
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay');
         cpuControlled_opponent = ClientPrefs.getGameplaySetting('botplay');
+        guitarHeroSustains = ClientPrefs.data.guitarHeroSustains;
         if (ClientPrefs.data.playOpponent) cpuControlled = ClientPrefs.data.botOpponentFix;
         
 		// var gameCam:FlxCamera = FlxG.camera;
