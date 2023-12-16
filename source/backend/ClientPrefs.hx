@@ -26,6 +26,10 @@ class SaveVariables {
 	public var showMEM:Bool = true;
 	public var rainbowFPS:Bool = false;
 	public var memoryType:Int = 3;
+	public var GuitarHeroSustains:Bool = true;
+	public var skipTitleVideo:Bool = false;
+	public var HealthDrainOPPOMult:Float = 0.5;
+	public var HealthDrainOPPO:Bool = true;
 	
 	public var flashing:Bool = true;
 	public var ResultsScreen:Bool = true;
