@@ -3,6 +3,7 @@ package states;
 import backend.WeekData;
 import backend.Highscore;
 import backend.Song;
+import backend.DiffCalc;
 
 import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
@@ -20,6 +21,7 @@ import flixel.addons.ui.FlxInputText;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.ui.FlxButton;
 import flixel.addons.display.FlxBackdrop;
+
 
 #if MODS_ALLOWED
 import sys.FileSystem;
@@ -1150,7 +1152,7 @@ class FreeplayState extends MusicBeatState
 		missingTextBG.visible = false;
 	}
 	
-	
+	var modCheck = Mods.currentModDirectory;
 
 	function changeSelection(change:Int = 0, playSound:Bool = true)
 	{
