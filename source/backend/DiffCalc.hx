@@ -45,9 +45,9 @@ class DiffCalc
 				var gottaHitNote:Bool = i.mustHitSection;
 
 				if (ii[1] >= 3 && gottaHitNote)
-					cleanedNotes.push(new SmallNote(ii[0] / FreeplayState.rate, Math.floor(Math.abs(ii[1]))));
+					cleanedNotes.push(new SmallNote(ii[0] / song.speed, Math.floor(Math.abs(ii[1]))));
 				if (ii[1] <= 4 && !gottaHitNote)
-					cleanedNotes.push(new SmallNote(ii[0] / FreeplayState.rate, Math.floor(Math.abs(ii[1]))));
+					cleanedNotes.push(new SmallNote(ii[0] / song.speed, Math.floor(Math.abs(ii[1]))));
 			}
 		}
 
@@ -275,7 +275,7 @@ class DiffCalc
 		lastDiffHandOne = hand_diffOne;
 		lastDiffHandTwo = hand_diffTwo;
 
-		return HelperFunctions.truncateFloat(chisel(accuracy, hand_diffOne, hand_diffTwo, point_npsOne, point_npsTwo, maxPoints), 2);
+		return truncateFloat(chisel(accuracy, hand_diffOne, hand_diffTwo, point_npsOne, point_npsTwo, maxPoints), 2);
 	}
 
 	public static function chisel(scoreGoal:Float, diffOne:Array<Float>, diffTwo:Array<Float>, pointsOne:Array<Float>, pointsTwo:Array<Float>, maxPoints:Float)
