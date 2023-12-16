@@ -2141,3 +2141,144 @@ class MarvelousSprite extends Option
 		return "Marvelous Sprite: < " + (ClientPrefs.data.marvelousSprite ? enable_O : disable_O) + " >";
 	}
 }
+
+class GuitarHeroSustains extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+	}
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.guitarHeroSustains = !ClientPrefs.data.guitarHeroSustains;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Guitar Hero Sustains: < " + (ClientPrefs.data.guitarHeroSustains ? enable_O : disable_O) + " >";
+	}
+
+}
+
+
+class skipTitleVideo extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+	}
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.skipTitleVideo = !ClientPrefs.data.skipTitleVideo;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Skip Intro Video: < " + (ClientPrefs.data.skipTitleVideo ? enable_O : disable_O) + " >";
+	}
+
+}
+
+
+class botOpponentFix extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+	}
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.botOpponentFix = !ClientPrefs.data.botOpponentFix;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Bot Opponent Fix: < " + (ClientPrefs.data.botOpponentFix ? enable_O : disable_O) + " >";
+	}
+
+}
+
+
+
+class HealthDrainOPPO extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+	}
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.HealthDrainOPPO = !ClientPrefs.data.HealthDrainOPPO;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Guitar Hero Sustains: < " + (ClientPrefs.data.HealthDrainOPPO ? enable_O : disable_O) + " >";
+	}
+
+}
+
+class HealthDrainOPPOMult extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+	}
+
+	public override function left():Bool
+	{
+		ClientPrefs.data.HealthDrainOPPOMult += 0.1;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		ClientPrefs.data.HealthDrainOPPOMult -= 0.1;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Health Drain multipler: < " + (ClientPrefs.data.HealthDrainOPPOMult + " >";
+	}
+
+}
+

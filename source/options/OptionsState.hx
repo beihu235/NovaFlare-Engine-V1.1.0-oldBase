@@ -187,6 +187,7 @@ class OptionsState extends MusicBeatState
                 //new NotesOption(),
                 //new Customizeption(),
 				new Judgement("Create a custom judgement preset"),
+				new GuitarHeroSustains('Guitar Hero like Sustains Note System');
 				//new Shouldcameramove("Moves camera on opponent/player note hits."),
 			]),
 			new OptionCata(345, 40, OptionsName.setAppearance(), [
@@ -235,12 +236,16 @@ class OptionsState extends MusicBeatState
 			new OptionCata(935, 40, OptionsName.setOpponentMode(), [
 			    new PlayOpponent('If checked, playing as opponent\nmay have bug in some mods\n(your score will not be recorded.'),
 				new OpponentCodeFix('If checked, goodNoteHit and opponentNoteHit not follow playOpponent setting to change (if you playing it will return goodNoteHit function.'),
+				new botOpponentFix('Bot Opponent Fix'),
+				new HealthDrainOPPO('Health Drain on opponent mode'),
+				new HealthDrainOPPOMult('Health Drain multiplier on opponent mode'),
 			 //   new PauseCountDownOption("Toggle countdown after pressing 'Resume' in Pause Menu."),
 			]),			
 			new OptionCata(50, 40 + 64, OptionsName.setMenuExtend(), [
 			    new CustomFadeType('Change Custom Fade Type'),
 				new CustomFadeSound('Change Custom Fade Sound Volume.'),	
 				new CustomFadeText('Check for showcase engine version and loading condition.'),				
+				new skipTitleVideo('Check for skip intro video'),
 			]),
 			new OptionCata(345, 40 + 64, OptionsName.setControls(), [
 			    new HideHud("Shows to you hud."),				
@@ -547,7 +552,7 @@ class OptionsState extends MusicBeatState
 	    up_hold = false;
 		down_hold = false;
 		
-		if (FlxG.keys.justPressed.U) openSubState(new options.ControlsSubState());
+		if (FlxG.keys.justPressed.Z) openSubState(new options.ControlsSubState());
 		
 	 
 		if (controls.UI_RIGHT_P || controls.UI_LEFT_P || controls.UI_UP_P || controls.UI_DOWN_P){
