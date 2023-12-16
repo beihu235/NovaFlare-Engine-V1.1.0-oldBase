@@ -1,6 +1,8 @@
+package backend;
+
 import openfl.system.System;
 import flixel.math.FlxMath;
-import Song.SwagSong;
+import backend.Song;
 
 class SmallNote // basically Note.hx but small as fuck
 {
