@@ -114,6 +114,9 @@ class Song
 			rawJson = Assets.getText(Paths.json(formattedFolder + '/' + formattedSong)).trim();
 			#end
 		}
+		
+		if (rawJson == null)
+			return null;
 
 		while (!rawJson.endsWith("}"))
 		{
