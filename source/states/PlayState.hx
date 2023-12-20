@@ -3358,7 +3358,7 @@ class PlayState extends MusicBeatState
 		
         var functionReturn:String = 'opponentNoteHit';
 		var result:Dynamic = callOnLuas(functionReturn, [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
-		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript(functionReturn, [note]);
+		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll && (!guitarHeroSustains && note.isSustainNote)) callOnHScript(functionReturn, [note]);
 
 		if (!note.isSustainNote)
 		{
@@ -3588,7 +3588,7 @@ class PlayState extends MusicBeatState
         
         var functionReturn:String = ClientPrefs.data.OpponentCodeFix ? 'opponentNoteHit' : 'goodNoteHit';
 		var result:Dynamic = callOnLuas(functionReturn, [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
-		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript(functionReturn, [note]);
+		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll && (!guitarHeroSustains && note.isSustainNote)) callOnHScript(functionReturn, [note]);
 
 		if (!note.isSustainNote)
 		{
