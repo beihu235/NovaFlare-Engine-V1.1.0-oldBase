@@ -3065,10 +3065,10 @@ class PlayState extends MusicBeatState
 					// if the note has a 0ms distance (is on top of the current note), kill it
 					if (Math.abs(doubleNote.strumTime - funnyNote.strumTime) < 1.0)
 						invalidateNote(doubleNote);
-					else if (doubleNote.strumTime < funnyNote.strumTime)
+					else if (doubleNote.strumTime < funnyNote.strumTime && !doubleNote.hitCausesMiss)
 					{
 						// replace the note if its ahead of time (or at least ensure "doubleNote" is ahead)
-						//funnyNote = doubleNote;
+						funnyNote = doubleNote;
 					}
 				}
 			}
@@ -3382,7 +3382,7 @@ class PlayState extends MusicBeatState
 			noteMiss(note);
 			if(!note.noteSplashData.disabled && !note.isSustainNote)
 				spawnNoteSplashOnNote(note);
-
+            /*
 			if(!note.noMissAnimation)
 			{
 				switch(note.noteType) {
@@ -3393,7 +3393,7 @@ class PlayState extends MusicBeatState
 						}
 				}
 			}
-
+            */
 			if (!note.isSustainNote)
 				invalidateNote(note);
 			return;
