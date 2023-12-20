@@ -3068,7 +3068,7 @@ class PlayState extends MusicBeatState
 					else if (doubleNote.strumTime < funnyNote.strumTime)
 					{
 						// replace the note if its ahead of time (or at least ensure "doubleNote" is ahead)
-						funnyNote = doubleNote;
+						//funnyNote = doubleNote;
 					}
 				}
 			}
@@ -3077,7 +3077,7 @@ class PlayState extends MusicBeatState
 			else opponentNoteHitForOpponent(funnyNote);
 		}
 		else {
-			if (shouldMiss && !boyfriend.stunned) {
+			if (shouldMiss && !char.stunned) {
 				callOnScripts('onGhostTap', [key]);
 				noteMissPress(key);
 			}
