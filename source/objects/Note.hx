@@ -268,8 +268,9 @@ class Note extends FlxSprite
 					prevNote.scale.y *= (6 / height); //Auto adjust note size
 				}
 				prevNote.updateHitbox();
+				
+				earlyHitMult = 0.1;
 			}
-
 			if(PlayState.isPixelStage)
 			{
 				scale.y *= PlayState.daPixelZoom;
