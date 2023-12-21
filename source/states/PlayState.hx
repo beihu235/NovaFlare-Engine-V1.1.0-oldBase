@@ -3358,7 +3358,7 @@ class PlayState extends MusicBeatState
 		
         var functionReturn:String = 'opponentNoteHit';
 		var result:Dynamic = callOnLuas(functionReturn, [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
-		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll && (!guitarHeroSustains && note.isSustainNote)) callOnHScript(functionReturn, [note]);
+		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript(functionReturn, [note]);
 
 		if (!note.isSustainNote)
 		{
@@ -3588,7 +3588,7 @@ class PlayState extends MusicBeatState
         
         var functionReturn:String = ClientPrefs.data.OpponentCodeFix ? 'opponentNoteHit' : 'goodNoteHit';
 		var result:Dynamic = callOnLuas(functionReturn, [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
-		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll && (!guitarHeroSustains && note.isSustainNote)) callOnHScript(functionReturn, [note]);
+		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript(functionReturn, [note]);
 
 		if (!note.isSustainNote)
 		{
@@ -3989,7 +3989,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public var ratingName:String = '?';
+	public var ratingName:String = 'N/A';
 	public var ratingPercent:Float;
 	public var ratingFC:String;
 	public function RecalculateRating(badHit:Bool = false) {
@@ -4001,7 +4001,7 @@ class PlayState extends MusicBeatState
 		var ret:Dynamic = callOnScripts('onRecalculateRating', null, true);
 		if(ret != FunkinLua.Function_Stop)
 		{
-			ratingName = '?';
+			ratingName = 'N/A';
 			if(totalPlayed != 0) //Prevent divide by 0
 			{
 				// Rating Percent
