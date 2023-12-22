@@ -3212,7 +3212,7 @@ class PlayState extends MusicBeatState
 	function noteMiss(daNote:Note):Void { //You didn't hit the key and let it go offscreen, also used by Hurt Notes
 		//Dupe note remove
 		notes.forEachAlive(function(note:Note) {
-			if (daNote != note && daNote.mustPress && daNote.noteData == note.noteData && daNote.isSustainNote == note.isSustainNote && Math.abs(daNote.strumTime - note.strumTime) < 1)
+			if (daNote != note && (!daNote.mustPress && ClientPrefs.data.playOpponent || daNote.mustPress && !ClientPrefs.data.playOpponent) && daNote.noteData == note.noteData && daNote.isSustainNote == note.isSustainNote && Math.abs(daNote.strumTime - note.strumTime) < 1)
 				invalidateNote(note);
 		});
 		
@@ -3259,12 +3259,14 @@ class PlayState extends MusicBeatState
 			if (note.missed)
 				return;
 		}
+		
 		if (note != null && guitarHeroSustains && note.parent != null && note.isSustainNote) {
 			if (note.missed)
 				return; 
 			
 			var parentNote:Note = note.parent;
-			if (parentNote.wasGoodHit && parentNote.tail.length > 0) {
+			if (//parentNote.wasGoodHit && 
+			   parentNote.tail.length > 0) {
 				for (child in parentNote.tail) if (child != note) {
 					child.missed = true;
 					child.canBeHit = false;
@@ -3377,7 +3379,7 @@ class PlayState extends MusicBeatState
 		note.wasGoodHit = true;
 		if (ClientPrefs.data.hitsoundVolume > 0 && !note.hitsoundDisabled)
 			FlxG.sound.play(Paths.sound(note.hitsound), ClientPrefs.data.hitsoundVolume);
-
+        /*
 		if(note.hitCausesMiss) {
 			noteMiss(note);
 			if(!note.noteSplashData.disabled && !note.isSustainNote)
@@ -3393,12 +3395,13 @@ class PlayState extends MusicBeatState
 						}
 				}
 			}
-            */
+            
 			if (!note.isSustainNote)
 				invalidateNote(note);
 			return;
 		}
-
+        */ // opponent dont need 
+        
 		if (!note.isSustainNote)
 		{
 			combo++;
