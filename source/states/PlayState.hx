@@ -3256,8 +3256,8 @@ class PlayState extends MusicBeatState
 				// i think it would be fair if damage multiplied based on how long the sustain is -Tahir
 			}
 
-			if (note.missed)
-				return;
+			/*if (note.missed)
+				return;*/
 		}
 		
 		if (note != null && guitarHeroSustains && note.parent != null && note.isSustainNote) {
