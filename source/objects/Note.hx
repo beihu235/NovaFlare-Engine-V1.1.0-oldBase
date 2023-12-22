@@ -269,7 +269,7 @@ class Note extends FlxSprite
 				}
 				prevNote.updateHitbox();
 				
-				earlyHitMult = 0.1;
+				prevNote.earlyHitMult = 0;
 			}
 			if(PlayState.isPixelStage)
 			{
