@@ -1,5 +1,7 @@
 package objects;
 
+import flixel.math.FlxPoint; //uhhhh？
+
 enum Alignment
 {
 	LEFT;
