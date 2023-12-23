@@ -111,23 +111,28 @@
 	<!--In case you want to use the addons package-->
 	<haxelib name="flixel-addons" />
 	<!--haxelib name="hscript" if="HSCRIPT_ALLOWED"/-->
-	<haxelib name="SScript" if="HSCRIPT_ALLOWED"/>
 	<define name="hscriptPos" if="HSCRIPT_ALLOWED"/>
 	<haxedef name="openflPos" if="desktop"/>
+	<haxelib name="SScript" if="HSCRIPT_ALLOWED"/>
 	<haxelib name="androiddialogs" if="android" />
 	<haxelib name="devicelanguage" if="android" />
+    <haxelib name="samcodes-notifications" if="android"/>
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="tjson" />
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
 	<haxelib name="extension-androidtools" if="android"/>
-	<haxelib name="faxe" if='switch'/>
-	<!--<haxelib name="polymod"/> -->
-	<haxelib name="discord_rpc" if="desktop || android"/>
+	<haxelib name="hxdiscord_rpc" if="cpp"/>
+	<haxelib name="flxanimate"/>
+
+	<!-- Disable Discord IO Thread -->
+	<haxedef name="DISCORD_DISABLE_IO_THREAD" if="hxdiscord_rpc" />
+	<haxedef name="NO_PRECOMPILED_HEADERS" if="linux" />
 
 	<!-- Enables a terminal log prompt on debug builds -->
 	<haxelib name="hxcpp-debug-server" if="debug"/>
+	<haxedef name="HXC_LIBVLC_LOGGING" if="VIDEOS_ALLOWED debug" />
 	
 
 	<!-- <haxelib name="markdown" /> -->
