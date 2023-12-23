@@ -4,11 +4,7 @@ import states.stages.objects.*;
 import substates.GameOverSubstate;
 import cutscenes.DialogueBox;
 
-#if MODS_ALLOWED
-import sys.FileSystem;
-#else
 import openfl.utils.Assets as OpenFlAssets;
-#end
 
 class School extends BaseStage
 {
@@ -113,7 +109,7 @@ class School extends BaseStage
 	{
 		var file:String = Paths.txt(songName + '/' + songName + 'Dialogue'); //Checks for vanilla/Senpai dialogue
 		#if MODS_ALLOWED
-		if (!FileSystem.exists(SUtil.getPath() + file))
+		if (!FileSystem.exists(file))
 		#else
 		if (!OpenFlAssets.exists(file))
 		#end
