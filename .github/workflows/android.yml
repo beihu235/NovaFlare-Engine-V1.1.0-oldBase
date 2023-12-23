@@ -1,6 +1,4 @@
-name: Android Build
-
-# Controls when the action will run.
+name: Android + Release
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
@@ -10,7 +8,6 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  
 jobs:
   Build:
     runs-on: ubuntu-latest
@@ -46,10 +43,6 @@ jobs:
           haxelib setup ~/haxelib
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
-          haxelib git extension-androidtools https://github.com/MaysLastPlay77/extension-androidtools
-          haxelib install hxcpp-debug-server
-          haxelib git androiddialogs https://github.com/beihu235/AndroidDialogs
-          haxelib git devicelanguage https://github.com/beihu235/devicelanguage
 
       - name: Configure Android
         run: |
@@ -59,7 +52,7 @@ jobs:
           haxelib run lime config ANDROID_SETUP true
 
       - name: Compile
-        run: haxelib run lime build android -final
+        run: haxelib run lime build android -final -D officialBuild
         env:
           cert_pass: nullfunni
           cert_alias_pass: nullfunni
@@ -109,3 +102,23 @@ jobs:
           name: androidBuild
           path: export/release/android/bin/app/build/outputs/apk/release/*.apk
           if-no-files-found: error
+  Releaser:
+    needs: Build
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Download The Build
+        uses: actions/download-artifact@main
+        with:
+           name: androidBuild
+           path: /home/runner
+
+      - name: Publish The Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          automatic_release_tag: "0.7.2"
+          title: "0.7.2 Android Release"
+          files: |
+            /home/runner/PsychEngine-release.apk
