@@ -125,20 +125,16 @@
 	<haxelib name="hxdiscord_rpc" if="desktop"/>
 	<haxelib name="flxanimate"/>
 
+	<!-- Mobile and Android Specific-->
+	<haxelib name="extension-androidtools" if="android" />
+	<haxelib name="extension-orientation" if="mobile" />
+
 	<!-- Disable Discord IO Thread -->
 	<haxedef name="DISCORD_DISABLE_IO_THREAD" if="hxdiscord_rpc" />
 	<haxedef name="NO_PRECOMPILED_HEADERS" if="linux" />
 
 	<!-- Enables a terminal log prompt on debug builds -->
 	<haxelib name="hxcpp-debug-server" if="debug"/>
-	<haxedef name="HXC_LIBVLC_LOGGING" if="VIDEOS_ALLOWED debug" />
-	
-
-	<!-- <haxelib name="markdown" /> -->
-	<!-- <haxelib name="HtmlParser" /> -->
-
-	<!--In case you want to use nape with flixel-->
-	<!--<haxelib name="nape-haxe4" />-->
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
@@ -166,23 +162,24 @@
 	<!--Disable the Flixel core focus lost screen-->
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 	
-	<!-- Show debug traces for hxCodec -->
+	<!-- Show debug traces for hxCodec (for old versions) -->
 	<haxedef name="HXC_DEBUG_TRACE" if="debug" />
+        <haxedef name="HXC_LIBVLC_LOGGING" if="debug" />
 	
 	<!--Disable the Flixel core debugger. Automatically gets set whenever you compile in release mode!-->
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
 
 	<!--Enable this for Nape release builds for a serious peformance improvement-->
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
-	
-	<!--Used for Izzy Engine's crash handler-->
-	<haxedef name="HXCPP_CHECK_POINTER" if="CRASH_HANDLER" />
-	<haxedef name="HXCPP_STACK_LINE" if="CRASH_HANDLER" />
-	
-	<!--Disable deprecated warnings-->
+
 	<haxedef name='no-deprecation-warnings' />
+
+		<!--Always enable Null Object Reference check-->
+		<haxedef name="HXCPP_CHECK_POINTER" />
+		<haxedef name="HXCPP_STACK_LINE" />
+		<haxedef name="HXCPP_STACK_TRACE" />
 	
-	<section if="android">
+		<section if="android">
 			<!-- Do whatever you want I'm tired uninstall and install everytime -->
 			<certificate path="key.keystore" password="nullfunni" alias="null" alias-password="nullfunni" unless="debug" />
 
@@ -203,14 +200,11 @@
 	<haxeflag name="--macro" value="allowPackage('flash')" />
 	<haxeflag name="--macro" value="include('my.pack')" />
 
-	
-
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
-	
-	<assets path='art/iconOG.png' rename='icon.png' if="linux" />
-	
+
+	<assets path='art/icon16.png' rename='icon.png' if="linux" />
 	<icon path="art/icon16.png" size='16'/>
 	<icon path="art/icon32.png" size='32'/>
 	<icon path="art/icon64.png" size='64'/>
