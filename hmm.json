@@ -32,8 +32,10 @@
     },
     {
       "name": "hxcpp",
-      "type": "haxelib",
-      "version": null
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/HaxeFoundation/hxcpp"
     },
     {
       "name": "hxCodec",
@@ -57,24 +59,34 @@
     },
     {
       "name": "hxdiscord_rpc",
-      "type": "git",
-      "dir": null,
-      "ref": "main",
-      "url": "https://github.com/MAJigsaw77/hxdiscord_rpc"
-    },
-    {
-      "name": "flxanimate",
-      "type": "git",
-      "dir": null,
-      "ref": "dev",
-      "url": "https://github.com/ShadowMario/flxanimate"
+      "type": "haxelib",
+      "version": null
     },
     {
       "name": "linc_luajit",
       "type": "git",
       "dir": null,
       "ref": "master",
-      "url": "https://github.com/superpowers04/linc_luajit"
+      "url": "https://github.com/superpowers04/linc_luajit.git"
+    },
+    {
+      "name": "flxanimate",
+      "type": "git",
+      "dir": null,
+      "ref": "dev",
+      "url": "https://github.com/ShadowMario/flxanimate.git"
+    },
+    {
+      "name": "extension-androidtools",
+      "type": "haxelib",
+      "version": null
+    },
+    {
+      "name": "extension-orientation",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/HaxeExtension/extension-orientation.git"
     }
   ]
 }
