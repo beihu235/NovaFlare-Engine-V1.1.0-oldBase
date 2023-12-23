@@ -62,6 +62,7 @@ jobs:
           haxelib install tjson 1.4.0
           haxelib install hxCodec 2.6.0
           haxelib install SScript 
+          haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev
           haxelib git hxCodec https://github.com/SPLCoding/hxCodec-but-it-works-xd.git
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
