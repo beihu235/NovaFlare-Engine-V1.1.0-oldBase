@@ -31,7 +31,7 @@ class MusicBeatState extends FlxUIState
 	
 	public static var currentColor:Int = 1;    
 	public static var currentColorAgain:Int = 0;    
-	
+	/*
 	public var ColorArray:Array<Int> = [
 		0xFF9400D3,
 		0xFF4B0082,
@@ -41,7 +41,7 @@ class MusicBeatState extends FlxUIState
 		0xFFFF7F00,
 		0xFFFF0000
 	                                
-	    ];
+	    ];*/
 	
 	public static var checkHitbox:Bool = false;
 	public static var checkDUO:Bool = false;
@@ -50,6 +50,9 @@ class MusicBeatState extends FlxUIState
 	{
 		return Controls.instance;
 	}
+	
+	
+	var _psychCameraInitialized:Bool = false;
 	
 	#if android
 	public static var _virtualpad:FlxVirtualPad;
