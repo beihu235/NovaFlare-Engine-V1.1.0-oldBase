@@ -10,6 +10,11 @@ import llua.*;
 import llua.Lua;
 #end
 
+#if sys
+import sys.FileSystem;
+import sys.io.File;
+#end
+
 import backend.Paths;
 import backend.Controls;
 import backend.CoolUtil;
