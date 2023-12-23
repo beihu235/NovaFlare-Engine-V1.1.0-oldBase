@@ -36,19 +36,14 @@
       "version": null
     },
     {
-      "name": "tjson",
+      "name": "hxCodec",
       "type": "haxelib",
       "version": null
     },
     {
-      "name": "hxCodec",
-      "type": "haxelib",
-      "version": "2.6.0"
-    },
-    {
       "name": "SScript",
       "type": "haxelib",
-      "version": "7.0.0"
+      "version": null
     },
     {
       "name": "hxcpp-debug-server",
@@ -56,11 +51,16 @@
       "version": null
     },
     {
-      "name": "discord_rpc",
+      "name": "tjson",
+      "type": "haxelib",
+      "version": null
+    },
+    {
+      "name": "hxdiscord_rpc",
       "type": "git",
       "dir": null,
-      "ref": "master",
-      "url": "https://github.com/Aidan63/linc_discord-rpc"
+      "ref": "main",
+      "url": "https://github.com/MAJigsaw77/hxdiscord_rpc"
     },
     {
       "name": "flxanimate",
