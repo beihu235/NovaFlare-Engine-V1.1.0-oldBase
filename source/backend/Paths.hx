@@ -17,10 +17,17 @@ import flash.media.Sound;
 
 import haxe.Json;
 
+#if sys
+import sys.io.File;
+import sys.FileSystem;
+#end
+
+import haxe.io.Bytes;
 
 #if MODS_ALLOWED
 import backend.Mods;
 #end
+
 
 class Paths
 {
