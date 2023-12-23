@@ -27,6 +27,10 @@ import backend.BaseStage;
 import backend.Difficulty;
 import backend.Mods;
 import backend.SUtil;
+#if ACHIEVEMENTS_ALLOWED
+import backend.Achievements;
+#end
+
 
 #if flxanimate
 import flxanimate.*;
