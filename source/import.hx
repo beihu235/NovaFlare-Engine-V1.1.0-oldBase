@@ -23,8 +23,12 @@ import backend.Difficulty;
 import backend.Mods;
 import backend.SUtil;
 
-import backend.AndroidDialogsExtend;
+#if flxanimate
+import flxanimate.*;
+#end
+
 #if android
+import backend.AndroidDialogsExtend;
 import extension.devicelang.DeviceLanguage;
 #end
   
