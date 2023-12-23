@@ -29,6 +29,20 @@ class MusicBeatState extends FlxUIState
 	private var curDecBeat:Float = 0;
 	public var controls(get, never):Controls;
 	
+	public static var currentColor:Int = 1;    
+	public static var currentColorAgain:Int = 0;    
+	
+	public var ColorArray:Array<Int> = [
+		0xFF9400D3,
+		0xFF4B0082,
+		0xFF0000FF,
+		0xFF00FF00,
+		0xFFFFFF00,
+		0xFFFF7F00,
+		0xFFFF0000
+	                                
+	    ];
+	
 	public static var checkHitbox:Bool = false;
 	public static var checkDUO:Bool = false;
 	
@@ -40,8 +54,7 @@ class MusicBeatState extends FlxUIState
 	#if android
 	public static var _virtualpad:FlxVirtualPad;
 	public static var androidc:AndroidControls;
-	//var trackedinputsUI:Array<FlxActionInput> = [];
-	//var trackedinputsNOTES:Array<FlxActionInput> = [];
+	
 	#end
 	
 	#if android
@@ -50,13 +63,8 @@ class MusicBeatState extends FlxUIState
 		add(_virtualpad);
 		Controls.checkState = true;
 		Controls.CheckPress = true;
-		//controls.setVirtualPadUI(_virtualpad, DPad, Action);
-		//trackedinputsUI = controls.trackedinputsUI;
-		//controls.trackedinputsUI = [];
 	}
 	#end
-	
-
 
 	#if android
 	public function removeVirtualPad() {
@@ -130,6 +138,8 @@ class MusicBeatState extends FlxUIState
 		var skip:Bool = FlxTransitionableState.skipNextTransOut;
 		#if MODS_ALLOWED Mods.updatedOnState = false; #end
 
+		if(!_psychCameraInitialized) initPsychCamera();
+
 		super.create();
 
 		if(!skip) {
@@ -137,6 +147,18 @@ class MusicBeatState extends FlxUIState
 		}
 		FlxTransitionableState.skipNextTransOut = false;
 		timePassedOnState = 0;
+		
+		
+	}
+	
+	public function initPsychCamera():PsychCamera
+	{
+		var camera = new PsychCamera();
+		FlxG.cameras.reset(camera);
+		FlxG.cameras.setDefaultDrawTarget(camera, true);
+		_psychCameraInitialized = true;
+		//trace('initialized psych camera ' + Sys.cpuTime());
+		return camera;
 	}
 
 	public static var timePassedOnState:Float = 0;
