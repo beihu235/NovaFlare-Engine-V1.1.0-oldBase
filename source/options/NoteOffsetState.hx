@@ -27,7 +27,7 @@ class NoteOffsetState extends MusicBeatState
 	var barPercent:Float = 0;
 	var delayMin:Int = -500;
 	var delayMax:Int = 500;
-	var timeBar:HealthBar;
+	var timeBar:Bar;
 	var timeTxt:FlxText;
 	var beatText:Alphabet;
 	var beatTween:FlxTween;
