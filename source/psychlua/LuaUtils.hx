@@ -4,7 +4,6 @@ import backend.WeekData;
 import objects.Character;
 
 import openfl.display.BlendMode;
-import animateatlas.AtlasFrameMaker;
 import Type.ValueType;
 
 import substates.GameOverSubstate;
@@ -76,66 +75,6 @@ class LuaUtils
 	}
 	public static function getVarInArray(instance:Dynamic, variable:String, allowMaps:Bool = false):Any
 	{
-	    
-	    #if android //Extend for check control for android,you can try to extend other key at same way but I'm so lazy. --Write by NF|beihu(北狐丶逐梦)
-	        var pressCheck:Dynamic;
-	        if (MusicBeatState.androidc.newhbox != null){ //check for android control and dont check for keyboard
-			    if (variable == 'keys.justPressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justPressed){
-    			    pressCheck = true;
-                    return pressCheck;
-                }
-                else if (variable == 'keys.pressed.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.pressed){
-                    pressCheck = true;
-                    return pressCheck;
-                }
-                else if (variable == 'keys.justReleased.SPACE' && MusicBeatState.androidc.newhbox.buttonSpace.justReleased){
-                    pressCheck = true;
-                    return pressCheck;
-                }
-                
-                if (variable == 'keys.justPressed.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.justPressed){
-    			    pressCheck = true;
-                    return pressCheck;
-                }
-                else if (variable == 'keys.pressed.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.pressed){
-                    pressCheck = true;
-                    return pressCheck;
-                }
-                else if (variable == 'keys.justReleased.SHIFT' && MusicBeatState.androidc.newhbox.buttonShift.justReleased){
-                    pressCheck = true;
-                    return pressCheck;
-                }
-            }
-            
-            if (MusicBeatState.androidc.vpad != null){ //check for android control and dont check for keyboard
-			    if (variable == 'keys.justPressed.SPACE' && MusicBeatState.androidc.vpad.buttonG.justPressed){
-    			    pressCheck = true;
-                    return pressCheck;
-                }
-                else if (variable == 'keys.pressed.SPACE' && MusicBeatState.androidc.vpad.buttonG.pressed){
-                    pressCheck = true;
-                    return pressCheck;
-                }
-                else if (variable == 'keys.justReleased.SPACE' && MusicBeatState.androidc.vpad.buttonG.justReleased){
-                    pressCheck = true;
-                    return pressCheck;
-                }
-                
-                if (variable == 'keys.justPressed.SHIFT' && MusicBeatState.androidc.vpad.buttonF.justPressed){
-    			    pressCheck = true;
-                    return pressCheck;
-                }
-                else if (variable == 'keys.pressed.SHIFT' && MusicBeatState.androidc.vpad.buttonF.pressed){
-                    pressCheck = true;
-                    return pressCheck;
-                }
-                else if (variable == 'keys.justReleased.SHIFT' && MusicBeatState.androidc.vpad.buttonF.justReleased){
-                    pressCheck = true;
-                    return pressCheck;
-                }
-            }
-        #end
-        
 		var splitProps:Array<String> = variable.split('[');
 		if(splitProps.length > 1)
 		{
@@ -155,8 +94,8 @@ class LuaUtils
 				target = target[j];
 			}
 			return target;
-		}            
-
+		}
+		
 		if(allowMaps && isMap(instance))
 		{
 			//trace(instance);
@@ -172,6 +111,67 @@ class LuaUtils
 		return Reflect.getProperty(instance, variable);
 	}
 
+	public static function getModSetting(saveTag:String, ?modName:String = null)
+	{
+		if(FlxG.save.data.modSettings == null) FlxG.save.data.modSettings = new Map<String, Dynamic>();
+
+		var settings:Map<String, Dynamic> = FlxG.save.data.modSettings.get(modName);
+		var path:String = Paths.mods('$modName/data/settings.json');
+		if(FileSystem.exists(path))
+		{
+			if(settings == null || !settings.exists(saveTag))
+			{
+				if(settings == null) settings = new Map<String, Dynamic>();
+				var data:String = File.getContent(path);
+				try
+				{
+					//FunkinLua.luaTrace('getModSetting: Trying to find default value for "$saveTag" in Mod: "$modName"');
+					var parsedJson:Dynamic = tjson.TJSON.parse(data);
+					for (i in 0...parsedJson.length)
+					{
+						var sub:Dynamic = parsedJson[i];
+						if(sub != null && sub.save != null && !settings.exists(sub.save))
+						{
+							if(sub.type != 'keybind' && sub.type != 'key')
+							{
+								if(sub.value != null)
+								{
+									//FunkinLua.luaTrace('getModSetting: Found unsaved value "${sub.save}" in Mod: "$modName"');
+									settings.set(sub.save, sub.value);
+								}
+							}
+							else
+							{
+								//FunkinLua.luaTrace('getModSetting: Found unsaved keybind "${sub.save}" in Mod: "$modName"');
+								settings.set(sub.save, {keyboard: (sub.keyboard != null ? sub.keyboard : 'NONE'), gamepad: (sub.gamepad != null ? sub.gamepad : 'NONE')});
+							}
+						}
+					}
+					FlxG.save.data.modSettings.set(modName, settings);
+				}
+				catch(e:Dynamic)
+				{
+					var errorTitle = 'Mod name: ' + Mods.currentModDirectory;
+					var errorMsg = 'An error occurred: $e';
+					#if windows
+					lime.app.Application.current.window.alert(errorMsg, errorTitle);
+					#end
+					trace('$errorTitle - $errorMsg');
+				}
+			}
+		}
+		else
+		{
+			FlxG.save.data.modSettings.remove(modName);
+			PlayState.instance.addTextToDebug('getModSetting: $path could not be found!', FlxColor.RED);
+			return null;
+		}
+
+		if(settings.exists(saveTag)) return settings.get(saveTag);
+		PlayState.instance.addTextToDebug('getModSetting: "$saveTag" could not be found inside $modName\'s settings!', FlxColor.RED);
+		return null;
+	}
+	
 	public static function isMap(variable:Dynamic)
 	{
 		/*switch(Type.typeof(variable)){
@@ -225,7 +225,7 @@ class LuaUtils
 		return obj;
 	}
 
-	public static function getObjectDirectly(objectName:String, ?checkForTextsToo:Bool = true, allowMaps:Bool = false):Dynamic
+	public static function getObjectDirectly(objectName:String, ?checkForTextsToo:Bool = true, ?allowMaps:Bool = false):Dynamic
 	{
 		switch(objectName)
 		{
@@ -240,7 +240,9 @@ class LuaUtils
 	}
 
 	inline public static function getTextObject(name:String):FlxText
+	{
 		return #if LUA_ALLOWED PlayState.instance.modchartTexts.exists(name) ? PlayState.instance.modchartTexts.get(name) : #end Reflect.getProperty(PlayState.instance, name);
+	}
 	
 	public static function isOfTypes(value:Any, types:Array<Dynamic>)
 	{
@@ -252,7 +254,9 @@ class LuaUtils
 	}
 	
 	public static inline function getTargetInstance()
+	{
 		return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
+	}
 
 	public static inline function getLowestCharacterGroup():FlxSpriteGroup
 	{
@@ -265,7 +269,7 @@ class LuaUtils
 			group = PlayState.instance.boyfriendGroup;
 			pos = newPos;
 		}
-
+		
 		newPos = PlayState.instance.members.indexOf(PlayState.instance.dadGroup);
 		if(newPos < pos)
 		{
@@ -274,14 +278,15 @@ class LuaUtils
 		}
 		return group;
 	}
-
+	
 	public static function addAnimByIndices(obj:String, name:String, prefix:String, indices:Any = null, framerate:Int = 24, loop:Bool = false)
 	{
 		var obj:Dynamic = LuaUtils.getObjectDirectly(obj, false);
 		if(obj != null && obj.animation != null)
 		{
-			if(indices == null) indices = [];
-			if(Std.isOfType(indices, String))
+			if(indices == null)
+				indices = [0];
+			else if(Std.isOfType(indices, String))
 			{
 				var strIndices:Array<String> = cast (indices, String).trim().split(',');
 				var myIndices:Array<Int> = [];
@@ -301,22 +306,19 @@ class LuaUtils
 		}
 		return false;
 	}
-
+	
 	public static function loadFrames(spr:FlxSprite, image:String, spriteType:String)
 	{
 		switch(spriteType.toLowerCase().trim())
 		{
-			case "texture" | "textureatlas" | "tex":
-				spr.frames = AtlasFrameMaker.construct(image);
+			//case "texture" | "textureatlas" | "tex":
+				//spr.frames = AtlasFrameMaker.construct(image);
 
-			case "texture_noaa" | "textureatlas_noaa" | "tex_noaa":
-				spr.frames = AtlasFrameMaker.construct(image, null, true);
+			//case "texture_noaa" | "textureatlas_noaa" | "tex_noaa":
+				//spr.frames = AtlasFrameMaker.construct(image, null, true);
 
 			case "packer" | "packeratlas" | "pac":
 				spr.frames = Paths.getPackerAtlas(image);
-
-			case "i8" | "jsoni8" | "json": 
-				spr.frames = Paths.getJsonAtlas(image);
 
 			default:
 				spr.frames = Paths.getSparrowAtlas(image);
@@ -325,8 +327,9 @@ class LuaUtils
 
 	public static function resetTextTag(tag:String) {
 		#if LUA_ALLOWED
-		if(!PlayState.instance.modchartTexts.exists(tag))
+		if(!PlayState.instance.modchartTexts.exists(tag)) {
 			return;
+		}
 
 		var target:FlxText = PlayState.instance.modchartTexts.get(tag);
 		target.kill();
@@ -338,8 +341,9 @@ class LuaUtils
 
 	public static function resetSpriteTag(tag:String) {
 		#if LUA_ALLOWED
-		if(!PlayState.instance.modchartSprites.exists(tag))
+		if(!PlayState.instance.modchartSprites.exists(tag)) {
 			return;
+		}
 
 		var target:ModchartSprite = PlayState.instance.modchartSprites.get(tag);
 		target.kill();
@@ -470,7 +474,6 @@ class LuaUtils
 		switch(cam.toLowerCase()) {
 			case 'camhud' | 'hud': return PlayState.instance.camHUD;
 			case 'camother' | 'other': return PlayState.instance.camOther;
-			//case 'cambars' | 'bars': return PlayState.instance.camBars;
 		}
 		return PlayState.instance.camGame;
 	}
