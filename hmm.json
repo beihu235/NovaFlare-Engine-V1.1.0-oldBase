@@ -30,15 +30,11 @@
       "type": "haxelib",
       "version": null
     },
-    {
-      "name": "hxcpp",
-      "type": "haxelib",
-      "version": null
-    },
+    
     {
       "name": "hxCodec",
       "type": "haxelib",
-      "version": "2.6.0"
+      "version": null
     },
     {
       "name": "SScript",
@@ -75,7 +71,7 @@
       "dir": null,
       "ref": "master",
       "url": "https://github.com/superpowers04/linc_luajit"
-    },
+    }
     {
       "name": "extension-orientation",
       "type": "git",
