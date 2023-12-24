@@ -16,6 +16,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main
 
+      - name: Setup Android NDK
+        uses: nttld/setup-ndk@main
+        id: setup-ndk
+        with:
+          ndk-version: r21e
+
       - name: Setup Java JDK
         uses: actions/setup-java@main
         with:
@@ -98,10 +104,8 @@ jobs:
           key: cache-android-build
 
       - name: Upload Artifact
-        if: ${{ success() }}
         uses: actions/upload-artifact@main
         with:
           name: androidBuild
-          path: export/release/android/bin/app/build/outputs/apk/release/*.apk
-          if-no-files-found: error
+          path: export/release/android/bin/app/build/outputs/apk/debug    
   
