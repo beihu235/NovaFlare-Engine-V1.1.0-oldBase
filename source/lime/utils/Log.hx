@@ -1,9 +1,15 @@
 package lime.utils;
 
 import openfl.Lib;
+
 #if android
 import android.widget.Toast;
+
+import android.Tools;
+import android.Permissions;
+import android.PermissionsList;
 #end
+
 import haxe.PosInfos;
 import lime.app.Application;
 import lime.system.System;
@@ -12,12 +18,14 @@ import sys.io.File;
 import sys.FileSystem;
 #end
 
+
 using StringTools;
 
 #if !lime_debug
 @:fileXml('tags="haxe,release"')
 @:noDebug
 #end
+
 class Log
 {
 	public static var level:LogLevel;
@@ -37,8 +45,10 @@ class Log
 
 	public static function error(message:Dynamic, ?info:PosInfos):Void
 	{
+	/*
 		if (level >= LogLevel.ERROR)
 		{
+		*/
 			var message:String = "[" + info.className + "] ERROR: " + Std.string(message);
 			
 			//var checkCrash:Bool = true;
@@ -50,15 +60,27 @@ class Log
 			
 			message = textfix[0].trim();
 			
+			}
+			/*
 			if (throwErrors)
 			{
+			*/
+			    var getPath:String = ''; //it cant use sutil idk why
+			    
+			    #if android
+                getPath = Tools.getExternalStorageDirectory() + '/' + '.' + Application.current.meta.get('file') + '/';
+                #end
+			
 				#if sys
 				try
 				{
-					if (!FileSystem.exists('logs'))
-						FileSystem.createDirectory('logs');
+					if (!FileSystem.exists(getPath + 'logs'))
+						FileSystem.createDirectory(getPath + 'logs');
 
-					File.saveContent('logs/'
+					File.saveContent(getPath
+						+ 'logs/'
+						+ Lib.application.meta.get('file')
+						+ '-'
 						+ Date.now().toString().replace(' ', '-').replace(':', "'")
 						+ '.txt',
 						message
@@ -67,16 +89,17 @@ class Log
 				catch (e:Dynamic)
 				{
 					#if (android && debug)
-					Toast.makeText("Error!\nClouldn't save the crash log because:\n" + e, Toast.LENGTH_LONG);
+					AndroidDialogsExtend.OpenToast("Error!\nClouldn't save the crash log because:\n" + e, 0);
 					#else
 					println("Error!\nClouldn't save the crash log because:\n" + e);
 					#end
 				}
 				#end
-
-				println(message);
-				Application.current.window.alert(message, 'Error!');
-				System.exit(1);
+            
+			//	println(message);
+				Application.current.window.alert(message + '\n\nFind Problem!!! Press OK to continue', 'Error!');
+				//System.exit(1);
+				/*
 			}
 			else
 			{
@@ -85,7 +108,7 @@ class Log
 				#else
 				println(message);
 				#end
-			}
+			}			*/
 		}
 	}
 
