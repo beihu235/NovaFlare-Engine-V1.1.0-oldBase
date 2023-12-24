@@ -104,23 +104,4 @@ jobs:
           name: androidBuild
           path: export/release/android/bin/app/build/outputs/apk/release/*.apk
           if-no-files-found: error
-  Releaser:
-    needs: Build
-    runs-on: ubuntu-latest
-    permissions: write-all
-    steps:
-      - name: Download The Build
-        uses: actions/download-artifact@main
-        with:
-           name: androidBuild
-           path: /home/runner
-
-      - name: Publish The Release
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          automatic_release_tag: "0.7.2"
-          title: "0.7.2 Android Release"
-          files: |
-            /home/runner/PsychEngine-release.apk
+  
