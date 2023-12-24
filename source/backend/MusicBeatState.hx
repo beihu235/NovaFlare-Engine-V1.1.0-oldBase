@@ -52,7 +52,7 @@ class MusicBeatState extends FlxUIState
 	}
 	
 	
-	var _psychCameraInitialized:Bool = false;
+	var _psychCameraInitialized:Bool = true;
 	
 	#if android
 	public static var _virtualpad:FlxVirtualPad;
