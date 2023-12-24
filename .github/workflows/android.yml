@@ -52,6 +52,7 @@ jobs:
           haxelib install tjson
           haxelib install hxjsonast
           haxelib install SScript
+          haxelib install flxanimate
           haxelib git hxCodec https://github.com/SPLCoding/hxCodec-but-it-works-xd.git
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib git linc_luajit https://github.com/Sirox228/linc_luajit
