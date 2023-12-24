@@ -56,7 +56,7 @@
       "version": null
     },
     {
-      "name": "hxdiscord_rpc",
+      "name": "discord_rpc",
       "type": "git",
       "dir": null,
       "ref": "main",
