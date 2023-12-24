@@ -43,7 +43,8 @@ jobs:
           haxelib setup ~/haxelib
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
-
+          haxelib git androiddialogs https://github.com/beihu235/AndroidDialogs
+          haxelib git devicelanguage https://github.com/beihu235/devicelanguage
       - name: Configure Android
         run: |
           haxelib run lime config ANDROID_SDK $ANDROID_HOME
