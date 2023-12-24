@@ -52,7 +52,7 @@ jobs:
           haxelib install tjson
           haxelib install hxjsonast
           haxelib install SScript
-          haxelib install extension-orientation
+          haxelib git extension-orientation https://github.com/HaxeExtension/extension-orientation
           haxelib git flxanimate https://github.com/ShadowMario/flxanimate
           haxelib install hxCodec 2.6.0
           haxelib git discord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc
@@ -69,6 +69,7 @@ jobs:
           haxelib run lime config ANDROID_NDK_ROOT $ANDROID_NDK_HOME
           haxelib run lime config JAVA_HOME $JAVA_HOME
           haxelib run lime config ANDROID_SETUP true
+          haxelib list
 
       - name: Compile
         run: haxelib run lime build android -final -D officialBuild
