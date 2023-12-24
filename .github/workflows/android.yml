@@ -53,7 +53,7 @@ jobs:
           haxelib install hxjsonast
           haxelib install SScript
           haxelib git extension-orientation https://github.com/HaxeExtension/extension-orientation
-          haxelib git flxanimate https://github.com/ShadowMario/flxanimate > /dev/null
+          haxelib git flxanimate https://github.com/ShadowMario/flxanimate@dev
           haxelib install hxCodec 2.6.0
           haxelib git discord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit
