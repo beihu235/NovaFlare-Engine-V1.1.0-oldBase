@@ -32,15 +32,13 @@
     },
     {
       "name": "hxcpp",
-      "type": "git",
-      "dir": null,
-      "ref": "master",
-      "url": "https://github.com/mcagabe19-stuff/hxcpp"
+      "type": "haxelib",
+      "version": null
     },
     {
       "name": "hxCodec",
       "type": "haxelib",
-      "version": "2.6.0"
+      "version": null
     },
     {
       "name": "SScript",
@@ -84,6 +82,11 @@
       "dir": null,
       "ref": "master",
       "url": "https://github.com/HaxeExtension/extension-orientation.git"
+    },
+    {
+      "name": "extension-androidtools",
+      "type": "haxelib",
+      "version": null
     }
   ]
 }
