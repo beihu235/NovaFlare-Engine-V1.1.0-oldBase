@@ -32,8 +32,10 @@
     },
     {
       "name": "hxcpp",
-      "type": "haxelib",
-      "version": null
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/mcagabe19-stuff/hxcpp"
     },
     {
       "name": "hxCodec",
@@ -56,7 +58,7 @@
       "version": null
     },
     {
-      "name": "discord_rpc",
+      "name": "hxdiscord_rpc",
       "type": "git",
       "dir": null,
       "ref": "main",
