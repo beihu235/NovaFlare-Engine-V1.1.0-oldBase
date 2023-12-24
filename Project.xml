@@ -31,7 +31,7 @@
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false"/>
 
 	<!--Mobile-specific-->
-	<window if="mobile" orientation="landscape" fullscreen="true" resizable="true" allow-shaders="true" require-shaders="true" allow-high-dpi="true" />
+	<window if="mobile" orientation="landscape" fullscreen="true" width="1280" height="720" resizable="false"/>
 
 	<!--Switch-specific-->
 	<window if="switch" orientation="landscape" fullscreen="true" width="0" height="0" resizable="true" />
@@ -126,7 +126,7 @@
 	<haxelib name="extension-androidtools" if="android"/>
 	<haxelib name="faxe" if='switch'/>
 	<!--<haxelib name="polymod"/> -->
-	<haxelib name="hxdiscord_rpc" if="cpp"/>
+	<haxelib name="discord_rpc" if="desktop || android"/>
 
 	<!-- Mobile and Android Specific-->
 	<haxelib name="extension-androidtools" if="android" />
@@ -177,27 +177,11 @@
 
 	<haxedef name='no-deprecation-warnings' />
 
-		<!--Always enable Null Object Reference check-->
-		<haxedef name="HXCPP_CHECK_POINTER" />
-		<haxedef name="HXCPP_STACK_LINE" />
-		<haxedef name="HXCPP_STACK_TRACE" />
-	
-		<section if="android">
-			<!-- Do whatever you want I'm tired uninstall and install everytime -->
-			<certificate path="key.keystore" password="nullfunni" alias="null" alias-password="nullfunni" unless="debug" />
-
-		        <config>
-				<!--Gradle-->
-				<android gradle-version="7.4.2" gradle-plugin="7.3.1" if="${lime &lt; 8.1.0}"/>
-				<!--Target SDK-->
-				<android target-sdk-version="30" if="${lime &lt; 8.1.0}"/>
-			</config>
-		</section>
-
-		<section if="ios">
-			<!--Dependency--> 
-			<dependency name="Metal.framework" if="${lime &lt; 8.0.0}" />
-		</section>
+		<!-- _________________________________ Android Stuff _______________________________ -->
+	<config:android permission="android.permission.READ_EXTERNAL_STORAGE" if="android"/>
+	<config:android permission="android.permission.WRITE_EXTERNAL_STORAGE" if="android"/>
+    <config:android gradle-version="7.5.1" />
+    <config:android gradle-plugin="7.3.1" />
 
 	<!--Macro fixes-->
 	<haxeflag name="--macro" value="allowPackage('flash')" />
