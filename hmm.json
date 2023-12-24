@@ -30,11 +30,15 @@
       "type": "haxelib",
       "version": null
     },
-    
+    {
+      "name": "hxcpp",
+      "type": "haxelib",
+      "version": null
+    },
     {
       "name": "hxCodec",
       "type": "haxelib",
-      "version": "2.6.0"
+      "version": null
     },
     {
       "name": "SScript",
