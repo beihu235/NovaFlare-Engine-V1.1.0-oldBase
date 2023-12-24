@@ -41,7 +41,7 @@ jobs:
       - name: Install Libraries
         run: |
           haxelib setup ~/haxelib
-          haxelib install hxcpp 4.2.1 > /dev/null
+          haxelib install hxcpp 4.3.2 > /dev/null
           haxelib install lime
           haxelib install openfl
           haxelib install flixel
@@ -53,7 +53,7 @@ jobs:
           haxelib install hxjsonast
           haxelib install SScript
           haxelib git extension-orientation https://github.com/HaxeExtension/extension-orientation
-          haxelib git flxanimate https://github.com/ShadowMario/flxanimate
+          haxelib git flxanimate https://github.com/ShadowMario/flxanimate > /dev
           haxelib install hxCodec 2.6.0
           haxelib git discord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit
