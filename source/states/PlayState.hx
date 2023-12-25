@@ -3737,35 +3737,35 @@ class PlayState extends MusicBeatState
 		#if MODS_ALLOWED
 		var luaToLoad:String = Paths.modFolders(luaFile);
 		if(!FileSystem.exists(luaToLoad))
-			luaToLoad = Paths.getPreloadPath(luaFile);
-		
+			luaToLoad = Paths.getSharedPath(luaFile);
+
 		if(FileSystem.exists(luaToLoad))
 		#elseif sys
-		var luaToLoad:String = Paths.getPreloadPath(luaFile);
+		var luaToLoad:String = Paths.getSharedPath(luaFile);
 		if(OpenFlAssets.exists(luaToLoad))
 		#end
 		{
 			for (script in luaArray)
 				if(script.scriptName == luaToLoad) return false;
-	
+
 			new FunkinLua(luaToLoad);
 			return true;
 		}
 		return false;
 	}
 	#end
-	
+
 	#if HSCRIPT_ALLOWED
 	public function startHScriptsNamed(scriptFile:String)
 	{
 		var scriptToLoad:String = Paths.modFolders(scriptFile);
 		if(!FileSystem.exists(scriptToLoad))
-			scriptToLoad = SUtil.getPath() + Paths.getPreloadPath(scriptFile);
-		
+			scriptToLoad = Paths.getSharedPath(scriptFile);
+
 		if(FileSystem.exists(scriptToLoad))
 		{
 			if (SScript.global.exists(scriptToLoad)) return false;
-	
+
 			initHScript(scriptToLoad);
 			return true;
 		}
@@ -3806,13 +3806,13 @@ class PlayState extends MusicBeatState
 				}
 				else trace('initialized tea interp successfully: $file');
 			}
-			
+
 		}
 		catch(e)
 		{
 			var len:Int = e.message.indexOf('\n') + 1;
 			if(len <= 0) len = e.message.length;
-			addTextToDebug('ERROR ($file) - ' + e.message.substr(0, len), FlxColor.RED);
+			addTextToDebug('ERROR - ' + e.message.substr(0, len), FlxColor.RED);
 			var newScript:HScript = cast (SScript.global.get(file), HScript);
 			if(newScript != null)
 			{
@@ -3841,16 +3841,17 @@ class PlayState extends MusicBeatState
 		if(exclusions == null) exclusions = [];
 		if(excludeValues == null) excludeValues = [FunkinLua.Function_Continue];
 
-		var len:Int = luaArray.length;
-		var i:Int = 0;
-		while(i < len)
+		var arr:Array<FunkinLua> = [];
+		for (script in luaArray)
 		{
-			var script:FunkinLua = luaArray[i];
-			if(exclusions.contains(script.scriptName))
+			if(script.closed)
 			{
-				i++;
+				arr.push(script);
 				continue;
 			}
+
+			if(exclusions.contains(script.scriptName))
+				continue;
 
 			var myValue:Dynamic = script.call(funcToCall, args);
 			if((myValue == FunkinLua.Function_StopLua || myValue == FunkinLua.Function_StopAll) && !excludeValues.contains(myValue) && !ignoreStops)
@@ -3858,17 +3859,20 @@ class PlayState extends MusicBeatState
 				returnVal = myValue;
 				break;
 			}
-			
+
 			if(myValue != null && !excludeValues.contains(myValue))
 				returnVal = myValue;
 
-			if(!script.closed) i++;
-			else len--;
+			if(script.closed) arr.push(script);
 		}
+
+		if(arr.length > 0)
+			for (script in arr)
+				luaArray.remove(script);
 		#end
 		return returnVal;
 	}
-	
+
 	public function callOnHScript(funcToCall:String, args:Array<Dynamic> = null, ?ignoreStops:Bool = false, exclusions:Array<String> = null, excludeValues:Array<Dynamic> = null):Dynamic {
 		var returnVal:Dynamic = psychlua.FunkinLua.Function_Continue;
 
@@ -3880,15 +3884,13 @@ class PlayState extends MusicBeatState
 		var len:Int = hscriptArray.length;
 		if (len < 1)
 			return returnVal;
-		for(i in 0...len)
-		{
+		for(i in 0...len) {
 			var script:HScript = hscriptArray[i];
 			if(script == null || !script.exists(funcToCall) || exclusions.contains(script.origin))
 				continue;
 
 			var myValue:Dynamic = null;
-			try
-			{
+			try {
 				var callValue = script.call(funcToCall, args);
 				if(!callValue.succeeded)
 				{
@@ -3897,7 +3899,7 @@ class PlayState extends MusicBeatState
 					{
 						var len:Int = e.message.indexOf('\n') + 1;
 						if(len <= 0) len = e.message.length;
-						FunkinLua.luaTrace('ERROR (${script.origin}: ${callValue.calledFunction}) - ' + e.message.substr(0, len), true, false, FlxColor.RED);
+						addTextToDebug('ERROR (${callValue.calledFunction}) - ' + e.message.substr(0, len), FlxColor.RED);
 					}
 				}
 				else
@@ -3908,7 +3910,7 @@ class PlayState extends MusicBeatState
 						returnVal = myValue;
 						break;
 					}
-					
+
 					if(myValue != null && !excludeValues.contains(myValue))
 						returnVal = myValue;
 				}
