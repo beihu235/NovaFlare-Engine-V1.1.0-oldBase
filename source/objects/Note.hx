@@ -243,7 +243,8 @@ class Note extends FlxSprite
 			if(ClientPrefs.data.downScroll) flipY = true;
 			
 			earlyHitMult = 0.5;
-
+            noAnimation = true;
+            
 			offsetX += width / 2;
 			copyAngle = false;
 
@@ -270,6 +271,7 @@ class Note extends FlxSprite
 				prevNote.updateHitbox();
 				
 				prevNote.earlyHitMult = 0;
+				prevNote.noAnimation = false;
 			}
 			if(PlayState.isPixelStage)
 			{
