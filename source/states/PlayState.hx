@@ -761,7 +761,7 @@ class PlayState extends MusicBeatState
 
 	function set_playbackRate(value:Float):Float
 	{
-		#if FLX_PITCH
+		
 		if(generatedMusic)
 		{
 			if(vocals != null) vocals.pitch = value;
@@ -779,9 +779,7 @@ class PlayState extends MusicBeatState
 		Conductor.safeZoneOffset = (ClientPrefs.data.safeFrames / 60) * 1000 * value;
 		setOnScripts('playbackRate', playbackRate);
 		
-		#else
-		playbackRate = 1.0; // ensuring -Crow
-		#end
+		
 		return playbackRate;
 	}
 
@@ -1312,13 +1310,13 @@ class PlayState extends MusicBeatState
 		vocals.pause();
 
 		FlxG.sound.music.time = time;
-		#if FLX_PITCH FlxG.sound.music.pitch = playbackRate; #end
+		FlxG.sound.music.pitch = playbackRate;
 		FlxG.sound.music.play();
 
 		if (Conductor.songPosition <= vocals.length)
 		{
 			vocals.time = time;
-			#if FLX_PITCH vocals.pitch = playbackRate; #end
+			vocals.pitch = playbackRate;
 		}
 		vocals.play();
 		Conductor.songPosition = time;
@@ -1339,7 +1337,7 @@ class PlayState extends MusicBeatState
 
 		@:privateAccess
 		FlxG.sound.playMusic(inst._sound, 1, false);
-		#if FLX_PITCH FlxG.sound.music.pitch = playbackRate; #end
+		FlxG.sound.music.pitch = playbackRate;
 		FlxG.sound.music.onComplete = finishSong.bind();
 		vocals.play();
 
@@ -1395,7 +1393,7 @@ class PlayState extends MusicBeatState
 		}
 		catch(e:Dynamic) {}
 
-		#if FLX_PITCH vocals.pitch = playbackRate; #end
+		vocals.pitch = playbackRate;
 		FlxG.sound.list.add(vocals);
 
 		inst = new FlxSound().loadEmbedded(Paths.inst(songData.song));
@@ -1802,12 +1800,12 @@ class PlayState extends MusicBeatState
 		vocals.pause();
 
 		FlxG.sound.music.play();
-		#if FLX_PITCH FlxG.sound.music.pitch = playbackRate; #end
+		FlxG.sound.music.pitch = playbackRate;
 		Conductor.songPosition = FlxG.sound.music.time;
 		if (Conductor.songPosition <= vocals.length)
 		{
 			vocals.time = Conductor.songPosition;
-			#if FLX_PITCH vocals.pitch = playbackRate; #end
+			vocals.pitch = playbackRate;
 		}
 		vocals.play();
 	}
@@ -3057,15 +3055,7 @@ class PlayState extends MusicBeatState
 	{
 		var eventKey:FlxKey = event.keyCode;
 		var key:Int = getKeyFromEvent(keysArray, eventKey);
-		if (!controls.controllerMode)
-		{
-			#if debug
-			//Prevents crash specifically on debug without needing to try catch shit
-			@:privateAccess if (!FlxG.keys._keyListMap.exists(eventKey)) return;
-			#end
-
-			if(FlxG.keys.checkStatus(eventKey, JUST_PRESSED)) keyPressed(key);
-		}
+		if (!controls.controllerMode && FlxG.keys.checkStatus(eventKey, JUST_PRESSED)) keyPressed(key);
 	}
 	
 	private function keyPressed(key:Int)
@@ -3678,7 +3668,7 @@ class PlayState extends MusicBeatState
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);		
 		FlxG.animationTimeScale = 1;
-		#if FLX_PITCH FlxG.sound.music.pitch = 1; #end
+		FlxG.sound.music.pitch = 1;
 		Note.globalRgbShaders = [];
 		backend.NoteTypesConfig.clearNoteTypesData();
 		instance = null;
