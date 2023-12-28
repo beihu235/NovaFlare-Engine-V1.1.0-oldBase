@@ -14,6 +14,7 @@ package substates;
     
     by the way dont move this to hscript,I dont allow it
 */
+
 import flixel.addons.transition.FlxTransitionableState;
 
 import states.PlayState;
@@ -24,11 +25,6 @@ import backend.Conductor;
 import flixel.util.FlxSpriteUtil;
 import openfl.display.Sprite;
 import openfl.geom.Rectangle;
-
-#if sys
-import sys.io.File;
-import sys.FileSystem;
-#end
 
 class ResultsScreen extends MusicBeatSubstate
 {
@@ -416,21 +412,8 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		var speed:String = ClientPrefs.getGameplaySetting('scrollspeed');
 		if (ClientPrefs.getGameplaySetting('scrolltype') == 'multiplicative')
-        speed = 'X' + speed;
-        
-		setGameText.text = 'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
-		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
-		+ '\n'
-		+ 'SongSpeed: X' + ClientPrefs.getGameplaySetting('scrollspeed')
-		+ '  PlaybackRate: ' + speed
-		+ '\n'
-		+ 'BotPlay: ' + botplay
-		+ '  PracticeMode: ' + practice
-		+ '\n'
-		+ 'Finished time: ' + Date.now().toString()
-		+ '\n';
-		
-	
+        speed = 'X' + speed;        
+					
 		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
 		{
 		    MusicBeatState.switchState(new FreeplayState());
