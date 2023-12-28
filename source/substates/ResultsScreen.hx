@@ -404,16 +404,7 @@ class ResultsScreen extends MusicBeatSubstate
 	
     
 	override function update(elapsed:Float)
-	{   
-	    var botplay:String = 'Disable';
-		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Enable';
-		var practice:String = 'Disable';
-		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Enable';
-		
-		var speed:String = ClientPrefs.getGameplaySetting('scrollspeed');
-		if (ClientPrefs.getGameplaySetting('scrolltype') == 'multiplicative')
-        speed = 'X' + speed;        
-					
+	{ 					
 		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
 		{
 		    MusicBeatState.switchState(new FreeplayState());
