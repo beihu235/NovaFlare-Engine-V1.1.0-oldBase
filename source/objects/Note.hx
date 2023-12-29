@@ -526,7 +526,7 @@ class Note extends FlxSprite
 	
     function angleReturn(angle:Float):Float{ //let's go!!!
         var result:Float = resetAngle(angle); //angle will change data to 0-1
-        result = (Math.cos(Math.PI * (result + 90) / 360) + 1) / 2;
+        result = (Math.cos(Math.PI * (result + 90) / 180) + 1) / 2;
         
         /*
         if (result <= 90) result = Math.cos(result / 180 * Math.PI); //cos(x)
