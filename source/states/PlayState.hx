@@ -523,12 +523,14 @@ class PlayState extends MusicBeatState
 		}
 		stagesFunc(function(stage:BaseStage) stage.createPost());
 		
+		cachePopUpScore();
+		
 		comboGroup = new FlxSpriteGroup();
 		add(comboGroup);
-		noteGroup = new FlxTypedGroup<FlxBasic>();
-		add(noteGroup);
 		uiGroup = new FlxSpriteGroup();
 		add(uiGroup);
+		noteGroup = new FlxTypedGroup<FlxBasic>();
+		add(noteGroup);		
 
 		Conductor.songPosition = -5000 / Conductor.songPosition;
 		var showTime:Bool = (ClientPrefs.data.timeBarType != 'Disabled');
@@ -594,7 +596,7 @@ class PlayState extends MusicBeatState
 		add(judgementCounter_S);
 		judgementCounter_S.y = FlxG.height / 2 - judgementCounter_S.height / 2;
 		
-		cachePopUpScore();
+		
 		
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		noteGroup.add(strumLineNotes);
@@ -2861,8 +2863,8 @@ class PlayState extends MusicBeatState
 		rateSpr_S.antialiasing = antialias;
 		rateSpr_S.alpha = 0.000001;
 		rateSpr_S.visible = showRating;
-		add(rateSpr_S);
-		rateSpr_S.cameras = [camHUD];
+		comboGroup.add(rateSpr_S);
+		
 				
 		comboSpr_S = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'combo' + uiSuffix));
 		comboSpr_S.cameras = [camHUD];
@@ -2874,8 +2876,8 @@ class PlayState extends MusicBeatState
 		comboSpr_S.y += 60;
 		comboSpr_S.alpha = 0.000001;
 		comboSpr_S.visible = showCombo;
-		add(comboSpr_S);
-		comboSpr_S.cameras = [camHUD];
+		comboGroup.add(comboSpr_S);
+		
 		
 		var xThing:Float = 0;
 		
