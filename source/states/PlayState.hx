@@ -606,7 +606,10 @@ class PlayState extends MusicBeatState
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = ClientPrefs.data.playOpponent ? cpuControlled_opponent : cpuControlled;
+		add(botplayTxt); //botplay text is special
+		botplayTxt.cameras = [camHUD];	
 		uiGroup.add(botplayTxt);
+		
 		if(ClientPrefs.data.downScroll) {
 			botplayTxt.y = timeBar.y - 78;
 		}
@@ -2898,7 +2901,8 @@ class PlayState extends MusicBeatState
 			numScore.updateHitbox();			
 			numScore.antialiasing = antialias;
             numScore.alpha = 0.000001;
-
+            
+            comboGroup.add(numScore);
             numItems.add(numScore);            
 
 			if(numScore.x > xThing) xThing = numScore.x;
