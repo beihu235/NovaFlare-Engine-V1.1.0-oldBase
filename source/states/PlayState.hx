@@ -523,12 +523,15 @@ class PlayState extends MusicBeatState
 		}
 		stagesFunc(function(stage:BaseStage) stage.createPost());
 		
-		cachePopUpScore();
+		
 		
 		comboGroup = new FlxSpriteGroup();
 		add(comboGroup);
+		cachePopUpScore();
+		
 		uiGroup = new FlxSpriteGroup();
 		add(uiGroup);
+		
 		noteGroup = new FlxTypedGroup<FlxBasic>();
 		add(noteGroup);		
 
@@ -606,7 +609,7 @@ class PlayState extends MusicBeatState
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = ClientPrefs.data.playOpponent ? cpuControlled_opponent : cpuControlled;
-		//add(botplayTxt); //botplay text is special
+		add(botplayTxt); //botplay text is special
 		botplayTxt.cameras = [camHUD];	
 		uiGroup.add(botplayTxt);
 		
