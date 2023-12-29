@@ -43,6 +43,7 @@ class Note extends FlxSprite
 	public var ignoreNote:Bool = false;
 	public var hitByOpponent:Bool = false;
 	public var noteWasHit:Bool = false;
+	public var isEndNote:Bool = true;
 	public var prevNote:Note;
 	public var nextNote:Note;
 
@@ -243,7 +244,8 @@ class Note extends FlxSprite
 			if(ClientPrefs.data.downScroll) flipY = true;
 			
 			earlyHitMult = 0.5;
-            noAnimation = true;
+            noAnimation = true; //better work for play anim
+            isEndNote = true;
             
 			offsetX += width / 2;
 			copyAngle = false;
@@ -272,6 +274,7 @@ class Note extends FlxSprite
 				
 				prevNote.earlyHitMult = 0;
 				prevNote.noAnimation = false;
+				prevNote.isEndNote = false;
 			}
 			if(PlayState.isPixelStage)
 			{
@@ -485,9 +488,9 @@ class Note extends FlxSprite
 					    y -= PlayState.daPixelZoom * 9.5;
 				    }
 				    y -= (frameHeight * scale.y) - (Note.swagWidth / 2);
-				   // y += ((frameHeight * scale.y)/* - (Note.swagWidth / 2)*/) * angleReturn(strumDirection);
+				    y += ((frameHeight * scale.y) - (Note.swagWidth / 2)) * angleReturn(strumDirection);
 			    }else{
-			      //  y -= ((frameHeight * scale.y) /*- (Note.swagWidth / 2)*/) * angleReturn(strumDirection);
+			        y -= ((frameHeight * scale.y) - (Note.swagWidth / 2)) * angleReturn(strumDirection);
 			    }
 			}
 		}
@@ -522,13 +525,17 @@ class Note extends FlxSprite
 	}
 	
     function angleReturn(angle:Float):Float{ //let's go!!!
-        var result:Float = resetAngle(angle);
+        var result:Float = resetAngle(angle); //angle will change data to 0-1
+        result = (Math.cos(Math.PI * (result + 90) / 360) + 1) / 2;
+        
+        /*
         if (result <= 90) result = Math.cos(result / 180 * Math.PI); //cos(x)
         else result = Math.sin( ((result - 90) / 27 * 15) / 180 * Math.PI); //uhhhh idk how to write
+        */
         return result;
     }
     
-    function resetAngle(angle:Float):Float{
+    function resetAngle(angle:Float):Float{ //make angle to 0 to 360
         if (angle >= 0)
         return angle - 360 * Math.floor(angle / 360);
         
