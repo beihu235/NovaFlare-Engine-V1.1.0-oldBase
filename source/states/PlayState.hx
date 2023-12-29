@@ -644,10 +644,9 @@ class PlayState extends MusicBeatState
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 		moveCameraSection();
 				
-		uiGroup.cameras = [camHUD];
-		noteGroup.cameras = [camHUD];
+		uiGroup.cameras = [camHUD];		
 		comboGroup.cameras = [camHUD];
-		
+		noteGroup.cameras = [camHUD];
 
 		startingSong = true;
 		
