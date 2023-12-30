@@ -17,6 +17,7 @@ import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import lime.system.Clipboard;
 
+import tjson.TJSON as Json;
 
 import objects.Character;
 import objects.HealthIcon;
@@ -1086,23 +1087,23 @@ class CharacterEditorState extends MusicBeatState
 	
 	function addAnimation(anim:String, name:String, fps:Float, loop:Bool, indices:Array<Int>)
 	{
-		if(!character.isAnimateAtlas)
+		if(!char.isAnimateAtlas)
 		{
 			if(indices != null && indices.length > 0)
-				character.animation.addByIndices(anim, name, indices, "", fps, loop);
+				char.animation.addByIndices(anim, name, indices, "", fps, loop);
 			else
-				character.animation.addByPrefix(anim, name, fps, loop);
+				char.animation.addByPrefix(anim, name, fps, loop);
 		}
 		else
 		{
 			if(indices != null && indices.length > 0)
-				character.atlas.anim.addBySymbolIndices(anim, name, indices, fps, loop);
+				char.atlas.anim.addBySymbolIndices(anim, name, indices, fps, loop);
 			else
-				character.atlas.anim.addBySymbol(anim, name, fps, loop);
+				char.atlas.anim.addBySymbol(anim, name, fps, loop);
 		}
 
-		if(!character.animOffsets.exists(anim))
-			character.addOffset(anim, 0, 0);
+		if(!char.animOffsets.exists(anim))
+			char.addOffset(anim, 0, 0);
 	}
 
 	override function update(elapsed:Float)
