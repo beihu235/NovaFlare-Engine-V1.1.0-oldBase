@@ -168,7 +168,7 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var offset:Float = 130 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(-1950, (i * 135)/*  + offset*/);
+			var menuItem:FlxSprite = new FlxSprite(-600, (i * 135)/*  + offset*/);
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
@@ -507,7 +507,7 @@ class MainMenuState extends MusicBeatState
 			    });
 			}else{
 			    if (selectedTween[i] != null) selectedTween[i].cancel();
-			    selectedTween[i] = FlxTween.tween(option, {y: 360 + (i - (optionShit.length / 2 + 0.5)) * 135 + ((optionShit.length / 2 + 0.5) - curSelected) / (optionShit.length / 2 + 0.5) * 150}, 0.3, {
+			    selectedTween[i] = FlxTween.tween(option, {y: 360 + (i - (optionShit.length / 2 + 0.5)) * 135 - ((optionShit.length / 2 + 0.5) - curSelected) / (optionShit.length / 2 + 0.5) * 150}, 0.3, {
 					ease: FlxEase.sineInOut
 			    }); 
 			    //option.y = 360 + (i - (optionShit.length / 2 + 0.5) * 135;
