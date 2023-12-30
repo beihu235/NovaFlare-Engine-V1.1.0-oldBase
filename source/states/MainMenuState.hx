@@ -83,13 +83,13 @@ class MainMenuState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end		
 
-		camGame = new FlxCamera();
+		camGame = initPsychCamera();
 		camHUD = new FlxCamera();
 		camAchievement = new FlxCamera();
 		camAchievement.bgColor.alpha = 0;
 		camHUD.bgColor.alpha = 0;
 
-		FlxG.cameras.reset(camGame);
+		
 		FlxG.cameras.add(camAchievement, false);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
