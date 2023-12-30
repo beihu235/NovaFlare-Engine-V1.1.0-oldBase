@@ -327,7 +327,15 @@ class MainMenuState extends MusicBeatState
         			    curSelected = spr.ID;
 			    	
         			    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	 
-        			    spr.animation.play('selected');				    
+        			    spr.animation.play('selected');			
+        			    
+        			    menuItems.forEach(function(spr:FlxSprite){
+            	            if (spr.ID != curSelected)
+            			    {
+                			    spr.animation.play('idle');
+                			    spr.centerOffsets();
+                			}
+            		    }			
     			    }
 			    }
 			}
