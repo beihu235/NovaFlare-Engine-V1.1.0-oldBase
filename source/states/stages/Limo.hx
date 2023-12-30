@@ -71,13 +71,12 @@ class Limo extends BaseStage
 			precacheSound('dancerdeath');
 			setDefaultGF('gf-car');
 		}
-
+    
+        var limo:BGSprite = new BGSprite('limo/limoDrive', -120, 550, 1, 1, ['Limo stage'], true);
+        
 		fastCar = new BGSprite('limo/fastCarLol', -300, 160);
 		fastCar.active = true;
 		add(fastCar);
-		
-		var limo:BGSprite = new BGSprite('limo/limoDrive', -120, 550, 1, 1, ['Limo stage'], true);
-		add(limo);
 	}
 	override function createPost()
 	{
