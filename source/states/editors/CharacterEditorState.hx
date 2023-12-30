@@ -18,9 +18,7 @@ import openfl.net.FileReference;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import lime.system.Clipboard;
-import tjson.TJSON as Json;
 
-import backend.SUtil;
 
 import objects.Character;
 import objects.HealthIcon;
@@ -834,44 +832,45 @@ class CharacterEditorState extends MusicBeatState
 		}
 	}
 
-	function reloadCharacterImage() {
-		var lastAnim:String = '';
-		if(char.animation.curAnim != null) {
-			lastAnim = char.animation.curAnim.name;
-		}
-		var anims:Array<AnimArray> = char.animationsArray.copy();
-		if(Paths.fileExists('images/' + char.imageFile + '/Animation.json', TEXT)) {
-			char.frames = AtlasFrameMaker.construct(char.imageFile);
-		} else if(Paths.fileExists('images/' + char.imageFile + '.txt', TEXT)) {
-			char.frames = Paths.getPackerAtlas(char.imageFile);
-		} else {
-			char.frames = Paths.getSparrowAtlas(char.imageFile);
-		}
+	function reloadCharacterImage()
+	{
+		var lastAnim:String = character.getAnimationName();
+		var anims:Array<AnimArray> = character.animationsArray.copy();
 
-		if(char.animationsArray != null && char.animationsArray.length > 0) {
-			for (anim in char.animationsArray) {
-				var animAnim:String = '' + anim.anim;
-				var animName:String = '' + anim.name;
-				var animFps:Int = anim.fps;
-				var animLoop:Bool = !!anim.loop; //Bruh
-				var animIndices:Array<Int> = anim.indices;
-				if(animIndices != null && animIndices.length > 0) {
-					char.animation.addByIndices(animAnim, animName, animIndices, "", animFps, animLoop);
-				} else {
-					char.animation.addByPrefix(animAnim, animName, animFps, animLoop);
-				}
+		character.destroyAtlas();
+		character.isAnimateAtlas = false;
+
+		if(Paths.fileExists('images/' + character.imageFile + '/Animation.json', TEXT))
+		{
+			character.atlas = new FlxAnimate();
+			character.atlas.showPivot = false;
+			try
+			{
+				Paths.loadAnimateAtlas(character.atlas, character.imageFile);
 			}
-		} else {
-			char.quickAnimAdd('idle', 'BF idle dance');
+			catch(e:Dynamic)
+			{
+				FlxG.log.warn('Could not load atlas ${character.imageFile}: $e');
+			}
+			character.isAnimateAtlas = true;
+		}
+		else if(Paths.fileExists('images/' + character.imageFile + '.txt', TEXT)) character.frames = Paths.getPackerAtlas(character.imageFile);
+		else character.frames = Paths.getSparrowAtlas(character.imageFile);
+
+		for (anim in anims) {
+			var animAnim:String = '' + anim.anim;
+			var animName:String = '' + anim.name;
+			var animFps:Int = anim.fps;
+			var animLoop:Bool = !!anim.loop; //Bruh
+			var animIndices:Array<Int> = anim.indices;
+			addAnimation(animAnim, animName, animFps, animLoop, animIndices);
 		}
 
-		if(lastAnim != '') {
-			char.playAnim(lastAnim, true);
-		} else {
-			char.dance();
+		if(anims.length > 0)
+		{
+			if(lastAnim != '') character.playAnim(lastAnim, true);
+			else character.dance();
 		}
-		ghostDropDown.selectedLabel = '';
-		reloadGhost();
 	}
 
 	function genBoyOffsets():Void
