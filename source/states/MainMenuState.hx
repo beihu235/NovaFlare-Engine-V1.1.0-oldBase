@@ -150,7 +150,7 @@ class MainMenuState extends MusicBeatState
 		logoBl.scale.y = logoBl.scale.x;
 		logoBl.updateHitbox();
 		add(logoBl);
-		menuItem.scrollFactor.set(0, 0);
+		logoBl.scrollFactor.set(0, 0);
 		logoBl.x = 1280 - 320 - logoBl.width / 2;
 		logoBl.y = 360 - logoBl.height / 2;
 		
