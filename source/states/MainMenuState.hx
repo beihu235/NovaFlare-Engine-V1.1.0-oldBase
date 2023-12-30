@@ -307,7 +307,7 @@ class MainMenuState extends MusicBeatState
 		{
 			if (usingMouse && canClick)
 			{
-				if (!FlxG.mouse.overlaps(spr) {
+				if (!FlxG.mouse.overlaps(spr)) {
 				    if (FlxG.mouse.pressed){
         			    spr.animation.play('idle');
     			    }
