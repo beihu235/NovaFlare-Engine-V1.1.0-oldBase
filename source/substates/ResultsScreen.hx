@@ -412,21 +412,10 @@ class ResultsScreen extends MusicBeatSubstate
 		}
 		    PlayState.cancelMusicFadeTween();
 	}
-
-	override function destroy()
-	{
-
-		super.destroy();
-	}
-
 	
-	
-}
+	//NewCustomFadeTransition is work for better close Substate
 
-
-class NewCustomFadeTransition //make close substate better
-{
-	public static var finishCallback:Void->Void;
+	var finishCallback:Void->Void;
 	private var leTween:FlxTween = null;
 	
 	var isTransIn:Bool = false;
@@ -443,10 +432,9 @@ class NewCustomFadeTransition //make close substate better
 	var EventTextTween:FlxTween;
 	var loadTextTween:FlxTween;
 
-	public function new(duration:Float = 0.6, isTransIn:Bool = false) {
-		super();
-
-		this.isTransIn = isTransIn;
+	function NewCustomFadeTransition(duration:Float = 0.6, isTransIn:Bool = false) {
+		
+		isTransIn = isTransIn;
 				
 		if(ClientPrefs.data.CustomFade == 'Move'){
     		loadRight = new FlxSprite(isTransIn ? 0 : 1280, 0).loadGraphic(Paths.image('menuExtend/CustomFadeTransition/loadingR'));
