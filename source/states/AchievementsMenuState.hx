@@ -127,7 +127,7 @@ class AchievementsMenuState extends MusicBeatState
 		FlxG.camera.scroll.y = -FlxG.height;
 		
 		#if android
-        addVirtualPad(FULL, A_B_C_X_Y_Z);
+        addVirtualPad(FULL, A_B);
         //addPadCamera();
         #end
 	}
