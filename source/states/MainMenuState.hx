@@ -21,7 +21,8 @@ class MainMenuState extends MusicBeatState
 {
 	public static var psychEngineVersion:String = '0.7.2'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
-
+    public static var saveCurSelected:Int = 0;
+    
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	public var camGame:FlxCamera;
 	public var camHUD:FlxCamera;
@@ -315,8 +316,7 @@ class MainMenuState extends MusicBeatState
     				{
     				    if (curSelected == spr.ID) {
     				        selectSomething();
-    				    }
-    				    else    { 
+    				    }else{
     					    curSelected = spr.ID;
 					    		
     					    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	    
@@ -337,6 +337,11 @@ class MainMenuState extends MusicBeatState
                 			}
             		    });
     			    }
+			    }
+			    
+			    if(saveCurSelected != curSelected){
+			        saveCurSelected = curSelected;
+			        checkChoose();
 			    }
 			}
 		});
@@ -487,6 +492,8 @@ class MainMenuState extends MusicBeatState
 	        curSelected = 0;
 		if (curSelected < 0)
 		    curSelected = menuItems.length - 1;
+		    
+		saveCurSelected = curSelected;
 		    
 	    menuItems.forEach(function(spr:FlxSprite){
 	        if (spr.ID != curSelected)
