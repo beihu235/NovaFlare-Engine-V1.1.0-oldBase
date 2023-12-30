@@ -335,7 +335,7 @@ class MainMenuState extends MusicBeatState
                 			    spr.animation.play('idle');
                 			    spr.centerOffsets();
                 			}
-            		    }			
+            		    });
     			    }
 			    }
 			}
