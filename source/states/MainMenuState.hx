@@ -200,7 +200,7 @@ class MainMenuState extends MusicBeatState
 			    option.y = 360 - 135 / 2 + (i - optionShit.length / 2) * 135;
 			
 			}else{
-			    option.y = 360 + (i - (optionShit.length / 2 + 0.5) * 135;
+			    option.y = 360 + (i - (optionShit.length / 2 + 0.5)) * 135;
 			}
 				optionTween[i] = FlxTween.tween(option, {x: 100}, 0.7 + 0.08 * i , {
 					ease: FlxEase.backInOut
@@ -503,12 +503,12 @@ class MainMenuState extends MusicBeatState
 			
 			if (optionShit.length % 2 == 0){
 			    if (selectedTween[i] != null) selectedTween[i].cancel();
-			    selectedTween[i] = FlxTween.tween(option, {y: 360 - 135 / 2 + (i - optionShit.length / 2) * 135 + (curSelected - (optionShit.length - 1) / 2) / (optionShit.length - 1) / 2 * 150}, 0.2, {
+			    selectedTween[i] = FlxTween.tween(option, {y: 360 - 135 / 2 + (i - optionShit.length / 2)) * 135 + (curSelected - (optionShit.length - 1) / 2) / (optionShit.length - 1) / 2 * 150}, 0.2, {
 					ease: FlxEase.backInOut
 			    });
 			}else{
 			    if (selectedTween[i] != null) selectedTween[i].cancel();
-			    selectedTween[i] = FlxTween.tween(option, {y: 360 + (i - (optionShit.length / 2 + 0.5) * 135 + (curSelected - (optionShit.length / 2 + 0.5) - 1) / optionShit.length / 2 * 150}, 0.2, {
+			    selectedTween[i] = FlxTween.tween(option, {y: 360 + (i - (optionShit.length / 2 + 0.5)) * 135 + (curSelected - (optionShit.length / 2 + 0.5) - 1) / optionShit.length / 2 * 150}, 0.2, {
 					ease: FlxEase.backInOut
 			    }); //have problem need to fix
 			    //option.y = 360 + (i - (optionShit.length / 2 + 0.5) * 135;
