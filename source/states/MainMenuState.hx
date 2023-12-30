@@ -503,7 +503,7 @@ class MainMenuState extends MusicBeatState
 			
 			if (optionShit.length % 2 == 0){
 			    if (selectedTween[i] != null) selectedTween[i].cancel();
-			    selectedTween[i] = FlxTween.tween(option, {y: 360 - 135 / 2 + (i - optionShit.length / 2)) * 135 + (curSelected - (optionShit.length - 1) / 2) / (optionShit.length - 1) / 2 * 150}, 0.2, {
+			    selectedTween[i] = FlxTween.tween(option, {y: 360 - 135 / 2 + (i - optionShit.length / 2) * 135 + (curSelected - (optionShit.length - 1) / 2) / (optionShit.length - 1) / 2 * 150}, 0.2, {
 					ease: FlxEase.backInOut
 			    });
 			}else{
