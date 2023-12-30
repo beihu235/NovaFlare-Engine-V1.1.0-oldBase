@@ -92,10 +92,9 @@ class MainMenuState extends MusicBeatState
 		camOther = new FlxCamera();
 		camOther.bgColor.alpha = 0;
 		camHUD.bgColor.alpha = 0;
-
-		
-		FlxG.cameras.add(camOther, false);
+				
 		FlxG.cameras.add(camHUD, false);
+		FlxG.cameras.add(camOther, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		CustomFadeTransition.nextCamera = camOther;
         //CustomFadeTransition.nextCamera = camOther;
@@ -503,14 +502,14 @@ class MainMenuState extends MusicBeatState
 			
 			if (optionShit.length % 2 == 0){
 			    if (selectedTween[i] != null) selectedTween[i].cancel();
-			    selectedTween[i] = FlxTween.tween(option, {y: 360 - 135 / 2 + (i - optionShit.length / 2) * 135 + (curSelected - (optionShit.length - 1) / 2) / (optionShit.length - 1) / 2 * 150}, 0.2, {
-					ease: FlxEase.backInOut
+			    selectedTween[i] = FlxTween.tween(option, {y: 360 - 135 / 2 + (i - optionShit.length / 2) * 135 + ((optionShit.length - 1) / 2 - curSelected) / (optionShit.length - 1) / 2 * 150}, 0.3, {
+					ease: FlxEase.sineInOut
 			    });
 			}else{
 			    if (selectedTween[i] != null) selectedTween[i].cancel();
-			    selectedTween[i] = FlxTween.tween(option, {y: 360 + (i - (optionShit.length / 2 + 0.5)) * 135 + (curSelected - (optionShit.length / 2 + 0.5) - 1) / optionShit.length / 2 * 150}, 0.2, {
-					ease: FlxEase.backInOut
-			    }); //have problem need to fix
+			    selectedTween[i] = FlxTween.tween(option, {y: 360 + (i - (optionShit.length / 2 + 0.5)) * 135 + ((optionShit.length / 2 + 0.5) - curSelected) / (optionShit.length / 2 + 0.5) * 150}, 0.3, {
+					ease: FlxEase.sineInOut
+			    }); 
 			    //option.y = 360 + (i - (optionShit.length / 2 + 0.5) * 135;
 			}
 			
