@@ -196,7 +196,7 @@ class MainMenuState extends MusicBeatState
 			var option:FlxSprite = menuItems.members[i];
 			
 			if (optionShit.length % 2 == 0){
-			    option.y = 360 - 135 / 2 + (i - optionShit.length / 2) * 135;
+			    option.y = 360 + (i - optionShit.length / 2) * 135;
 			
 			}else{
 			    option.y = 360 + (i - (optionShit.length / 2 + 0.5)) * 135;
@@ -502,7 +502,7 @@ class MainMenuState extends MusicBeatState
 			
 			if (optionShit.length % 2 == 0){
 			    if (selectedTween[i] != null) selectedTween[i].cancel();
-			    selectedTween[i] = FlxTween.tween(option, {y: 360 - 135 / 2 + (i - optionShit.length / 2) * 135 + ((optionShit.length - 1) / 2 - curSelected) / (optionShit.length - 1) / 2 * 150}, 0.3, {
+			    selectedTween[i] = FlxTween.tween(option, {y: 360 + (i - optionShit.length / 2) * 135 + ((optionShit.length - 1) / 2 - curSelected) / (optionShit.length - 1) / 2 * 150}, 0.3, {
 					ease: FlxEase.sineInOut
 			    });
 			}else{
