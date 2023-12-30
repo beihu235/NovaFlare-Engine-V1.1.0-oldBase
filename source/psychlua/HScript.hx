@@ -319,6 +319,7 @@ class HScript extends SScript
 	public static function implement(funk:FunkinLua) {
 		#if LUA_ALLOWED
 		funk.addLocalCallback("runHaxeCode", function(codeToRun:String, ?varsToBring:Any = null, ?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):Dynamic {
+            #if HSCRIPT_ALLOWED
 			try {
 			var retVal:#if (SScript <= "7.0.0") SCall #else TeaCall #end = funk.hscript.executeCode(funcToRun, funcArgs);
 			if (retVal != null)
