@@ -24,7 +24,7 @@ import backend.SUtil;
 
 import objects.Character;
 import objects.HealthIcon;
-import objects.HealthBar;
+import objects.Bar;
 
 #if MODS_ALLOWED
 import sys.FileSystem;
@@ -63,7 +63,7 @@ class CharacterEditorState extends MusicBeatState
 	var characterList:Array<String> = [];
 
 	var cameraFollowPointer:FlxSprite;
-	var healthBar:HealthBar;
+	var healthBar:Bar;
 
 	override function create()
 	{
@@ -103,7 +103,7 @@ class CharacterEditorState extends MusicBeatState
 
 		loadChar(!daAnim.startsWith('bf'), false);
 
-		healthBar = new HealthBar(30, FlxG.height - 75);
+		healthBar = new Bar(30, FlxG.height - 75);
 		healthBar.scrollFactor.set();
 		add(healthBar);
 		healthBar.cameras = [camHUD];
