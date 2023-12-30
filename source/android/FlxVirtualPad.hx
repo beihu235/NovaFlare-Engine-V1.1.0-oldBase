@@ -150,6 +150,11 @@ class FlxVirtualPad extends FlxSpriteGroup {
 			case MainMenuState:
 				dPad.add(add(buttonUp = createButton(FlxG.width - 44 * 3, FlxG.height - 165 * 3, 44 * 3, 127, "up", 0x00FF00)));
 				dPad.add(add(buttonDown = createButton(FlxG.width - 44 * 3, FlxG.height - 125 * 3, 44 * 3, 127, "down", 0x00FFFF)));		
+			case PauseSubstate:	
+				dPad.add(add(buttonUp = createButton(0, FlxG.height - 85 * 3, 44 * 3, 127, "up", 0x00FF00)));
+				dPad.add(add(buttonDown = createButton(0, FlxG.height - 45 * 3, 44 * 3, 127, "down", 0x00FFFF)));
+				dPad.add(add(buttonLeft = createButton(84 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "left", 0xFF00FF)));
+				dPad.add(add(buttonRight = createButton(126 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "right", 0xFF0000)));		
             case NoteSplashDebugState:
 			    //orgAlpha = 0.75;
 				dPad.add(add(buttonUp = createButton(0, FlxG.height - 85 * 3 - 460, 44 * 3, 127, "up", 0x00FF00)));
@@ -331,6 +336,7 @@ enum FlxDPadMode {
 	DialogueCharacterEditor;
 	NoteSplashDebugState;
 	MainMenuState;
+	PauseSubstate;
 	NONE;
 }
 
