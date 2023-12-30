@@ -433,8 +433,8 @@ class MainMenuState extends MusicBeatState
 		
 		FlxTween.tween(camGame, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
 		FlxTween.tween(camGame, {angle: 0}, 0.8, { //not use for now
-		ease: FlxEase.cubeInOut,
-		onComplete: function(twn:FlxTween)
+		        ease: FlxEase.cubeInOut,
+		        onComplete: function(twn:FlxTween)
 				{
 			    var daChoice:String = optionShit[curSelected];
 
@@ -460,7 +460,8 @@ class MainMenuState extends MusicBeatState
 									PlayState.SONG.arrowSkin = null;
 									PlayState.SONG.splashSkin = null;
 								}
-				    }    
+				    }
+				}
 		});
 	}
 	
