@@ -443,7 +443,7 @@ class NewCustomFadeTransition //make close substate better
 	var EventTextTween:FlxTween;
 	var loadTextTween:FlxTween;
 
-	public function new(duration:Float, isTransIn:Bool = false) {
+	public function new(duration:Float = 0.6, isTransIn:Bool = false) {
 		super();
 
 		this.isTransIn = isTransIn;
