@@ -1,7 +1,5 @@
 package states.editors;
 
-import animateatlas.AtlasFrameMaker;
-
 import flixel.FlxObject;
 import flixel.graphics.FlxGraphic;
 
@@ -18,13 +16,12 @@ import openfl.net.FileReference;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import lime.system.Clipboard;
-import tjson.TJSON as Json;
 
-import backend.SUtil;
+import tjson.TJSON as Json;
 
 import objects.Character;
 import objects.HealthIcon;
-import objects.HealthBar;
+import objects.Bar;
 
 #if MODS_ALLOWED
 import sys.FileSystem;
@@ -63,7 +60,7 @@ class CharacterEditorState extends MusicBeatState
 	var characterList:Array<String> = [];
 
 	var cameraFollowPointer:FlxSprite;
-	var healthBar:HealthBar;
+	var healthBar:Bar;
 
 	override function create()
 	{
@@ -103,7 +100,7 @@ class CharacterEditorState extends MusicBeatState
 
 		loadChar(!daAnim.startsWith('bf'), false);
 
-		healthBar = new HealthBar(30, FlxG.height - 75);
+		healthBar = new Bar(30, FlxG.height - 75);
 		healthBar.scrollFactor.set();
 		add(healthBar);
 		healthBar.cameras = [camHUD];
@@ -834,44 +831,45 @@ class CharacterEditorState extends MusicBeatState
 		}
 	}
 
-	function reloadCharacterImage() {
-		var lastAnim:String = '';
-		if(char.animation.curAnim != null) {
-			lastAnim = char.animation.curAnim.name;
-		}
+	function reloadCharacterImage()
+	{
+		var lastAnim:String = char.getAnimationName();
 		var anims:Array<AnimArray> = char.animationsArray.copy();
-		if(Paths.fileExists('images/' + char.imageFile + '/Animation.json', TEXT)) {
-			char.frames = AtlasFrameMaker.construct(char.imageFile);
-		} else if(Paths.fileExists('images/' + char.imageFile + '.txt', TEXT)) {
-			char.frames = Paths.getPackerAtlas(char.imageFile);
-		} else {
-			char.frames = Paths.getSparrowAtlas(char.imageFile);
-		}
 
-		if(char.animationsArray != null && char.animationsArray.length > 0) {
-			for (anim in char.animationsArray) {
-				var animAnim:String = '' + anim.anim;
-				var animName:String = '' + anim.name;
-				var animFps:Int = anim.fps;
-				var animLoop:Bool = !!anim.loop; //Bruh
-				var animIndices:Array<Int> = anim.indices;
-				if(animIndices != null && animIndices.length > 0) {
-					char.animation.addByIndices(animAnim, animName, animIndices, "", animFps, animLoop);
-				} else {
-					char.animation.addByPrefix(animAnim, animName, animFps, animLoop);
-				}
+		char.destroyAtlas();
+		char.isAnimateAtlas = false;
+
+		if(Paths.fileExists('images/' + char.imageFile + '/Animation.json', TEXT))
+		{
+			char.atlas = new FlxAnimate();
+			char.atlas.showPivot = false;
+			try
+			{
+				Paths.loadAnimateAtlas(char.atlas, char.imageFile);
 			}
-		} else {
-			char.quickAnimAdd('idle', 'BF idle dance');
+			catch(e:Dynamic)
+			{
+				FlxG.log.warn('Could not load atlas ${char.imageFile}: $e');
+			}
+			char.isAnimateAtlas = true;
+		}
+		else if(Paths.fileExists('images/' + char.imageFile + '.txt', TEXT)) char.frames = Paths.getPackerAtlas(char.imageFile);
+		else char.frames = Paths.getSparrowAtlas(char.imageFile);
+
+		for (anim in anims) {
+			var animAnim:String = '' + anim.anim;
+			var animName:String = '' + anim.name;
+			var animFps:Int = anim.fps;
+			var animLoop:Bool = !!anim.loop; //Bruh
+			var animIndices:Array<Int> = anim.indices;
+			addAnimation(animAnim, animName, animFps, animLoop, animIndices);
 		}
 
-		if(lastAnim != '') {
-			char.playAnim(lastAnim, true);
-		} else {
-			char.dance();
+		if(anims.length > 0)
+		{
+			if(lastAnim != '') char.playAnim(lastAnim, true);
+			else char.dance();
 		}
-		ghostDropDown.selectedLabel = '';
-		reloadGhost();
 	}
 
 	function genBoyOffsets():Void
@@ -1085,6 +1083,27 @@ class CharacterEditorState extends MusicBeatState
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("Character Editor", "Character: " + daAnim, leHealthIcon.getCharacter());
 		#end
+	}
+	
+	function addAnimation(anim:String, name:String, fps:Float, loop:Bool, indices:Array<Int>)
+	{
+		if(!char.isAnimateAtlas)
+		{
+			if(indices != null && indices.length > 0)
+				char.animation.addByIndices(anim, name, indices, "", fps, loop);
+			else
+				char.animation.addByPrefix(anim, name, fps, loop);
+		}
+		else
+		{
+			if(indices != null && indices.length > 0)
+				char.atlas.anim.addBySymbolIndices(anim, name, indices, fps, loop);
+			else
+				char.atlas.anim.addBySymbol(anim, name, fps, loop);
+		}
+
+		if(!char.animOffsets.exists(anim))
+			char.addOffset(anim, 0, 0);
 	}
 
 	override function update(elapsed:Float)

@@ -5,6 +5,7 @@ import flixel.FlxGame;
 import flixel.FlxState;
 import openfl.Assets;
 import openfl.Lib;
+import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
@@ -12,6 +13,12 @@ import lime.app.Application;
 import states.TitleState;
 //crash handler stuff
 import objects.Watermark;
+
+#if linux
+import lime.graphics.Image;
+#end
+
+//crash handler stuff
 #if CRASH_HANDLER
 import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
@@ -21,11 +28,11 @@ import sys.io.File;
 import sys.io.Process;
 #end
 
-import flixel.FlxSprite;
-import flixel.FlxObject;
-
 #if linux
-import lime.graphics.Image;
+@:cppInclude('./external/gamemode_client.h')
+@:cppFileCode('
+	#define GAMEMODE_AUTO
+')
 #end
 
 class Main extends Sprite
@@ -147,7 +154,7 @@ class Main extends Sprite
 		#end
 
 		#if desktop
-		DiscordClient.start();
+		DiscordClient.prepare();
 		#end
 
 		// shader coords fix

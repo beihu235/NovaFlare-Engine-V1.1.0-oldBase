@@ -48,7 +48,7 @@
 	<define name="HSCRIPT_ALLOWED" />
 	<define name="MODS_ALLOWED" if="desktop || android" />
 	<define name="LUA_ALLOWED" if="desktop || android"/>
-	<!--define name="ACHIEVEMENTS_ALLOWED" /-->
+	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="VIDEOS_ALLOWED" />
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="TITLE_SCREEN_EASTER_EGG" if="officialBuild"/> <!-- DELETE THE if="officialBuild" for enabling this on an unofficial build -->
@@ -111,11 +111,13 @@
 	<!--In case you want to use the addons package-->
 	<haxelib name="flixel-addons" />
 	<!--haxelib name="hscript" if="HSCRIPT_ALLOWED"/-->
-	<haxelib name="SScript" if="HSCRIPT_ALLOWED"/>
 	<define name="hscriptPos" if="HSCRIPT_ALLOWED"/>
 	<haxedef name="openflPos" if="desktop"/>
+	<haxelib name="SScript" if="HSCRIPT_ALLOWED"/>
 	<haxelib name="androiddialogs" if="android" />
 	<haxelib name="devicelanguage" if="android" />
+    <haxelib name="flxanimate" unless="web"/>
+    <haxelib name="extension-orientation" if="mobile" />
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
@@ -124,17 +126,18 @@
 	<haxelib name="extension-androidtools" if="android"/>
 	<haxelib name="faxe" if='switch'/>
 	<!--<haxelib name="polymod"/> -->
-	<haxelib name="discord_rpc" if="desktop || android"/>
+	<haxelib name="hxdiscord_rpc" if="cpp"/>
+
+	<!-- Mobile and Android Specific-->
+	<haxelib name="extension-androidtools" if="android" />
+	<haxelib name="extension-orientation" if="mobile" />
+
+	<!-- Disable Discord IO Thread -->
+	<haxedef name="DISCORD_DISABLE_IO_THREAD" if="hxdiscord_rpc" />
+	<haxedef name="NO_PRECOMPILED_HEADERS" if="linux" />
 
 	<!-- Enables a terminal log prompt on debug builds -->
 	<haxelib name="hxcpp-debug-server" if="debug"/>
-	
-
-	<!-- <haxelib name="markdown" /> -->
-	<!-- <haxelib name="HtmlParser" /> -->
-
-	<!--In case you want to use nape with flixel-->
-	<!--<haxelib name="nape-haxe4" />-->
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
@@ -162,31 +165,33 @@
 	<!--Disable the Flixel core focus lost screen-->
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 	
-	<!-- Show debug traces for hxCodec -->
+	<!-- Show debug traces for hxCodec (for old versions) -->
 	<haxedef name="HXC_DEBUG_TRACE" if="debug" />
+        <haxedef name="HXC_LIBVLC_LOGGING" if="debug" />
 	
 	<!--Disable the Flixel core debugger. Automatically gets set whenever you compile in release mode!-->
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
 
 	<!--Enable this for Nape release builds for a serious peformance improvement-->
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
-	
-	<!--Used for Izzy Engine's crash handler-->
-	<haxedef name="HXCPP_CHECK_POINTER" if="CRASH_HANDLER" />
-	<haxedef name="HXCPP_STACK_LINE" if="CRASH_HANDLER" />
 
-	<!-- _________________________________ Android Stuff _______________________________ -->
+	<haxedef name='no-deprecation-warnings' />
+
+		<!-- _________________________________ Android Stuff _______________________________ -->
 	<config:android permission="android.permission.READ_EXTERNAL_STORAGE" if="android"/>
 	<config:android permission="android.permission.WRITE_EXTERNAL_STORAGE" if="android"/>
     <config:android gradle-version="7.5.1" />
     <config:android gradle-plugin="7.3.1" />
 
+	<!--Macro fixes-->
+	<haxeflag name="--macro" value="allowPackage('flash')" />
+	<haxeflag name="--macro" value="include('my.pack')" />
+
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
-	
-	<assets path='art/iconOG.png' rename='icon.png' if="linux" />
-	
+
+	<assets path='art/icon16.png' rename='icon.png' if="linux" />
 	<icon path="art/icon16.png" size='16'/>
 	<icon path="art/icon32.png" size='32'/>
 	<icon path="art/icon64.png" size='64'/>

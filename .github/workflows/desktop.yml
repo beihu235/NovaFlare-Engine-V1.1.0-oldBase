@@ -1,3 +1,5 @@
+# This is a basic workflow to help you get started with Actions
+
 name: desktop Build
 
 
@@ -15,55 +17,36 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  BuildWindows:
+  
+  buildWindows:
     runs-on: windows-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.0
 
       - uses: krdlab/setup-haxe@master
         with:
-          haxe-version: 4.2.5
-      
-      - name: Restore Previous Cache
-        id: cache-build-windows-restore
-        uses: actions/cache/restore@main
-        with:
-          path: |
-            .haxelib/
-            export/release/windows/haxe/
-            export/release/windows/obj/
-          key: cache-windows-build
-
+          haxe-version: latest
       # Runs a set of commands using the runners shell
       - name: Install Haxelib
         run: |
           haxelib setup C:/haxelib
           haxelib install hxcpp > /dev/null --quiet
-          haxelib install lime 8.1.1
-          haxelib install openfl 9.2.1
-          haxelib install flixel 5.2.2
-          haxelib install flixel-tools 1.5.1
-          haxelib install flixel-ui 2.5.0
-          haxelib install flixel-addons 3.0.2
-          haxelib install tjson 1.4.0
-          haxelib install hxCodec 2.6.0
-          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
-          haxelib install SScript 8.1.6
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib run lime rebuild hxcpp
-          haxelib list
+          haxe -cp ./setup -D analyzer-optimize -main Main --interp
+          haxelib fixrepo
+        shell: cmd
+      - name: Skip SScript setup mode
+        run: echo 'oy9:showMacroty8:loopCosti25y10:includeAllfg' >> %USERPROFILE%/settings.cocoa
         shell: cmd
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
-        run: haxelib run lime build windows --app-version="4.0.0-${{ github.run_id}}" -D NO_PRECOMPILED_HEADERS
-
+        run: haxelib run lime build windows --app-version="4.0.0-${{ github.run_id}}"
       - name: Publish Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: Windows
+          name: windowsBuild
           path: export/release/windows/bin
   buildMac:
     runs-on: macos-latest
@@ -79,20 +62,11 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
-          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
-          haxelib install lime 8.1.1
-          haxelib install openfl 9.2.1
-          haxelib install flixel 5.2.2
-          haxelib install flixel-tools 1.5.1
-          haxelib install flixel-ui 2.5.0
-          haxelib install flixel-addons 3.0.2
-          haxelib install tjson 1.4.0
-          haxelib install hxCodec 2.6.0
-          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
-          haxelib install SScript 8.1.6
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib run lime rebuild hxcpp
-          haxelib list
+          haxelib install hxcpp > /dev/null --quiet
+          haxe -cp ./setup -D analyzer-optimize -main Main --interp
+      
+      - name: Skip SScript setup mode
+        run: echo 'oy9:showMacroty8:loopCosti25y10:includeAllfg' >> ~/settings.cocoa
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile

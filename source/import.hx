@@ -10,6 +10,11 @@ import llua.*;
 import llua.Lua;
 #end
 
+#if sys
+import sys.FileSystem;
+import sys.io.File;
+#end
+
 import backend.Paths;
 import backend.Controls;
 import backend.CoolUtil;
@@ -22,9 +27,17 @@ import backend.BaseStage;
 import backend.Difficulty;
 import backend.Mods;
 import backend.SUtil;
+#if ACHIEVEMENTS_ALLOWED
+import backend.Achievements;
+#end
 
-import backend.AndroidDialogsExtend;
+
+#if flxanimate
+import flxanimate.*;
+#end
+
 #if android
+import backend.AndroidDialogsExtend;
 import extension.devicelang.DeviceLanguage;
 #end
   
@@ -44,6 +57,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
 import flixel.math.FlxMath;
+import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.text.FlxText;

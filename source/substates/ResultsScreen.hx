@@ -14,6 +14,7 @@ package substates;
     
     by the way dont move this to hscript,I dont allow it
 */
+
 import flixel.addons.transition.FlxTransitionableState;
 
 import states.PlayState;
@@ -24,11 +25,7 @@ import backend.Conductor;
 import flixel.util.FlxSpriteUtil;
 import openfl.display.Sprite;
 import openfl.geom.Rectangle;
-
-#if sys
-import sys.io.File;
-import sys.FileSystem;
-#end
+import openfl.utils.Assets;
 
 class ResultsScreen extends MusicBeatSubstate
 {
@@ -161,37 +158,37 @@ class ResultsScreen extends MusicBeatSubstate
 		graphSickUp.scrollFactor.set();
 		graphSickUp.alpha = 0;		
 		add(graphSickUp);
-		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.sickWindow) graphSickUp.visible = false;
+		if ((ClientPrefs.data.marvelousWindow > ClientPrefs.data.sickWindow && ClientPrefs.data.marvelousRating)) graphSickUp.visible = false;
 		
 		graphSickDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[1]);
 		graphSickDown.scrollFactor.set();
 		graphSickDown.alpha = 0;		
 		add(graphSickDown);
-		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.sickWindow) graphSickDown.visible = false;
+		if ((ClientPrefs.data.marvelousWindow > ClientPrefs.data.sickWindow && ClientPrefs.data.marvelousRating)) graphSickDown.visible = false;
 		
 		graphGoodUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[2]);
 		graphGoodUp.scrollFactor.set();
 		graphGoodUp.alpha = 0;		
 		add(graphGoodUp);
-		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.goodWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.goodWindow) graphGoodUp.visible = false;
+		if ((ClientPrefs.data.marvelousWindow > ClientPrefs.data.goodWindow && ClientPrefs.data.marvelousRating) || ClientPrefs.data.sickWindow > ClientPrefs.data.goodWindow) graphGoodUp.visible = false;
 		
 		graphGoodDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[2]);
 		graphGoodDown.scrollFactor.set();
 		graphGoodDown.alpha = 0;		
 		add(graphGoodDown);
-		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.goodWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.goodWindow) graphGoodDown.visible = false;
+		if ((ClientPrefs.data.marvelousWindow > ClientPrefs.data.goodWindow && ClientPrefs.data.marvelousRating) || ClientPrefs.data.sickWindow > ClientPrefs.data.goodWindow) graphGoodDown.visible = false;
 		
 		graphBadUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[3]);
 		graphBadUp.scrollFactor.set();
 		graphBadUp.alpha = 0;		
 		add(graphBadUp);
-		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.badWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.badWindow || ClientPrefs.data.goodWindow > ClientPrefs.data.badWindow) graphBadUp.visible = false;
+		if ((ClientPrefs.data.marvelousWindow > ClientPrefs.data.badWindow && ClientPrefs.data.marvelousRating) || ClientPrefs.data.sickWindow > ClientPrefs.data.badWindow || ClientPrefs.data.goodWindow > ClientPrefs.data.badWindow) graphBadUp.visible = false;
 		
 		graphBadDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[3]);
 		graphBadDown.scrollFactor.set();
 		graphBadDown.alpha = 0;		
 		add(graphBadDown);
-		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.badWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.badWindow || ClientPrefs.data.goodWindow > ClientPrefs.data.badWindow) graphBadDown.visible = false;
+		if ((ClientPrefs.data.marvelousWindow > ClientPrefs.data.badWindow && ClientPrefs.data.marvelousRating) || ClientPrefs.data.sickWindow > ClientPrefs.data.badWindow || ClientPrefs.data.goodWindow > ClientPrefs.data.badWindow) graphBadDown.visible = false;
 		
 		graphShitUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (safeZoneOffset / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[4]);
 		graphShitUp.scrollFactor.set();
@@ -289,8 +286,8 @@ class ResultsScreen extends MusicBeatSubstate
 		'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
 		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
 		+ '\n'
-		+ 'SongSpeed: X' + ClientPrefs.getGameplaySetting('scrollspeed')
-		+ '  PlaybackRate: ' + speed
+		+ 'SongSpeed: X' + speed
+		+ '  PlaybackRate: X' + ClientPrefs.getGameplaySetting('songspeed')
 		+ '\n'
 		+ 'BotPlay: ' + botplay
 		+ '  PracticeMode: ' + practice
@@ -408,42 +405,167 @@ class ResultsScreen extends MusicBeatSubstate
 	
     
 	override function update(elapsed:Float)
-	{   
-	    var botplay:String = 'Disable';
-		if (ClientPrefs.getGameplaySetting('botplay')) botplay = 'Enable';
-		var practice:String = 'Disable';
-		if (ClientPrefs.getGameplaySetting('practice')) practice = 'Enable';
-		
-		var speed:String = ClientPrefs.getGameplaySetting('scrollspeed');
-		if (ClientPrefs.getGameplaySetting('scrolltype') == 'multiplicative')
-        speed = 'X' + speed;
-        
-		setGameText.text = 'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
-		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
-		+ '\n'
-		+ 'SongSpeed: X' + ClientPrefs.getGameplaySetting('scrollspeed')
-		+ '  PlaybackRate: ' + speed
-		+ '\n'
-		+ 'BotPlay: ' + botplay
-		+ '  PracticeMode: ' + practice
-		+ '\n'
-		+ 'Finished time: ' + Date.now().toString()
-		+ '\n';
-		
-	
+	{ 					
 		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
 		{
-		    MusicBeatState.switchState(new FreeplayState());
+		    NewCustomFadeTransition();
+		    //MusicBeatState.switchState(new FreeplayState());
 		}
 		    PlayState.cancelMusicFadeTween();
 	}
+	
+	//NewCustomFadeTransition is work for better close Substate
 
-	override function destroy()
-	{
+	var finishCallback:Void->Void;
+	private var leTween:FlxTween = null;
+	
+	var isTransIn:Bool = false;
+	
+	var loadLeft:FlxSprite;
+	var loadRight:FlxSprite;
+	var loadAlpha:FlxSprite;
+	var WaterMark:FlxText;
+	var EventText:FlxText;
+	
+	var loadLeftTween:FlxTween;
+	var loadRightTween:FlxTween;
+	var loadAlphaTween:FlxTween;
+	var EventTextTween:FlxTween;
+	var loadTextTween:FlxTween;
 
-		super.destroy();
+	function NewCustomFadeTransition(duration:Float = 0.6, TransIn:Bool = false) {
+		
+		isTransIn = TransIn;
+				
+		if(ClientPrefs.data.CustomFade == 'Move'){
+    		loadRight = new FlxSprite(isTransIn ? 0 : 1280, 0).loadGraphic(Paths.image('menuExtend/CustomFadeTransition/loadingR'));
+    		loadRight.scrollFactor.set();
+    		loadRight.antialiasing = ClientPrefs.data.antialiasing;		
+    		add(loadRight);
+    		loadRight.setGraphicSize(FlxG.width, FlxG.height);
+    		loadRight.updateHitbox();
+    		
+    		loadLeft = new FlxSprite(isTransIn ? 0 : -1280, 0).loadGraphic(Paths.image('menuExtend/CustomFadeTransition/loadingL'));
+    		loadLeft.scrollFactor.set();
+    		loadLeft.antialiasing = ClientPrefs.data.antialiasing;
+    		add(loadLeft);
+    		loadLeft.setGraphicSize(FlxG.width, FlxG.height);
+    		loadLeft.updateHitbox();
+		
+    		WaterMark = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 50 * 2, 0, 'NF ENGINE V1.1.0', 50);
+    		WaterMark.scrollFactor.set();
+    		WaterMark.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+    		WaterMark.antialiasing = ClientPrefs.data.antialiasing;
+    		add(WaterMark);
+        
+            EventText= new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 50, 0, 'LOADING . . . . . . ', 50);
+    		EventText.scrollFactor.set();
+    		EventText.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+    		EventText.antialiasing = ClientPrefs.data.antialiasing;
+    		add(EventText);
+		
+			FlxG.sound.play(Paths.sound('loading_close'),ClientPrefs.data.CustomFadeSound);
+			if (!ClientPrefs.data.CustomFadeText) {
+			    EventText.text = '';
+			    WaterMark.text = '';
+			}
+			loadLeftTween = FlxTween.tween(loadLeft, {x: 0}, duration, {
+				onComplete: function(twn:FlxTween) {
+				    FlxTransitionableState.skipNextTransIn = true;
+					MusicBeatState.switchState(new FreeplayState());
+				},
+			ease: FlxEase.expoInOut});
+			
+			loadRightTween = FlxTween.tween(loadRight, {x: 0}, duration, {
+				onComplete: function(twn:FlxTween) {
+					if(finishCallback != null) {
+						finishCallback();
+					}
+				},
+			ease: FlxEase.expoInOut});
+			
+			loadTextTween = FlxTween.tween(WaterMark, {x: 50}, duration, {
+				onComplete: function(twn:FlxTween) {
+					if(finishCallback != null) {
+						finishCallback();
+					}
+				},
+			ease: FlxEase.expoInOut});
+			
+			EventTextTween = FlxTween.tween(EventText, {x: 50}, duration, {
+				onComplete: function(twn:FlxTween) {
+					if(finishCallback != null) {
+						finishCallback();
+					}
+				},
+			ease: FlxEase.expoInOut});					
+		}else{
+    		loadAlpha = new FlxSprite( 0, 0).loadGraphic(Paths.image('menuExtend/CustomFadeTransition/loadingAlpha'));
+    		loadAlpha.scrollFactor.set();
+    		loadAlpha.antialiasing = ClientPrefs.data.antialiasing;		
+    		add(loadAlpha);
+    		loadAlpha.setGraphicSize(FlxG.width, FlxG.height);
+    		loadAlpha.updateHitbox();
+		
+    		WaterMark = new FlxText( 50, 720 - 50 - 50 * 2, 0, 'NF ENGINE V1.1.0', 50);
+    		WaterMark.scrollFactor.set();
+    		WaterMark.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+    		WaterMark.antialiasing = ClientPrefs.data.antialiasing;
+    		add(WaterMark);
+        
+            EventText= new FlxText( 50, 720 - 50 - 50, 0, 'LOADING . . . . . . ', 50);
+    		EventText.scrollFactor.set();
+    		EventText.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+    		EventText.antialiasing = ClientPrefs.data.antialiasing;
+        		add(EventText);
+		
+		
+			FlxG.sound.play(Paths.sound('loading_close'),ClientPrefs.data.CustomFadeSound);
+			if (!ClientPrefs.data.CustomFadeText) {
+			    EventText.text = '';
+			    WaterMark.text = '';
+			}
+			WaterMark.alpha = 0;
+			EventText.alpha = 0;
+			loadAlpha.alpha = 0;
+			loadAlphaTween = FlxTween.tween(loadAlpha, {alpha: 1}, duration, {
+				onComplete: function(twn:FlxTween) {
+				    FlxTransitionableState.skipNextTransIn = true;
+					MusicBeatState.switchState(new FreeplayState());
+				},
+			ease: FlxEase.sineInOut});
+			
+			loadTextTween = FlxTween.tween(WaterMark, {alpha: 1}, duration, {
+				onComplete: function(twn:FlxTween) {
+					if(finishCallback != null) {
+						finishCallback();
+					}
+				},
+			ease: FlxEase.sineInOut});
+			
+			EventTextTween = FlxTween.tween(EventText, {alpha: 1}, duration, {
+				onComplete: function(twn:FlxTween) {
+					if(finishCallback != null) {
+						finishCallback();
+					}
+				},
+			ease: FlxEase.sineInOut});
+		}
+
 	}
 
-	
-	
+	override function destroy() {
+		if(leTween != null) {
+			finishCallback();
+			leTween.cancel();
+			
+			if (loadLeftTween != null) loadLeftTween.cancel();
+			if (loadRightTween != null) loadRightTween.cancel();
+			if (loadAlphaTween != null) loadAlphaTween.cancel();
+			
+			loadTextTween.cancel();
+			EventTextTween.cancel();
+		}
+		super.destroy();
+	}
 }

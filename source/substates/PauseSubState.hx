@@ -167,6 +167,7 @@ class PauseSubState extends MusicBeatSubstate
     	backButton.scale.set(0.45, 0.45);
     	backButton.updateHitbox();
     	backButton.alpha = 0;
+    	#if android backButton.y -= 90; #end
 	
     	if (Difficulty.list.length < 2) options.remove('Difficulty');
 	

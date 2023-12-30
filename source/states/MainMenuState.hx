@@ -19,7 +19,7 @@ import openfl.Lib;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var psychEngineVersion:String = '0.7.1'; //This is also used for Discord RPC
+	public static var psychEngineVersion:String = '0.7.2'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
@@ -41,8 +41,7 @@ class MainMenuState extends MusicBeatState
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
-	var camFollowPos:FlxObject;
-	
+
 	var SoundTime:Float = 0;
 	var BeatTime:Float = 0;
 	
@@ -84,13 +83,13 @@ class MainMenuState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end		
 
-		camGame = new FlxCamera();
+		camGame = initPsychCamera();
 		camHUD = new FlxCamera();
 		camAchievement = new FlxCamera();
 		camAchievement.bgColor.alpha = 0;
 		camHUD.bgColor.alpha = 0;
 
-		FlxG.cameras.reset(camGame);
+		
 		FlxG.cameras.add(camAchievement, false);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
@@ -106,7 +105,7 @@ class MainMenuState extends MusicBeatState
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
-		bg.scrollFactor.set(0,0);
+		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width));
 		bg.updateHitbox();
 		bg.screenCenter();
@@ -122,9 +121,9 @@ class MainMenuState extends MusicBeatState
 		add(bgMove);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
-		camFollowPos = new FlxObject(0, 0, 1, 1);
+		
 		add(camFollow);
-		add(camFollowPos);
+		
 
 		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
 		magenta.scrollFactor.set(0, yScroll);
@@ -218,16 +217,14 @@ class MainMenuState extends MusicBeatState
 		
         
 		#if ACHIEVEMENTS_ALLOWED
-		Achievements.loadAchievements();
+		// Unlocks "Freaky on a Friday Night" achievement if it's a Friday and between 18:00 PM and 23:59 PM
 		var leDate = Date.now();
-		if (leDate.getDay() == 5 && leDate.getHours() >= 18) {
-			var achieveID:Int = Achievements.getAchievementIndex('friday_night_play');
-			if(!Achievements.isAchievementUnlocked(Achievements.achievementsStuff[achieveID][2])) { //It's a friday night. WEEEEEEEEEEEEEEEEEE
-				Achievements.achievementsMap.set(Achievements.achievementsStuff[achieveID][2], true);
-				giveAchievement();
-				ClientPrefs.saveSettings();
-			}
-		}
+		if (leDate.getDay() == 5 && leDate.getHours() >= 18)
+			Achievements.unlock('friday_night_play');
+        
+		#if MODS_ALLOWED
+		Achievements.reloadList();
+		#end
 		#end
 		
 		#if !android
@@ -244,18 +241,6 @@ class MainMenuState extends MusicBeatState
 		super.create();
 		CustomFadeTransition.nextCamera = camHUD;
 	}
-
-    
-	#if ACHIEVEMENTS_ALLOWED
-	// Unlocks "Freaky on a Friday Night" achievement
-	function giveAchievement() {
-		add(new AchievementObject('friday_night_play', camAchievement));
-		FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
-		trace('Giving achievement "friday_night_play"');
-	}
-	#end
-    
-    
 	
 	var canClick:Bool = true;
 	var canBeat:Bool = true;
@@ -491,5 +476,8 @@ class MainMenuState extends MusicBeatState
 		    
 		    spr.updateHitbox();
         });
+        
+        camFollow.setPosition(menuItems.members[curSelected].getGraphicMidpoint().x,
+			menuItems.members[curSelected].getGraphicMidpoint().y - (menuItems.length > 4 ? menuItems.length * 8 : 0));
 	}
 }
