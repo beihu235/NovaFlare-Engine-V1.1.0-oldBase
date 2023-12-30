@@ -105,7 +105,7 @@ class MainMenuState extends MusicBeatState
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
-		bg.scrollFactor.set(0, yScroll);
+		bg.scrollFactor.set(0, 0);
 		bg.setGraphicSize(Std.int(bg.width));
 		bg.updateHitbox();
 		bg.screenCenter();
@@ -116,6 +116,7 @@ class MainMenuState extends MusicBeatState
 		bgMove.alpha = 0.1;
 		bgMove.color = ColorArray[currentColor];
 		bgMove.screenCenter();
+		bg.scrollFactor.set(0, 0);
 		bgMove.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
 		bgMove.antialiasing = ClientPrefs.data.antialiasing;
 		add(bgMove);
@@ -200,7 +201,7 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollow, null, 0);
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "NF Engine v" + '1.1.0' + ' (PSYCH v0.7.1h)', 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "NF Engine v" + '1.1.0' + ' (PSYCH v0.7.2h)', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		versionShit.antialiasing = ClientPrefs.data.antialiasing;
@@ -438,19 +439,28 @@ class MainMenuState extends MusicBeatState
 			    var daChoice:String = optionShit[curSelected];
 
 				    switch (daChoice)
-					    {
+					{
 						case 'story_mode':
-							MusicBeatState.switchState(new StoryMenuState());
-						case 'freeplay':
-							MusicBeatState.switchState(new FreeplayState());	
-						case 'mods':
-							MusicBeatState.switchState(new ModsMenuState());									
-						case 'options':						    
-							MusicBeatState.switchState(new options.OptionsState());
-						case 'credits':
-							MusicBeatState.switchState(new CreditsState());	
-					    }
-				}    
+								MusicBeatState.switchState(new StoryMenuState());
+							case 'freeplay':
+								MusicBeatState.switchState(new FreeplayState());
+							#if MODS_ALLOWED
+							case 'mods':
+								MusicBeatState.switchState(new ModsMenuState());
+							#end
+							case 'awards':
+								MusicBeatState.switchState(new AchievementsMenuState());
+							case 'credits':
+								MusicBeatState.switchState(new CreditsState());
+							case 'options':
+								MusicBeatState.switchState(new OptionsState());
+								OptionsState.onPlayState = false;
+								if (PlayState.SONG != null)
+								{
+									PlayState.SONG.arrowSkin = null;
+									PlayState.SONG.splashSkin = null;
+								}
+				    }    
 		});
 	}
 	
