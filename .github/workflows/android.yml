@@ -52,7 +52,7 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
-          haxelib install hxcpp > /dev/null --quiet
+          haxelib install hxcpp > /dev/null
           haxelib install hxcpp-debug-server
           haxelib install lime 7.9.0
           haxelib install openfl 9.2.0
