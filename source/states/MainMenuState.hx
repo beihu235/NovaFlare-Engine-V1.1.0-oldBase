@@ -337,12 +337,8 @@ class MainMenuState extends MusicBeatState
                 			}
             		    });
     			    }
-			    }
-			    
-			    if(saveCurSelected != curSelected){
-			        saveCurSelected = curSelected;
-			        checkChoose();
-			    }
+			    }			    
+			    if(saveCurSelected != curSelected) checkChoose();
 			}
 		});
 		
