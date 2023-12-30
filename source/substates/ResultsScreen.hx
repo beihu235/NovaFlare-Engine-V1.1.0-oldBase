@@ -157,37 +157,37 @@ class ResultsScreen extends MusicBeatSubstate
 		graphSickUp.scrollFactor.set();
 		graphSickUp.alpha = 0;		
 		add(graphSickUp);
-		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.sickWindow) graphSickUp.visible = false;
+		if ((ClientPrefs.data.marvelousWindow > ClientPrefs.data.sickWindow && ClientPrefs.data.marvelousRating)) graphSickUp.visible = false;
 		
 		graphSickDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.sickWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[1]);
 		graphSickDown.scrollFactor.set();
 		graphSickDown.alpha = 0;		
 		add(graphSickDown);
-		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.sickWindow) graphSickDown.visible = false;
+		if ((ClientPrefs.data.marvelousWindow > ClientPrefs.data.sickWindow && ClientPrefs.data.marvelousRating)) graphSickDown.visible = false;
 		
 		graphGoodUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[2]);
 		graphGoodUp.scrollFactor.set();
 		graphGoodUp.alpha = 0;		
 		add(graphGoodUp);
-		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.goodWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.goodWindow) graphGoodUp.visible = false;
+		if ((ClientPrefs.data.marvelousWindow > ClientPrefs.data.goodWindow && ClientPrefs.data.marvelousRating) || ClientPrefs.data.sickWindow > ClientPrefs.data.goodWindow) graphGoodUp.visible = false;
 		
 		graphGoodDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.goodWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[2]);
 		graphGoodDown.scrollFactor.set();
 		graphGoodDown.alpha = 0;		
 		add(graphGoodDown);
-		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.goodWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.goodWindow) graphGoodDown.visible = false;
+		if ((ClientPrefs.data.marvelousWindow > ClientPrefs.data.goodWindow && ClientPrefs.data.marvelousRating) || ClientPrefs.data.sickWindow > ClientPrefs.data.goodWindow) graphGoodDown.visible = false;
 		
 		graphBadUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[3]);
 		graphBadUp.scrollFactor.set();
 		graphBadUp.alpha = 0;		
 		add(graphBadUp);
-		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.badWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.badWindow || ClientPrefs.data.goodWindow > ClientPrefs.data.badWindow) graphBadUp.visible = false;
+		if ((ClientPrefs.data.marvelousWindow > ClientPrefs.data.badWindow && ClientPrefs.data.marvelousRating) || ClientPrefs.data.sickWindow > ClientPrefs.data.badWindow || ClientPrefs.data.goodWindow > ClientPrefs.data.badWindow) graphBadUp.visible = false;
 		
 		graphBadDown = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 + graphHeight * 0.5 * MoveSize * (ClientPrefs.data.badWindow / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[3]);
 		graphBadDown.scrollFactor.set();
 		graphBadDown.alpha = 0;		
 		add(graphBadDown);
-		if (ClientPrefs.data.marvelousWindow > ClientPrefs.data.badWindow || ClientPrefs.data.sickWindow > ClientPrefs.data.badWindow || ClientPrefs.data.goodWindow > ClientPrefs.data.badWindow) graphBadDown.visible = false;
+		if ((ClientPrefs.data.marvelousWindow > ClientPrefs.data.badWindow && ClientPrefs.data.marvelousRating) || ClientPrefs.data.sickWindow > ClientPrefs.data.badWindow || ClientPrefs.data.goodWindow > ClientPrefs.data.badWindow) graphBadDown.visible = false;
 		
 		graphShitUp = new FlxSprite(graphBG.x, graphBG.y + graphHeight * 0.5 - graphHeight * 0.5 * MoveSize * (safeZoneOffset / safeZoneOffset) - judgeHeight * 0.5).makeGraphic(graphWidth, judgeHeight, ColorArray[4]);
 		graphShitUp.scrollFactor.set();
