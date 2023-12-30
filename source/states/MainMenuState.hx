@@ -434,7 +434,7 @@ class MainMenuState extends MusicBeatState
 			}
 		});
 		
-		FlxTween.tween(logoBl, {x: 1280 + 320 - logoBl.width / 2 }, 0.6, ease: FlxEase.backInOut);
+		FlxTween.tween(logoBl, {x: 1280 + 320 - logoBl.width / 2 }, 0.6, {ease: FlxEase.backInOut});
 		
 		FlxTween.tween(camGame, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
 		FlxTween.tween(camHUD, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
