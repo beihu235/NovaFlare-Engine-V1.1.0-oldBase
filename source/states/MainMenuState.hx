@@ -193,6 +193,7 @@ class MainMenuState extends MusicBeatState
 			if (menuItem.ID == curSelected){
 			menuItem.animation.play('selected');
 			menuItem.updateHitbox();
+			}
 		}
 		
 		for (i in 0...optionShit.length)
