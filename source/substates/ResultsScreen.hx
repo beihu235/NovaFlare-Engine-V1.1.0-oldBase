@@ -25,6 +25,7 @@ import backend.Conductor;
 import flixel.util.FlxSpriteUtil;
 import openfl.display.Sprite;
 import openfl.geom.Rectangle;
+import openfl.utils.Assets;
 
 class ResultsScreen extends MusicBeatSubstate
 {
@@ -432,9 +433,9 @@ class ResultsScreen extends MusicBeatSubstate
 	var EventTextTween:FlxTween;
 	var loadTextTween:FlxTween;
 
-	function NewCustomFadeTransition(duration:Float = 0.6, isTransIn:Bool = false) {
+	function NewCustomFadeTransition(duration:Float = 0.6, TransIn:Bool = false) {
 		
-		isTransIn = isTransIn;
+		isTransIn = TransIn;
 				
 		if(ClientPrefs.data.CustomFade == 'Move'){
     		loadRight = new FlxSprite(isTransIn ? 0 : 1280, 0).loadGraphic(Paths.image('menuExtend/CustomFadeTransition/loadingR'));
