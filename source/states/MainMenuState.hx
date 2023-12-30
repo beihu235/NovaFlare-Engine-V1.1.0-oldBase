@@ -305,29 +305,25 @@ class MainMenuState extends MusicBeatState
 		    
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			if (usingMouse)
+			if (usingMouse && canClick)
 			{
-				if (!FlxG.mouse.overlaps(spr) && FlxG.mouse.justReleased #if android && !FlxG.mouse.overlaps(MusicBeatState._virtualpad.buttonA) #end){
-					spr.animation.play('idle');
-			        spr.updateHitbox();
+				if (!FlxG.mouse.overlaps(spr) {
+				    if (FlxG.mouse.pressed){
+        			    spr.animation.play('idle');
+    			    }
+				    if (FlxG.mouse.justReleased 
+				    #if android && !FlxG.mouse.overlaps(MusicBeatState._virtualpad.buttonA) #end){
+					    spr.animation.play('idle');			        			        
+			        } //work better for use virtual pad
 			    }
     			if (FlxG.mouse.overlaps(spr)){
-                    if (FlxG.mouse.justPressed && canClick && spr.animation.curAnim.name != 'idle')
-    				{
-    				    if (curSelected == spr.ID) {
-    				        selectSomething();
-    				    }else{
-    					    curSelected = spr.ID;
-					    		
-    					    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	    
-    					    spr.animation.play('selected');
-    					}
-    				}
-    				if (FlxG.mouse.pressed && canClick){
+    				if (FlxG.mouse.pressed){
         			    curSelected = spr.ID;
 			    	
-        			    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	 
-        			    spr.animation.play('selected');			
+        			    if (spr.animation.curAnim.name == 'idle'){
+        			        FlxG.sound.play(Paths.sound('scrollMenu'));	 
+        			        spr.animation.play('selected');		
+        			    }	
         			    
         			    menuItems.forEach(function(spr:FlxSprite){
             	            if (spr.ID != curSelected)
@@ -336,6 +332,10 @@ class MainMenuState extends MusicBeatState
                 			    spr.centerOffsets();
                 			}
             		    });
+    			    }
+    			    if (FlxG.mouse.justReleased){
+    			        if (spr.animation.curAnim.name == 'selected') selectSomething();
+    			        else spr.animation.play('idle');
     			    }
 			    }			    
 			    if(saveCurSelected != curSelected) checkChoose();
