@@ -115,7 +115,7 @@ class MainMenuState extends MusicBeatState
 	    bgMove = new FlxBackdrop(Paths.image('menuExtend/Others/backdrop'), XY, 0, 0);
 		bgMove.alpha = 0.1;
 		bgMove.color = ColorArray[currentColor];
-		bgMove.screenCenter();
+		bgMove.screenCenter(XY);
 		bg.scrollFactor.set(0, 0);
 		bgMove.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
 		bgMove.antialiasing = ClientPrefs.data.antialiasing;
@@ -215,7 +215,7 @@ class MainMenuState extends MusicBeatState
         versionShit.cameras = [camHUD];
 		// NG.core.calls.event.logEvent('swag').send();
 
-		
+		checkChoose();
         
 		#if ACHIEVEMENTS_ALLOWED
 		// Unlocks "Freaky on a Friday Night" achievement if it's a Friday and between 18:00 PM and 23:59 PM
@@ -420,7 +420,7 @@ class MainMenuState extends MusicBeatState
 				
 				//spr.animation.play('selected');
 			
-			    FlxTween.tween(spr, {y: 360 - spr.height / 2}, 0.6, {
+			    FlxTween.tween(spr, {y: 360 - spr.height / 2 - menuItems.members[curSelected].getGraphicMidpoint().y - (menuItems.length > 4 ? menuItems.length * 8 : 0)}, 0.6, {
 					ease: FlxEase.backInOut
 			    });
 			
@@ -432,6 +432,7 @@ class MainMenuState extends MusicBeatState
 		
 		
 		FlxTween.tween(camGame, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
+		FlxTween.tween(camHUD, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
 		FlxTween.tween(camGame, {angle: 0}, 0.8, { //not use for now
 		        ease: FlxEase.cubeInOut,
 		        onComplete: function(twn:FlxTween)
