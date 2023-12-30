@@ -25,7 +25,7 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	public var camGame:FlxCamera;
 	public var camHUD:FlxCamera;
-	public var camAchievement:FlxCamera;
+	public var camOther:FlxCamera;
 	var optionTween:Array<FlxTween> = [];
 	var cameraTween:Array<FlxTween> = [];
 	
@@ -87,16 +87,16 @@ class MainMenuState extends MusicBeatState
 
 		camGame = initPsychCamera();
 		camHUD = new FlxCamera();
-		camAchievement = new FlxCamera();
-		camAchievement.bgColor.alpha = 0;
+		camOther = new FlxCamera();
+		camOther.bgColor.alpha = 0;
 		camHUD.bgColor.alpha = 0;
 
 		
-		FlxG.cameras.add(camAchievement, false);
+		FlxG.cameras.add(camOther, false);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
-		CustomFadeTransition.nextCamera = camHUD;
-        //CustomFadeTransition.nextCamera = camAchievement;
+		CustomFadeTransition.nextCamera = camOther;
+        //CustomFadeTransition.nextCamera = camOther;
         
 		//transIn = FlxTransitionableState.defaultTransIn;
 		//transOut = FlxTransitionableState.defaultTransOut;
@@ -116,13 +116,13 @@ class MainMenuState extends MusicBeatState
 		
 	    bgMove = new FlxBackdrop(Paths.image('menuExtend/Others/backdrop'), XY, 0, 0);
 		bgMove.alpha = 0.1;
-		bgMove.color = ColorArray[currentColor];
-		bgMove.screenCenter(XY);
-		bg.scrollFactor.set(0, 0);
+		bgMove.color = ColorArray[currentColor];		
 		bgMove.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
 		bgMove.antialiasing = ClientPrefs.data.antialiasing;
 		add(bgMove);
-
+        bgMove.screenCenter(XY);
+		bg.scrollFactor.set(0, 0);
+		
 		camFollow = new FlxObject(0, 0, 1, 1);
 		
 		add(camFollow);
@@ -245,7 +245,7 @@ class MainMenuState extends MusicBeatState
 		
         
 		super.create();
-		CustomFadeTransition.nextCamera = camHUD;
+		CustomFadeTransition.nextCamera = camOther;
 	}
 	
 	var canClick:Bool = true;
@@ -304,7 +304,7 @@ class MainMenuState extends MusicBeatState
 		{
 			if (usingMouse)
 			{
-				if (!FlxG.mouse.overlaps(spr) #if android && !FlxG.mouse.overlaps(MusicBeatState._virtualpad.buttonA) #end){
+				if (!FlxG.mouse.overlaps(spr) && spr.x > 0 #if android && !FlxG.mouse.overlaps(MusicBeatState._virtualpad.buttonA) #end){
 					spr.animation.play('idle');
 			        spr.updateHitbox();
 			    }
@@ -337,15 +337,13 @@ class MainMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new TitleState());
 			}		
-	
-			
-			#if (desktop || android)
+				
 			else if (controls.justPressed('debug_1') #if android || MusicBeatState._virtualpad.buttonE.justPressed #end)
 			{
 				endCheck = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
 			}
-			#end 
+			
 		
         }
       
@@ -423,8 +421,9 @@ class MainMenuState extends MusicBeatState
 			{				
 				
 				//spr.animation.play('selected');
-			
-			    FlxTween.tween(spr, {y: 360 - spr.height / 2 - menuItems.members[curSelected].getGraphicMidpoint().y - (menuItems.length > 4 ? menuItems.length * 8 : 0)}, 0.6, {
+			    var scr:Float = (optionShit.length - 4) * 0.135;
+			    if(optionShit.length < 6) scr = 0;
+			    FlxTween.tween(spr, {y: 360 - spr.height / 2}, 0.6, {
 					ease: FlxEase.backInOut
 			    });
 			
