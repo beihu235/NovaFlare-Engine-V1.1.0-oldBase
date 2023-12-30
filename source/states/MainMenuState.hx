@@ -40,6 +40,8 @@ class MainMenuState extends MusicBeatState
 	];
 
 	var magenta:FlxSprite;
+	var logoBl:FlxSprite;
+	
 	var camFollow:FlxObject;
 
 	var SoundTime:Float = 0;
@@ -136,15 +138,31 @@ class MainMenuState extends MusicBeatState
 		magenta.color = 0xFFfd719b;
 		add(magenta);
 		
+		
+		logoBl = new FlxSprite(0, 0);
+		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+		logoBl.antialiasing = ClientPrefs.data.antialiasing;
+		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
+		logoBl.animation.play('bump');
+		logoBl.offset.x = 0;
+		logoBl.offset.y = 0;
+		logoBl.scale.x = (640 / logoBl.frameWidth);
+		logoBl.scale.y = logoBl.scale.x;
+		logoBl.updateHitbox();
+		add(logoBl);
+		menuItem.scrollFactor.set(0, 0);
+		logoBl.x = 1280 - 320 - logoBl.width / 2;
+		logoBl.y = 360 - logoBl.height / 2;
+		
 		// magenta.scrollFactor.set();
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
 		var scale:Float = 0.8;
-		/*if(optionShit.length > 6) {
+		if(optionShit.length > 6) {
 			scale = 6 / optionShit.length;
-		}*/
+		}
 
 		for (i in 0...optionShit.length)
 		{
@@ -175,20 +193,6 @@ class MainMenuState extends MusicBeatState
 			if (menuItem.ID == curSelected){
 			menuItem.animation.play('selected');
 			menuItem.updateHitbox();
-			//menuItem.centerOffsets();
-			//menuItem.offset.x = menuItem.offset.x * 0.8;
-			//menuItem.offset.y = menuItem.offset.y * 0.8 + menuItem.width / 2;
-			}
-			/*
-			FlxTween.tween(menuItem, {x: 100}, (0.5 + 0.06 * i), {
-			    ease: FlxEase.quadOut,
-			    type: ONESHOT,
-				onComplete: function(twn:FlxTween)
-				    {
-
-				    }
-				});                             
-				*/      
 		}
 		
 		for (i in 0...optionShit.length)
@@ -356,11 +360,10 @@ class MainMenuState extends MusicBeatState
             currentColorAgain = currentColor - 1;
             if (currentColorAgain <= 0) currentColorAgain = 6;
             
-            FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});
-           
-			camGame.zoom = 1 + 0.015;
-			
-			//FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
+            logoBl.animation.play('bump');
+            
+            FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});           
+			camGame.zoom = 1 + 0.015;			
 			cameraTween[0] = FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
 		    
 			menuItems.forEach(function(spr:FlxSprite)	{
@@ -430,6 +433,7 @@ class MainMenuState extends MusicBeatState
 			}
 		});
 		
+		FlxTween.tween(logoBl, {x: 1280 + 320 - logoBl.width / 2 )}, 0.6, ease: FlxEase.backInOut);
 		
 		FlxTween.tween(camGame, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
 		FlxTween.tween(camHUD, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
