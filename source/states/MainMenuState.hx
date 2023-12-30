@@ -41,8 +41,7 @@ class MainMenuState extends MusicBeatState
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
-	var camFollowPos:FlxObject;
-	
+
 	var SoundTime:Float = 0;
 	var BeatTime:Float = 0;
 	
@@ -106,7 +105,7 @@ class MainMenuState extends MusicBeatState
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
-		bg.scrollFactor.set(0,0);
+		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width));
 		bg.updateHitbox();
 		bg.screenCenter();
@@ -122,9 +121,9 @@ class MainMenuState extends MusicBeatState
 		add(bgMove);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
-		camFollowPos = new FlxObject(0, 0, 1, 1);
+		
 		add(camFollow);
-		add(camFollowPos);
+		
 
 		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
 		magenta.scrollFactor.set(0, yScroll);
@@ -477,5 +476,8 @@ class MainMenuState extends MusicBeatState
 		    
 		    spr.updateHitbox();
         });
+        
+        camFollow.setPosition(menuItems.members[curSelected].getGraphicMidpoint().x,
+			menuItems.members[curSelected].getGraphicMidpoint().y - (menuItems.length > 4 ? menuItems.length * 8 : 0));
 	}
 }
