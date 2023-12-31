@@ -93,9 +93,11 @@ class ResultsScreen extends MusicBeatSubstate
 		}else{
 		    lossImage = true;
 		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50);
-            graphBG.graphic.beginFill(0x000000, 0.6); //alpha 0.6 for black
-            graphBG.graphic.drawRect(0, 0, graphWidth, graphHeight);
-            graphBG.graphic.endFill();
+
+            var background:FlxBitmap = new FlxBitmap(0, 0); // 创建一个空白的FlxBitmap
+            add(background);
+            background.fillRect(new Rectangle(0, 0, graphWidth, graphHeight), 0x000000, 0.6);
+            graphBG.pixels = background.pixels;
 		}
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
