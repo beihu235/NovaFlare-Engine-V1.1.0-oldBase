@@ -100,10 +100,10 @@ class TitleState extends MusicBeatState
 		//https://github.com/beihu235/AndroidDialogs
 		
 		#if android
-		if (lime.app.Application.current.meta.get('title') != "Friday Night Funkin' NF Engine"
-		 || lime.app.Application.current.meta.get("packageName") != "com.NFengine"
-		 || lime.app.Application.current.meta.get("package") != "com.NFengine"
-		 || lime.app.Application.current.meta.get("version") != '1.1.0'
+		if (Application.current.meta.get('title') != "Friday Night Funkin' NF Engine"
+		 || Application.current.meta.get("packageName") != "com.NFengine"
+		 || Application.current.meta.get("package") != "com.NFengine"
+		 || Application.current.meta.get("version") != '1.1.0'
 		){
 		    if (DeviceLanguage.getLang() == 'zh') 
     		lang = '检测到引擎被修改，请使用官方版本';
