@@ -93,9 +93,9 @@ class ResultsScreen extends MusicBeatSubstate
 		}else{
 		    lossImage = true;
 		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50);
-            graphBG.graphics.beginFill(0x000000, 0.6); //alpha 0.6 for black
-            graphBG.graphics.drawRect(0, 0, graphWidth, graphHeight);
-            graphBG.graphics.endFill();
+            graphBG.beginFill(0x000000, 0.6); //alpha 0.6 for black
+            graphBG.drawRect(0, 0, graphWidth, graphHeight);
+            graphBG.endFill();
 		}
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
