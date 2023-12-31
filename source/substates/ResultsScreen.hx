@@ -24,7 +24,7 @@ import backend.Conductor;
 
 import flixel.util.FlxSpriteUtil;
 import openfl.display.Sprite;
-import openfl.display.BitmapData;
+import openfl.display.Bitmap;
 import openfl.geom.graphBG;
 import openfl.utils.Assets;
 
@@ -94,11 +94,13 @@ class ResultsScreen extends MusicBeatSubstate
 		}else{
 		    lossImage = true;
 		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50);
+            
+            var copySprite:FlxSprite = new FlxSprite(0,0).makeGraphic(graphWidth, graphHeight, FlxColor.BLACK);
+            var bitmap:Bitmap = new Bitmap();
+            bitmap.bitmapData = copySprite.pixels;
+            bitmap.alpha = 0.5;
 
-            var bitmapData:BitmapData = new BitmapData(graphWidth, graphHeight, true, 0xff000000);
-            bitmapData.alpha = 0.5;
-
-            graphBG.pixels = bitmapData;
+            graphBG.pixels = bitmap.bitmapData;
 		}
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
