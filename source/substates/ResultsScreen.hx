@@ -92,14 +92,10 @@ class ResultsScreen extends MusicBeatSubstate
 		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).loadGraphic(Paths.image('menuExtend/ResultsScreen/ResultsScreenBG'));		    
 		}else{
 		    lossImage = true;
-		    var copySprite:FlxSprite = new FlxSprite(FlxG.width * 2, 50).makeGraphic(graphWidth, graphHeight, FlxColor.BLACK);
-		    copySprite.alpha = 0.6;
-		    copySprite.updateHitbox();
-		    add(copySprite);
-		    
-		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50);
-		    graphBG.graphic = copySprite.graphic;
-		    graphBG.pixels = copySprite.pixels;
+		    graphBG = FlxSprite = new FlxSprite(FlxG.width - 550 - 50, 50);
+            rectangle.graphics.beginFill(0x000000, 0.6);
+            rectangle.graphics.drawRect(0, 0, graphWidth, graphHeight);
+            rectangle.graphics.endFill();
 		}
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
@@ -414,7 +410,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		new FlxTimer().start(2.5, function(tmr:FlxTimer){
 			FlxTween.tween(backBG, {x:  1280 - backBG.width}, 1, {ease: FlxEase.backInOut});
-			FlxTween.tween(backText, {x: 1280 - backText.width}, 1.2, {ease: FlxEase.backInOut});
+			FlxTween.tween(backText, {x: 1280 - backText.width - 50}, 1.2, {ease: FlxEase.backInOut});
 		});
 				
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];						
