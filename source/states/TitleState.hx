@@ -103,7 +103,7 @@ class TitleState extends MusicBeatState
 		if (lime.app.Application.current.meta.get('title') != "Friday Night Funkin' NF Engine"
 		 || lime.app.Application.current.meta.get("packageName") != "com.NFengine"
 		 || lime.app.Application.current.meta.get("package") != "com.NFengine"
-		 || lime.app.Application.current.meta.get("version") == '1.1.0'
+		 || lime.app.Application.current.meta.get("version") != '1.1.0'
 		){
 		    if (DeviceLanguage.getLang() == 'zh') 
     		lang = '检测到引擎被修改，请使用官方版本';
@@ -111,8 +111,8 @@ class TitleState extends MusicBeatState
     		lang = 'The engine has been modified. Please use the official version';
 		    
 		    AndroidDialogsExtend.OpenToast(lang,2);
-		    Sys.exit(1);		
-		    return;
+		    //Sys.exit(1);		
+		   // return;
 		}
 		
 		if (DeviceLanguage.getLang() == 'zh') 
