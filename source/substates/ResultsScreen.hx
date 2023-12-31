@@ -418,7 +418,9 @@ class ResultsScreen extends MusicBeatSubstate
 	{ 					
 		if(FlxG.keys.justPressed.ENTER #if android || FlxG.mouse.overlaps(backText) #end)
 		{
+		   if (FlxG.mouse.pressed){
 		    NewCustomFadeTransition();
+		}
 		    //MusicBeatState.switchState(new FreeplayState());
 		}
 		    PlayState.cancelMusicFadeTween();
