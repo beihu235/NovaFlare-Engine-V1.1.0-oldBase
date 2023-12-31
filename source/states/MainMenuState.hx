@@ -317,6 +317,10 @@ class MainMenuState extends MusicBeatState
 			        } //work better for use virtual pad
 			    }
     			if (FlxG.mouse.overlaps(spr)){
+    			    if (FlxG.mouse.justPressed){
+    			        if (spr.animation.curAnim.name == 'selected') selectSomething();
+    			        else spr.animation.play('idle');
+    			    }
     				if (FlxG.mouse.pressed){
         			    curSelected = spr.ID;
 			    	
@@ -332,11 +336,7 @@ class MainMenuState extends MusicBeatState
                 			    spr.centerOffsets();
                 			}
             		    });
-    			    }
-    			    if (FlxG.mouse.justReleased){
-    			        if (spr.animation.curAnim.name == 'selected') selectSomething();
-    			        else spr.animation.play('idle');
-    			    }
+    			    }   			    
 			    }			    
 			    if(saveCurSelected != curSelected) checkChoose();
 			}
