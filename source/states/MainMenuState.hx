@@ -308,7 +308,8 @@ class MainMenuState extends MusicBeatState
 			if (usingMouse && canClick)
 			{
 				if (!FlxG.mouse.overlaps(spr)) {
-				    if (FlxG.mouse.pressed){
+				    if (FlxG.mouse.pressed
+				    #if android && !FlxG.mouse.overlaps(MusicBeatState._virtualpad.buttonA) #end){
         			    spr.animation.play('idle');
     			    }
 				    if (FlxG.mouse.justReleased 
