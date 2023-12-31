@@ -343,7 +343,6 @@ class ResultsScreen extends MusicBeatSubstate
 		bBg.scrollFactor.set(0, 0);
 		bBg.scale.x = 0.5;
 		bBg.scale.y = 0.5;
-		bBg.setGraphicSize(bBGWidth, bBGHeight);
 		add(bBg);
 
 
