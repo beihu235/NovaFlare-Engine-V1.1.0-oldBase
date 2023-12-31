@@ -351,7 +351,7 @@ class ResultsScreen extends MusicBeatSubstate
 		backText.alpha = 0;
 		backText.x = FlxG.width - backText.width - 20;
 
-		var bBg:FlxSprite = new FlxSprite(backText.x + 120,backText.y - 55).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
+		var bBg:FlxSprite = new FlxSprite(backText.x + 130,backText.y - 50).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
 		bBg.scrollFactor.set(0, 0);
 		bBg.scale.x = 0.5;
 		bBg.scale.y = 0.5;
