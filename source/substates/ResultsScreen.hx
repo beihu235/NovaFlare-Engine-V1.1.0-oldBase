@@ -24,6 +24,7 @@ import backend.Conductor;
 
 import flixel.util.FlxSpriteUtil;
 import openfl.display.Sprite;
+import openfl.display.BitmapData;
 import openfl.geom.graphBG;
 import openfl.utils.Assets;
 
