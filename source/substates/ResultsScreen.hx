@@ -339,13 +339,6 @@ class ResultsScreen extends MusicBeatSubstate
 		setMsText.antialiasing = ClientPrefs.data.antialiasing;
 		add(setMsText);		
 
-		var bBg:FlxSprite = new FlxSprite(0,0).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
-		bBg.scrollFactor.set(0, 0);
-		bBg.scale.x = 0.5;
-		bBg.scale.y = 0.5;
-		add(bBg);
-
-
 		var backTextShow:String = 'Press Enter to continue';
 		#if android backTextShow = 'Press Text to continue'; #end
 		backText = new FlxText(0, FlxG.height - 45, 0, backTextShow);
@@ -355,10 +348,15 @@ class ResultsScreen extends MusicBeatSubstate
 		backText.scrollFactor.set();
 		backText.antialiasing = ClientPrefs.data.antialiasing;
 	    backText.alignment = RIGHT;
-		add(backText);		
 		backText.alpha = 0;
 		backText.x = FlxG.width - backText.width - 20;
 
+		var bBg:FlxSprite = new FlxSprite(backText.x,backText.y).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
+		bBg.scrollFactor.set(0, 0);
+		bBg.scale.x = 0.5;
+		bBg.scale.y = 0.5;
+		add(bBg);
+		add(backText);		
 		
 		//--------------text
 		
