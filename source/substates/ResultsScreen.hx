@@ -25,7 +25,7 @@ import backend.Conductor;
 import flixel.util.FlxSpriteUtil;
 import openfl.display.Sprite;
 import openfl.display.Bitmap;
-import openfl.geom.graphBG;
+import openfl.geom.Rectangle;
 import openfl.utils.Assets;
 
 class ResultsScreen extends MusicBeatSubstate
