@@ -238,7 +238,8 @@ class ResultsScreen extends MusicBeatSubstate
 		graphSizeRight = new FlxSprite(graphBG.x + graphWidth, graphBG.y).makeGraphic(2, graphHeight + 2, FlxColor.WHITE);
 		graphSizeRight.scrollFactor.set();
 		graphSizeRight.alpha = 0;		
-		add(graphSizeRight);		
+		add(graphSizeRight);
+
 		
 		//-----------------------BG
 		var opponentExtend:String = '';
@@ -349,6 +350,11 @@ class ResultsScreen extends MusicBeatSubstate
 		backText.alpha = 0;
 		backText.x = FlxG.width - backText.width - 20;
 
+		var bBg:FlxSprite = new FlxSprite(backText.x,backText.y).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
+		bBg.scrollFactor.set(0, 0);
+		bBg.setGraphicSize(Std.int(bBg.width));
+		add(bBg);
+		
 		//--------------text
 		
 		//time = 0
