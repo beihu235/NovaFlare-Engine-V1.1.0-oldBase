@@ -351,7 +351,7 @@ class ResultsScreen extends MusicBeatSubstate
 		backText.alpha = 0;
 		backText.x = FlxG.width - backText.width - 20;
 
-		var bBg:FlxSprite = new FlxSprite(backText.x,backText.y + 10).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
+		var bBg:FlxSprite = new FlxSprite(backText.x + 20,backText.y - 15).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
 		bBg.scrollFactor.set(0, 0);
 		bBg.scale.x = 0.5;
 		bBg.scale.y = 0.5;
@@ -403,7 +403,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		new FlxTimer().start(2.5, function(tmr:FlxTimer){
 			FlxTween.tween(backText, {alpha: 1}, 1);
-			FlxTween.tween(bBg, {x: backText.x - 100});
+			FlxTween.tween(bBg, {x: backText.x - 250});
 		});
 		
 		
