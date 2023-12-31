@@ -24,7 +24,7 @@ import backend.Conductor;
 
 import flixel.util.FlxSpriteUtil;
 import openfl.display.Sprite;
-import openfl.geom.Rectangle;
+import openfl.geom.graphBG;
 import openfl.utils.Assets;
 
 class ResultsScreen extends MusicBeatSubstate
@@ -92,10 +92,10 @@ class ResultsScreen extends MusicBeatSubstate
 		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).loadGraphic(Paths.image('menuExtend/ResultsScreen/ResultsScreenBG'));		    
 		}else{
 		    lossImage = true;
-		    graphBG = FlxSprite = new FlxSprite(FlxG.width - 550 - 50, 50);
-            rectangle.graphics.beginFill(0x000000, 0.6);
-            rectangle.graphics.drawRect(0, 0, graphWidth, graphHeight);
-            rectangle.graphics.endFill();
+		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50);
+            graphBG.graphics.beginFill(0x000000, 0.6); //alpha 0.6 for black
+            graphBG.graphics.drawRect(0, 0, graphWidth, graphHeight);
+            graphBG.graphics.endFill();
 		}
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
