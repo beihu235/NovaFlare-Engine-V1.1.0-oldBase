@@ -83,6 +83,8 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		var graphWidth = 550;
 		var graphHeight = 300;
+		var bBGWidth = 926;
+		var bBGHeight = 126;
 		var imageCheck:Bool;
 		var image:String = Paths.modFolders('images/menuExtend/ResultsScreen/ResultsScreenBG.png');
 		if (FileSystem.exists(image)){
@@ -287,7 +289,7 @@ class ResultsScreen extends MusicBeatSubstate
 		'healthGain: X' + ClientPrefs.getGameplaySetting('healthgain')
 		+ '  healthLoss: X' + ClientPrefs.getGameplaySetting('healthloss')
 		+ '\n'
-		+ 'SongSpeed: X' + speed
+		+ 'SongSpeed: ' + speed
 		+ '  PlaybackRate: X' + ClientPrefs.getGameplaySetting('songspeed')
 		+ '\n'
 		+ 'BotPlay: ' + botplay
@@ -336,7 +338,15 @@ class ResultsScreen extends MusicBeatSubstate
 		setMsText.scrollFactor.set();
 		setMsText.antialiasing = ClientPrefs.data.antialiasing;
 		add(setMsText);		
-		
+
+		var bBg:FlxSprite = new FlxSprite(backText.x,backText.y).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
+		bBg.scrollFactor.set(0, 0);
+		bBg.scale.x = 0.5;
+		bBg.scale.y = 0.5;
+		bBg.setGraphicSize(bBGWidth, bBGHeight);
+		add(bBg);
+
+
 		var backTextShow:String = 'Press Enter to continue';
 		#if android backTextShow = 'Press Text to continue'; #end
 		backText = new FlxText(0, FlxG.height - 45, 0, backTextShow);
@@ -350,10 +360,6 @@ class ResultsScreen extends MusicBeatSubstate
 		backText.alpha = 0;
 		backText.x = FlxG.width - backText.width - 20;
 
-		var bBg:FlxSprite = new FlxSprite(backText.x,backText.y).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
-		bBg.scrollFactor.set(0, 0);
-		bBg.setGraphicSize(Std.int(bBg.width));
-		add(bBg);
 		
 		//--------------text
 		
