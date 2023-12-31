@@ -339,7 +339,7 @@ class ResultsScreen extends MusicBeatSubstate
 		setMsText.antialiasing = ClientPrefs.data.antialiasing;
 		add(setMsText);		
 
-		var bBg:FlxSprite = new FlxSprite(backText.x,backText.y).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
+		var bBg:FlxSprite = new FlxSprite(0,0).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
 		bBg.scrollFactor.set(0, 0);
 		bBg.scale.x = 0.5;
 		bBg.scale.y = 0.5;
