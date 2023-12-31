@@ -112,8 +112,8 @@ class TitleState extends MusicBeatState
 		    
 		    AndroidDialogsExtend.OpenToast(lang,2);
 		    Sys.exit(1);		
-		    return
-		}		
+		    return;
+		}
 		
 		if (DeviceLanguage.getLang() == 'zh') 
 		lang = '欢迎使用NF引擎\n版本: 1.1.0';
