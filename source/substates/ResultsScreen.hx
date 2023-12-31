@@ -403,7 +403,7 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		new FlxTimer().start(2.5, function(tmr:FlxTimer){
 			FlxTween.tween(backText, {alpha: 1}, 1);
-			FlxTween.tween(bBG, {x: backText.x - 100});
+			FlxTween.tween(bBg, {x: backText.x - 100});
 		});
 		
 		
