@@ -84,19 +84,22 @@ class ResultsScreen extends MusicBeatSubstate
 		var graphWidth = 550;
 		var graphHeight = 300;
 		
-		var imageCheck:Bool;
+		var lossImage:Bool;
 		var image:String = Paths.modFolders('images/menuExtend/ResultsScreen/ResultsScreenBG.png');		
 		
 		if (FileSystem.exists(image)){
-		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).loadGraphic(Paths.image('menuExtend/ResultsScreen/ResultsScreenBG'));
-		    imageCheck = true;
+		    lossImage = false;
+		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).loadGraphic(Paths.image('menuExtend/ResultsScreen/ResultsScreenBG'));		    
 		}else{
-		    var copySprite:FlxSprite = new FlxSprite(FlxG.width - 550 - 50, 50).makeGraphic(graphWidth, graphHeight, FlxColor.BLACK);
-		    copySprite.alpha = 0.3;
+		    lossImage = true;
+		    var copySprite:FlxSprite = new FlxSprite(FlxG.width * 2, 50).makeGraphic(graphWidth, graphHeight, FlxColor.BLACK);
+		    copySprite.alpha = 0.6;
+		    copySprite.updateHitbox();
+		    add(copySprite);
 		    
 		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50);
 		    graphBG.graphic = copySprite.graphic;
-		    imageCheck = false;
+		    graphBG.pixels = copySprite.pixels;
 		}
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
@@ -139,7 +142,7 @@ class ResultsScreen extends MusicBeatSubstate
 		lostPNGText.antialiasing = ClientPrefs.data.antialiasing;
 		lostPNGText.color = FlxColor.RED;
 		lostPNGText.x -= lostPNGText.width / 2;
-		lostPNGText.visible = !imageCheck;
+		lostPNGText.visible = lossImage;
 		add(lostPNGText);
 		
 		var judgeHeight = 2;
@@ -346,25 +349,24 @@ class ResultsScreen extends MusicBeatSubstate
 		var backTextShow:String = 'Press Enter to continue';
 		#if android backTextShow = 'Press Text to continue'; #end
 		
-		backText = new FlxText(0, FlxG.height - 60, 0, backTextShow);
+		backText = new FlxText(FlxG.width, , 0, backTextShow);
 		backText.size = 28;
 		backText.font = Paths.font('vcr.ttf');
 		backText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
 		backText.scrollFactor.set();
 		backText.antialiasing = ClientPrefs.data.antialiasing;
-	    backText.alignment = RIGHT;
-		backText.alpha = 1;
-		backText.x = FlxG.width;
+	    backText.alignment = RIGHT;		
 
-		backBG = new FlxSprite(FlxG.width, backText.y - backText.height / 2).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
+		backBG = new FlxSprite(FlxG.width, FlxG.height - 30).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
 		backBG.scrollFactor.set(0, 0);
 		backBG.scale.x = 0.5;
 		backBG.scale.y = 0.5;
 		backBG.updateHitbox();
-		backBG.y -= backBG.height / 2;
-		
+		backBG.antialiasing = ClientPrefs.data.antialiasing;
+		backBG.y -= backBG.height;
 		add(backBG);
 		add(backText);		
+		backText.y = backBG.y + backBG.height / 2 - backText.height / 2;
 		
 		//--------------text
 		
@@ -389,6 +391,7 @@ class ResultsScreen extends MusicBeatSubstate
 			FlxTween.tween(graphBG, {alpha: 1}, 0.5);
 			
 			FlxTween.tween(lostPNGText, {alpha: 1}, 0.5);
+			if (lossImage)  new FlxTimer().start(5, function(tmr:FlxTimer){ FlxTween.tween(lostPNGText, {alpha: 0}, 1); });
 			
 			FlxTween.tween(graphJudgeCenter, {alpha: 0.3}, 0.5);	
 			FlxTween.tween(graphMarvelousUp, {alpha: 0.3}, 0.5);	
@@ -418,21 +421,26 @@ class ResultsScreen extends MusicBeatSubstate
 	}
 	
 	var getReadyClose:Bool = false;    
+	var closeCheck:Bool = false;
 	override function update(elapsed:Float)
 	{ 					
-		if(FlxG.keys.justPressed.ENTER || (FlxG.mouse.overlaps(backText) && FlxG.mouse.justPressed))
+		if(!closeCheck && (FlxG.keys.justPressed.ENTER || (FlxG.mouse.overlaps(backText) && FlxG.mouse.justPressed)))
 		{
 		    if (getReadyClose){
     		    NewCustomFadeTransition();
                 PlayState.cancelMusicFadeTween();
+                closeCheck = true;
             }else{
                 getReadyClose = true;
-                FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+                FlxG.sound.play(Paths.sound('scrollMenu'));
                 
-                new FlxTimer().start(1, function(tmr:FlxTimer){
-    		        var backTextShow:String = 'Press Again to continue';		            
+                backText.text = 'Press Again to continue';
+                
+                new FlxTimer().start(1, function(tmr:FlxTimer){    		        		                        		
+		            var backTextShow:String = 'Press Enter to continue';
+            		#if android backTextShow = 'Press Text to continue'; #end		
             		backText.text = backTextShow;
-		            
+            		
 		            getReadyClose = false;
         		});
             }
