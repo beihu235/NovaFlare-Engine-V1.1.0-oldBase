@@ -416,7 +416,7 @@ class ResultsScreen extends MusicBeatSubstate
     
 	override function update(elapsed:Float)
 	{ 					
-		if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
+		if(FlxG.keys.justPressed.ENTER #if android || FlxG.mouse.overlaps(backText) #end)
 		{
 		    NewCustomFadeTransition();
 		    //MusicBeatState.switchState(new FreeplayState());
