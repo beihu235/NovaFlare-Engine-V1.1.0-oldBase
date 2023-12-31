@@ -349,7 +349,7 @@ class ResultsScreen extends MusicBeatSubstate
 		var backTextShow:String = 'Press Enter to continue';
 		#if android backTextShow = 'Press Text to continue'; #end
 		
-		backText = new FlxText(FlxG.width, , 0, backTextShow);
+		backText = new FlxText(FlxG.width, 0, backTextShow);
 		backText.size = 28;
 		backText.font = Paths.font('vcr.ttf');
 		backText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
