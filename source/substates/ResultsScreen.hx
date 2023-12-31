@@ -94,10 +94,10 @@ class ResultsScreen extends MusicBeatSubstate
 		    lossImage = true;
 		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50);
 
-            var background:FlxBitmap = new FlxBitmap(0, 0); // 创建一个空白的FlxBitmap
-            add(background);
-            background.fillRect(new Rectangle(0, 0, graphWidth, graphHeight), 0x000000, 0.6);
-            graphBG.pixels = background.pixels;
+            var bitmapData:BitmapData = new BitmapData(graphWidth, graphHeight, true, 0xff000000);
+            bitmapData.alpha = 0.5;
+
+            graphBG.pixels = bitmapData;
 		}
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
