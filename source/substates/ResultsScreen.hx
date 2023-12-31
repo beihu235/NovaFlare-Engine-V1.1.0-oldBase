@@ -93,14 +93,7 @@ class ResultsScreen extends MusicBeatSubstate
 		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).loadGraphic(Paths.image('menuExtend/ResultsScreen/ResultsScreenBG'));		    
 		}else{
 		    lossImage = true;
-		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50);
-            
-            var copySprite:FlxSprite = new FlxSprite(0,0).makeGraphic(graphWidth, graphHeight, FlxColor.BLACK);
-            var bitmap:Bitmap = new Bitmap();
-            bitmap.bitmapData = copySprite.pixels;
-            bitmap.alpha = 0.5;
-
-            graphBG.pixels = bitmap.bitmapData;
+		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).makeGraphic(graphWidth, graphHeight, 0x7F000000); //0x7F000000 is black for 60% alpha
 		}
 		graphBG.scrollFactor.set();
 		graphBG.alpha = 0;		
