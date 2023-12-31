@@ -55,7 +55,7 @@ class ResultsScreen extends MusicBeatSubstate
 	public var setGameText:FlxText;
 	public var setMsText:FlxText;
 	public var backText:FlxText;
-	public var backBG:FlxText;
+	public var backBG:FlxSprite;
     
     //public var NoteTypeColor:NoteTypeColorData;
     
@@ -83,15 +83,19 @@ class ResultsScreen extends MusicBeatSubstate
 		
 		var graphWidth = 550;
 		var graphHeight = 300;
-		var bBGWidth = 926;
-		var bBGHeight = 126;
+		
 		var imageCheck:Bool;
-		var image:String = Paths.modFolders('images/menuExtend/ResultsScreen/ResultsScreenBG.png');
+		var image:String = Paths.modFolders('images/menuExtend/ResultsScreen/ResultsScreenBG.png');		
+		
 		if (FileSystem.exists(image)){
 		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).loadGraphic(Paths.image('menuExtend/ResultsScreen/ResultsScreenBG'));
 		    imageCheck = true;
 		}else{
-		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50).makeGraphic(graphWidth, graphHeight, FlxColor.BLACK);
+		    var copySprite:FlxSprite = new FlxSprite(FlxG.width - 550 - 50, 50).makeGraphic(graphWidth, graphHeight, FlxColor.BLACK);
+		    copySprite.alpha = 0.3;
+		    
+		    graphBG = new FlxSprite(FlxG.width - 550 - 50, 50);
+		    graphBG.graphic = copySprite.graphic;
 		    imageCheck = false;
 		}
 		graphBG.scrollFactor.set();
@@ -341,21 +345,25 @@ class ResultsScreen extends MusicBeatSubstate
 
 		var backTextShow:String = 'Press Enter to continue';
 		#if android backTextShow = 'Press Text to continue'; #end
-		backText = new FlxText(0, FlxG.height - 45, 0, backTextShow);
+		
+		backText = new FlxText(0, FlxG.height - 60, 0, backTextShow);
 		backText.size = 28;
 		backText.font = Paths.font('vcr.ttf');
 		backText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
 		backText.scrollFactor.set();
 		backText.antialiasing = ClientPrefs.data.antialiasing;
 	    backText.alignment = RIGHT;
-		backText.alpha = 0;
-		backText.x = FlxG.width - backText.width - 20;
+		backText.alpha = 1;
+		backText.x = FlxG.width;
 
-		var bBg:FlxSprite = new FlxSprite(backText.x + 130,backText.y - 50).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
-		bBg.scrollFactor.set(0, 0);
-		bBg.scale.x = 0.5;
-		bBg.scale.y = 0.5;
-		add(bBg);
+		backBG = new FlxSprite(FlxG.width, backText.y - backText.height / 2).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
+		backBG.scrollFactor.set(0, 0);
+		backBG.scale.x = 0.5;
+		backBG.scale.y = 0.5;
+		backBG.updateHitbox();
+		backBG.y -= backBG.height / 2;
+		
+		add(backBG);
 		add(backText);		
 		
 		//--------------text
@@ -402,28 +410,33 @@ class ResultsScreen extends MusicBeatSubstate
 		});
 		
 		new FlxTimer().start(2.5, function(tmr:FlxTimer){
-			FlxTween.tween(bBg, {x: backText.x - 300}, 0.3, {ease: FlxEase.backInOut});
-			FlxTween.tween(backText, {alpha: 1}, 1);
+			FlxTween.tween(backBG, {x:  1280 - backBG.width}, 1, {ease: FlxEase.backInOut});
+			FlxTween.tween(backText, {x: 1280 - backText.width}, 1.2, {ease: FlxEase.backInOut});
 		});
-		
-		
-		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
-		
-		
-		
+				
+		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];						
 	}
 	
-    
+	var getReadyClose:Bool = false;    
 	override function update(elapsed:Float)
 	{ 					
-		if(FlxG.keys.justPressed.ENTER #if android || FlxG.mouse.overlaps(backText) #end)
+		if(FlxG.keys.justPressed.ENTER || (FlxG.mouse.overlaps(backText) && FlxG.mouse.justPressed))
 		{
-		   if (FlxG.mouse.pressed){
-		    NewCustomFadeTransition();
-		}
-		    //MusicBeatState.switchState(new FreeplayState());
-		}
-		    PlayState.cancelMusicFadeTween();
+		    if (getReadyClose){
+    		    NewCustomFadeTransition();
+                PlayState.cancelMusicFadeTween();
+            }else{
+                getReadyClose = true;
+                FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+                
+                new FlxTimer().start(1, function(tmr:FlxTimer){
+    		        var backTextShow:String = 'Press Again to continue';		            
+            		backText.text = backTextShow;
+		            
+		            getReadyClose = false;
+        		});
+            }
+		}		    
 	}
 	
 	//NewCustomFadeTransition is work for better close Substate
