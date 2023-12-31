@@ -126,7 +126,7 @@ class ResultsScreen extends MusicBeatSubstate
 		graphBG.updateHitbox();
 		add(graphBG);
 		
-		lostPNGText = new FlxText(graphBG.x + graphBG.width / 2, graphBG.y + graphBG.height + 5, 0, "Loss load image/ResultsScreen/ResultsScreenBG.png");
+		lostPNGText = new FlxText(graphBG.x + graphBG.width / 2, graphBG.y + graphBG.height + 5, 0, "Error load: image/ResultsScreen/ResultsScreenBG.png");
 		lostPNGText.size = 20;
 		lostPNGText.alignment = CENTER;
 		lostPNGText.font = Paths.font('vcr.ttf');
