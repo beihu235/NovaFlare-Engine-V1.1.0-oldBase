@@ -271,7 +271,7 @@ class MusicBeatState extends FlxUIState
 
     // 创建一个回调函数
     function handleEvent(data: Dynamic): Void {
-        (nextState == FlxG.state) {
+        if (nextState == FlxG.state) {
             CustomFadeTransition.finishCallback = function() FlxG.resetState();
         } else {
             CustomFadeTransition.finishCallback = function() FlxG.switchState(nextState);
