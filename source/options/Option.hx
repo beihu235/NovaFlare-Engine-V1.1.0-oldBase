@@ -1054,7 +1054,7 @@ class HideOppStrumsOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Opponent Strums: < " + (!ClientPrefs.data.opponentStrums ? enable_O : disable_O) + " >";
+		return "Opponent Strums: < " + (!ClientPrefs.data.opponentStrums ? 'Show' : 'Hide') + " >";
 	}
 }
 /*
@@ -2193,7 +2193,7 @@ class GuitarHeroSustains extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Sustains Note Input: < " + (ClientPrefs.data.guitarHeroSustains ? 'New' : 'Classic) + " >";
+		return "Sustains Note Input: < " + (ClientPrefs.data.guitarHeroSustains ? 'New' : 'Classic') + " >";
 	}
 
 }
