@@ -267,18 +267,18 @@ class MusicBeatState extends FlxUIState
 		FlxG.state.openSubState(new CustomFadeTransition(0.6, false));
 		
 		
-		threadPool.doWork(doHeavyTask(nextState));
+		threadPool.doWork = function():Void {
+        if(nextState == FlxG.state)
+			CustomFadeTransition.finishCallback = function() FlxG.resetState();
+		else
+			CustomFadeTransition.finishCallback = function() FlxG.switchState(nextState);
+			
+        trace("Heavy task finished in another thread!");
+        }
 		
 	}
 	
-	public static function doHeavyTask(state:FlxState = null):Void {
-        if(state == FlxG.state)
-			CustomFadeTransition.finishCallback = function() FlxG.resetState();
-		else
-			CustomFadeTransition.finishCallback = function() FlxG.switchState(state);
-			
-        trace("Heavy task finished in another thread!");
-    }
+	
 
 	public static function getState():MusicBeatState {
 		return cast (FlxG.state, MusicBeatState);
