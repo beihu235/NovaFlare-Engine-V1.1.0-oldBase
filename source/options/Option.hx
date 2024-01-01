@@ -2193,7 +2193,7 @@ class GuitarHeroSustains extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Guitar Hero Sustains: < " + (ClientPrefs.data.guitarHeroSustains ? enable_O : disable_O) + " >";
+		return "Sustains Note Input: < " + (ClientPrefs.data.guitarHeroSustains ? 'New' : 'Classic) + " >";
 	}
 
 }

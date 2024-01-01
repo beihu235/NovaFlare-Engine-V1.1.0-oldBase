@@ -177,7 +177,7 @@ class OptionsState extends MusicBeatState
 				new MiddleScrollOption("Put your lane in the center or on the right."), 
 				new PlayOpponent('If checked, playing as opponent\nmay have bug in some mods\n(your score will not be recorded.'),
 				new FilpChart('If checked, filp chart for playing.'),
-				new GuitarHeroSustains('Guitar Hero like Sustains Note System'),
+				new GuitarHeroSustains("If checked, Hold Notes can't be pressed if you miss\nUncheck this if you prefer the old Input System."),
 				new HitSoundOption("Adds 'hitsound' on note hits."),
 				new GhostTapOption("Toggle counting pressing a directional input when no arrow is there as a miss."),								
 				new NoReset("Toggle pressing R to gameover."),								
@@ -206,8 +206,8 @@ class OptionsState extends MusicBeatState
 			    //new TimeBarType("Change the song's current position bar."),
 			]),
 			new OptionCata(640, 40, OptionsName.setMisc(), [			    
-				new DisableNoteRGB('Easier to disableNoteRGB for Note.'),
-				new DisableSplashRGB('Easier to disableNoteRGB for Splash.'),
+				new NoteRGB('Easier to set RGB for Note.'),
+				new SplashRGB('Easier to to RGB for Splash.'),
 				
 				new TimeBarType('What should the Time Bar display?'),
 				new PauseMusic('What song do you prefer for the Pause Screen?'),
