@@ -3,7 +3,8 @@ package backend;
 import flixel.addons.ui.FlxUIState;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxState;
-import openfl.events.Event;
+
+import lime.app.Event;
 import lime.system.ThreadPool;
 
 #if android
@@ -278,7 +279,7 @@ class MusicBeatState extends FlxUIState
         }
     }
     // 添加回调函数到事件
-    event.addCallback(handleEvent);
+    event.add(handleEvent);
 
     threadPool.doWork(event);	
     
