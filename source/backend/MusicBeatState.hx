@@ -4,8 +4,7 @@ import flixel.addons.ui.FlxUIState;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxState;
 
-//import lime.app.Event;
-import lime.system.ThreadPool;
+
 
 #if android
 import android.AndroidControls.AndroidControls;
@@ -32,9 +31,17 @@ class MusicBeatState extends FlxUIState
 	
 	public static var currentColor:Int = 1;    
 	public static var currentColorAgain:Int = 0;    
-	
-	public static var threadPool:ThreadPool;
-		
+	/*
+	public var ColorArray:Array<Int> = [
+		0xFF9400D3,
+		0xFF4B0082,
+		0xFF0000FF,
+		0xFF00FF00,
+		0xFFFFFF00,
+		0xFFFF7F00,
+		0xFFFF0000
+	                                
+	    ];*/
 	
 	public static var checkHitbox:Bool = false;
 	public static var checkDUO:Bool = false;
@@ -42,7 +49,8 @@ class MusicBeatState extends FlxUIState
 	private function get_controls()
 	{
 		return Controls.instance;
-	}	
+	}
+	
 	
 	var _psychCameraInitialized:Bool = true;
 	
@@ -129,9 +137,6 @@ class MusicBeatState extends FlxUIState
 	public static var camBeat:FlxCamera;
 
 	override function create() {
-	    
-	    threadPool = new ThreadPool(0, 8);
-	    
 		camBeat = FlxG.camera;
 		var skip:Bool = FlxTransitionableState.skipNextTransOut;
 		#if MODS_ALLOWED Mods.updatedOnState = false; #end
