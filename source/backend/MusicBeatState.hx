@@ -32,7 +32,7 @@ class MusicBeatState extends FlxUIState
 	public static var currentColor:Int = 1;    
 	public static var currentColorAgain:Int = 0;    
 	
-	public var threadPool:ThreadPool;
+	public static var threadPool:ThreadPool;
 		
 	
 	public static var checkHitbox:Bool = false;
@@ -275,7 +275,7 @@ class MusicBeatState extends FlxUIState
         if(state == FlxG.state)
 			CustomFadeTransition.finishCallback = function() FlxG.resetState();
 		else
-			CustomFadeTransition.finishCallback = function() FlxG.switchState(nextState);
+			CustomFadeTransition.finishCallback = function() FlxG.switchState(state);
 			
         trace("Heavy task finished in another thread!");
     }
