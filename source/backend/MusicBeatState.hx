@@ -4,7 +4,7 @@ import flixel.addons.ui.FlxUIState;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxState;
 
-import lime.app.Event;
+//import lime.app.Event;
 import lime.system.ThreadPool;
 
 #if android
