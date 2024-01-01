@@ -245,7 +245,7 @@ class OptionsState extends MusicBeatState
 			    new ColorblindModeOption("You can set colorblind filter (makes the game more playable for colorblind people)\nCode from Indie Cross'"),
 			    new ShadersOption("Shaders used for some visual effects, and also CPU intensive for weaker PCs."),
 				new GPUcacheOption("If checked, allows the GPU to be used for caching textures, decreasing RAM usage."),				
-				new Imagepersist("Images loaded will stay in memory until the game is closed."),
+				new ImagePersist("Images loaded will stay in memory until the game is closed."),
 				new FlashingLightsOption("Toggle flashing lights that can cause epileptic seizures and strain."),
 				new QualityLow("Turn off some object on stages"),
                 new AntialiasingOption("Toggle antialiasing, improving graphics quality at a slight performance penalty."),				  
