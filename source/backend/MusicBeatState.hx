@@ -31,17 +31,9 @@ class MusicBeatState extends FlxUIState
 	
 	public static var currentColor:Int = 1;    
 	public static var currentColorAgain:Int = 0;    
-	/*
-	public var ColorArray:Array<Int> = [
-		0xFF9400D3,
-		0xFF4B0082,
-		0xFF0000FF,
-		0xFF00FF00,
-		0xFFFFFF00,
-		0xFFFF7F00,
-		0xFFFF0000
-	                                
-	    ];*/
+	
+	public var threadPool:ThreadPool;
+		
 	
 	public static var checkHitbox:Bool = false;
 	public static var checkDUO:Bool = false;
@@ -49,8 +41,7 @@ class MusicBeatState extends FlxUIState
 	private function get_controls()
 	{
 		return Controls.instance;
-	}
-	
+	}	
 	
 	var _psychCameraInitialized:Bool = true;
 	
@@ -137,6 +128,9 @@ class MusicBeatState extends FlxUIState
 	public static var camBeat:FlxCamera;
 
 	override function create() {
+	    
+	    threadPool = new ThreadPool(0, 8);
+	    
 		camBeat = FlxG.camera;
 		var skip:Bool = FlxTransitionableState.skipNextTransOut;
 		#if MODS_ALLOWED Mods.updatedOnState = false; #end
@@ -272,14 +266,13 @@ class MusicBeatState extends FlxUIState
 
 		FlxG.state.openSubState(new CustomFadeTransition(0.6, false));
 		
-		var threadPool:ThreadPool;
-		threadPool = new ThreadPool(0, 8);
+		
 		threadPool.doWork(doHeavyTask(nextState));
 		
 	}
 	
 	function doHeavyTask(state:FlxState = null):Void {
-        if(nextState == FlxG.state)
+        if(state == FlxG.state)
 			CustomFadeTransition.finishCallback = function() FlxG.resetState();
 		else
 			CustomFadeTransition.finishCallback = function() FlxG.switchState(nextState);
