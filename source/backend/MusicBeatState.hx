@@ -268,7 +268,7 @@ class MusicBeatState extends FlxUIState
 		FlxG.state.openSubState(new CustomFadeTransition(0.6, false));
 		            	
 	// 创建一个新的Event对象
-    var event: Event<Dynamic> = new Event<Dynamic>();
+    var event: Event<Dynamic->Void> = new Event<Dynamic->Void>();
 
     
     // 添加回调函数到事件
