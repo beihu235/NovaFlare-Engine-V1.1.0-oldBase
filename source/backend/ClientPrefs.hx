@@ -29,8 +29,7 @@ class SaveVariables {
 	public var memoryType:Int = 3;
 	public var guitarHeroSustains:Bool = true;
 	public var skipTitleVideo:Bool = false;
-	
-	
+		
 	public var flashing:Bool = true;
 	public var ResultsScreen:Bool = true;
 	public var autoPause:Bool = true;
@@ -38,8 +37,9 @@ class SaveVariables {
 	
 	public var noteSkin:String = 'Default';
 	public var splashSkin:String = 'Psych';
-	public var disableNoteRGB:Bool = false;
-	public var disableSplashRGB:Bool = false;
+	public var noteRGB:Bool = true;
+	public var splashRGB:Bool = true;
+	public var showSplash:Bool = true;
 	public var splashAlpha:Float = 0.6;
 	
 	public var lowQuality:Bool = false;
