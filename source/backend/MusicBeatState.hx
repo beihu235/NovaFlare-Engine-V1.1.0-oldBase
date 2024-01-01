@@ -271,7 +271,7 @@ class MusicBeatState extends FlxUIState
 		
 	}
 	
-	function doHeavyTask(state:FlxState = null):Void {
+	public static function doHeavyTask(state:FlxState = null):Void {
         if(state == FlxG.state)
 			CustomFadeTransition.finishCallback = function() FlxG.resetState();
 		else
