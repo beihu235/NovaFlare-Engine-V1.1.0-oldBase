@@ -268,13 +268,14 @@ class MusicBeatState extends FlxUIState
 		
 		
 		threadPool.doWork = function(task:Dynamic):Void {
-        if(nextState == FlxG.state) {
-            CustomFadeTransition.finishCallback = function() FlxG.resetState();
-        } else {
-            CustomFadeTransition.finishCallback = function() FlxG.switchState(nextState);
-        }
-        trace("Heavy task finished in another thread!");
-        }
+    if(nextState == FlxG.state) {
+        CustomFadeTransition.finishCallback = function() FlxG.resetState();
+    } else {
+        CustomFadeTransition.finishCallback = function() FlxG.switchState(nextState);
+    }
+    trace("Heavy task finished in another thread!");
+} as lime.app._Event_Dynamic_Void<Dynamic -> Void>;
+
 		
 	}
 	
