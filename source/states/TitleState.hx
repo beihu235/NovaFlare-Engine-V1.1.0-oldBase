@@ -94,13 +94,17 @@ class TitleState extends MusicBeatState
     
 	override public function create():Void
 	{
-		Paths.clearStoredMemory();
-		Paths.clearUnusedMemory();
+		if(!checkOpenFirst){
+    		Paths.clearStoredMemory();
+    		Paths.clearUnusedMemory();
+		}
+		
 		Lib.application.window.title = " NF - Engine - Title";
 		
 		//https://github.com/beihu235/AndroidDialogs
 		
 		#if android
+		/*
 		if (lime.app.Application.current.meta.get('title') != "Friday Night Funkin' NF Engine"
 		 || lime.app.Application.current.meta.get("packageName") != "com.NFengine"
 		 || lime.app.Application.current.meta.get("package") != "com.NFengine"
@@ -116,7 +120,7 @@ class TitleState extends MusicBeatState
     		lang = 'The engine has been modified. Please use the official version';
 		    
 		    AndroidDialogsExtend.OpenToast(lang,2);
-		    
+		*/
 		if (DeviceLanguage.getLang() == 'zh') 
 		lang = '欢迎使用NF引擎\n版本: 1.1.0';
 		else
