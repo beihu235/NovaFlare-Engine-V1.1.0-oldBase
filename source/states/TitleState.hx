@@ -94,7 +94,7 @@ class TitleState extends MusicBeatState
     
 	override public function create():Void
 	{
-		if(!checkOpenFirst){
+		if(checkOpenFirst){
     		Paths.clearStoredMemory();
     		Paths.clearUnusedMemory();
 		}
