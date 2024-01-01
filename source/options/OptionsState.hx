@@ -175,35 +175,26 @@ class OptionsState extends MusicBeatState
 			new OptionCata(50, 40, OptionsName.setGameplay(), [				
 				new DownscrollOption(OptionsName.setDownscrollOption()),
 				new MiddleScrollOption("Put your lane in the center or on the right."), 
+				new PlayOpponent('If checked, playing as opponent\nmay have bug in some mods\n(your score will not be recorded.'),
 				new FilpChart('If checked, filp chart for playing.'),
 				new GuitarHeroSustains('Guitar Hero like Sustains Note System'),
 				new HitSoundOption("Adds 'hitsound' on note hits."),
-				new GhostTapOption("Toggle counting pressing a directional input when no arrow is there as a miss."),				
-				
-				new NoReset("Toggle pressing R to gameover."),
-				
-				
+				new GhostTapOption("Toggle counting pressing a directional input when no arrow is there as a miss."),								
+				new NoReset("Toggle pressing R to gameover."),								
                 //new ControllerMode("Enables you to play with controller."),
                 //new DFJKOption(),
                 //new NotesOption(),
                 //new Customizeption(),
 				new Judgement("Create a custom judgement preset"),
-				
-				//new Shouldcameramove("Moves camera on opponent/player note hits."),
 			]),
 			new OptionCata(345, 40, OptionsName.setAppearance(), [
                 new NoteskinOption("Change your current noteSkin"),
                 new SplashSkin('Change your current splashSkin'),
-				//new AccTypeOption("Change your current accuracy type you want!"),
-				//new SongNameOption("Shows to you name of song your playing on HUD"),			
-				new HideOppStrumsOption("Shows/Hides opponent strums on screen.(RESTART SONG)"),
-				//new MissSoundsOption("Toggle miss sounds playing when you don't hit a note."),
-				//new MissAnimsOption("Toggle miss animations playing when you don't hit a note."),
-                //new ShowSplashes("Show particles on SICK hit."),
-               // new SustainsAlpha("Change Sustain Notes Alpha."),
-				//new HealthBarOption("Toggles health bar visibility"),
-				new JudgementCounter("Show your judgements that you've gotten in the song"),
+				new HideOppStrumsOption("Shows/Hides opponent strums on screen."),
+                new ShowSplashes("Show particles on SICK hit."),
+                //new SplashAlpha('How much transparent should the Note Splashes be.'),
 				new CamZoomOption("Toggle the camera zoom in-game."),
+				new JudgementCounter("Show your judgements that you've gotten in the song"),				
                 new HideHud("Shows to you hud."),
                 new ShowComboNum("Combo sprite appearance."),
                 new ShowRating("Rating sprite appearance."),
@@ -214,9 +205,7 @@ class OptionsState extends MusicBeatState
                 //new BlurNotes("(CONTAINS FPS ISSUES)/Make notes a bit 'blurred'."), // TODO: rework later - Snake
 			    //new TimeBarType("Change the song's current position bar."),
 			]),
-			new OptionCata(640, 40, OptionsName.setMisc(), [
-			    
-				new SplashAlpha('How much transparent should the Note Splashes be.'),
+			new OptionCata(640, 40, OptionsName.setMisc(), [			    
 				new DisableNoteRGB('Easier to disableNoteRGB for Note.'),
 				new DisableSplashRGB('Easier to disableNoteRGB for Splash.'),
 				
@@ -232,15 +221,15 @@ class OptionsState extends MusicBeatState
 				//new VintageOption("Adds 'vintage' on game screen."),
                 
                 
-				//new Imagepersist("Images loaded will stay in memory until the game is closed."),
+				
         		]),
 			new OptionCata(935, 40, OptionsName.setOpponentMode(), [
-			    new PlayOpponent('If checked, playing as opponent\nmay have bug in some mods\n(your score will not be recorded.'),
+			    
 				new OpponentCodeFix('If checked, goodNoteHit and opponentNoteHit not follow playOpponent setting to change (if you playing it will return goodNoteHit function.'),
 				new BotOpponentFix('Bot Opponent Fix'),
 				new HealthDrainOPPO('Health Drain on opponent mode'),
 				new HealthDrainOPPOMult('Health Drain multiplier on opponent mode'),
-			 //   new PauseCountDownOption("Toggle countdown after pressing 'Resume' in Pause Menu."),
+			 
 			]),			
 			new OptionCata(50, 40 + 64, OptionsName.setMenuExtend(), [
 			    new CustomFadeType('Change Custom Fade Type'),
@@ -253,22 +242,22 @@ class OptionsState extends MusicBeatState
 			]),
 			new OptionCata(640, 40 + 64, "System", [
 			    //new Language("Change language in some state."), //will use fot NF1.2.0
-			    new ColorblindModeOption("You can set colorblind filter (makes the game more playable for colorblind people)\nCredits: notweuz (Creator of OS Engine)'"),
+			    new ColorblindModeOption("You can set colorblind filter (makes the game more playable for colorblind people)\nCode from Indie Cross'"),
 			    new ShadersOption("Shaders used for some visual effects, and also CPU intensive for weaker PCs."),
 				new GPUcacheOption("If checked, allows the GPU to be used for caching textures, decreasing RAM usage."),				
+				new Imagepersist("Images loaded will stay in memory until the game is closed."),
 				new FlashingLightsOption("Toggle flashing lights that can cause epileptic seizures and strain."),
 				new QualityLow("Turn off some object on stages"),
+                new AntialiasingOption("Toggle antialiasing, improving graphics quality at a slight performance penalty."),				  
 				new AutoPause("Stops game, when its unfocused"),
-				new AntialiasingOption("Toggle antialiasing, improving graphics quality at a slight performance penalty."),
-				new FPSCapOption("Change your FPS Cap."),		
+				              
+			]),			
+			new OptionCata(935, 40 + 64, "Watermark", [
+                new FPSCapOption("Change your FPS Cap."),		
 				new FPSOption("Toggle the FPS Counter."),
 				new FPSRainbowOption("Make the FPS Counter flicker through rainbow colors."),
                 new MEMOption("Toggle the MEM Counter."),
                 new MEMType("Choose memory showcase data."),
-                new MSOption("Toggle the delay time Counter."),
-                
-			]),			
-			new OptionCata(935, 40 + 64, "wait", [
                 new MSOption("Toggle the delay time Counter."),
 			]),			
 			new OptionCata(-1, 125, "Editing Judgements", [			

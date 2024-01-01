@@ -875,7 +875,7 @@ class AutoPause extends Option
 		return "AutoPause: < " + (ClientPrefs.data.autoPause ? enable_O : disable_O) + " >";
 	} 
 }
-/*
+
 class ShowSplashes extends Option
 {
 	public function new(desc:String)
@@ -886,7 +886,7 @@ class ShowSplashes extends Option
 
 	public override function left():Bool
 	{
-        ClientPrefs.data.noteSplashes = !ClientPrefs.data.noteSplashes;
+        ClientPrefs.data.showSplash = !ClientPrefs.data.showSplash;
 		display = updateDisplay();
 		return true;
 	}
@@ -899,9 +899,9 @@ class ShowSplashes extends Option
 
 	private override function updateDisplay():String
 	{
-		return "NoteSplashes: < " + (ClientPrefs.data.noteSplashes ? enable_O : disable_O) + " >";
+		return "showSplash: < " + (ClientPrefs.data.showSplash ? enable_O : disable_O) + " >";
 	} 
-}*/
+}
 class QualityLow extends Option
 {
 	public function new(desc:String)
@@ -971,8 +971,8 @@ class FPSCapOption extends Option
 	{
 		if (ClientPrefs.data.framerate > 290)
 			ClientPrefs.data.framerate = 290;
-		else if (ClientPrefs.data.framerate <= 60)
-			ClientPrefs.data.framerate = Application.current.window.displayMode.refreshRate;
+		else if (ClientPrefs.data.framerate <= 24)
+			ClientPrefs.data.framerate = 24;
 		else
 			ClientPrefs.data.framerate = ClientPrefs.data.framerate - 1;
 			onChangeFramerate();
@@ -1525,6 +1525,35 @@ class GPUcacheOption extends Option
 	}
 }
 
+class ImagePersist extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+		acceptValues = true;
+	}	
+
+	override function right():Bool
+	{
+		ClientPrefs.data.imagePersist = !ClientPrefs.data.imagePersist;
+		display = updateDisplay();
+		return true;
+
+	}
+
+	override function left():Bool
+	{
+		right();
+		return true;
+	}
+	
+	private override function updateDisplay():String
+	{
+		return "ImagePersist: < " + ClientPrefs.data.imagePersist + " >";
+	}
+}
+
 class ComboStacking extends Option
 {
 	public function new(desc:String)
@@ -1588,7 +1617,7 @@ class SplashAlpha extends Option
 	
 }
 
-class DisableNoteRGB extends Option
+class NoteRGB extends Option
 {
 	public function new(desc:String)
 	{
@@ -1603,7 +1632,7 @@ class DisableNoteRGB extends Option
 	{
 		if (OptionsState.onPlayState)
 			return false;
-		ClientPrefs.data.disableNoteRGB = !ClientPrefs.data.disableNoteRGB;
+		ClientPrefs.data.noteRGB = !ClientPrefs.data.noteRGB;
 		display = updateDisplay();
 		return true;
 	}
@@ -1616,7 +1645,7 @@ class DisableNoteRGB extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Disable Note RGB: < " + (ClientPrefs.data.disableNoteRGB ? enable_O : disable_O) + " >";
+		return "Note RGB: < " + (ClientPrefs.data.noteRGB ? enable_O : disable_O) + " >";
 	}
 }
 
@@ -1635,7 +1664,7 @@ class DisableSplashRGB extends Option
 	{
 		if (OptionsState.onPlayState)
 			return false;
-		ClientPrefs.data.disableSplashRGB = !ClientPrefs.data.disableSplashRGB;
+		ClientPrefs.splashRGB = !ClientPrefs.splashRGB;
 		display = updateDisplay();
 		return true;
 	}
@@ -1648,7 +1677,7 @@ class DisableSplashRGB extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Disable Splash RGB: < " + (ClientPrefs.data.disableSplashRGB ? enable_O : disable_O) + " >";
+		return "Splash RGB: < " + (ClientPrefs.splashRGB ? enable_O : disable_O) + " >";
 	}
 }
 

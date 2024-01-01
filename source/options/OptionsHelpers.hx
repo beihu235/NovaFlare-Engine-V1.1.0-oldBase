@@ -64,46 +64,7 @@ class OptionsHelpers
 		    NoteskinOption.chooseNum = 0;
 		}
     }
-    /*
-    public static function getIconBopByID(id:Int)
-	{
-	    return IconsBopArray[id];
-	}
-
-    static public function ChangeIconBop(id:Int)
-    {
-       // ClientPrefs.healthIconBop = getIconBopByID(id);
-    }
-
-    public static function getTimeBarByID(id:Int)
-	{
-	    return TimeBarArray[id];
-	}
-
-    static public function ChangeTimeBar(id:Int)
-    {
-        ClientPrefs.timeBarType = getTimeBarByID(id);
-    }
-
-    public static function getColorBlindByID(id:Int)
-    {
-        return ColorBlindArray[id];
-    }
-
-    static public function ChangeColorBlind(id:Int)
-    {
-        ClientPrefs.ColorBlindType = getColorBlindByID(id);
-    }
-
-    public static function getAccTypeID(id:Int)
-    {
-        return AccuracyTypeArray[id];
-    }
-
-    static public function ChangeAccType(id:Int)
-    {
-        ClientPrefs.ratingSystem = getAccTypeID(id);
-    }*/
+    
 }
 
 class OptionsName
@@ -220,7 +181,7 @@ class OptionsName
         switch (ClientPrefs.data.language)
 	    {
 			case 0: //english
-			    return "Opponent Mode";
+			    return "Opponent";
 			case 1: //chinese
 			    return "对手设置";
 			case 2: //chinese
