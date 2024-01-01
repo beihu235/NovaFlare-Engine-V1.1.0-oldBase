@@ -1664,7 +1664,7 @@ class DisableSplashRGB extends Option
 	{
 		if (OptionsState.onPlayState)
 			return false;
-		ClientPrefs.splashRGB = !ClientPrefs.splashRGB;
+		ClientPrefs.data.splashRGB = !ClientPrefs.data.splashRGB;
 		display = updateDisplay();
 		return true;
 	}
@@ -1677,7 +1677,7 @@ class DisableSplashRGB extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Splash RGB: < " + (ClientPrefs.splashRGB ? enable_O : disable_O) + " >";
+		return "Splash RGB: < " + (ClientPrefs.data.splashRGB ? enable_O : disable_O) + " >";
 	}
 }
 
