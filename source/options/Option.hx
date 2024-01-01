@@ -1649,7 +1649,7 @@ class NoteRGB extends Option
 	}
 }
 
-class DisableSplashRGB extends Option
+class SplashRGB extends Option
 {
 	public function new(desc:String)
 	{
