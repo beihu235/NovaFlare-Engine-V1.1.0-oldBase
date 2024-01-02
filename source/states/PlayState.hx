@@ -318,8 +318,9 @@ class PlayState extends MusicBeatState
 		startCallback = startCountdown;
 		endCallback = endSong;
         
-        
+        #if android
         addAndroidControlsCheck(); //use first set for control fix lua problem
+        #end
         
 		// for lua
 		instance = this;
