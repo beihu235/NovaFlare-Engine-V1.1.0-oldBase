@@ -86,7 +86,7 @@ class MusicBeatState extends FlxUIState
 	public function addAndroidControls() {
 		androidc = new AndroidControls();
 		
-        Controls.CheckPress = true;
+        Controls.CheckPress = false;
         
 		switch (androidc.mode)
 		{
@@ -121,39 +121,6 @@ class MusicBeatState extends FlxUIState
 		androidc.visible = false;
 
 		add(androidc);
-		Controls.CheckControl = true;
-	}
-	
-	public function addAndroidControlsCheck() {
-		androidc = new AndroidControls();
-		
-        Controls.CheckPress = true;
-        
-		switch (androidc.mode)
-		{
-			case VIRTUALPAD_RIGHT | VIRTUALPAD_LEFT | VIRTUALPAD_CUSTOM:
-				//controls.setVirtualPadNOTES(androidc.vpad, FULL, NONE);
-				checkHitbox = false;
-				checkDUO = false;
-				Controls.CheckKeyboard = false;
-			case DUO:
-				//controls.setVirtualPadNOTES(androidc.vpad, DUO, NONE);
-				checkHitbox = false;
-				checkDUO = true;
-				Controls.CheckKeyboard = false;
-			case HITBOX:
-				//controls.setNewHitBox(androidc.newhbox);
-				checkHitbox = true;
-				checkDUO = false;
-				Controls.CheckKeyboard = false;
-			//case KEYBOARD:	
-			    
-			default:
-			    checkHitbox = false;
-				checkDUO = false;
-			    Controls.CheckKeyboard = true;
-		}
-		
 		Controls.CheckControl = true;
 	}
 	#end
