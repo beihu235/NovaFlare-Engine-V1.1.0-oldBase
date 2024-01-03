@@ -407,8 +407,8 @@ class ResultsScreen extends MusicBeatSubstate
 		});
 		
 		new FlxTimer().start(2.5, function(tmr:FlxTimer){
-			FlxTween.tween(backBG, {x:  1280 - backBG.width}, 1, {ease: FlxEase.backInOut});
-			FlxTween.tween(backText, {x: 1280 - backText.width - 50}, 1.2, {ease: FlxEase.backInOut});
+			FlxTween.tween(backBG, {x:  1280 - backBG.width}, 1, {ease: FlxEase.quintInOut});
+			FlxTween.tween(backText, {x: 1280 - backText.width - 50}, 1.2, {ease: FlxEase.quintInOut});
 		});
 				
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];						
