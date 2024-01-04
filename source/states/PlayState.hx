@@ -3116,6 +3116,10 @@ class PlayState extends MusicBeatState
 				noteMissPress(key);
 			}
 		}
+		
+		// Needed for the  "Just the Two of Us" achievement.
+		//									- Shadow Mario
+		if(!keysPressed.contains(key)) keysPressed.push(key);
 
 		
 		//more accurate hit time for the ratings? part 2 (Now that the calculations are done, go back to the time it was before for not causing a note stutter)
