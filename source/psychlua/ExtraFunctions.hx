@@ -16,7 +16,7 @@ class ExtraFunctions
 		// Keyboard & Gamepads
 		Lua_helper.add_callback(lua, "keyboardJustPressed", function(name:String)
 		{
-		   name = name.toLowerCase();
+		   name = name.toUpperCase();
 		   
 		   #if android // Extend for check control for android
            if (MusicBeatState.androidc.newhbox != null){ //check for android control and dont check for keyboard
@@ -42,7 +42,7 @@ class ExtraFunctions
 		});
 		Lua_helper.add_callback(lua, "keyboardPressed", function(name:String)
 		{
-		   name = name.toLowerCase();
+		   name = name.toUpperCase();
 		   
 		   #if android // Extend for check control for android
            if (MusicBeatState.androidc.newhbox != null){ //check for android control and dont check for keyboard
@@ -67,7 +67,7 @@ class ExtraFunctions
 		});
 		Lua_helper.add_callback(lua, "keyboardReleased", function(name:String)
 		{
-		   name = name.toLowerCase();
+		   name = name.toUpperCase();
 		   
 		   #if android // Extend for check control for android
            if (MusicBeatState.androidc.newhbox != null){ //check for android control and dont check for keyboard
