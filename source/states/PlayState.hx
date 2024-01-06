@@ -3217,7 +3217,7 @@ class PlayState extends MusicBeatState
 					&& !daNote.tooLate 
 					&& !daNote.wasGoodHit
 					&& !daNote.blockHit
-					&& susCanPress) 
+					&& (daNote.susCanPress && ClientPrefs.data.guitarHeroSustains || !ClientPrefs.data.guitarHeroSustains)) 
 					{
 						if (daNote.mustPress && !ClientPrefs.data.playOpponent){
 						goodNoteHit(daNote);
