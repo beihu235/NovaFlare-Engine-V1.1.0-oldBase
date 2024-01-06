@@ -64,8 +64,10 @@ class ResultsScreen extends MusicBeatSubstate
     public var color:FlxColor;
 	public function new(x:Float, y:Float)
 	{
+	    
 		super();	
-				
+	    cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+	    
 		ColorArray = [
 		0xFFFFFF00, //marvelous
 		0xFF00FFFF, //sick
@@ -411,14 +413,14 @@ class ResultsScreen extends MusicBeatSubstate
 			FlxTween.tween(backText, {x: 1280 - backText.width - 50}, 1.2, {ease: FlxEase.quintInOut});
 		});
 				
-		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];						
+								
 	}
 	
 	var getReadyClose:Bool = false;    
 	var closeCheck:Bool = false;
 	override function update(elapsed:Float)
 	{ 					
-		if(!closeCheck && (FlxG.keys.justPressed.ENTER || (FlxG.mouse.overlaps(backBG) && FlxG.mouse.justPressed)))
+		if(!closeCheck && (FlxG.keys.justPressed.ENTER || (FlxG.mouse.overlaps(backBG) && FlxG.mouse.justPressed) #if android || FlxG.android.justReleased.BACK #end))
 		{
 		    if (getReadyClose){
     		    NewCustomFadeTransition();
