@@ -418,7 +418,7 @@ class ResultsScreen extends MusicBeatSubstate
 	var closeCheck:Bool = false;
 	override function update(elapsed:Float)
 	{ 					
-		if(!closeCheck && (FlxG.keys.justPressed.ENTER || (FlxG.mouse.overlaps(backText) && FlxG.mouse.justPressed)))
+		if(!closeCheck && (FlxG.keys.justPressed.ENTER || (FlxG.mouse.overlaps(backBG) && FlxG.mouse.justPressed)))
 		{
 		    if (getReadyClose){
     		    NewCustomFadeTransition();
