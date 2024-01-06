@@ -3217,8 +3217,7 @@ class PlayState extends MusicBeatState
 					&& !daNote.tooLate 
 					&& !daNote.wasGoodHit
 					&& !daNote.blockHit
-					&& ((daNote.susCanPress || !daNote.susCanPress && FlxG.mouse.justPressed) && ClientPrefs.data.guitarHeroSustains || !ClientPrefs.data.guitarHeroSustains)) 
-					// use FlxG.mouse.justPressed for check is like press not for hold(work for special note)
+					&& (daNote.susCanPress && ClientPrefs.data.guitarHeroSustains || !ClientPrefs.data.guitarHeroSustains)) 
 					{
 						if (daNote.mustPress && !ClientPrefs.data.playOpponent){
 						goodNoteHit(daNote);
