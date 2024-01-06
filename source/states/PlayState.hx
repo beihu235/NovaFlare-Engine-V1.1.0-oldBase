@@ -3419,7 +3419,7 @@ class PlayState extends MusicBeatState
 			var parentNote:Note = note.parent;
 			if (parentNote.tail.length > 0) 
 				for (child in parentNote.tail) if (child != note) 
-					childNote.susCanPress = true;		
+					child.susCanPress = true;		
 		}				    				    		    
 		
 		if (Paths.formatToSongPath(SONG.song) != 'tutorial')
@@ -3535,7 +3535,7 @@ class PlayState extends MusicBeatState
 			var parentNote:Note = note.parent;
 			if (parentNote.tail.length > 0) 
 				for (child in parentNote.tail) if (child != note) 
-					childNote.susCanPress = true;		
+					child.susCanPress = true;		
 		}				    							
 
 		note.wasGoodHit = true;
