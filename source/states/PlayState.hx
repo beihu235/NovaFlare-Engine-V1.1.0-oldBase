@@ -3217,7 +3217,8 @@ class PlayState extends MusicBeatState
 					&& !daNote.tooLate 
 					&& !daNote.wasGoodHit
 					&& !daNote.blockHit
-					&& (daNote.susCanPress && ClientPrefs.data.guitarHeroSustains || !ClientPrefs.data.guitarHeroSustains)) 
+					&& ((daNote.susCanPress || !daNote.susCanPress && FlxG.mouse.justPressed) && ClientPrefs.data.guitarHeroSustains || !ClientPrefs.data.guitarHeroSustains)) 
+					// use FlxG.mouse.justPressed for check is like press not for hold(work for special note)
 					{
 						if (daNote.mustPress && !ClientPrefs.data.playOpponent){
 						goodNoteHit(daNote);
@@ -3415,6 +3416,13 @@ class PlayState extends MusicBeatState
 				for(childNote in note.tail)
 				    childNote.susCanPress = true;			
 		
+		if (note != null && ClientPrefs.data.guitarHeroSustains && note.parent != null && note.isSustainNote && !note.susCanPress) {
+			var parentNote:Note = note.parent;
+			if (parentNote.tail.length > 0) 
+				for (child in parentNote.tail) if (child != note) 
+					childNote.susCanPress = true;		
+		}				    				    		    
+		
 		if (Paths.formatToSongPath(SONG.song) != 'tutorial')
 			camZooming = true;
 
@@ -3522,7 +3530,14 @@ class PlayState extends MusicBeatState
 		if (note != null && ClientPrefs.data.guitarHeroSustains && note.parent == null && !note.isSustainNote)
 			if(note.tail.length > 0)
 				for(childNote in note.tail)
-				    childNote.susCanPress = true;									
+				    childNote.susCanPress = true;		
+		
+		if (note != null && ClientPrefs.data.guitarHeroSustains && note.parent != null && note.isSustainNote && !note.susCanPress) {
+			var parentNote:Note = note.parent;
+			if (parentNote.tail.length > 0) 
+				for (child in parentNote.tail) if (child != note) 
+					childNote.susCanPress = true;		
+		}				    							
 
 		note.wasGoodHit = true;
 		if (ClientPrefs.data.hitsoundVolume > 0 && !note.hitsoundDisabled)
