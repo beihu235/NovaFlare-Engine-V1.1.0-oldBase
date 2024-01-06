@@ -289,7 +289,7 @@ class Note extends FlxSprite
 			centerOffsets();
 			centerOrigin();
 		}
-		offset.x += offsetX;
+		x += offsetX;
 	}
 
 	public static function initializeGlobalRGBShader(noteData:Int)
