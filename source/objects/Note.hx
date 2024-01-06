@@ -43,7 +43,7 @@ class Note extends FlxSprite
 	public var ignoreNote:Bool = false;
 	public var hitByOpponent:Bool = false;
 	public var noteWasHit:Bool = false;
-	public var isEndNote:Bool = true;
+	public var susCanPress:Bool = true;
 	public var prevNote:Note;
 	public var nextNote:Note;
 
@@ -242,6 +242,7 @@ class Note extends FlxSprite
 			multAlpha = 0.6;
 			hitsoundDisabled = true;
 			if(ClientPrefs.data.downScroll) flipY = true;
+			if(ClientPrefs.data.guitarHeroSustains) susCanPress = false; // for better note check
 			
 			earlyHitMult = 0.5;
             noAnimation = true; //better work for play anim
@@ -287,7 +288,7 @@ class Note extends FlxSprite
 			centerOffsets();
 			centerOrigin();
 		}
-		x += offsetX;
+		offset.x += offsetX;
 	}
 
 	public static function initializeGlobalRGBShader(noteData:Int)
