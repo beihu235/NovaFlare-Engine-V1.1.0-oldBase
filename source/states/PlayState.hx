@@ -3216,7 +3216,8 @@ class PlayState extends MusicBeatState
 					&& daNote.canBeHit
 					&& !daNote.tooLate 
 					&& !daNote.wasGoodHit
-					&& !daNote.blockHit) 
+					&& !daNote.blockHit
+					&& susCanPress) 
 					{
 						if (daNote.mustPress && !ClientPrefs.data.playOpponent){
 						goodNoteHit(daNote);
@@ -3409,6 +3410,11 @@ class PlayState extends MusicBeatState
 		if(note.wasGoodHit) return;
 		if(cpuControlled_opponent && (note.ignoreNote || note.hitCausesMiss)) return;
 		
+		if (note != null && ClientPrefs.data.guitarHeroSustains && note.parent == null && !note.isSustainNote)
+			if(note.tail.length > 0)
+				for(childNote in note.tail)
+				    childNote.susCanPress = true;			
+		
 		if (Paths.formatToSongPath(SONG.song) != 'tutorial')
 			camZooming = true;
 
@@ -3512,6 +3518,11 @@ class PlayState extends MusicBeatState
 	{
 		if(note.wasGoodHit) return;
 		if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
+		
+		if (note != null && ClientPrefs.data.guitarHeroSustains && note.parent == null && !note.isSustainNote)
+			if(note.tail.length > 0)
+				for(childNote in note.tail)
+				    childNote.susCanPress = true;									
 
 		note.wasGoodHit = true;
 		if (ClientPrefs.data.hitsoundVolume > 0 && !note.hitsoundDisabled)
