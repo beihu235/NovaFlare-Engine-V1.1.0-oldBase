@@ -3272,7 +3272,7 @@ class PlayState extends MusicBeatState
 		if(note != null) subtract = note.missHealth;
         
 		// GUITAR HERO SUSTAIN CHECK LOL!!!!
-		if (note != null && guitarHeroSustains && note.parent == null) {
+		if (note != null && guitarHeroSustains && note.parent == null && !note.isSustainNote) {
 			if(note.tail.length > 0) {
 				for(childNote in note.tail) {
 					childNote.missed = true;
