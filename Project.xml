@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin' NF Engine" file="NF Engine" packageName="com.NFengine" package="com.NFengine" main="Main" version="1.1.0" company="ShadowMario" />
+	<app title="Friday Night Funkin' NF Engine" file="NF Engine" packageName="com.NFengine" package="com.NFengine" main="Main" version="1.1.0" company="beihu" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />
@@ -114,6 +114,7 @@
 	<define name="hscriptPos" if="HSCRIPT_ALLOWED"/>
 	<haxedef name="openflPos" if="desktop"/>
 	<haxelib name="SScript" if="HSCRIPT_ALLOWED"/>
+	<haxelib name="hscript" if="HSCRIPT_ALLOWED"/>
 	<haxelib name="androiddialogs" if="android" />
 	<haxelib name="devicelanguage" if="android" />
     <haxelib name="flxanimate" unless="web"/>
