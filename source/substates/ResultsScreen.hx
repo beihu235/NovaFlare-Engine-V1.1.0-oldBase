@@ -428,7 +428,7 @@ class ResultsScreen extends MusicBeatSubstate
 	var closeCheck:Bool = false;
 	override function update(elapsed:Float)
 	{ 					
-		if(!closeCheck && (FlxG.keys.justPressed.ENTER || (FlxG.mouse.overlaps(backBG) && FlxG.mouse.justPressed) #if android || FlxG.android.justReleased.BACK #end))
+		iif(!closeCheck && (FlxG.keys.justPressed.ENTER || ((FlxG.mouse.getScreenPosition(camOther).x > backBG.x && FlxG.mouse.getScreenPosition(camOther).x < backBG.x + backBG.width && FlxG.mouse.getScreenPosition(camOther).y > backBG.y && FlxG.mouse.getScreenPosition(camOther).y < backBG.y + backBG.height) && FlxG.mouse.justPressed) #if android || FlxG.android.justReleased.BACK #end))
 		{
 		    if (getReadyClose){
     		    NewCustomFadeTransition();
