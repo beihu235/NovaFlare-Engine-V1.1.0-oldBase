@@ -479,6 +479,7 @@ class ResultsScreen extends MusicBeatSubstate
     		loadRight.scrollFactor.set();
     		loadRight.antialiasing = ClientPrefs.data.antialiasing;		
     		add(loadRight);
+    		loadRight.cameras = [camOther];
     		loadRight.setGraphicSize(FlxG.width, FlxG.height);
     		loadRight.updateHitbox();
     		
@@ -486,6 +487,7 @@ class ResultsScreen extends MusicBeatSubstate
     		loadLeft.scrollFactor.set();
     		loadLeft.antialiasing = ClientPrefs.data.antialiasing;
     		add(loadLeft);
+    		loadLeft.cameras = [camOther];
     		loadLeft.setGraphicSize(FlxG.width, FlxG.height);
     		loadLeft.updateHitbox();
 		
@@ -494,12 +496,14 @@ class ResultsScreen extends MusicBeatSubstate
     		WaterMark.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
     		WaterMark.antialiasing = ClientPrefs.data.antialiasing;
     		add(WaterMark);
+    		WaterMark.cameras = [camOther];
         
-            EventText= new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 50, 0, 'LOADING . . . . . . ', 50);
+            EventText = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 50, 0, 'LOADING . . . . . . ', 50);
     		EventText.scrollFactor.set();
     		EventText.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
     		EventText.antialiasing = ClientPrefs.data.antialiasing;
     		add(EventText);
+    		EventText.cameras = [camOther];
 		
 			FlxG.sound.play(Paths.sound('loading_close'),ClientPrefs.data.CustomFadeSound);
 			if (!ClientPrefs.data.CustomFadeText) {
@@ -541,6 +545,7 @@ class ResultsScreen extends MusicBeatSubstate
     		loadAlpha.scrollFactor.set();
     		loadAlpha.antialiasing = ClientPrefs.data.antialiasing;		
     		add(loadAlpha);
+    		loadAlpha.cameras = [camOther];
     		loadAlpha.setGraphicSize(FlxG.width, FlxG.height);
     		loadAlpha.updateHitbox();
 		
@@ -549,13 +554,14 @@ class ResultsScreen extends MusicBeatSubstate
     		WaterMark.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
     		WaterMark.antialiasing = ClientPrefs.data.antialiasing;
     		add(WaterMark);
-        
-            EventText= new FlxText( 50, 720 - 50 - 50, 0, 'LOADING . . . . . . ', 50);
+            WaterMark.cameras = [camOther];
+            
+            EventText = new FlxText( 50, 720 - 50 - 50, 0, 'LOADING . . . . . . ', 50);
     		EventText.scrollFactor.set();
     		EventText.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
     		EventText.antialiasing = ClientPrefs.data.antialiasing;
-        		add(EventText);
-		
+        	add(EventText);
+		    EventText..cameras = [camOther];
 		
 			FlxG.sound.play(Paths.sound('loading_close'),ClientPrefs.data.CustomFadeSound);
 			if (!ClientPrefs.data.CustomFadeText) {
