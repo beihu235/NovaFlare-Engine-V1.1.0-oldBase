@@ -14,7 +14,7 @@
       "name": "flixel",
       "type": "haxelib",
       "version": "5.5.0"
-    },
+    },    
     {
       "name": "flixel-addons",
       "type": "haxelib",
@@ -46,6 +46,10 @@
       "name": "SScript",
       "type": "haxelib",
       "version": null
+    },
+      "name": "hscript",
+      "type": "haxelib",
+      "version": "2.5.0"
     },
     {
       "name": "hxcpp-debug-server",
