@@ -57,6 +57,8 @@ class ResultsScreen extends MusicBeatSubstate
 	public var setMsText:FlxText;
 	public var backText:FlxText;
 	public var backBG:FlxSprite;
+	
+	public var camHUD:FlxCamera;
     
     //public var NoteTypeColor:NoteTypeColorData;
     
@@ -67,6 +69,10 @@ class ResultsScreen extends MusicBeatSubstate
 	    
 		super();	
 	    cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+	    
+	    camOther = new FlxCamera();
+	    camOther.bgColor.alpha = 0;
+	    FlxG.cameras.add(camHUD, false);
 	    
 		ColorArray = [
 		0xFFFFFF00, //marvelous
@@ -351,7 +357,7 @@ class ResultsScreen extends MusicBeatSubstate
 		backText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
 		backText.scrollFactor.set();
 		backText.antialiasing = ClientPrefs.data.antialiasing;
-	    backText.alignment = RIGHT;		
+	    backText.alignment = RIGHT;			    
 
 		backBG = new FlxSprite(FlxG.width, FlxG.height - 30).loadGraphic(Paths.image('menuExtend/ResultsScreen/backBG'));
 		backBG.scrollFactor.set(0, 0);
@@ -359,9 +365,11 @@ class ResultsScreen extends MusicBeatSubstate
 		backBG.scale.y = 0.5;
 		backBG.updateHitbox();
 		backBG.antialiasing = ClientPrefs.data.antialiasing;
-		backBG.y -= backBG.height;
+		backBG.y -= backBG.height;		
 		add(backBG);
 		add(backText);		
+		backBG.cameras = [camHUD];
+		backText.cameras = [camHUD];
 		backText.y = backBG.y + backBG.height / 2 - backText.height / 2;
 		
 		//--------------text
