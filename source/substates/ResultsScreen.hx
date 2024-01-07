@@ -561,7 +561,7 @@ class ResultsScreen extends MusicBeatSubstate
     		EventText.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 50, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
     		EventText.antialiasing = ClientPrefs.data.antialiasing;
         	add(EventText);
-		    EventText..cameras = [camOther];
+		    EventText.cameras = [camOther];
 		
 			FlxG.sound.play(Paths.sound('loading_close'),ClientPrefs.data.CustomFadeSound);
 			if (!ClientPrefs.data.CustomFadeText) {
