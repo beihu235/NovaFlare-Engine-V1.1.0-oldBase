@@ -72,7 +72,7 @@ class ResultsScreen extends MusicBeatSubstate
 	    
 	    camOther = new FlxCamera();
 	    camOther.bgColor.alpha = 0;
-	    FlxG.cameras.add(camHUD, false);
+	    FlxG.cameras.add(camOther, false);
 	    
 		ColorArray = [
 		0xFFFFFF00, //marvelous
