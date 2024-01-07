@@ -47,6 +47,7 @@
       "type": "haxelib",
       "version": null
     },
+    {
       "name": "hscript",
       "type": "haxelib",
       "version": "2.5.0"
