@@ -58,7 +58,7 @@ class ResultsScreen extends MusicBeatSubstate
 	public var backText:FlxText;
 	public var backBG:FlxSprite;
 	
-	public var camHUD:FlxCamera;
+	public var camOther:FlxCamera;
     
     //public var NoteTypeColor:NoteTypeColorData;
     
@@ -368,8 +368,8 @@ class ResultsScreen extends MusicBeatSubstate
 		backBG.y -= backBG.height;		
 		add(backBG);
 		add(backText);		
-		backBG.cameras = [camHUD];
-		backText.cameras = [camHUD];
+		backBG.cameras = [camOther];
+		backText.cameras = [camOther];
 		backText.y = backBG.y + backBG.height / 2 - backText.height / 2;
 		
 		//--------------text
