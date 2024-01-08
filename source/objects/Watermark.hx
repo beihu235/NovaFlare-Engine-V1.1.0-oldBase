@@ -81,7 +81,7 @@ class FPS extends TextField
 	
 	
 	public static var currentColor = 0;    
-	 var skippedFrames = 0;
+	 var skippedFrames:Float = 0;
 	 
      var logicFPSnum = 0;
 	
