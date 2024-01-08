@@ -128,7 +128,7 @@ class FPS extends TextField
     		}
     		else
     		{
-    			skippedFrames += deltaTime;;	
+    			skippedFrames += deltaTime;
     		}
 		}
 		else
