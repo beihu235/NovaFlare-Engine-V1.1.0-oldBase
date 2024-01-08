@@ -30,11 +30,8 @@ class Watermark extends Bitmap
 
 		this.x = x;
 		this.y = y;
-        this.alpha = Alpha;
-        
-        
+        this.alpha = Alpha;        
     }
-
 } 
 
 
@@ -115,10 +112,12 @@ class FPS extends TextField
         }
         
         if (currentFPS > ClientPrefs.data.framerate) currentFPS = ClientPrefs.data.framerate;
+        
+        var changeTime:Int = 3 * Math.floor(ClientPrefs.data.framerate / 60)
 		
 		if (ClientPrefs.data.rainbowFPS)
 	    {
-	        if (skippedFrames >= 6)
+	        if (skippedFrames >= changeTime)
 		    {
 		    	if (currentColor >= ColorArray.length)
     				currentColor = 0;
