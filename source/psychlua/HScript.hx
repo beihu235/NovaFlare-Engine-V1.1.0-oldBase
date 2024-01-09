@@ -419,8 +419,8 @@ class HScript extends SScript
 }
 
 
-
-class HScript
+/*
+class HScriptBase
 {
 	#if HSCRIPT_ALLOWED
 	public static var parser:Parser = new Parser();
@@ -607,7 +607,7 @@ class HScript
 	}
 	#end
 }
-
+*/
 class CustomFlxColor {
 	public static var TRANSPARENT(default, null):Int = FlxColor.TRANSPARENT;
 	public static var BLACK(default, null):Int = FlxColor.BLACK;
