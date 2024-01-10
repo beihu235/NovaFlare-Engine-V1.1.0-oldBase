@@ -103,7 +103,7 @@ jobs:
             ~/.gradle
             export/release/android/haxe
             export/release/android/obj
-          key: cache-android-build-previous
+          key: cache-android-build
 
       - name: Save Current Cache
         id: cache-release-build-android-save
@@ -114,8 +114,7 @@ jobs:
             ~/.gradle
             export/release/android/haxe
             export/release/android/obj
-          key: cache-android-build-current
-
+          key: cache-android-build
 
       - name: Upload Artifact
         uses: actions/upload-artifact@main
