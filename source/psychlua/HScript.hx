@@ -5,7 +5,7 @@ import objects.Character;
 import psychlua.FunkinLua;
 import psychlua.CustomSubstate;
 
-#if HSCRIPT_ALLOWED_ALLOWED
+#if HSCRIPT_ALLOWED
 import tea.SScript;
 
 import hscript.Parser;
