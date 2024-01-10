@@ -96,7 +96,7 @@ jobs:
       
       - name: Clear Previous Cache
         id: cache-release-build-android-remove
-        uses: actions/cache/remove@main
+        uses: actions/cache@main
         with:
           path: |
             ~/haxelib
