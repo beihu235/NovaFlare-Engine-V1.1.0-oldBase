@@ -228,7 +228,7 @@ class LuaUtils
 		}
 
 		if(settings.exists(saveTag)) return settings.get(saveTag);
-		PlayState.instance.addTextToDebug("getModSetting: "$saveTag" could not be found inside $modName\'s settings!", FlxColor.RED);
+		PlayState.instance.addTextToDebug('getModSetting: "$saveTag" could not be found inside $modName\'s settings!', FlxColor.RED);  //'
 		return null;
 	}
 	
