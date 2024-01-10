@@ -2254,6 +2254,7 @@ class PlayState extends MusicBeatState
 				vocals.stop();
 				FlxG.sound.music.stop();
 
+				isDead = true;
 				
 				#if LUA_ALLOWED
 				for (tween in modchartTweens) {
@@ -2263,7 +2264,6 @@ class PlayState extends MusicBeatState
 					timer.active = true;
 				}
 				#end
-				isDead = true;
 				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0], boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollow.x, camFollow.y));
 
 				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
@@ -2272,6 +2272,7 @@ class PlayState extends MusicBeatState
 				// Game Over doesn't get his its variable because it's only used here
 				if(autoUpdateRPC) DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 				#end
+				
 				persistentUpdate = false;
 				persistentDraw = false;
 				return true;
