@@ -13,7 +13,8 @@ import substates.GameOverSubstate;
 class ReflectionFunctions
 {
 	public static function implement(funk:FunkinLua)
-	{
+	{ 
+	try{ //fix if get null obj make Engine crash
 		var lua:State = funk.lua;
 		Lua_helper.add_callback(lua, "getProperty", function(variable:String, ?allowMaps:Bool = false) {
 			var split:Array<String> = variable.split('.');
@@ -150,7 +151,7 @@ class ReflectionFunctions
 				realObject = LuaUtils.getPropertyLoop(split, true, false, allowMaps);
 			else
 				realObject = Reflect.getProperty(LuaUtils.getTargetInstance(), obj);
-
+            
 			if(Std.isOfType(realObject, FlxTypedGroup)) {
 				LuaUtils.setGroupStuff(realObject.members[index], variable, value, allowMaps);
 				return value;
@@ -228,6 +229,9 @@ class ReflectionFunctions
 			}
 			else FunkinLua.luaTrace('addInstance: Can\'t add what doesn\'t exist~ ($objectName)', false, false, FlxColor.RED);
 		});
+    }
+	catch(e:Dynamic)
+	    FunkinLua.luaTrace('ERROR! $e', false, false, FlxColor.RED);
 	}
 	
 	public static function varCheck(className:Dynamic, variable:String):String{
