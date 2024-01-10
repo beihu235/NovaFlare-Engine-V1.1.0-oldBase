@@ -52,7 +52,7 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
-          haxelib install hxcpp > /dev/null
+          haxelib git hxcpp https://github.com/mcagabe19-stuff/hxcpp > /dev/null --quiet
           haxelib install hxcpp-debug-server
           haxelib install lime 7.9.0
           haxelib install openfl 9.2.0
@@ -69,7 +69,7 @@ jobs:
           haxelib git flxanimate https://github.com/beihu235/flxanimate
           haxelib git linc_luajit https://github.com/superpowers04/linc_luajit
           haxelib git extension-androidtools https://github.com/MaysLastPlay77/extension-androidtools
-          haxelib git extension-orientation https://github.com/HaxeExtension/extension-orientation
+          haxelib git extension-orientation https://github.com/HaxeExtension/extension-orientation.git
           haxelib git androiddialogs https://github.com/beihu235/AndroidDialogs
           haxelib git devicelanguage https://github.com/beihu235/devicelanguage
           haxelib list         
@@ -94,7 +94,27 @@ jobs:
           cert_pass: nullfunni
           cert_alias_pass: nullfunni
 
-      
+      - name: Clear Previous Cache
+      uses: actions/cache@main
+      with:
+        path: |
+          ~/haxelib
+          ~/.gradle
+          export/release/android/haxe
+          export/release/android/obj
+        key: cache-android-build
+
+
+      - name: Save Current Cache
+        id: cache-release-build-android-save
+        uses: actions/cache/save@main
+        with:
+          path: |
+            ~/haxelib
+            ~/.gradle
+            export/release/android/haxe
+            export/release/android/obj
+          key: cache-android-build
 
       - name: Upload Artifact
         uses: actions/upload-artifact@main
