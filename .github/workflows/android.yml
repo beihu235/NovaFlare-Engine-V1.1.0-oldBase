@@ -52,7 +52,7 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
-          haxelib git hxcpp https://github.com/mcagabe19-stuff/hxcpp > /dev/null --quiet
+          haxelib install hxcpp > /dev/null
           haxelib install hxcpp-debug-server
           haxelib install lime 7.9.0
           haxelib install openfl 9.2.0
@@ -94,15 +94,8 @@ jobs:
           cert_pass: nullfunni
           cert_alias_pass: nullfunni
 
-      - name: Clear Previous Cache
-      uses: actions/cache@main
-      with:
-        path: |
-          ~/haxelib
-          ~/.gradle
-          export/release/android/haxe
-          export/release/android/obj
-        key: cache-android-build
+      
+      
 
 
       - name: Save Current Cache
