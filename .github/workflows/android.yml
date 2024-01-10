@@ -93,10 +93,18 @@ jobs:
         env:
           cert_pass: nullfunni
           cert_alias_pass: nullfunni
-
       
-      
-
+        - name: Clear Previous Cache
+        uses: actions/cache@main
+        with:
+          path: |
+            ~/haxelib
+            ~/.gradle
+            export/release/android/haxe
+            export/release/android/obj
+          key: cache-android-build
+          restore-keys: |
+            cache-android-build
 
       - name: Save Current Cache
         id: cache-release-build-android-save
