@@ -94,7 +94,8 @@ jobs:
           cert_pass: nullfunni
           cert_alias_pass: nullfunni
       
-        - name: Clear Previous Cache
+        - name: Remove Cache
+        id: cache-release-build-android-remove
         uses: actions/cache@main
         with:
           path: |
@@ -103,8 +104,6 @@ jobs:
             export/release/android/haxe
             export/release/android/obj
           key: cache-android-build
-          restore-keys: |
-            cache-android-build
 
       - name: Save Current Cache
         id: cache-release-build-android-save
