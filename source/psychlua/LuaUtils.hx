@@ -315,7 +315,7 @@ class LuaUtils
 	
 	public static inline function getTargetInstance()
 	{
-		return/* PlayState.instance.isDead ? GameOverSubstate.instance : */PlayState.instance;
+		return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
 	}
 
 	public static inline function getLowestCharacterGroup():FlxSpriteGroup
