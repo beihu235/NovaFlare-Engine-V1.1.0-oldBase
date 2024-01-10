@@ -94,16 +94,16 @@ jobs:
           cert_pass: nullfunni
           cert_alias_pass: nullfunni
       
-      - name: Clear Previous Cache
+      -      - name: Clear Previous Cache
         id: cache-release-build-android-remove
-        uses: actions/cache@main
+        uses: actions/cache/remove@main
         with:
           path: |
             ~/haxelib
             ~/.gradle
             export/release/android/haxe
             export/release/android/obj
-          key: cache-android-build
+          key: cache-android-build-previous
 
       - name: Save Current Cache
         id: cache-release-build-android-save
@@ -114,7 +114,8 @@ jobs:
             ~/.gradle
             export/release/android/haxe
             export/release/android/obj
-          key: cache-android-build
+          key: cache-android-build-current
+
 
       - name: Upload Artifact
         uses: actions/upload-artifact@main
