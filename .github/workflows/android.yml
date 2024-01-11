@@ -94,7 +94,7 @@ jobs:
           cert_pass: nullfunni
           cert_alias_pass: nullfunni
       
-      - name: Clear Previous Cache
+      - name: Clear Current Cache
         id: cache-release-build-android-remove
         uses: actions/cache@main
         with:
