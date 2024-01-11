@@ -3929,7 +3929,7 @@ class PlayState extends MusicBeatState
 		if(args == null) args = [];
 		if(exclusions == null) exclusions = [];
 		if(excludeValues == null) excludeValues = [FunkinLua.Function_Continue];
-
+        try {
 		var arr:Array<FunkinLua> = [];
 		for (script in luaArray)
 		{
@@ -3959,7 +3959,9 @@ class PlayState extends MusicBeatState
 			for (script in arr)
 				luaArray.remove(script);
 		#end
+		}
 		return returnVal;
+		
 	}
 
 	public function callOnHScript(funcToCall:String, args:Array<Dynamic> = null, ?ignoreStops:Bool = false, exclusions:Array<String> = null, excludeValues:Array<Dynamic> = null):Dynamic {
