@@ -3912,14 +3912,15 @@ class PlayState extends MusicBeatState
 	}
 	#end
 
-	public function callOnScripts(funcToCall:String, args:Array<Dynamic> = null, ignoreStops = false, exclusions:Array<String> = null, excludeValues:Array<Dynamic> = null):Dynamic {
+	public function callOnScripts(funcToCall:String, args:Array<Dynamic> = null, ignoreStops = false, exclusions:Array<String> = null, excludeValues:Array<Dynamic> = null):Dynamic {	    
 		var returnVal:Dynamic = psychlua.FunkinLua.Function_Continue;
 		if(args == null) args = [];
 		if(exclusions == null) exclusions = [];
 		if(excludeValues == null) excludeValues = [psychlua.FunkinLua.Function_Continue];
-
+        try{
 		var result:Dynamic = callOnLuas(funcToCall, args, ignoreStops, exclusions, excludeValues);
 		if(result == null || excludeValues.contains(result)) result = callOnHScript(funcToCall, args, ignoreStops, exclusions, excludeValues);
+		}
 		return result;
 	}
 
@@ -3929,7 +3930,7 @@ class PlayState extends MusicBeatState
 		if(args == null) args = [];
 		if(exclusions == null) exclusions = [];
 		if(excludeValues == null) excludeValues = [FunkinLua.Function_Continue];
-        try {
+		
 		var arr:Array<FunkinLua> = [];
 		for (script in luaArray)
 		{
@@ -3959,7 +3960,7 @@ class PlayState extends MusicBeatState
 			for (script in arr)
 				luaArray.remove(script);
 		#end
-		}
+		
 		return returnVal;
 		
 	}
