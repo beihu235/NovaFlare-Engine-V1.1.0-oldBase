@@ -10,17 +10,17 @@ class ShaderFunctions
 	{
 		var lua = funk.lua;
 		// shader shit
-		funk.addLocalCallback("initLuaShader", function(name:String) {
+		funk.addLocalCallback("initLuaShader", function(name:String, ?glslVersion:Int = 120) {
 			if(!ClientPrefs.data.shaders) return false;
 
 			#if (!flash && MODS_ALLOWED && sys)
-			return funk.initLuaShader(name);
+			return funk.initLuaShader(name, glslVersion);
 			#else
 			FunkinLua.luaTrace("initLuaShader: Platform unsupported for Runtime Shaders!", false, false, FlxColor.RED);
 			#end
 			return false;
 		});
-
+		
 		funk.addLocalCallback("setSpriteShader", function(obj:String, shader:String) {
 			if(!ClientPrefs.data.shaders) return false;
 
@@ -33,8 +33,9 @@ class ShaderFunctions
 
 			var split:Array<String> = obj.split('.');
 			var leObj:FlxSprite = LuaUtils.getObjectDirectly(split[0]);
-			if(split.length > 1)
+			if(split.length > 1) {
 				leObj = LuaUtils.getVarInArray(LuaUtils.getPropertyLoop(split), split[split.length-1]);
+			}
 
 			if(leObj != null) {
 				var arr:Array<String> = funk.runtimeShaders.get(shader);
@@ -49,8 +50,9 @@ class ShaderFunctions
 		Lua_helper.add_callback(lua, "removeSpriteShader", function(obj:String) {
 			var split:Array<String> = obj.split('.');
 			var leObj:FlxSprite = LuaUtils.getObjectDirectly(split[0]);
-			if(split.length > 1)
+			if(split.length > 1) {
 				leObj = LuaUtils.getVarInArray(LuaUtils.getPropertyLoop(split), split[split.length-1]);
+			}
 
 			if(leObj != null) {
 				leObj.shader = null;
@@ -58,6 +60,7 @@ class ShaderFunctions
 			}
 			return false;
 		});
+
 
 		Lua_helper.add_callback(lua, "getShaderBool", function(obj:String, prop:String) {
 			#if (!flash && MODS_ALLOWED && sys)
@@ -143,6 +146,7 @@ class ShaderFunctions
 			return null;
 			#end
 		});
+
 
 		Lua_helper.add_callback(lua, "setShaderBool", function(obj:String, prop:String, value:Bool) {
 			#if (!flash && MODS_ALLOWED && sys)
@@ -260,7 +264,7 @@ class ShaderFunctions
 			#end
 		});
 	}
-
+	
 	#if (!flash && sys)
 	public static function getShader(obj:String):FlxRuntimeShader
 	{
