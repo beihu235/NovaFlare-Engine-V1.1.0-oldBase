@@ -1631,7 +1631,7 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-	    if (isdead) return;
+	    if (isDead) return;
 		if(!inCutscene && !paused && !freezeCamera) {
 			FlxG.camera.followLerp = 0.04 * cameraSpeed * playbackRate;
 			if(!startingSong && !endingSong && boyfriend.getAnimationName().startsWith('idle')) {
@@ -1720,7 +1720,7 @@ class PlayState extends MusicBeatState
 			trace("RESET = True");
 		}
 		doDeathCheck();
-		if (isdead) return;
+		if (isDead) return;
 
 		if (unspawnNotes[0] != null)
 		{
